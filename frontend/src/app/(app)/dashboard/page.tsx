@@ -3,11 +3,26 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+import { KPICard } from '@/components/ui/KPICard';
+import api from '@/lib/api';
+
 export default function DashboardPage() {
     const [currentTime, setCurrentTime] = useState(new Date());
+    const [stats, setStats] = useState({ total: 0, active: 0 });
 
     useEffect(() => {
         const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+
+        // Fetch dashboard stats
+        api.get('/dashboard')
+            .then(res => {
+                setStats({
+                    total: res.data.totalComplaints || 0,
+                    active: res.data.activeComplaints || 0
+                });
+            })
+            .catch(err => console.error("Error fetching dashboard stats:", err));
+
         return () => clearInterval(timer);
     }, []);
 
@@ -36,27 +51,42 @@ export default function DashboardPage() {
 
             {/* Grille des KPIs - Version Premium */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                {[
-                    { label: 'Total Tickets', val: '1,428', sub: '+12% vs semaine dernière', icon: 'bar_chart', color: 'slate' },
-                    { label: 'Nouveaux', val: '156', sub: 'À traiter aujourd\'hui', icon: 'new_releases', color: 'primary' },
-                    { label: 'En Cours', val: '412', sub: 'Interventions actives', icon: 'pending_actions', color: 'blue-500' },
-                    { label: 'Résolus', val: '842', sub: 'Clôturés avec succès', icon: 'task_alt', color: 'emerald-500' },
-                    { label: 'Urgents', val: '18', sub: 'Priorité Critique', icon: 'error', color: 'rose-500', pulse: true },
-                ].map((kpi, i) => (
-                    <div key={i} className={`bg-white dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden relative group`}>
-                        <div className={`absolute top-0 right-0 p-4 opacity-5 group-hover:scale-125 transition-transform duration-500`}>
-                            <span className="material-symbols-outlined text-6xl">{kpi.icon}</span>
-                        </div>
-                        <div className="flex items-center justify-between mb-4">
-                            <div className={`size-10 rounded-xl flex items-center justify-center ${kpi.color === 'slate' ? 'bg-slate-100 text-slate-500' : `bg-${kpi.color}/10 text-${kpi.color}`}`}>
-                                <span className={`material-symbols-outlined text-xl ${kpi.pulse ? 'animate-pulse' : ''}`}>{kpi.icon}</span>
-                            </div>
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em]">{kpi.label}</span>
-                        </div>
-                        <p className={`text-3xl font-black ${kpi.color === 'rose-500' ? 'text-rose-600' : 'text-slate-900 dark:text-white'}`}>{kpi.val}</p>
-                        <p className="text-[10px] font-bold text-slate-500 mt-2 uppercase tracking-tight">{kpi.sub}</p>
-                    </div>
-                ))}
+                <KPICard
+                    label="Total Tickets"
+                    val={stats.total}
+                    sub="+12% vs semaine dernière"
+                    icon="bar_chart"
+                    color="slate"
+                />
+                <KPICard
+                    label="Nouveaux"
+                    val={stats.active} // Using active counts for now as proxy
+                    sub="À traiter aujourd'hui"
+                    icon="new_releases"
+                    color="primary"
+                />
+                <KPICard
+                    label="En Cours"
+                    val={stats.active}
+                    sub="Interventions actives"
+                    icon="pending_actions"
+                    color="blue-500"
+                />
+                <KPICard
+                    label="Résolus"
+                    val={stats.total - stats.active}
+                    sub="Clôturés avec succès"
+                    icon="task_alt"
+                    color="emerald-500"
+                />
+                <KPICard
+                    label="Urgents"
+                    val="0" // Mock for now
+                    sub="Priorité Critique"
+                    icon="error"
+                    color="rose-500"
+                    pulse={true}
+                />
             </div>
 
             {/* Section Centrale */}

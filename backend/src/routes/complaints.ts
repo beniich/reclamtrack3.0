@@ -7,11 +7,24 @@ import { io } from '../services/socketService.js';
 
 const router = Router();
 
-/* GET /api/complaints */
+// GET /api/complaints
 router.get('/', async (req, res, next) => {
     try {
         const complaints = await Complaint.find().sort({ createdAt: -1 });
         res.json(complaints);
+    } catch (err) {
+        next(err);
+    }
+});
+
+// GET /api/complaints/:id
+router.get('/:id', async (req, res, next) => {
+    try {
+        const complaint = await Complaint.findById(req.params.id);
+        if (!complaint) {
+            return res.status(404).json({ message: 'Complaint not found' });
+        }
+        res.json(complaint);
     } catch (err) {
         next(err);
     }

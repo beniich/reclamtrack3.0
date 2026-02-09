@@ -29,7 +29,7 @@
 ### Semaine 3-4: Pages Core
 
 #### Jour 11-13: Authentification
-- [ ] Migrer `secure_login_screen` → `/login`
+- [x] Migrer `secure_login_screen` → `/login`
 - [ ] Implémenter authStore (Zustand)
 - [ ] Connecter API backend `/api/auth/login`
 - [ ] Protected routes middleware
@@ -78,7 +78,7 @@
 - [ ] API endpoints teams CRUD
 
 #### Jour 36-40: Planning & Calendrier
-- [ ] Migrer `intervention_planning_calendar` → `/teams/planning`
+- [x] Migrer `intervention_planning_calendar` → `/teams/planning`
 - [ ] Intégrer FullCalendar ou React Big Calendar
 - [ ] Drag & drop interventions
 - [ ] Migrer `team_shift_&_roster_scheduler`
@@ -97,7 +97,7 @@
 
 #### Jour 46-50: Administration
 - [ ] Migrer `system_admin_overview` → `/admin/system`
-- [ ] Migrer `user_&_roles_management` → `/admin/users`
+- [x] Migrer `user_&_roles_management` → `/admin/users`
 - [ ] Migrer `audit_logs_&_activity_feed` → `/admin/audit-logs`
 - [ ] RBAC (Role-Based Access Control)
 - [ ] Logs en temps réel (WebSocket)

@@ -18,7 +18,7 @@ export default function LandingPage() {
                         <Link href="#features" className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors">Features</Link>
                         <Link href="#solutions" className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors">Solutions</Link>
                         <Link href="#pricing" className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors">Pricing</Link>
-                        <Link href="#resources" className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors">Resources</Link>
+                        <Link href="/system-info" className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors">Resources</Link>
                     </nav>
                     <div className="flex items-center gap-4">
                         <Link href="/login" className="hidden sm:block text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-primary transition-colors px-4 py-2">

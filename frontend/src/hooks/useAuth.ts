@@ -6,14 +6,14 @@ import { useAuthStore } from '@/store/authStore';
 
 interface AuthResponse {
     token: string;
-    user: { id: string; email: string; role: string };
+    user: { id: string; email: string; name: string; avatar?: string; role: 'admin' | 'dispatcher' | 'staff' };
 }
 
 /** Hook simplifié pour login / register / logout */
 export const useAuth = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { setUser, setToken, logout } = useAuthStore();
+    const { user, setUser, setToken, logout } = useAuthStore();
 
     const login = async (email: string, password: string) => {
         setLoading(true);
@@ -59,5 +59,5 @@ export const useAuth = () => {
         }
     };
 
-    return { login, register, logout, loading, error };
+    return { user, login, register, logout, loading, error };
 };

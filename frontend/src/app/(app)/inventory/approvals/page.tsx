@@ -138,15 +138,15 @@ export default function WarehouseApprovalsPage() {
                                     key={req.id}
                                     onClick={() => setSelectedRequestId(req.id)}
                                     className={`p-3 rounded-r-lg cursor-pointer border-l-4 transition-colors ${selectedRequestId === req.id
-                                            ? 'bg-primary/5 border-primary'
-                                            : 'hover:bg-slate-50 dark:hover:bg-slate-800/50 border-transparent'
+                                        ? 'bg-primary/5 border-primary'
+                                        : 'hover:bg-slate-50 dark:hover:bg-slate-800/50 border-transparent'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start mb-1">
                                         <span className={`text-xs font-bold uppercase ${selectedRequestId === req.id ? 'text-primary' : 'text-slate-400'}`}>#{req.id}</span>
                                         <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${req.priority === 'URGENT' ? 'bg-red-100 text-red-600' :
-                                                req.priority === 'MEDIUM' ? 'bg-amber-100 text-amber-600' :
-                                                    'bg-slate-100 text-slate-500'
+                                            req.priority === 'MEDIUM' ? 'bg-amber-100 text-amber-600' :
+                                                'bg-slate-100 text-slate-500'
                                             }`}>{req.priority}</span>
                                     </div>
                                     <p className="font-semibold text-sm text-slate-900 dark:text-white">{req.requester}</p>
@@ -212,7 +212,7 @@ export default function WarehouseApprovalsPage() {
                             {/* Inventory Table */}
                             <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
                                 <div className="p-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex justify-between items-center">
-                                    <h3 class="font-bold flex items-center gap-2 text-slate-900 dark:text-white">
+                                    <h3 className="font-bold flex items-center gap-2 text-slate-900 dark:text-white">
                                         <span className="material-symbols-outlined text-slate-400">list_alt</span>
                                         Requested Items & Stock Availability
                                     </h3>
@@ -246,8 +246,8 @@ export default function WarehouseApprovalsPage() {
                                                         <td className="px-6 py-4">
                                                             <input
                                                                 className={`w-20 px-2 py-1 rounded border text-sm focus:ring-2 focus:ring-primary ${isShortage
-                                                                        ? 'border-red-200 dark:border-red-900 text-red-600 focus:border-red-500'
-                                                                        : 'border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white'
+                                                                    ? 'border-red-200 dark:border-red-900 text-red-600 focus:border-red-500'
+                                                                    : 'border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white'
                                                                     } bg-white dark:bg-slate-800`}
                                                                 type="number"
                                                                 value={item.approvedQty}

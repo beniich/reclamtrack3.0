@@ -4,6 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Header from '@/components/Header';
+import useNotifications from '@/hooks/useNotifications';
 
 export default function AppLayout({
     children,
@@ -12,6 +13,7 @@ export default function AppLayout({
 }) {
     const { user, loading } = useAuth();
     const router = useRouter();
+    useNotifications();
 
     useEffect(() => {
         if (!loading && !user) {

@@ -7,7 +7,11 @@ import Link from 'next/link';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { FileText } from 'lucide-react';
 
+import { useRouter } from 'next/navigation';
+import { StatusBadge } from '@/components/ui/StatusBadge';
+
 export default function ComplaintListPage() {
+    const router = useRouter();
     const [complaints, setComplaints] = useState<Complaint[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -27,12 +31,7 @@ export default function ComplaintListPage() {
         );
     }
 
-    const statusColors = {
-        nouvelle: 'bg-blue-100 text-blue-800',
-        'en cours': 'bg-yellow-100 text-yellow-800',
-        résolue: 'bg-green-100 text-green-800',
-        fermée: 'bg-gray-100 text-gray-800'
-    };
+
 
     return (
         <section className="max-w-6xl mx-auto py-6">
@@ -67,19 +66,32 @@ export default function ComplaintListPage() {
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                             {complaints.map((c) => (
-                                <tr key={c._id} className="hover:bg-gray-50">
-                                    <td className="px-6 py-4 font-mono text-sm">{c.number}</td>
-                                    <td className="px-6 py-4">
-                                        {c.firstName} {c.lastName}
+                                <tr
+                                    key={c._id}
+                                    className="hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onClick={() => router.push(`/complaints/${c._id}`)}
+                                >
+                                    <td className="px-6 py-4 font-mono text-sm font-medium text-primary">
+                                        #{c.number}
                                     </td>
-                                    <td className="px-6 py-4 capitalize">{c.leakType}</td>
                                     <td className="px-6 py-4">
-                                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[c.status]}`}>
-                                            {c.status}
+                                        <div className="font-medium text-gray-900">{c.firstName} {c.lastName}</div>
+                                        <div className="text-xs text-gray-500">{c.phone}</div>
+                                    </td>
+                                    <td className="px-6 py-4 capitalize">
+                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">
+                                            {c.leakType}
                                         </span>
                                     </td>
+                                    <td className="px-6 py-4">
+                                        <StatusBadge status={c.status} size="sm" />
+                                    </td>
                                     <td className="px-6 py-4 text-sm text-gray-500">
-                                        {new Date(c.createdAt).toLocaleDateString('fr-FR')}
+                                        {new Date(c.createdAt).toLocaleDateString('fr-FR', {
+                                            day: 'numeric',
+                                            month: 'short',
+                                            year: 'numeric'
+                                        })}
                                     </td>
                                 </tr>
                             ))}

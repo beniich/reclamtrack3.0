@@ -6,6 +6,7 @@ import rateLimit from 'express-rate-limit';
 import { envValidator } from './config/envValidator.js';
 import { connectDB } from './config/db.js';
 import { initSocket } from './services/socketService.js';
+import notificationService from './services/socketService.js';
 import { logger } from './utils/logger.js';
 import errorHandler from './middleware/errorHandler.js';
 
@@ -48,6 +49,23 @@ app.use('/api/dashboard', dashboardRoutes);
 // Health check
 app.get('/', (req, res) => {
     res.json({ status: 'ok', service: 'ReclamTrack API' });
+});
+
+// Test notification endpoint
+app.post('/api/test-notification', (req, res) => {
+    const notificationService = require('./services/socketService.js').default;
+
+    notificationService.broadcast({
+        type: 'success',
+        title: 'Test Notification',
+        message: 'Le système de notifications fonctionne parfaitement ! 🎉',
+        timestamp: new Date()
+    });
+
+    res.json({
+        success: true,
+        message: 'Notification envoyée à tous les clients connectés'
+    });
 });
 
 // Error handler

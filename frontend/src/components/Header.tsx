@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useAuthStore } from '~/store/authStore';
+import { useAuthStore } from '@/store/authStore';
 import { LogOut } from 'lucide-react';
 
 export default function Header() {
@@ -29,6 +29,7 @@ export default function Header() {
                             <Link href="/planning" className="hover:text-primary transition-colors">Planning</Link>
                             <Link href="/map" className="hover:text-primary transition-colors">Carte</Link>
                             <Link href="/analytics" className="hover:text-primary transition-colors">Analytique</Link>
+                            <Link href="/system-info" className="hover:text-primary transition-colors">Infos Système</Link>
 
                             {/* More Menu */}
                             <div className="relative group">

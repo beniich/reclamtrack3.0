@@ -10,13 +10,19 @@ module.exports = {
             colors: {
                 // Brand colors
                 primary: {
-                    DEFAULT: 'hsl(var(--color-primary-600) / <alpha-value>)',
-                    50: 'hsl(var(--color-primary-50) / <alpha-value>)',
-                    100: 'hsl(var(--color-primary-100) / <alpha-value>)',
-                    500: 'hsl(var(--color-primary-500) / <alpha-value>)',
-                    600: 'hsl(var(--color-primary-600) / <alpha-value>)',
-                    700: 'hsl(var(--color-primary-700) / <alpha-value>)',
+                    DEFAULT: '#2563eb',
+                    50: '#eff6ff',
+                    100: '#dbeafe',
+                    500: '#3b82f6',
+                    600: '#2563eb',
+                    700: '#1d4ed8',
                 },
+                "background-light": "#f6f6f8",
+                "background-dark": "#111121",
+                "water": "#0ea5e9",
+                "electricity": "#f59e0b",
+                "gas": "#ef4444",
+                "general": "#10b981",
                 // Semantic colors
                 success: {
                     DEFAULT: 'var(--color-success)',
@@ -78,6 +84,7 @@ module.exports = {
             fontFamily: {
                 sans: ['var(--font-sans)', 'Inter', 'system-ui', 'sans-serif'],
                 mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
+                display: ["Inter", "sans-serif"],
             },
             borderRadius: {
                 sm: 'var(--radius-sm)',

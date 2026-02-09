@@ -1,128 +1,45 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 
-// Types
-type UserRole = 'admin' | 'operator' | 'technician' | 'support';
-type UserStatus = 'active' | 'inactive' | 'suspended';
-
-interface User {
-    id: string;
-    name: string;
-    email: string;
-    role: UserRole;
-    status: UserStatus;
-    lastActive: string;
-    avatar: string;
-}
-
-// Mock Data
-const mockUsers: User[] = [
-    { id: '1', name: 'Alex Rivera', email: 'alex@system.com', role: 'admin', status: 'active', lastActive: '2 mins ago', avatar: 'AR' },
-    { id: '2', name: 'Jordan Smith', email: 'j.smith@system.com', role: 'operator', status: 'active', lastActive: '1 hour ago', avatar: 'JS' },
-    { id: '3', name: 'Casey Chen', email: 'casey.c@system.com', role: 'technician', status: 'inactive', lastActive: '3 days ago', avatar: 'CC' },
-    { id: '4', name: 'Morgan Lee', email: 'mlee@system.com', role: 'operator', status: 'active', lastActive: 'Just now', avatar: 'ML' },
-    { id: '5', name: 'Riley Taylor', email: 'riley@system.com', role: 'technician', status: 'active', lastActive: '5 hours ago', avatar: 'RT' },
-    { id: '6', name: 'Jamie Fox', email: 'j.fox@system.com', role: 'support', status: 'suspended', lastActive: '2 weeks ago', avatar: 'JF' },
-];
-
 export default function UsersPage() {
-    // State
-    const [searchQuery, setSearchQuery] = useState('');
-    const [selectedRole, setSelectedRole] = useState<UserRole | 'all'>('all');
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [editingUser, setEditingUser] = useState<User | null>(null);
-
-    // Filtering
-    const filteredUsers = useMemo(() => {
-        return mockUsers.filter(user => {
-            const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                user.email.toLowerCase().includes(searchQuery.toLowerCase());
-            const matchesRole = selectedRole === 'all' || user.role === selectedRole;
-            return matchesSearch && matchesRole;
-        });
-    }, [searchQuery, selectedRole]);
-
-    // Role Colors Helper
-    const getRoleBadge = (role: UserRole) => {
-        switch (role) {
-            case 'admin': return <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">Admin</span>;
-            case 'operator': return <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Operator</span>;
-            case 'technician': return <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-orange-600">Technician</span>;
-            case 'support': return <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-50 dark:bg-purple-900/20 text-purple-600">Support</span>;
-        }
-    };
-
-    const getStatusIndicator = (status: UserStatus) => {
-        switch (status) {
-            case 'active': return (
-                <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Active</span>
-                </div>
-            );
-            case 'inactive': return (
-                <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-600"></span>
-                    <span className="text-sm text-slate-500">Inactive</span>
-                </div>
-            );
-            case 'suspended': return (
-                <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-red-500"></span>
-                    <span className="text-sm text-red-500 font-medium">Suspended</span>
-                </div>
-            );
-        }
-    };
-
-    const getAvatarColor = (role: UserRole) => {
-        switch (role) {
-            case 'admin': return 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400';
-            case 'operator': return 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400';
-            case 'technician': return 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400';
-            case 'support': return 'bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400';
-        }
-    };
-
     return (
         <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
-            {/* Navigation Bar */}
+            {/* Note: Header is handled by the layout usually, but the HTML provided includes a specific header. 
+                I will include the header here as requested, but if it duplicates the layout header, 
+                we might need to adjust layout later. For now, I follow the HTML structure. */}
+
+            {/* Navigation Bar from HTML */}
             <header className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 lg:px-10">
                 <div className="flex items-center gap-8">
-                    <Link href="/dashboard" className="flex items-center gap-3">
+                    <div className="flex items-center gap-3">
                         <div className="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center">
                             <span className="material-symbols-outlined text-xl">account_balance</span>
                         </div>
-                        <h2 className="text-lg font-bold leading-tight tracking-tight">ReclamTrack</h2>
-                    </Link>
+                        <h2 className="text-lg font-bold leading-tight tracking-tight">Complaints System</h2>
+                    </div>
                     <nav className="hidden md:flex items-center gap-6">
-                        <Link href="/dashboard" className="text-sm font-medium hover:text-primary transition-colors text-slate-500 dark:text-slate-400">Dashboard</Link>
-                        <Link href="/complaints/list" className="text-sm font-medium hover:text-primary transition-colors text-slate-500 dark:text-slate-400">Complaints</Link>
-                        <Link href="/users" className="text-primary text-sm font-bold border-b-2 border-primary pb-1">Users</Link>
-                        <Link href="/reports" className="text-sm font-medium hover:text-primary transition-colors text-slate-500 dark:text-slate-400">Reports</Link>
+                        <a className="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+                        <a className="text-sm font-medium hover:text-primary transition-colors" href="#">Interventions</a>
+                        <a className="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Users</a>
+                        <a className="text-sm font-medium hover:text-primary transition-colors" href="#">Reports</a>
                     </nav>
                 </div>
                 <div className="flex items-center gap-4">
-                    <div className="hidden sm:flex bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 items-center gap-2 border border-transparent focus-within:border-primary/50 transition-colors">
+                    <div className="hidden sm:flex bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 items-center gap-2">
                         <span className="material-symbols-outlined text-slate-400 text-lg">search</span>
-                        <input
-                            type="text"
-                            placeholder="Search system..."
-                            className="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder:text-slate-400 p-0"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
+                        <input className="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder:text-slate-400" placeholder="Search system..." type="text" />
                     </div>
-                    <div className="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-200 dark:border-slate-600">
-                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=2424eb&color=fff" alt="Profile" className="w-full h-full object-cover" />
-                    </div>
+                    <div
+                        className="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center"
+                        style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7XXuS_4dgIRSbgQo7054yJ4FPcQZ_VnRbSXsM7oaNt5PFmQlldHA2stZCAClvS68emwdruY1mjgPUwX_EiipmtA_1-L8ozNjF9kUXDGlJADYywJ71e8G5fgBtUZZzsQDdcktgoSlvB5iPKixRBBhzWwm8Pah9oUoe3PxSAojnVd3SN5T09s44oYPKngGaemTwvATV_ZLV-RMgBi0vGEoRHq-xisD58g5cPU1XtZM641M91sSd3CBkY1ZvZ-cA8sYTozhgGLhn7R2j')" }}
+                    ></div>
                 </div>
             </header>
 
             <main className="flex flex-1 justify-center py-8 px-4 md:px-10 lg:px-40">
-                <div className="flex flex-col max-w-[1200px] flex-1 w-full relative">
+                <div className="flex flex-col max-w-[1200px] flex-1">
                     {/* Page Header */}
                     <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
                         <div className="flex flex-col gap-1">
@@ -134,10 +51,7 @@ export default function UsersPage() {
                                 <span className="material-symbols-outlined text-lg">filter_list</span>
                                 Filter
                             </button>
-                            <button
-                                onClick={() => setIsModalOpen(true)}
-                                className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20"
-                            >
+                            <button className="flex items-center gap-2 bg-primary hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20">
                                 <span className="material-symbols-outlined text-lg">person_add</span>
                                 Add User
                             </button>
@@ -145,32 +59,12 @@ export default function UsersPage() {
                     </div>
 
                     {/* Tabs */}
-                    <div className="mb-6 border-b border-slate-200 dark:border-slate-800 overflow-x-auto">
-                        <div className="flex gap-8 min-w-max">
-                            <button
-                                onClick={() => setSelectedRole('all')}
-                                className={`border-b-2 pb-3 font-bold text-sm transition-colors ${selectedRole === 'all' ? 'border-primary text-primary' : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700'}`}
-                            >
-                                All Staff
-                            </button>
-                            <button
-                                onClick={() => setSelectedRole('admin')}
-                                className={`border-b-2 pb-3 font-medium text-sm transition-colors ${selectedRole === 'admin' ? 'border-primary text-primary font-bold' : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700'}`}
-                            >
-                                Administrators
-                            </button>
-                            <button
-                                onClick={() => setSelectedRole('operator')}
-                                className={`border-b-2 pb-3 font-medium text-sm transition-colors ${selectedRole === 'operator' ? 'border-primary text-primary font-bold' : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700'}`}
-                            >
-                                Operators
-                            </button>
-                            <button
-                                onClick={() => setSelectedRole('technician')}
-                                className={`border-b-2 pb-3 font-medium text-sm transition-colors ${selectedRole === 'technician' ? 'border-primary text-primary font-bold' : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700'}`}
-                            >
-                                Field Technicians
-                            </button>
+                    <div className="mb-6 border-b border-slate-200 dark:border-slate-800">
+                        <div className="flex gap-8">
+                            <a className="border-b-2 border-primary text-primary pb-3 font-bold text-sm" href="#">All Staff</a>
+                            <a className="border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 font-medium text-sm hover:text-slate-700 transition-colors" href="#">Administrators</a>
+                            <a className="border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 font-medium text-sm hover:text-slate-700 transition-colors" href="#">Operators</a>
+                            <a className="border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 font-medium text-sm hover:text-slate-700 transition-colors" href="#">Field Technicians</a>
                         </div>
                     </div>
 
@@ -188,124 +82,188 @@ export default function UsersPage() {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                                    {filteredUsers.length > 0 ? filteredUsers.map(user => (
-                                        <tr key={user.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors group">
-                                            <td className="px-6 py-4">
-                                                <div className="flex items-center gap-3">
-                                                    <div className={`h-10 w-10 rounded-full flex items-center justify-center font-bold text-xs ${getAvatarColor(user.role)}`}>
-                                                        {user.avatar}
-                                                    </div>
-                                                    <div className="flex flex-col">
-                                                        <span className="text-sm font-semibold text-slate-900 dark:text-white">{user.name}</span>
-                                                        <span className="text-xs text-slate-500">{user.email}</span>
-                                                    </div>
+                                    {/* Row 1 */}
+                                    <tr className="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors">
+                                        <td className="px-6 py-5">
+                                            <div className="flex items-center gap-3">
+                                                <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-xs">AR</div>
+                                                <div className="flex flex-col">
+                                                    <span className="text-sm font-semibold">Alex Rivera</span>
+                                                    <span className="text-xs text-slate-500">alex@system.com</span>
                                                 </div>
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                {getRoleBadge(user.role)}
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                {getStatusIndicator(user.status)}
-                                            </td>
-                                            <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">{user.lastActive}</td>
-                                            <td className="px-6 py-4 text-right">
-                                                <div className="invisible group-hover:visible flex items-center justify-end gap-2">
-                                                    <button className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide px-3 py-1 rounded hover:bg-primary/5 transition-colors">Edit</button>
-                                                    <button className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                                                        <span className="material-symbols-outlined text-lg block">more_vert</span>
-                                                    </button>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-5">
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">Admin</span>
+                                        </td>
+                                        <td className="px-6 py-5">
+                                            <div className="flex items-center gap-2">
+                                                <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+                                                <span className="text-sm">Active</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-5 text-sm text-slate-500">2 mins ago</td>
+                                        <td className="px-6 py-5 text-right">
+                                            <button className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</button>
+                                            <button className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                        </td>
+                                    </tr>
+                                    {/* Row 2 */}
+                                    <tr className="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors">
+                                        <td className="px-6 py-5">
+                                            <div className="flex items-center gap-3">
+                                                <div className="h-10 w-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 font-bold text-xs">JS</div>
+                                                <div className="flex flex-col">
+                                                    <span className="text-sm font-semibold">Jordan Smith</span>
+                                                    <span className="text-xs text-slate-500">j.smith@system.com</span>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                    )) : (
-                                        <tr>
-                                            <td colSpan={5} className="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
-                                                No users found matching your criteria.
-                                            </td>
-                                        </tr>
-                                    )}
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-5">
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Operator</span>
+                                        </td>
+                                        <td className="px-6 py-5">
+                                            <div className="flex items-center gap-2">
+                                                <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+                                                <span className="text-sm">Active</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-5 text-sm text-slate-500">1 hour ago</td>
+                                        <td className="px-6 py-5 text-right">
+                                            <button className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</button>
+                                            <button className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                        </td>
+                                    </tr>
+                                    {/* Row 3 */}
+                                    <tr className="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors">
+                                        <td className="px-6 py-5">
+                                            <div className="flex items-center gap-3">
+                                                <div className="h-10 w-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 font-bold text-xs">CC</div>
+                                                <div className="flex flex-col">
+                                                    <span className="text-sm font-semibold">Casey Chen</span>
+                                                    <span className="text-xs text-slate-500">casey.c@system.com</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-5">
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-orange-600">Technician</span>
+                                        </td>
+                                        <td className="px-6 py-5">
+                                            <div className="flex items-center gap-2">
+                                                <span className="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-600"></span>
+                                                <span className="text-sm text-slate-500">Inactive</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-5 text-sm text-slate-500">3 days ago</td>
+                                        <td className="px-6 py-5 text-right">
+                                            <button className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</button>
+                                            <button className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                        </td>
+                                    </tr>
+                                    {/* Row 4 */}
+                                    <tr className="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors">
+                                        <td className="px-6 py-5">
+                                            <div className="flex items-center gap-3">
+                                                <div className="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold text-xs">ML</div>
+                                                <div className="flex flex-col">
+                                                    <span className="text-sm font-semibold">Morgan Lee</span>
+                                                    <span className="text-xs text-slate-500">mlee@system.com</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-5">
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Operator</span>
+                                        </td>
+                                        <td className="px-6 py-5">
+                                            <div className="flex items-center gap-2">
+                                                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                                <span className="text-sm font-medium">Online Now</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-5 text-sm text-slate-500">Just now</td>
+                                        <td className="px-6 py-5 text-right">
+                                            <button className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</button>
+                                            <button className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                        </td>
+                                    </tr>
+                                    {/* Row 5 */}
+                                    <tr className="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors">
+                                        <td className="px-6 py-5">
+                                            <div className="flex items-center gap-3">
+                                                <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 font-bold text-xs">RT</div>
+                                                <div className="flex flex-col">
+                                                    <span className="text-sm font-semibold">Riley Taylor</span>
+                                                    <span className="text-xs text-slate-500">riley@system.com</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-5">
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-orange-600">Technician</span>
+                                        </td>
+                                        <td className="px-6 py-5">
+                                            <div className="flex items-center gap-2">
+                                                <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+                                                <span className="text-sm">Active</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-5 text-sm text-slate-500">5 hours ago</td>
+                                        <td className="px-6 py-5 text-right">
+                                            <button className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</button>
+                                            <button className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
+
                         {/* Pagination */}
                         <div className="px-6 py-4 flex items-center justify-between border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30">
-                            <p className="text-sm text-slate-500 dark:text-slate-400">
-                                Showing <span className="font-bold text-slate-900 dark:text-white">1</span> to <span className="font-bold text-slate-900 dark:text-white">{filteredUsers.length}</span> of <span className="font-bold text-slate-900 dark:text-white">{mockUsers.length}</span> staff members
-                            </p>
+                            <p className="text-sm text-slate-500">Showing <span className="font-bold text-slate-900 dark:text-white">1</span> to <span className="font-bold text-slate-900 dark:text-white">5</span> of <span className="font-bold text-slate-900 dark:text-white">42</span> staff members</p>
                             <div className="flex gap-1">
-                                <button className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-500 dark:text-slate-400 disabled:opacity-50" disabled>
-                                    <span className="material-symbols-outlined text-sm block">chevron_left</span>
+                                <button className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-500">
+                                    <span className="material-symbols-outlined">chevron_left</span>
                                 </button>
                                 <button className="px-3.5 py-1.5 rounded-lg bg-primary text-white font-bold text-sm">1</button>
-                                <button className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-500 dark:text-slate-400 disabled:opacity-50" disabled>
-                                    <span className="material-symbols-outlined text-sm block">chevron_right</span>
+                                <button className="px-3.5 py-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm font-medium">2</button>
+                                <button className="px-3.5 py-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm font-medium">3</button>
+                                <button className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-500">
+                                    <span className="material-symbols-outlined">chevron_right</span>
                                 </button>
                             </div>
                         </div>
                     </div>
 
                     {/* Role Info Cards */}
-                    <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
                             <div className="flex items-center gap-3 mb-3">
                                 <span className="material-symbols-outlined text-primary">security</span>
-                                <h3 className="font-bold text-sm text-slate-900 dark:text-white">Administrators</h3>
+                                <h3 className="font-bold text-sm">Administrators</h3>
                             </div>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Full system access including financial records, system configuration, and data exports.</p>
+                            <p className="text-xs text-slate-500 leading-relaxed">Full system access including financial records, system configuration, and data exports.</p>
                         </div>
-                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
                             <div className="flex items-center gap-3 mb-3">
-                                <span className="material-symbols-outlined text-slate-700 dark:text-slate-300">support_agent</span>
-                                <h3 className="font-bold text-sm text-slate-900 dark:text-white">Operators</h3>
+                                <span className="material-symbols-outlined text-slate-700">support_agent</span>
+                                <h3 className="font-bold text-sm">Operators</h3>
                             </div>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Can manage complaints, dispatch interventions, and communicate with customers.</p>
+                            <p className="text-xs text-slate-500 leading-relaxed">Can manage complaints, dispatch interventions, and communicate with customers.</p>
                         </div>
-                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
                             <div className="flex items-center gap-3 mb-3">
                                 <span className="material-symbols-outlined text-orange-500">engineering</span>
-                                <h3 className="font-bold text-sm text-slate-900 dark:text-white">Technicians</h3>
+                                <h3 className="font-bold text-sm">Technicians</h3>
                             </div>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Restricted to mobile interface for resolving field interventions and reporting status.</p>
+                            <p className="text-xs text-slate-500 leading-relaxed">Restricted to mobile interface for resolving field interventions and reporting status.</p>
                         </div>
                     </div>
                 </div>
             </main>
 
-            {/* Modal Overlay */}
-            {isModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden animate-in zoom-in-95 duration-200">
-                        <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
-                            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Add New User</h3>
-                            <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
-                                <span className="material-symbols-outlined">close</span>
-                            </button>
-                        </div>
-                        <div className="p-6 space-y-4">
-                            <div>
-                                <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Full Name</label>
-                                <input type="text" className="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="e.g. John Doe" />
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Email Address</label>
-                                <input type="email" className="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="e.g. john@system.com" />
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Role Assignment</label>
-                                <select className="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-primary focus:border-primary">
-                                    <option value="operator">Operator</option>
-                                    <option value="technician">Technician</option>
-                                    <option value="admin">Administrator</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div className="p-6 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex justify-end gap-3">
-                            <button onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-sm font-bold text-slate-600 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors">Cancel</button>
-                            <button className="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-primary/20">Create Account</button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            {/* Footer */}
+            <footer className="mt-auto py-6 px-10 border-t border-slate-200 dark:border-slate-800 text-center text-slate-400 text-xs">
+                © 2023 Complaints & Intervention System. Admin Terminal V 2.1.0
+            </footer>
         </div>
     );
 }

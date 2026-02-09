@@ -2,16 +2,19 @@
 
 import { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
-import Header from '~/components/Header';
-import Footer from '~/components/Footer';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
     const pathname = usePathname();
     const isTechnician = pathname?.startsWith('/technician');
     const isMap = pathname?.startsWith('/map');
 
-    // Technician: No App Header/Footer, Full Width
-    if (isTechnician) {
+    const isFleet = pathname?.startsWith('/fleet');
+    const isAdminSystem = pathname?.startsWith('/admin/system');
+
+    // Full screen layouts (No global Header/Footer)
+    if (isTechnician || isFleet || isAdminSystem) {
         return <>{children}</>;
     }
 

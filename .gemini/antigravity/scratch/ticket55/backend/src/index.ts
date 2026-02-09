@@ -1,0 +1,75 @@
+import express from 'express';
+import { createServer } from 'http';
+import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import { envValidator } from './config/envValidator.js';
+import { connectDB } from './config/db.js';
+import { initSocket } from './services/socketService.js';
+import { logger } from './utils/logger.js';
+import errorHandler from './middleware/errorHandler.js';
+
+// Routes
+import authRoutes from './routes/auth.js';
+import complaintRoutes from './routes/complaints.js';
+import teamRoutes from './routes/teams.js';
+import assignmentRoutes from './routes/assignments.js';
+import planningRoutes from './routes/planning.js';
+import dashboardRoutes from './routes/dashboard.js';
+import aiRoutes from './routes/ai.js';
+
+// Validate environment
+envValidator();
+
+const app = express();
+const httpServer = createServer(app);
+
+// Security middleware
+app.use(helmet());
+app.use(cors({ origin: '*' }));
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 min
+    max: 100
+});
+app.use('/api/', limiter);
+
+// Body parsing
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Mount routes
+app.use('/api/auth', authRoutes);
+app.use('/api/complaints', complaintRoutes);
+app.use('/api/teams', teamRoutes);
+app.use('/api/assignments', assignmentRoutes);
+app.use('/api/planning', planningRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/ai', aiRoutes);
+
+// Health check
+app.get('/', (req, res) => {
+    res.json({ status: 'ok', service: 'ReclamTrack API' });
+});
+
+// Error handler
+app.use(errorHandler);
+
+// Initialize Socket.IO
+initSocket(httpServer);
+
+// Start server
+const start = async () => {
+    try {
+        await connectDB();
+        const PORT = process.env.PORT || 5001;
+        httpServer.listen(PORT, () => {
+            logger.info(`🚀 API ReclamTrack écoute sur le port ${PORT}`);
+        });
+    } catch (err) {
+        logger.error('❌ Échec démarrage serveur', err);
+        process.exit(1);
+    }
+};
+
+start();

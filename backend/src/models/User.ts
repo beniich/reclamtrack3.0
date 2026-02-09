@@ -2,33 +2,53 @@ import mongoose, { Schema, Document } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 export interface IUser extends Document {
+    name?: string;
     email: string;
-    password: string;
-    role: 'admin' | 'dispatcher' | 'staff';
+    password?: string;
+    role: 'admin' | 'dispatcher' | 'staff' | 'citizen';
+    googleId?: string;
+    avatar?: string;
+    isEmailVerified?: boolean;
+    authProvider?: 'local' | 'google';
     comparePassword(candidate: string): Promise<boolean>;
 }
 
 const UserSchema: Schema = new Schema(
     {
+        name: { type: String },
         email: { type: String, required: true, unique: true, lowercase: true },
-        password: { type: String, required: true },
+        password: {
+            type: String,
+            required: function (this: any) {
+                return !this.googleId; // Password required only if not Google auth
+            }
+        },
         role: {
             type: String,
-            enum: ['admin', 'dispatcher', 'staff'],
+            enum: ['admin', 'dispatcher', 'staff', 'citizen'],
             default: 'staff'
-        }
+        },
+        googleId: { type: String, unique: true, sparse: true },
+        avatar: { type: String },
+        isEmailVerified: { type: Boolean, default: false },
+        authProvider: { type: String, enum: ['local', 'google'], default: 'local' }
     },
     { timestamps: true }
 );
 
-UserSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
+UserSchema.pre<IUser>('save', async function (next) {
+    if (!this.isModified('password') || !this.password) return next();
+    try {
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (error: any) {
+        next(error);
+    }
 });
 
 UserSchema.methods.comparePassword = async function (candidate: string) {
+    if (!this.password) return false;
     return bcrypt.compare(candidate, this.password);
 };
 

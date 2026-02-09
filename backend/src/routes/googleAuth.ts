@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { OAuth2Client } from 'google-auth-library';
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import { User } from '../models/User.js';
 
 const router = Router();
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -70,7 +70,7 @@ router.post('/google', async (req: Request, res: Response, next: NextFunction) =
         const token = jwt.sign(
             { id: user._id, email: user.email, role: user.role },
             process.env.JWT_SECRET || 'fallback_secret',
-            { expiresIn: process.env.JWT_EXPIRE || '7d' }
+            { expiresIn: process.env.JWT_EXPIRE || '7d' } as jwt.SignOptions
         );
 
         res.status(200).json({

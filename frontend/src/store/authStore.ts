@@ -6,7 +6,7 @@ interface User {
     email: string;
     name: string;
     avatar?: string;
-    role: 'admin' | 'dispatcher' | 'staff';
+    role: 'admin' | 'dispatcher' | 'staff' | 'super_admin' | 'manager' | 'technician' | 'warehouse_manager' | 'citizen';
 }
 
 interface AuthState {

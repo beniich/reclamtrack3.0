@@ -3,6 +3,7 @@ import { createServer } from 'http';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import path from 'path';
 import { envValidator } from './config/envValidator.js';
 import { connectDB } from './config/db.js';
 import { initSocket } from './services/socketService.js';
@@ -17,6 +18,7 @@ import teamRoutes from './routes/teams.js';
 import assignmentRoutes from './routes/assignments.js';
 import planningRoutes from './routes/planning.js';
 import dashboardRoutes from './routes/dashboard.js';
+import inventoryRoutes from './routes/inventory.js';
 
 // Validate environment
 envValidator();
@@ -25,7 +27,9 @@ const app = express();
 const httpServer = createServer(app);
 
 // Security middleware
-app.use(helmet());
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" } // Allow accessing images
+}));
 app.use(cors({ origin: '*' }));
 
 const limiter = rateLimit({
@@ -38,6 +42,9 @@ app.use('/api/', limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+
 // Mount routes
 app.use('/api/auth', authRoutes);
 app.use('/api/complaints', complaintRoutes);
@@ -45,6 +52,7 @@ app.use('/api/teams', teamRoutes);
 app.use('/api/assignments', assignmentRoutes);
 app.use('/api/planning', planningRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/inventory', inventoryRoutes);
 
 // Health check
 app.get('/', (req, res) => {

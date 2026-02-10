@@ -23,7 +23,10 @@ router.post(
     adminOnly,
     [
         body('name').notEmpty(),
-        body('status').optional().isIn(['disponible', 'intervention', 'repos'])
+        body('color').optional().isHexColor(),
+        body('status').optional().isIn(['disponible', 'intervention', 'repos']),
+        body('members').optional().isArray(),
+        body('leaderId').optional().isMongoId()
     ],
     validator,
     async (req, res, next) => {
@@ -43,14 +46,18 @@ router.patch(
     adminOnly,
     [
         param('id').isMongoId(),
-        body('status').isIn(['disponible', 'intervention', 'repos'])
+        body('name').optional().notEmpty(),
+        body('color').optional().isHexColor(),
+        body('status').optional().isIn(['disponible', 'intervention', 'repos']),
+        body('members').optional().isArray(),
+        body('leaderId').optional().isMongoId()
     ],
     validator,
     async (req, res, next) => {
         try {
             const team = await Team.findByIdAndUpdate(
                 req.params.id,
-                { status: req.body.status },
+                req.body,
                 { new: true }
             );
             if (!team) return res.status(404).json({ message: 'Équipe introuvable' });

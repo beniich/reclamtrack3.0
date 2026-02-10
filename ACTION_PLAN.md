@@ -5,24 +5,24 @@
 ### Semaine 1-2: Setup & Foundation
 
 #### Jour 1-2: Configuration Projet
-- [ ] Initialiser structure Next.js App Router
-- [ ] Configurer Tailwind avec design tokens
-- [ ] Installer dépendances (Zustand, React Query, Leaflet, etc.)
-- [ ] Configurer ESLint, Prettier, TypeScript strict
-- [ ] Setup Git hooks (Husky + lint-staged)
+- [x] Initialiser structure Next.js App Router
+- [x] Configurer Tailwind avec design tokens
+- [x] Installer dépendances (Zustand, React Query, Leaflet, etc.)
+- [x] Configurer ESLint, Prettier, TypeScript strict
+- [x] Setup Git hooks (Husky + lint-staged)
 
 #### Jour 3-5: Design System
-- [ ] Créer fichier `design-tokens.css`
-- [ ] Configurer `tailwind.config.js` avec tokens
-- [ ] Créer composants UI de base (Button, Card, Badge, Input)
-- [ ] Documenter composants dans Storybook (optionnel)
+- [x] Créer fichier `design-tokens.css`
+- [x] Configurer `tailwind.config.js` avec tokens
+- [x] Créer composants UI de base (Button, Card, Badge, Input)
+- [x] Documenter composants dans Storybook (optionnel)
 
 #### Jour 6-10: Composants Layout
-- [ ] Extraire et créer `Header.tsx`
-- [ ] Extraire et créer `Sidebar.tsx`
-- [ ] Extraire et créer `Footer.tsx`
-- [ ] Créer `MobileNav.tsx`
-- [ ] Créer layouts Next.js (RootLayout, DashboardLayout, AuthLayout)
+- [x] Extraire et créer `Header.tsx`
+- [x] Extraire et créer `Sidebar.tsx`
+- [x] Extraire et créer `Footer.tsx`
+- [x] Créer `MobileNav.tsx`
+- [x] Créer layouts Next.js (RootLayout, DashboardLayout, AuthLayout)
 
 ---
 
@@ -30,39 +30,39 @@
 
 #### Jour 11-13: Authentification
 - [x] Migrer `secure_login_screen` → `/login`
-- [ ] Implémenter authStore (Zustand)
-- [ ] Connecter API backend `/api/auth/login`
-- [ ] Protected routes middleware
-- [ ] Session persistence (localStorage + cookies)
+- [x] Implémenter authStore (Zustand)
+- [x] Connecter API backend `/api/auth/login`
+- [x] Protected routes middleware
+- [x] Session persistence (localStorage + cookies)
 
 #### Jour 14-16: Dashboard Principal
-- [ ] Migrer `operations_management_dashboard` → `/dashboard/operations`
-- [ ] Créer composants KPICard, StatCard
-- [ ] Implémenter fetching données temps réel
+- [x] Migrer `operations_management_dashboard` → `/dashboard/operations`
+- [x] Créer composants KPICard, StatCard
+- [x] Implémenter fetching données temps réel
 - [ ] Ajouter filtres date range
 
 #### Jour 17-20: Gestion Réclamations
-- [ ] Migrer `advanced_complaint_list_view` → `/complaints/list`
-- [ ] Créer DataTable component réutilisable
-- [ ] Implémenter pagination, tri, filtres
-- [ ] Migrer `detailed_complaint_ticket_view` → `/complaints/[id]`
-- [ ] Connecter API CRUD complaints
+- [x] Migrer `advanced_complaint_list_view` → `/complaints/list`
+- [x] Créer DataTable component réutilisable
+- [x] Implémenter pagination, tri, filtres
+- [x] Migrer `detailed_complaint_ticket_view` → `/complaints/[id]`
+- [x] Connecter API CRUD complaints
 
 ---
 
 ### Semaine 5-6: Formulaires & Maps
 
 #### Jour 21-25: Formulaire Multi-étapes
-- [ ] Migrer `step-by-step_complaint_intake_form` → `/complaints/create`
-- [ ] Implémenter stepper component
+- [x] Migrer `step-by-step_complaint_intake_form` → `/complaints/create`
+- [x] Implémenter stepper component
 - [ ] Validation Zod pour chaque étape
 - [ ] State management formulaire (React Hook Form)
 - [ ] Upload fichiers (photos, documents)
 
 #### Jour 26-30: Cartographie
-- [ ] Intégrer Leaflet dans projet
-- [ ] Créer MapView component
-- [ ] Migrer `geospatial_operations_map` → `/maps/operations`
+- [x] Intégrer Leaflet dans projet
+- [x] Créer MapView component
+- [x] Migrer `geospatial_operations_map` → `/maps/operations`
 - [ ] Migrer `infrastructure_issue_heatmap` → `/maps/heatmap`
 - [ ] Clustering markers pour performance
 - [ ] Géolocalisation utilisateur
@@ -72,14 +72,14 @@
 ### Semaine 7-8: Équipes & Planning
 
 #### Jour 31-35: Gestion Équipes
-- [ ] Migrer `technical_teams_directory` → `/teams/directory`
-- [ ] Migrer `technical_team_profile_details` → `/teams/[id]`
-- [ ] Créer TeamCard, TeamMemberList components
-- [ ] API endpoints teams CRUD
+- [x] Migrer `technical_teams_directory` → `/teams/directory`
+- [x] Migrer `technical_team_profile_details` → `/teams/[id]`
+- [x] Créer TeamCard, TeamMemberList components
+- [x] API endpoints teams CRUD
 
 #### Jour 36-40: Planning & Calendrier
 - [x] Migrer `intervention_planning_calendar` → `/teams/planning`
-- [ ] Intégrer FullCalendar ou React Big Calendar
+- [x] Intégrer FullCalendar ou React Big Calendar
 - [ ] Drag & drop interventions
 - [ ] Migrer `team_shift_&_roster_scheduler`
 - [ ] Gestion conflits horaires
@@ -89,25 +89,25 @@
 ### Semaine 9-10: Inventaire & Admin
 
 #### Jour 41-45: Gestion Stocks
-- [ ] Migrer `inventory_&_stock_management_1` → `/inventory/stock`
+- [x] Migrer `inventory_&_stock_management_1` → `/inventory/stock`
 - [ ] Migrer `material_requisition_form` → `/inventory/requisition`
-- [ ] Migrer `warehouse_request_approval_portal` → `/inventory/approval`
+- [x] Migrer `warehouse_request_approval_portal` → `/inventory/approval`
 - [ ] Workflow approbation (états: pending → approved → delivered)
-- [ ] Notifications temps réel (Socket.io)
+- [x] Notifications temps réel (Socket.io)
 
 #### Jour 46-50: Administration
-- [ ] Migrer `system_admin_overview` → `/admin/system`
+- [x] Migrer `system_admin_overview` → `/admin/system`
 - [x] Migrer `user_&_roles_management` → `/admin/users`
-- [ ] Migrer `audit_logs_&_activity_feed` → `/admin/audit-logs`
+- [x] Migrer `audit_logs_&_activity_feed` → `/admin/audit-logs`
 - [ ] RBAC (Role-Based Access Control)
-- [ ] Logs en temps réel (WebSocket)
+- [x] Logs en temps réel (WebSocket)
 
 ---
 
 ### Semaine 11-12: Analytics & Finalisation
 
 #### Jour 51-55: Dashboards Analytics
-- [ ] Migrer `operational_analytics_dashboard` → `/analytics/operations`
+- [x] Migrer `operational_analytics_dashboard` → `/analytics/operations`
 - [ ] Migrer `citizen_satisfaction_dashboard` → `/analytics/satisfaction`
 - [ ] Intégrer Chart.js ou Recharts
 - [ ] Export données (Excel, CSV, PDF)
@@ -772,17 +772,17 @@ npm run generate:component ComponentName
 
 | Catégorie | Total | Migrées | En cours | Restantes | % Complétion |
 |-----------|-------|---------|----------|-----------|--------------|
-| Auth & Landing | 2 | 0 | 0 | 2 | 0% |
-| Dashboards | 4 | 0 | 0 | 4 | 0% |
-| Réclamations | 5 | 0 | 0 | 5 | 0% |
-| Équipes | 6 | 0 | 0 | 6 | 0% |
-| Cartographie | 2 | 0 | 0 | 2 | 0% |
-| Inventaire | 5 | 0 | 0 | 5 | 0% |
+| Auth & Landing | 2 | 2 | 0 | 0 | 100% |
+| Dashboards | 4 | 1 | 1 | 2 | 25% |
+| Réclamations | 5 | 3 | 1 | 1 | 60% |
+| Équipes | 6 | 3 | 1 | 2 | 50% |
+| Cartographie | 2 | 1 | 0 | 1 | 50% |
+| Inventaire | 5 | 2 | 1 | 2 | 40% |
 | Documents | 3 | 0 | 0 | 3 | 0% |
-| Administration | 5 | 0 | 0 | 5 | 0% |
-| Intégrations | 3 | 0 | 0 | 3 | 0% |
+| Administration | 5 | 3 | 1 | 1 | 60% |
+| Intégrations | 3 | 1 | 1 | 1 | 33% |
 | E-commerce | 4 | 0 | 0 | 4 | 0% |
-| **TOTAL** | **39** | **0** | **0** | **39** | **0%** |
+| **TOTAL** | **39** | **16** | **6** | **17** | **41%** |
 
 ---
 

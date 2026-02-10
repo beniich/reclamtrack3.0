@@ -94,7 +94,6 @@ export default function ComplaintDetailPage() {
     ];
 
     const notes: Note[] = []; // Empty for now
-    const attachments: any[] = []; // Empty for now
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-[#0a0a14] font-display">
@@ -132,7 +131,7 @@ export default function ComplaintDetailPage() {
                         <div className="p-6 lg:p-8 space-y-6">
                             <div className="flex items-start justify-between gap-4">
                                 <h1 className="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white leading-tight">
-                                    {complaint.leakType}
+                                    {complaint.title}
                                 </h1>
                                 <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
                                     <span className="material-symbols-outlined text-slate-500">info</span>
@@ -142,11 +141,13 @@ export default function ComplaintDetailPage() {
                             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 py-6 border-y border-slate-100 dark:border-slate-800">
                                 <div>
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Catégorie</p>
-                                    <p className="text-sm font-bold text-slate-700 dark:text-slate-200 capitalize">{complaint.leakType}</p>
+                                    <p className="text-sm font-bold text-slate-700 dark:text-slate-200 capitalize">{complaint.category} - {complaint.subcategory}</p>
                                 </div>
                                 <div>
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Équipe Assignée</p>
-                                    <p className="text-sm font-bold text-slate-500 italic">Non assigné</p>
+                                    <p className={`text-sm font-bold ${complaint.assignedTeamId ? 'text-slate-700 dark:text-slate-200' : 'text-slate-500 italic'}`}>
+                                        {complaint.assignedTeamId?.name || 'Non assigné'}
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Créé le</p>
@@ -154,7 +155,7 @@ export default function ComplaintDetailPage() {
                                 </div>
                                 <div>
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Adresse</p>
-                                    <p className="text-sm font-bold text-slate-700 dark:text-slate-200 truncate" title={complaint.address}>{complaint.address}</p>
+                                    <p className="text-sm font-bold text-slate-700 dark:text-slate-200 truncate" title={`${complaint.address}, ${complaint.city}`}>{complaint.address}, {complaint.city}</p>
                                 </div>
                             </div>
 
@@ -217,9 +218,38 @@ export default function ComplaintDetailPage() {
                             )}
 
                             {activeTab === 'files' && (
-                                <div className="flex flex-col items-center justify-center py-12 text-slate-400">
-                                    <span className="material-symbols-outlined text-4xl mb-2">attachment</span>
-                                    <p className="text-sm font-medium">Bientôt disponible</p>
+                                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                    {complaint.photos && complaint.photos.length > 0 ? (
+                                        complaint.photos.map((photo: string, index: number) => {
+                                            const imageUrl = photo.startsWith('http') ? photo : `${process.env.NEXT_PUBLIC_API_URL}/${photo}`;
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className="relative aspect-square rounded-xl overflow-hidden cursor-pointer group"
+                                                    onClick={() => {
+                                                        setSelectedImage(imageUrl);
+                                                        setShowImageModal(true);
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={imageUrl}
+                                                        alt={`Photo ${index + 1}`}
+                                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                                    />
+                                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                                        <span className="material-symbols-outlined text-white opacity-0 group-hover:opacity-100 transition-opacity text-4xl">
+                                                            zoom_in
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })
+                                    ) : (
+                                        <div className="col-span-full flex flex-col items-center justify-center py-12 text-slate-400">
+                                            <span className="material-symbols-outlined text-4xl mb-2">attachment</span>
+                                            <p className="text-sm font-medium">Aucune pièce jointe</p>
+                                        </div>
+                                    )}
                                 </div>
                             )}
                         </div>
@@ -237,34 +267,53 @@ export default function ComplaintDetailPage() {
                             </button>
                         </div>
 
-                        <div className="flex flex-col items-center text-center gap-3">
-                            <div className="size-20 rounded-3xl bg-gradient-to-br from-primary to-blue-600 text-white flex items-center justify-center text-3xl font-black italic shadow-2xl shadow-primary/30 ring-4 ring-white dark:ring-slate-900">
-                                {complaint.firstName.charAt(0)}{complaint.lastName.charAt(0)}
-                            </div>
-                            <div>
-                                <p className="text-xl font-black text-slate-900 dark:text-white">{complaint.firstName} {complaint.lastName}</p>
-                                <div className="flex items-center justify-center gap-1.5 mt-1">
-                                    <span className="size-1.5 rounded-full bg-slate-300"></span>
-                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Client</p>
+                        {complaint.isAnonymous ? (
+                            <div className="flex flex-col items-center text-center gap-3">
+                                <div className="size-20 rounded-3xl bg-slate-200 dark:bg-slate-800 text-slate-400 flex items-center justify-center text-3xl font-black italic shadow-inner">
+                                    ?
+                                </div>
+                                <div>
+                                    <p className="text-xl font-black text-slate-900 dark:text-white">Anonyme</p>
+                                    <div className="flex items-center justify-center gap-1.5 mt-1">
+                                        <span className="size-1.5 rounded-full bg-slate-400"></span>
+                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Citoyen</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ) : (
+                            <div className="flex flex-col items-center text-center gap-3">
+                                <div className="size-20 rounded-3xl bg-gradient-to-br from-primary to-blue-600 text-white flex items-center justify-center text-3xl font-black italic shadow-2xl shadow-primary/30 ring-4 ring-white dark:ring-slate-900">
+                                    {complaint.firstName?.charAt(0)}{complaint.lastName?.charAt(0)}
+                                </div>
+                                <div>
+                                    <p className="text-xl font-black text-slate-900 dark:text-white">{complaint.firstName} {complaint.lastName}</p>
+                                    <div className="flex items-center justify-center gap-1.5 mt-1">
+                                        <span className="size-1.5 rounded-full bg-slate-300"></span>
+                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Client</p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
                         <div className="space-y-3 pt-4">
-                            <div className="flex items-center gap-4 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer group">
-                                <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">call</span>
-                                <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{complaint.phone}</span>
-                            </div>
+                            {!complaint.isAnonymous && (
+                                <div className="flex items-center gap-4 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer group">
+                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">call</span>
+                                    <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{complaint.phone || 'Non renseigné'}</span>
+                                </div>
+                            )}
                             <div className="flex items-start gap-4 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
                                 <span className="material-symbols-outlined text-rose-500 shrink-0">location_on</span>
                                 <span className="text-sm font-bold text-slate-700 dark:text-slate-300 italic leading-relaxed">{complaint.address}</span>
                             </div>
                         </div>
 
-                        <button className="w-full py-3.5 rounded-2xl bg-primary text-white font-black text-[10px] uppercase tracking-widest shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-98 transition-all flex items-center justify-center gap-3">
-                            <span className="material-symbols-outlined text-sm">chat_bubble</span>
-                            Contacter le client
-                        </button>
+                        {!complaint.isAnonymous && (
+                            <button className="w-full py-3.5 rounded-2xl bg-primary text-white font-black text-[10px] uppercase tracking-widest shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-98 transition-all flex items-center justify-center gap-3">
+                                <span className="material-symbols-outlined text-sm">chat_bubble</span>
+                                Contacter le client
+                            </button>
+                        )}
                     </div>
 
                     {/* Centre de Contrôle Rapide */}

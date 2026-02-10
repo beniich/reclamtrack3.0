@@ -75,13 +75,20 @@ export default function ComplaintListPage() {
                                         #{c.number}
                                     </td>
                                     <td className="px-6 py-4">
-                                        <div className="font-medium text-gray-900">{c.firstName} {c.lastName}</div>
-                                        <div className="text-xs text-gray-500">{c.phone}</div>
+                                        {c.isAnonymous ? (
+                                            <div className="font-medium text-gray-500 italic">Anonyme</div>
+                                        ) : (
+                                            <>
+                                                <div className="font-medium text-gray-900">{c.firstName} {c.lastName}</div>
+                                                <div className="text-xs text-gray-500">{c.phone}</div>
+                                            </>
+                                        )}
                                     </td>
                                     <td className="px-6 py-4 capitalize">
-                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">
-                                            {c.leakType}
-                                        </span>
+                                        <div className="flex flex-col">
+                                            <span className="font-medium text-slate-700">{c.category}</span>
+                                            <span className="text-xs text-slate-500">{c.subcategory}</span>
+                                        </div>
                                     </td>
                                     <td className="px-6 py-4">
                                         <StatusBadge status={c.status} size="sm" />

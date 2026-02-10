@@ -1,14 +1,43 @@
 export interface Complaint {
     _id: string;
-    number: string;            // numéro unique
-    firstName: string;
-    lastName: string;
+    number: string;
+    // Step 1
+    category: string;
+    subcategory: string;
+    priority: 'low' | 'medium' | 'high' | 'urgent';
+    title: string;
+    description: string;
+
+    // Step 2
     address: string;
-    phone: string;
-    leakType: string;
-    description?: string;
-    status: 'nouvelle' | 'en cours' | 'résolue' | 'fermée';
+    city: string;
+    district: string;
+    postalCode?: string;
+    latitude?: number;
+    longitude?: number;
+
+    // Step 3
+    photos: string[];
+    documents?: { name: string; url: string }[];
+    audioNote?: string;
+
+    // Step 4 (Contact)
+    isAnonymous: boolean;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
+
+    // Workflow
+    status: 'nouvelle' | 'en cours' | 'résolue' | 'fermée' | 'rejetée';
+    assignedTeamId?: { _id: string; name: string }; // Populated
+    technicianId?: { _id: string; name: string; email: string }; // Populated
+
     createdAt: string;
+    updatedAt: string;
+
+    // Legacy support (optional)
+    leakType?: string;
 }
 
 export interface Team {

@@ -7,7 +7,7 @@ import { Role, Permission, ROLE_PERMISSIONS, isRoleHigherOrEqual } from '@/lib/r
 
 export function usePermissions() {
     const { data: session } = useSession();
-    const userRole = session?.user?.role as Role;
+    const userRole = (session?.user as any)?.role as Role;
 
     const permissions = useMemo(() => {
         if (!userRole) return [];

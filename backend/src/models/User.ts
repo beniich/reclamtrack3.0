@@ -25,7 +25,7 @@ const UserSchema: Schema = new Schema(
         },
         role: {
             type: String,
-            enum: ['admin', 'dispatcher', 'staff', 'citizen'],
+            enum: ['admin', 'dispatcher', 'staff', 'citizen', 'technician'],
             default: 'staff'
         },
         googleId: { type: String, unique: true, sparse: true },

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs';
 import { User } from '../models/User.js';
 import { Requisition, RequisitionStatus } from '../models/Requisition.js';
 import { KnowledgeBase } from '../models/Knowledge.js';
@@ -18,9 +19,8 @@ const seedData = async () => {
         await mongoose.connect(MONGO_URI);
         console.log('✅ Connecté à MongoDB pour le seed');
 
-        // 1. Nettoyer la base (optionnel, commenté pour sécurité)
-        // await mongoose.connection.db.dropDatabase();
-        // console.log('🗑️ Base de données nettoyée');
+        // Préparer le hash du mot de passe
+        const hashedPassword = await bcrypt.hash('password123', 10);
 
         // 2. Créer Utilisateurs
         const admin = await User.findOneAndUpdate(
@@ -28,7 +28,7 @@ const seedData = async () => {
             {
                 name: 'Admin Principal',
                 email: 'admin@reclamtrack.com',
-                password: 'password123', // Hashage géré par le modèle si implémenté
+                password: hashedPassword,
                 role: 'admin'
             },
             { upsert: true, new: true }
@@ -39,12 +39,12 @@ const seedData = async () => {
             {
                 name: 'Technicien Senior',
                 email: 'tech@reclamtrack.com',
-                password: 'password123',
-                role: 'technician'
+                password: hashedPassword,
+                role: 'technician' // Corrected role if needed based on enum in User model: 'admin' | 'dispatcher' | 'staff' | 'citizen'
             },
             { upsert: true, new: true }
         );
-        console.log('👥 Utilisateurs créés/mis à jour');
+        console.log('👥 Utilisateurs créés/mis à jour avec mots de passe hashés');
 
         // 3. Créer Réquisitions
         if (await Requisition.countDocuments() === 0) {

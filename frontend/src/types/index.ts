@@ -69,3 +69,42 @@ export interface Assignment {
     assignedAt: string;
     status: 'affecté' | 'en cours' | 'terminé';
 }
+
+// Types from Roadmap 2
+export interface ApiResponse<T = any> {
+    success: boolean;
+    data?: T;
+    error?: string;
+    message?: string;
+    meta?: {
+        page?: number;
+        limit?: number;
+        total?: number;
+        totalPages?: number;
+    };
+}
+
+export interface PaginationParams {
+    page: number;
+    limit: number;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+}
+
+export interface FilterParams {
+    status?: string[];
+    category?: string[];
+    priority?: string[];
+    dateFrom?: string;
+    dateTo?: string;
+    search?: string;
+}
+
+export interface TimelineEvent {
+    id: string;
+    type: 'created' | 'assigned' | 'in_progress' | 'resolved' | 'closed' | 'note';
+    title: string;
+    description: string;
+    timestamp: string;
+    actor?: string;
+}

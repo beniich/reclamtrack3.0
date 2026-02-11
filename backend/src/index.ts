@@ -19,6 +19,14 @@ import assignmentRoutes from './routes/assignments.js';
 import planningRoutes from './routes/planning.js';
 import dashboardRoutes from './routes/dashboard.js';
 import inventoryRoutes from './routes/inventory.js';
+import requisitionRoutes from './routes/requisitions.js';
+import analyticsRoutes from './routes/analytics.js';
+import schedulerRoutes from './routes/scheduler.js';
+import fleetRoutes from './routes/fleet.js';
+import messageRoutes from './routes/messages.js';
+import knowledgeRoutes from './routes/knowledge.js';
+import feedbackRoutes from './routes/feedback.js';
+import adminRoutes from './routes/admin.js';
 
 // Validate environment
 envValidator();
@@ -53,6 +61,14 @@ app.use('/api/assignments', assignmentRoutes);
 app.use('/api/planning', planningRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/inventory', inventoryRoutes);
+app.use('/api/requisitions', requisitionRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/scheduler', schedulerRoutes);
+app.use('/api/fleet', fleetRoutes);
+app.use('/api/messages', messageRoutes);
+app.use('/api/knowledge', knowledgeRoutes);
+app.use('/api/feedback', feedbackRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Health check
 app.get('/', (req, res) => {

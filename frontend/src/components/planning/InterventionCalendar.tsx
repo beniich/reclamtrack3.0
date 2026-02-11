@@ -1,4 +1,4 @@
-// components/planning/InterventionCalendar.tsx
+
 'use client';
 
 import { useState, useCallback, useMemo } from 'react';
@@ -8,14 +8,14 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import frLocale from '@fullcalendar/core/locales/fr';
 import { EventInput, EventClickArg, EventDropArg, DateSelectArg } from '@fullcalendar/core';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 import {
     Dialog,
     DialogContent,
     DialogHeader,
     DialogTitle,
     DialogFooter,
-} from '@/components/ui/dialog'; // Assuming these UI components exist in your project in components/ui, if not they need to be created or imports adjusted. Given User provided code, I assume they might be missing or need Shadcn setup. I will keep them and if they break, user needs to add Shadcn.
+} from '@/components/ui/dialog';
 import { Calendar as CalendarIcon, Clock, Users, MapPin, AlertCircle, X } from 'lucide-react';
 
 interface Intervention {
@@ -50,12 +50,15 @@ export function InterventionCalendar({
     interventions,
     teams,
     onInterventionUpdate,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onInterventionCreate,
     onInterventionDelete,
     editable = true,
 }: InterventionCalendarProps) {
     const [selectedEvent, setSelectedEvent] = useState<Intervention | null>(null);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [selectedDateRange, setSelectedDateRange] = useState<DateSelectArg | null>(null);
     const [conflictWarning, setConflictWarning] = useState<string | null>(null);
 
@@ -63,7 +66,7 @@ export function InterventionCalendar({
     const events: EventInput[] = useMemo(() => {
         return interventions.map((intervention) => {
             const team = teams.find((t) => t.id === intervention.teamId);
-            const priorityColors: any = {
+            const priorityColors: Record<string, string> = {
                 low: '#22c55e',
                 medium: '#eab308',
                 high: '#f97316',

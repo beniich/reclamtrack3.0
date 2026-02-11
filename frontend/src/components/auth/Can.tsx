@@ -1,4 +1,4 @@
-// components/auth/Can.tsx
+
 'use client';
 
 import { usePermissions } from '@/hooks/usePermissions';

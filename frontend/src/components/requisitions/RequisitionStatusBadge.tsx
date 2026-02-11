@@ -1,4 +1,4 @@
-// components/requisitions/RequisitionStatusBadge.tsx
+
 'use client';
 
 import { RequisitionStatus } from '@/lib/workflows/requisition-workflow';

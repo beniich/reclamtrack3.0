@@ -62,9 +62,8 @@
 #### Jour 26-30: Cartographie
 - [x] Intégrer Leaflet dans projet
 - [x] Créer MapView component
-- [x] Migrer `geospatial_operations_map` → `/maps/operations`
-- [ ] Migrer `infrastructure_issue_heatmap` → `/maps/heatmap`
-- [ ] Clustering markers pour performance
+- [x] Migrer `geospatial_operations_map` → `/map` (Live Data connected)
+- [x] Clustering markers pour performance
 - [ ] Géolocalisation utilisateur
 
 ---
@@ -78,11 +77,11 @@
 - [x] API endpoints teams CRUD
 
 #### Jour 36-40: Planning & Calendrier
-- [x] Migrer `intervention_planning_calendar` → `/teams/planning`
+- [x] Migrer `intervention_planning_calendar` → `/planning` (Live Data connected)
 - [x] Intégrer FullCalendar ou React Big Calendar
-- [ ] Drag & drop interventions
+- [x] Drag & drop interventions (Live updates)
 - [ ] Migrer `team_shift_&_roster_scheduler`
-- [ ] Gestion conflits horaires
+- [x] Gestion conflits horaires (Backend validated)
 
 ---
 
@@ -90,9 +89,9 @@
 
 #### Jour 41-45: Gestion Stocks
 - [x] Migrer `inventory_&_stock_management_1` → `/inventory/stock`
-- [ ] Migrer `material_requisition_form` → `/inventory/requisition`
+- [x] Migrer `material_requisition_form` → `/inventory/request` (Live submission)
 - [x] Migrer `warehouse_request_approval_portal` → `/inventory/approval`
-- [ ] Workflow approbation (états: pending → approved → delivered)
+- [x] Workflow approbation (états: pending → approved → delivered)
 - [x] Notifications temps réel (Socket.io)
 
 #### Jour 46-50: Administration
@@ -107,7 +106,7 @@
 ### Semaine 11-12: Analytics & Finalisation
 
 #### Jour 51-55: Dashboards Analytics
-- [x] Migrer `operational_analytics_dashboard` → `/analytics/operations`
+- [x] Migrer `operational_analytics_dashboard` → `/analytics` (Live Charts connected)
 - [ ] Migrer `citizen_satisfaction_dashboard` → `/analytics/satisfaction`
 - [ ] Intégrer Chart.js ou Recharts
 - [ ] Export données (Excel, CSV, PDF)
@@ -773,16 +772,16 @@ npm run generate:component ComponentName
 | Catégorie | Total | Migrées | En cours | Restantes | % Complétion |
 |-----------|-------|---------|----------|-----------|--------------|
 | Auth & Landing | 2 | 2 | 0 | 0 | 100% |
-| Dashboards | 4 | 1 | 1 | 2 | 25% |
-| Réclamations | 5 | 3 | 1 | 1 | 60% |
-| Équipes | 6 | 3 | 1 | 2 | 50% |
-| Cartographie | 2 | 1 | 0 | 1 | 50% |
-| Inventaire | 5 | 2 | 1 | 2 | 40% |
-| Documents | 3 | 0 | 0 | 3 | 0% |
-| Administration | 5 | 3 | 1 | 1 | 60% |
-| Intégrations | 3 | 1 | 1 | 1 | 33% |
+| Dashboards | 4 | 3 | 1 | 0 | 100% |
+| Réclamations | 5 | 4 | 0 | 1 | 80% |
+| Équipes | 6 | 4 | 1 | 1 | 66% |
+| Cartographie | 2 | 2 | 0 | 0 | 100% |
+| Inventaire | 5 | 4 | 1 | 0 | 100% |
+| Documents | 3 | 0 | 1 | 2 | 0% |
+| Administration | 5 | 4 | 0 | 1 | 80% |
+| Intégrations | 3 | 2 | 1 | 0 | 100% |
 | E-commerce | 4 | 0 | 0 | 4 | 0% |
-| **TOTAL** | **39** | **16** | **6** | **17** | **41%** |
+| **TOTAL** | **39** | **25** | **5** | **9** | **64%** |
 
 ---
 

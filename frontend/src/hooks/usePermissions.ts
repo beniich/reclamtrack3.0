@@ -1,13 +1,13 @@
-// hooks/usePermissions.ts
+
 'use client';
 
-import { useAuthStore } from '@/store/authStore'; // Assuming authStore exists and has user data
+import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
-import { Permission, Role, ROLE_PERMISSIONS, isRoleHigherOrEqual } from '@/lib/rbac/permissions';
+import { Role, Permission, ROLE_PERMISSIONS, isRoleHigherOrEqual } from '@/lib/rbac/permissions';
 
 export function usePermissions() {
-    const { user } = useAuthStore();
-    const userRole = user?.role as Role;
+    const { data: session } = useSession();
+    const userRole = session?.user?.role as Role;
 
     const permissions = useMemo(() => {
         if (!userRole) return [];

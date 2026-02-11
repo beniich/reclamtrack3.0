@@ -1,11 +1,11 @@
-// hooks/useComplaintForm.ts
+
 'use client';
 
 import { useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { toast } from 'react-hot-toast'; // Changed form sonner to react-hot-toast as per package.json
+import { toast } from 'sonner';
 import {
     step1Schema,
     step2Schema,
@@ -152,21 +152,54 @@ export function useComplaintForm(options: UseComplaintFormOptions = {}) {
         file: File,
         type: 'photo' | 'document' | 'audio'
     ): Promise<string> => {
-        // We will return the file object itself or a temporary URL, 
-        // as the actual upload will happen on form submission to link it to the complaint.
-        // OR we can implement immediate upload if backend supports it.
-        // Given backend route for '/api/complaints' handles upload with 'photos' field,
-        // we should probably collect files in state and send them on final submit.
-        // However, the FileUpload component expects a URL return usually for preview.
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('type', type);
 
-        // For now, let's just return a local preview URL
-        // The actual File object should be stored in the form state.
+        const fileId = `${type}_${Date.now()}_${Math.random()}`;
 
-        return URL.createObjectURL(file);
+        try {
+            const xhr = new XMLHttpRequest();
+
+            return new Promise((resolve, reject) => {
+                xhr.upload.addEventListener('progress', (e) => {
+                    if (e.lengthComputable) {
+                        const progress = Math.round((e.loaded / e.total) * 100);
+                        setUploadProgress((prev) => ({ ...prev, [fileId]: progress }));
+                    }
+                });
+
+                xhr.addEventListener('load', () => {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        setUploadProgress((prev) => {
+                            const newProgress = { ...prev };
+                            delete newProgress[fileId];
+                            return newProgress;
+                        });
+                        resolve(response.url);
+                    } else {
+                        reject(new Error('Upload failed'));
+                    }
+                });
+
+                xhr.addEventListener('error', () => reject(new Error('Upload error')));
+
+                xhr.open('POST', '/api/upload');
+                xhr.send(formData);
+            });
+        } catch (error) {
+            setUploadProgress((prev) => {
+                const newProgress = { ...prev };
+                delete newProgress[fileId];
+                return newProgress;
+            });
+            throw error;
+        }
     }, []);
 
     // Soumission finale du formulaire
-    const submitComplaint = useCallback(async (files?: File[]) => { // Accept files argument
+    const submitComplaint = useCallback(async () => {
         setIsSubmitting(true);
 
         try {
@@ -191,74 +224,43 @@ export function useComplaintForm(options: UseComplaintFormOptions = {}) {
             }
 
             // Collecte des données
-            const formData = new FormData();
-
-            // Step 1
-            const step1 = step1Form.getValues();
-            formData.append('category', step1.category);
-            formData.append('subcategory', step1.subcategory);
-            formData.append('priority', step1.priority);
-            formData.append('title', step1.title);
-            formData.append('description', step1.description);
-
-            // Step 2
-            const step2 = step2Form.getValues();
-            formData.append('address', step2.address);
-            formData.append('city', step2.city);
-            formData.append('district', step2.district);
-            if (step2.postalCode) formData.append('postalCode', step2.postalCode);
-            if (step2.latitude) formData.append('latitude', String(step2.latitude));
-            if (step2.longitude) formData.append('longitude', String(step2.longitude));
-
-            // Step 3 (Files)
-            if (files && files.length > 0) {
-                files.forEach(file => {
-                    formData.append('photos', file);
-                });
-            }
-
-            // Step 4
-            const step4 = step4Form.getValues();
-            formData.append('isAnonymous', String(step4.isAnonymous));
-
-            // Only append contact info if NOT anonymous to respect privacy/backend logic
-            if (!step4.isAnonymous) {
-                if (step4.firstName) formData.append('firstName', step4.firstName);
-                if (step4.lastName) formData.append('lastName', step4.lastName);
-                if (step4.email) formData.append('email', step4.email);
-                if (step4.phone) formData.append('phone', step4.phone);
-            }
+            const complaintData = {
+                ...step1Form.getValues(),
+                ...step2Form.getValues(),
+                ...step3Form.getValues(),
+                ...step4Form.getValues(),
+                submittedAt: new Date().toISOString(),
+            };
 
             // Envoi au backend
-            const token = localStorage.getItem('token');
-            const headers: Record<string, string> = {};
-            if (token) headers['Authorization'] = `Bearer ${token}`;
-
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api'}/complaints`, {
+            const response = await fetch('/api/complaints', {
                 method: 'POST',
-                headers: headers, // Do NOT set Content-Type, browser sets it with boundary
-                body: formData,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(complaintData),
             });
 
             if (!response.ok) {
-                const errData = await response.json();
-                throw new Error(errData.message || 'Erreur lors de la soumission');
+                throw new Error('Erreur lors de la soumission');
             }
 
             const result = await response.json();
 
             // Succès
             clearDraft();
-            toast.success('Réclamation soumise avec succès!');
+            toast.success('Réclamation soumise avec succès!', {
+                description: `Numéro de référence: ${result.id}`,
+            });
 
             if (onSuccess) {
-                onSuccess(result._id || result.id);
+                onSuccess(result.id);
             } else {
-                router.push(`/complaints/${result._id || result.id}`);
+                router.push(`/complaints/${result.id}`);
             }
-        } catch (error: any) {
+        } catch (error) {
             console.error('Submission error:', error);
-            toast.error(error.message || 'Erreur lors de la soumission');
+            toast.error('Erreur lors de la soumission', {
+                description: 'Veuillez réessayer ou contacter le support',
+            });
         } finally {
             setIsSubmitting(false);
         }

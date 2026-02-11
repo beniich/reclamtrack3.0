@@ -1,3 +1,4 @@
+
 // lib/rbac/permissions.ts
 
 export enum Permission {

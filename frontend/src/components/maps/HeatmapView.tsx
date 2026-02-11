@@ -1,9 +1,14 @@
-// components/maps/HeatmapView.tsx
+
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet.heat';
+import 'leaflet.markercluster';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import { Layers, Thermometer, Download } from 'lucide-react';
-import dynamic from 'next/dynamic';
 
 interface HeatmapDataPoint {
     lat: number;
@@ -30,8 +35,7 @@ interface HeatmapViewProps {
 
 const RABAT_CENTER: [number, number] = [34.0209, -6.8416];
 
-// Component logic that uses Leaflet
-function MapComponent({
+export function HeatmapView({
     data,
     center = RABAT_CENTER,
     zoom = 12,
@@ -40,25 +44,9 @@ function MapComponent({
     filterCategory,
     filterPriority,
 }: HeatmapViewProps) {
-    // Imports inside the component to ensure they run on client
-    const L = require('leaflet');
-    require('leaflet/dist/leaflet.css');
-    require('leaflet.heat');
-    require('leaflet.markercluster');
-    require('leaflet.markercluster/dist/MarkerCluster.css');
-    require('leaflet.markercluster/dist/MarkerCluster.Default.css');
-
-    // Fix marker icons
-    delete (L.Icon.Default.prototype as any)._getIconUrl;
-    L.Icon.Default.mergeOptions({
-        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-    });
-
-    const mapRef = useRef<any>(null);
+    const mapRef = useRef<L.Map | null>(null);
     const heatLayerRef = useRef<any>(null);
-    const markerClusterRef = useRef<any>(null);
+    const markerClusterRef = useRef<L.MarkerClusterGroup | null>(null);
     const [mapMode, setMapMode] = useState<'heatmap' | 'clusters' | 'both'>('heatmap');
     const [intensityMultiplier, setIntensityMultiplier] = useState(1);
 
@@ -72,6 +60,7 @@ function MapComponent({
                 preferCanvas: true,
             });
 
+            // Add tile layer
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors',
                 maxZoom: 19,
@@ -88,7 +77,7 @@ function MapComponent({
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    // Update heatmap/cluster data
+    // Update heatmap data
     useEffect(() => {
         if (!mapRef.current || !data.length) return;
 
@@ -101,7 +90,6 @@ function MapComponent({
         // Remove existing heatmap
         if (heatLayerRef.current) {
             mapRef.current.removeLayer(heatLayerRef.current);
-            heatLayerRef.current = null;
         }
 
         // Create heatmap layer
@@ -112,21 +100,19 @@ function MapComponent({
                 (point.intensity || 1) * intensityMultiplier,
             ]);
 
-            if (L.heatLayer) {
-                heatLayerRef.current = L.heatLayer(heatData, {
-                    radius: 25,
-                    blur: 15,
-                    maxZoom: 17,
-                    max: 1.0,
-                    gradient: {
-                        0.0: '#3b82f6',
-                        0.3: '#22c55e',
-                        0.5: '#eab308',
-                        0.7: '#f97316',
-                        1.0: '#ef4444',
-                    },
-                }).addTo(mapRef.current);
-            }
+            heatLayerRef.current = (L as any).heatLayer(heatData, {
+                radius: 25,
+                blur: 15,
+                maxZoom: 17,
+                max: 1.0,
+                gradient: {
+                    0.0: '#3b82f6',
+                    0.3: '#22c55e',
+                    0.5: '#eab308',
+                    0.7: '#f97316',
+                    1.0: '#ef4444',
+                },
+            }).addTo(mapRef.current);
         }
 
         // Remove existing cluster layer
@@ -137,91 +123,90 @@ function MapComponent({
 
         // Create cluster layer
         if ((mapMode === 'clusters' || mapMode === 'both') && showClusters) {
-            if (L.markerClusterGroup) {
-                markerClusterRef.current = L.markerClusterGroup({
-                    maxClusterRadius: 60,
-                    spiderfyOnMaxZoom: true,
-                    showCoverageOnHover: false,
-                    zoomToBoundsOnClick: true,
-                    iconCreateFunction: (cluster: any) => {
-                        const count = cluster.getChildCount();
-                        let size = 'small';
-                        let className = 'marker-cluster-small';
+            markerClusterRef.current = new L.MarkerClusterGroup({
+                maxClusterRadius: 60,
+                spiderfyOnMaxZoom: true,
+                showCoverageOnHover: false,
+                zoomToBoundsOnClick: true,
+                iconCreateFunction: (cluster) => {
+                    const count = cluster.getChildCount();
+                    let size = 'small';
+                    let className = 'marker-cluster-small';
 
-                        if (count > 50) {
-                            size = 'large';
-                            className = 'marker-cluster-large';
-                        } else if (count > 10) {
-                            size = 'medium';
-                            className = 'marker-cluster-medium';
-                        }
-
-                        return L.divIcon({
-                            html: `<div><span>${count}</span></div>`,
-                            className: `marker-cluster ${className}`,
-                            iconSize: L.point(40, 40),
-                        });
-                    },
-                });
-
-                filteredData.forEach((point) => {
-                    if (!point.complaint) return;
-
-                    const priorityColors: any = {
-                        low: '#22c55e',
-                        medium: '#eab308',
-                        high: '#f97316',
-                        urgent: '#ef4444',
-                    };
-
-                    const color = priorityColors[point.complaint.priority] || '#3b82f6';
-
-                    const icon = L.divIcon({
-                        html: `
-              <div style="
-                background: ${color};
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                border: 3px solid white;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-              "></div>
-            `,
-                        className: '',
-                        iconSize: L.point(24, 24),
-                    });
-
-                    const marker = L.marker([point.lat, point.lng], { icon })
-                        .bindPopup(`
-              <div class="p-2">
-                <h4 class="font-bold text-sm mb-1">${point.complaint.title}</h4>
-                <p class="text-xs text-gray-600 mb-2">${point.complaint.category}</p>
-                <div class="flex gap-2">
-                  <span class="px-2 py-1 text-xs rounded" style="background: ${color}20; color: ${color}">
-                    ${point.complaint.priority}
-                  </span>
-                  <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
-                    ${point.complaint.status}
-                  </span>
-                </div>
-              </div>
-            `);
-
-                    if (onMarkerClick) {
-                        marker.on('click', () => onMarkerClick(point.complaint!.id));
+                    if (count > 50) {
+                        size = 'large';
+                        className = 'marker-cluster-large';
+                    } else if (count > 10) {
+                        size = 'medium';
+                        className = 'marker-cluster-medium';
                     }
 
-                    markerClusterRef.current.addLayer(marker);
+                    return L.divIcon({
+                        html: `<div><span>${count}</span></div>`,
+                        className: `marker-cluster ${className}`,
+                        iconSize: L.point(40, 40),
+                    });
+                },
+            });
+
+            filteredData.forEach((point) => {
+                if (!point.complaint) return;
+
+                const priorityColors: Record<string, string> = {
+                    low: '#22c55e',
+                    medium: '#eab308',
+                    high: '#f97316',
+                    urgent: '#ef4444',
+                };
+
+                const color = priorityColors[point.complaint.priority] || '#3b82f6';
+
+                const icon = L.divIcon({
+                    html: `
+            <div style="
+              background: ${color};
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+              border: 3px solid white;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            "></div>
+          `,
+                    className: '',
+                    iconSize: L.point(24, 24),
                 });
 
-                mapRef.current.addLayer(markerClusterRef.current);
-            }
+                const marker = L.marker([point.lat, point.lng], { icon })
+                    .bindPopup(`
+            <div class="p-2">
+              <h4 class="font-bold text-sm mb-1">${point.complaint.title}</h4>
+              <p class="text-xs text-gray-600 mb-2">${point.complaint.category}</p>
+              <div class="flex gap-2">
+                <span class="px-2 py-1 text-xs rounded" style="background: ${color}20; color: ${color}">
+                  ${point.complaint.priority}
+                </span>
+                <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                  ${point.complaint.status}
+                </span>
+              </div>
+            </div>
+          `);
+
+                if (onMarkerClick) {
+                    marker.on('click', () => onMarkerClick(point.complaint!.id));
+                }
+
+                markerClusterRef.current!.addLayer(marker);
+            });
+
+            mapRef.current.addLayer(markerClusterRef.current);
         }
-    }, [data, mapMode, intensityMultiplier, showClusters, filterCategory, filterPriority, onMarkerClick, L]);
+    }, [data, mapMode, intensityMultiplier, showClusters, filterCategory, filterPriority, onMarkerClick]);
 
     const exportHeatmapImage = () => {
         if (!mapRef.current) return;
 
+        // @ts-ignore
         import('leaflet-image').then((leafletImage) => {
             // @ts-ignore
             leafletImage.default(mapRef.current, (err: any, canvas: HTMLCanvasElement) => {
@@ -240,9 +225,12 @@ function MapComponent({
 
     return (
         <div className="relative w-full h-full">
+            {/* Map Container */}
             <div id="heatmap-container" className="w-full h-full rounded-xl overflow-hidden" />
 
-            <div className="absolute top-4 right-4 flex flex-col gap-2 z-[400]">
+            {/* Controls */}
+            <div className="absolute top-4 right-4 flex flex-col gap-2 z-[1000]">
+                {/* Layer Toggle */}
                 <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-2 space-y-2">
                     <p className="text-xs font-bold text-slate-500 uppercase px-2">Vue</p>
 
@@ -283,6 +271,7 @@ function MapComponent({
                     )}
                 </div>
 
+                {/* Intensity Control */}
                 {(mapMode === 'heatmap' || mapMode === 'both') && (
                     <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-3">
                         <p className="text-xs font-bold text-slate-500 uppercase mb-2">Intensité</p>
@@ -301,6 +290,7 @@ function MapComponent({
                     </div>
                 )}
 
+                {/* Export Button */}
                 <button
                     onClick={exportHeatmapImage}
                     className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
@@ -310,7 +300,8 @@ function MapComponent({
                 </button>
             </div>
 
-            <div className="absolute bottom-4 left-4 z-[400] bg-white dark:bg-slate-800 rounded-lg shadow-lg p-3">
+            {/* Legend */}
+            <div className="absolute bottom-4 left-4 bg-white dark:bg-slate-800 rounded-lg shadow-lg p-3 z-[1000]">
                 <p className="text-xs font-bold text-slate-500 uppercase mb-2">Densité</p>
                 <div className="flex items-center gap-2">
                     <div className="w-32 h-3 rounded-full" style={{
@@ -323,13 +314,15 @@ function MapComponent({
                 </div>
             </div>
 
-            <div className="absolute top-4 left-4 z-[400] bg-white dark:bg-slate-800 rounded-lg shadow-lg px-4 py-2">
+            {/* Data Count */}
+            <div className="absolute top-4 left-4 bg-white dark:bg-slate-800 rounded-lg shadow-lg px-4 py-2 z-[1000]">
                 <p className="text-sm">
                     <span className="font-bold text-primary">{data.length}</span>
                     <span className="text-slate-500 ml-1">points de données</span>
                 </p>
             </div>
 
+            {/* CSS for clusters */}
             <style jsx global>{`
         .marker-cluster-small {
           background-color: rgba(59, 130, 246, 0.6);
@@ -384,10 +377,3 @@ function MapComponent({
         </div>
     );
 }
-
-// Export dynamic component
-const HeatmapView = dynamic(() => Promise.resolve(MapComponent), {
-    ssr: false
-});
-
-export { HeatmapView };

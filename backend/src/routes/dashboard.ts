@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { protect } from '../middleware/auth.js';
 import { Complaint } from '../models/Complaint.js';
 import { Team } from '../models/Team.js';
-import { Assignment } from '../models/Assignment.js';
+import mongoose from 'mongoose';
 
 const router = Router();
 
@@ -10,8 +10,38 @@ const router = Router();
 router.get('/', protect, async (req, res, next) => {
     try {
         const totalComplaints = await Complaint.countDocuments();
-        const activeComplaints = await Complaint.countDocuments({ status: { $ne: 'fermée' } });
 
+        // Distribution by Status
+        const statusStats = await Complaint.aggregate([
+            { $group: { _id: '$status', count: { $sum: 1 } } }
+        ]);
+
+        // Distribution by Category
+        const categoryStats = await Complaint.aggregate([
+            { $group: { _id: '$category', count: { $sum: 1 } } }
+        ]);
+
+        // Distribution by Priority
+        const priorityStats = await Complaint.aggregate([
+            { $group: { _id: '$priority', count: { $sum: 1 } } }
+        ]);
+
+        // Evolution Trend (Last 30 days)
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+        const trendStats = await Complaint.aggregate([
+            { $match: { createdAt: { $gte: thirtyDaysAgo } } },
+            {
+                $group: {
+                    _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+                    count: { $sum: 1 }
+                }
+            },
+            { $sort: { _id: 1 } }
+        ]);
+
+        // Team Stats
         const teamStats = await Team.aggregate([
             {
                 $lookup: {
@@ -24,6 +54,7 @@ router.get('/', protect, async (req, res, next) => {
             {
                 $project: {
                     name: 1,
+                    color: 1,
                     activeAssignments: {
                         $size: {
                             $filter: {
@@ -38,8 +69,11 @@ router.get('/', protect, async (req, res, next) => {
         ]);
 
         res.json({
-            totalComplaints,
-            activeComplaints,
+            total: totalComplaints,
+            byStatus: statusStats.reduce((acc, curr) => ({ ...acc, [curr._id]: curr.count }), {}),
+            byCategory: categoryStats,
+            byPriority: priorityStats,
+            trends: trendStats,
             teamStats
         });
     } catch (err) {

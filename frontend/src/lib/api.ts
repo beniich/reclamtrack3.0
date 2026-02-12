@@ -198,4 +198,19 @@ export const adminApi = {
     getSystemStatus: () => apiClient.get('/admin/system/status'),
 };
 
+export const staffApi = {
+    getAll: () => apiClient.get('/staff'),
+    create: (data: any) => apiClient.post('/staff', data),
+};
+
+export const rosterApi = {
+    get: (params: { week: string }) => apiClient.get('/roster', params),
+    update: (data: { week: string; shifts: any[] }) => apiClient.post('/roster/update', data),
+};
+
+export const leaveApi = {
+    getAll: () => apiClient.get('/leave'),
+    updateStatus: (id: string, status: string) => apiClient.patch(`/leave/${id}/status`, { status }),
+};
+
 export default apiClient;

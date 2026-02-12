@@ -82,7 +82,7 @@ export const step3Schema = z.object({
 
 // Étape 4: Informations du réclamant
 export const step4Schema = z.object({
-    isAnonymous: z.boolean().default(false),
+    isAnonymous: z.boolean(),
     firstName: z.string().min(2, 'Prénom requis').optional(),
     lastName: z.string().min(2, 'Nom requis').optional(),
     email: z.string()
@@ -94,7 +94,7 @@ export const step4Schema = z.object({
     alternatePhone: z.string()
         .regex(/^(\+212|0)[5-7]\d{8}$/, 'Numéro de téléphone marocain invalide')
         .optional(),
-    notificationPreference: z.enum(['email', 'sms', 'both', 'none']).default('both'),
+    notificationPreference: z.enum(['email', 'sms', 'both', 'none']),
     agreeToTerms: z.boolean().refine((val) => val === true, {
         message: 'Vous devez accepter les conditions d\'utilisation',
     }),

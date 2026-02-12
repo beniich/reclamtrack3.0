@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '@/lib/api';
 import { InterventionCalendar } from '@/components/planning/InterventionCalendar';
-import { Calendar as CalendarIcon, Users } from 'lucide-react';
+import { Calendar as CalendarIcon } from 'lucide-react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { toast } from 'react-hot-toast';
 
@@ -17,7 +16,8 @@ export default function PlanningPage() {
         queryFn: async () => {
             const res = await api.get('/planning/interventions');
             // Convert strings to Date objects
-            return res.data.map((inv: any) => ({
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return res.map((inv: any) => ({
                 ...inv,
                 id: inv._id, // Add id if missing (backend uses _id)
                 start: new Date(inv.start),
@@ -33,7 +33,8 @@ export default function PlanningPage() {
         queryKey: ['teams'],
         queryFn: async () => {
             const res = await api.get('/teams');
-            return res.data.map((t: any) => ({
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return res.map((t: any) => ({
                 id: t._id,
                 name: t.name,
                 color: t.color || '#3b82f6'
@@ -43,6 +44,7 @@ export default function PlanningPage() {
 
     // Mutations
     const updateMutation = useMutation({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         mutationFn: async (updated: any) => {
             const { id, ...data } = updated;
             return api.patch(`/planning/interventions/${id}`, data);
@@ -50,12 +52,14 @@ export default function PlanningPage() {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['interventions'] });
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (err: any) => {
             toast.error(err.response?.data?.message || 'Erreur lors de la mise à jour');
         }
     });
 
     const createMutation = useMutation({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         mutationFn: async (newInv: any) => {
             return api.post('/planning/interventions', newInv);
         },
@@ -63,6 +67,7 @@ export default function PlanningPage() {
             queryClient.invalidateQueries({ queryKey: ['interventions'] });
             toast.success('Intervention planifiée');
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (err: any) => {
             toast.error(err.response?.data?.message || 'Erreur lors de la planification');
         }
@@ -75,7 +80,8 @@ export default function PlanningPage() {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['interventions'] });
         },
-        onError: (err: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onError: () => {
             toast.error('Erreur lors de la suppression');
         }
     });
@@ -111,6 +117,7 @@ export default function PlanningPage() {
                 </div>
 
                 <div className="flex flex-wrap gap-2">
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                     {teams?.map((team: any) => (
                         <div key={team.id} className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] font-black uppercase tracking-widest shadow-sm">
                             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: team.color }} />

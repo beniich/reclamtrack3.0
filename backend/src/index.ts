@@ -27,6 +27,9 @@ import messageRoutes from './routes/messages.js';
 import knowledgeRoutes from './routes/knowledge.js';
 import feedbackRoutes from './routes/feedback.js';
 import adminRoutes from './routes/admin.js';
+import staffRoutes from './routes/staff.js';
+import rosterRoutes from './routes/roster.js';
+import leaveRoutes from './routes/leave.js';
 
 // Validate environment
 envValidator();
@@ -69,6 +72,9 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/knowledge', knowledgeRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/staff', staffRoutes);
+app.use('/api/roster', rosterRoutes);
+app.use('/api/leave', leaveRoutes);
 
 // Health check
 app.get('/', (req, res) => {

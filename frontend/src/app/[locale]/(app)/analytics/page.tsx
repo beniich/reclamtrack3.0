@@ -42,7 +42,7 @@ export default function AnalyticsPage() {
         queryKey: ['dashboard-stats'],
         queryFn: async () => {
             const res = await api.get('/dashboard');
-            return res.data;
+            return res;
         }
     });
 

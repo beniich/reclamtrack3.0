@@ -6,6 +6,8 @@ import { Inter } from 'next/font/google';
 import '@/styles/globals.css';
 import { NotificationToast } from '@/components/NotificationToast';
 import { QueryProvider } from '@/providers/QueryProvider';
+import DebugWidget from '@/components/DebugWidget';
+import { MiniMcLarenLoader } from '@/components/mini-mclarenloader';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -41,6 +43,8 @@ export default async function LocaleLayout({
                     <QueryProvider>
                         {children}
                         <NotificationToast />
+                        <DebugWidget />
+                        <MiniMcLarenLoader />
                     </QueryProvider>
                 </NextIntlClientProvider>
             </body>

@@ -18,8 +18,11 @@ export default function ComplaintListPage() {
     useEffect(() => {
         api
             .get('/complaints')
-            .then((res) => setComplaints(res.data))
-            .catch((err) => console.error(err))
+            .then((res) => setComplaints(res || []))
+            .catch((err) => {
+                console.error(err);
+                setComplaints([]);
+            })
             .finally(() => setLoading(false));
     }, []);
 

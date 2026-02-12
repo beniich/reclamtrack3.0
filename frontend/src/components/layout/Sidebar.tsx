@@ -56,9 +56,19 @@ const menuItems: MenuItem[] = [
         icon: Package,
     },
     {
-        label: 'Analytics',
-        href: '/analytics',
+        label: 'Satisfaction',
+        href: '/feedback/satisfaction',
         icon: BarChart3,
+    },
+    {
+        label: 'Audit Logs',
+        href: '/audit-logs',
+        icon: FileText,
+    },
+    {
+        label: 'Roster',
+        href: '/roster',
+        icon: Users,
     },
     {
         label: 'Settings',

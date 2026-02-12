@@ -53,16 +53,28 @@ export default function Header() {
                                             <span>{t('admin')}</span>
                                         </div>
                                     </Link>
+                                    <Link href="/feedback/satisfaction" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                        <div className="flex items-center gap-2 text-primary font-bold">
+                                            <MessagesSquare className="text-sm w-4 h-4" />
+                                            <span>Satisfaction</span>
+                                        </div>
+                                    </Link>
                                     <Link href="/fleet" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                                         <div className="flex items-center gap-2">
                                             <Truck className="text-sm w-4 h-4" />
                                             <span>{t('fleet')}</span>
                                         </div>
                                     </Link>
-                                    <Link href="/roster" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors last:rounded-b-lg">
+                                    <Link href="/roster" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                                         <div className="flex items-center gap-2">
                                             <CalendarDays className="text-sm w-4 h-4" />
                                             <span>{t('roster')}</span>
+                                        </div>
+                                    </Link>
+                                    <Link href="/audit-logs" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors last:rounded-b-lg">
+                                        <div className="flex items-center gap-2">
+                                            <Shield className="text-sm w-4 h-4" />
+                                            <span>Audit Logs</span>
                                         </div>
                                     </Link>
                                 </div>

@@ -13,6 +13,26 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/debug/:path*',
+        destination: 'http://localhost:8000/debug/:path*',
+      },
+      {
+        source: '/analytics/:path*',
+        destination: 'http://localhost:8000/analytics/:path*',
+      },
+      {
+        source: '/error',
+        destination: 'http://localhost:8000/error',
+      },
+      {
+        source: '/ping',
+        destination: 'http://localhost:8000/ping',
+      },
+    ]
+  },
 };
 
 export default withNextIntl(nextConfig);

@@ -6,6 +6,16 @@ import api from '@/lib/api';
 import { HeatmapView } from '@/components/maps/HeatmapView';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 
+interface Complaint {
+    _id: string;
+    title: string;
+    category: string;
+    priority: 'urgent' | 'high' | 'medium' | 'low';
+    status: string;
+    latitude?: number;
+    longitude?: number;
+}
+
 export default function MapPage() {
     const [activeTab, setActiveTab] = useState('operations');
 
@@ -13,7 +23,7 @@ export default function MapPage() {
         queryKey: ['complaints'],
         queryFn: async () => {
             const res = await api.get('/complaints');
-            return res.data;
+            return res;
         }
     });
 
@@ -41,7 +51,9 @@ export default function MapPage() {
 
     // Transformer les données pour la heatmap
     const heatmapData = (complaints || [])
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .filter((c: any) => c.latitude && c.longitude)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .map((c: any) => ({
             lat: c.latitude,
             lng: c.longitude,

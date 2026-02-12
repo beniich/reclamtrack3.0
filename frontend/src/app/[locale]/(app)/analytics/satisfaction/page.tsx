@@ -215,7 +215,7 @@ export default function CitizenSatisfactionPage() {
                                     cy="50%"
                                     labelLine={false}
                                     label={({ name, percent }) =>
-                                        `${name}: ${(percent * 100).toFixed(0)}%`
+                                        `${name}: ${((percent || 0) * 100).toFixed(0)}%`
                                     }
                                     outerRadius={100}
                                     fill="#8884d8"
@@ -324,8 +324,8 @@ export default function CitizenSatisfactionPage() {
                             <div
                                 key={keyword.word}
                                 className={`px-4 py-2 rounded-full font-medium ${keyword.sentiment === 'positive'
-                                        ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
-                                        : 'bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400'
+                                    ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
+                                    : 'bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400'
                                     }`}
                             >
                                 {keyword.word} ({keyword.count})
@@ -376,8 +376,8 @@ export default function CitizenSatisfactionPage() {
                                                 <Star
                                                     key={i}
                                                     className={`w-4 h-4 ${i < feedback.rating
-                                                            ? 'fill-yellow-400 text-yellow-400'
-                                                            : 'text-slate-300'
+                                                        ? 'fill-yellow-400 text-yellow-400'
+                                                        : 'text-slate-300'
                                                         }`}
                                                 />
                                             ))}

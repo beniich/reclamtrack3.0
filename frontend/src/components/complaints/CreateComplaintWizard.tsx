@@ -6,13 +6,7 @@ import { useComplaintForm } from '@/hooks/useComplaintForm';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select';
+
 
 import { useState } from 'react'; // Ensure useState is imported
 
@@ -23,7 +17,6 @@ export function CreateComplaintWizard() {
         goToNextStep,
         goToPreviousStep,
         saveDraft,
-        uploadFile,
         submitComplaint,
         isSubmitting,
         isFirstStep,
@@ -35,6 +28,7 @@ export function CreateComplaintWizard() {
         },
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const currentForm = formRef as any; // Cast to any to bypass TS union errors
 
     // Local state to hold files to submit
@@ -189,7 +183,6 @@ export function CreateComplaintWizard() {
                         </div>
                     )}
 
-                    {/* Étape 3: Documents */}
                     {currentStep === 3 && (
                         <div className="space-y-6">
                             <h2 className="text-2xl font-bold">Preuves et Documents</h2>
@@ -199,9 +192,10 @@ export function CreateComplaintWizard() {
                                 <FileUpload
                                     accept={{ 'image/*': ['.jpeg', '.jpg', '.png', '.webp'] }}
                                     maxFiles={5}
-                                    // Note: Integration with hook-form needs manual handling usually
-                                    // For demo, we just show the component. State is handled in hook but FileUpload expects onChange.
-                                    // We will just show it for now.
+                                    value={files.map(f => ({ file: f, preview: URL.createObjectURL(f) }))}
+                                    onChange={(uploadedFiles) => {
+                                        setFiles(uploadedFiles.map(uf => uf.file));
+                                    }}
                                     onUpload={handleFileUpload}
                                 />
                                 <p className="text-sm text-slate-500">Ajouter des photos du problème (Max 5)</p>
@@ -242,7 +236,7 @@ export function CreateComplaintWizard() {
                             <div className="mt-4">
                                 <div className="flex items-center space-x-2">
                                     <input type="checkbox" id="agreeToTerms" {...currentForm.register('agreeToTerms')} className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary" />
-                                    <Label htmlFor="agreeToTerms">J'accepte les conditions d'utilisation</Label>
+                                    <Label htmlFor="agreeToTerms">J&apos;accepte les conditions d&apos;utilisation</Label>
                                 </div>
                                 {currentForm.formState.errors.agreeToTerms && (
                                     <p className="text-red-500 text-sm mt-1">

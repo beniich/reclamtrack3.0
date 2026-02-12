@@ -1,10 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { rosterApi, staffApi } from '@/lib/api';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 export default function RosterPage() {
+    const [staff, setStaff] = useState<any[]>([]);
+    const [roster, setRoster] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+    const [currentWeek, setCurrentWeek] = useState('2024-W43'); // Example week
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [staffData, rosterData] = await Promise.all([
+                    staffApi.getAll(),
+                    rosterApi.get({ week: currentWeek }),
+                ]);
+                setStaff(staffData);
+                setRoster(rosterData);
+            } catch (error) {
+                console.error('Error fetching roster data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, [currentWeek]);
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <LoadingSpinner />
+            </div>
+        );
+    }
+
     return (
-        <div className="min-h-screen bg-background-light dark:bg-background-dark">
+        <div className="min-h-screen bg-background-light dark:bg-background-dark p-6">
             {/* Toolbar */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div className="flex items-center gap-3">
@@ -45,99 +78,36 @@ export default function RosterPage() {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                            {/* Staff Member 1 */}
-                            <tr className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
-                                <td className="sticky left-0 z-10 bg-white dark:bg-slate-900 px-6 py-4 border-r border-slate-200 dark:border-slate-700">
-                                    <div className="flex items-center gap-3">
-                                        <div className="size-10 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold">AR</div>
-                                        <div>
-                                            <div className="text-sm font-bold text-slate-900 dark:text-white">Alex Rivera</div>
-                                            <div className="text-[11px] text-slate-500 font-medium">Intervention Lead • 38h</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                {/* Days */}
-                                <td className="p-2 border-r border-slate-100 dark:border-slate-800">
-                                    <div className="bg-amber-100/50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/50 rounded-lg p-2 text-center">
-                                        <span className="text-xs font-bold text-amber-700 dark:text-amber-400">Morning</span>
-                                    </div>
-                                </td>
-                                <td className="p-2 border-r border-slate-100 dark:border-slate-800">
-                                    <div className="bg-amber-100/50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/50 rounded-lg p-2 text-center">
-                                        <span className="text-xs font-bold text-amber-700 dark:text-amber-400">Morning</span>
-                                    </div>
-                                </td>
-                                <td className="p-2 border-r border-slate-100 dark:border-slate-800">
-                                    <div className="bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 rounded-lg p-2 text-center flex flex-col items-center">
-                                        <span className="material-symbols-outlined text-sm text-red-500">flight_takeoff</span>
-                                        <span className="text-[10px] font-bold text-red-600 dark:text-red-400">Annual Leave</span>
-                                    </div>
-                                </td>
-                                <td className="p-2 border-r border-slate-100 dark:border-slate-800">
-                                    <div className="bg-amber-100/50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/50 rounded-lg p-2 text-center">
-                                        <span className="text-xs font-bold text-amber-700 dark:text-amber-400">Morning</span>
-                                    </div>
-                                </td>
-                                <td className="p-2 border-r border-slate-100 dark:border-slate-800">
-                                    <div className="bg-amber-100/50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/50 rounded-lg p-2 text-center">
-                                        <span className="text-xs font-bold text-amber-700 dark:text-amber-400">Morning</span>
-                                    </div>
-                                </td>
-                                <td className="p-2 border-r border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/20"></td>
-                                <td className="p-2 bg-slate-50 dark:bg-slate-800/20"></td>
-                            </tr>
-
-                            {/* Staff Member 2 */}
-                            <tr className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
-                                <td className="sticky left-0 z-10 bg-white dark:bg-slate-900 px-6 py-4 border-r border-slate-200 dark:border-slate-700">
-                                    <div className="flex items-center gap-3">
-                                        <div className="size-10 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold">SC</div>
-                                        <div>
-                                            <div className="text-sm font-bold text-slate-900 dark:text-white">Sam Chen</div>
-                                            <div className="text-[11px] text-slate-500 font-medium">Support Staff • 44h</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                {[...Array(5)].map((_, i) => (
-                                    <td key={i} className="p-2 border-r border-slate-100 dark:border-slate-800">
-                                        <div className="bg-blue-100/50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-900/50 rounded-lg p-2 text-center">
-                                            <span className="text-xs font-bold text-blue-700 dark:text-blue-400">Night</span>
-                                        </div>
+                            {staff.length > 0 ? (
+                                staff.map((member: any) => (
+                                    <tr key={member._id} className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
+                                        <td className="sticky left-0 z-10 bg-white dark:bg-slate-900 px-6 py-4 border-r border-slate-200 dark:border-slate-700">
+                                            <div className="flex items-center gap-3">
+                                                <div className="size-10 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold">
+                                                    {member.name.split(' ').map((n: string) => n[0]).join('')}
+                                                </div>
+                                                <div>
+                                                    <div className="text-sm font-bold text-slate-900 dark:text-white">{member.name}</div>
+                                                    <div className="text-[11px] text-slate-500 font-medium">{member.role}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        {[...Array(7)].map((_, i) => (
+                                            <td key={i} className="p-2 border-r border-slate-100 dark:border-slate-800">
+                                                <div className="bg-slate-100/50 dark:bg-slate-800/20 border border-slate-200 dark:border-slate-700 rounded-lg p-2 text-center min-h-[40px]">
+                                                    <span className="text-xs text-slate-500">-</span>
+                                                </div>
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={8} className="px-6 py-12 text-center text-slate-500">
+                                        No staff members found. Add staff to begin scheduling.
                                     </td>
-                                ))}
-                                <td className="p-2 border-r border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/20"></td>
-                                <td className="p-2 bg-slate-50 dark:bg-slate-800/20"></td>
-                            </tr>
-
-                            {/* Staff Member 3 */}
-                            <tr className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
-                                <td className="sticky left-0 z-10 bg-white dark:bg-slate-900 px-6 py-4 border-r border-slate-200 dark:border-slate-700">
-                                    <div className="flex items-center gap-3">
-                                        <div className="size-10 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold">JS</div>
-                                        <div>
-                                            <div className="text-sm font-bold text-slate-900 dark:text-white">Jordan Smith</div>
-                                            <div className="text-[11px] text-slate-500 font-medium">Intervention • 40h</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                {[...Array(5)].map((_, i) => (
-                                    <td key={i} className="p-2 border-r border-slate-100 dark:border-slate-800">
-                                        <div className="bg-emerald-100/50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-900/50 rounded-lg p-2 text-center">
-                                            <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400">Afternoon</span>
-                                        </div>
-                                    </td>
-                                ))}
-                                <td className="p-2 border-r border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/20">
-                                    <div className="bg-amber-100/50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/50 rounded-lg p-2 text-center">
-                                        <span className="text-xs font-bold text-amber-700 dark:text-amber-400">Morning</span>
-                                    </div>
-                                </td>
-                                <td className="p-2 bg-slate-50 dark:bg-slate-800/20">
-                                    <div className="bg-amber-100/50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-900/50 rounded-lg p-2 text-center">
-                                        <span className="text-xs font-bold text-amber-700 dark:text-amber-400">Morning</span>
-                                    </div>
-                                </td>
-                            </tr>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
@@ -150,7 +120,7 @@ export default function RosterPage() {
                         <span className="material-symbols-outlined text-3xl">check_circle</span>
                     </div>
                     <div>
-                        <div className="text-2xl font-bold">142</div>
+                        <div className="text-2xl font-bold">{roster?.shifts?.length || 0}</div>
                         <div className="text-sm text-slate-500 font-medium">Confirmed Shifts</div>
                     </div>
                 </div>
@@ -160,18 +130,18 @@ export default function RosterPage() {
                         <span className="material-symbols-outlined text-3xl">pending_actions</span>
                     </div>
                     <div>
-                        <div className="text-2xl font-bold">5</div>
+                        <div className="text-2xl font-bold">0</div>
                         <div className="text-sm text-slate-500 font-medium">Pending Leave Requests</div>
                     </div>
                 </div>
 
-                <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4 border-l-4 border-l-red-500">
-                    <div className="size-12 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 flex items-center justify-center">
-                        <span className="material-symbols-outlined text-3xl">error</span>
+                <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                    <div className="size-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center">
+                        <span className="material-symbols-outlined text-3xl">groups</span>
                     </div>
                     <div>
-                        <div className="text-2xl font-bold">2</div>
-                        <div className="text-sm text-slate-500 font-medium">Coverage Conflicts</div>
+                        <div className="text-2xl font-bold">{staff.length}</div>
+                        <div className="text-sm text-slate-500 font-medium">Total Staff</div>
                     </div>
                 </div>
             </div>

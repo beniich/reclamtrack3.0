@@ -19,14 +19,14 @@ export const useAuth = () => {
         setLoading(true);
         setError(null);
         try {
-            const { data } = await api.post<AuthResponse>('/auth/login', {
+            const response = await api.post<AuthResponse>('/auth/login', {
                 email,
                 password
             });
-            setToken(data.token);
-            setUser(data.user);
+            setToken(response.token);
+            setUser(response.user);
             if (typeof window !== 'undefined') {
-                localStorage.setItem('token', data.token);
+                localStorage.setItem('token', response.token);
             }
             return true;
         } catch (e: any) {
@@ -41,14 +41,14 @@ export const useAuth = () => {
         setLoading(true);
         setError(null);
         try {
-            const { data } = await api.post<AuthResponse>('/auth/register', {
+            const response = await api.post<AuthResponse>('/auth/register', {
                 email,
                 password
             });
-            setToken(data.token);
-            setUser(data.user);
+            setToken(response.token);
+            setUser(response.user);
             if (typeof window !== 'undefined') {
-                localStorage.setItem('token', data.token);
+                localStorage.setItem('token', response.token);
             }
             return true;
         } catch (e: any) {

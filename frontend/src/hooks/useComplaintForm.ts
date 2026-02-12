@@ -57,11 +57,12 @@ export function useComplaintForm(options: UseComplaintFormOptions = {}) {
     const step4Form = useForm<Step4Data>({
         resolver: zodResolver(step4Schema),
         mode: 'onBlur',
-        defaultValues: loadDraft('step4') || {
+        defaultValues: {
             isAnonymous: false,
             notificationPreference: 'both',
             agreeToTerms: false,
-        },
+            ...loadDraft('step4')
+        } as Step4Data,
     });
 
     const forms = {

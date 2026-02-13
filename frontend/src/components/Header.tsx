@@ -47,7 +47,7 @@ export default function Header() {
                                     <ChevronDown className="w-4 h-4" />
                                 </button>
                                 <div className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                    <Link href="/admin" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors first:rounded-t-lg">
+                                    <Link href="/admin-db" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors first:rounded-t-lg">
                                         <div className="flex items-center gap-2">
                                             <Shield className="text-sm w-4 h-4" />
                                             <span>{t('admin')}</span>
@@ -65,7 +65,7 @@ export default function Header() {
                                             <span>{t('fleet')}</span>
                                         </div>
                                     </Link>
-                                    <Link href="/roster" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                    <Link href="/roster-scheduler" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                                         <div className="flex items-center gap-2">
                                             <CalendarDays className="text-sm w-4 h-4" />
                                             <span>{t('roster')}</span>

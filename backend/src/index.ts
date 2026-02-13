@@ -30,6 +30,7 @@ import adminRoutes from './routes/admin.js';
 import staffRoutes from './routes/staff.js';
 import rosterRoutes from './routes/roster.js';
 import leaveRoutes from './routes/leave.js';
+import dbRoutes from './routes/db.js';
 
 // Validate environment
 envValidator();
@@ -75,6 +76,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/staff', staffRoutes);
 app.use('/api/roster', rosterRoutes);
 app.use('/api/leave', leaveRoutes);
+app.use('/api/db', dbRoutes);
 
 // Health check
 app.get('/', (req, res) => {

@@ -4,7 +4,6 @@ config();
 export const envValidator = () => {
     const required = [
         'PORT',
-        'MONGODB_URI',
         'JWT_SECRET',
         'SMTP_HOST',
         'SMTP_PORT',

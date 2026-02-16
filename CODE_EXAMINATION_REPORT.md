@@ -18,7 +18,7 @@ Le projet est un monorepo structuré comme suit :
     - Suppression des imports de types inexistants (ex: `TeamResponse`).
     - Ajustement des types dans les composants complexes (`DataTable`, `HeatmapView`).
 - **Configuration Linting** : Assouplissement des règles ESLint (`no-unused-vars` en warning, `no-unescaped-entities` désactivé) pour permettre le build tout en maintenant une visibilité sur la dette technique.
-- **Backend Demo Mode** : Configuration d'un environnement `.env` permettant au backend de démarrer en mode démo même sans instance MongoDB active.
+- **Backend Demo Mode** : Configuration d'un environnement `.env` et adaptation du code (auth routes) permettant au backend de démarrer et de fonctionner en mode démo (avec des identifiants hardcodés : `admin@reclamtrack.com` / `Admin123!`) même sans instance MongoDB active.
 
 ## 4. Dette Technique et Points d'Attention
 - **Dépendances** : Utilisation de `--legacy-peer-deps` nécessaire en raison de conflits entre React 19 et certaines bibliothèques (ex: HeadlessUI).

@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import mongoose from 'mongoose';
 import { body } from 'express-validator';
 import { validator } from '../middleware/validator.js';
 import { protect } from '../middleware/auth.js';
@@ -71,16 +72,36 @@ router.post(
         try {
             const { email, password } = req.body;
 
-            const user = await User.findOne({ email });
+            let user = null;
+            if (!(global as any).IS_DEMO_MODE) {
+                try {
+                    user = await User.findOne({ email });
+                } catch (e) {
+                    logger.error('DB Error:', e);
+                }
+            }
+
+            if (!user && (global as any).IS_DEMO_MODE) {
+                // Mock user for demo mode
+                if (email === 'admin@reclamtrack.com' && password === 'Admin123!') {
+                    user = {
+                        _id: new (mongoose.Types.ObjectId as any)('507f1f77bcf86cd799439011'),
+                        email: 'admin@reclamtrack.com',
+                        role: 'admin',
+                        name: 'Admin Demo'
+                    } as any;
+                }
+            }
 
             if (!user) {
                 return res.status(401).json({ message: 'Identifiants invalides' });
             }
 
-            const matched = await user.comparePassword(password);
-
-            if (!matched) {
-                return res.status(401).json({ message: 'Identifiants invalides' });
+            if (!(global as any).IS_DEMO_MODE || (user as any).comparePassword) {
+                const matched = await (user as any).comparePassword(password);
+                if (!matched) {
+                    return res.status(401).json({ message: 'Identifiants invalides' });
+                }
             }
 
             const token = jwt.sign(
@@ -92,14 +113,16 @@ router.post(
             logger.info(`🔐 Connexion - ${email}`);
 
             // Audit Log
-            await AuditLog.create({
-                action: 'LOGIN',
-                userId: user._id,
-                targetId: user._id.toString(),
-                targetType: 'Session',
-                details: { email, role: user.role },
-                ipAddress: req.ip
-            });
+            if (!(global as any).IS_DEMO_MODE) {
+                await AuditLog.create({
+                    action: 'LOGIN',
+                    userId: user._id,
+                    targetId: user._id.toString(),
+                    targetType: 'Session',
+                    details: { email, role: user.role },
+                    ipAddress: req.ip
+                });
+            }
 
             // Kafka Event
             await eventBus.publish('auth-events', 'USER_LOGIN', {
@@ -119,12 +142,25 @@ router.post(
 /* GET /api/auth/me */
 router.get('/me', protect, async (req, res, next) => {
     try {
-        const user = await User.findById(req.user!.id).select('-password');
+        let user = null;
+        if (!(global as any).IS_DEMO_MODE) {
+            user = await User.findById(req.user!.id).select('-password');
+        } else {
+            if (req.user!.id === '507f1f77bcf86cd799439011') {
+                user = {
+                    _id: '507f1f77bcf86cd799439011',
+                    email: 'admin@reclamtrack.com',
+                    role: 'admin',
+                    name: 'Admin Demo'
+                };
+            }
+        }
+
         if (!user) {
             return res.status(404).json({ message: 'Utilisateur non trouvé' });
         }
         logger.info(`👤 Profil récupéré - ${user.email}`);
-        res.json({ id: user._id, email: user.email, role: user.role });
+        res.json({ id: (user as any)._id, email: (user as any).email, role: (user as any).role });
     } catch (err) {
         next(err);
     }

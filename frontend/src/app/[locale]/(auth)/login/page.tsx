@@ -1,19 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/store/authStore'; // Import direct vers le store si nécessaire, ou via le hook si disponible
-import { toast } from 'react-hot-toast'; // Assurez-vous que react-hot-toast est installé
+import { useAuthStore } from '@/store/authStore';
+import { toast } from 'react-hot-toast';
 import { GoogleLogin } from '@react-oauth/google';
+import { useLocale } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 export default function LoginPage() {
-    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-
     const [rememberMe, setRememberMe] = useState(false);
+    const locale = useLocale();
 
     // Utilisation du store pour la gestion de l'état global
     const { login, googleLogin } = useAuthStore();
@@ -26,17 +26,17 @@ export default function LoginPage() {
             await login(email, password);
             toast.success('Connexion réussie !');
 
-            // Redirection après un court délai pour laisser le toast s'afficher
+            // Redirection avec locale pour garder le contexte i18n
             setTimeout(() => {
-                router.push('/dashboard');
+                window.location.href = `/${locale}/dashboard`;
             }, 100);
 
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Login error:', error);
-            // L'erreur est déjà gérée dans le store, mais on l'affiche ici aussi pour le toast
+            const axiosError = error as { response?: { data?: { message?: string } } };
             let message = 'Erreur de connexion. Veuillez vérifier vos identifiants.';
-            if (error.response?.data?.message) {
-                message = error.response.data.message;
+            if (axiosError.response?.data?.message) {
+                message = axiosError.response.data.message;
             }
             toast.error(message);
         } finally {
@@ -44,13 +44,13 @@ export default function LoginPage() {
         }
     };
 
-    const handleGoogleSuccess = async (credentialResponse: any) => {
+    const handleGoogleSuccess = async (credentialResponse: { credential?: string }) => {
         try {
             if (credentialResponse.credential) {
                 await googleLogin(credentialResponse.credential);
                 toast.success('Connexion Google réussie !');
                 setTimeout(() => {
-                    router.push('/dashboard');
+                    window.location.href = `/${locale}/dashboard`;
                 }, 100);
             }
         } catch (error) {
@@ -120,7 +120,7 @@ export default function LoginPage() {
                                     id="identifier"
                                     name="identifier"
                                     placeholder="Entrez votre email"
-                                    type="text" // Changé en text pour permettre username ou email
+                                    type="text"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
@@ -205,9 +205,9 @@ export default function LoginPage() {
 
             <div className="mt-8 text-center text-sm">
                 <span className="text-slate-600 dark:text-slate-400">Pas encore de compte ? </span>
-                <a href="/register" className="text-primary hover:underline font-semibold">
+                <Link href="/register" className="text-primary hover:underline font-semibold">
                     Créer un compte
-                </a>
+                </Link>
             </div>
 
             <p className="mt-8 text-xs text-slate-400 dark:text-slate-600">

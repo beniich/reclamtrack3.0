@@ -88,7 +88,10 @@ export const useAuthStore = create<AuthState>()(
                 if (typeof window !== 'undefined') {
                     localStorage.removeItem('auth_token');
                     document.cookie = 'reclamtrack-auth-storage=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-                    window.location.href = '/login';
+                    // Detect current locale from URL to maintain i18n context
+                    const pathLocale = window.location.pathname.split('/')[1];
+                    const locale = ['fr', 'en'].includes(pathLocale) ? pathLocale : 'fr';
+                    window.location.href = `/${locale}/login`;
                 }
             },
 

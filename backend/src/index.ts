@@ -21,8 +21,8 @@ import assignmentRoutes from './routes/assignments.js';
 import planningRoutes from './routes/planning.js';
 import dashboardRoutes from './routes/dashboard.js';
 import inventoryRoutes from './routes/inventory.js';
-import requisitionRoutes from './routes/requisitions.js';
 import analyticsRoutes from './routes/analytics.js';
+import interventionRoutes from './routes/interventions.js';
 import schedulerRoutes from './routes/scheduler.js';
 import fleetRoutes from './routes/fleet.js';
 import messageRoutes from './routes/messages.js';
@@ -56,7 +56,7 @@ const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 min
     max: 100
 });
-app.use('/api/', limiter);
+app.use('/api/', limiter as any);
 
 // Body parsing
 app.use(express.json());
@@ -74,8 +74,8 @@ app.use('/api/assignments', assignmentRoutes);
 app.use('/api/planning', planningRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/inventory', inventoryRoutes);
-app.use('/api/requisitions', requisitionRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/interventions', interventionRoutes);
 app.use('/api/scheduler', schedulerRoutes);
 app.use('/api/fleet', fleetRoutes);
 app.use('/api/messages', messageRoutes);
@@ -151,7 +151,7 @@ app.post('/events', async (req, res) => {
             console.log(`↩️ [Saga HTTP] Complaint ${data.complaintId} priority escalated.`);
         }
         res.json({ success: true });
-    } catch (e) {
+    } catch (e: any) {
         console.error('Error in Backend HTTP Event:', e);
         res.status(500).json({ error: e.message });
     }

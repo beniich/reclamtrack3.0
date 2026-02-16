@@ -32,7 +32,7 @@ async function testAutoAssign() {
             body: JSON.stringify(complaintData)
         });
 
-        const data = await response.json();
+        const data: any = await response.json();
         console.log('Response Status:', response.status);
         console.log('Response Data:', JSON.stringify(data, null, 2));
 

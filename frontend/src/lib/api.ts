@@ -57,9 +57,12 @@ class ApiClient {
                     switch (error.response.status) {
                         case 401:
                             // Unauthorized - redirect to login
-                            if (typeof window !== 'undefined' && !window.location.pathname.includes(API_ROUTES.auth.login)) {
+                            if (typeof window !== 'undefined' && !window.location.pathname.includes('/login')) {
                                 localStorage.removeItem('auth_token');
-                                window.location.href = '/login';
+                                // Detect current locale from URL to maintain i18n context
+                                const pathLocale = window.location.pathname.split('/')[1];
+                                const locale = ['fr', 'en'].includes(pathLocale) ? pathLocale : 'fr';
+                                window.location.href = `/${locale}/login`;
                             }
                             break;
                         case 403:
@@ -180,21 +183,62 @@ export const interventionsApi = {
     delete: (id: string) => apiClient.delete(`/interventions/${id}`),
 };
 
+export const assignmentsApi = {
+    getAll: (params?: any) => apiClient.get('/assignments', params),
+    getById: (id: string) => apiClient.get(`/assignments/${id}`),
+    create: (data: any) => apiClient.post('/assignments', data),
+    update: (id: string, data: any) => apiClient.put(`/assignments/${id}`, data),
+    delete: (id: string) => apiClient.delete(`/assignments/${id}`),
+    assign: (data: any) => apiClient.post('/assignments/assign', data),
+};
+
+export const planningApi = {
+    getAll: (params?: any) => apiClient.get('/planning', params),
+    getById: (id: string) => apiClient.get(`/planning/${id}`),
+    create: (data: any) => apiClient.post('/planning', data),
+    update: (id: string, data: any) => apiClient.put(`/planning/${id}`, data),
+    delete: (id: string) => apiClient.delete(`/planning/${id}`),
+};
+
+export const messagesApi = {
+    getAll: (params?: any) => apiClient.get('/messages', params),
+    getById: (id: string) => apiClient.get(`/messages/${id}`),
+    send: (data: any) => apiClient.post('/messages', data),
+    markRead: (id: string) => apiClient.put(`/messages/${id}/read`, {}),
+    delete: (id: string) => apiClient.delete(`/messages/${id}`),
+};
+
+export const feedbackApi = {
+    getAll: (params?: any) => apiClient.get('/feedback', params),
+    create: (data: any) => apiClient.post('/feedback', data),
+};
+
+export const fleetApi = {
+    getAll: (params?: any) => apiClient.get('/fleet', params),
+    getById: (id: string) => apiClient.get(`/fleet/${id}`),
+    create: (data: any) => apiClient.post('/fleet', data),
+    update: (id: string, data: any) => apiClient.put(`/fleet/${id}`, data),
+    delete: (id: string) => apiClient.delete(`/fleet/${id}`),
+};
+
+export const knowledgeApi = {
+    getAll: (params?: any) => apiClient.get('/knowledge', params),
+    getById: (id: string) => apiClient.get(`/knowledge/${id}`),
+    create: (data: any) => apiClient.post('/knowledge', data),
+    update: (id: string, data: any) => apiClient.put(`/knowledge/${id}`, data),
+    delete: (id: string) => apiClient.delete(`/knowledge/${id}`),
+};
+
+export const schedulerApi = {
+    getAll: (params?: any) => apiClient.get('/scheduler', params),
+    create: (data: any) => apiClient.post('/scheduler', data),
+};
+
 export const inventoryApi = {
-    getAll: (params?: any) => apiClient.get(API_ROUTES.inventory.root, params), // Mapped to /requisitions by microservice, but frontend accesses via gateway/alias?
-    // Wait, the shared route says /inventory/requisitions.
-    // If we use microservices direct port access, it would be localhost:3006/api/inventory...
-    // If we use monolith (current), we need to ensure /inventory/requisitions exists or is aliased.
-    // In monolith: inventory.ts has /requisitions (mounted at /api/inventory/requisitions? No, mounted at /api/inventory... wait)
-    // backend/src/index.ts mounts inventoryRoutes at /api/inventory?
-    // backend/src/routes/inventory.ts has router.get('/requisitions', ...)
-    // So the URL is /api/inventory/requisitions.
-    // The Shared Route is /inventory/requisitions.
-    // API_BASE_URL is /api.
-    // So apiClient.get('/inventory/requisitions') -> /api/inventory/requisitions. Correct.
+    getAll: (params?: any) => apiClient.get(API_ROUTES.inventory.root, params),
     getById: (id: string) => apiClient.get(API_ROUTES.inventory.byId(id)),
     update: (id: string, data: any) => apiClient.put(API_ROUTES.inventory.byId(id), data),
-    createRequest: (data: any) => apiClient.post('/inventory/requests', data), // Should use alias from shared? Shared has no 'createRequest' alias specifically, but aliases exist in backend.
+    createRequest: (data: any) => apiClient.post('/inventory/requests', data),
     getRequests: (params?: any) => apiClient.get('/inventory/requests', params),
     approveRequest: (id: string) => apiClient.post(API_ROUTES.inventory.approve(id)),
     rejectRequest: (id: string, reason: string) =>
@@ -205,6 +249,9 @@ export const analyticsApi = {
     getDashboard: (params?: any) => apiClient.get(API_ROUTES.analytics.dashboard, params),
     getComplaintStats: (params?: any) => apiClient.get('/analytics/complaints', params),
     getTeamStats: (params?: any) => apiClient.get('/analytics/teams', params),
+    getPerformance: (params?: any) => apiClient.get('/analytics/performance', params),
+    getSatisfaction: (params?: any) => apiClient.get('/analytics/satisfaction', params),
+    getHeatmap: (params?: any) => apiClient.get('/analytics/heatmap', params),
     exportReport: (type: string, params?: any) =>
         apiClient.download(`/analytics/export/${type}`, `report-${type}-${Date.now()}.pdf`),
 };
@@ -241,11 +288,14 @@ export const organizationsApi = {
     getMyOrganizations: () => apiClient.get('/organizations/me/memberships'),
     getMembers: (id: string) => apiClient.get(`/organizations/${id}/members`),
     inviteMember: (id: string, email: string, roles: string[]) =>
-        apiClient.post(`/organizations/${id}/members`, { email, role: roles[0] }), // Backend expects 'role' singular for now
+        apiClient.post(`/organizations/${id}/members`, { email, role: roles[0] }),
     updateMemberRole: (id: string, membershipId: string, roles: string[]) =>
         apiClient.patch(`/organizations/${id}/members/${membershipId}`, { roles }),
     removeMember: (id: string, membershipId: string) =>
         apiClient.delete(`/organizations/${id}/members/${membershipId}`),
 };
+
+// Alias for compatibility
+export const organizationApi = organizationsApi;
 
 export default apiClient;

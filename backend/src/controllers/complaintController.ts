@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { complaintService } from '../services/complaintService.js';
+import { eventBus } from '../services/eventBus.js';
 import AuditLog from '../models/AuditLog.js';
 
 /**
@@ -44,7 +45,7 @@ export class ComplaintController {
      */
     async getById(req: Request, res: Response, next: NextFunction) {
         try {
-            const complaint = await complaintService.getComplaintById(req.params.id, (req as any).organizationId);
+            const complaint = await complaintService.getComplaintById(req.params.id as string, (req as any).organizationId);
             res.json(formatResponse(complaint));
         } catch (error) {
             next(error);
@@ -104,7 +105,7 @@ export class ComplaintController {
     async update(req: Request, res: Response, next: NextFunction) {
         try {
             const complaint = await complaintService.updateComplaint(
-                req.params.id,
+                req.params.id as string,
                 req.body,
                 (req as any).organizationId
             );
@@ -133,7 +134,7 @@ export class ComplaintController {
      */
     async delete(req: Request, res: Response, next: NextFunction) {
         try {
-            await complaintService.deleteComplaint(req.params.id, (req as any).organizationId);
+            await complaintService.deleteComplaint(req.params.id as string, (req as any).organizationId);
             res.json(formatResponse(null, 'Complaint deleted successfully'));
         } catch (error) {
             next(error);

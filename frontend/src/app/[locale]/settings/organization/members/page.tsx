@@ -66,7 +66,7 @@ export default function MembersPage() {
         if (!activeOrganization) return;
         setIsLoading(true);
         try {
-            const response = await organizationApi.getOrganizationMembers(activeOrganization._id);
+            const response = await organizationApi.getMembers(activeOrganization._id);
             setMembers(response.data.data);
         } catch (error) {
             toast.error('Failed to load members');
@@ -79,10 +79,7 @@ export default function MembersPage() {
         if (!activeOrganization || !inviteEmail) return;
         setIsInviting(true);
         try {
-            await organizationApi.inviteMember(activeOrganization._id, {
-                email: inviteEmail,
-                role: inviteRole
-            });
+            await organizationApi.inviteMember(activeOrganization._id, inviteEmail, [inviteRole]);
             toast.success('Invitation sent successfully');
             setInviteEmail('');
             setIsInviteOpen(false);

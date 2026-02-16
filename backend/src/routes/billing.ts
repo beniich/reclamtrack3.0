@@ -7,7 +7,7 @@ const router = Router();
 
 // Initialize Stripe
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
-    apiVersion: '2023-10-16', // Use latest API version
+    apiVersion: '2026-01-28.clover', // Use latest API version
 });
 
 // Mock Plans (should be in DB or Stripe Products)

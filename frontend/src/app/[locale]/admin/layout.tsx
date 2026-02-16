@@ -1,26 +1,21 @@
 'use client';
 
-import { useAuth } from '@/hooks/useAuth';
 import { useAuthStore } from '@/store/authStore';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Header from '@/components/Header';
-import { Footer } from '@/components/layout/Footer';
-import useNotifications from '@/hooks/useNotifications';
 
-export default function AppLayout({
+export default function AdminLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    const { user } = useAuth();
-    const { _hasHydrated, token } = useAuthStore();
+    const { user, token, _hasHydrated } = useAuthStore();
     const router = useRouter();
-    useNotifications();
 
     useEffect(() => {
         if (_hasHydrated && !user && !token) {
-            console.log('[AppLayout] Redirecting to login: No user and no token found after hydration.');
+            console.log('[AdminLayout] Redirecting to login: No user and no token found after hydration.');
             router.push('/login');
         }
     }, [user, token, _hasHydrated, router]);
@@ -43,10 +38,9 @@ export default function AppLayout({
     return (
         <div className="flex flex-col min-h-screen bg-background">
             <Header />
-            <main className="flex-1 container mx-auto px-4 py-8">
+            <main className="flex-1">
                 {children}
             </main>
-            <Footer />
         </div>
     );
 }

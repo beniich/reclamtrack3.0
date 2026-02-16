@@ -10,7 +10,8 @@ export default function PricingPage() {
     const [isYearly, setIsYearly] = useState(false);
     const router = useRouter();
     const { createCheckoutSession, isLoading, error } = useStripeStore();
-    const { isAuthenticated, user } = useAuthStore();
+    const { user } = useAuthStore();
+    const isAuthenticated = !!user;
 
     const handlePlanSelect = async (planId: string) => {
         if (!isAuthenticated) {

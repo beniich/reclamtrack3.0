@@ -91,7 +91,7 @@ router.get('/', protect, async (req: any, res: Response) => {
         }).populate('organizationId');
 
         const organizations = memberships.map(m => ({
-            ...m.organizationId.toObject(),
+            ...(m.organizationId as any).toObject(),
             membership: {
                 roles: m.roles,
                 joinedAt: m.joinedAt

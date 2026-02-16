@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { ShieldCheck, Mail, Lock, Eye, EyeOff, UserPlus } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
-import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 export default function RegisterPage() {
@@ -12,13 +12,13 @@ export default function RegisterPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { register, loading, error } = useAuth();
-    const router = useRouter();
+    const locale = useLocale();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const success = await register(email, password);
         if (success) {
-            router.push('/dashboard');
+            window.location.href = `/${locale}/dashboard`;
         }
     };
 

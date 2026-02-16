@@ -9,6 +9,8 @@ export interface IMembership extends Document {
     invitedBy?: mongoose.Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
+    hasRole(role: string): boolean;
+    isAdmin(): boolean;
 }
 
 const MembershipSchema = new Schema<IMembership>(

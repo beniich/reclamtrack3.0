@@ -26,7 +26,7 @@ const seedE2E = async () => {
             { name: 'Luigi Electric', email: 'luigi@reclamtrack.com', role: 'technician', type: 'electrical' }
         ];
 
-        const createdTechs = [];
+        const createdTechs: any[] = [];
         for (const t of techs) {
             let user = await User.findOne({ email: t.email });
             if (!user) {

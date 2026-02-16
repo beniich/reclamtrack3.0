@@ -15,8 +15,7 @@ import {
     FilterList,
     RadioButtonChecked,
     NotificationsActive,
-    Add,
-    Activity // Fallback for settings/search
+    Add
 } from '@/components/icons';
 import { Search, Settings } from 'lucide-react'; // Import direct for standard UI icons if not in icons.tsx
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';

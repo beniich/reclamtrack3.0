@@ -4,6 +4,7 @@ import { requireOrganization } from '../middleware/organization.js';
 import { logger } from '../utils/logger.js';
 import { Feedback } from '../models/Feedback.js';
 import { Complaint } from '../models/Complaint.js';
+import mongoose from 'mongoose';
 
 const router = Router();
 
@@ -275,8 +276,7 @@ router.get('/dashboard', async (req: Request, res: Response) => {
 // GET /api/analytics/complaints - Detailed complaint stats
 router.get('/complaints', async (req: Request, res: Response) => {
     // Redirect to performance which has similar data
-    req.url = '/performance';
-    router.handle(req, res);
+    res.redirect('/api/analytics/performance');
 });
 
 // GET /api/analytics/teams - Team performance stats

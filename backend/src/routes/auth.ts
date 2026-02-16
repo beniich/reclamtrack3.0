@@ -83,10 +83,13 @@ router.post(
 
             if (!user && (global as any).IS_DEMO_MODE) {
                 // Mock user for demo mode
-                if (email === 'admin@reclamtrack.com' && password === 'Admin123!') {
+                const demoEmail = process.env.DEMO_ADMIN_EMAIL;
+                const demoPass = process.env.DEMO_ADMIN_PASSWORD;
+
+                if (demoEmail && demoPass && email === demoEmail && password === demoPass) {
                     user = {
                         _id: new (mongoose.Types.ObjectId as any)('507f1f77bcf86cd799439011'),
-                        email: 'admin@reclamtrack.com',
+                        email: demoEmail,
                         role: 'admin',
                         name: 'Admin Demo'
                     } as any;
@@ -149,7 +152,7 @@ router.get('/me', protect, async (req, res, next) => {
             if (req.user!.id === '507f1f77bcf86cd799439011') {
                 user = {
                     _id: '507f1f77bcf86cd799439011',
-                    email: 'admin@reclamtrack.com',
+                    email: process.env.DEMO_ADMIN_EMAIL,
                     role: 'admin',
                     name: 'Admin Demo'
                 };

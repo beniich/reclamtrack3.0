@@ -71,15 +71,18 @@ router.post(
         try {
             const { email, password } = req.body;
 
+            logger.debug(`Unknown login attempt for email: ${email}`);
             const user = await User.findOne({ email });
 
             if (!user) {
+                logger.warn(`Login failed: User not found for email: ${email}`);
                 return res.status(401).json({ message: 'Identifiants invalides' });
             }
 
             const matched = await user.comparePassword(password);
 
             if (!matched) {
+                logger.warn(`Login failed: Password mismatch for user: ${email}`);
                 return res.status(401).json({ message: 'Identifiants invalides' });
             }
 

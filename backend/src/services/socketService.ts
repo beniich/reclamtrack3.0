@@ -48,6 +48,31 @@ class NotificationService {
       socket.on('disconnect', () => {
         logger.info(`🔌 Client déconnecté: ${socket.id}`);
       });
+
+      // --- WebRTC Signaling for SRTP Calls ---
+      socket.on('call-user', (data: { userToCall: string; signalData: any; from: string; fromName: string }) => {
+        logger.info(`📞 Call initiated from ${data.from} to ${data.userToCall}`);
+        this.io?.to(`user:${data.userToCall}`).emit('call-made', {
+          signal: data.signalData,
+          from: data.from,
+          fromName: data.fromName
+        });
+      });
+
+      socket.on('answer-call', (data: { to: string; signal: any }) => {
+        logger.info(`📞 Call answered by ${socket.id} for ${data.to}`);
+        this.io?.to(`user:${data.to}`).emit('call-answered', { signal: data.signal, from: socket.id });
+      });
+
+      socket.on('reject-call', (data: { to: string }) => {
+        logger.info(`📞 Call rejected by ${socket.id} for ${data.to}`);
+        this.io?.to(`user:${data.to}`).emit('call-rejected', { from: socket.id });
+      });
+
+      socket.on('ice-candidate', (data: { to: string; candidate: any }) => {
+        this.io?.to(`user:${data.to}`).emit('ice-candidate', { candidate: data.candidate, from: socket.id });
+      });
+      // ---------------------------------------
     });
 
     // Namespace /logs pour les logs en temps réel (Enterprise DB)

@@ -4,8 +4,9 @@ import { User } from '../models/User.js';
 import { Team } from '../models/Team.js';
 import { Complaint } from '../models/Complaint.js';
 import { Staff } from '../models/Staff.js';
+import { Organization } from '../models/Organization.js';
+import { Membership } from '../models/Membership.js';
 import { logger } from '../utils/logger.js';
-
 
 config();
 
@@ -25,6 +26,8 @@ const seedDatabase = async () => {
         await Team.deleteMany({});
         await Complaint.deleteMany({});
         await Staff.deleteMany({});
+        await Organization.deleteMany({});
+        await Membership.deleteMany({});
         logger.info('🗑️  Cleared existing data');
 
         // Create Admin User
@@ -35,26 +38,70 @@ const seedDatabase = async () => {
             role: 'admin',
             isEmailVerified: true
         });
-        logger.info('👤 Created admin user');
+        logger.info('👤 Created admin user: admin@reclamtrack.com / Admin123!');
+
+        // Create Superadmin User for Monitoring
+        const superAdminUser = await User.create({
+            email: 'superadmin@reclamtrack.com',
+            password: 'SuperAdmin123!',
+            name: 'Super Administrator',
+            role: 'admin', // Using admin role but can be identified by email for special permissions
+            isEmailVerified: true
+        });
+        logger.info('🔐 Created superadmin user: superadmin@reclamtrack.com / SuperAdmin123!');
+
+        // Create Default Organization
+        const organization = await Organization.create({
+            name: 'ReclamTrack Default',
+            slug: 'reclamtrack-default',
+            ownerId: adminUser._id,
+            subscription: {
+                plan: 'ENTERPRISE',
+                status: 'ACTIVE'
+            }
+        });
+        logger.info(`🏢 Created organization: ${organization.name}`);
+
+        // Add Admin to Organization
+        await Membership.create({
+            userId: adminUser._id,
+            organizationId: organization._id,
+            roles: ['OWNER', 'ADMIN'],
+            status: 'ACTIVE',
+            joinedAt: new Date()
+        });
+
+        // Add Superadmin to Organization
+        await Membership.create({
+            userId: superAdminUser._id,
+            organizationId: organization._id,
+            roles: ['OWNER', 'ADMIN'],
+            status: 'ACTIVE',
+            joinedAt: new Date()
+        });
+        logger.info('🔗 Added admin and superadmin to organization');
 
         // Create Teams
         const teams = await Team.create([
             {
                 name: 'Équipe Électricité',
-                description: 'Gestion des pannes électriques',
-                specialization: 'Électricité',
+                specialization: 'electrical',
+                status: 'disponible',
+                organizationId: organization._id,
                 isActive: true
             },
             {
                 name: 'Équipe Plomberie',
-                description: 'Réparation des fuites et canalisations',
-                specialization: 'Plomberie',
+                specialization: 'plumbing',
+                status: 'disponible',
+                organizationId: organization._id,
                 isActive: true
             },
             {
                 name: 'Équipe Voirie',
-                description: 'Entretien des routes et trottoirs',
-                specialization: 'Voirie',
+                specialization: 'infrastructure',
+                status: 'disponible',
+                organizationId: organization._id,
                 isActive: true
             }
         ]);
@@ -101,7 +148,8 @@ const seedDatabase = async () => {
                 phone: '+33612345678',
                 status: 'en cours',
                 assignedTeamId: teams[0]._id,
-                technicianId: staff[0]._id
+                technicianId: adminUser._id, // Assign to a user instead of staff model if possible, or leave blank
+                organizationId: organization._id
             },
             {
                 category: 'Plomberie',
@@ -116,7 +164,8 @@ const seedDatabase = async () => {
                 latitude: 48.8698,
                 longitude: 2.3078,
                 isAnonymous: true,
-                status: 'nouvelle'
+                status: 'nouvelle',
+                organizationId: organization._id
             },
             {
                 category: 'Voirie',
@@ -137,22 +186,18 @@ const seedDatabase = async () => {
                 phone: '+33698765432',
                 status: 'résolue',
                 assignedTeamId: teams[2]._id,
-                technicianId: staff[2]._id
+                organizationId: organization._id
             }
         ]);
         logger.info(`📋 Created ${complaints.length} sample complaints`);
 
         logger.info('✅ Database seeding completed successfully!');
-        logger.info('\n📊 Summary:');
-        logger.info(`   - Users: ${await User.countDocuments()}`);
-        logger.info(`   - Teams: ${await Team.countDocuments()}`);
-        logger.info(`   - Staff: ${await Staff.countDocuments()}`);
-        logger.info(`   - Complaints: ${await Complaint.countDocuments()}`);
 
-        process.exit(0);
+        setTimeout(() => process.exit(0), 1000);
     } catch (error) {
-        logger.error('❌ Seeding failed:', error);
-        process.exit(1);
+        console.error('❌ Seeding failed (console):', error);
+        logger.error('❌ Seeding failed (logger):', error);
+        setTimeout(() => process.exit(1), 1000);
     }
 };
 

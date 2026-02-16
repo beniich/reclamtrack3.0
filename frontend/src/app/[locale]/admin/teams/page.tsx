@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useOrgStore } from '@/store/orgStore';
 import { teamsApi, organizationApi } from '@/lib/api';
-import { TeamResponse } from '@/types'; // Assuming types exist or will be inferred
+// import { TeamResponse } from '@/types'; // Removed unused import
 import {
     WaterDrop,
     Bolt,

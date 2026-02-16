@@ -11,8 +11,9 @@ export const requireOrganization = async (
     next: NextFunction
 ) => {
     try {
-        const userId = req.user?._id;
+        const userId = req.user?._id || req.user?.id;
         if (!userId) {
+            console.warn('[Org Middleware] User ID missing from request user context');
             return res.status(401).json({ message: 'Non authentifié' });
         }
 

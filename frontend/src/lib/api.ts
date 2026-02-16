@@ -252,7 +252,7 @@ export const analyticsApi = {
     getPerformance: (params?: any) => apiClient.get('/analytics/performance', params),
     getSatisfaction: (params?: any) => apiClient.get('/analytics/satisfaction', params),
     getHeatmap: (params?: any) => apiClient.get('/analytics/heatmap', params),
-    exportReport: (type: string, params?: any) =>
+    exportReport: (type: string, _params?: any) =>
         apiClient.download(`/analytics/export/${type}`, `report-${type}-${Date.now()}.pdf`),
 };
 

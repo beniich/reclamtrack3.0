@@ -237,7 +237,7 @@ export default function SecurityDashboard() {
                                     <div className="absolute inset-[-12px] rounded-full border-[12px] border-amber-400 border-l-transparent border-t-transparent border-r-transparent rotate-45"></div>
                                     <div className="flex flex-col items-center">
                                         <span className="text-2xl font-bold">10.4k</span>
-                                        <span class="text-[10px] text-slate-500 uppercase tracking-wider">Total req</span>
+                                        <span className="text-[10px] text-slate-500 uppercase tracking-wider">Total req</span>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 type Status = 'new' | 'in-progress' | 'resolved' | 'urgent' | 'pending' | 'nouvelle' | 'en cours' | 'résolue' | 'fermée';
 
 interface StatusBadgeProps {

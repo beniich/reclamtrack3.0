@@ -105,7 +105,6 @@ const ComplaintManagementSystem = () => {
             statut: 'Nouvelle',
             equipe: null
         };
-        // @ts-ignore
         setComplaints([newComplaintData, ...complaints]);
         setNewComplaint({
             nom: '',

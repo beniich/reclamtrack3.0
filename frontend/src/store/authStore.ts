@@ -100,7 +100,7 @@ export const useAuthStore = create<AuthState>()(
                 try {
                     const user = await authApi.me();
                     set({ user, isLoading: false });
-                } catch (error) {
+                } catch {
                     // console.error(error);
                     set({ user: null, token: null, isLoading: false });
                     if (typeof window !== 'undefined') {

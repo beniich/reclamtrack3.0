@@ -12,14 +12,7 @@ import { logger } from './utils/logger.js';
 import errorHandler from './middleware/errorHandler.js';
 
 import billingRoutes from './routes/billing.js';
-
 import memberRoutes from './routes/members.js';
-
-// Routes
-// ... existing routes
-app.use('/api', memberRoutes); // Mount at /api so paths become /api/organizations/:id/...
-// ... existing routes
-app.use('/api/billing', billingRoutes);
 import authRoutes from './routes/auth.js';
 import googleAuthRoutes from './routes/googleAuth.js';
 import complaintRoutes from './routes/complaints.js';
@@ -97,6 +90,8 @@ app.use('/api/audit-logs', auditRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/organizations', organizationRoutes);
 app.use('/api/memberships', membershipRoutes);
+app.use('/api', memberRoutes); // Mount at /api so paths become /api/organizations/:id/...
+app.use('/api/billing', billingRoutes);
 
 // Health check
 app.get('/', (req, res) => {

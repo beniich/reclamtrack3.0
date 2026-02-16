@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import express, { Router, Request, Response } from 'express';
 import Stripe from 'stripe';
 import { protect } from '../middleware/auth.js';
 import { logger } from '../utils/logger.js';

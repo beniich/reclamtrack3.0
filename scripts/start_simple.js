@@ -32,6 +32,17 @@ const processes = [];
 console.log('🚀 Starting ReclamTrack SIMPLE Stack (Backend + Frontend)...');
 console.log('ℹ️  Microservices & Kafka are DISABLED.');
 
+// Build Shared Package First
+console.log('📦 Building @reclamtrack/shared...');
+try {
+    const sharedPath = path.join(__dirname, '..', 'shared');
+    require('child_process').execSync('npm run build', { cwd: sharedPath, stdio: 'inherit' });
+    console.log('✅ Shared package built successfully.');
+} catch (error) {
+    console.error('❌ Failed to build shared package:', error.message);
+    process.exit(1);
+}
+
 services.forEach(service => {
     const servicePath = path.join(__dirname, '..', service.dir);
     // Merge process.env with service.env (service.env wins)

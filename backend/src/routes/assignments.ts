@@ -9,6 +9,37 @@ import { io } from '../services/socketService.js';
 
 const router = Router();
 
+/* GET /api/assignments - Get assignments for the current user (via Team) */
+router.get(
+    '/',
+    protect,
+    async (req: any, res, next) => {
+        try {
+            // 1. Find teams where the user is a member
+            const teams = await Team.find({ members: req.user.id });
+            const teamIds = teams.map(t => t._id);
+
+            // 2. Find assignments for these teams
+            // We verify that status is not 'terminé' to get active/pending ones (or use query param to filter)
+            const { status } = req.query;
+            const filter: any = { teamId: { $in: teamIds } };
+
+            if (status) {
+                filter.status = status;
+            }
+
+            const assignments = await Assignment.find(filter)
+                .populate('complaintId') // Get details of the complaint
+                .populate('teamId', 'name color') // Get basic team info
+                .sort({ createdAt: -1 }); // Newest first
+
+            res.json(assignments);
+        } catch (err) {
+            next(err);
+        }
+    }
+);
+
 /* POST /api/assignments */
 router.post(
     '/',

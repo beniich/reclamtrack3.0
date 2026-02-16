@@ -1,7 +1,8 @@
 import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
 import { ApiResponse } from '@/types';
+import { API_ROUTES } from '@reclamtrack/shared';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api'; // Updated default port to 5001
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
 
 class ApiClient {
     private client: AxiosInstance;
@@ -30,6 +31,14 @@ class ApiClient {
                 if (token) {
                     config.headers.Authorization = `Bearer ${token}`;
                 }
+
+                if (typeof window !== 'undefined') {
+                    const orgId = localStorage.getItem('active_organization_id');
+                    if (orgId) {
+                        config.headers['x-organization-id'] = orgId;
+                    }
+                }
+
                 return config;
             },
             (error) => {
@@ -48,7 +57,7 @@ class ApiClient {
                     switch (error.response.status) {
                         case 401:
                             // Unauthorized - redirect to login
-                            if (typeof window !== 'undefined' && !window.location.pathname.includes('/login')) {
+                            if (typeof window !== 'undefined' && !window.location.pathname.includes(API_ROUTES.auth.login)) {
                                 localStorage.removeItem('auth_token');
                                 window.location.href = '/login';
                             }
@@ -138,28 +147,29 @@ export const apiClient = new ApiClient();
 // Export specific API endpoints
 export const authApi = {
     login: (credentials: { email: string; password: string }) =>
-        apiClient.post('/auth/login', credentials),
-    logout: () => apiClient.post('/auth/logout'),
-    me: () => apiClient.get('/auth/me'),
-    refreshToken: () => apiClient.post('/auth/refresh'),
+        apiClient.post(API_ROUTES.auth.login, credentials),
+    logout: () => apiClient.post(API_ROUTES.auth.logout),
+    me: () => apiClient.get(API_ROUTES.auth.me),
+    refreshToken: () => apiClient.post(API_ROUTES.auth.refresh),
+    googleLogin: (credential: string) => apiClient.post('/auth/google', { credential }), // Not in shared yet, keep as is or add
 };
 
 export const complaintsApi = {
-    getAll: (params?: any) => apiClient.get('/complaints', params),
-    getById: (id: string) => apiClient.get(`/complaints/${id}`),
-    create: (data: any) => apiClient.post('/complaints', data),
-    update: (id: string, data: any) => apiClient.put(`/complaints/${id}`, data),
-    delete: (id: string) => apiClient.delete(`/complaints/${id}`),
+    getAll: (params?: any) => apiClient.get(API_ROUTES.complaints.root, params),
+    getById: (id: string) => apiClient.get(API_ROUTES.complaints.byId(id)),
+    create: (data: any) => apiClient.post(API_ROUTES.complaints.root, data),
+    update: (id: string, data: any) => apiClient.put(API_ROUTES.complaints.byId(id), data),
+    delete: (id: string) => apiClient.delete(API_ROUTES.complaints.byId(id)),
     uploadPhoto: (id: string, formData: FormData) =>
-        apiClient.upload(`/complaints/${id}/photos`, formData),
+        apiClient.upload(`${API_ROUTES.complaints.root}/${id}/photos`, formData),
 };
 
 export const teamsApi = {
-    getAll: (params?: any) => apiClient.get('/teams', params),
-    getById: (id: string) => apiClient.get(`/teams/${id}`),
-    create: (data: any) => apiClient.post('/teams', data),
-    update: (id: string, data: any) => apiClient.put(`/teams/${id}`, data),
-    delete: (id: string) => apiClient.delete(`/teams/${id}`),
+    getAll: (params?: any) => apiClient.get(API_ROUTES.teams.root, params),
+    getById: (id: string) => apiClient.get(API_ROUTES.teams.byId(id)),
+    create: (data: any) => apiClient.post(API_ROUTES.teams.root, data),
+    update: (id: string, data: any) => apiClient.put(API_ROUTES.teams.byId(id), data),
+    delete: (id: string) => apiClient.delete(API_ROUTES.teams.byId(id)),
 };
 
 export const interventionsApi = {
@@ -171,18 +181,28 @@ export const interventionsApi = {
 };
 
 export const inventoryApi = {
-    getAll: (params?: any) => apiClient.get('/inventory', params),
-    getById: (id: string) => apiClient.get(`/inventory/${id}`),
-    update: (id: string, data: any) => apiClient.put(`/inventory/${id}`, data),
-    createRequest: (data: any) => apiClient.post('/inventory/requests', data),
+    getAll: (params?: any) => apiClient.get(API_ROUTES.inventory.root, params), // Mapped to /requisitions by microservice, but frontend accesses via gateway/alias?
+    // Wait, the shared route says /inventory/requisitions.
+    // If we use microservices direct port access, it would be localhost:3006/api/inventory...
+    // If we use monolith (current), we need to ensure /inventory/requisitions exists or is aliased.
+    // In monolith: inventory.ts has /requisitions (mounted at /api/inventory/requisitions? No, mounted at /api/inventory... wait)
+    // backend/src/index.ts mounts inventoryRoutes at /api/inventory?
+    // backend/src/routes/inventory.ts has router.get('/requisitions', ...)
+    // So the URL is /api/inventory/requisitions.
+    // The Shared Route is /inventory/requisitions.
+    // API_BASE_URL is /api.
+    // So apiClient.get('/inventory/requisitions') -> /api/inventory/requisitions. Correct.
+    getById: (id: string) => apiClient.get(API_ROUTES.inventory.byId(id)),
+    update: (id: string, data: any) => apiClient.put(API_ROUTES.inventory.byId(id), data),
+    createRequest: (data: any) => apiClient.post('/inventory/requests', data), // Should use alias from shared? Shared has no 'createRequest' alias specifically, but aliases exist in backend.
     getRequests: (params?: any) => apiClient.get('/inventory/requests', params),
-    approveRequest: (id: string) => apiClient.post(`/inventory/requests/${id}/approve`),
+    approveRequest: (id: string) => apiClient.post(API_ROUTES.inventory.approve(id)),
     rejectRequest: (id: string, reason: string) =>
-        apiClient.post(`/inventory/requests/${id}/reject`, { reason }),
+        apiClient.post(API_ROUTES.inventory.reject(id), { reason }),
 };
 
 export const analyticsApi = {
-    getDashboard: (params?: any) => apiClient.get('/analytics/dashboard', params),
+    getDashboard: (params?: any) => apiClient.get(API_ROUTES.analytics.dashboard, params),
     getComplaintStats: (params?: any) => apiClient.get('/analytics/complaints', params),
     getTeamStats: (params?: any) => apiClient.get('/analytics/teams', params),
     exportReport: (type: string, params?: any) =>
@@ -211,6 +231,21 @@ export const rosterApi = {
 export const leaveApi = {
     getAll: () => apiClient.get('/leave'),
     updateStatus: (id: string, status: string) => apiClient.patch(`/leave/${id}/status`, { status }),
+};
+
+export const organizationsApi = {
+    getAll: () => apiClient.get('/organizations'),
+    getById: (id: string) => apiClient.get(`/organizations/${id}`),
+    create: (data: any) => apiClient.post('/organizations', data),
+    update: (id: string, data: any) => apiClient.put(`/organizations/${id}`, data),
+    getMyOrganizations: () => apiClient.get('/organizations/me/memberships'),
+    getMembers: (id: string) => apiClient.get(`/organizations/${id}/members`),
+    inviteMember: (id: string, email: string, roles: string[]) =>
+        apiClient.post(`/organizations/${id}/members`, { email, role: roles[0] }), // Backend expects 'role' singular for now
+    updateMemberRole: (id: string, membershipId: string, roles: string[]) =>
+        apiClient.patch(`/organizations/${id}/members/${membershipId}`, { roles }),
+    removeMember: (id: string, membershipId: string) =>
+        apiClient.delete(`/organizations/${id}/members/${membershipId}`),
 };
 
 export default apiClient;

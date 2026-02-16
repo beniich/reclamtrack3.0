@@ -1,14 +1,37 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { CheckCircle2, XCircle, ArrowRight } from 'lucide-react';
+import { useStripeStore } from '@/store/stripeStore';
+import { useAuthStore } from '@/store/authStore';
 
 export default function PricingPage() {
     const [isYearly, setIsYearly] = useState(false);
+    const router = useRouter();
+    const { createCheckoutSession, isLoading, error } = useStripeStore();
+    const { isAuthenticated, user } = useAuthStore();
+
+    const handlePlanSelect = async (planId: string) => {
+        if (!isAuthenticated) {
+            router.push('/login?redirect=/pricing');
+            return;
+        }
+
+        if (planId === 'enterprise') {
+            window.location.href = 'mailto:sales@reclamtrack.com'; // Simple mailto for enterprise
+            return;
+        }
+
+        const url = await createCheckoutSession(planId, isYearly ? 'year' : 'month');
+        if (url) {
+            window.location.href = url;
+        }
+    };
 
     const plans = [
         {
+            id: "starter", // Added ID
             name: "Starter",
             price: "0",
             description: "Perfect for small towns and basic internal tracking.",
@@ -22,6 +45,7 @@ export default function PricingPage() {
             popular: false
         },
         {
+            id: "pro", // Added ID
             name: "Professional",
             price: isYearly ? "39" : "49",
             description: "The standard for growing municipalities and agencies.",
@@ -37,6 +61,7 @@ export default function PricingPage() {
             subtext: isYearly ? "Billed $468 annually" : null
         },
         {
+            id: "enterprise", // Added ID
             name: "Enterprise",
             price: "Custom",
             description: "Dedicated solutions for large-scale operations with volume discounts.",
@@ -129,15 +154,23 @@ export default function PricingPage() {
                                 ))}
                             </div>
 
-                            <Link
-                                href={plan.name === "Professional" ? "/en/pricing/summary" : "#"}
-                                className={`w-full py-3 px-4 rounded-lg font-bold text-sm text-center transition-all ${plan.popular
-                                    ? 'bg-primary text-white hover:brightness-110 shadow-lg shadow-primary/25'
-                                    : 'bg-[#e7e7f3] dark:bg-[#2a2a4a] text-primary dark:text-[#f8f8fc] hover:opacity-80'
-                                    }`}
-                            >
-                                {plan.buttonText}
-                            </Link>
+                            <div className="mt-auto">
+                                <button
+                                    onClick={() => handlePlanSelect(plan.id)}
+                                    disabled={isLoading}
+                                    className={`w-full py-3 px-4 rounded-lg font-bold text-sm text-center transition-all flex items-center justify-center gap-2 ${plan.popular
+                                        ? 'bg-primary text-white hover:brightness-110 shadow-lg shadow-primary/25'
+                                        : 'bg-[#e7e7f3] dark:bg-[#2a2a4a] text-primary dark:text-[#f8f8fc] hover:opacity-80'
+                                        } ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                >
+                                    {isLoading ? (
+                                        <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                                    ) : (
+                                        plan.buttonText
+                                    )}
+                                </button>
+                                {error && <p className="text-red-500 text-xs mt-2 text-center">{error}</p>}
+                            </div>
                         </div>
                     ))}
                 </div>

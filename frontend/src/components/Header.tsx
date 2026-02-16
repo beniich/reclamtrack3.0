@@ -6,6 +6,8 @@ import { useAuthStore } from '@/store/authStore';
 import { useTranslations } from 'next-intl';
 import { LogOut, ChevronDown, Shield, Truck, CalendarDays, MessagesSquare, Settings as SettingsIcon, Menu, X } from 'lucide-react';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { NotificationCenter } from '@/components/notifications/NotificationCenter';
+import { OrganizationSelector } from './organization/OrganizationSelector';
 
 export default function Header() {
     const { user, logout } = useAuthStore();
@@ -18,13 +20,21 @@ export default function Header() {
             <div className="flex items-center gap-4">
                 <Link href="/" className="flex items-center gap-3">
                     <div className="bg-primary p-1.5 rounded-lg text-white">
-                        <span className="material-symbols-outlined block">account_balance</span>
+                        <span className="material-symbols-outlined block notranslate" translate="no">account_balance</span>
                     </div>
                     <div className="flex flex-col">
                         <h1 className="text-lg font-bold leading-none tracking-tight text-slate-900 dark:text-white">ReclamTrack</h1>
                         <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">{t('technicalServices')}</span>
                     </div>
                 </Link>
+
+                <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 mx-2 hidden lg:block"></div>
+
+                {user && (
+                    <div className="hidden lg:block">
+                        <OrganizationSelector />
+                    </div>
+                )}
             </div>
 
             {/* Desktop Navigation */}
@@ -71,12 +81,21 @@ export default function Header() {
                                             <span>{t('roster')}</span>
                                         </div>
                                     </Link>
-                                    <Link href="/audit-logs" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors last:rounded-b-lg">
+                                    <Link href="/audit-logs" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                                         <div className="flex items-center gap-2">
                                             <Shield className="text-sm w-4 h-4" />
                                             <span>Audit Logs</span>
                                         </div>
                                     </Link>
+                                    <div className="px-4 py-2 border-t border-slate-100 dark:border-slate-700">
+                                        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Dashboards V2</p>
+                                        <Link href="/admin/dashboards/material-workflow" className="block py-1 hover:text-primary transition-colors text-sm">
+                                            Material Workflow
+                                        </Link>
+                                        <Link href="/admin/dashboards/database-topology" className="block py-1 hover:text-primary transition-colors text-sm">
+                                            DB Topology
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +112,8 @@ export default function Header() {
                             <Link href="/settings" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-500 hover:text-primary transition-colors" title={t('settings')}>
                                 <SettingsIcon className="w-5 h-5" />
                             </Link>
-
+                            {/* Notifications */}
+                            <NotificationCenter />
                             <div className="text-right hidden sm:block ml-2">
                                 <p className="text-xs font-semibold text-slate-900 dark:text-white">{user.email.split('@')[0]}</p>
                                 <p className="text-[10px] text-slate-500 uppercase">{user.role}</p>

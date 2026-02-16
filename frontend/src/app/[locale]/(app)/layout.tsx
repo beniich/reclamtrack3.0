@@ -1,6 +1,7 @@
 'use client';
 
 import { useAuth } from '@/hooks/useAuth';
+import { useAuthStore } from '@/store/authStore';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Header from '@/components/Header';
@@ -12,29 +13,32 @@ export default function AppLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const { user, loading } = useAuth();
+    const { user } = useAuth(); // Removed loading from useAuth as it's local
+    const { _hasHydrated } = useAuthStore();
     const router = useRouter();
     useNotifications();
 
     useEffect(() => {
-        if (!loading && !user) {
+        console.log('[AppLayout] Effect check:', { user: !!user, _hasHydrated });
+        if (_hasHydrated && !user) {
+            console.log('[AppLayout] Redirecting to login because user is null and hydration is done');
             router.push('/login');
         }
-    }, [user, loading, router]);
+    }, [user, _hasHydrated, router]);
 
-    if (loading) {
+    if (!_hasHydrated) {
         return (
             <div className="flex items-center justify-center min-h-screen bg-background">
                 <div className="flex flex-col items-center gap-4">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-                    <p className="text-sm text-muted-foreground">Chargement...</p>
+                    <p className="text-sm text-muted-foreground">Initialisation...</p>
                 </div>
             </div>
         );
     }
 
     if (!user) {
-        return null;
+        return null; // Will redirect in useEffect
     }
 
     return (

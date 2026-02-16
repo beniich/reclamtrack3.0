@@ -4,17 +4,77 @@ import { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useAuthStore } from '@/store/authStore';
+import { useOrgStore } from '@/store/orgStore';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
     const pathname = usePathname();
-    const isTechnician = pathname?.startsWith('/technician');
-    const isMap = pathname?.startsWith('/map');
+    const router = useRouter();
+    const { user, _hasHydrated: authHydrated } = useAuthStore();
+    const {
+        activeOrganization,
+        fetchOrganizations,
+        organizations,
+        _hasHydrated: orgHydrated,
+        isLoading: orgLoading
+    } = useOrgStore();
 
-    const isFleet = pathname?.startsWith('/fleet');
-    const isAdminSystem = pathname?.startsWith('/admin/system');
+    const [isChecking, setIsChecking] = useState(true);
+
+    const isTechnician = pathname?.includes('/technician');
+    const isMap = pathname?.includes('/map');
+    const isFleet = pathname?.includes('/fleet');
+    const isAdminSystem = pathname?.includes('/admin/system');
+    const isAuthPage = pathname?.includes('/login') || pathname?.includes('/register');
+    const isOrgSelectPage = pathname?.includes('/org-select');
+
+    useEffect(() => {
+        const checkOrg = async () => {
+            if (!authHydrated || !orgHydrated) return;
+
+            if (user && !isAuthPage && !isOrgSelectPage) {
+                // User is logged in but not on an auth/org-select page
+                if (organizations.length === 0 && !orgLoading) {
+                    await fetchOrganizations();
+                }
+
+                if (!activeOrganization && !orgLoading) {
+                    // Still no active org after fetch? Redirect
+                    console.log('No active organization, redirecting to org-select');
+                    router.push('/org-select');
+                }
+            }
+            setIsChecking(false);
+        };
+
+        checkOrg();
+    }, [
+        user,
+        activeOrganization,
+        authHydrated,
+        orgHydrated,
+        pathname,
+        organizations.length,
+        orgLoading,
+        fetchOrganizations,
+        router,
+        isAuthPage,
+        isOrgSelectPage
+    ]);
+
+    if (user && !activeOrganization && !isAuthPage && !isOrgSelectPage && isChecking) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-slate-50">
+                <Loader2 className="h-10 w-10 animate-spin text-primary" />
+            </div>
+        );
+    }
 
     // Full screen layouts (No global Header/Footer)
-    if (isTechnician || isFleet || isAdminSystem) {
+    if (isTechnician || isFleet || isAdminSystem || isOrgSelectPage) {
         return <>{children}</>;
     }
 

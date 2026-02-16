@@ -73,7 +73,7 @@ export interface Assignment {
 }
 
 // Types from Roadmap 2
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
     success: boolean;
     data?: T;
     error?: string;
@@ -109,4 +109,30 @@ export interface TimelineEvent {
     description: string;
     timestamp: string;
     actor?: string;
+}
+
+export interface Organization {
+    _id: string;
+    name: string;
+    slug: string;
+    ownerId: string;
+    logo?: string;
+    subscription: {
+        plan: 'FREE' | 'PRO' | 'ENTERPRISE';
+        status: 'ACTIVE' | 'TRIAL' | 'PAST_DUE' | 'CANCELED';
+        expiresAt?: string;
+        maxUsers?: number;
+        maxTickets?: number;
+    };
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface Membership {
+    _id: string;
+    userId: string;
+    organizationId: string | Organization;
+    roles: string[];
+    status: 'ACTIVE' | 'INVITED' | 'SUSPENDED';
+    joinedAt: string;
 }

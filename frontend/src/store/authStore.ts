@@ -9,10 +9,13 @@ interface AuthState {
     isLoading: boolean;
     error: string | null;
     login: (email: string, password: string) => Promise<void>;
+    googleLogin: (credential: string) => Promise<void>;
     logout: () => void;
     setUser: (user: User | null) => void;
     setToken: (token: string | null) => void;
     checkAuth: () => Promise<void>;
+    _hasHydrated: boolean;
+    setHasHydrated: (state: boolean) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -26,13 +29,14 @@ export const useAuthStore = create<AuthState>()(
             setUser: (user) => set({ user }),
             setToken: (token) => {
                 set({ token });
-                if (token) {
-                    if (typeof window !== 'undefined') {
+                if (typeof window !== 'undefined') {
+                    if (token) {
                         localStorage.setItem('auth_token', token);
-                    }
-                } else {
-                    if (typeof window !== 'undefined') {
+                        // Sync with middleware cookie
+                        document.cookie = `reclamtrack-auth-storage=${token}; path=/; max-age=604800; SameSite=Lax`;
+                    } else {
                         localStorage.removeItem('auth_token');
+                        document.cookie = 'reclamtrack-auth-storage=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
                     }
                 }
             },
@@ -45,8 +49,9 @@ export const useAuthStore = create<AuthState>()(
 
                     set({ user, token, isLoading: false });
 
-                    if (token && typeof window !== 'undefined') {
+                    if (typeof window !== 'undefined' && token) {
                         localStorage.setItem('auth_token', token);
+                        document.cookie = `reclamtrack-auth-storage=${token}; path=/; max-age=604800; SameSite=Lax`;
                     }
                 } catch (error: any) {
                     set({
@@ -57,10 +62,32 @@ export const useAuthStore = create<AuthState>()(
                 }
             },
 
+            googleLogin: async (credential) => {
+                set({ isLoading: true, error: null });
+                try {
+                    const response = await authApi.googleLogin(credential);
+                    const { user, token } = response as any;
+
+                    set({ user, token, isLoading: false });
+
+                    if (typeof window !== 'undefined' && token) {
+                        localStorage.setItem('auth_token', token);
+                        document.cookie = `reclamtrack-auth-storage=${token}; path=/; max-age=604800; SameSite=Lax`;
+                    }
+                } catch (error: any) {
+                    set({
+                        isLoading: false,
+                        error: error.response?.data?.message || 'Échec de la connexion Google'
+                    });
+                    throw error;
+                }
+            },
+
             logout: () => {
                 set({ user: null, token: null });
                 if (typeof window !== 'undefined') {
                     localStorage.removeItem('auth_token');
+                    document.cookie = 'reclamtrack-auth-storage=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
                     window.location.href = '/login';
                 }
             },
@@ -71,16 +98,24 @@ export const useAuthStore = create<AuthState>()(
                     const user = await authApi.me();
                     set({ user, isLoading: false });
                 } catch (error) {
+                    // console.error(error);
                     set({ user: null, token: null, isLoading: false });
                     if (typeof window !== 'undefined') {
                         localStorage.removeItem('auth_token');
                     }
                 }
-            }
+            },
+
+            // Hydration state
+            _hasHydrated: false,
+            setHasHydrated: (state: boolean) => set({ _hasHydrated: state })
         }),
         {
             name: 'reclamtrack-auth-storage',
-            partialize: (state) => ({ user: state.user, token: state.token })
+            partialize: (state) => ({ user: state.user, token: state.token }),
+            onRehydrateStorage: () => (state) => {
+                state?.setHasHydrated(true);
+            }
         }
     )
 );

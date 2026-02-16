@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore'; // Import direct vers le store si nécessaire, ou via le hook si disponible
 import { toast } from 'react-hot-toast'; // Assurez-vous que react-hot-toast est installé
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function LoginPage() {
     const router = useRouter();
@@ -15,7 +16,7 @@ export default function LoginPage() {
     const [rememberMe, setRememberMe] = useState(false);
 
     // Utilisation du store pour la gestion de l'état global
-    const { login } = useAuthStore();
+    const { login, googleLogin } = useAuthStore();
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -43,14 +44,33 @@ export default function LoginPage() {
         }
     };
 
+    const handleGoogleSuccess = async (credentialResponse: any) => {
+        try {
+            if (credentialResponse.credential) {
+                await googleLogin(credentialResponse.credential);
+                toast.success('Connexion Google réussie !');
+                setTimeout(() => {
+                    router.push('/dashboard');
+                }, 100);
+            }
+        } catch (error) {
+            console.error('Google login error:', error);
+            toast.error('Échec de la connexion Google');
+        }
+    };
+
+    const handleGoogleError = () => {
+        toast.error('Échec de la connexion Google');
+    };
+
     return (
         <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-background-light dark:bg-background-dark transition-colors duration-200 font-display">
             {/* Logo / Branding Header */}
             <div className="mb-8 flex flex-col items-center">
                 <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-primary/20">
-                    <span className="material-symbols-outlined text-white text-3xl">shield_person</span>
+                    <span className="material-symbols-outlined text-white text-3xl notranslate" translate="no">shield_person</span>
                 </div>
-                <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">IMS Secure</h1>
+                <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white" suppressHydrationWarning>IMS Secure</h1>
                 <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Intervention Management System</p>
             </div>
 
@@ -69,12 +89,32 @@ export default function LoginPage() {
                 </div>
 
                 <div className="p-8">
+                    <div className="mb-6 flex justify-center">
+                        <GoogleLogin
+                            onSuccess={handleGoogleSuccess}
+                            onError={handleGoogleError}
+                            theme="filled_blue"
+                            shape="pill"
+                            text="signin_with"
+
+                        />
+                    </div>
+
+                    <div className="relative mb-6">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-slate-200 dark:border-slate-700"></div>
+                        </div>
+                        <div className="relative flex justify-center text-sm">
+                            <span className="px-2 bg-white dark:bg-slate-900 text-slate-500">Ou continuer avec</span>
+                        </div>
+                    </div>
+
                     <form className="space-y-6" onSubmit={handleLogin}>
                         {/* Username/Email Field */}
                         <div>
                             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5" htmlFor="identifier">Identifiant ou Email</label>
                             <div className="relative">
-                                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">mail</span>
+                                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl notranslate" translate="no">mail</span>
                                 <input
                                     className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
                                     id="identifier"
@@ -95,7 +135,7 @@ export default function LoginPage() {
                                 <a className="text-xs font-semibold text-primary hover:underline" href="#">Mot de passe oublié ?</a>
                             </div>
                             <div className="relative">
-                                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">lock</span>
+                                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl notranslate" translate="no">lock</span>
                                 <input
                                     className="w-full pl-11 pr-12 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all text-slate-900 dark:text-white placeholder:text-slate-400"
                                     id="password"
@@ -111,7 +151,7 @@ export default function LoginPage() {
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
                                 >
-                                    <span className="material-symbols-outlined text-xl">{showPassword ? 'visibility_off' : 'visibility'}</span>
+                                    <span className="material-symbols-outlined text-xl notranslate" translate="no">{showPassword ? 'visibility_off' : 'visibility'}</span>
                                 </button>
                             </div>
                         </div>
@@ -142,7 +182,7 @@ export default function LoginPage() {
                             ) : (
                                 <>
                                     <span>Se connecter</span>
-                                    <span className="material-symbols-outlined text-lg">login</span>
+                                    <span className="material-symbols-outlined text-lg notranslate" translate="no">login</span>
                                 </>
                             )}
                         </button>
@@ -150,7 +190,7 @@ export default function LoginPage() {
 
                     {/* Security Footer inside card */}
                     <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-center gap-2 text-slate-400 dark:text-slate-500">
-                        <span className="material-symbols-outlined text-sm">encrypted</span>
+                        <span className="material-symbols-outlined text-sm notranslate" translate="no">encrypted</span>
                         <span className="text-xs">Connexion chiffrée de bout en bout</span>
                     </div>
                 </div>
@@ -161,6 +201,13 @@ export default function LoginPage() {
                 <a className="hover:text-primary transition-colors" href="#">Politique de sécurité</a>
                 <a className="hover:text-primary transition-colors" href="#">Support</a>
                 <a className="hover:text-primary transition-colors" href="#">Confidentialité</a>
+            </div>
+
+            <div className="mt-8 text-center text-sm">
+                <span className="text-slate-600 dark:text-slate-400">Pas encore de compte ? </span>
+                <a href="/register" className="text-primary hover:underline font-semibold">
+                    Créer un compte
+                </a>
             </div>
 
             <p className="mt-8 text-xs text-slate-400 dark:text-slate-600">

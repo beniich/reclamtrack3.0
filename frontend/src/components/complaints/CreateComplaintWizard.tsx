@@ -17,6 +17,7 @@ export function CreateComplaintWizard() {
         goToNextStep,
         goToPreviousStep,
         saveDraft,
+        uploadFile, // Add uploadFile
         submitComplaint,
         isSubmitting,
         isFirstStep,
@@ -34,14 +35,29 @@ export function CreateComplaintWizard() {
     // Local state to hold files to submit
     const [files, setFiles] = useState<File[]>([]);
 
-    const handleFileUpload = (file: File) => {
-        setFiles(prev => [...prev, file]);
-        return Promise.resolve(URL.createObjectURL(file)); // Return preview URL
+    const handleFileUpload = async (file: File) => {
+        try {
+            // Upload immediately
+            const url = await uploadFile(file, 'photo');
+
+            // Update local state for UI
+            setFiles(prev => [...prev, file]);
+
+            // Update form data (assuming step 3 is active or we access step3Form via some means, 
+            // but here currentForm is step3Form when on step 3).
+            // We should ensure we are on step 3 or safely update step 3 data.
+            // CreateComplaintWizard renders step 3, so currentForm is step 3 form.
+            const currentPhotos = currentForm.getValues('photos') || [];
+            currentForm.setValue('photos', [...currentPhotos, url], { shouldValidate: true });
+
+            return url; // Return URL as preview (or use objectURL if preferred for speed)
+        } catch (error) {
+            console.error('Upload failed:', error);
+            throw error;
+        }
     };
 
     const handleFinalSubmit = () => {
-        // Pass the files to the hook's submit function
-        // TODO: Handle file uploads separately or update submitComplaint to accept files
         submitComplaint();
     };
 

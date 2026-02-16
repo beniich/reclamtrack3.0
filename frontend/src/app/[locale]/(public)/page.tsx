@@ -14,7 +14,7 @@ export default async function LandingPage() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <div className="flex items-center justify-center size-9 bg-primary rounded-lg text-white shadow-lg shadow-primary/25">
-                            <span className="material-symbols-outlined text-xl">account_balance</span>
+                            <span className="material-symbols-outlined text-xl notranslate" translate="no">account_balance</span>
                         </div>
                         <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">CMS <span className="text-primary">Admin</span></h2>
                     </div>
@@ -42,7 +42,7 @@ export default async function LandingPage() {
                     <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div className="flex flex-col gap-8 max-w-xl animate-in fade-in slide-in-from-left-8 duration-1000">
                             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] w-fit">
-                                <span className="material-symbols-outlined text-sm">verified</span>
+                                <span className="material-symbols-outlined text-sm notranslate" translate="no">verified</span>
                                 {tLanding('heroBadge')}
                             </div>
                             <h1 className="text-6xl lg:text-7xl font-black leading-[0.95] tracking-tight text-slate-900 dark:text-white">
@@ -56,7 +56,7 @@ export default async function LandingPage() {
                             <div className="flex flex-col sm:flex-row gap-4 mt-2">
                                 <Link href="/login" className="bg-primary text-white h-14 px-10 rounded-full font-black text-lg shadow-2xl shadow-primary/40 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 group">
                                     {tLanding('bookDemo')}
-                                    <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                    <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform notranslate" translate="no">arrow_forward</span>
                                 </Link>
                                 <Link href="/login" className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 h-14 px-10 rounded-full font-black text-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-all flex items-center justify-center">
                                     {tLanding('viewRoadmap')}
@@ -101,7 +101,7 @@ export default async function LandingPage() {
                                 </div>
                                 <div className="flex-1 h-[240px] bg-slate-50 dark:bg-slate-800/50 rounded-3xl border border-slate-100 dark:border-slate-700 relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-700">
                                     <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                                        <span className="material-symbols-outlined text-[140px] text-slate-400">public</span>
+                                        <span className="material-symbols-outlined text-[140px] text-slate-400 notranslate" translate="no">public</span>
                                     </div>
                                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-white/80 dark:from-slate-900/80 to-transparent"></div>
 
@@ -114,7 +114,7 @@ export default async function LandingPage() {
                                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-2xl border border-slate-100 dark:border-slate-700 w-44">
                                         <div className="flex items-center gap-3 mb-2">
                                             <div className="size-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                                                <span className="material-symbols-outlined text-primary text-sm font-bold leading-none">person_pin_circle</span>
+                                                <span className="material-symbols-outlined text-primary text-sm font-bold leading-none notranslate" translate="no">person_pin_circle</span>
                                             </div>
                                             <div className="flex-1">
                                                 <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-700 rounded-full mb-1"></div>
@@ -145,7 +145,7 @@ export default async function LandingPage() {
                             ].map((f, i) => (
                                 <div key={i} className="group p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/50 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
                                     <div className="size-16 bg-primary/5 text-primary rounded-[1.25rem] flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                                        <span className="material-symbols-outlined text-3xl font-bold">{f.icon}</span>
+                                        <span className="material-symbols-outlined text-3xl font-bold notranslate" translate="no">{f.icon}</span>
                                     </div>
                                     <h4 className="text-2xl font-black mb-4 text-slate-900 dark:text-white">{f.title}</h4>
                                     <p className="text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
@@ -186,7 +186,7 @@ export default async function LandingPage() {
                     <div className="col-span-2">
                         <div className="flex items-center gap-3 mb-8">
                             <div className="flex items-center justify-center size-9 bg-primary rounded-lg text-white">
-                                <span className="material-symbols-outlined text-xl">account_balance</span>
+                                <span className="material-symbols-outlined text-xl notranslate" translate="no">account_balance</span>
                             </div>
                             <h2 className="text-xl font-black tracking-tight text-slate-900 dark:text-white">CMS <span className="text-primary">Admin</span></h2>
                         </div>
@@ -231,7 +231,7 @@ export default async function LandingPage() {
                     <div className="flex gap-8">
                         {['share', 'public', 'mail'].map((icon) => (
                             <Link key={icon} href="#" className="text-slate-300 hover:text-primary transition-all duration-300 hover:scale-125">
-                                <span className="material-symbols-outlined text-xl">{icon}</span>
+                                <span className="material-symbols-outlined text-xl notranslate" translate="no">{icon}</span>
                             </Link>
                         ))}
                     </div>

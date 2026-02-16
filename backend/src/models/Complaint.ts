@@ -19,6 +19,10 @@ export interface IComplaint extends Document {
     postalCode?: string;
     latitude?: number;
     longitude?: number;
+    location?: {
+        latitude: number;
+        longitude: number;
+    };
 
     // Step 3: Files
     photos?: string[];
@@ -36,7 +40,9 @@ export interface IComplaint extends Document {
     status: ComplaintStatus;
     assignedTeamId?: mongoose.Types.ObjectId;
     technicianId?: mongoose.Types.ObjectId;
+    assignedAt?: Date;
 
+    organizationId: mongoose.Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -63,6 +69,10 @@ const ComplaintSchema: Schema = new Schema(
         postalCode: { type: String },
         latitude: { type: Number },
         longitude: { type: Number },
+        location: {
+            latitude: { type: Number },
+            longitude: { type: Number }
+        },
 
         // Step 3
         photos: [{ type: String }],
@@ -86,10 +96,16 @@ const ComplaintSchema: Schema = new Schema(
             default: 'nouvelle'
         },
         assignedTeamId: { type: Schema.Types.ObjectId, ref: 'Team' },
-        technicianId: { type: Schema.Types.ObjectId, ref: 'User' }
+        technicianId: { type: Schema.Types.ObjectId, ref: 'User' },
+        assignedAt: { type: Date },
+        organizationId: { type: Schema.Types.ObjectId, ref: 'Organization', required: true }
     },
     { timestamps: true }
 );
+
+// Index for organization filtering
+ComplaintSchema.index({ organizationId: 1, status: 1 });
+ComplaintSchema.index({ organizationId: 1, createdAt: -1 });
 
 // Auto-generate unique complaint number
 ComplaintSchema.pre<IComplaint>('save', function (next) {

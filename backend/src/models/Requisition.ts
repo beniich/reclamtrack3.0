@@ -33,6 +33,7 @@ export interface IRequisition extends Document {
     }>;
     createdAt: Date;
     updatedAt: Date;
+    organizationId: mongoose.Types.ObjectId;
 }
 
 const RequisitionSchema: Schema = new Schema(
@@ -60,9 +61,13 @@ const RequisitionSchema: Schema = new Schema(
                 comment: { type: String },
                 timestamp: { type: Date, default: Date.now }
             }
-        ]
+        ],
+        organizationId: { type: Schema.Types.ObjectId, ref: 'Organization', required: true }
     },
     { timestamps: true }
 );
+
+RequisitionSchema.index({ organizationId: 1, status: 1 });
+RequisitionSchema.index({ organizationId: 1, createdAt: -1 });
 
 export const Requisition = mongoose.model<IRequisition>('Requisition', RequisitionSchema);

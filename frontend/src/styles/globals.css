@@ -216,4 +216,92 @@
   .card-hover {
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
+
+  /* DevOps Dashboard Utilities */
+  .pulse-indicator {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+  }
+
+  .terminal-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .terminal-scrollbar::-webkit-scrollbar-track {
+    background: #0b0f17;
+  }
+  .terminal-scrollbar::-webkit-scrollbar-thumb {
+    background: #2d3a54;
+    border-radius: 4px;
+  }
+  .terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #135bec;
+  }
+
+  .canvas-grid {
+    background-image: radial-gradient(circle, #232f48 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  .chart-gradient-hot {
+    fill: url(#hotGradient);
+  }
+
+  .diff-added {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-left: 3px solid #10b981;
+  }
+
+  .diff-removed {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-left: 3px solid #ef4444;
+  }
+
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 4px;
+  }
+
+  .heatmap-cell {
+    aspect-ratio: 1;
+    border-radius: 2px;
+  }
+
+  /* Added for DevOps Dashboards from pppppp integration */
+  .dashboard-card {
+    @apply bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm;
+  }
+  .data-table {
+    @apply w-full text-left text-sm;
+  }
+  .status-badge {
+      @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+  }
+  .status-success {
+      @apply bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-400;
+  }
+  .status-warning {
+      @apply bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-400;
+  }
+  .status-error {
+      @apply bg-red-100 text-red-800 dark:bg-red-500/20 dark:text-red-400;
+  }
+  .status-info {
+      @apply bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-400;
+  }
 }

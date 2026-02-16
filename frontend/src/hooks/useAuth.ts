@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import api from '@/lib/api';
 import { useAuthStore } from '@/store/authStore';
+import { API_ROUTES } from '@reclamtrack/shared';
 
 interface AuthResponse {
     token: string;
@@ -19,18 +20,18 @@ export const useAuth = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await api.post<AuthResponse>('/auth/login', {
+            const response = await api.post<AuthResponse>(API_ROUTES.auth.login, {
                 email,
                 password
             });
             setToken(response.token);
             setUser(response.user);
             if (typeof window !== 'undefined') {
-                localStorage.setItem('token', response.token);
+                localStorage.setItem('auth_token', response.token);
             }
             return true;
-        } catch (e: any) {
-            setError(e.response?.data?.message || 'Erreur de connexion');
+        } catch (e: unknown) {
+            setError(e instanceof Error && 'response' in e ? (e as any).response?.data?.message : 'Erreur de connexion');
             return false;
         } finally {
             setLoading(false);
@@ -41,18 +42,18 @@ export const useAuth = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await api.post<AuthResponse>('/auth/register', {
+            const response = await api.post<AuthResponse>(API_ROUTES.auth.register, {
                 email,
                 password
             });
             setToken(response.token);
             setUser(response.user);
             if (typeof window !== 'undefined') {
-                localStorage.setItem('token', response.token);
+                localStorage.setItem('auth_token', response.token);
             }
             return true;
-        } catch (e: any) {
-            setError(e.response?.data?.message || "Erreur d'inscription");
+        } catch (e: unknown) {
+            setError(e instanceof Error && 'response' in e ? (e as any).response?.data?.message : "Erreur d'inscription");
             return false;
         } finally {
             setLoading(false);

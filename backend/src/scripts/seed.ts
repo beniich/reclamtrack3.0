@@ -1,127 +1,159 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import bcrypt from 'bcryptjs';
+import { config } from 'dotenv';
 import { User } from '../models/User.js';
-import { Requisition, RequisitionStatus } from '../models/Requisition.js';
-import { KnowledgeBase } from '../models/Knowledge.js';
-import { Feedback } from '../models/Feedback.js';
-import { Message } from '../models/Message.js';
-import { Vehicle } from '../models/Vehicle.js';
-import { ShiftType } from '../models/Scheduler.js';
+import { Team } from '../models/Team.js';
+import { Complaint } from '../models/Complaint.js';
+import { Staff } from '../models/Staff.js';
+import { logger } from '../utils/logger.js';
 
-// Charger les variables d'environnement
-dotenv.config();
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/reclamtrack';
+config();
 
-const seedData = async () => {
+const seedDatabase = async () => {
     try {
-        await mongoose.connect(MONGO_URI);
-        console.log('✅ Connecté à MongoDB pour le seed');
+        // Connect to MongoDB
+        const mongoUri = process.env.MONGODB_URI;
+        if (!mongoUri) {
+            throw new Error('MONGODB_URI not defined in .env');
+        }
 
-        // Préparer le hash du mot de passe
-        const hashedPassword = await bcrypt.hash('password123', 10);
+        await mongoose.connect(mongoUri);
+        logger.info('✅ Connected to MongoDB for seeding');
 
-        // 2. Créer Utilisateurs
-        const admin = await User.findOneAndUpdate(
-            { email: 'admin@reclamtrack.com' },
+        // Clear existing data
+        await User.deleteMany({});
+        await Team.deleteMany({});
+        await Complaint.deleteMany({});
+        await Staff.deleteMany({});
+        logger.info('🗑️  Cleared existing data');
+
+        // Create Admin User
+        const adminUser = await User.create({
+            email: 'admin@reclamtrack.com',
+            password: 'Admin123!', // Will be hashed by the model
+            name: 'Admin System',
+            role: 'admin',
+            isEmailVerified: true
+        });
+        logger.info('👤 Created admin user');
+
+        // Create Teams
+        const teams = await Team.create([
             {
-                name: 'Admin Principal',
-                email: 'admin@reclamtrack.com',
-                password: hashedPassword,
-                role: 'admin'
+                name: 'Équipe Électricité',
+                description: 'Gestion des pannes électriques',
+                specialization: 'Électricité',
+                isActive: true
             },
-            { upsert: true, new: true }
-        );
-
-        const tech = await User.findOneAndUpdate(
-            { email: 'tech@reclamtrack.com' },
             {
-                name: 'Technicien Senior',
-                email: 'tech@reclamtrack.com',
-                password: hashedPassword,
-                role: 'technician' // Corrected role if needed based on enum in User model: 'admin' | 'dispatcher' | 'staff' | 'citizen'
+                name: 'Équipe Plomberie',
+                description: 'Réparation des fuites et canalisations',
+                specialization: 'Plomberie',
+                isActive: true
             },
-            { upsert: true, new: true }
-        );
-        console.log('👥 Utilisateurs créés/mis à jour avec mots de passe hashés');
+            {
+                name: 'Équipe Voirie',
+                description: 'Entretien des routes et trottoirs',
+                specialization: 'Voirie',
+                isActive: true
+            }
+        ]);
+        logger.info(`👥 Created ${teams.length} teams`);
 
-        // 3. Créer Réquisitions
-        if (await Requisition.countDocuments() === 0) {
-            await Requisition.create([
-                {
-                    requesterId: tech._id,
-                    items: [
-                        { description: 'Tuyau PVC 32mm', quantity: 10, justification: 'Stock épuisé' },
-                        { description: 'Colle PVC', quantity: 5 }
-                    ],
-                    status: RequisitionStatus.PENDING,
-                    history: [{ status: RequisitionStatus.PENDING, action: 'created', userId: tech._id, timestamp: new Date() }]
-                },
-                {
-                    requesterId: tech._id,
-                    items: [
-                        { description: 'Câble électrique 3G2.5', quantity: 100 },
-                        { description: 'Domino', quantity: 50 }
-                    ],
-                    status: RequisitionStatus.APPROVED,
-                    history: [{ status: RequisitionStatus.APPROVED, action: 'approved', userId: admin._id, timestamp: new Date() }]
-                }
-            ]);
-            console.log('📦 Réquisitions créées');
-        }
+        // Create Staff Members
+        const staff = await Staff.create([
+            {
+                name: 'Jean Dupont',
+                email: 'jean.dupont@reclamtrack.com',
+                role: 'Technicien Électricité'
+            },
+            {
+                name: 'Marie Martin',
+                email: 'marie.martin@reclamtrack.com',
+                role: 'Technicienne Plomberie'
+            },
+            {
+                name: 'Pierre Bernard',
+                email: 'pierre.bernard@reclamtrack.com',
+                role: 'Superviseur Voirie'
+            }
+        ]);
+        logger.info(`🔧 Created ${staff.length} staff members`);
 
-        // 4. Créer SOPs (Knowledge Base)
-        if (await KnowledgeBase.countDocuments() === 0) {
-            await KnowledgeBase.create([
-                {
-                    title: 'Procédure d\'intervention Fuite d\'Eau',
-                    category: 'Plomberie',
-                    content: '1. Sécuriser la zone.\n2. Couper l\'arrivée d\'eau principale.\n3. Identifier la fuite.\n4. Réparer ou remplacer la pièce défectueuse.',
-                    author: 'Chef Plombier',
-                    tags: ['urgence', 'fuite', 'eau'],
-                    isActive: true
-                },
-                {
-                    title: 'Remplacement Ampoule Réverbère',
-                    category: 'Éclairage Public',
-                    content: '1. Baliser la zone d\'intervention avec des cônes.\n2. Couper l\'alimentation du secteur.\n3. Utiliser la nacelle pour atteindre le luminaire.\n4. Remplacer l\'ampoule et vérifier le ballast.',
-                    author: 'Resp. Sécurité',
-                    tags: ['électricité', 'hauteur', 'maintenance'],
-                    isActive: true
-                }
-            ]);
-            console.log('📚 Base de connaissances peuplée');
-        }
+        // Create Sample Complaints
+        const complaints = await Complaint.create([
+            {
+                category: 'Électricité',
+                subcategory: 'Panne de courant',
+                priority: 'urgent',
+                title: 'Panne électrique rue Victor Hugo',
+                description: 'Coupure de courant depuis 2 heures dans tout le quartier',
+                address: '15 Rue Victor Hugo',
+                city: 'Paris',
+                district: '16ème',
+                postalCode: '75016',
+                latitude: 48.8566,
+                longitude: 2.3522,
+                isAnonymous: false,
+                firstName: 'Sophie',
+                lastName: 'Dubois',
+                email: 'sophie.dubois@example.com',
+                phone: '+33612345678',
+                status: 'en cours',
+                assignedTeamId: teams[0]._id,
+                technicianId: staff[0]._id
+            },
+            {
+                category: 'Plomberie',
+                subcategory: 'Fuite d\'eau',
+                priority: 'high',
+                title: 'Fuite importante avenue des Champs',
+                description: 'Fuite d\'eau visible sur la chaussée, risque d\'inondation',
+                address: '42 Avenue des Champs-Élysées',
+                city: 'Paris',
+                district: '8ème',
+                postalCode: '75008',
+                latitude: 48.8698,
+                longitude: 2.3078,
+                isAnonymous: true,
+                status: 'nouvelle'
+            },
+            {
+                category: 'Voirie',
+                subcategory: 'Nid de poule',
+                priority: 'medium',
+                title: 'Nid de poule boulevard Saint-Germain',
+                description: 'Trou important sur la chaussée, dangereux pour les véhicules',
+                address: '120 Boulevard Saint-Germain',
+                city: 'Paris',
+                district: '6ème',
+                postalCode: '75006',
+                latitude: 48.8534,
+                longitude: 2.3364,
+                isAnonymous: false,
+                firstName: 'Marc',
+                lastName: 'Leroy',
+                email: 'marc.leroy@example.com',
+                phone: '+33698765432',
+                status: 'résolue',
+                assignedTeamId: teams[2]._id,
+                technicianId: staff[2]._id
+            }
+        ]);
+        logger.info(`📋 Created ${complaints.length} sample complaints`);
 
-        // 5. Créer Feedback
-        if (await Feedback.countDocuments() === 0) {
-            await Feedback.create([
-                { rating: 5, comment: 'Intervention rapide et efficace !', source: 'mobile', status: 'reviewed' },
-                { rating: 3, comment: 'Le technicien est arrivé en retard.', source: 'web', status: 'new' },
-                { rating: 4, comment: 'Application très pratique.', source: 'web', status: 'addressed' }
-            ]);
-            console.log('💬 Feedbacks créés');
-        }
+        logger.info('✅ Database seeding completed successfully!');
+        logger.info('\n📊 Summary:');
+        logger.info(`   - Users: ${await User.countDocuments()}`);
+        logger.info(`   - Teams: ${await Team.countDocuments()}`);
+        logger.info(`   - Staff: ${await Staff.countDocuments()}`);
+        logger.info(`   - Complaints: ${await Complaint.countDocuments()}`);
 
-        // 6. Créer Messages
-        if (await Message.countDocuments() === 0) {
-            await Message.create([
-                { senderId: admin._id, senderName: admin.name, recipientId: tech._id, content: 'Bienvenue dans l\'équipe !', type: 'text' },
-                { senderId: 'system', senderName: 'Système', groupId: 'general', content: 'Maintenance prévue ce soir à 23h.', type: 'system' }
-            ]);
-            console.log('📨 Messages créés');
-        }
-
-        // 7. Véhicules et Shifts (gérés par les routes, mais on peut forcer ici)
-        // ... (optionnel)
-
-        console.log('✅ Seed terminé avec succès !');
         process.exit(0);
     } catch (error) {
-        console.error('❌ Erreur lors du seed:', error);
+        logger.error('❌ Seeding failed:', error);
         process.exit(1);
     }
 };
 
-seedData();
+seedDatabase();

@@ -1,15 +1,19 @@
 import { Router, Request, Response } from 'express';
 import { protect as auth } from '../middleware/auth.js';
+import { requireOrganization } from '../middleware/organization.js';
 import { logger } from '../utils/logger.js';
 import { Requisition, RequisitionStatus } from '../models/Requisition.js';
 
 const router = Router();
 
+// Apply organization context
+router.use(auth, requireOrganization);
+
 // GET /api/requisitions - Liste des réquisitions
-router.get('/', auth, async (req: any, res: Response) => {
+router.get('/', async (req: any, res: Response) => {
     try {
         const { status, requesterId } = req.query;
-        const query: any = {};
+        const query: any = { organizationId: req.organizationId };
 
         if (status) query.status = status;
 
@@ -40,10 +44,10 @@ router.get('/', auth, async (req: any, res: Response) => {
 });
 
 // GET /api/requisitions/:id - Détails d'une réquisition
-router.get('/:id', auth, async (req: Request, res: Response) => {
+router.get('/:id', async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const requisition = await Requisition.findById(id)
+        const requisition = await Requisition.findOne({ _id: id, organizationId: (req as any).organizationId })
             .populate('requesterId', 'name email role')
             .populate('complaintId');
 
@@ -68,7 +72,7 @@ router.get('/:id', auth, async (req: Request, res: Response) => {
 });
 
 // POST /api/requisitions - Créer une réquisition
-router.post('/', auth, async (req: any, res: Response) => {
+router.post('/', async (req: any, res: Response) => {
     try {
         const { items, complaintId, notes } = req.body;
 
@@ -85,6 +89,7 @@ router.post('/', auth, async (req: any, res: Response) => {
             items,
             notes,
             status: RequisitionStatus.DRAFT,
+            organizationId: req.organizationId,
             history: [{
                 status: RequisitionStatus.DRAFT,
                 action: 'created',
@@ -112,12 +117,12 @@ router.post('/', auth, async (req: any, res: Response) => {
 });
 
 // PUT /api/requisitions/:id - Modifier une réquisition
-router.put('/:id', auth, async (req: any, res: Response) => {
+router.put('/:id', async (req: any, res: Response) => {
     try {
         const { id } = req.params;
         const updates = req.body;
 
-        const requisition = await Requisition.findById(id);
+        const requisition = await Requisition.findOne({ _id: id, organizationId: req.organizationId });
 
         if (!requisition) {
             return res.status(404).json({
@@ -163,12 +168,12 @@ router.put('/:id', auth, async (req: any, res: Response) => {
 });
 
 // POST /api/requisitions/:id/transition - Changer le statut
-router.post('/:id/transition', auth, async (req: any, res: Response) => {
+router.post('/:id/transition', async (req: any, res: Response) => {
     try {
         const { id } = req.params;
         const { action, comment } = req.body; // action: 'submit', 'approve', 'reject', etc.
 
-        const requisition = await Requisition.findById(id);
+        const requisition = await Requisition.findOne({ _id: id, organizationId: req.organizationId });
 
         if (!requisition) {
             return res.status(404).json({
@@ -240,10 +245,10 @@ router.post('/:id/transition', auth, async (req: any, res: Response) => {
 });
 
 // DELETE /api/requisitions/:id - Supprimer une réquisition
-router.delete('/:id', auth, async (req: any, res: Response) => {
+router.delete('/:id', async (req: any, res: Response) => {
     try {
         const { id } = req.params;
-        const requisition = await Requisition.findById(id);
+        const requisition = await Requisition.findOne({ _id: id, organizationId: req.organizationId });
 
         if (!requisition) {
             return res.status(404).json({

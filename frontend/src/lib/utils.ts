@@ -272,3 +272,43 @@ export function formatTime(date: Date | string): string {
         minute: '2-digit',
     }).format(d);
 }
+
+// --- Dashboard V2 Utilities ---
+
+export function formatLatency(ms: number): string {
+    if (ms >= 1000) {
+        return `${(ms / 1000).toFixed(2)}s`
+    }
+    return `${ms}ms`
+}
+
+export function formatPercentage(value: number, decimals: number = 1): string {
+    return `${value.toFixed(decimals)}%`
+}
+
+export function getTailwindStatusColor(status: string): string {
+    const statusMap: Record<string, string> = {
+        healthy: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
+        warning: 'text-amber-500 bg-amber-500/10 border-amber-500/20',
+        critical: 'text-red-500 bg-red-500/10 border-red-500/20',
+        offline: 'text-slate-500 bg-slate-500/10 border-slate-500/20',
+        degraded: 'text-orange-500 bg-orange-500/10 border-orange-500/20',
+    }
+    return statusMap[status.toLowerCase()] || statusMap.offline
+}
+
+export function getSeverityColor(severity: string): string {
+    const severityMap: Record<string, string> = {
+        critical: 'bg-red-500/10 text-red-500 border-red-500/20',
+        high: 'bg-orange-500/10 text-orange-500 border-orange-500/20',
+        medium: 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20',
+        low: 'bg-green-500/10 text-green-500 border-green-500/20',
+    }
+    return severityMap[severity.toLowerCase()] || ''
+}
+
+export function generateMockTimeSeries(points: number = 24, baseValue: number = 100, variance: number = 20): number[] {
+    return Array.from({ length: points }, () =>
+        baseValue + (Math.random() - 0.5) * variance
+    )
+}

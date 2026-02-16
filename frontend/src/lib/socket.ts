@@ -12,7 +12,7 @@ class SocketService {
             });
 
             // Optionnel : authentification
-            // this.socket.emit('authenticate', localStorage.getItem('token'));
+            // this.socket.emit('authenticate', localStorage.getItem('auth_token'));
         }
         return this.socket;
     }
@@ -29,4 +29,5 @@ class SocketService {
     }
 }
 
-export default new SocketService();
+const socketService = new SocketService();
+export default socketService;

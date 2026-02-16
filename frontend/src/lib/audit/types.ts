@@ -1,13 +1,17 @@
-export type LogEntry = {
-    id: string;
-    user: {
+export interface LogEntry {
+    _id: string;
+    action: string;
+    userId: {
+        _id: string;
         name: string;
-        avatar?: string | null;
-        roleId: string;
+        email: string;
+        role: string;
+        avatar?: string;
     };
-    action: "CREATED" | "STATUS CHANGE" | "DELETED" | "MODIFIED";
-    target: string;
-    details: string;
+    targetId?: string;
+    targetType?: string;
+    details?: any;
+    ipAddress?: string;
     timestamp: string;
-    severity?: "critical" | "normal";
-};
+    severity?: "critical" | "normal"; // Computed on frontend or added to backend later
+}

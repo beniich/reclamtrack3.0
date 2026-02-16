@@ -92,13 +92,28 @@ export default function RosterPage() {
                                                 </div>
                                             </div>
                                         </td>
-                                        {[...Array(7)].map((_, i) => (
-                                            <td key={i} className="p-2 border-r border-slate-100 dark:border-slate-800">
-                                                <div className="bg-slate-100/50 dark:bg-slate-800/20 border border-slate-200 dark:border-slate-700 rounded-lg p-2 text-center min-h-[40px]">
-                                                    <span className="text-xs text-slate-500">-</span>
-                                                </div>
-                                            </td>
-                                        ))}
+                                        {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day, i) => {
+                                            // Find shift for this member
+                                            const shift = roster?.shifts?.find((s: any) =>
+                                                (s.staffId._id === member._id) || (s.staffId === member._id)
+                                            );
+                                            const dayShift = shift?.days?.[day];
+                                            const isOff = !dayShift || dayShift.toLowerCase() === 'off';
+
+                                            return (
+                                                <td key={day} className="p-2 border-r border-slate-100 dark:border-slate-800">
+                                                    <div className={`
+                                                        border rounded-lg p-2 text-center min-h-[40px] text-xs font-medium flex items-center justify-center
+                                                        ${isOff
+                                                            ? 'bg-slate-50 dark:bg-slate-800/20 border-slate-100 dark:border-slate-800 text-slate-400'
+                                                            : 'bg-blue-50 dark:bg-blue-900/20 border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-300'
+                                                        }
+                                                    `}>
+                                                        {isOff ? 'OFF' : dayShift}
+                                                    </div>
+                                                </td>
+                                            );
+                                        })}
                                     </tr>
                                 ))
                             ) : (

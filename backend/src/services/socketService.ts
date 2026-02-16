@@ -2,6 +2,15 @@ import { Server as SocketIOServer } from 'socket.io';
 import { Server } from 'http';
 import { logger } from '../utils/logger.js';
 
+export interface NotificationPayload {
+  type: 'complaint_assigned' | 'status_update' | 'message' | 'alert';
+  title: string;
+  message: string;
+  data?: any;
+  priority?: 'low' | 'medium' | 'high' | 'urgent';
+  timestamp: Date;
+}
+
 interface NotificationData {
   type: 'info' | 'success' | 'warning' | 'error';
   title: string;
@@ -207,6 +216,81 @@ class NotificationService {
 
   getIO() {
     return this.io;
+  }
+
+  /**
+   * Notify team about new complaint assignment
+   */
+  async notifyComplaintAssigned(teamId: string, complaint: any) {
+    const notification = {
+      type: 'complaint_assigned',
+      title: 'Nouvelle Réclamation Assignée',
+      message: `Une réclamation "${complaint.title}" a été assignée à votre équipe`,
+      data: {
+        complaintId: complaint._id,
+        category: complaint.category,
+        priority: complaint.priority,
+        address: complaint.address
+      },
+      priority: complaint.priority,
+      timestamp: new Date()
+    };
+
+    // Assuming team rooms are formatted as 'team:ID'
+    if (this.io) {
+      this.io.to(`team:${teamId}`).emit('notification', notification);
+      logger.info(`📧 Notification sent to team ${teamId}: ${notification.title}`);
+    }
+  }
+
+  /**
+   * Notify about complaint status change
+   */
+  async notifyStatusChange(complaintId: string, oldStatus: string, newStatus: string, userIds: string[]) {
+    const notification = {
+      type: 'status_update',
+      title: 'Statut de Réclamation Mis à Jour',
+      message: `Le statut de la réclamation est passé de "${oldStatus}" à "${newStatus}"`,
+      data: {
+        complaintId,
+        oldStatus,
+        newStatus
+      },
+      timestamp: new Date()
+    };
+
+    if (this.io) {
+      userIds.forEach(userId => {
+        // Assuming user rooms are formatted as 'user:ID' or just 'ID'
+        // The existing code has socket.join(room), so we need to ensure users join 'user:ID'
+        this.io?.to(`user:${userId}`).emit('notification', notification);
+      });
+      logger.info(`📧 Status change notification sent to ${userIds.length} users`);
+    }
+  }
+
+  /**
+   * Send urgent alert
+   */
+  async sendUrgentAlert(message: string, recipientIds?: string[]) {
+    const notification = {
+      type: 'alert',
+      title: '⚠️ Alerte Urgente',
+      message,
+      priority: 'urgent',
+      timestamp: new Date()
+    };
+
+    if (this.io) {
+      if (recipientIds && recipientIds.length > 0) {
+        recipientIds.forEach(userId => {
+          this.io?.to(`user:${userId}`).emit('notification', notification);
+        });
+      } else {
+        this.io.emit('notification', notification);
+      }
+      logger.info(`📢 Urgent alert sent: ${message}`);
+    }
   }
 }
 

@@ -1,0 +1,157 @@
+import { Request, Response, NextFunction } from 'express';
+import { complaintService } from '../services/complaintService.js';
+import AuditLog from '../models/AuditLog.js';
+
+/**
+ * Standard API response format
+ */
+const formatResponse = (data: any, message?: string) => ({
+    success: true,
+    data,
+    message
+});
+
+const formatError = (message: string, statusCode: number = 400) => ({
+    success: false,
+    error: message,
+    statusCode
+});
+
+export class ComplaintController {
+    /**
+     * GET /api/complaints
+     * Get all complaints with optional filters
+     */
+    async getAll(req: Request, res: Response, next: NextFunction) {
+        try {
+            const filters = {
+                status: req.query.status as string,
+                priority: req.query.priority as string,
+                category: req.query.category as string,
+                assignedTeamId: req.query.teamId as string
+            };
+
+            const complaints = await complaintService.getAllComplaints(filters, (req as any).organizationId);
+            res.json(formatResponse(complaints));
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    /**
+     * GET /api/complaints/:id
+     * Get a single complaint by ID
+     */
+    async getById(req: Request, res: Response, next: NextFunction) {
+        try {
+            const complaint = await complaintService.getComplaintById(req.params.id, (req as any).organizationId);
+            res.json(formatResponse(complaint));
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    /**
+     * POST /api/complaints
+     * Create a new complaint
+     */
+    async create(req: Request, res: Response, next: NextFunction) {
+        try {
+            const userId = (req as any).user?._id;
+            const organizationId = (req as any).organizationId;
+            const complaintData = {
+                ...req.body,
+                userId,
+                organizationId
+            };
+            const complaint = await complaintService.createComplaint(complaintData);
+
+            // Create Method
+            // Audit Log
+            if (userId) {
+                await AuditLog.create({
+                    action: 'CREATE_TICKET',
+                    userId: userId,
+                    targetId: (complaint as any)._id,
+                    targetType: 'Complaint',
+                    details: { title: req.body.title, category: req.body.category },
+                    ipAddress: req.ip
+                });
+            }
+
+            // ... inside create method
+            // Kafka Event
+            await eventBus.publish('complaint-events', 'COMPLAINT_CREATED', {
+                complaintId: (complaint as any)._id,
+                userId: userId,
+                title: req.body.title, // Add Title
+                category: req.body.category,
+                priority: req.body.priority,
+                status: 'nouvelle',
+                timestamp: new Date()
+            });
+
+            res.status(201).json(formatResponse(complaint, 'Complaint created successfully'));
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    /**
+     * PUT /api/complaints/:id
+     * Update a complaint
+     */
+    async update(req: Request, res: Response, next: NextFunction) {
+        try {
+            const complaint = await complaintService.updateComplaint(
+                req.params.id,
+                req.body,
+                (req as any).organizationId
+            );
+
+            // Kafka Event (only if status changed or just general update?)
+            // We publish generic update, consumer filters if needed.
+            // Or specifically status.
+            if (req.body.status) {
+                await eventBus.publish('complaint-events', 'COMPLAINT_STATUS_UPDATED', {
+                    complaintId: req.params.id,
+                    status: req.body.status,
+                    updatedBy: (req as any).user?._id,
+                    timestamp: new Date()
+                });
+            }
+
+            res.json(formatResponse(complaint, 'Complaint updated successfully'));
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    /**
+     * DELETE /api/complaints/:id
+     * Delete a complaint
+     */
+    async delete(req: Request, res: Response, next: NextFunction) {
+        try {
+            await complaintService.deleteComplaint(req.params.id, (req as any).organizationId);
+            res.json(formatResponse(null, 'Complaint deleted successfully'));
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    /**
+     * GET /api/complaints/stats
+     * Get complaint statistics
+     */
+    async getStats(req: Request, res: Response, next: NextFunction) {
+        try {
+            const stats = await complaintService.getComplaintStats((req as any).organizationId);
+            res.json(formatResponse(stats));
+        } catch (error) {
+            next(error);
+        }
+    }
+}
+
+export const complaintController = new ComplaintController();

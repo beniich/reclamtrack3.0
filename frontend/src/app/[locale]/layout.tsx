@@ -8,6 +8,7 @@ import { NotificationToast } from '@/components/NotificationToast';
 import { QueryProvider } from '@/providers/QueryProvider';
 import DebugWidget from '@/components/DebugWidget';
 import { MiniMcLarenLoader } from '@/components/mini-mclarenloader';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -40,12 +41,14 @@ export default async function LocaleLayout({
             </head>
             <body className={`${inter.variable} font-sans antialiased text-slate-900 dark:text-slate-100 bg-white dark:bg-[#0a0a0f]`}>
                 <NextIntlClientProvider messages={messages} locale={locale}>
-                    <QueryProvider>
-                        {children}
-                        <NotificationToast />
-                        <DebugWidget />
-                        <MiniMcLarenLoader />
-                    </QueryProvider>
+                    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''}>
+                        <QueryProvider>
+                            {children}
+                            <NotificationToast />
+                            <DebugWidget />
+                            <MiniMcLarenLoader />
+                        </QueryProvider>
+                    </GoogleOAuthProvider>
                 </NextIntlClientProvider>
             </body>
         </html>

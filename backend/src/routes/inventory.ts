@@ -4,6 +4,7 @@ import { body, param } from 'express-validator';
 import { validator } from '../middleware/validator.js';
 import { Requisition, RequisitionStatus } from '../models/Requisition.js';
 import { io } from '../services/socketService.js';
+import { eventBus } from '../services/eventBus.js';
 
 const router = Router();
 
@@ -128,7 +129,7 @@ router.post(
     validator,
     async (req: any, res, next) => {
         try {
-            const requisition = await Requisition.create({
+            await Requisition.create({
                 ...req.body,
                 requesterId: req.user.id,
                 status: RequisitionStatus.DRAFT,
@@ -138,6 +139,13 @@ router.post(
                     userId: req.user.id,
                     timestamp: new Date()
                 }]
+            });
+
+            // Kafka Event
+            await eventBus.publish('inventory-events', 'REQUISITION_CREATED', {
+                requisitionId: (requisition as any)._id,
+                requesterId: req.user.id,
+                timestamp: new Date()
             });
 
             res.status(201).json(requisition);
@@ -182,12 +190,54 @@ router.patch(
                 io.emit('requisition-updated', requisition);
             }
 
+            // Kafka Event
+            await eventBus.publish('inventory-events', 'REQUISITION_STATUS_UPDATED', {
+                requisitionId: requisition._id,
+                status: status,
+                updatedBy: req.user.id,
+                timestamp: new Date()
+            });
+
             res.json(requisition);
         } catch (err) {
             next(err);
         }
     }
 );
+
+// --- Aliases for Frontend Compatibility ---
+
+// POST /api/inventory/requests -> POST /api/inventory/requisitions
+router.post('/requests', protect, (req, res, next) => {
+    req.url = '/requisitions';
+    router.handle(req, res, next);
+});
+
+// GET /api/inventory/requests -> GET /api/inventory/requisitions
+router.get('/requests', protect, (req, res, next) => {
+    req.url = '/requisitions';
+    router.handle(req, res, next);
+});
+
+// POST /api/inventory/requests/:id/approve
+router.post('/requests/:id/approve', protect, async (req, res, next) => {
+    req.body.status = RequisitionStatus.APPROVED;
+    req.body.comment = 'Approved via API';
+    // Manually call the patch handler logic or redirect
+    // For simplicity, we'll reuse the logic by modifying the request
+    req.url = `/requisitions/${req.params.id}/status`;
+    req.method = 'PATCH';
+    router.handle(req, res, next);
+});
+
+// POST /api/inventory/requests/:id/reject
+router.post('/requests/:id/reject', protect, async (req, res, next) => {
+    req.body.status = RequisitionStatus.REJECTED;
+    // comment should be in req.body from frontend
+    req.url = `/requisitions/${req.params.id}/status`;
+    req.method = 'PATCH';
+    router.handle(req, res, next);
+});
 
 export default router;
 

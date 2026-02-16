@@ -4,10 +4,12 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "test": "vitest run"
     },
     "devDependencies": {
-        "typescript": "^5.0.0"
+        "typescript": "^5.0.0",
+        "vitest": "^3.0.0"
     },
     "dependencies": {
         "zod": "^3.21.4"

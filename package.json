@@ -15,7 +15,7 @@
     "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
     "start": "npm run start --workspace=frontend & npm run start --workspace=backend",
     "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend",
-    "test": "npm run test --workspace=frontend && npm run test --workspace=backend"
+    "test": "npm run test --workspace=shared && npm run test --workspace=frontend && npm run test --workspace=backend"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

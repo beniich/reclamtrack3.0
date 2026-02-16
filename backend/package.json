@@ -8,7 +8,8 @@
         "build": "tsc",
         "start": "node dist/index.js",
         "lint": "eslint . --ext .ts,.js",
-        "seed": "tsx src/scripts/seed.ts"
+        "seed": "tsx src/scripts/seed.ts",
+        "test": "vitest run"
     },
     "dependencies": {
         "@reclamtrack/shared": "file:../shared",
@@ -48,6 +49,7 @@
         "nodemon": "^3.1.2",
         "ts-node": "^10.9.2",
         "tsx": "^4.21.0",
-        "typescript": "^5.7.3"
+        "typescript": "^5.7.3",
+        "vitest": "^3.0.0"
     }
 }

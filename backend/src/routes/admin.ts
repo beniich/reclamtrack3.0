@@ -1,6 +1,8 @@
 import { Router, Request, Response } from 'express';
 import { protect as auth } from '../middleware/auth.js';
 import { logger } from '../utils/logger.js';
+import { getSecurityMetrics } from '../services/securityService.js';
+import { runSecurityAudit } from '../services/securityAuditService.js';
 
 const router = Router();
 
@@ -63,6 +65,26 @@ router.get('/audit', auth, adminOnly, (req: Request, res: Response) => {
             { id: 3, action: 'DELETE_COMPLAINT', user: 'chef.nord@reclamtrack.com', target: 'C-2025-001', time: '2025-02-09 11:30' }
         ]
     });
+});
+
+// GET /api/admin/security/metrics - Metrics de sécurité réelles
+router.get('/security/metrics', auth, adminOnly, async (req: Request, res: Response) => {
+    try {
+        const metrics = await getSecurityMetrics();
+        res.json({ success: true, data: metrics });
+    } catch (error: any) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
+// GET /api/admin/security/audit - Audit de sécurité complet
+router.get('/security/audit', auth, adminOnly, async (req: Request, res: Response) => {
+    try {
+        const audit = await runSecurityAudit();
+        res.json({ success: true, data: audit });
+    } catch (error: any) {
+        res.status(500).json({ success: false, message: error.message });
+    }
 });
 
 export default router;

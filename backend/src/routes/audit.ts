@@ -10,6 +10,17 @@ router.get('/', auth, async (req: Request, res: Response) => {
     try {
         const { limit = '50', page = '1', action, userId } = req.query;
 
+        if ((global as any).IS_DEMO_MODE) {
+            return res.json({
+                data: [
+                    { action: 'LOGIN', user: 'admin@reclamtrack.com', targetType: 'Session', timestamp: new Date() },
+                    { action: 'SECURITY_AUDIT', user: 'system', targetType: 'System', timestamp: new Date(Date.now() - 3600000) },
+                    { action: 'WAF_BLOCK', user: 'Firewall', targetType: 'Network', timestamp: new Date(Date.now() - 7200000) }
+                ],
+                pagination: { total: 3, page: 1, pages: 1 }
+            });
+        }
+
         const query: any = {};
         if (action) query.action = action;
         if (userId) query.userId = userId;

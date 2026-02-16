@@ -1,6 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSecurityMetrics } from '@/hooks/useSecurityMetrics';
+import { adminApi } from '@/lib/api';
 import {
     ShieldCheck,
     LayoutDashboard,
@@ -24,6 +26,39 @@ import {
 } from 'lucide-react';
 
 export default function SecurityDashboard() {
+    const { metrics, loading } = useSecurityMetrics();
+    const [auditLogs, setAuditLogs] = useState<any[]>([]);
+    const [logsLoading, setLogsLoading] = useState(true);
+    const [securityChecks, setSecurityChecks] = useState<any[]>([]);
+    const [auditLoading, setAuditLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchLogs = async () => {
+            try {
+                const logs = await adminApi.getAuditLogs();
+                setAuditLogs(logs.data || logs);
+            } catch (err) {
+                console.error('Failed to fetch audit logs:', err);
+            } finally {
+                setLogsLoading(false);
+            }
+        };
+
+        const fetchAudit = async () => {
+            try {
+                const audit = await adminApi.getSecurityAudit();
+                setSecurityChecks(audit.data || audit);
+            } catch (err) {
+                console.error('Failed to fetch security audit:', err);
+            } finally {
+                setAuditLoading(false);
+            }
+        };
+
+        fetchLogs();
+        fetchAudit();
+    }, []);
+
     return (
         <div className="flex h-[calc(100vh-4rem)] overflow-hidden bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100">
             {/* Sidebar */}
@@ -122,8 +157,8 @@ export default function SecurityDashboard() {
                                     +5.2% <TrendingUp className="size-3.5" />
                                 </span>
                             </div>
-                            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Active Sessions</p>
-                            <p className="text-3xl font-bold mt-1">12,842</p>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Security Score</p>
+                            <p className="text-3xl font-bold mt-1">{loading ? '...' : metrics?.securityScore}%</p>
                         </div>
 
                         <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -132,37 +167,37 @@ export default function SecurityDashboard() {
                                     <CheckCircle className="size-5" />
                                 </div>
                                 <span className="text-emerald-500 text-sm font-medium flex items-center gap-1">
-                                    +0.1% <TrendingUp className="size-3.5" />
+                                    STABLE <TrendingUp className="size-3.5" />
                                 </span>
                             </div>
-                            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Success Rate</p>
-                            <p className="text-3xl font-bold mt-1">99.98%</p>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Status</p>
+                            <p className="text-3xl font-bold mt-1 uppercase text-emerald-500">{loading ? '...' : metrics?.status}</p>
                         </div>
 
                         <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
                             <div className="flex justify-between items-start mb-4">
                                 <div className="size-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
-                                    <Clock className="size-5" />
+                                    <Share2 className="size-5" />
                                 </div>
-                                <span className="text-rose-500 text-sm font-medium flex items-center gap-1">
-                                    -12% <TrendingDown className="size-3.5" />
+                                <span className="text-amber-500 text-sm font-medium flex items-center gap-1">
+                                    LIVE
                                 </span>
                             </div>
-                            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Avg Latency</p>
-                            <p className="text-3xl font-bold mt-1">42<span className="text-lg font-normal text-slate-400 ml-1">ms</span></p>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Blocked IPs</p>
+                            <p className="text-3xl font-bold mt-1">{loading ? '...' : metrics?.blockedIPs}</p>
                         </div>
 
                         <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
                             <div className="flex justify-between items-start mb-4">
                                 <div className="size-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center">
-                                    <AlertCircle className="size-5" />
+                                    <ShieldCheck className="size-5" />
                                 </div>
                                 <span className="text-emerald-500 text-sm font-medium flex items-center gap-1">
-                                    -4% <TrendingDown className="size-3.5" />
+                                    ACTIVE
                                 </span>
                             </div>
-                            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Error Count (5m)</p>
-                            <p className="text-3xl font-bold mt-1">14</p>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">WAF Triggers</p>
+                            <p className="text-3xl font-bold mt-1">{loading ? '...' : metrics?.wafTriggers}</p>
                         </div>
                     </div>
 
@@ -226,6 +261,48 @@ export default function SecurityDashboard() {
                         </div>
                     </div>
 
+                    {/* Security Audit Row */}
+                    <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div className="flex justify-between items-center mb-6">
+                            <div>
+                                <h3 className="font-semibold text-base">Sentinel Security Audit</h3>
+                                <p className="text-xs text-slate-500">Continuous vulnerability and configuration scanning</p>
+                            </div>
+                            <span className="px-3 py-1 rounded-full bg-blue-600/10 text-blue-600 text-xs font-bold border border-blue-600/20">
+                                {auditLoading ? 'Running...' : `${securityChecks.filter(c => c.status === 'pass').length}/${securityChecks.length} Passed`}
+                            </span>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {auditLoading ? (
+                                Array(6).fill(0).map((_, i) => (
+                                    <div key={i} className="h-24 bg-slate-50 dark:bg-slate-950/50 animate-pulse rounded-xl"></div>
+                                ))
+                            ) : (
+                                securityChecks.map((check) => (
+                                    <div key={check.id} className="p-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/30 flex gap-4">
+                                        <div className={`size-10 shrink-0 rounded-full flex items-center justify-center ${
+                                            check.status === 'pass' ? 'bg-emerald-500/10 text-emerald-500' :
+                                            check.status === 'warn' ? 'bg-amber-500/10 text-amber-500' :
+                                            'bg-rose-500/10 text-rose-500'
+                                        }`}>
+                                            {check.status === 'pass' ? <CheckCircle className="size-5" /> :
+                                             check.status === 'warn' ? <AlertCircle className="size-5" /> :
+                                             <ShieldCheck className="size-5" />}
+                                        </div>
+                                        <div className="min-w-0">
+                                            <p className="font-semibold text-sm truncate">{check.name}</p>
+                                            <p className="text-xs text-slate-500 line-clamp-2">{check.description}</p>
+                                            {check.recommendation && (
+                                                <p className="text-[10px] text-blue-600 font-medium mt-1 truncate">💡 {check.recommendation}</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+
                     {/* Status Codes & Table Row */}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -236,8 +313,8 @@ export default function SecurityDashboard() {
                                     <div className="absolute inset-[-12px] rounded-full border-[12px] border-blue-600 border-r-transparent border-b-transparent rotate-12"></div>
                                     <div className="absolute inset-[-12px] rounded-full border-[12px] border-amber-400 border-l-transparent border-t-transparent border-r-transparent rotate-45"></div>
                                     <div className="flex flex-col items-center">
-                                        <span className="text-2xl font-bold">10.4k</span>
-                                        <span className="text-[10px] text-slate-500 uppercase tracking-wider">Total req</span>
+                                        <span className="text-2xl font-bold">{loading ? '...' : metrics?.totalUsers}</span>
+                                        <span className="text-[10px] text-slate-500 uppercase tracking-wider">Total Users</span>
                                     </div>
                                 </div>
                             </div>
@@ -320,41 +397,19 @@ export default function SecurityDashboard() {
                             </div>
                         </div>
                         <div className="flex-1 bg-[#0b101a] p-4 font-mono text-xs overflow-y-auto custom-scrollbar space-y-1">
-                            <div className="p-1 border-l-2 border-emerald-500 flex gap-4 hover:bg-blue-600/10 transition-colors">
-                                <span className="text-slate-500 min-w-[140px]">2023-10-24 14:02:11</span>
-                                <span className="text-emerald-400 font-bold">[INFO]</span>
-                                <span className="text-slate-300">Successfully issued JWT for user <span className="text-blue-500">u_99212</span> (exp: 3600s)</span>
-                            </div>
-                            <div className="p-1 border-l-2 border-emerald-500 flex gap-4 hover:bg-blue-600/10 transition-colors">
-                                <span className="text-slate-500 min-w-[140px]">2023-10-24 14:02:13</span>
-                                <span className="text-emerald-400 font-bold">[INFO]</span>
-                                <span className="text-slate-300">Token introspection request from <span className="text-blue-500">payment-service</span></span>
-                            </div>
-                            <div className="p-1 border-l-2 border-rose-500 flex gap-4 bg-rose-500/5 hover:bg-rose-500/10 transition-colors">
-                                <span className="text-slate-500 min-w-[140px]">2023-10-24 14:02:15</span>
-                                <span className="text-rose-500 font-bold">[ERROR]</span>
-                                <span className="text-slate-300">Redis connection timeout on cluster-node-2. Retrying in 500ms...</span>
-                            </div>
-                            <div className="p-1 border-l-2 border-amber-500 flex gap-4 hover:bg-amber-500/10 transition-colors">
-                                <span className="text-slate-500 min-w-[140px]">2023-10-24 14:02:18</span>
-                                <span className="text-amber-500 font-bold">[WARN]</span>
-                                <span className="text-slate-300">Rate limit approaching for IP <span className="text-amber-400">192.168.1.44</span> (450/500 req/min)</span>
-                            </div>
-                            <div className="p-1 border-l-2 border-emerald-500 flex gap-4 hover:bg-blue-600/10 transition-colors">
-                                <span className="text-slate-500 min-w-[140px]">2023-10-24 14:02:20</span>
-                                <span className="text-emerald-400 font-bold">[INFO]</span>
-                                <span className="text-slate-300">MFA verification successful for session <span className="text-blue-500">sess_abc123</span></span>
-                            </div>
-                            <div className="p-1 border-l-2 border-emerald-500 flex gap-4 hover:bg-blue-600/10 transition-colors">
-                                <span className="text-slate-500 min-w-[140px]">2023-10-24 14:02:22</span>
-                                <span className="text-emerald-400 font-bold">[INFO]</span>
-                                <span className="text-slate-300">Auth audit log archived to S3 bucket <span className="text-blue-500">auth-logs-archive</span></span>
-                            </div>
-                            <div className="p-1 border-l-2 border-emerald-500 flex gap-4 hover:bg-blue-600/10 transition-colors">
-                                <span className="text-slate-500 min-w-[140px]">2023-10-24 14:02:24</span>
-                                <span className="text-emerald-400 font-bold">[INFO]</span>
-                                <span className="text-slate-300">Health check passed. CPU: 12% Memory: 452MB</span>
-                            </div>
+                            {logsLoading ? (
+                                <p className="text-slate-500 italic">Loading live audit logs...</p>
+                            ) : auditLogs.length > 0 ? (
+                                auditLogs.map((log: any, idx: number) => (
+                                    <div key={idx} className={`p-1 border-l-2 ${log.action === 'ERROR' ? 'border-rose-500 bg-rose-500/5' : log.action === 'WARN' ? 'border-amber-500' : 'border-emerald-500'} flex gap-4 hover:bg-blue-600/10 transition-colors`}>
+                                        <span className="text-slate-500 min-w-[140px]">{new Date(log.timestamp || log.time).toLocaleString()}</span>
+                                        <span className={`${log.action === 'ERROR' ? 'text-rose-500' : log.action === 'WARN' ? 'text-amber-500' : 'text-emerald-400'} font-bold`}>[{log.action}]</span>
+                                        <span className="text-slate-300">User <span className="text-blue-500">{log.userId || log.user}</span> executed <span className="text-blue-400">{log.action}</span> on {log.targetType || 'system'}</span>
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="text-slate-500 italic">No recent audit logs available.</p>
+                            )}
                         </div>
                     </div>
                 </div>

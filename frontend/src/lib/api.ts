@@ -261,8 +261,10 @@ export const adminApi = {
     createUser: (data: any) => apiClient.post('/admin/users', data),
     updateUser: (id: string, data: any) => apiClient.put(`/admin/users/${id}`, data),
     deleteUser: (id: string) => apiClient.delete(`/admin/users/${id}`),
-    getAuditLogs: (params?: any) => apiClient.get('/admin/audit-logs', params),
+    getAuditLogs: (params?: any) => apiClient.get('/audit-logs', params),
     getSystemStatus: () => apiClient.get('/admin/system/status'),
+    getSecurityMetrics: () => apiClient.get('/admin/security/metrics'),
+    getSecurityAudit: () => apiClient.get('/admin/security/audit'),
 };
 
 export const staffApi = {

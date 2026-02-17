@@ -772,16 +772,16 @@ npm run generate:component ComponentName
 | Catégorie | Total | Migrées | En cours | Restantes | % Complétion |
 |-----------|-------|---------|----------|-----------|--------------|
 | Auth & Landing | 2 | 2 | 0 | 0 | 100% |
-| Dashboards | 4 | 3 | 1 | 0 | 100% |
-| Réclamations | 5 | 4 | 0 | 1 | 80% |
-| Équipes | 6 | 4 | 1 | 1 | 66% |
+| Dashboards | 4 | 4 | 0 | 0 | 100% |
+| Réclamations | 5 | 5 | 0 | 0 | 100% |
+| Équipes | 6 | 6 | 0 | 0 | 100% |
 | Cartographie | 2 | 2 | 0 | 0 | 100% |
-| Inventaire | 5 | 4 | 1 | 0 | 100% |
-| Documents | 3 | 0 | 1 | 2 | 0% |
-| Administration | 5 | 4 | 0 | 1 | 80% |
-| Intégrations | 3 | 2 | 1 | 0 | 100% |
-| E-commerce | 4 | 0 | 0 | 4 | 0% |
-| **TOTAL** | **39** | **25** | **5** | **9** | **64%** |
+| Inventaire | 5 | 5 | 0 | 0 | 100% |
+| Documents | 3 | 3 | 0 | 0 | 100% |
+| Administration | 5 | 5 | 0 | 0 | 100% |
+| Intégrations | 3 | 3 | 0 | 0 | 100% |
+| E-commerce | 4 | 4 | 0 | 0 | 100% |
+| **TOTAL** | **39** | **39** | **0** | **0** | **100%** |
 
 ---
 

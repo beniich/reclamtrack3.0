@@ -97,14 +97,20 @@ router.post(
             }
 
             if (!user) {
+                logger.warn(`Login failed: User not found for email: ${email}`);
                 return res.status(401).json({ message: 'Identifiants invalides' });
             }
 
-            if (!(global as any).IS_DEMO_MODE || (user as any).comparePassword) {
-                const matched = await (user as any).comparePassword(password);
-                if (!matched) {
-                    return res.status(401).json({ message: 'Identifiants invalides' });
-                }
+            let matched = false;
+            if ((global as any).IS_DEMO_MODE && user.email === process.env.DEMO_ADMIN_EMAIL) {
+                matched = password === process.env.DEMO_ADMIN_PASSWORD;
+            } else if ((user as any).comparePassword) {
+                matched = await (user as any).comparePassword(password);
+            }
+
+            if (!matched) {
+                logger.warn(`Login failed: Password mismatch for user: ${email}`);
+                return res.status(401).json({ message: 'Identifiants invalides' });
             }
 
             const token = jwt.sign(

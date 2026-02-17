@@ -24,7 +24,7 @@ router.post(
     async (req: any, res: Response) => {
         try {
             const { name, slug } = req.body;
-            const userId = req.user._id;
+            const userId = req.user?._id || req.user?.id;
 
             // Check if slug already exists
             const existing = await Organization.findOne({ slug });
@@ -82,7 +82,7 @@ router.post(
  */
 router.get('/', protect, async (req: any, res: Response) => {
     try {
-        const userId = req.user._id;
+        const userId = req.user?._id || req.user?.id;
 
         // Find all memberships for this user
         const memberships = await Membership.find({
@@ -111,7 +111,7 @@ router.get('/', protect, async (req: any, res: Response) => {
  */
 router.get('/:id', protect, async (req: any, res: Response) => {
     try {
-        const userId = req.user._id;
+        const userId = req.user?._id || req.user?.id;
         const { id } = req.params;
 
         // Check membership
@@ -150,7 +150,7 @@ router.get('/:id', protect, async (req: any, res: Response) => {
  */
 router.patch('/:id', protect, async (req: any, res: Response) => {
     try {
-        const userId = req.user._id;
+        const userId = req.user?._id || req.user?.id;
         const { id } = req.params;
 
         // Check admin permission

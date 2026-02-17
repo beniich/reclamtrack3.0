@@ -165,6 +165,80 @@ export class ComplaintService {
             }, {} as Record<string, number>)
         };
     }
+
+    /**
+     * Approve a complaint (change status to 'en cours')
+     */
+    async approveComplaint(id: string, organizationId: string, approvedBy: string) {
+        if (!Types.ObjectId.isValid(id)) {
+            throw new Error('Invalid complaint ID');
+        }
+
+        const complaint = await Complaint.findOne({ _id: id, organizationId });
+
+        if (!complaint) {
+            throw new Error('Complaint not found');
+        }
+
+        if (complaint.status !== 'nouvelle') {
+            throw new Error('Only new complaints can be approved');
+        }
+
+        complaint.status = 'en cours';
+        await complaint.save();
+
+        // Populate for return
+        await complaint.populate('assignedTeamId', 'name specialization');
+        await complaint.populate('technicianId', 'firstName lastName email');
+
+        // Send notification if assigned
+        if (complaint.assignedTeamId) {
+            try {
+                const teamId = complaint.assignedTeamId._id
+                    ? complaint.assignedTeamId._id.toString()
+                    : complaint.assignedTeamId.toString();
+
+                await notificationService.notifyComplaintAssigned(teamId, complaint);
+            } catch (error) {
+                console.error('Failed to send notification:', error);
+            }
+        }
+
+        return complaint;
+    }
+
+    /**
+     * Reject a complaint
+     */
+    async rejectComplaint(id: string, organizationId: string, rejectionReason: string, rejectedBy: string) {
+        if (!Types.ObjectId.isValid(id)) {
+            throw new Error('Invalid complaint ID');
+        }
+
+        if (!rejectionReason || rejectionReason.trim().length === 0) {
+            throw new Error('Rejection reason is required');
+        }
+
+        const complaint = await Complaint.findOne({ _id: id, organizationId });
+
+        if (!complaint) {
+            throw new Error('Complaint not found');
+        }
+
+        if (complaint.status !== 'nouvelle') {
+            throw new Error('Only new complaints can be rejected');
+        }
+
+        complaint.status = 'rejetée';
+        complaint.rejectionReason = rejectionReason;
+        await complaint.save();
+
+        // Populate for return
+        await complaint.populate('assignedTeamId', 'name specialization');
+        await complaint.populate('technicianId', 'firstName lastName email');
+
+        return complaint;
+    }
 }
 
 export const complaintService = new ComplaintService();

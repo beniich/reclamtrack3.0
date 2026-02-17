@@ -10,6 +10,7 @@ import DebugWidget from '@/components/DebugWidget';
 import { MiniMcLarenLoader } from '@/components/mini-mclarenloader';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from '@/providers/AuthProvider';
+import { CallProvider } from '@/providers/CallProvider';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -45,10 +46,12 @@ export default async function LocaleLayout({
                     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''}>
                         <QueryProvider>
                             <AuthProvider>
-                                {children}
-                                <NotificationToast />
-                                <DebugWidget />
-                                <MiniMcLarenLoader />
+                                <CallProvider>
+                                    {children}
+                                    <NotificationToast />
+                                    <DebugWidget />
+                                    <MiniMcLarenLoader />
+                                </CallProvider>
                             </AuthProvider>
                         </QueryProvider>
                     </GoogleOAuthProvider>

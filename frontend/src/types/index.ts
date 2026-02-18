@@ -77,7 +77,9 @@ export interface ApiResponse<T = unknown> {
     success: boolean;
     data?: T;
     error?: string;
+    code?: string;
     message?: string;
+    timestamp?: string;
     meta?: {
         page?: number;
         limit?: number;

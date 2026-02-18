@@ -1,7 +1,7 @@
+import { authApi } from '@/lib/api';
+import { User } from '@/types';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { User } from '@/types';
-import { authApi } from '@/lib/api';
 
 interface AuthState {
     user: User | null;
@@ -47,6 +47,11 @@ export const useAuthStore = create<AuthState>()(
                     const response = await authApi.login({ email, password });
                     const { user, token } = response as any;
 
+                    // Ensure user is not null
+                    if (!user || !token) {
+                        throw new Error('Réponse invalide du serveur');
+                    }
+
                     set({ user, token, isLoading: false });
 
                     if (typeof window !== 'undefined' && token) {
@@ -54,9 +59,10 @@ export const useAuthStore = create<AuthState>()(
                         document.cookie = `reclamtrack-auth-storage=${token}; path=/; max-age=604800; SameSite=Lax`;
                     }
                 } catch (error: any) {
+                    const errorMsg = error.response?.data?.error || error.response?.data?.message || 'Identifiants invalides';
                     set({
                         isLoading: false,
-                        error: error.response?.data?.message || 'Identifiants invalides'
+                        error: errorMsg
                     });
                     throw error;
                 }
@@ -68,6 +74,10 @@ export const useAuthStore = create<AuthState>()(
                     const response = await authApi.googleLogin(credential);
                     const { user, token } = response as any;
 
+                    if (!user || !token) {
+                         throw new Error('Réponse invalide du serveur');
+                    }
+
                     set({ user, token, isLoading: false });
 
                     if (typeof window !== 'undefined' && token) {
@@ -75,9 +85,10 @@ export const useAuthStore = create<AuthState>()(
                         document.cookie = `reclamtrack-auth-storage=${token}; path=/; max-age=604800; SameSite=Lax`;
                     }
                 } catch (error: any) {
+                    const errorMsg = error.response?.data?.error || error.response?.data?.message || 'Échec de la connexion Google';
                     set({
                         isLoading: false,
-                        error: error.response?.data?.message || 'Échec de la connexion Google'
+                        error: errorMsg
                     });
                     throw error;
                 }

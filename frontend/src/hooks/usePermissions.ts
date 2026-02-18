@@ -1,13 +1,13 @@
 
 'use client';
 
-import { useSession } from 'next-auth/react';
+import { Permission, ROLE_PERMISSIONS, Role, isRoleHigherOrEqual } from '@/lib/rbac/permissions';
+import { useAuthStore } from '@/store/authStore';
 import { useMemo } from 'react';
-import { Role, Permission, ROLE_PERMISSIONS, isRoleHigherOrEqual } from '@/lib/rbac/permissions';
 
 export function usePermissions() {
-    const { data: session } = useSession();
-    const userRole = (session?.user as any)?.role as Role;
+    const { user } = useAuthStore();
+    const userRole = (user?.role?.toUpperCase() || '') as Role;
 
     const permissions = useMemo(() => {
         if (!userRole) return [];

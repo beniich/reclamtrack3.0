@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { api } from '@/lib/api';
 import {
     Activity,
     AlertTriangle, CheckCircle,
@@ -17,55 +18,68 @@ import {
     Shield,
     Terminal
 } from 'lucide-react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export default function SecurityCenterPage() {
   const [loading, setLoading] = useState(true);
-  const [passwordAudit, setPasswordAudit] = useState<any>(null);
+  const [passwordAudit, setPasswordAudit] = useState<any>(null); // TODO: Define proper types
   const [rdpSessions, setRdpSessions] = useState<any[]>([]);
   const [gpoPolicies, setGpoPolicies] = useState<any[]>([]);
+  const [complianceReport, setComplianceReport] = useState<any>(null);
+  const [firewallStatus, setFirewallStatus] = useState<any>(null);
+  const [firewallLogs, setFirewallLogs] = useState<any[]>([]);
+  const [vaultStats, setVaultStats] = useState<any>(null);
 
   useEffect(() => {
     loadSecurityData();
   }, []);
 
   const loadSecurityData = async () => {
+    setLoading(true);
     try {
-      // In real implementation, these would be actual API calls
-      setPasswordAudit({
-        totalUsers: 156,
-        bcryptHashed: 156,
-        weakPasswords: 0,
-        rotationNeeded: 12,
-        lastAudit: new Date().toISOString()
-      });
-
-      setRdpSessions([
-        { user: 'admin@domain.local', ip: '192.168.1.50', status: 'active', since: '2h ago' },
-        { user: 'tech@domain.local', ip: '10.0.0.15', status: 'disconnected', since: '5h ago' }
+      const [passwordRes, rdpRes, gpoRes, complianceRes, fwStatusRes, fwLogsRes, vaultRes] = await Promise.all([
+        api.get('/api/security/audit/passwords'),
+        api.get('/api/security/sessions/rdp'),
+        api.get('/api/security/gpo'),
+        api.get('/api/security/compliance'),
+        api.get('/api/security/pfsense/system').catch(() => ({ data: { success: false } })),
+        api.get('/api/security/pfsense/logs?limit=10').catch(() => ({ data: { success: false } })),
+        api.get('/api/security/secrets/stats').catch(() => ({ data: { success: false } })),
       ]);
 
-      setGpoPolicies([
-        { name: 'Default Domain Policy', status: 'applied', users: 250, lastUpdate: '2 days ago' },
-        { name: 'Security Baseline', status: 'applied', users: 250, lastUpdate: '1 week ago' },
-        { name: 'Desktop Restrictions', status: 'pending', users: 150, lastUpdate: '3 days ago' }
-      ]);
+      if (passwordRes.data.success) setPasswordAudit(passwordRes.data.data);
+      if (rdpRes.data.success) setRdpSessions(rdpRes.data.data);
+      if (gpoRes.data.success) setGpoPolicies(gpoRes.data.data);
+      if (complianceRes.data.success) setComplianceReport(complianceRes.data.data);
+      if (fwStatusRes.data.success) setFirewallStatus(fwStatusRes.data.data);
+      if (fwLogsRes.data.success) setFirewallLogs(fwLogsRes.data.data);
+      if (vaultRes.data.success) setVaultStats(vaultRes.data.data);
 
     } catch (error) {
       console.error('Failed to load security data:', error);
+      toast.error('Failed to load security metrics');
     } finally {
       setLoading(false);
     }
   };
 
   const runPowerShellScript = async (scriptName: string) => {
-    toast.loading(`Executing ${scriptName}...`);
-    // Simulated execution
-    setTimeout(() => {
-      toast.dismiss();
-      toast.success(`${scriptName} executed successfully`);
-    }, 2000);
+    const loadingToast = toast.loading(`Executing ${scriptName} via PowerShell...`);
+    try {
+      const res = await api.post('/api/security/powershell', { scriptName });
+      toast.dismiss(loadingToast);
+      if (res.data.success) {
+        toast.success(`${scriptName} executed successfully`);
+        loadSecurityData(); // Refresh data
+      } else {
+        toast.error(res.data.error || 'Execution failed');
+      }
+    } catch (error: any) {
+      toast.dismiss(loadingToast);
+      toast.error(error.response?.data?.error || 'PowerShell execution error');
+    }
   };
 
   if (loading) {
@@ -145,11 +159,12 @@ export default function SecurityCenterPage() {
       </div>
 
       <Tabs defaultValue="passwords" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="passwords">Password Audit</TabsTrigger>
           <TabsTrigger value="rdp">RDP Access</TabsTrigger>
           <TabsTrigger value="gpmc">GPMC / GPO</TabsTrigger>
           <TabsTrigger value="firewall">Firewall</TabsTrigger>
+          <TabsTrigger value="compliance">Compliance</TabsTrigger>
         </TabsList>
 
         {/* Password Audit Tab */}
@@ -366,18 +381,27 @@ export default function SecurityCenterPage() {
                   <CardContent className="pt-6">
                     <p className="text-sm text-gray-500">System Status</p>
                     <div className="flex items-center gap-2">
-                       <CheckCircle className="h-5 w-5 text-green-600" />
-                       <span className="font-bold text-lg text-green-700">Online</span>
+                       {firewallStatus?.status === 'online' ? (
+                         <>
+                           <CheckCircle className="h-5 w-5 text-green-600" />
+                           <span className="font-bold text-lg text-green-700">Online</span>
+                         </>
+                       ) : (
+                         <>
+                           <AlertTriangle className="h-5 w-5 text-red-600" />
+                           <span className="font-bold text-lg text-red-700">Offline / Disconnected</span>
+                         </>
+                       )}
                     </div>
-                    <p className="text-xs text-gray-400 mt-1">Uptime: 15 days</p>
+                    <p className="text-xs text-gray-400 mt-1">Uptime: {firewallStatus?.uptime || 'N/A'}</p>
                   </CardContent>
                 </Card>
                 <Card className="bg-gray-50 border-0">
                    <CardContent className="pt-6">
                     <p className="text-sm text-gray-500">Active States</p>
-                    <p className="font-bold text-2xl">1,254 / 50,000</p>
+                    <p className="font-bold text-2xl">{firewallStatus?.states || '0 / 0'}</p>
                     <div className="w-full bg-gray-200 rounded-full h-1.5 mt-2">
-                      <div className="bg-blue-600 h-1.5 rounded-full" style={{ width: '2.5%' }}></div>
+                      <div className="bg-blue-600 h-1.5 rounded-full" style={{ width: `${firewallStatus?.statesPercentage || 0}%` }}></div>
                     </div>
                   </CardContent>
                 </Card>
@@ -387,11 +411,11 @@ export default function SecurityCenterPage() {
                     <div className="flex justify-between items-end">
                       <div>
                         <p className="text-xs text-gray-400">IN</p>
-                        <p className="font-bold text-lg">45.2 Mbps</p>
+                        <p className="font-bold text-lg">{firewallStatus?.trafficIn || '0'} Mbps</p>
                       </div>
                       <div>
                         <p className="text-xs text-gray-400 text-right">OUT</p>
-                        <p className="font-bold text-lg">12.8 Mbps</p>
+                        <p className="font-bold text-lg">{firewallStatus?.trafficOut || '0'} Mbps</p>
                       </div>
                     </div>
                   </CardContent>
@@ -412,36 +436,148 @@ export default function SecurityCenterPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-b">
-                      <td className="px-4 py-2 text-gray-500">10:42:15</td>
-                      <td className="px-4 py-2"><span className="text-red-600 px-2 py-0.5 bg-red-50 rounded text-xs font-medium">BLOCK</span></td>
-                      <td className="px-4 py-2">WAN</td>
-                      <td className="px-4 py-2 font-mono text-xs">185.220.101.45:45632</td>
-                      <td className="px-4 py-2 font-mono text-xs">192.168.1.1:22</td>
-                      <td className="px-4 py-2">TCP</td>
-                    </tr>
-                    <tr className="border-b">
-                      <td className="px-4 py-2 text-gray-500">10:41:58</td>
-                      <td className="px-4 py-2"><span className="text-green-600 px-2 py-0.5 bg-green-50 rounded text-xs font-medium">PASS</span></td>
-                      <td className="px-4 py-2">LAN</td>
-                      <td className="px-4 py-2 font-mono text-xs">192.168.1.100:54321</td>
-                      <td className="px-4 py-2 font-mono text-xs">104.26.15.123:443</td>
-                      <td className="px-4 py-2">TCP</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-2 text-gray-500">10:41:12</td>
-                      <td className="px-4 py-2"><span className="text-red-600 px-2 py-0.5 bg-red-50 rounded text-xs font-medium">BLOCK</span></td>
-                      <td className="px-4 py-2">WAN</td>
-                      <td className="px-4 py-2 font-mono text-xs">91.189.88.65:12345</td>
-                      <td className="px-4 py-2 font-mono text-xs">192.168.1.1:53</td>
-                      <td className="px-4 py-2">UDP</td>
-                    </tr>
+                    {firewallLogs.length > 0 ? firewallLogs.map((log, i) => (
+                      <tr key={i} className="border-b">
+                        <td className="px-4 py-2 text-gray-500">{new Date(log.timestamp).toLocaleTimeString()}</td>
+                        <td className="px-4 py-2">
+                          <span className={`${log.action === 'PASS' ? 'text-green-600 bg-green-50' : 'text-red-600 bg-red-50'} px-2 py-0.5 rounded text-xs font-medium`}>
+                            {log.action}
+                          </span>
+                        </td>
+                        <td className="px-4 py-2">{log.interface}</td>
+                        <td className="px-4 py-2 font-mono text-xs">{log.src}</td>
+                        <td className="px-4 py-2 font-mono text-xs">{log.dst}</td>
+                        <td className="px-4 py-2">{log.proto}</td>
+                      </tr>
+                    )) : (
+                      <tr>
+                        <td colSpan={6} className="px-4 py-8 text-center text-gray-500 italic">No firewall logs available or disconnected</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
+
+        {/* Compliance Tab */}
+        <TabsContent value="compliance" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-blue-600" />
+                Compliance & Governance
+              </CardTitle>
+              <CardDescription>Automated security compliance tracking and reporting</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {complianceReport ? (
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {complianceReport.standards?.map((standard: any, idx: number) => (
+                      <div key={idx} className="border p-4 rounded-xl space-y-3">
+                        <div className="flex justify-between items-center">
+                          <p className="font-bold">{standard.name}</p>
+                          <span className={`text-xs px-2 py-0.5 rounded-full ${standard.score > 80 ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                            {standard.score}%
+                          </span>
+                        </div>
+                        <div className="w-full bg-gray-100 rounded-full h-2">
+                          <div
+                            className={`h-2 rounded-full ${standard.score > 80 ? 'bg-green-500' : 'bg-yellow-500'}`}
+                            style={{ width: `${standard.score}%` }}
+                          />
+                        </div>
+                        <p className="text-xs text-gray-500">{standard.description}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="border rounded-xl">
+                    <div className="px-4 py-3 bg-gray-50 border-b font-medium">Compliance Violations</div>
+                    <div className="p-0">
+                      {complianceReport.violations?.length > 0 ? (
+                        <table className="w-full text-sm">
+                          <thead className="text-gray-500 border-b">
+                            <tr>
+                              <th className="px-4 py-3 text-left">Control</th>
+                              <th className="px-4 py-3 text-left">Finding</th>
+                              <th className="px-4 py-3 text-left">Severity</th>
+                              <th className="px-4 py-3 text-right">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {complianceReport.violations.map((v: any, i: number) => (
+                              <tr key={i} className="border-b last:border-0">
+                                <td className="px-4 py-3 font-medium">{v.controlId}</td>
+                                <td className="px-4 py-3 text-gray-600">{v.message}</td>
+                                <td className="px-4 py-3">
+                                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                    v.severity === 'CRITICAL' ? 'bg-red-100 text-red-700' :
+                                    v.severity === 'HIGH' ? 'bg-orange-100 text-orange-700' :
+                                    'bg-yellow-100 text-yellow-700'
+                                  }`}>
+                                    {v.severity}
+                                  </span>
+                                </td>
+                                <td className="px-4 py-3 text-right">
+                                  <Button variant="ghost" size="sm" className="text-blue-600 h-8">Remediate</Button>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      ) : (
+                        <div className="px-4 py-12 text-center">
+                           <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-3" />
+                           <p className="text-gray-900 font-medium">No active violations detected</p>
+                           <p className="text-sm text-gray-500">Your organization is fully compliant with active standards.</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="py-12 text-center text-gray-500">
+                   Generating compliance report...
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Secret Vault Summary */}
+        <Card className="bg-slate-900 text-white rounded-3xl overflow-hidden border-0 shadow-2xl">
+          <CardContent className="p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-6">
+               <div className="bg-primary/20 p-4 rounded-2xl">
+                  <Shield className="h-12 w-12 text-primary" />
+               </div>
+               <div>
+                  <h3 className="text-2xl font-black">Secret Vault</h3>
+                  <p className="text-slate-400 font-medium">Enterprise-grade encryption for your sensitive data</p>
+                  <div className="flex gap-4 mt-3">
+                    <div className="flex items-center gap-2">
+                       <span className="size-2 rounded-full bg-green-500"></span>
+                       <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Total: {vaultStats?.total || 0}</span>
+                    </div>
+                    {vaultStats?.expiringSoon > 0 && (
+                      <div className="flex items-center gap-2">
+                         <span className="size-2 rounded-full bg-red-500 animate-pulse"></span>
+                         <span className="text-xs font-bold uppercase tracking-widest text-red-400">Expiring: {vaultStats.expiringSoon}</span>
+                      </div>
+                    )}
+                  </div>
+               </div>
+            </div>
+            <Link href="/admin/devops/secret-vault">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold px-8 rounded-xl h-14">
+                Access Vault
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
       </Tabs>
     </div>
   );

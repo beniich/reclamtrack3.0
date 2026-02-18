@@ -1,13 +1,29 @@
 import express, { Response } from 'express';
-import { auth } from '../middleware/auth.js';
-import { requireOrganization, requireRole } from '../middleware/organization.js';
+import {
+  authenticate,
+  AuthenticatedRequest,
+  rateLimiter,
+  requireOrganization,
+  requireRole,
+} from '../middleware/security.js';
 import { securityService } from '../services/securityService.js';
-import { AuthenticatedRequest } from '../types/request.js';
+import {
+  createdResponse,
+  ErrorCodes,
+  errorResponse,
+  successResponse,
+} from '../utils/apiResponse.js';
 
 const router = express.Router();
 
 // All security routes require authentication and admin role
-router.use(auth, requireOrganization, requireRole(['ADMIN', 'OWNER']));
+// Rate limiting: max 100 requests per minute
+router.use(
+  authenticate,
+  requireOrganization,
+  requireRole(['ADMIN', 'OWNER']),
+  rateLimiter({ max: 100, windowMs: 60000 })
+);
 
 /**
  * GET /api/security/audit/passwords
@@ -15,18 +31,17 @@ router.use(auth, requireOrganization, requireRole(['ADMIN', 'OWNER']));
  */
 router.get('/audit/passwords', async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const organizationId = (req as any).organizationId;
-    const audit = await securityService.auditPasswordSecurity(organizationId);
+    const organizationId = req.organizationId;
 
-    res.json({
-      success: true,
-      data: audit,
-    });
+    if (!organizationId) {
+      return errorResponse(res, 'Organization ID manquant', 400, ErrorCodes.ORG_CONTEXT_MISSING);
+    }
+
+    const audit = await securityService.auditPasswordSecurity(organizationId);
+    return successResponse(res, audit);
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    console.error('[Security Routes] Error in password audit:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
   }
 });
 
@@ -37,16 +52,10 @@ router.get('/audit/passwords', async (req: AuthenticatedRequest, res: Response) 
 router.get('/sessions/rdp', async (req: AuthenticatedRequest, res: Response) => {
   try {
     const sessions = await securityService.getRDPSessions();
-
-    res.json({
-      success: true,
-      data: sessions,
-    });
+    return successResponse(res, sessions);
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    console.error('[Security Routes] Error in RDP sessions:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
   }
 });
 
@@ -57,16 +66,10 @@ router.get('/sessions/rdp', async (req: AuthenticatedRequest, res: Response) => 
 router.get('/gpo', async (req: AuthenticatedRequest, res: Response) => {
   try {
     const gpoList = await securityService.getGPOList();
-
-    res.json({
-      success: true,
-      data: gpoList,
-    });
+    return successResponse(res, gpoList);
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    console.error('[Security Routes] Error in GPO list:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
   }
 });
 
@@ -77,26 +80,21 @@ router.get('/gpo', async (req: AuthenticatedRequest, res: Response) => {
 router.post('/powershell', async (req: AuthenticatedRequest, res: Response) => {
   try {
     const { scriptName } = req.body;
-    const userId = (req as any).user?._id;
+    const userId = req.user?.id || req.user?._id;
 
     if (!scriptName) {
-      return res.status(400).json({
-        success: false,
-        error: 'Script name is required',
-      });
+      return errorResponse(res, 'Script name is required', 400, ErrorCodes.MISSING_REQUIRED_FIELD);
+    }
+
+    if (!userId) {
+      return errorResponse(res, 'User identity missing', 401, ErrorCodes.AUTH_USER_MISSING);
     }
 
     const result = await securityService.executePowerShellScript(scriptName, userId);
-
-    res.json({
-      success: true,
-      data: result,
-    });
+    return successResponse(res, result);
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    console.error('[Security Routes] Error in PowerShell execution:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
   }
 });
 
@@ -106,18 +104,17 @@ router.post('/powershell', async (req: AuthenticatedRequest, res: Response) => {
  */
 router.get('/compliance', async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const organizationId = (req as any).organizationId;
-    const report = await securityService.generateComplianceReport(organizationId);
+    const organizationId = req.organizationId;
 
-    res.json({
-      success: true,
-      data: report,
-    });
+    if (!organizationId) {
+      return errorResponse(res, 'Organization ID manquant', 400, ErrorCodes.ORG_CONTEXT_MISSING);
+    }
+
+    const report = await securityService.generateComplianceReport(organizationId);
+    return successResponse(res, report);
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    console.error('[Security Routes] Error in compliance report:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
   }
 });
 
@@ -130,31 +127,30 @@ router.post('/pfsense/connect', async (req: AuthenticatedRequest, res: Response)
     const { host, apiKey, apiSecret, port, protocol } = req.body;
 
     if (!host || !apiKey || !apiSecret) {
-      return res.status(400).json({
-        success: false,
-        error: 'Host, API key, and API secret are required',
-      });
+      return errorResponse(
+        res,
+        'Host, API key, and API secret are required',
+        400,
+        ErrorCodes.MISSING_REQUIRED_FIELD
+      );
     }
 
     const { pfSenseService } = await import('../services/pfSenseService.js');
     const connected = await pfSenseService.connect({ host, apiKey, apiSecret, port, protocol });
 
     if (!connected) {
-      return res.status(500).json({
-        success: false,
-        error: 'Failed to connect to pfSense',
-      });
+      return errorResponse(
+        res,
+        'Failed to connect to pfSense',
+        500,
+        ErrorCodes.SERVICE_UNAVAILABLE
+      );
     }
 
-    res.json({
-      success: true,
-      message: 'Successfully connected to pfSense',
-    });
+    return successResponse(res, { message: 'Successfully connected to pfSense' });
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    console.error('[Security Routes] Error in pfSense connect:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
   }
 });
 
@@ -166,16 +162,10 @@ router.get('/pfsense/rules', async (req: AuthenticatedRequest, res: Response) =>
   try {
     const { pfSenseService } = await import('../services/pfSenseService.js');
     const rules = await pfSenseService.getFirewallRules();
-
-    res.json({
-      success: true,
-      data: rules,
-    });
+    return successResponse(res, rules);
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    console.error('[Security Routes] Error in pfSense rules:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
   }
 });
 
@@ -188,16 +178,10 @@ router.get('/pfsense/logs', async (req: AuthenticatedRequest, res: Response) => 
     const limit = parseInt(req.query.limit as string) || 100;
     const { pfSenseService } = await import('../services/pfSenseService.js');
     const logs = await pfSenseService.getFirewallLogs(limit);
-
-    res.json({
-      success: true,
-      data: logs,
-    });
+    return successResponse(res, logs);
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    console.error('[Security Routes] Error in pfSense logs:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
   }
 });
 
@@ -209,16 +193,10 @@ router.get('/pfsense/interfaces', async (req: AuthenticatedRequest, res: Respons
   try {
     const { pfSenseService } = await import('../services/pfSenseService.js');
     const stats = await pfSenseService.getInterfaceStats();
-
-    res.json({
-      success: true,
-      data: stats,
-    });
+    return successResponse(res, stats);
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    console.error('[Security Routes] Error in pfSense interfaces:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
   }
 });
 
@@ -230,16 +208,10 @@ router.get('/pfsense/system', async (req: AuthenticatedRequest, res: Response) =
   try {
     const { pfSenseService } = await import('../services/pfSenseService.js');
     const status = await pfSenseService.getSystemStatus();
-
-    res.json({
-      success: true,
-      data: status,
-    });
+    return successResponse(res, status);
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    console.error('[Security Routes] Error in pfSense system:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
   }
 });
 
@@ -251,16 +223,122 @@ router.get('/pfsense/traffic', async (req: AuthenticatedRequest, res: Response) 
   try {
     const { pfSenseService } = await import('../services/pfSenseService.js');
     const traffic = await pfSenseService.getTrafficStats();
-
-    res.json({
-      success: true,
-      data: traffic,
-    });
+    return successResponse(res, traffic);
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    console.error('[Security Routes] Error in pfSense traffic:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
+  }
+});
+
+/**
+ * GET /api/security/secrets
+ * Get all secrets (without values)
+ */
+router.get('/secrets', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const organizationId = req.organizationId;
+
+    if (!organizationId) {
+      return errorResponse(res, 'Organization ID manquant', 400, ErrorCodes.ORG_CONTEXT_MISSING);
+    }
+
+    const { secretService } = await import('../services/secretService.js');
+    const secrets = await secretService.getSecrets(organizationId);
+    return successResponse(res, secrets);
+  } catch (error: any) {
+    console.error('[Security Routes] Error in get secrets:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
+  }
+});
+
+/**
+ * POST /api/security/secrets
+ * Create a new secret
+ */
+router.post('/secrets', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const organizationId = req.organizationId;
+    const userId = req.user?.id || req.user?._id;
+
+    if (!organizationId) {
+      return errorResponse(res, 'Organization ID manquant', 400, ErrorCodes.ORG_CONTEXT_MISSING);
+    }
+
+    if (!userId) {
+      return errorResponse(res, 'User identity missing', 401, ErrorCodes.AUTH_USER_MISSING);
+    }
+
+    const { secretService } = await import('../services/secretService.js');
+    const secret = await secretService.createSecret(req.body, userId, organizationId);
+    return createdResponse(res, secret);
+  } catch (error: any) {
+    console.error('[Security Routes] Error in create secret:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
+  }
+});
+
+/**
+ * GET /api/security/secrets/:id/reveal
+ * Decrypt and reveal secret value
+ */
+router.get('/secrets/:id/reveal', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+    const organizationId = req.organizationId;
+
+    if (!organizationId) {
+      return errorResponse(res, 'Organization ID manquant', 400, ErrorCodes.ORG_CONTEXT_MISSING);
+    }
+
+    const { secretService } = await import('../services/secretService.js');
+    const secret = await secretService.revealSecret(id, organizationId);
+    return successResponse(res, secret);
+  } catch (error: any) {
+    console.error('[Security Routes] Error in reveal secret:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
+  }
+});
+
+/**
+ * DELETE /api/security/secrets/:id
+ * Remove a secret
+ */
+router.delete('/secrets/:id', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+    const organizationId = req.organizationId;
+
+    if (!organizationId) {
+      return errorResponse(res, 'Organization ID manquant', 400, ErrorCodes.ORG_CONTEXT_MISSING);
+    }
+
+    const { secretService } = await import('../services/secretService.js');
+    await secretService.deleteSecret(id, organizationId);
+    return successResponse(res, { message: 'Secret deleted' });
+  } catch (error: any) {
+    console.error('[Security Routes] Error in delete secret:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
+  }
+});
+
+/**
+ * GET /api/security/secrets/stats
+ * Get vault statistics
+ */
+router.get('/secrets/stats', async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const organizationId = req.organizationId;
+
+    if (!organizationId) {
+      return errorResponse(res, 'Organization ID manquant', 400, ErrorCodes.ORG_CONTEXT_MISSING);
+    }
+
+    const { secretService } = await import('../services/secretService.js');
+    const stats = await secretService.getSecretStats(organizationId);
+    return successResponse(res, stats);
+  } catch (error: any) {
+    console.error('[Security Routes] Error in secret stats:', error);
+    return errorResponse(res, error.message, 500, ErrorCodes.INTERNAL_ERROR);
   }
 });
 

@@ -159,68 +159,73 @@ export default function ITAdminDashboard() {
 
       {/* Quick Access */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="bg-gradient-to-br from-blue-500 to-blue-700 text-white hover:shadow-lg transition-shadow cursor-pointer">
-          <CardHeader>
-            <CardTitle className="flex items-center text-white">
-              <Server className="mr-2 h-5 w-5" />
-              IT Assets
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-blue-100">Manage servers, workstations, and equipment</p>
-            <button className="mt-4 bg-white text-blue-700 px-4 py-2 rounded-md font-medium hover:bg-blue-50 transition-colors">
-              View Assets →
-            </button>
-          </CardContent>
-        </Card>
+        <Link href="/it-admin/assets" className="block">
+          <Card className="bg-gradient-to-br from-blue-500 to-blue-700 text-white hover:shadow-lg transition-shadow cursor-pointer h-full">
+            <CardHeader>
+              <CardTitle className="flex items-center text-white">
+                <Server className="mr-2 h-5 w-5" />
+                IT Assets
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-blue-100 mb-4">Manage servers, workstations, and equipment</p>
+              <div className="bg-white text-blue-700 px-4 py-2 rounded-md font-medium hover:bg-blue-50 transition-colors text-center">
+                View Assets →
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
 
-        <Card className="bg-gradient-to-br from-purple-500 to-purple-700 text-white hover:shadow-lg transition-shadow cursor-pointer">
-          <CardHeader>
-            <CardTitle className="flex items-center text-white">
-              <Network className="mr-2 h-5 w-5" />
-              Network Monitoring
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-purple-100">Monitor routers, switches, and infrastructure</p>
-            <button className="mt-4 bg-white text-purple-700 px-4 py-2 rounded-md font-medium hover:bg-purple-50 transition-colors">
-              View Network →
-            </button>
-          </CardContent>
-        </Card>
+        <Link href="/it-admin/network" className="block">
+          <Card className="bg-gradient-to-br from-purple-500 to-purple-700 text-white hover:shadow-lg transition-shadow cursor-pointer h-full">
+            <CardHeader>
+              <CardTitle className="flex items-center text-white">
+                <Network className="mr-2 h-5 w-5" />
+                Network Monitoring
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-purple-100 mb-4">Monitor routers, switches, and infrastructure</p>
+              <div className="bg-white text-purple-700 px-4 py-2 rounded-md font-medium hover:bg-purple-50 transition-colors text-center">
+                View Network →
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
 
-        <Card className="bg-gradient-to-br from-orange-500 to-orange-700 text-white hover:shadow-lg transition-shadow cursor-pointer">
-          <CardHeader>
-            <CardTitle className="flex items-center text-white">
-              <Ticket className="mr-2 h-5 w-5" />
-              IT Helpdesk
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-orange-100">Manage IT support tickets and requests</p>
-            <button className="mt-4 bg-white text-orange-700 px-4 py-2 rounded-md font-medium hover:bg-orange-50 transition-colors">
-              View Tickets →
-            </button>
-          </CardContent>
-        </Card>
+        <Link href="/it-admin/tickets" className="block">
+          <Card className="bg-gradient-to-br from-orange-500 to-orange-700 text-white hover:shadow-lg transition-shadow cursor-pointer h-full">
+            <CardHeader>
+              <CardTitle className="flex items-center text-white">
+                <Ticket className="mr-2 h-5 w-5" />
+                IT Helpdesk
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-orange-100 mb-4">Manage IT support tickets and requests</p>
+              <div className="bg-white text-orange-700 px-4 py-2 rounded-md font-medium hover:bg-orange-50 transition-colors text-center">
+                View Tickets →
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
 
-        {/* Active Directory Access */}
-        <Card className="bg-gradient-to-br from-indigo-500 to-indigo-700 text-white hover:shadow-lg transition-shadow cursor-pointer">
-          <CardHeader>
-            <CardTitle className="flex items-center text-white">
-              <Users className="mr-2 h-5 w-5" />
-              Active Directory
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-indigo-100">Sync users and manage permissions</p>
-            <Link href="/it-admin/active-directory" className="block mt-4">
-              <button className="w-full bg-white text-indigo-700 px-4 py-2 rounded-md font-medium hover:bg-indigo-50 transition-colors text-left">
-                Manage AD →
-              </button>
-            </Link>
-          </CardContent>
-        </Card>
+        <Link href="/it-admin/active-directory" className="block">
+          <Card className="bg-gradient-to-br from-indigo-500 to-indigo-700 text-white hover:shadow-lg transition-shadow cursor-pointer h-full">
+            <CardHeader>
+              <CardTitle className="flex items-center text-white">
+                <Users className="mr-2 h-5 w-5" />
+                Active Directory
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-indigo-100 mb-4">Sync users and manage permissions</p>
+              <div className="bg-white text-indigo-700 px-4 py-2 rounded-md font-medium hover:bg-indigo-50 transition-colors text-center">
+                 Manage AD →
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
 
       {/* Recent Alerts - Placeholder */}

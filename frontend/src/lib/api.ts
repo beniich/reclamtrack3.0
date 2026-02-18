@@ -1,8 +1,8 @@
-import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
 import { ApiResponse } from '@/types';
 import { API_ROUTES } from '@reclamtrack/shared';
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
 class ApiClient {
     private client: AxiosInstance;
@@ -53,8 +53,15 @@ class ApiClient {
             },
             (error: AxiosError<ApiResponse>) => {
                 if (error.response) {
+                    const status = error.response.status;
+                    const data = error.response.data;
+                    const code = data?.code || 'UNKNOWN_ERROR';
+                    const message = data?.error || data?.message || 'An error occurred';
+
+                    console.error(`[API] Error ${status} (${code}): ${message}`);
+
                     // Handle specific error codes
-                    switch (error.response.status) {
+                    switch (status) {
                         case 401:
                             // Unauthorized - redirect to login
                             if (typeof window !== 'undefined' && !window.location.pathname.includes('/login')) {
@@ -67,15 +74,19 @@ class ApiClient {
                             break;
                         case 403:
                             // Forbidden
-                            console.error('Access forbidden');
+                            console.warn('Access forbidden: Insufficient permissions');
                             break;
                         case 404:
                             // Not found
-                            console.error('Resource not found');
+                            console.warn('Resource not found');
+                            break;
+                        case 429:
+                            // Rate limit
+                            console.warn('Too many requests. Please try again later.');
                             break;
                         case 500:
                             // Server error
-                            console.error('Server error');
+                            console.error('Server error:', message);
                             break;
                     }
                 } else if (error.request) {

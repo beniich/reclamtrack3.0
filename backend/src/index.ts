@@ -75,6 +75,12 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
+// Swagger Documentation
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
+const swaggerDocument = YAML.load('./docs/openapi.yaml');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Mount routes
 app.use('/api/auth', authRoutes);
 app.use('/api/auth', googleAuthRoutes);

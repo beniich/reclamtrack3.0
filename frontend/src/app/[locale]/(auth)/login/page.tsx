@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { Link } from '@/i18n/routing';
 import { useAuthStore } from '@/store/authStore';
-import { toast } from 'react-hot-toast';
 import { GoogleLogin } from '@react-oauth/google';
 import { useLocale } from 'next-intl';
-import { Link } from '@/i18n/routing';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
@@ -31,13 +31,9 @@ export default function LoginPage() {
                 window.location.href = `/${locale}/dashboard`;
             }, 100);
 
-        } catch (error: unknown) {
+        } catch (error: any) {
             console.error('Login error:', error);
-            const axiosError = error as { response?: { data?: { message?: string } } };
-            let message = 'Erreur de connexion. Veuillez vérifier vos identifiants.';
-            if (axiosError.response?.data?.message) {
-                message = axiosError.response.data.message;
-            }
+            const message = error.response?.data?.error || error.response?.data?.message || 'Erreur de connexion. Veuillez vérifier vos identifiants.';
             toast.error(message);
         } finally {
             setLoading(false);
@@ -53,9 +49,10 @@ export default function LoginPage() {
                     window.location.href = `/${locale}/dashboard`;
                 }, 100);
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Google login error:', error);
-            toast.error('Échec de la connexion Google');
+            const message = error.response?.data?.error || error.response?.data?.message || 'Échec de la connexion Google';
+            toast.error(message);
         }
     };
 

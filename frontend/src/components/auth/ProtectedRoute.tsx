@@ -1,10 +1,9 @@
-
 'use client';
 
 import { usePermissions } from '@/hooks/usePermissions';
-import { redirect } from 'next/navigation';
-import { ReactNode } from 'react';
 import { Permission, Role } from '@/lib/rbac/permissions';
+import { useRouter } from 'next/navigation';
+import { ReactNode, useEffect } from 'react';
 
 interface ProtectedRouteProps {
     children: ReactNode;
@@ -22,23 +21,33 @@ export function ProtectedRoute({
     fallback,
 }: ProtectedRouteProps) {
     const { canAny, canAll, isRoleOrHigher } = usePermissions();
+    const router = useRouter();
 
-    // Vérification du rôle
-    if (requiredRole && !isRoleOrHigher(requiredRole)) {
-        if (fallback) return <>{fallback}</>;
-        redirect('/unauthorized');
-    }
+    const isAuthorized = () => {
+        // Si aucun rôle/permission requis, accès autorisé
+        if (!requiredRole && requiredPermissions.length === 0) return true;
 
-    // Vérification des permissions
-    if (requiredPermissions.length > 0) {
-        const hasAccess = requireAll
-            ? canAll(requiredPermissions)
-            : canAny(requiredPermissions);
+        if (requiredRole && !isRoleOrHigher(requiredRole)) return false;
 
-        if (!hasAccess) {
-            if (fallback) return <>{fallback}</>;
-            redirect('/unauthorized');
+        if (requiredPermissions.length > 0) {
+            return requireAll
+                ? canAll(requiredPermissions)
+                : canAny(requiredPermissions);
         }
+
+        return true;
+    };
+
+    const authorized = isAuthorized();
+
+    useEffect(() => {
+        if (!authorized) {
+            router.push('/unauthorized');
+        }
+    }, [authorized, router]);
+
+    if (!authorized) {
+        return fallback ? <>{fallback}</> : null;
     }
 
     return <>{children}</>;

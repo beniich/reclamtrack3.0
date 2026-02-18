@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { useAuthStore } from '@/store/authStore';
-import { useTranslations } from 'next-intl';
-import { LogOut, ChevronDown, Shield, Truck, CalendarDays, MessagesSquare, Settings as SettingsIcon, Menu, X } from 'lucide-react';
-import { LanguageSwitcher } from './LanguageSwitcher';
 import { NotificationCenter } from '@/components/notifications/NotificationCenter';
+import { useAuthStore } from '@/store/authStore';
+import { BarChart3, CalendarDays, ChevronDown, FileText, LayoutDashboard, LogOut, Map, Menu, MessagesSquare, Settings as SettingsIcon, Shield, Truck, Users, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useState } from 'react';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { OrganizationSelector } from './organization/OrganizationSelector';
 
 export default function Header() {
@@ -41,14 +41,28 @@ export default function Header() {
             <nav className="hidden lg:flex items-center space-x-6">
                 {user ? (
                     <>
-                        <div className="flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
-                            <Link href="/dashboard" className="hover:text-primary transition-colors">{t('dashboard')}</Link>
-                            <Link href="/complaints/list" className="hover:text-primary transition-colors">{t('complaints')}</Link>
-                            <Link href="/teams" className="hover:text-primary transition-colors">{t('teams')}</Link>
-                            <Link href="/planning" className="hover:text-primary transition-colors">{t('planning')}</Link>
-                            <Link href="/map" className="hover:text-primary transition-colors">{t('map')}</Link>
-                            <Link href="/analytics" className="hover:text-primary transition-colors">{t('analytics')}</Link>
-                            <Link href="/system-info" className="hover:text-primary transition-colors">{t('systemInfo')}</Link>
+                <div className="flex items-center gap-1 text-sm font-medium text-slate-600 dark:text-slate-400">
+                    <Link href="/dashboard" className="p-2 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" title={t('dashboard')}>
+                        <LayoutDashboard className="w-5 h-5" />
+                    </Link>
+                    <Link href="/complaints/list" className="p-2 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" title={t('complaints')}>
+                        <FileText className="w-5 h-5" />
+                    </Link>
+                    <Link href="/teams" className="p-2 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" title={t('teams')}>
+                        <Users className="w-5 h-5" />
+                    </Link>
+                    <Link href="/planning" className="p-2 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" title={t('planning')}>
+                        <CalendarDays className="w-5 h-5" />
+                    </Link>
+                    <Link href="/map" className="p-2 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" title={t('map')}>
+                        <Map className="w-5 h-5" />
+                    </Link>
+                    <Link href="/analytics" className="p-2 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" title={t('analytics')}>
+                        <BarChart3 className="w-5 h-5" />
+                    </Link>
+                    <Link href="/system-info" className="p-2 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" title={t('systemInfo')}>
+                        <Shield className="w-5 h-5" />
+                    </Link>
 
                             {/* More Menu */}
                             <div className="relative group">

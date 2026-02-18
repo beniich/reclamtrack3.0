@@ -1,6 +1,5 @@
 'use client';
 
-import Header from '@/components/Header';
 import { usePermissions } from '@/hooks/usePermissions';
 import { Role } from '@/lib/rbac/permissions';
 import { useAuthStore } from '@/store/authStore';
@@ -28,9 +27,6 @@ export default function AdminLayout({
             // Check for admin role or higher
             if (!isRoleOrHigher(Role.ADMIN)) {
                 console.warn('[AdminLayout] Access denied: User does not have required permissions.');
-                // Optional: redirect to dashboard or unauthorized page
-                // router.push('/dashboard');
-                // For now, we'll handle it in render by showing Access Denied
                 return;
             }
 
@@ -78,7 +74,6 @@ export default function AdminLayout({
 
     return (
         <div className="flex flex-col min-h-screen bg-background">
-            <Header />
             <main className="flex-1">
                 {children}
             </main>

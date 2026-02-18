@@ -42,7 +42,7 @@ import uploadRoutes from './routes/upload.js';
 
 // IT Administration Module Routes
 import adRoutes from './routes/ad.js';
-import itAssetsRoutes from './routes/itAssets.js';
+import itAssetsRoutes from './routes/it-assets.js';
 import networkRoutes from './routes/network.js';
 import securityRoutes from './routes/security.js';
 

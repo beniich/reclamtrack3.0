@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { api } from '@/lib/api';
+import api from '@/lib/api';
 import { AlertTriangle, Network, Server, Ticket, TrendingUp, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';

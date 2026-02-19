@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Radar, Search, AlertCircle, CheckCircle } from 'lucide-react';
-import { api } from '@/lib/api';
+import api from '@/lib/api';
+import { CheckCircle, Radar, Search } from 'lucide-react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 interface ScanResult {

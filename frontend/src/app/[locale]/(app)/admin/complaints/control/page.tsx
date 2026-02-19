@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { api } from '@/lib/api';
+import api from '@/lib/api';
 import { AlertTriangle, CheckCircle, FileText, Search, ShieldCheck, XCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -145,7 +145,7 @@ export default function ComplaintControlPage() {
 
                   <div className="flex items-center gap-3">
                     <Button
-                      variant="destructive"
+                      variant="danger"
                       onClick={() => handleRejectInit(complaint._id)}
                       className="bg-red-50 text-red-700 hover:bg-red-100 border-red-200 border"
                     >
@@ -193,7 +193,7 @@ export default function ComplaintControlPage() {
           <DialogFooter>
             <Button variant="outline" onClick={() => setRejectingId(null)}>Cancel</Button>
             <Button
-              variant="destructive"
+              variant="danger"
               onClick={handleRejectConfirm}
               disabled={!rejectionReason.trim()}
             >

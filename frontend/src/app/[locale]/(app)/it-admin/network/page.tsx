@@ -14,7 +14,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { api } from '@/lib/api';
+import api from '@/lib/api';
 import { Activity, Edit, MoreVertical, Plus, Search, Server, Shield, Trash2, Wifi } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';

@@ -200,8 +200,8 @@ export function FleetRouteMap() {
           <InfoWindow
             position={
               selectedMarker.type === 'team'
-                ? selectedMarker.location
-                : { lat: selectedMarker.latitude, lng: selectedMarker.longitude }
+                ? (selectedMarker.location as google.maps.LatLngLiteral)
+                : { lat: selectedMarker.latitude!, lng: selectedMarker.longitude! }
             }
             onCloseClick={() => setSelectedMarker(null)}
           >

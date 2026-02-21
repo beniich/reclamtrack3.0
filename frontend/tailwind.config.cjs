@@ -10,24 +10,29 @@ module.exports = {
             colors: {
                 // Brand colors
                 primary: {
-                    DEFAULT: '#2563eb',
-                    50: '#eff6ff',
-                    100: '#dbeafe',
-                    500: '#3b82f6',
-                    600: '#2563eb',
-                    700: '#1d4ed8',
+                    DEFAULT: '#FF6B00',
+                    50: '#fff7ed',
+                    100: '#ffedd5',
+                    500: '#FF6B00',
+                    600: '#E66100',
+                    700: '#CC5600',
                 },
-                "background-light": "#f6f6f8",
-                "background-dark": "#101622",
-                "surface-dark": "#1a2233",
-                "border-dark": "#232f48",
+                brand: {
+                    orange: '#FF6B00',
+                    deepBlue: '#0A0E17',
+                    midnight: '#020617',
+                },
+                "background-light": "#f8f6f6",
+                "background-dark": "#020617",
+                "surface-dark": "#0A0E17",
+                "border-dark": "#1E293B",
                 "accent-red": "#fa6238",
                 "accent-green": "#0bda5e",
-                "accent-orange": "#f59e0b",
+                "accent-orange": "#FF6B00",
                 "danger": "#ef4444",
                 "success": "#22c55e",
                 "warning": "#f59e0b",
-                // Semantic colors
+                // ... rest of semantic colors
                 success: {
                     DEFAULT: 'var(--color-success)',
                     light: 'var(--color-success-light)',
@@ -86,9 +91,9 @@ module.exports = {
                 ring: 'hsl(var(--ring) / <alpha-value>)',
             },
             fontFamily: {
-                sans: ['var(--font-sans)', 'Inter', 'system-ui', 'sans-serif'],
+                sans: ['Inter', 'system-ui', 'sans-serif'],
                 mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
-                display: ["Inter", "sans-serif"],
+                display: ["Sora", "Inter", "sans-serif"],
             },
             borderRadius: {
                 sm: 'var(--radius-sm)',
@@ -110,12 +115,17 @@ module.exports = {
                 slow: 'var(--transition-slow)',
             },
             animation: {
-                'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'float': 'float 6s ease-in-out infinite',
                 'fade-in': 'fadeIn 0.5s ease-in-out',
                 'slide-in-left': 'slideInFromLeft 0.5s ease-out',
                 'slide-in-right': 'slideInFromRight 0.5s ease-out',
             },
             keyframes: {
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-20px)' },
+                },
                 fadeIn: {
                     '0%': { opacity: '0' },
                     '100%': { opacity: '1' },

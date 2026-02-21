@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import { useAuthStore } from '@/store/authStore';
 import { GoogleLogin } from '@react-oauth/google';
 import { useLocale } from 'next-intl';

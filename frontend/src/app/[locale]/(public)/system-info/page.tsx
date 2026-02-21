@@ -11,9 +11,9 @@ export default function SystemInfoPage() {
                     <div className="flex items-center gap-8">
                         <Link href="/" className="flex items-center gap-3 text-primary">
                             <div className="size-8 flex items-center justify-center rounded-lg bg-primary/10">
-                                <span className="material-symbols-outlined text-primary">account_tree</span>
+                                <span className="material-symbols-outlined text-primary">cloud</span>
                             </div>
-                            <h2 className="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">ReclamTrack</h2>
+                            <h2 className="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">CloudIndustrie</h2>
                         </Link>
                         <nav className="hidden md:flex items-center gap-9">
                             <Link className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="/dashboard">Dashboard</Link>
@@ -45,10 +45,11 @@ export default function SystemInfoPage() {
                             <div className="flex-1 z-10">
                                 <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase rounded-full mb-4">Operations Guide</span>
                                 <h1 className="text-slate-900 dark:text-white text-4xl lg:text-5xl font-black leading-tight tracking-[-0.033em] mb-4">
-                                    Operational Workflow
+                                    Flux Technologique
                                 </h1>
                                 <p className="text-slate-600 dark:text-slate-400 text-lg max-w-xl leading-relaxed">
-                                    Our mission is to ensure service efficiency and rapid response to municipal needs through a streamlined, automated lifecycle management system.
+                                    Notre mission est de propulser votre croissance à travers une infrastructure robuste,
+                                    IA-native et sécurisée par des protocoles de nouvelle génération.
                                 </p>
                                 <div className="flex flex-wrap gap-4 mt-8">
                                     <button className="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all">
@@ -74,8 +75,8 @@ export default function SystemInfoPage() {
                     {/* Step-by-Step Infographic */}
                     <section className="mb-20">
                         <div className="text-center mb-12">
-                            <h2 className="text-slate-900 dark:text-white text-3xl font-bold tracking-tight mb-2">The Service Lifecycle</h2>
-                            <p className="text-slate-500">From initial contact to final resolution, every step is tracked and optimized.</p>
+                            <h2 className="text-slate-900 dark:text-white text-3xl font-bold tracking-tight mb-2">Cycle de Vie des Services</h2>
+                            <p className="text-slate-500">De l'expression du besoin à l'optimisation continue de vos performances.</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 relative">
                             {/* Connecting Line (Desktop) */}
@@ -84,51 +85,51 @@ export default function SystemInfoPage() {
                             {/* Step 1 */}
                             <div className="flex flex-col items-center text-center group z-10">
                                 <div className="size-20 rounded-full bg-white dark:bg-slate-900 border-4 border-primary flex items-center justify-center text-primary shadow-lg mb-6 group-hover:scale-110 transition-transform">
-                                    <span className="material-symbols-outlined text-3xl">call</span>
+                                    <span className="material-symbols-outlined text-3xl">hub</span>
                                 </div>
-                                <span className="text-xs font-bold text-primary uppercase tracking-widest mb-1">Step 01</span>
-                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Intake</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Customer initiates a request via call, message, or app portal.</p>
+                                <span className="text-xs font-bold text-primary uppercase tracking-widest mb-1">Étape 01</span>
+                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Capture</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Identification de vos besoins en ressources (GPU, CPU, Stockage).</p>
                             </div>
 
                             {/* Step 2 */}
                             <div className="flex flex-col items-center text-center group z-10">
                                 <div className="size-20 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
-                                    <span className="material-symbols-outlined text-3xl">app_registration</span>
+                                    <span className="material-symbols-outlined text-3xl">psychology</span>
                                 </div>
-                                <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Step 02</span>
-                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Log</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Complaint is digitized and categorized by priority and type.</p>
+                                <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Étape 02</span>
+                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Audit IA</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Analyse algorithmique pour optimiser la configuration de votre instance.</p>
                             </div>
 
                             {/* Step 3 */}
                             <div className="flex flex-col items-center text-center group z-10">
                                 <div className="size-20 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
-                                    <span className="material-symbols-outlined text-3xl">assignment_ind</span>
+                                    <span className="material-symbols-outlined text-3xl">rocket_launch</span>
                                 </div>
-                                <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Step 03</span>
-                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Dispatch</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">System assigns the task to the nearest qualified specialized team.</p>
+                                <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Étape 03</span>
+                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Déploiement</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Provisioning instantané de votre environnement Cloud sécurisé.</p>
                             </div>
 
                             {/* Step 4 */}
                             <div className="flex flex-col items-center text-center group z-10">
                                 <div className="size-20 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
-                                    <span className="material-symbols-outlined text-3xl">engineering</span>
+                                    <span className="material-symbols-outlined text-3xl">radar</span>
                                 </div>
-                                <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Step 04</span>
-                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Action</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Field intervention takes place with real-time status updates.</p>
+                                <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Étape 04</span>
+                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Monitoring</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Surveillance 24/7 de la performance et détection proactive des menaces.</p>
                             </div>
 
                             {/* Step 5 */}
                             <div className="flex flex-col items-center text-center group z-10">
                                 <div className="size-20 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
-                                    <span className="material-symbols-outlined text-3xl">verified_user</span>
+                                    <span className="material-symbols-outlined text-3xl">trending_up</span>
                                 </div>
-                                <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Step 05</span>
-                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Finalize</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Resolution is verified, documented, and the ticket is closed.</p>
+                                <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Étape 05</span>
+                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Optimisation</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Ajustement continu pour garantir un ROI maximal de votre infrastructure.</p>
                             </div>
                         </div>
                     </section>
@@ -137,45 +138,42 @@ export default function SystemInfoPage() {
                     <section className="mb-20">
                         <div className="flex items-center justify-between mb-10">
                             <div>
-                                <h2 className="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">Team Capabilities</h2>
-                                <p className="text-slate-500">Expertise sectors available for field assignment.</p>
+                                <h2 className="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">Expertise Technique</h2>
+                                <p className="text-slate-500">Domaines d'intervention spécialisés de CloudIndustrie.</p>
                             </div>
-                            <Link href="/teams" className="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
-                                View All Departments <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-                            </Link>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {/* Water & Sewage */}
+                            {/* IA & Computing */}
                             <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
                                 <div className="size-12 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
-                                    <span className="material-symbols-outlined">water_drop</span>
+                                    <span className="material-symbols-outlined">memory</span>
                                 </div>
-                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Water & Sewage</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Leak repairs, pipeline maintenance, and waste-water management systems.</p>
+                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">IA & Computing</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Optimisation de clusters GPU NVIDIA A100 et déploiement de modèles LLM.</p>
                             </div>
-                            {/* Electrical */}
+                            {/* Cybersecurity */}
                             <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
                                 <div className="size-12 rounded-lg bg-amber-50 dark:bg-amber-900/20 text-amber-600 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
-                                    <span className="material-symbols-outlined">bolt</span>
+                                    <span className="material-symbols-outlined">security</span>
                                 </div>
-                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Electrical</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Grid stability, street lighting repairs, and public facility power audits.</p>
+                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Cyber-blindage</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Protection ESET Enterprise, isolation CloudLinux et audits de vulnérabilité.</p>
                             </div>
-                            {/* Infrastructure & Carpentry */}
+                            {/* Cloud Architecture */}
                             <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
                                 <div className="size-12 rounded-lg bg-orange-50 dark:bg-orange-900/20 text-orange-600 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
-                                    <span className="material-symbols-outlined">carpenter</span>
+                                    <span className="material-symbols-outlined">cloud_sync</span>
                                 </div>
-                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Carpentry</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Public furniture restoration, structural repairs, and signage installation.</p>
+                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Cloud Architecture</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Design de réseaux hybrides, CDN LiteSpeed et orchestration de conteneurs.</p>
                             </div>
-                            {/* Sanitation */}
+                            {/* Managed Services */}
                             <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
                                 <div className="size-12 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-600 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
-                                    <span className="material-symbols-outlined">delete_sweep</span>
+                                    <span className="material-symbols-outlined">support_agent</span>
                                 </div>
-                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Sanitation</h3>
-                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Waste collection schedules, public hygiene maintenance, and recycling programs.</p>
+                                <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Support Managé</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Infogérance 24/7 proactive par nos ingénieurs experts en infrastructure.</p>
                             </div>
                         </div>
                     </section>
@@ -183,8 +181,8 @@ export default function SystemInfoPage() {
                     {/* Dashboard Statistics Brief */}
                     <section className="mb-10 p-8 rounded-xl bg-primary text-white flex flex-col md:flex-row items-center justify-between gap-8">
                         <div className="flex-1">
-                            <h2 className="text-2xl font-bold mb-2">Real-time Performance</h2>
-                            <p className="text-white/80 leading-relaxed">The system currently manages 1,240 active work orders with a 94% on-time resolution rate across all sectors.</p>
+                            <h2 className="text-2xl font-bold mb-2">Performance en Temps Réel</h2>
+                            <p className="text-white/80 leading-relaxed">Nos systèmes gèrent actuellement des milliers d'instances avec un taux de disponibilité de 99.99%.</p>
                         </div>
                         <div className="flex gap-4">
                             <div className="text-center px-6 border-r border-white/20">
@@ -207,11 +205,11 @@ export default function SystemInfoPage() {
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                         <div className="col-span-1 md:col-span-2">
                             <div className="flex items-center gap-3 text-primary mb-6">
-                                <span className="material-symbols-outlined text-3xl">account_tree</span>
-                                <h2 className="text-slate-900 dark:text-white text-xl font-bold tracking-tight">ReclamTrack Portal</h2>
+                                <span className="material-symbols-outlined text-3xl">cloud</span>
+                                <h2 className="text-slate-900 dark:text-white text-xl font-bold tracking-tight">CloudIndustrie Portal</h2>
                             </div>
                             <p className="text-slate-500 dark:text-slate-400 max-w-sm mb-6">
-                                Building a smarter, more responsive city through technology-driven infrastructure management.
+                                Bâtir un monde plus rapide et plus sécurisé grâce aux technologies d'infrastructure de pointe.
                             </p>
                             <div className="flex gap-4">
                                 <a className="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 hover:text-primary transition-colors" href="#">
@@ -242,7 +240,7 @@ export default function SystemInfoPage() {
                         </div>
                     </div>
                     <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="text-slate-400 text-xs">© 2024 ReclamTrack Portal. All operational data is confidential.</p>
+                        <p className="text-slate-400 text-xs">© {new Date().getFullYear()} Cloudindustrie Ltd. Toutes les données opérationnelles sont sécurisées.</p>
                         <div className="flex gap-6">
                             <Link className="text-slate-400 text-xs hover:text-primary transition-colors" href="#">Privacy Policy</Link>
                             <Link className="text-slate-400 text-xs hover:text-primary transition-colors" href="#">Terms of Service</Link>

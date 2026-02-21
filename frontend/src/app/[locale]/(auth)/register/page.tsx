@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import { Link } from '@/i18n/routing';
-import { ShieldCheck, Mail, Lock, Eye, EyeOff, UserPlus } from 'lucide-react';
-import { useAuth } from '@/hooks/useAuth';
-import { useLocale } from 'next-intl';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { useAuth } from '@/hooks/useAuth';
+import { Link } from '@/i18n/navigation';
+import { Eye, EyeOff, Lock, Mail, ShieldCheck, UserPlus } from 'lucide-react';
+import { useLocale } from 'next-intl';
+import { useState } from 'react';
 
 export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false);

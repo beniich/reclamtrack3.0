@@ -20,10 +20,10 @@ export default function Header() {
             <div className="flex items-center gap-4">
                 <Link href="/" className="flex items-center gap-3">
                     <div className="bg-primary p-1.5 rounded-lg text-white">
-                        <span className="material-symbols-outlined block notranslate" translate="no">account_balance</span>
+                        <span className="material-symbols-outlined block notranslate" translate="no">cloud</span>
                     </div>
                     <div className="flex flex-col">
-                        <h1 className="text-lg font-bold leading-none tracking-tight text-slate-900 dark:text-white">ReclamTrack</h1>
+                        <h1 className="text-lg font-bold leading-none tracking-tight text-slate-900 dark:text-white">CloudIndustrie</h1>
                         <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">{t('technicalServices')}</span>
                     </div>
                 </Link>

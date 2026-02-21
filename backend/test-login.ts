@@ -10,7 +10,7 @@ async function testLogin() {
     try {
         const response = await axios.post(LOGIN_URL, {
             email: 'admin@reclamtrack.com',
-            password: 'Admin123!'
+            password: 'l'
         });
 
         console.log('✅ Login Successful!');

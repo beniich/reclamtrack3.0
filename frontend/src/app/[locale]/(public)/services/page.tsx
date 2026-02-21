@@ -1,121 +1,108 @@
 'use client';
 
-import { useState } from 'react';
-import {
-    Droplets,
-    Zap,
-    Lightbulb,
-    Trash2,
-    Hammer,
-    Trees,
-} from 'lucide-react';
-import { Header } from '@/components/services/Header';
-import { ServiceCard } from '@/components/services/ServiceCard';
-import { Modal } from '@/components/services/Modal';
-import { SERVICES } from '@/lib/services-data';
+import Link from 'next/link';
 
-const ICONS = {
-    water: <Droplets className="w-8 h-8" />,
-    electricity: <Zap className="w-8 h-8" />,
-    lighting: <Lightbulb className="w-8 h-8" />,
-    waste: <Trash2 className="w-8 h-8" />,
-    roads: <Hammer className="w-8 h-8" />,
-    parks: <Trees className="w-8 h-8" />,
-};
+const VERTICALS = [
+    { id: 'gov', color: 'blue', title: 'Gouvernance Digitale', desc: 'Solutions d\'e-gouvernance et transparence administrative.', symbol: 'account_balance', href: '/services/governance' },
+    { id: 'health', color: 'cyan', title: 'Santé Connect', desc: 'Gestion hospitalière et coordination des soins en temps réel.', symbol: 'medical_services', href: '/services/healthcare' },
+    { id: 'infra', color: 'blue', title: 'Hébergement Pro', desc: 'Infrastructure souveraine IA et serveurs haute performance.', symbol: 'lan', href: '/services/infrastructure' },
+    { id: 'hotel', color: 'emerald', title: 'Hospitality Hub', desc: 'Optimisation de l\'expérience client et gestion PMS.', symbol: 'hotel', href: '/services/hospitality' },
+    { id: 'edu', color: 'amber', title: 'EduCRM Pro', desc: 'Suivi de la performance scolaire et gestion des établissements.', symbol: 'school', href: '/services/education' }
+];
 
 export default function ServicesPage() {
-    const [selectedService, setSelectedService] = useState<string | null>(null);
-
-    const handleReportIssue = (serviceId: string) => {
-        setSelectedService(serviceId);
-    };
-
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-black">
-            <Header />
+        <div className="min-h-screen bg-brand-midnight text-white selection:bg-brand-orange selection:text-white">
+            {/* Hero Section */}
+            <section className="relative pt-32 pb-20 overflow-hidden px-6 lg:px-20 border-b border-white/5 bg-white/[0.01]">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-brand-orange/5 blur-[150px] -z-10"></div>
 
-            <main className="max-w-7xl mx-auto px-6 py-10">
-                {/* Hero Section */}
-                <section className="mb-12">
-                    <div className="relative rounded-xl overflow-hidden bg-slate-900 h-64 flex items-center p-12">
-                        <div className="absolute inset-0 opacity-30">
-                            <div className="w-full h-full bg-gradient-to-r from-slate-800 to-slate-600" />
-                        </div>
-                        <div className="relative z-10 max-w-2xl">
-                            <h2 className="text-4xl font-bold text-white mb-4">
-                                How can we help you today?
-                            </h2>
-                            <p className="text-slate-200 text-lg">
-                                Access essential municipal services, contact emergency maintenance
-                                teams, or report infrastructure issues directly to the city
-                                administration.
-                            </p>
-                        </div>
+                <div className="max-w-7xl mx-auto text-center space-y-8">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-[10px] font-black uppercase tracking-widest mx-auto">
+                        <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse"></span>
+                        Écosystème ReclamTrack Pro
                     </div>
-                </section>
 
-                {/* Services Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {SERVICES.map((service) => (
-                        <ServiceCard
-                            key={service.id}
-                            title={service.title}
-                            icon={ICONS[service.id as keyof typeof ICONS]}
-                            status={service.status}
-                            details={service.details}
-                            onReportIssue={() => handleReportIssue(service.id)}
-                        />
-                    ))}
+                    <h1 className="text-6xl md:text-9xl font-display font-black leading-none tracking-tighter uppercase italic">
+                        Notre <br />
+                        <span className="text-brand-orange not-italic">Expertise.</span>
+                    </h1>
+
+                    <p className="text-lg text-slate-400 max-w-2xl mx-auto font-light leading-relaxed">
+                        Des solutions technologiques verticales conçues pour répondre aux défis spécifiques de votre secteur d'activité.
+                    </p>
                 </div>
-            </main>
+            </section>
 
-            {/* Report Issue Modal */}
-            <Modal
-                isOpen={!!selectedService}
-                onClose={() => setSelectedService(null)}
-                title={`Report Issue: ${SERVICES.find(s => s.id === selectedService)?.title}`}
-                description="Please provide details about the issue you're experiencing"
-            >
-                <form className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium mb-2">
-                            Issue Description
-                        </label>
-                        <textarea
-                            className="w-full px-4 py-2 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-primary/50 outline-none resize-none"
-                            rows={4}
-                            placeholder="Describe the issue..."
-                        />
-                    </div>
+            {/* Grid Section */}
+            <section className="py-32 px-6 lg:px-20 overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        {VERTICALS.map((service, i) => (
+                            <Link key={i} href={service.href} className="group relative">
+                                <div className="absolute -inset-0.5 bg-gradient-to-br from-white/10 to-transparent rounded-[3rem] blur opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+                                <div className="relative glass-card p-12 rounded-[3.5rem] h-full flex flex-col border border-white/5 hover:border-brand-orange/30 transition-all duration-700 hover:-translate-y-4">
+                                    <div className={`w-16 h-16 bg-${service.color}-500/20 text-${service.color}-400 rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-12 transition-all`}>
+                                        <span className="material-symbols-outlined text-4xl">{service.symbol}</span>
+                                    </div>
 
-                    <div>
-                        <label className="block text-sm font-medium mb-2">
-                            Location
-                        </label>
-                        <input
-                            type="text"
-                            className="w-full px-4 py-2 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg focus:ring-2 focus:ring-primary/50 outline-none"
-                            placeholder="Street or area..."
-                        />
-                    </div>
+                                    <h3 className="text-3xl font-black text-white mb-6 uppercase tracking-tight group-hover:text-brand-orange transition-colors">
+                                        {service.title}
+                                    </h3>
 
-                    <div className="flex gap-3 pt-4">
-                        <button
-                            type="button"
-                            onClick={() => setSelectedService(null)}
-                            className="flex-1 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="submit"
-                            className="flex-1 px-4 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                        >
-                            Submit Report
-                        </button>
+                                    <div className="p-8 rounded-3xl bg-white/5 border border-white/5 group-hover:border-brand-orange/20 hover:bg-white/[0.08] transition-all flex-grow mb-10">
+                                        <p className="text-sm text-slate-400 leading-relaxed font-light">
+                                            {service.desc}
+                                        </p>
+                                    </div>
+
+                                    <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-brand-orange group-hover:gap-6 transition-all duration-500">
+                                        Explorer la solution
+                                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+
+                        {/* Custom Inquiry Card */}
+                        <div className="glass-card p-12 rounded-[3.5rem] bg-brand-orange/10 border-brand-orange/20 h-full flex flex-col items-center justify-center text-center space-y-8 min-h-[450px]">
+                            <div className="w-20 h-20 bg-brand-orange text-white rounded-3xl flex items-center justify-center shadow-2xl shadow-brand-orange/30">
+                                <span className="material-symbols-outlined text-4xl">add</span>
+                            </div>
+                            <div className="space-y-4">
+                                <h3 className="text-2xl font-black uppercase italic tracking-tight">Besoin de plus ?</h3>
+                                <p className="text-sm text-slate-400 font-light leading-relaxed max-w-[250px]">
+                                    Nos ingénieurs conçoivent des solutions sur-mesure pour vos besoins spécifiques.
+                                </p>
+                            </div>
+                            <Link href="/contact" className="px-10 py-5 bg-white text-brand-midnight font-black rounded-2xl text-[10px] uppercase tracking-widest hover:bg-brand-orange hover:text-white transition-all transform hover:scale-105 shadow-xl">
+                                Contacter l'Expert
+                            </Link>
+                        </div>
                     </div>
-                </form>
-            </Modal>
+                </div>
+            </section>
+
+            {/* Bottom CTA */}
+            <section className="py-32 px-6 lg:px-20">
+                <div className="max-w-5xl mx-auto glass-card rounded-[4rem] p-16 md:p-24 text-center space-y-12 relative overflow-hidden bg-gradient-to-br from-brand-orange/20 to-transparent border-brand-orange/20 group">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-brand-orange/20 blur-[100px] -z-10 group-hover:bg-brand-orange/40 transition-all duration-1000"></div>
+
+                    <h2 className="text-4xl md:text-7xl font-display font-black uppercase italic tracking-tighter">
+                        Prêt à <span className="text-brand-orange not-italic">Transformer</span> <br />
+                        votre organisation ?
+                    </h2>
+
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
+                        <Link href="/auth/register" className="w-full sm:w-auto px-12 py-6 bg-brand-orange text-white font-black rounded-2xl text-[12px] uppercase tracking-[0.2em] shadow-2xl shadow-brand-orange/30 hover:scale-110 transition-all orange-glow">
+                            Démarrer maintenant
+                        </Link>
+                        <Link href="/contact" className="w-full sm:w-auto px-12 py-6 glass-card rounded-2xl text-[12px] font-black uppercase tracking-[0.2em] hover:bg-white/10 transition-all border border-brand-orange/30">
+                            Prendre RDV
+                        </Link>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 }

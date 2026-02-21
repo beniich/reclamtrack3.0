@@ -1,7 +1,7 @@
 'use client';
 
+import { Linkedin, Mail, MapPin, Twitter } from 'lucide-react';
 import Link from 'next/link';
-import { Github, Twitter, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
@@ -34,10 +34,9 @@ export function Footer() {
     };
 
     const socialLinks = [
-        { icon: <Github className="w-5 h-5" />, href: 'https://github.com', label: 'GitHub' },
-        { icon: <Twitter className="w-5 h-5" />, href: 'https://twitter.com', label: 'Twitter' },
-        { icon: <Linkedin className="w-5 h-5" />, href: 'https://linkedin.com', label: 'LinkedIn' },
-        { icon: <Mail className="w-5 h-5" />, href: 'mailto:contact@reclamtrack.ma', label: 'Email' },
+        { icon: <Twitter className="w-5 h-5" />, href: 'https://cloudindustrie.com', label: 'Twitter' },
+        { icon: <Linkedin className="w-5 h-5" />, href: 'https://cloudindustrie.com', label: 'LinkedIn' },
+        { icon: <Mail className="w-5 h-5" />, href: 'mailto:sam@cloudindustrie.com', label: 'Email' },
     ];
 
     return (
@@ -52,9 +51,9 @@ export function Footer() {
                                 <span className="material-symbols-outlined text-2xl">account_balance</span>
                             </div>
                             <div className="flex flex-col">
-                                <h2 className="text-xl font-bold leading-none">ReclamTrack</h2>
+                                <h2 className="text-xl font-bold leading-none">CloudIndustrie</h2>
                                 <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">
-                                    Municipal Services
+                                    Digital Infrastructure
                                 </span>
                             </div>
                         </div>
@@ -67,15 +66,11 @@ export function Footer() {
                         <div className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
                             <div className="flex items-center gap-2">
                                 <MapPin className="w-4 h-4" />
-                                <span>Casablanca, Morocco</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Phone className="w-4 h-4" />
-                                <span>+212 5XX-XXXXXX</span>
+                                <span>71-75 Shelton Street, Covent Garden, London, UK</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Mail className="w-4 h-4" />
-                                <span>contact@reclamtrack.ma</span>
+                                <span>sam@cloudindustrie.com</span>
                             </div>
                         </div>
                     </div>
@@ -162,7 +157,7 @@ export function Footer() {
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         {/* Copyright */}
                         <p className="text-sm text-slate-600 dark:text-slate-400">
-                            © {currentYear} ReclamTrack. All rights reserved.
+                            © {currentYear} Cloudindustrie Ltd. All rights reserved.
                         </p>
 
                         {/* Social Links */}

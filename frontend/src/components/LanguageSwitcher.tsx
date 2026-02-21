@@ -1,8 +1,8 @@
 'use client';
 
-import { useLocale } from 'next-intl';
-import { usePathname, useRouter } from '@/i18n/routing';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import { Languages } from 'lucide-react';
+import { useLocale } from 'next-intl';
 
 export function LanguageSwitcher() {
     const locale = useLocale();

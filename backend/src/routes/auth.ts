@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import mongoose from 'mongoose';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import { authenticate } from '../middleware/security.js';

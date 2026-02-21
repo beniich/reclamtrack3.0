@@ -12,7 +12,7 @@ export default function SentimentKeywords({
             <h4 className="font-bold text-base mb-4 text-slate-900 dark:text-white">Sentiment Keywords</h4>
             <div className="flex flex-wrap gap-2">
                 {keywords.map((kw, i) => {
-                    let base = "px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-default";
+                    const base = "px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-default";
                     let variant = "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700";
 
                     if (kw.change !== undefined) {

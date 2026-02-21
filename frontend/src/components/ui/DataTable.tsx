@@ -100,9 +100,9 @@ export function DataTable<T extends { id: string | number }>({
                                     {columns.map((column) => (
                                         <td key={String(column.key)} className="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">
                                             {column.render
-                                                // @ts-ignore - dynamic access
+                                                // @ts-ignore
                                                 ? column.render(row[column.key], row)
-                                                // @ts-ignore - dynamic access
+                                                // @ts-ignore
                                                 : String(row[column.key])
                                             }
                                         </td>

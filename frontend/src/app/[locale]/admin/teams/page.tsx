@@ -17,7 +17,7 @@ import {
     NotificationsActive,
     Add
 } from '@/components/icons';
-import { Search, Settings } from 'lucide-react'; // Import direct for standard UI icons if not in icons.tsx
+import { Search } from 'lucide-react'; // Import direct for standard UI icons if not in icons.tsx
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

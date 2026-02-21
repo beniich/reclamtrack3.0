@@ -89,6 +89,12 @@ export default function Header() {
                                             <span>{t('fleet')}</span>
                                         </div>
                                     </Link>
+                                    <Link href="/fleet/map" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                        <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold">
+                                            <Map className="text-sm w-4 h-4" />
+                                            <span>Suivi Temps Réel</span>
+                                        </div>
+                                    </Link>
                                     <Link href="/it-assets" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                                         <div className="flex items-center gap-2">
                                             <LayoutDashboard className="text-sm w-4 h-4" />

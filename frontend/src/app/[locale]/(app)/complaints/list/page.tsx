@@ -1,19 +1,44 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 import api from '@/lib/api';
 import { Complaint } from '@/types';
+import { Download, FileText, Loader2 } from 'lucide-react';
 import Link from 'next/link';
-import { LoadingSpinner } from '@/components/LoadingSpinner';
-import { FileText } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
-import { useRouter } from 'next/navigation';
 import { StatusBadge } from '@/components/ui/StatusBadge';
+import { useRouter } from 'next/navigation';
 
 export default function ComplaintListPage() {
     const router = useRouter();
     const [complaints, setComplaints] = useState<Complaint[]>([]);
     const [loading, setLoading] = useState(true);
+    const [exporting, setExporting] = useState(false);
+
+    const handleExport = async () => {
+        setExporting(true);
+        const toastId = toast.loading('Génération de l\'export Excel...');
+        try {
+            const result = await api.get('/analytics/export/complaints');
+            toast.dismiss(toastId);
+            if (result?.data?.mode === 'local' && result?.data?.downloadUrl) {
+                toast.success('Export prêt ! Téléchargement en cours...');
+                window.open(result.data.downloadUrl, '_blank');
+            } else if (result?.data?.mode === 'google_drive' && result?.data?.driveViewLink) {
+                toast.success('Export sauvegardé sur Google Drive !');
+                window.open(result.data.driveViewLink, '_blank');
+            } else {
+                toast.success(result?.message || 'Export réussi !');
+            }
+        } catch (err: unknown) {
+            toast.dismiss(toastId);
+            toast.error(err instanceof Error ? err.message : 'Erreur lors de l\'export');
+        } finally {
+            setExporting(false);
+        }
+    };
 
     useEffect(() => {
         api
@@ -43,12 +68,22 @@ export default function ComplaintListPage() {
                     <FileText className="w-6 h-6" />
                     Liste des réclamations
                 </h2>
-                <Link
-                    href="/complaints/new"
-                    className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors"
-                >
-                    Nouvelle réclamation
-                </Link>
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={handleExport}
+                        disabled={exporting}
+                        className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60 text-white px-4 py-2 rounded-lg transition-colors font-bold text-sm shadow-lg shadow-emerald-900/20"
+                    >
+                        {exporting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+                        Exporter Excel
+                    </button>
+                    <Link
+                        href="/complaints/new"
+                        className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors"
+                    >
+                        Nouvelle réclamation
+                    </Link>
+                </div>
             </div>
 
             {complaints.length === 0 ? (

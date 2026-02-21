@@ -309,4 +309,48 @@ export const organizationsApi = {
 // Alias for compatibility
 export const organizationApi = organizationsApi;
 
+// Security API
+export const securityApi = {
+    getPasswordAudit: () => apiClient.get('/security/audit/passwords'),
+    getRdpSessions: () => apiClient.get('/security/sessions/rdp'),
+    getGpoList: () => apiClient.get('/security/gpo'),
+    getCompliance: () => apiClient.get('/security/compliance'),
+    runPowerShell: (scriptName: string) => apiClient.post('/security/powershell', { scriptName }),
+    // pfSense
+    connectPfsense: (data: any) => apiClient.post('/security/pfsense/connect', data),
+    getPfsenseRules: () => apiClient.get('/security/pfsense/rules'),
+    getPfsenseLogs: (limit = 50) => apiClient.get('/security/pfsense/logs', { limit }),
+    getPfsenseSystem: () => apiClient.get('/security/pfsense/system'),
+    getPfsenseTraffic: () => apiClient.get('/security/pfsense/traffic'),
+    // Secret Vault
+    getSecrets: () => apiClient.get('/security/secrets'),
+    createSecret: (data: any) => apiClient.post('/security/secrets', data),
+    revealSecret: (id: string) => apiClient.get(`/security/secrets/${id}/reveal`),
+    deleteSecret: (id: string) => apiClient.delete(`/security/secrets/${id}`),
+    getSecretStats: () => apiClient.get('/security/secrets/stats'),
+};
+
+// IT Assets API
+export const itAssetsApi = {
+    getAll: (params?: any) => apiClient.get('/it-assets', params),
+    getById: (id: string) => apiClient.get(`/it-assets/${id}`),
+    getStats: () => apiClient.get('/it-assets/stats'),
+    create: (data: any) => apiClient.post('/it-assets', data),
+    update: (id: string, data: any) => apiClient.put(`/it-assets/${id}`, data),
+    delete: (id: string) => apiClient.delete(`/it-assets/${id}`),
+    addMaintenance: (id: string, data: any) => apiClient.post(`/it-assets/${id}/maintenance`, data),
+};
+
+// IT Tickets (Helpdesk) API
+export const itTicketsApi = {
+    getAll: (params?: any) => apiClient.get('/it-tickets', params),
+    getById: (id: string) => apiClient.get(`/it-tickets/${id}`),
+    getStats: () => apiClient.get('/it-tickets/stats'),
+    create: (data: any) => apiClient.post('/it-tickets', data),
+    update: (id: string, data: any) => apiClient.put(`/it-tickets/${id}`, data),
+    addUpdate: (id: string, data: any) => apiClient.post(`/it-tickets/${id}/updates`, data),
+    assign: (id: string, data: any) => apiClient.post(`/it-tickets/${id}/assign`, data),
+    resolve: (id: string, data: any) => apiClient.post(`/it-tickets/${id}/resolve`, data),
+};
+
 export default apiClient;

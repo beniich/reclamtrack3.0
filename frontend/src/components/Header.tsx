@@ -89,6 +89,24 @@ export default function Header() {
                                             <span>{t('fleet')}</span>
                                         </div>
                                     </Link>
+                                    <Link href="/it-assets" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                        <div className="flex items-center gap-2">
+                                            <LayoutDashboard className="text-sm w-4 h-4" />
+                                            <span>IT Assets</span>
+                                        </div>
+                                    </Link>
+                                    <Link href="/it-helpdesk" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                        <div className="flex items-center gap-2">
+                                            <FileText className="text-sm w-4 h-4" />
+                                            <span>IT Helpdesk</span>
+                                        </div>
+                                    </Link>
+                                    <Link href="/admin/export-settings" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors last:rounded-b-lg">
+                                        <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold">
+                                            <SettingsIcon className="text-sm w-4 h-4" />
+                                            <span>Paramètres Export</span>
+                                        </div>
+                                    </Link>
                                     <Link href="/roster-scheduler" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                                         <div className="flex items-center gap-2">
                                             <CalendarDays className="text-sm w-4 h-4" />

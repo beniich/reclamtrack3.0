@@ -20,7 +20,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import api from '@/lib/api';
+import { securityApi } from '@/lib/api';
 import {
     AlertCircle,
     Clock,
@@ -70,10 +70,8 @@ export default function SecretVaultPage() {
 
   const loadSecrets = async () => {
     try {
-      const res = await api.get('/api/security/secrets');
-      if (res.data.success) {
-        setSecrets(res.data.data);
-      }
+      const data = await securityApi.getSecrets();
+      setSecrets(data);
     } catch (error) {
       toast.error('Failed to load secrets');
     } finally {
@@ -83,13 +81,11 @@ export default function SecretVaultPage() {
 
   const handleCreate = async () => {
     try {
-      const res = await api.post('/api/security/secrets', newSecret);
-      if (res.data.success) {
-        toast.success('Secret created successfully');
-        setIsCreateOpen(false);
-        setNewSecret({ name: '', value: '', category: 'API_KEY', environment: 'production', description: '' });
-        loadSecrets();
-      }
+      await securityApi.createSecret(newSecret);
+      toast.success('Secret created successfully');
+      setIsCreateOpen(false);
+      setNewSecret({ name: '', value: '', category: 'API_KEY', environment: 'production', description: '' });
+      loadSecrets();
     } catch (error: any) {
       toast.error(error.response?.data?.error || 'Creation failed');
     }
@@ -103,12 +99,10 @@ export default function SecretVaultPage() {
     }
 
     try {
-      const res = await api.get(`/api/security/secrets/${id}/reveal`);
-      if (res.data.success) {
-        setRevealedSecret(id);
-        setRevealedValue(res.data.data.value);
-        toast.success('Secret revealed');
-      }
+      const data = await securityApi.revealSecret(id);
+      setRevealedSecret(id);
+      setRevealedValue(data.value);
+      toast.success('Secret revealed');
     } catch (error) {
       toast.error('Access denied or failed to reveal');
     }
@@ -117,7 +111,7 @@ export default function SecretVaultPage() {
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this secret? This cannot be undone.')) return;
     try {
-      await api.delete(`/api/security/secrets/${id}`);
+      await securityApi.deleteSecret(id);
       toast.success('Secret deleted');
       loadSecrets();
     } catch (error) {

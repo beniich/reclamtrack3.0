@@ -11,7 +11,7 @@ export interface INetworkDevice extends Document {
   snmpCommunity?: string; // Should be encrypted
   snmpVersion: 'v1' | 'v2c' | 'v3';
   manufacturer?: string;
-  model?: string;
+  deviceModel?: string;
   firmwareVersion?: string;
   serialNumber?: string;
   interfaces?: Array<{
@@ -94,7 +94,7 @@ const NetworkDeviceSchema = new Schema<INetworkDevice>(
 
     // Device info
     manufacturer: String,
-    model: String,
+    deviceModel: String,
     firmwareVersion: String,
     serialNumber: String,
 

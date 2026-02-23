@@ -169,7 +169,7 @@ router.post('/:id/maintenance', async (req: AuthenticatedRequest, res: Response)
           maintenanceHistory: {
             date: new Date(),
             type: req.body.type,
-            performedBy: req.user._id,
+            performedBy: req.user!._id || req.user!.id,
             notes: req.body.notes,
             cost: req.body.cost || 0,
           },

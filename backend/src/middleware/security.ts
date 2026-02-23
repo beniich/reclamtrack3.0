@@ -1,101 +1,92 @@
+/**
+ * @file security.ts
+ * @description Single source of truth for all Express security middleware.
+ *              Handles authentication, organization context, RBAC, API key
+ *              validation, and subscription feature gating.
+ * @module backend/middleware
+ */
+
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { Membership } from '../models/Membership.js';
+import {
+  AppError,
+  ForbiddenAppError,
+  TokenExpiredAppError,
+  TokenInvalidAppError,
+} from '../utils/AppError.js';
+import { logger } from '../utils/logger.js';
 
-/**
- * Extended Request interface with user and organization context
- */
-export interface AuthenticatedRequest extends Request {
-  user?: {
-    id: string;
-    _id?: string;
-    role: string;
-    email?: string;
-  };
-  organizationId?: string;
-  membership?: any;
-}
+// ──────────────────────────────────────────────────────────────────────────────
+// Types
+// ──────────────────────────────────────────────────────────────────────────────
 
-/**
- * JWT Payload interface
- */
 interface JwtPayload {
   id: string;
   role: string;
   email?: string;
 }
 
+// ──────────────────────────────────────────────────────────────────────────────
+// 1. Authentication — verify JWT access token
+// ──────────────────────────────────────────────────────────────────────────────
+
 /**
- * Authentication middleware
- * Verifies JWT token and attaches user to request
+ * Verifies the Bearer JWT in the Authorization header.
+ * Attaches `req.user` on success.
+ * Distinguishes expired tokens (AUTH_TOKEN_EXPIRED) from invalid ones (AUTH_TOKEN_INVALID).
  */
-export const authenticate = (
-  req: AuthenticatedRequest,
-  res: Response,
-  next: NextFunction
-): void | Response => {
+export const authenticate = (req: Request, res: Response, next: NextFunction): void => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    console.log('[Auth Middleware] Missing or invalid Authorization header');
-    return res.status(401).json({
-      success: false,
-      error: 'Token requis',
-      code: 'AUTH_TOKEN_MISSING',
-    });
+    return next(new AppError('Token manquant ou format invalide', 401, 'AUTH_TOKEN_MISSING'));
   }
 
   const token = authHeader.split(' ')[1];
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
     req.user = decoded;
-    console.log(`[Auth Middleware] ✅ Token valid for user ${decoded.id}`);
+    logger.debug(`[Auth] ✅ User ${decoded.id} authenticated`, { requestId: req.id });
     next();
   } catch (err) {
-    console.error(
-      '[Auth Middleware] ❌ Token verification failed:',
-      err instanceof Error ? err.message : 'Unknown error'
-    );
-    return res.status(401).json({
-      success: false,
-      error: 'Token invalide ou expiré',
-      code: 'AUTH_TOKEN_INVALID',
-    });
+    if (err instanceof jwt.TokenExpiredError) {
+      return next(new TokenExpiredAppError());
+    }
+    return next(new TokenInvalidAppError());
   }
 };
 
+// Backward-compatibility aliases
+export const auth = authenticate;
+export const protect = authenticate;
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 2. Organization context — verify membership
+// ──────────────────────────────────────────────────────────────────────────────
+
 /**
- * Organization membership middleware
- * Requires authenticate middleware to be called first
- * Verifies user membership in the organization specified in x-organization-id header
+ * Verifies the user is an ACTIVE member of the organization specified
+ * in the `x-organization-id` request header.
+ * Must be called AFTER `authenticate`.
+ * Attaches `req.organizationId` and `req.membership` on success.
  */
 export const requireOrganization = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction
-): Promise<void | Response> => {
+): Promise<void> => {
   try {
-    const userId = req.user?._id || req.user?.id;
+    const userId = req.user?._id ?? req.user?.id;
     if (!userId) {
-      console.warn('[Org Middleware] User ID missing from request user context');
-      return res.status(401).json({
-        success: false,
-        error: 'Non authentifié',
-        code: 'AUTH_USER_MISSING',
-      });
+      return next(new AppError('Non authentifié', 401, 'AUTH_USER_MISSING'));
     }
 
-    // Get organization ID from header
-    const organizationId = req.headers['x-organization-id'];
+    const organizationId = req.headers['x-organization-id'] as string | undefined;
     if (!organizationId) {
-      return res.status(400).json({
-        success: false,
-        error: 'En-tête x-organization-id requis',
-        code: 'ORG_HEADER_MISSING',
-      });
+      return next(new AppError('En-tête x-organization-id requis', 400, 'ORG_HEADER_MISSING'));
     }
 
-    // Check membership
     const membership = await Membership.findOne({
       userId,
       organizationId,
@@ -103,215 +94,172 @@ export const requireOrganization = async (
     });
 
     if (!membership) {
-      return res.status(403).json({
-        success: false,
-        error: 'Accès refusé à cette organisation',
-        code: 'ORG_ACCESS_DENIED',
-      });
+      return next(new ForbiddenAppError('Accès refusé à cette organisation', 'ORG_ACCESS_DENIED'));
     }
 
-    // Attach organization context to request
-    req.organizationId = organizationId as string;
-    req.membership = membership;
+    req.organizationId = organizationId;
+    req.membership = membership as any;
 
-    console.log(`[Org Middleware] ✅ User ${userId} has access to org ${organizationId}`);
+    logger.debug(`[Org] ✅ User ${userId} → org ${organizationId}`, { requestId: req.id });
     next();
-  } catch (error: any) {
-    console.error('[Org Middleware] ❌ Error:', error);
-    return res.status(500).json({
-      success: false,
-      error: error.message,
-      code: 'ORG_CHECK_ERROR',
-    });
+  } catch (err) {
+    next(err);
   }
 };
 
+// ──────────────────────────────────────────────────────────────────────────────
+// 3. Admin role — requires requireOrganization to run first
+// ──────────────────────────────────────────────────────────────────────────────
+
 /**
- * Admin role middleware
- * Requires requireOrganization middleware to be called first
+ * Requires the user to have admin rights in the current organization.
+ * Must be called AFTER `requireOrganization`.
  */
 export const requireAdmin = async (
-  req: AuthenticatedRequest,
-  res: Response,
-  next: NextFunction
-): Promise<void | Response> => {
-  try {
-    if (!req.membership) {
-      return res.status(403).json({
-        success: false,
-        error: "Context d'organisation manquant",
-        code: 'ORG_CONTEXT_MISSING',
-      });
-    }
-
-    if (!req.membership.isAdmin()) {
-      return res.status(403).json({
-        success: false,
-        error: 'Droits administrateur requis',
-        code: 'ADMIN_REQUIRED',
-      });
-    }
-
-    console.log('[Admin Middleware] ✅ User has admin rights');
-    next();
-  } catch (error: any) {
-    console.error('[Admin Middleware] ❌ Error:', error);
-    return res.status(500).json({
-      success: false,
-      error: error.message,
-      code: 'ADMIN_CHECK_ERROR',
-    });
-  }
-};
-
-/**
- * Role-based access control middleware
- * Requires requireOrganization middleware to be called first
- * @param roles - Single role string or array of role strings
- */
-export const requireRole = (roles: string | string[]) => {
-  return async (
-    req: AuthenticatedRequest,
-    res: Response,
-    next: NextFunction
-  ): Promise<void | Response> => {
-    try {
-      if (!req.membership) {
-        return res.status(403).json({
-          success: false,
-          error: "Context d'organisation manquant",
-          code: 'ORG_CONTEXT_MISSING',
-        });
-      }
-
-      const allowedRoles = Array.isArray(roles) ? roles : [roles];
-      const hasPermission = allowedRoles.some((role) => req.membership.hasRole(role));
-
-      if (!hasPermission) {
-        return res.status(403).json({
-          success: false,
-          error: `Rôle requis: ${allowedRoles.join(' ou ')}`,
-          code: 'ROLE_REQUIRED',
-        });
-      }
-
-      console.log(`[Role Middleware] ✅ User has required role: ${allowedRoles.join(' or ')}`);
-      next();
-    } catch (error: any) {
-      console.error('[Role Middleware] ❌ Error:', error);
-      return res.status(500).json({
-        success: false,
-        error: error.message,
-        code: 'ROLE_CHECK_ERROR',
-      });
-    }
-  };
-};
-
-/**
- * Rate limiting configuration
- * Can be customized per route
- */
-export interface RateLimitOptions {
-  windowMs?: number; // Time window in milliseconds
-  max?: number; // Max requests per window
-  message?: string; // Custom error message
-}
-
-/**
- * Simple in-memory rate limiter
- * For production, use Redis-based rate limiting
- */
-const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
-
-export const rateLimiter = (options: RateLimitOptions = {}) => {
-  const windowMs = options.windowMs || 60000; // 1 minute default
-  const max = options.max || 100; // 100 requests per window default
-  const message = options.message || 'Trop de requêtes, réessayez plus tard';
-
-  return (req: Request, res: Response, next: NextFunction): void | Response => {
-    const key = req.ip || 'unknown';
-    const now = Date.now();
-
-    let record = rateLimitStore.get(key);
-
-    if (!record || now > record.resetTime) {
-      record = { count: 1, resetTime: now + windowMs };
-      rateLimitStore.set(key, record);
-      return next();
-    }
-
-    if (record.count >= max) {
-      console.warn(`[Rate Limiter] ⚠️ Rate limit exceeded for ${key}`);
-      return res.status(429).json({
-        success: false,
-        error: message,
-        code: 'RATE_LIMIT_EXCEEDED',
-      });
-    }
-
-    record.count++;
-    next();
-  };
-};
-
-/**
- * Security headers middleware
- * Adds common security headers to responses
- */
-export const securityHeaders = (_req: Request, res: Response, next: NextFunction): void => {
-  // Prevent clickjacking
-  res.setHeader('X-Frame-Options', 'DENY');
-
-  // Prevent MIME type sniffing
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-
-  // Enable XSS protection
-  res.setHeader('X-XSS-Protection', '1; mode=block');
-
-  // Strict Transport Security (HTTPS only)
-  if (process.env.NODE_ENV === 'production') {
-    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  }
-
-  // Content Security Policy
-  res.setHeader(
-    'Content-Security-Policy',
-    "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
-  );
-
-  next();
-};
-
-/**
- * CSRF token validation middleware
- * For mutation operations (POST, PUT, DELETE, PATCH)
- */
-export const csrfProtection = (
   req: Request,
   res: Response,
   next: NextFunction
-): void | Response => {
-  // Skip CSRF for GET, HEAD, OPTIONS
-  if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) {
-    return next();
+): Promise<void> => {
+  try {
+    if (!req.membership) {
+      return next(new ForbiddenAppError("Contexte d'organisation manquant", 'ORG_CONTEXT_MISSING'));
+    }
+    if (!(req.membership as any).isAdmin()) {
+      return next(new ForbiddenAppError('Droits administrateur requis', 'ADMIN_REQUIRED'));
+    }
+    logger.debug(`[Admin] ✅ Admin access granted`, { requestId: req.id });
+    next();
+  } catch (err) {
+    next(err);
   }
-
-  const csrfToken = req.headers['x-csrf-token'] as string;
-  const expectedToken = req.headers['x-csrf-expected'] as string;
-
-  if (!csrfToken || csrfToken !== expectedToken) {
-    console.warn('[CSRF] ⚠️ Invalid CSRF token');
-    return res.status(403).json({
-      success: false,
-      error: 'Token CSRF invalide',
-      code: 'CSRF_INVALID',
-    });
-  }
-
-  next();
 };
 
-// Export backward compatibility aliases
-export const auth = authenticate;
-export const protect = authenticate;
+// ──────────────────────────────────────────────────────────────────────────────
+// 4. Role-based access control
+// ──────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Requires the user to have at least one of the specified roles.
+ * Must be called AFTER `requireOrganization`.
+ * @param roles - Single role or array of roles (OR logic)
+ */
+export const requireRole = (roles: string | string[]) => {
+  return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      if (!req.membership) {
+        return next(
+          new ForbiddenAppError("Contexte d'organisation manquant", 'ORG_CONTEXT_MISSING')
+        );
+      }
+      const allowedRoles = Array.isArray(roles) ? roles : [roles];
+      const hasPermission = allowedRoles.some((role) => (req.membership as any).hasRole(role));
+      if (!hasPermission) {
+        return next(
+          new ForbiddenAppError(`Rôle requis: ${allowedRoles.join(' ou ')}`, 'ROLE_REQUIRED')
+        );
+      }
+      logger.debug(`[RBAC] ✅ Role check passed: ${allowedRoles.join('|')}`, { requestId: req.id });
+      next();
+    } catch (err) {
+      next(err);
+    }
+  };
+};
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 5. API Key authentication
+// ──────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Validates the API key provided in the `x-api-key` header.
+ * Sets `req.apiKey` with key metadata on success.
+ * Can be used independently of JWT authentication (for service-to-service calls).
+ */
+export const requireApiKey = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const rawKey = req.headers['x-api-key'] as string | undefined;
+    if (!rawKey) {
+      return next(new AppError('En-tête x-api-key requis', 401, 'API_KEY_MISSING'));
+    }
+
+    // Lazy import to avoid circular dependency before apiKeyService is created
+    const { validateApiKey } = await import('../services/apiKeyService.js');
+    const keyDoc = await validateApiKey(rawKey);
+
+    if (!keyDoc) {
+      return next(new AppError('Clé API invalide ou expirée', 401, 'API_KEY_INVALID'));
+    }
+
+    req.apiKey = {
+      orgId: keyDoc.orgId.toString(),
+      scopes: keyDoc.scopes,
+      plan: keyDoc.plan,
+      name: keyDoc.name,
+    };
+
+    logger.debug(`[ApiKey] ✅ Key "${keyDoc.name}" validated`, { requestId: req.id });
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 6. Subscription feature gating
+// ──────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Requires the organization's subscription to include a specific feature.
+ * Must be called AFTER `requireOrganization`.
+ * @param feature - Feature name to check (e.g. 'api_access', 'sso', 'advanced_analytics')
+ */
+export const requireSubscription = (feature: string) => {
+  return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      if (!req.organizationId) {
+        return next(
+          new ForbiddenAppError("Contexte d'organisation manquant", 'ORG_CONTEXT_MISSING')
+        );
+      }
+
+      const { hasFeature } = await import('../services/subscriptionService.js');
+      const allowed = await hasFeature(req.organizationId, feature);
+
+      if (!allowed) {
+        return next(
+          new AppError(
+            `Cette fonctionnalité ('${feature}') n'est pas disponible dans votre plan`,
+            402,
+            'SUBSCRIPTION_FEATURE_REQUIRED'
+          )
+        );
+      }
+
+      logger.debug(`[Sub] ✅ Feature '${feature}' granted`, { requestId: req.id });
+      next();
+    } catch (err) {
+      next(err);
+    }
+  };
+};
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 7. Security headers (additional to Helmet)
+// ──────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Adds supplemental security response headers not covered by Helmet.
+ */
+export const securityHeaders = (_req: Request, res: Response, next: NextFunction): void => {
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  if (process.env.NODE_ENV === 'production') {
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  }
+  next();
+};

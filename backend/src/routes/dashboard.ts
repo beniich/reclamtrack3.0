@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { protect } from '../middleware/auth.js';
+﻿import { Router } from 'express';
+import { authenticate as protect } from '../middleware/security.js';
 import { Complaint } from '../models/Complaint.js';
 import { Team } from '../models/Team.js';
 import mongoose from 'mongoose';

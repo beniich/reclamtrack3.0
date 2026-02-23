@@ -1,6 +1,6 @@
-import express, { Response } from 'express';
-import { auth } from '../middleware/auth.js';
-import { requireAdmin, requireOrganization } from '../middleware/organization.js';
+﻿import express, { Response } from 'express';
+import { authenticate as auth } from '../middleware/security.js';
+import { requireAdmin, requireOrganization } from '../middleware/security.js';
 import ADSyncLog from '../models/ADSyncLog.js';
 import { ActiveDirectoryService } from '../services/adService.js';
 import { AuthenticatedRequest } from '../types/request.js';

@@ -11,13 +11,13 @@
  */
 
 // Core Security Service
-export { SecurityService, securityService } from './securityService.js';
+export { SecurityService, securityService } from '../securityService.js';
 
 // Secrets Management
-export { SecretService, secretService } from './secretService.js';
+export { SecretService, secretService } from '../secretService.js';
 
 // Firewall & Network Security
-export { PfSenseService, pfSenseService } from './pfSenseService.js';
+export { PfSenseService, pfSenseService } from '../pfSenseService.js';
 
 /**
  * Security Services Type Definitions

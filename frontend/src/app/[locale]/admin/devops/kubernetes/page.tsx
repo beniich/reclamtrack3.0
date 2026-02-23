@@ -1,5 +1,7 @@
 'use client'
 
+import { Footer } from "@/components/devops-dashboards/layout/Footer"
+import { Header } from "@/components/devops-dashboards/layout/Header"
 import { useState } from 'react'
 
 export default function KubernetesPage() {
@@ -8,8 +10,9 @@ export default function KubernetesPage() {
 
     return (
         <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-hidden">
-            {/* Top Navigation Bar */}
-            <header className="flex items-center justify-between px-6 py-3 border-b border-border-dark bg-surface-dark/50 backdrop-blur-md sticky top-0 z-50">
+            <Header />
+            {/* Top Navigation Bar / Subheader */}
+            <header className="flex items-center justify-between px-6 py-3 border-b border-border-dark bg-surface-dark/50 backdrop-blur-md z-10">
                 <div className="flex items-center gap-6">
                     <div className="flex items-center gap-3">
                         <div className="bg-primary/20 p-1.5 rounded-lg text-primary">
@@ -315,12 +318,13 @@ export default function KubernetesPage() {
             </main>
 
             {/* Floating Tooltip for pod health */}
-            <div className="fixed bottom-12 right-6">
-                <div className="bg-primary shadow-xl shadow-primary/20 rounded-full px-4 py-2 flex items-center gap-3 text-white">
+            <div className="fixed bottom-24 right-6 pointer-events-none">
+                <div className="bg-primary shadow-xl shadow-primary/20 rounded-full px-4 py-2 flex items-center gap-3 text-white pointer-events-auto">
                     <span className="material-symbols-outlined animate-spin text-sm">sync</span>
                     <span className="text-xs font-bold tracking-tight">AUTO-FOLLOW LOGS ENABLED</span>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { protect, adminOnly } from '../middleware/auth.js';
+﻿import { Router } from 'express';
+import { authenticate as protect, requireAdmin as adminOnly } from '../middleware/security.js';
 import { body, param } from 'express-validator';
 import { validator } from '../middleware/validator.js';
 import { Intervention } from '../models/Intervention.js';

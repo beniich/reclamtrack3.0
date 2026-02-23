@@ -16,7 +16,7 @@ export interface IITAsset extends Document {
     | 'other';
   status: 'active' | 'inactive' | 'maintenance' | 'retired' | 'broken';
   manufacturer?: string;
-  model?: string;
+  deviceModel?: string;
   serialNumber?: string;
   hostname?: string;
   ipAddress?: string;
@@ -107,7 +107,7 @@ const ITAssetSchema = new Schema<IITAsset>(
 
     // Hardware info
     manufacturer: String,
-    model: String,
+    deviceModel: String,
     serialNumber: String,
 
     // Network info

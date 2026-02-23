@@ -1,8 +1,8 @@
 import express, { Response } from 'express';
+import rateLimit from 'express-rate-limit';
 import {
   authenticate,
   AuthenticatedRequest,
-  rateLimiter,
   requireOrganization,
   requireRole,
 } from '../middleware/security.js';
@@ -22,7 +22,7 @@ router.use(
   authenticate,
   requireOrganization,
   requireRole(['ADMIN', 'OWNER']),
-  rateLimiter({ max: 100, windowMs: 60000 })
+  rateLimit({ max: 100, windowMs: 60000 })
 );
 
 /**
@@ -80,14 +80,14 @@ router.get('/gpo', async (req: AuthenticatedRequest, res: Response) => {
 router.post('/powershell', async (req: AuthenticatedRequest, res: Response) => {
   try {
     const { scriptName } = req.body;
-    const userId = req.user?.id || req.user?._id;
+    const userId = req.user!.id || req.user!._id;
 
     if (!scriptName) {
       return errorResponse(res, 'Script name is required', 400, ErrorCodes.MISSING_REQUIRED_FIELD);
     }
 
     if (!userId) {
-      return errorResponse(res, 'User identity missing', 401, ErrorCodes.AUTH_USER_MISSING);
+      return errorResponse(res, 'User identity missing', 401, ErrorCodes.AUTH_TOKEN_MISSING);
     }
 
     const result = await securityService.executePowerShellScript(scriptName, userId);
@@ -243,7 +243,7 @@ router.get('/secrets', async (req: AuthenticatedRequest, res: Response) => {
     }
 
     const { secretService } = await import('../services/secretService.js');
-    const secrets = await secretService.getSecrets(organizationId);
+    const secrets = await secretService.getSecrets(organizationId!);
     return successResponse(res, secrets);
   } catch (error: any) {
     console.error('[Security Routes] Error in get secrets:', error);
@@ -258,7 +258,7 @@ router.get('/secrets', async (req: AuthenticatedRequest, res: Response) => {
 router.post('/secrets', async (req: AuthenticatedRequest, res: Response) => {
   try {
     const organizationId = req.organizationId;
-    const userId = req.user?.id || req.user?._id;
+    const userId = req.user!.id || req.user!._id;
 
     if (!organizationId) {
       return errorResponse(res, 'Organization ID manquant', 400, ErrorCodes.ORG_CONTEXT_MISSING);
@@ -269,7 +269,7 @@ router.post('/secrets', async (req: AuthenticatedRequest, res: Response) => {
     }
 
     const { secretService } = await import('../services/secretService.js');
-    const secret = await secretService.createSecret(req.body, userId, organizationId);
+    const secret = await secretService.createSecret(req.body, userId, organizationId!);
     return createdResponse(res, secret);
   } catch (error: any) {
     console.error('[Security Routes] Error in create secret:', error);
@@ -291,7 +291,7 @@ router.get('/secrets/:id/reveal', async (req: AuthenticatedRequest, res: Respons
     }
 
     const { secretService } = await import('../services/secretService.js');
-    const secret = await secretService.revealSecret(id, organizationId);
+    const secret = await secretService.revealSecret(id, organizationId!);
     return successResponse(res, secret);
   } catch (error: any) {
     console.error('[Security Routes] Error in reveal secret:', error);
@@ -313,7 +313,7 @@ router.delete('/secrets/:id', async (req: AuthenticatedRequest, res: Response) =
     }
 
     const { secretService } = await import('../services/secretService.js');
-    await secretService.deleteSecret(id, organizationId);
+    await secretService.deleteSecret(id, organizationId!);
     return successResponse(res, { message: 'Secret deleted' });
   } catch (error: any) {
     console.error('[Security Routes] Error in delete secret:', error);
@@ -334,7 +334,7 @@ router.get('/secrets/stats', async (req: AuthenticatedRequest, res: Response) =>
     }
 
     const { secretService } = await import('../services/secretService.js');
-    const stats = await secretService.getSecretStats(organizationId);
+    const stats = await secretService.getSecretStats(organizationId!);
     return successResponse(res, stats);
   } catch (error: any) {
     console.error('[Security Routes] Error in secret stats:', error);

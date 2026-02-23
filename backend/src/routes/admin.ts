@@ -1,6 +1,7 @@
-import { Request, Response, Router } from 'express';
-import { protect as auth } from '../middleware/auth.js';
+﻿import { Request, Response, Router } from 'express';
+import { authenticate as auth } from '../middleware/security.js';
 import { runSecurityAudit } from '../services/securityAuditService.js';
+import { securityService } from '../services/securityService.js';
 
 const router = Router();
 

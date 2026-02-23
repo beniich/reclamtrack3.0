@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { protect } from '../middleware/auth.js';
+﻿import { Router } from 'express';
+import { authenticate as protect } from '../middleware/security.js';
 import { body } from 'express-validator';
 import { validator } from '../middleware/validator.js';
 import { Assignment } from '../models/Assignment.js';

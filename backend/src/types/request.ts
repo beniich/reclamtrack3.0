@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-export interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Omit<Request, 'user'> {
   user?: {
     id: string;
     _id?: string;

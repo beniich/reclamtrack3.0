@@ -164,13 +164,13 @@ export class ActiveDirectoryService {
             await Membership.create({
               userId: existingUser._id,
               organizationId,
-              role,
+              roles: [role],
               status: 'active',
             });
-          } else if (membership.role !== role) {
+          } else if (!membership.roles || !membership.roles.includes(role)) {
             // Update role if changed in AD
             // Note: Usually we might want to manually manage keys, but let's sync for now
-            // await Membership.findByIdAndUpdate(membership._id, { role });
+            // await Membership.findByIdAndUpdate(membership._id, { roles: [role] });
           }
 
           results.updated++;
@@ -194,7 +194,7 @@ export class ActiveDirectoryService {
           await Membership.create({
             userId: newUser._id,
             organizationId,
-            role,
+            roles: [role],
             status: 'active',
           });
           results.imported++;
@@ -221,7 +221,7 @@ export class ActiveDirectoryService {
         disabled: 0,
       },
       duration: Date.now() - startTime,
-      errors: results.errors,
+      syncErrors: results.errors,
     });
 
     return results;

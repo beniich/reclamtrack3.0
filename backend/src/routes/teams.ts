@@ -1,6 +1,6 @@
-import { Router } from 'express';
-import { protect, adminOnly } from '../middleware/auth.js';
-import { requireOrganization } from '../middleware/organization.js';
+﻿import { Router } from 'express';
+import { authenticate as protect, requireAdmin as adminOnly } from '../middleware/security.js';
+import { requireOrganization } from '../middleware/security.js';
 import { Team } from '../models/Team.js';
 import { body, param } from 'express-validator';
 import { validator } from '../middleware/validator.js';

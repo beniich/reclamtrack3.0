@@ -1,5 +1,5 @@
-import { Router, Request, Response } from 'express';
-import { protect as auth } from '../middleware/auth.js';
+﻿import { Router, Request, Response } from 'express';
+import { authenticate as auth } from '../middleware/security.js';
 import { logger } from '../utils/logger.js';
 import { Feedback } from '../models/Feedback.js';
 

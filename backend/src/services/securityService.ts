@@ -29,9 +29,10 @@ export class SecurityService {
         }
 
         // Check password age (if lastPasswordChange field exists)
-        if (user.lastPasswordChange) {
+        if ((user as any).lastPasswordChange) {
           const daysSinceChange = Math.floor(
-            (Date.now() - new Date(user.lastPasswordChange).getTime()) / (1000 * 60 * 60 * 24)
+            (Date.now() - new Date((user as any).lastPasswordChange).getTime()) /
+              (1000 * 60 * 60 * 24)
           );
           if (daysSinceChange > 90) {
             audit.rotationNeeded++;

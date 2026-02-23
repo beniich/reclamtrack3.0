@@ -9,7 +9,7 @@ export interface IADSyncLog extends Document {
   totalProcessed: number;
   successful: number;
   failed: number;
-  errors?: Array<{
+  syncErrors?: Array<{
     username: string;
     error: string;
   }>;
@@ -64,7 +64,7 @@ const ADSyncLogSchema = new Schema<IADSyncLog>(
     },
 
     // Errors encountered
-    errors: [
+    syncErrors: [
       {
         username: String,
         error: String,

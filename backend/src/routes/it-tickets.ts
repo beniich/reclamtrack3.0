@@ -146,7 +146,7 @@ router.post('/', async (req: AuthenticatedRequest, res: Response) => {
     const ticket = await ITTicket.create({
       ...req.body,
       organizationId: req.organizationId,
-      requestedBy: req.user._id,
+      requestedBy: req.user!._id || req.user!.id,
       sla: {
         responseTime: sla.response,
         resolutionTime: sla.resolution,
@@ -209,7 +209,7 @@ router.post('/:id/updates', async (req: AuthenticatedRequest, res: Response) => 
         $push: {
           updates: {
             timestamp: new Date(),
-            userId: req.user._id,
+            userId: req.user!._id || req.user!.id,
             message: req.body.message,
             internal: req.body.internal || false,
           },
@@ -242,7 +242,7 @@ router.post('/:id/assign', async (req: AuthenticatedRequest, res: Response) => {
         $push: {
           updates: {
             timestamp: new Date(),
-            userId: req.user._id,
+            userId: req.user!._id || req.user!.id,
             message: `Ticket assigned to ${req.body.assignedTo}`,
             internal: true,
           },
@@ -277,7 +277,7 @@ router.post('/:id/resolve', async (req: any, res) => {
             summary: req.body.summary,
             rootCause: req.body.rootCause,
             solution: req.body.solution,
-            resolvedBy: req.user._id,
+            resolvedBy: req.user!._id || req.user!.id,
           },
         },
       },

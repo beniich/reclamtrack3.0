@@ -1,17 +1,35 @@
 "use client"
 
+import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
+import { Badge } from "@/components/ui/badge"
 import { useSecuritySocket } from "@/hooks/useSecuritySocket"
 import { securityApi } from "@/lib/api"
 import { format } from "date-fns"
-import Link from "next/link"
 import { useEffect, useState } from "react"
 
+interface ComplianceData {
+    complianceScore: number;
+    recommendations: string[];
+}
+
+interface RdpSession {
+    username: string;
+    sessionName: string;
+    id: string;
+    state: string;
+}
+
+interface PasswordAudit {
+    bcryptHashed: number;
+    totalUsers: number;
+}
+
 export default function SecurityPage() {
-    const [complianceData, setComplianceData] = useState<any>(null);
-    const [rdpSessions, setRdpSessions] = useState<any[]>([]);
-    const [passwordAudit, setPasswordAudit] = useState<any>(null);
+    const [complianceData, setComplianceData] = useState<ComplianceData | null>(null);
+    const [rdpSessions, setRdpSessions] = useState<RdpSession[]>([]);
+    const [passwordAudit, setPasswordAudit] = useState<PasswordAudit | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-    const { firewallLogs, securityAlerts, isConnected } = useSecuritySocket();
+    const { firewallLogs, isConnected } = useSecuritySocket();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,173 +52,205 @@ export default function SecurityPage() {
         fetchData();
     }, []);
 
-    const getStatusColor = (score: number) => {
-        if (score >= 80) return "text-green-500";
-        if (score >= 50) return "text-yellow-500";
-        return "text-red-500";
-    };
+    const activeThreats = firewallLogs.filter(l => l.action !== 'pass').length;
+
+    const kpis = [
+        {
+            title: "Security Score",
+            value: isLoading ? "..." : `${complianceData?.complianceScore || 0}%`,
+            change: "Stable",
+            trend: "up" as const,
+            icon: "verified_user",
+            iconColor: (complianceData?.complianceScore || 0) >= 80 ? "emerald" : "amber" as "emerald" | "amber"
+        },
+        {
+            title: "Active Threats",
+            value: activeThreats.toString(),
+            change: "Last 24h",
+            trend: "down" as const,
+            icon: "gpp_maybe",
+            iconColor: activeThreats > 0 ? "rose" : "emerald" as "rose" | "emerald"
+        },
+        {
+            title: "RDP Sessions",
+            value: isLoading ? "..." : rdpSessions.length.toString(),
+            subtitle: "Authorized access",
+            icon: "terminal",
+            iconColor: "primary"
+        },
+        {
+            title: "Encryption",
+            value: isLoading ? "..." : `${passwordAudit?.bcryptHashed || 0}/${passwordAudit?.totalUsers || 0}`,
+            subtitle: "BCRYPT Coverage",
+            icon: "lock",
+            iconColor: "primary"
+        }
+    ]
 
     return (
-        <div className="min-h-screen bg-slate-950">
-            <header className="h-16 border-b border-white/10 bg-slate-900/50 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-10">
-                <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                        <span className="material-symbols-outlined text-blue-400">shield_lock</span>
-                    </div>
-                    <div className="flex flex-col">
-                        <h1 className="text-sm font-bold text-white uppercase tracking-wider">Security Center</h1>
-                        <div className="flex items-center gap-1.5">
-                            <div className={`h-1.5 w-1.5 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                            <span className="text-[10px] text-slate-400 uppercase">{isConnected ? 'Live Feed Active' : 'Offline'}</span>
-                        </div>
-                    </div>
-                </div>
-                <Link href="/admin/devops" className="p-2 text-slate-400 hover:text-white flex items-center gap-2 text-sm transition-colors">
-                    <span className="material-symbols-outlined text-sm">arrow_back</span>
-                    Dashboard
-                </Link>
-            </header>
-
-            <main className="p-6 max-w-7xl mx-auto space-y-6">
-                {/* Top KPI Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div className="bg-slate-900 border border-white/5 p-5 rounded-2xl shadow-xl relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <span className="material-symbols-outlined text-6xl">verified_user</span>
-                        </div>
-                        <p className="text-slate-400 text-xs font-medium uppercase mb-2">Compliance Score</p>
-                        <div className={`text-4xl font-black ${getStatusColor(complianceData?.complianceScore || 0)}`}>
-                            {isLoading ? "..." : `${complianceData?.complianceScore || 0}%`}
-                        </div>
-                        <p className="text-[10px] text-slate-500 mt-2 uppercase">Based on latest audit</p>
+        <DashboardTemplate
+            title="Security Center"
+            icon="shield_lock"
+            kpis={kpis}
+        >
+            <div className="space-y-8 font-display">
+                {/* Security Status Banner */}
+                <div className={`p-8 rounded-[32px] border ${activeThreats > 0 ? 'border-rose-500/20 bg-rose-500/10' : 'border-emerald-500/20 bg-emerald-500/10'} flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group`}>
+                    <div className="absolute top-0 right-0 p-12 opacity-5 scale-150 pointer-events-none group-hover:rotate-12 transition-transform duration-1000">
+                        <span className="material-symbols-outlined text-9xl text-white">security_update_good</span>
                     </div>
 
-                    <div className="bg-slate-900 border border-white/5 p-5 rounded-2xl shadow-xl">
-                        <p className="text-slate-400 text-xs font-medium uppercase mb-2">Active RDP Sessions</p>
-                        <div className="text-4xl font-black text-white">{isLoading ? "..." : rdpSessions.length}</div>
-                        <p className="text-[10px] text-slate-500 mt-2 uppercase">Real-time terminal access</p>
-                    </div>
-
-                    <div className="bg-slate-900 border border-white/5 p-5 rounded-2xl shadow-xl">
-                        <p className="text-slate-400 text-xs font-medium uppercase mb-2">BCRYPT Coverage</p>
-                        <div className="text-4xl font-black text-blue-400">
-                            {isLoading ? "..." : `${passwordAudit?.bcryptHashed || 0}/${passwordAudit?.totalUsers || 0}`}
+                    <div className="flex items-center gap-6 relative z-10">
+                        <div className={`size-20 rounded-3xl ${activeThreats > 0 ? 'bg-rose-500/20' : 'bg-emerald-500/20'} flex items-center justify-center border ${activeThreats > 0 ? 'border-rose-500/30' : 'border-emerald-500/30'} shadow-2xl`}>
+                            <span className={`material-symbols-outlined text-4xl font-black ${activeThreats > 0 ? 'text-rose-500' : 'text-emerald-500'}`}>
+                                {activeThreats > 0 ? 'warning' : 'shield_check'}
+                            </span>
                         </div>
-                        <p className="text-[10px] text-slate-500 mt-2 uppercase">Hashed user passwords</p>
+                        <div>
+                            <h2 className="text-3xl font-black uppercase tracking-tighter">
+                                {activeThreats > 0 ? 'System Under Attack' : 'Defenses Optimal'}
+                            </h2>
+                            <p className="text-slate-500 font-medium">
+                                {activeThreats > 0
+                                    ? `${activeThreats} malicious attempts blocked in the last hour.`
+                                    : 'AII sensors reporting normal behavior across all perimeters.'}
+                            </p>
+                        </div>
                     </div>
 
-                    <div className="bg-slate-900 border border-white/5 p-5 rounded-2xl shadow-xl">
-                        <p className="text-slate-400 text-xs font-medium uppercase mb-2">Active Threats (24h)</p>
-                        <div className="text-4xl font-black text-red-500">{firewallLogs.filter(l => l.action !== 'pass').length}</div>
-                        <p className="text-[10px] text-slate-500 mt-2 uppercase">Blocked intrusion attempts</p>
+                    <div className="flex gap-4 relative z-10">
+                        <button className="px-8 py-4 bg-white dark:bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-2xl border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 transition-all">
+                            Review Policy
+                        </button>
+                        <button className={`px-8 py-4 ${activeThreats > 0 ? 'bg-rose-500' : 'bg-primary'} text-white text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-2xl hover:scale-105 transition-all`}>
+                            Isolate Network
+                        </button>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Live Firewall Logs */}
-                    <div className="lg:col-span-2 bg-slate-900 border border-white/5 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[600px]">
-                        <div className="px-6 py-4 border-b border-white/5 bg-white/5 flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <span className="material-symbols-outlined text-blue-400">lan</span>
-                                <h3 className="text-sm font-bold text-white uppercase tracking-tight">Real-Time Firewall Activity</h3>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Live Network Monitoring */}
+                    <div className="lg:col-span-2 space-y-8">
+                        <div className="dashboard-card overflow-hidden">
+                            <div className="p-8 border-b border-slate-200 dark:border-white/5 flex items-center justify-between bg-slate-50 dark:bg-white/5">
+                                <div>
+                                    <h3 className="font-black text-xl uppercase tracking-tight">Perimeter Traffic</h3>
+                                    <p className="text-sm text-slate-500 font-medium">Real-time socket stream from edge firewalls</p>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <div className={`size-2 rounded-full ${isConnected ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`}></div>
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                        {isConnected ? 'Edge Socket Linked' : 'Socket Disconnected'}
+                                    </span>
+                                </div>
                             </div>
-                            <span className="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">{firewallLogs.length} events logged</span>
-                        </div>
-                        <div className="flex-1 overflow-auto p-0 font-mono text-[11px]">
-                            <table className="w-full text-left border-collapse">
-                                <thead className="bg-slate-950 text-slate-500 sticky top-0 uppercase">
-                                    <tr>
-                                        <th className="px-4 py-2 font-medium">Time</th>
-                                        <th className="px-4 py-2 font-medium">Action</th>
-                                        <th className="px-4 py-2 font-medium">Proto</th>
-                                        <th className="px-4 py-2 font-medium">Source</th>
-                                        <th className="px-4 py-2 font-medium">Destination</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-white/5">
-                                    {firewallLogs.map((log, i) => (
-                                        <tr key={i} className="hover:bg-white/5 transition-colors">
-                                            <td className="px-4 py-1.5 text-slate-400">{format(new Date(log.timestamp), 'HH:mm:ss')}</td>
-                                            <td className="px-4 py-1.5">
-                                                <span className={`px-1.5 py-0.5 rounded uppercase font-bold text-[9px] ${
-                                                    log.action === 'pass' ? 'bg-green-500/20 text-green-400' :
-                                                    log.action === 'block' ? 'bg-red-500/20 text-red-400' : 'bg-yellow-500/20 text-yellow-400'
-                                                }`}>
-                                                    {log.action}
-                                                </span>
-                                            </td>
-                                            <td className="px-4 py-1.5 text-slate-300 font-bold">{log.protocol}</td>
-                                            <td className="px-4 py-1.5 text-blue-400">{log.srcIP}:{log.srcPort}</td>
-                                            <td className="px-4 py-1.5 text-slate-400">{log.dstIP}:{log.dstPort}</td>
+                            <div className="overflow-x-auto h-[500px] custom-scrollbar">
+                                <table className="w-full text-left border-collapse font-mono">
+                                    <thead className="sticky top-0 bg-white dark:bg-slate-900 z-10">
+                                        <tr className="border-b border-slate-200 dark:border-white/10">
+                                            <th className="px-8 py-4 text-[9px] font-black uppercase tracking-widest text-slate-400">Timestamp</th>
+                                            <th className="px-8 py-4 text-[9px] font-black uppercase tracking-widest text-slate-400">Action</th>
+                                            <th className="px-8 py-4 text-[9px] font-black uppercase tracking-widest text-slate-400">Source Asset</th>
+                                            <th className="px-8 py-4 text-[9px] font-black uppercase tracking-widest text-slate-400">Protocol</th>
+                                            <th className="px-8 py-4 text-[9px] font-black uppercase tracking-widest text-slate-400 text-right">Destination</th>
                                         </tr>
-                                    ))}
-                                    {firewallLogs.length === 0 && (
-                                        <tr>
-                                            <td colSpan={5} className="p-20 text-center text-slate-600 italic">Listening for network events...</td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody className="divide-y divide-slate-100 dark:divide-white/5">
+                                        {firewallLogs.length > 0 ? firewallLogs.map((log, _i) => (
+                                            <tr key={_i} className="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                                                <td className="px-8 py-4 text-[10px] text-slate-500">
+                                                    {format(new Date(log.timestamp), 'HH:mm:ss.SSS')}
+                                                </td>
+                                                <td className="px-8 py-4">
+                                                    <Badge className={`${
+                                                        log.action === 'pass' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
+                                                        'bg-rose-500/10 text-rose-500 border-rose-500/20'
+                                                    } text-[8px] font-black uppercase px-2 py-0.5 border`}>
+                                                        {log.action}
+                                                    </Badge>
+                                                </td>
+                                                <td className="px-8 py-4 text-[10px] font-bold text-primary">
+                                                    {log.srcIP}:{log.srcPort}
+                                                </td>
+                                                <td className="px-8 py-4 text-[10px] text-slate-400 font-bold uppercase">
+                                                    {log.protocol}
+                                                </td>
+                                                <td className="px-8 py-4 text-[10px] text-slate-500 text-right">
+                                                    {log.dstIP}:{log.dstPort}
+                                                </td>
+                                            </tr>
+                                        )) : (
+                                            <tr>
+                                                <td colSpan={5} className="p-20 text-center">
+                                                    <div className="flex flex-col items-center gap-4 opacity-20">
+                                                        <span className="material-symbols-outlined text-6xl animate-pulse">radar</span>
+                                                        <p className="text-[10px] font-black uppercase tracking-widest">Scanning network traffic...</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Side Sidebar: RDP & Recommendations */}
-                    <div className="space-y-6">
-                        {/* RDP Sessions */}
-                        <div className="bg-slate-900 border border-white/5 rounded-2xl shadow-xl overflow-hidden">
-                            <div className="px-4 py-3 border-b border-white/5 bg-white/5">
-                                <h4 className="text-xs font-bold text-white uppercase">Active RDP Sessions</h4>
+                    {/* Threat Intel Sidebar */}
+                    <div className="space-y-8">
+                        {/* RDP Monitoring */}
+                        <div className="dashboard-card p-8 space-y-6">
+                            <div className="flex items-center justify-between">
+                                <h3 className="font-black text-xl uppercase tracking-tight">RDP Sessions</h3>
+                                <span className="material-symbols-outlined text-slate-400">person_search</span>
                             </div>
-                            <div className="p-4 space-y-3">
+                            <div className="space-y-3">
                                 {isLoading ? (
-                                    <div className="animate-pulse space-y-2">
-                                        <div className="h-10 bg-white/5 rounded"></div>
-                                        <div className="h-10 bg-white/5 rounded"></div>
-                                    </div>
-                                ) : rdpSessions.length > 0 ? (
-                                    rdpSessions.map((session, i) => (
-                                        <div key={i} className="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5 hover:border-blue-500/30 transition-colors">
-                                            <div className="flex items-center gap-3">
-                                                <div className="h-8 w-8 bg-blue-500/10 rounded-full flex items-center justify-center">
-                                                    <span className="material-symbols-outlined text-sm text-blue-400">person</span>
-                                                </div>
-                                                <div>
-                                                    <p className="text-xs font-bold text-white">{session.username}</p>
-                                                    <p className="text-[9px] text-slate-500">{session.sessionName} • ID {session.id}</p>
-                                                </div>
+                                    [1,2].map(n => <div key={n} className="h-16 bg-slate-100 dark:bg-white/5 rounded-2xl animate-pulse" />)
+                                ) : rdpSessions.length > 0 ? rdpSessions.map((session, _i) => (
+                                    <div key={_i} className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5 flex items-center justify-between group hover:border-primary/50 transition-all">
+                                        <div className="flex items-center gap-4">
+                                            <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                                                <span className="material-symbols-outlined text-primary text-xl">account_circle</span>
                                             </div>
-                                            <span className="px-2 py-0.5 bg-green-500/20 text-green-400 text-[8px] font-bold rounded-full uppercase">{session.state}</span>
+                                            <div>
+                                                <p className="text-[10px] font-black uppercase tracking-widest">{session.username}</p>
+                                                <p className="text-[9px] text-slate-500 font-medium">Session ID: {session.id}</p>
+                                            </div>
                                         </div>
-                                    ))
-                                ) : (
-                                    <p className="text-center py-4 text-xs text-slate-500">No active RDP sessions detected.</p>
+                                        <Badge className="bg-emerald-500 text-[8px] font-black uppercase px-2 py-0.5">Active</Badge>
+                                    </div>
+                                )) : (
+                                    <p className="text-center py-6 text-[10px] font-black uppercase tracking-widest text-slate-500 italic">No Active Sessions</p>
                                 )}
                             </div>
                         </div>
 
-                        {/* Security Recommendations */}
-                        <div className="bg-slate-900 border border-white/5 rounded-2xl shadow-xl overflow-hidden">
-                            <div className="px-4 py-3 border-b border-white/5 bg-white/5">
-                                <h4 className="text-xs font-bold text-white uppercase">Critical Items</h4>
-                            </div>
-                            <div className="p-4 space-y-4">
-                                {complianceData?.recommendations?.map((rec: string, i: number) => (
-                                    <div key={i} className="flex gap-3">
-                                        <span className="material-symbols-outlined text-sm text-yellow-500">warning</span>
-                                        <p className="text-[11px] text-slate-400 leading-relaxed">{rec}</p>
-                                    </div>
-                                ))}
-                                {!isLoading && complianceData?.recommendations?.length === 0 && (
-                                    <div className="flex items-center gap-2 text-green-500">
-                                        <span className="material-symbols-outlined text-sm">check_circle</span>
-                                        <p className="text-[11px]">System compliant.</p>
-                                    </div>
-                                )}
-                            </div>
+                        {/* Critical Compliance Audit */}
+                        <div className="dashboard-card p-8 bg-slate-900 border-white/5 relative overflow-hidden group">
+                           <div className="absolute -top-12 -left-12 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-700">
+                               <span className="material-symbols-outlined text-[160px] text-white">fact_check</span>
+                           </div>
+                           <div className="relative z-10 space-y-6">
+                               <div className="flex items-center justify-between">
+                                   <h3 className="text-xl font-black text-white uppercase tracking-tight">Policy Audit</h3>
+                                   <Badge className="bg-amber-500/20 text-amber-500 text-[9px] font-black uppercase border border-amber-500/30">Action Required</Badge>
+                               </div>
+                               <div className="space-y-4">
+                                   {complianceData?.recommendations?.map((rec, _i) => (
+                                       <div key={_i} className="flex gap-4 group/item">
+                                           <div className="mt-1 size-1.5 rounded-full bg-amber-500 shrink-0 group-hover/item:scale-150 transition-transform" />
+                                           <p className="text-[11px] text-slate-400 font-medium leading-relaxed group-hover/item:text-slate-200 transition-colors">{rec}</p>
+                                       </div>
+                                   ))}
+                               </div>
+                               <button className="w-full py-4 bg-white/10 hover:bg-white/20 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl border border-white/10 transition-all backdrop-blur-md">
+                                   Download Full Report
+                               </button>
+                           </div>
                         </div>
                     </div>
                 </div>
-            </main>
-        </div>
+            </div>
+        </DashboardTemplate>
     )
 }

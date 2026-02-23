@@ -179,7 +179,6 @@ ITTicketSchema.index({ organizationId: 1, priority: 1 });
 ITTicketSchema.index({ organizationId: 1, category: 1 });
 ITTicketSchema.index({ assignedTo: 1 });
 ITTicketSchema.index({ requestedBy: 1 });
-ITTicketSchema.index({ ticketNumber: 1 });
 
 // Pre-save hook to auto-generate ticket number
 ITTicketSchema.pre('save', async function (next) {

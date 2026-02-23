@@ -104,7 +104,7 @@ export class HealthService {
 
     try {
       if (mongoose.connection.readyState === 1) {
-        await mongoose.connection.db.admin().ping();
+        await mongoose.connection.db?.admin().ping();
         status = 'operational';
       }
     } catch (error) {

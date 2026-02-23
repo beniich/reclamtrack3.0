@@ -1,5 +1,5 @@
-'use client'
-
+import { Footer } from '../layout/Footer'
+import { Header } from '../layout/Header'
 import KPICard from './KPICard'
 
 interface DashboardTemplateProps {
@@ -25,20 +25,27 @@ export default function DashboardTemplate({
 }: DashboardTemplateProps) {
     return (
         <div className="min-h-screen flex flex-col bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
-            {/* Header */}
-            <header className="bg-white dark:bg-surface-dark border-b border-slate-200 dark:border-border-dark px-6 py-4">
-                <div className="flex items-center justify-between">
+            <Header />
+
+            {/* Page Sub-Header */}
+            <div className="bg-white/50 dark:bg-surface-dark/50 border-b border-slate-200 dark:border-border-dark px-6 py-4 backdrop-blur-sm sticky top-16 z-30">
+                <div className="max-w-7xl mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <span className="material-symbols-outlined text-3xl text-primary">{icon}</span>
-                        <h1 className="text-2xl font-bold">{title}</h1>
+                        <h1 className="text-2xl font-black tracking-tight">{title}</h1>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <span className="text-sm text-slate-500 dark:text-slate-400">DevOps Engineer</span>
+                    <div className="flex items-center gap-2">
+                        <button className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
+                            <span className="material-symbols-outlined">refresh</span>
+                        </button>
+                        <button className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
+                            <span className="material-symbols-outlined">settings</span>
+                        </button>
                     </div>
                 </div>
-            </header>
+            </div>
 
-            <main className="flex-1 overflow-y-auto p-6 lg:p-8 space-y-8">
+            <main className="flex-1 max-w-7xl mx-auto w-full p-6 lg:p-8 space-y-8">
                 {/* KPIs Section */}
                 {kpis.length > 0 && (
                     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -51,6 +58,8 @@ export default function DashboardTemplate({
                 {/* Custom Content */}
                 {children}
             </main>
+
+            <Footer />
         </div>
     )
 }

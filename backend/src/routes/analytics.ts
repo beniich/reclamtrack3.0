@@ -1,9 +1,10 @@
+﻿import ExcelJS from 'exceljs';
 import { Request, Response, Router } from 'express';
 import fs from 'fs';
 import mongoose from 'mongoose';
 import path from 'path';
-import { protect as auth } from '../middleware/auth.js';
-import { requireOrganization } from '../middleware/organization.js';
+import { authenticate as auth } from '../middleware/security.js';
+import { requireOrganization } from '../middleware/security.js';
 import { Complaint } from '../models/Complaint.js';
 import { Feedback } from '../models/Feedback.js';
 import { Organization } from '../models/Organization.js';
@@ -324,8 +325,7 @@ router.get('/export/:type', async (req: Request, res: Response) => {
   try {
     const organizationId = (req as any).organizationId;
 
-    // Dynamic import for exceljs to keep startup fast
-    const ExcelJS = (await import('exceljs')).default;
+    // exceljs imported statically
     const workbook = new ExcelJS.Workbook();
     workbook.creator = 'ReclamTrack';
     workbook.created = new Date();
@@ -475,20 +475,18 @@ router.get('/export/:type', async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     logger.error('Export Excel error:', error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Erreur lors de la génération de l'export",
-        error: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Erreur lors de la génération de l'export",
+      error: error.message,
+    });
   }
 });
 
 // GET /api/analytics/exports/download/:filename - Download a locally saved export
 router.get('/exports/download/:filename', async (req: Request, res: Response) => {
   try {
-    const { filename } = req.params;
+    const filename = req.params.filename as string;
     // Basic validation to prevent path traversal
     if (!filename || filename.includes('..') || filename.includes('/') || filename.includes('\\')) {
       return res.status(400).json({ success: false, message: 'Invalid filename' });

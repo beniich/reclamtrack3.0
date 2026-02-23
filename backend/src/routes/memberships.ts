@@ -1,7 +1,7 @@
-import { Router, Response } from 'express';
+﻿import { Router, Response } from 'express';
 import { body } from 'express-validator';
 import { validator } from '../middleware/validator.js';
-import { protect } from '../middleware/auth.js';
+import { authenticate as protect } from '../middleware/security.js';
 import { Membership } from '../models/Membership.js';
 import { Organization } from '../models/Organization.js';
 import { User } from '../models/User.js';

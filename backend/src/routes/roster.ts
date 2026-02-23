@@ -1,6 +1,6 @@
-import { Router } from 'express';
+﻿import { Router } from 'express';
 import { Roster } from '../models/Roster.js';
-import { protect } from '../middleware/auth.js';
+import { authenticate as protect } from '../middleware/security.js';
 
 const router = Router();
 

@@ -1,17 +1,20 @@
 import cors from 'cors';
 import express from 'express';
-import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import { createServer } from 'http';
 import path from 'path';
 import { connectDB } from './config/db.js';
 import { envValidator } from './config/envValidator.js';
 import errorHandler from './middleware/errorHandler.js';
+import { globalLimiter } from './middleware/rateLimiters.js';
+import { requestId } from './middleware/requestId.js';
+import { authenticate, requireAdmin, securityHeaders } from './middleware/security.js';
 import { initSocket } from './services/socketService.js';
 import { logger } from './utils/logger.js';
 
 import adminRoutes from './routes/admin.js';
 import analyticsRoutes from './routes/analytics.js';
+import apiKeysRoutes from './routes/api-keys.js';
 import assignmentRoutes from './routes/assignments.js';
 import auditRoutes from './routes/audit.js';
 import authRoutes from './routes/auth.js';
@@ -20,6 +23,7 @@ import complaintRoutes from './routes/complaints.js';
 import dashboardRoutes from './routes/dashboard.js';
 import dbRoutes from './routes/db.js';
 import devopsRoutes from './routes/devops.js';
+import eventsRoutes from './routes/events.js';
 import feedbackRoutes from './routes/feedback.js';
 import fleetRoutes from './routes/fleet.js';
 import googleAuthRoutes from './routes/googleAuth.js';
@@ -45,6 +49,7 @@ import adRoutes from './routes/ad.js';
 import itAssetsRoutes from './routes/it-assets.js';
 import networkRoutes from './routes/network.js';
 import securityRoutes from './routes/security.js';
+import sshRoutes from './routes/ssh-management.js';
 
 // ...
 
@@ -55,18 +60,32 @@ const app = express();
 const httpServer = createServer(app);
 
 // Security middleware
+app.use(requestId);
+app.use(securityHeaders);
 app.use(
   helmet({
     crossOriginResourcePolicy: { policy: 'cross-origin' }, // Allow accessing images
   })
 );
-app.use(cors({ origin: '*' }));
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 min
-  max: 100,
-});
-app.use('/api/', limiter as any);
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'];
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1 && allowedOrigins[0] !== '*') {
+        const msg =
+          'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    credentials: true,
+  })
+);
+
+app.use('/api/', globalLimiter);
 
 // Body parsing
 app.use(express.json());
@@ -108,6 +127,7 @@ app.use('/api/organizations', organizationRoutes);
 app.use('/api/memberships', membershipRoutes);
 app.use('/api', memberRoutes); // Mount at /api so paths become /api/organizations/:id/...
 app.use('/api/billing', billingRoutes);
+app.use('/api/api-keys', apiKeysRoutes);
 
 // IT Administration Module Routes
 app.use('/api/it-assets', itAssetsRoutes);
@@ -117,15 +137,17 @@ app.use('/api/ad', adRoutes);
 app.use('/api/monitoring', monitoringRoutes);
 app.use('/api/security', securityRoutes);
 app.use('/api/devops', devopsRoutes);
+app.use('/api/ssh', sshRoutes);
 
 // Health check
 app.get('/', (req, res) => {
   res.json({ status: 'ok', service: 'ReclamTrack API' });
 });
 
-// Test notification endpoint
-app.post('/api/test-notification', (req, res) => {
-  const notificationService = require('./services/socketService.js').default;
+// Test notification endpoint — Must be protected in prod!
+app.post('/api/test-notification', authenticate, requireAdmin, async (req, res) => {
+  // Safe dynamic import pattern
+  const { default: notificationService } = await import('./services/socketService.js');
 
   notificationService.broadcast({
     type: 'success',
@@ -149,38 +171,8 @@ initSocket(httpServer);
 // Start server
 import { startSagaConsumer } from './services/sagaConsumer.js';
 
-// ...
-// ...
-app.post('/events', async (req, res) => {
-  // Handling Saga Responses via HTTP
-  const { topic, eventType, data } = req.body;
-  console.log(`📥 [Backend HTTP] Received ${eventType} for ${data?.complaintId}`);
-
-  // Reuse the logic from SagaConsumer? Or just duplicate for simplicty since type is different
-  // Importing Component Model
-  const { Complaint } = require('./models/Complaint.js');
-
-  try {
-    if (eventType === 'COMPLAINT_ASSIGNED') {
-      await Complaint.findByIdAndUpdate(data.complaintId, {
-        assignedTeamId: data.teamId,
-        status: 'en cours',
-        updatedAt: new Date(),
-      });
-      console.log(`✅ [Saga HTTP] Complaint ${data.complaintId} updated with Team ${data.teamId}`);
-    } else if (eventType === 'ASSIGNMENT_FAILED') {
-      await Complaint.findByIdAndUpdate(data.complaintId, {
-        priority: 'urgent',
-        updatedAt: new Date(),
-      });
-      console.log(`↩️ [Saga HTTP] Complaint ${data.complaintId} priority escalated.`);
-    }
-    res.json({ success: true });
-  } catch (e: any) {
-    console.error('Error in Backend HTTP Event:', e);
-    res.status(500).json({ error: e.message });
-  }
-});
+// HTTP event bridge
+app.use('/events', eventsRoutes);
 
 const start = async () => {
   try {

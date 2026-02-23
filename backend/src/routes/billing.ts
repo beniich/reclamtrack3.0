@@ -1,125 +1,163 @@
-import express, { Router, Request, Response } from 'express';
+﻿/**
+ * @file billing.ts
+ * @description Organization billing routes. Handles Stripe checkout sessions,
+ *              plan retrieval, and the Stripe webhook for provisioning
+ *              subscriptions in the database.
+ * @module backend/routes
+ */
+
+import express, { Request, Response, Router } from 'express';
 import Stripe from 'stripe';
-import { protect } from '../middleware/auth.js';
+import { authenticate as protect } from '../middleware/security.js';
+import { PLAN_FEATURES, PLAN_MAX_USERS } from '../models/Subscription.js';
+import { updateFromStripe } from '../services/subscriptionService.js';
+import { AppError } from '../utils/AppError.js';
+import { successResponse } from '../utils/apiResponse.js';
 import { logger } from '../utils/logger.js';
 
 const router = Router();
 
-// Initialize Stripe
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
-    apiVersion: '2026-01-28.clover', // Use latest API version
+  apiVersion: '2023-10-16', // Fixed known stable version instead of '2026-01-28.clover'
 });
 
-// Mock Plans (should be in DB or Stripe Products)
-const PLANS = {
-    'starter': 'price_starter_id',
-    'pro': 'price_pro_id',
-    'enterprise': 'price_enterprise_id'
+// Map standard plans to Stripe Price IDs (from env)
+const PLAN_PRICES: Record<string, string | undefined> = {
+  starter: process.env.STRIPE_PRICE_STARTER,
+  pro: process.env.STRIPE_PRICE_PRO,
+  enterprise: process.env.STRIPE_PRICE_ENTERPRISE,
 };
 
+// ──────────────────────────────────────────────────────────────────────────────
 // POST /api/billing/create-checkout-session
-router.post('/create-checkout-session', protect, async (req: Request, res: Response) => {
-    try {
-        const { planId, interval } = req.body;
-        const user = (req as any).user;
+// ──────────────────────────────────────────────────────────────────────────────
+router.post('/create-checkout-session', protect, async (req: Request, res: Response, next) => {
+  try {
+    const { planId } = req.body;
+    const user = req.user!;
 
-        // In a real app, you would look up the price ID based on planId and interval
-        // For now, we'll just mock it or use a test ID
-        const priceId = 'price_1234567890'; // Replace with dynamic lookup
-
-        logger.info(`Creating checkout session for user ${user.id} and plan ${planId}`);
-
-        const session = await stripe.checkout.sessions.create({
-            mode: 'subscription',
-            payment_method_types: ['card'],
-            line_items: [
-                {
-                    price: priceId,
-                    quantity: 1,
-                },
-            ],
-            customer_email: user.email,
-            success_url: `${process.env.FRONTEND_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.FRONTEND_URL}/pricing`,
-            metadata: {
-                userId: user.id,
-                planId: planId
-            }
-        });
-
-        res.json({ url: session.url, id: session.id });
-
-    } catch (error: any) {
-        logger.error('Error creating checkout session:', error);
-        res.status(500).json({ message: 'Failed to create checkout session', error: error.message });
+    if (!PLAN_PRICES[planId]) {
+      throw new AppError(`Plan invalide: ${planId}`, 400, 'INVALID_PLAN');
     }
-});
 
-// GET /api/billing/plans
-router.get('/plans', (req: Request, res: Response) => {
-    res.json({
-        success: true,
-        data: [
-            {
-                id: 'starter',
-                name: 'Starter',
-                price: 29,
-                features: ['Up to 5 users', 'Basic Reporting', 'Email Support']
-            },
-            {
-                id: 'pro',
-                name: 'Professional',
-                price: 99,
-                popular: true,
-                features: ['Up to 20 users', 'Advanced Analytics', 'Priority Support', 'API Access']
-            },
-            {
-                id: 'enterprise',
-                name: 'Enterprise',
-                price: 299,
-                features: ['Unlimited users', 'Custom Integrations', 'Dedicated Account Manager', 'SLA']
-            }
-        ]
+    const priceId = PLAN_PRICES[planId];
+    logger.info(`[Billing] Creating checkout session for user ${user.id} / plan ${planId}`);
+
+    const session = await stripe.checkout.sessions.create({
+      mode: 'subscription',
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
+        },
+      ],
+      customer_email: user.email,
+      success_url: `${process.env.FRONTEND_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.FRONTEND_URL}/pricing`,
+      metadata: {
+        userId: user.id,
+        planId: planId,
+      },
     });
+
+    return successResponse(res, { url: session.url, id: session.id });
+  } catch (err) {
+    next(err);
+  }
 });
 
+// ──────────────────────────────────────────────────────────────────────────────
+// GET /api/billing/plans
+// ──────────────────────────────────────────────────────────────────────────────
+router.get('/plans', (_req: Request, res: Response) => {
+  return successResponse(res, [
+    {
+      id: 'starter',
+      name: 'Starter',
+      price: 29,
+      maxUsers: PLAN_MAX_USERS.starter,
+      features: PLAN_FEATURES.starter,
+    },
+    {
+      id: 'pro',
+      name: 'Professional',
+      price: 99,
+      popular: true,
+      maxUsers: PLAN_MAX_USERS.pro,
+      features: PLAN_FEATURES.pro,
+    },
+    {
+      id: 'enterprise',
+      name: 'Enterprise',
+      price: 299,
+      maxUsers: 'Illimité',
+      features: PLAN_FEATURES.enterprise,
+    },
+  ]);
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
 // POST /api/billing/webhook
-// Note: This endpoint should NOT use 'protect' middleware as it's called by Stripe
-router.post('/webhook', express.raw({ type: 'application/json' }), async (req: Request, res: Response) => {
-    const sig = req.headers['stripe-signature'];
-    const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
-
-    let event;
-
+// Note: Webhook MUST NOT use protection middleware; it receives raw body
+// ──────────────────────────────────────────────────────────────────────────────
+router.post(
+  '/webhook',
+  express.raw({ type: 'application/json' }),
+  async (req: Request, res: Response, next) => {
     try {
-        if (endpointSecret && sig) {
-            event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-        } else {
-            event = req.body; // Fallback for testing without signature verification (NOT SECURE FOR PROD)
-        }
-    } catch (err: any) {
-        logger.error(`Webhook signature verification failed: ${err.message}`);
-        return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
+      const sig = req.headers['stripe-signature'];
+      const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-    // Handle the event
-    switch (event.type) {
-        case 'checkout.session.completed':
-            const session = event.data.object;
-            logger.info(`Payment successful for session: ${session.id}`);
-            // TODO: Provision subscription, update user role/org status
-            break;
-        case 'invoice.payment_succeeded':
-            // Continue subscription
-            break;
-        case 'invoice.payment_failed':
-            // Handle failed payment
-            break;
-        default:
-        // console.log(`Unhandled event type ${event.type}`);
-    }
+      if (!endpointSecret || !sig) {
+        throw new AppError('Configuration Stripe webhook manquante', 500, 'STRIPE_CONFIG_ERROR');
+      }
 
-    res.send({ received: true });
-});
+      let event: Stripe.Event;
+      try {
+        event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+      } catch (err: any) {
+        logger.error(`[Billing] Webhook signature verification failed: ${err.message}`);
+        throw new AppError('Signature Webhook invalide', 400, 'STRIPE_SIGNATURE_INVALID');
+      }
+
+      // Process event
+      if (
+        event.type === 'customer.subscription.created' ||
+        event.type === 'customer.subscription.updated'
+      ) {
+        const subscription = event.data.object as Stripe.Subscription;
+        const stripeCustomerId = subscription.customer as string;
+        const priceId = subscription.items.data[0].price.id;
+
+        await updateFromStripe(
+          stripeCustomerId,
+          subscription.id,
+          priceId,
+          subscription.status,
+          new Date(subscription.current_period_end * 1000)
+        );
+
+        logger.info(`[Billing] Validated mapping for subscription: ${subscription.id}`);
+      } else if (event.type === 'customer.subscription.deleted') {
+        const subscription = event.data.object as Stripe.Subscription;
+        const stripeCustomerId = subscription.customer as string;
+
+        await updateFromStripe(stripeCustomerId, subscription.id, '', 'canceled', new Date());
+        logger.warn(`[Billing] Subscription canceled: ${subscription.id}`);
+      }
+
+      res.send({ received: true });
+    } catch (err) {
+      // Only pass to global handler if it's our AppError.
+      // Otherwise return 400 so Stripe knows we rejected the payload.
+      if (err instanceof AppError) {
+        next(err);
+      } else {
+        res.status(400).send(`Webhook Error: ${(err as Error).message}`);
+      }
+    }
+  }
+);
 
 export default router;

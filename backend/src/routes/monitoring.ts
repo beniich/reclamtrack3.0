@@ -1,8 +1,8 @@
-import express, { Response } from 'express';
-import { auth } from '../middleware/auth.js';
-import { requireAdmin, requireOrganization } from '../middleware/organization.js';
+﻿import express, { Response } from 'express';
+import { authenticate as auth } from '../middleware/security.js';
+import { requireAdmin, requireOrganization } from '../middleware/security.js';
 import NetworkDevice from '../models/NetworkDevice.js';
-import { NetworkService } from '../services/networkService.js';
+import defaultNetworkService from '../services/networkService.js';
 import { AuthenticatedRequest } from '../types/request.js';
 
 const router = express.Router();
@@ -50,7 +50,7 @@ router.get('/device/:id/check', async (req: AuthenticatedRequest, res: Response)
     }
 
     // Check Ping
-    const pingRes = await NetworkService.pingHost(device.ipAddress);
+    const pingRes = await defaultNetworkService.pingHost(device.ipAddress);
 
     // Check SNMP if reachable
     let snmpData = {};
@@ -115,9 +115,10 @@ router.post(
               memoryUsage: 0,
               isOnline: true,
               lastChecked: new Date(),
+              uptime: snmpData.sysUpTime ? Math.floor(snmpData.sysUpTime / 100) : 0,
             };
-          device.currentMetrics.isOnline = true;
-          device.currentMetrics.lastChecked = new Date();
+          device.currentMetrics!.isOnline = true;
+          device.currentMetrics!.lastChecked = new Date();
           // CPU/Memory would require specific MIB OIDs per vendor
         }
         await device.save();

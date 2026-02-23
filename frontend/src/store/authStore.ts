@@ -32,11 +32,11 @@ export const useAuthStore = create<AuthState>()(
                 if (typeof window !== 'undefined') {
                     if (token) {
                         localStorage.setItem('auth_token', token);
-                        // Sync with middleware cookie
-                        document.cookie = `reclamtrack-auth-storage=${token}; path=/; max-age=604800; SameSite=Lax`;
+                        // Simple clean cookie for middleware (not the Zustand JSON one)
+                        document.cookie = `auth-token=${token}; path=/; max-age=604800; SameSite=Lax`;
                     } else {
                         localStorage.removeItem('auth_token');
-                        document.cookie = 'reclamtrack-auth-storage=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+                        document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
                     }
                 }
             },
@@ -45,7 +45,7 @@ export const useAuthStore = create<AuthState>()(
                 set({ isLoading: true, error: null });
                 try {
                     const response = await authApi.login({ email, password });
-                    const { user, token } = response as any;
+                    const { user, accessToken: token } = response as any;
 
                     // Ensure user is not null
                     if (!user || !token) {
@@ -56,7 +56,7 @@ export const useAuthStore = create<AuthState>()(
 
                     if (typeof window !== 'undefined' && token) {
                         localStorage.setItem('auth_token', token);
-                        document.cookie = `reclamtrack-auth-storage=${token}; path=/; max-age=604800; SameSite=Lax`;
+                        document.cookie = `auth-token=${token}; path=/; max-age=604800; SameSite=Lax`;
                     }
                 } catch (error: any) {
                     const errorMsg = error.response?.data?.error || error.response?.data?.message || 'Identifiants invalides';
@@ -72,7 +72,7 @@ export const useAuthStore = create<AuthState>()(
                 set({ isLoading: true, error: null });
                 try {
                     const response = await authApi.googleLogin(credential);
-                    const { user, token } = response as any;
+                    const { user, accessToken: token } = response as any;
 
                     if (!user || !token) {
                          throw new Error('Réponse invalide du serveur');
@@ -82,7 +82,7 @@ export const useAuthStore = create<AuthState>()(
 
                     if (typeof window !== 'undefined' && token) {
                         localStorage.setItem('auth_token', token);
-                        document.cookie = `reclamtrack-auth-storage=${token}; path=/; max-age=604800; SameSite=Lax`;
+                        document.cookie = `auth-token=${token}; path=/; max-age=604800; SameSite=Lax`;
                     }
                 } catch (error: any) {
                     const errorMsg = error.response?.data?.error || error.response?.data?.message || 'Échec de la connexion Google';
@@ -98,7 +98,7 @@ export const useAuthStore = create<AuthState>()(
                 set({ user: null, token: null });
                 if (typeof window !== 'undefined') {
                     localStorage.removeItem('auth_token');
-                    document.cookie = 'reclamtrack-auth-storage=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+                    document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
                     // Detect current locale from URL to maintain i18n context
                     const pathLocale = window.location.pathname.split('/')[1];
                     const locale = ['fr', 'en'].includes(pathLocale) ? pathLocale : 'fr';

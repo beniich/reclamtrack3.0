@@ -10,6 +10,13 @@ const nextConfig = {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_SOCKET_URL: process.env.NEXT_PUBLIC_SOCKET_URL
   },
+
+  // Performance optimizations
+  poweredByHeader: false,
+  compress: true,
+
+  transpilePackages: ['lucide-react', 'recharts'],
+
   eslint: {
     ignoreDuringBuilds: true,
   },

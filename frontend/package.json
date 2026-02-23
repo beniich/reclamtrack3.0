@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "vercel-build": "cd ../shared && npm run build && cd ../frontend && next build",
     "start": "next start",
@@ -55,6 +55,7 @@
     "next": "15.1.12",
     "next-auth": "^4.24.13",
     "next-intl": "^4.8.2",
+    "nextjs-toploader": "^3.9.17",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "react": "19.0.0",
     "react-big-calendar": "^1.19.4",

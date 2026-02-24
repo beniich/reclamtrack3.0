@@ -1,26 +1,26 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import {
+    Activity,
     AlertCircle,
+    ArrowRight,
+    Calendar as CalendarIcon,
     CheckCircle2,
     Clock,
-    Users,
-    Activity,
-    TrendingUp,
-    Calendar as CalendarIcon,
-    FileText,
-    ArrowRight,
+    Construction,
     Droplet,
+    FileText,
     Lightbulb,
     Trash2,
-    Construction
+    TrendingUp,
+    Users
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-import { StatsCard } from '@/components/ui/StatsCard';
 import { ComplaintCard } from '@/components/ui/ComplaintCard';
+import { StatsCard } from '@/components/ui/StatsCard';
 import { apiClient } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import type { Complaint } from '@/types';
@@ -182,7 +182,7 @@ export default function DashboardPage() {
                 {/* Sidebar Stats & Activity */}
                 <aside className="space-y-8">
                     {/* Live Activity Feed */}
-                    <div className="bg-slate-900 rounded-[2.5rem] border border-slate-800 overflow-hidden flex flex-col shadow-2xl shadow-primary/10 transition-all">
+                    <div className="glass-card gradient-bg rounded-[2.5rem] border border-white/5 overflow-hidden flex flex-col shadow-2xl shadow-primary/10 transition-all">
                         <div className="p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
                             <div>
                                 <h3 className="font-black text-xl text-white uppercase italic tracking-tighter">{t('liveActivity')}</h3>
@@ -219,7 +219,7 @@ export default function DashboardPage() {
                     </div>
 
                     {/* Sector Breakdown Card */}
-                    <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 p-8 shadow-sm">
+                    <div className="bg-white dark:glass-card rounded-[2.5rem] border border-slate-200 dark:border-white/5 p-8 shadow-sm">
                         <div className="mb-8 flex items-center justify-between">
                             <div>
                                 <h3 className="font-black text-lg text-slate-900 dark:text-white uppercase italic tracking-tight leading-none">{t('sectorBreakdown')}</h3>

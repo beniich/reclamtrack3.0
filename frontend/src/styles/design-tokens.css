@@ -1,24 +1,37 @@
 :root {
-  /* Colors - Primary Palette */
-  --color-primary: #3b82f6;
-  --color-primary-light: #60a5fa;
-  --color-primary-dark: #2563eb;
+  /* Colors - User Custom Palette (Orange & Violet) */
+  --pumpkin-spice: #ff6d00;
+  --harvest-orange: #ff7900;
+  --princeton-orange: #ff8500;
+  --deep-saffron: #ff9100;
+  --amber-glow: #ff9e00;
 
-  /* Colors - Secondary Palette */
-  --color-secondary: #8b5cf6;
-  --color-secondary-light: #a78bfa;
-  --color-secondary-dark: #7c3aed;
+  --dark-amethyst: #240046;
+  --indigo-ink: #3c096c;
+  --indigo-velvet: #5a189a;
+  --royal-violet: #7b2cbf;
+  --lavender-purple: #9d4edd;
+
+  /* Colors - Primary Palette (Mapped to Violet and Orange) */
+  --color-primary: var(--pumpkin-spice);
+  --color-primary-light: var(--amber-glow);
+  --color-primary-dark: var(--harvest-orange);
+
+  /* Colors - Secondary Palette (Mapped to Violets) */
+  --color-secondary: var(--indigo-velvet);
+  --color-secondary-light: var(--lavender-purple);
+  --color-secondary-dark: var(--dark-amethyst);
 
   /* Colors - Accent */
-  --color-accent: #f59e0b;
-  --color-accent-light: #fbbf24;
-  --color-accent-dark: #d97706;
+  --color-accent: var(--pumpkin-spice);
+  --color-accent-light: var(--amber-glow);
+  --color-accent-dark: var(--harvest-orange);
 
   /* Colors - Status */
   --color-success: #10b981;
-  --color-warning: #f59e0b;
+  --color-warning: var(--princeton-orange);
   --color-error: #ef4444;
-  --color-info: #3b82f6;
+  --color-info: var(--royal-violet);
 
   /* Colors - Neutrals */
   --color-gray-50: #f9fafb;
@@ -90,18 +103,18 @@
 
 /* Dark Mode */
 [data-theme='dark'] {
-  --color-primary: #60a5fa;
-  --color-primary-light: #93c5fd;
-  --color-primary-dark: #3b82f6;
+  --color-primary: var(--pumpkin-spice);
+  --color-primary-light: var(--amber-glow);
+  --color-primary-dark: var(--harvest-orange);
 
-  --color-secondary: #a78bfa;
-  --color-secondary-light: #c4b5fd;
-  --color-secondary-dark: #8b5cf6;
+  --color-secondary: var(--lavender-purple);
+  --color-secondary-light: #e0b3ff;
+  --color-secondary-dark: var(--royal-violet);
 
   --color-success: #34d399;
-  --color-warning: #fbbf24;
+  --color-warning: var(--deep-saffron);
   --color-error: #f87171;
-  --color-info: #60a5fa;
+  --color-info: var(--indigo-velvet);
 }
 
 /* Global Styles */
@@ -143,7 +156,7 @@ body {
 
 /* Dark mode scrollbar */
 [data-theme='dark'] ::-webkit-scrollbar-track {
-  background: var(--color-gray-800);
+  background: var(--dark-amethyst);
 }
 
 [data-theme='dark'] ::-webkit-scrollbar-thumb {

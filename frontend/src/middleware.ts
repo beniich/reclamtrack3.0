@@ -1,6 +1,6 @@
 import createMiddleware from 'next-intl/middleware';
-import { routing } from './i18n/routing';
 import { NextRequest, NextResponse } from 'next/server';
+import { routing } from './i18n/routing';
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -18,7 +18,21 @@ export default function middleware(request: NextRequest) {
 
     // Si ce n'est pas une route publique, vérifier l'authentification
     if (!isPublicRoute) {
-        const token = request.cookies.get('reclamtrack-auth-storage')?.value;
+        const cookieRaw = request.cookies.get('reclamtrack-auth-storage')?.value;
+
+        // Zustand persist stores state as JSON: {"state":{"user":...,"token":"..."}}
+        // We also check the clean `auth-token` cookie written by authStore directly
+        let token: string | null = request.cookies.get('auth-token')?.value ?? null;
+
+        if (!token && cookieRaw) {
+            try {
+                const parsed = JSON.parse(decodeURIComponent(cookieRaw));
+                token = parsed?.state?.token ?? null;
+            } catch {
+                // The cookie might be a raw token (legacy) — use it directly
+                token = cookieRaw.length > 20 ? cookieRaw : null;
+            }
+        }
 
         // Si pas de token et pas sur la page de login, rediriger vers login
         if (!token && !pathname.includes('/login')) {

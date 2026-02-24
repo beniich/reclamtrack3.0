@@ -2,7 +2,7 @@ import { ApiResponse } from '@/types';
 import { API_ROUTES } from '@reclamtrack/shared';
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
 console.log('[API] Using Base URL:', API_BASE_URL);
 
 class ApiClient {

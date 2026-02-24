@@ -1,9 +1,9 @@
 'use client'
 
+import { Footer } from "@/components/devops-dashboards/layout/Footer"
+import { Header } from "@/components/devops-dashboards/layout/Header"
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { Header } from "@/components/devops-dashboards/layout/Header"
-import { Footer } from "@/components/devops-dashboards/layout/Footer"
 
 const dashboards = [
     // Implemented DevOps Dashboards
@@ -51,44 +51,53 @@ export default function DevOpsPage() {
     const locale = params.locale as string
 
     return (
-        <div className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col">
+        <div className="min-h-screen bg-background-light dark:bg-background-dark gradient-bg flex flex-col">
             <Header />
             <div className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
                 {/* Header */}
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white mb-4">
+                <div className="text-center mb-12 relative">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/20 blur-[120px] rounded-full pointer-events-none"></div>
+                    <h1 className="text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-4 relative z-10 text-gradient">
                         DevOps Monitoring Suite
                     </h1>
-                    <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+                    <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto relative z-10 font-medium">
                         Professional monitoring and management dashboards for modern infrastructure
                     </p>
                 </div>
 
                 {/* Dashboard Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
                     {dashboards.map((dashboard) => (
                         <Link
                             key={dashboard.id}
                             href={`/${locale}/admin/devops/${dashboard.id}`}
-                            className="group relative bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl p-6 hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/10"
+                            className="group relative glass-card rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 block"
                         >
-                            <div className="flex items-start gap-4">
-                                <div className={`size-12 rounded-lg flex items-center justify-center transition-colors ${colorClasses[dashboard.color as keyof typeof colorClasses]}`}>
-                                    <span className="material-symbols-outlined text-2xl">{dashboard.icon}</span>
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/0 rounded-2xl pointer-events-none"></div>
+
+                            <div className="flex items-start gap-4 mb-4 relative z-10">
+                                <div className={`size-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-lg ${colorClasses[dashboard.color as keyof typeof colorClasses]}`}>
+                                    <span className="material-symbols-outlined text-2xl drop-shadow-md">{dashboard.icon}</span>
                                 </div>
-                                <div className="flex-1">
-                                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
+                                <div className="flex-1 pt-1">
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">
                                         {dashboard.name}
                                     </h3>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
                                         {dashboard.description}
                                     </p>
                                 </div>
                             </div>
-                            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <span className="material-symbols-outlined text-primary">
-                                    arrow_forward
+
+                            <div className="flex justify-between items-center mt-6 pt-4 border-t border-slate-200/50 dark:border-white/10 relative z-10">
+                                <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">
+                                    Accéder
                                 </span>
+                                <div className="size-8 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-primary group-hover:text-white text-slate-400 dark:text-slate-500 transition-all duration-300">
+                                    <span className="material-symbols-outlined text-sm">
+                                        arrow_forward
+                                    </span>
+                                </div>
                             </div>
                         </Link>
                     ))}

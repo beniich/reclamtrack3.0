@@ -8,27 +8,39 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                // User Custom Palette (Orange & Violet)
+                pumpkin: 'var(--pumpkin-spice)',
+                harvest: 'var(--harvest-orange)',
+                princeton: 'var(--princeton-orange)',
+                saffron: 'var(--deep-saffron)',
+                amber: 'var(--amber-glow)',
+                amethyst: 'var(--dark-amethyst)',
+                indigoInk: 'var(--indigo-ink)',
+                indigoVelvet: 'var(--indigo-velvet)',
+                royal: 'var(--royal-violet)',
+                lavender: 'var(--lavender-purple)',
+
                 // Brand colors
                 primary: {
-                    DEFAULT: '#FF6B00',
+                    DEFAULT: 'var(--pumpkin-spice)',
                     50: '#fff7ed',
                     100: '#ffedd5',
-                    500: '#FF6B00',
-                    600: '#E66100',
-                    700: '#CC5600',
+                    500: 'var(--pumpkin-spice)',
+                    600: 'var(--harvest-orange)',
+                    700: 'var(--princeton-orange)',
                 },
                 brand: {
-                    orange: '#FF6B00',
-                    deepBlue: '#0A0E17',
-                    midnight: '#020617',
+                    orange: 'var(--pumpkin-spice)',
+                    deepBlue: 'var(--dark-amethyst)',
+                    midnight: 'var(--indigo-ink)',
                 },
                 "background-light": "#f8f6f6",
-                "background-dark": "#020617",
-                "surface-dark": "#0A0E17",
-                "border-dark": "#1E293B",
+                "background-dark": "var(--dark-amethyst)",
+                "surface-dark": "var(--indigo-ink)",
+                "border-dark": "var(--indigo-velvet)",
                 "accent-red": "#fa6238",
                 "accent-green": "#0bda5e",
-                "accent-orange": "#FF6B00",
+                "accent-orange": "var(--pumpkin-spice)",
                 "danger": "#ef4444",
                 "success": "#22c55e",
                 "warning": "#f59e0b",
@@ -91,9 +103,9 @@ module.exports = {
                 ring: 'hsl(var(--ring) / <alpha-value>)',
             },
             fontFamily: {
-                sans: ['Inter', 'system-ui', 'sans-serif'],
+                sans: ['Cornella', 'var(--font-inter)', 'system-ui', 'sans-serif'],
                 mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
-                display: ["Sora", "Inter", "sans-serif"],
+                display: ["Makien", "Sora", "var(--font-inter)", "sans-serif"],
             },
             borderRadius: {
                 sm: 'var(--radius-sm)',

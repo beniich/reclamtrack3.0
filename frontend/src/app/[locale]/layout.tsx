@@ -11,6 +11,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Inter, Sora } from 'next/font/google';
 import { notFound } from 'next/navigation';
+import NextTopLoader from 'nextjs-toploader';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -53,6 +54,19 @@ export default async function LocaleLayout({
                         <QueryProvider>
                             <AuthProvider>
                                 <CallProvider>
+                                    <NextTopLoader
+                                        color="var(--pumpkin-spice)"
+                                        initialPosition={0.08}
+                                        crawlSpeed={200}
+                                        height={3}
+                                        crawl={true}
+                                        showSpinner={false}
+                                        easing="ease"
+                                        speed={200}
+                                        shadow="0 0 10px var(--pumpkin-spice),0 0 5px var(--pumpkin-spice)"
+                                        zIndex={1600}
+                                        showAtBottom={false}
+                                    />
                                     {children}
                                     <NotificationToast />
                                     <DebugWidget />

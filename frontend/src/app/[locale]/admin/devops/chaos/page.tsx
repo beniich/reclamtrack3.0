@@ -1,8 +1,10 @@
 'use client'
 
+import { RoleGuard } from '@/components/security/RoleGuard'
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { MetricCard } from '@/components/ui/MetricCard'
-import { Button } from '@/components/ui/button'
+import { Role } from '@/lib/rbac/permissions'
 
 export default function ChaosHubPage() {
     return (
@@ -18,10 +20,12 @@ export default function ChaosHubPage() {
                             <p className="text-slate-500 dark:text-slate-400">Resilience testing and fault injection experiments</p>
                         </div>
                     </div>
-                    <Button variant="danger">
-                        <span className="material-symbols-outlined">warning</span>
-                        New Experiment
-                    </Button>
+                    <RoleGuard allowedRoles={[Role.OWNER, Role.ADMIN]}>
+                        <Button variant="danger">
+                            <span className="material-symbols-outlined">warning</span>
+                            New Experiment
+                        </Button>
+                    </RoleGuard>
                 </header>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

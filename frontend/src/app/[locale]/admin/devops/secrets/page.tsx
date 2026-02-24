@@ -1,8 +1,10 @@
 'use client'
 
+import { RoleGuard } from '@/components/security/RoleGuard'
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { MetricCard } from '@/components/ui/MetricCard'
-import { Button } from '@/components/ui/button'
+import { Role } from '@/lib/rbac/permissions'
 
 export default function SecretsPage() {
     return (
@@ -18,10 +20,12 @@ export default function SecretsPage() {
                             <p className="text-slate-500 dark:text-slate-400">Secure storage and rotation of credentials</p>
                         </div>
                     </div>
-                    <Button variant="primary">
-                        <span className="material-symbols-outlined">add</span>
-                        New Secret
-                    </Button>
+                    <RoleGuard minRole={Role.ADMIN}>
+                        <Button variant="primary">
+                            <span className="material-symbols-outlined">add</span>
+                            New Secret
+                        </Button>
+                    </RoleGuard>
                 </header>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

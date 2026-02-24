@@ -1,8 +1,10 @@
 'use client';
 
+import { RoleGuard } from '@/components/security/RoleGuard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import api from '@/lib/api';
+import { Role } from '@/lib/rbac/permissions';
 import { CheckCircle, FileText, RefreshCw, Users, XCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -72,10 +74,12 @@ export default function ActiveDirectoryPage() {
           <h1 className="text-3xl font-bold">Active Directory</h1>
           <p className="text-gray-600 mt-1">Manage AD synchronization and users</p>
         </div>
-        <Button onClick={handleSync} disabled={syncing || status?.status !== 'connected'}>
-          <RefreshCw className={`mr-2 h-4 w-4 ${syncing ? 'animate-spin' : ''}`} />
-          {syncing ? 'Syncing...' : 'Sync Now'}
-        </Button>
+        <RoleGuard minRole={Role.ADMIN}>
+          <Button onClick={handleSync} disabled={syncing || status?.status !== 'connected'}>
+            <RefreshCw className={`mr-2 h-4 w-4 ${syncing ? 'animate-spin' : ''}`} />
+            {syncing ? 'Syncing...' : 'Sync Now'}
+          </Button>
+        </RoleGuard>
       </div>
 
       {/* Connection Status */}
@@ -108,7 +112,9 @@ export default function ActiveDirectoryPage() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-600 mb-4">View users imported from Active Directory.</p>
-            <Button variant="outline" className="w-full">View AD Users</Button>
+            <RoleGuard minRole={Role.MODERATOR}>
+              <Button variant="outline" className="w-full">View AD Users</Button>
+            </RoleGuard>
           </CardContent>
         </Card>
 
@@ -135,7 +141,9 @@ export default function ActiveDirectoryPage() {
                  <span className="font-mono">admin@example.com</span>
                </div>
             </div>
-            <Button variant="outline" className="w-full mt-4">Edit Configuration</Button>
+            <RoleGuard minRole={Role.ADMIN}>
+              <Button variant="outline" className="w-full mt-4">Edit Configuration</Button>
+            </RoleGuard>
           </CardContent>
         </Card>
       </div>

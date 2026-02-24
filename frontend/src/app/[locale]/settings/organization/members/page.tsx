@@ -33,6 +33,8 @@ import {
 import { toast } from 'react-hot-toast';
 import { Loader2, Plus, UserX, Shield, Mail } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { RoleGuard } from '@/components/security/RoleGuard';
+import { Role } from '@/lib/rbac/permissions';
 
 interface Member {
     id: string;
@@ -125,52 +127,54 @@ export default function MembersPage() {
                     <p className="text-slate-500">Manage access and roles for your organization.</p>
                 </div>
 
-                <Dialog open={isInviteOpen} onOpenChange={setIsInviteOpen}>
-                    <DialogTrigger asChild>
-                        <Button className="gap-2">
-                            <Plus className="w-4 h-4" /> Invite Member
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>Invite New Member</DialogTitle>
-                            <DialogDescription>
-                                They will receive an email to join <strong>{activeOrganization.name}</strong>.
-                            </DialogDescription>
-                        </DialogHeader>
-                        <div className="grid gap-4 py-4">
-                            <div className="grid gap-2">
-                                <label htmlFor="email" className="text-sm font-medium">Email Address</label>
-                                <Input
-                                    id="email"
-                                    placeholder="colleague@example.com"
-                                    value={inviteEmail}
-                                    onChange={(e) => setInviteEmail(e.target.value)}
-                                />
-                            </div>
-                            <div className="grid gap-2">
-                                <label htmlFor="role" className="text-sm font-medium">Role</label>
-                                <Select value={inviteRole} onValueChange={setInviteRole}>
-                                    <SelectTrigger>
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="MEMBER">Member</SelectItem>
-                                        <SelectItem value="ADMIN">Admin</SelectItem>
-                                        <SelectItem value="TECHNICIAN">Technician</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                        </div>
-                        <DialogFooter>
-                            <Button variant="outline" onClick={() => setIsInviteOpen(false)}>Cancel</Button>
-                            <Button onClick={handleInvite} disabled={isInviting}>
-                                {isInviting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                                Send Invitation
+                <RoleGuard minRole={Role.ADMIN}>
+                    <Dialog open={isInviteOpen} onOpenChange={setIsInviteOpen}>
+                        <DialogTrigger asChild>
+                            <Button className="gap-2">
+                                <Plus className="w-4 h-4" /> Invite Member
                             </Button>
-                        </DialogFooter>
-                    </DialogContent>
-                </Dialog>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Invite New Member</DialogTitle>
+                                <DialogDescription>
+                                    They will receive an email to join <strong>{activeOrganization.name}</strong>.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                                <div className="grid gap-2">
+                                    <label htmlFor="email" className="text-sm font-medium">Email Address</label>
+                                    <Input
+                                        id="email"
+                                        placeholder="colleague@example.com"
+                                        value={inviteEmail}
+                                        onChange={(e) => setInviteEmail(e.target.value)}
+                                    />
+                                </div>
+                                <div className="grid gap-2">
+                                    <label htmlFor="role" className="text-sm font-medium">Role</label>
+                                    <Select value={inviteRole} onValueChange={setInviteRole}>
+                                        <SelectTrigger>
+                                            <SelectValue />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="MEMBER">Member</SelectItem>
+                                            <SelectItem value="ADMIN">Admin</SelectItem>
+                                            <SelectItem value="TECHNICIAN">Technician</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </div>
+                            <DialogFooter>
+                                <Button variant="outline" onClick={() => setIsInviteOpen(false)}>Cancel</Button>
+                                <Button onClick={handleInvite} disabled={isInviting}>
+                                    {isInviting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                                    Send Invitation
+                                </Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
+                </RoleGuard>
             </div>
 
             <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
@@ -214,21 +218,23 @@ export default function MembersPage() {
                                         </div>
                                     </TableCell>
                                     <TableCell>
-                                        <Select
-                                            defaultValue={member.roles[0]}
-                                            onValueChange={(val) => handleRoleUpdate(member.id, val)}
-                                            disabled={member.roles.includes('OWNER')}
-                                        >
-                                            <SelectTrigger className="w-[130px] h-8 text-xs">
-                                                <SelectValue />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="OWNER" disabled>Owner</SelectItem>
-                                                <SelectItem value="ADMIN">Admin</SelectItem>
-                                                <SelectItem value="MEMBER">Member</SelectItem>
-                                                <SelectItem value="TECHNICIAN">Technician</SelectItem>
-                                            </SelectContent>
-                                        </Select>
+                                        <RoleGuard minRole={Role.ADMIN} fallback={<span className="text-sm">{member.roles[0]}</span>}>
+                                            <Select
+                                                defaultValue={member.roles[0]}
+                                                onValueChange={(val) => handleRoleUpdate(member.id, val)}
+                                                disabled={member.roles.includes('OWNER')}
+                                            >
+                                                <SelectTrigger className="w-[130px] h-8 text-xs">
+                                                    <SelectValue />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="OWNER" disabled>Owner</SelectItem>
+                                                    <SelectItem value="ADMIN">Admin</SelectItem>
+                                                    <SelectItem value="MEMBER">Member</SelectItem>
+                                                    <SelectItem value="TECHNICIAN">Technician</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </RoleGuard>
                                     </TableCell>
                                     <TableCell>
                                         {member.status === 'ACTIVE' ? (
@@ -245,15 +251,17 @@ export default function MembersPage() {
                                         {new Date(member.joinedAt).toLocaleDateString()}
                                     </TableCell>
                                     <TableCell className="text-right">
-                                        <Button
-                                            variant="ghost"
-                                            size="icon"
-                                            className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10"
-                                            onClick={() => handleRemoveMember(member.id)}
-                                            disabled={member.roles.includes('OWNER')}
-                                        >
-                                            <UserX className="w-4 h-4" />
-                                        </Button>
+                                        <RoleGuard minRole={Role.ADMIN}>
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10"
+                                                onClick={() => handleRemoveMember(member.id)}
+                                                disabled={member.roles.includes('OWNER')}
+                                            >
+                                                <UserX className="w-4 h-4" />
+                                            </Button>
+                                        </RoleGuard>
                                     </TableCell>
                                 </TableRow>
                             ))

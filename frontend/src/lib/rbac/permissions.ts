@@ -37,14 +37,17 @@ export enum Role {
     SUPER_ADMIN = 'SUPER_ADMIN',
     OWNER = 'OWNER',
     ADMIN = 'ADMIN',
+    MODERATOR = 'MODERATOR', // Modérateur: Full edit/review capability
     MANAGER = 'MANAGER',
     DISPATCHER = 'DISPATCHER', // Legacy/Alias
+    VALIDATOR = 'VALIDATOR', // Validateur: Review and approve capability
+    WAREHOUSE_MANAGER = 'WAREHOUSE_MANAGER', // Legacy
+    EDITOR = 'EDITOR', // Rédacteur: Creation capability
     TECHNICIAN = 'TECHNICIAN',
     TECHNIQUE = 'TECHNIQUE', // Legacy/Alias
     USER = 'USER',
     CITIZEN = 'CITIZEN', // Legacy/Alias
-    VIEWER = 'VIEWER',
-    WAREHOUSE_MANAGER = 'WAREHOUSE_MANAGER', // Legacy
+    VIEWER = 'VIEWER', // Consultatif: View only capability
 }
 
 // Role Hierarchy
@@ -52,9 +55,12 @@ export const ROLE_HIERARCHY: Record<Role, number> = {
     [Role.SUPER_ADMIN]: 100,
     [Role.OWNER]: 90,
     [Role.ADMIN]: 80,
+    [Role.MODERATOR]: 75,
     [Role.MANAGER]: 60,
     [Role.DISPATCHER]: 60,
+    [Role.VALIDATOR]: 55,
     [Role.WAREHOUSE_MANAGER]: 50,
+    [Role.EDITOR]: 45,
     [Role.TECHNICIAN]: 40,
     [Role.TECHNIQUE]: 40,
     [Role.USER]: 20,
@@ -80,6 +86,28 @@ const DATA_ADMIN_PERMS = [
     Permission.VIEW_USERS,
     Permission.MANAGE_USERS,
     Permission.VIEW_AUDIT_LOGS,
+];
+
+const MODERATOR_PERMS = [
+    ...DATA_ADMIN_PERMS, // Moderator has almost same perms as admin for content management
+];
+
+const VALIDATOR_PERMS = [
+    Permission.VIEW_COMPLAINTS,
+    Permission.RESOLVE_COMPLAINT,
+    Permission.APPROVE_REQUISITIONS,
+    Permission.VIEW_TEAMS,
+    Permission.VIEW_INVENTORY,
+    Permission.VIEW_ANALYTICS,
+];
+
+const EDITOR_PERMS = [
+    Permission.VIEW_COMPLAINTS,
+    Permission.CREATE_COMPLAINT,
+    Permission.EDIT_COMPLAINT,
+    Permission.VIEW_TEAMS,
+    Permission.VIEW_INVENTORY,
+    Permission.CREATE_REQUISITION,
 ];
 
 const MANAGER_PERMS = [
@@ -116,9 +144,11 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     [Role.OWNER]: Object.values(Permission),
 
     [Role.ADMIN]: DATA_ADMIN_PERMS,
+    [Role.MODERATOR]: MODERATOR_PERMS,
 
     [Role.MANAGER]: MANAGER_PERMS,
     [Role.DISPATCHER]: MANAGER_PERMS,
+    [Role.VALIDATOR]: VALIDATOR_PERMS,
 
     [Role.WAREHOUSE_MANAGER]: [
         Permission.VIEW_COMPLAINTS,
@@ -127,6 +157,8 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
         Permission.APPROVE_REQUISITIONS,
         Permission.CREATE_REQUISITION,
     ],
+
+    [Role.EDITOR]: EDITOR_PERMS,
 
     [Role.TECHNICIAN]: TECH_PERMS,
     [Role.TECHNIQUE]: TECH_PERMS,

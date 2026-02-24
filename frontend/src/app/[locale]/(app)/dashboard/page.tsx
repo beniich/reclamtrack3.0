@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 import {
     Activity,
     AlertCircle,
@@ -27,11 +29,13 @@ import type { Complaint } from '@/types';
 
 export default function DashboardPage() {
     const t = useTranslations('Dashboard');
-    const [stats, setStats] = useState({
-        total: 0,
-        active: 0,
+    const [stats, setStats] = useState<any>({
+        totalComplaints: 0,
+        activeComplaints: 0,
         resolvedToday: 0,
-        teamsActive: 0
+        activeTeams: 0,
+        byStatus: {},
+        byCategory: []
     });
     const [recentComplaints, setRecentComplaints] = useState<Complaint[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -42,16 +46,12 @@ export default function DashboardPage() {
                 // Fetch stats and complaints in parallel
                 const [statsRes, complaintsRes] = await Promise.all([
                     apiClient.get('/dashboard') as Promise<any>,
-                    apiClient.get('/complaints?limit=3') as Promise<Complaint[]>
+                    apiClient.get('/complaints?limit=3') as Promise<any>
                 ]);
 
-                setStats({
-                    total: statsRes.totalComplaints || 0,
-                    active: statsRes.activeComplaints || 0,
-                    resolvedToday: statsRes.resolvedToday || 0,
-                    teamsActive: statsRes.activeTeams || 0
-                });
-                setRecentComplaints(complaintsRes || []);
+                setStats(statsRes || {});
+                // Complaints are wrapped in { success, data } in formatResponse
+                setRecentComplaints(complaintsRes?.data || []);
             } catch (err) {
                 console.error("Error fetching dashboard data:", err);
             } finally {
@@ -65,29 +65,29 @@ export default function DashboardPage() {
     const kpiStats = [
         {
             title: t('activeTickets'),
-            value: stats.active,
+            value: stats.activeComplaints || 0,
             trend: { value: '+12%', isPositive: true },
             icon: AlertCircle,
             color: 'blue' as const,
         },
         {
             title: t('resolvedToday'),
-            value: stats.resolvedToday,
+            value: stats.resolvedToday || 0,
             trend: { value: '+8%', isPositive: true },
             icon: CheckCircle2,
             color: 'green' as const,
         },
         {
             title: t('pendingReview'),
-            value: 18, // Mock for now
+            value: stats.byStatus?.nouvelle || 0,
             trend: { value: '-5%', isPositive: false },
             icon: Clock,
             color: 'amber' as const,
         },
         {
             title: t('activeTeams'),
-            value: stats.teamsActive || 12,
-            subtitle: t('teamsActiveSubtitle', { count: 15 }), // sur 15 totales
+            value: stats.activeTeams || 0,
+            subtitle: t('teamsActiveSubtitle', { count: stats.totalTeams || stats.activeTeams || 0 }),
             icon: Users,
             color: 'purple' as const,
         },
@@ -231,26 +231,32 @@ export default function DashboardPage() {
                         </div>
 
                         <div className="space-y-6">
-                            {[
-                                { name: 'Eau & Fuites', color: 'bg-blue-500', percent: 45, icon: Droplet },
-                                { name: 'Éclairage Public', color: 'bg-amber-500', percent: 29, icon: Lightbulb },
-                                { name: 'Assainissement', color: 'bg-emerald-500', percent: 21, icon: Trash2 },
-                            ].map((cat, idx) => (
-                                <div key={idx} className="group cursor-pointer">
-                                    <div className="flex items-center justify-between mb-3">
-                                        <div className="flex items-center gap-3">
-                                            <div className={cn("size-8 rounded-xl text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform", cat.color)}>
-                                                <cat.icon className="w-4 h-4" />
+                            {(stats.byCategory && stats.byCategory.length > 0) ? stats.byCategory.slice(0, 3).map((cat: any, idx: number) => {
+                                const icons = [Droplet, Lightbulb, Trash2];
+                                const colors = ['bg-blue-500', 'bg-amber-500', 'bg-emerald-500'];
+                                const percent = stats.totalComplaints > 0
+                                    ? Math.round((cat.count / stats.totalComplaints) * 100)
+                                    : 0;
+
+                                return (
+                                    <div key={idx} className="group cursor-pointer">
+                                        <div className="flex items-center justify-between mb-3">
+                                            <div className="flex items-center gap-3">
+                                                <div className={cn("size-8 rounded-xl text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform", colors[idx % colors.length])}>
+                                                    {React.createElement(icons[idx % icons.length], { className: "w-4 h-4" })}
+                                                </div>
+                                                <span className="text-[11px] font-black text-slate-700 dark:text-slate-200 uppercase tracking-tight">{cat._id}</span>
                                             </div>
-                                            <span className="text-[11px] font-black text-slate-700 dark:text-slate-200 uppercase tracking-tight">{cat.name}</span>
+                                            <span className="text-xs font-black text-slate-900 dark:text-white lowercase">{percent}%</span>
                                         </div>
-                                        <span className="text-xs font-black text-slate-900 dark:text-white lowercase">{cat.percent}%</span>
+                                        <div className="w-full bg-slate-100 dark:bg-slate-800/50 h-2 rounded-full overflow-hidden">
+                                            <div className={cn("h-full rounded-full transition-all duration-1000", colors[idx % colors.length])} style={{ width: `${percent}%` }}></div>
+                                        </div>
                                     </div>
-                                    <div className="w-full bg-slate-100 dark:bg-slate-800/50 h-2 rounded-full overflow-hidden">
-                                        <div className={cn("h-full rounded-full transition-all duration-1000", cat.color)} style={{ width: `${cat.percent}%` }}></div>
-                                    </div>
-                                </div>
-                            ))}
+                                );
+                            }) : (
+                                <p className="text-xs text-slate-500 italic">Aucune donnée de catégorie disponible.</p>
+                            )}
                         </div>
                     </div>
                 </aside>

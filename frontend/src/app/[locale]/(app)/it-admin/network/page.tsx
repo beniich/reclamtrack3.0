@@ -1,5 +1,6 @@
 'use client';
 
+import { RoleGuard } from '@/components/security/RoleGuard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -15,6 +16,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import api from '@/lib/api';
+import { Role } from '@/lib/rbac/permissions';
 import { Activity, Edit, MoreVertical, Plus, Search, Server, Shield, Trash2, Wifi } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -145,16 +147,20 @@ export default function NetworkPage() {
           <p className="text-gray-500 mt-1">Monitor availability and performance of network infrastructure.</p>
         </div>
         <div className="flex gap-2">
-          <Link href="/it-admin/network/scan">
-            <Button variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
-              <Search className="mr-2 h-4 w-4" />
-              Scan Network
+          <RoleGuard minRole={Role.MODERATOR}>
+            <Link href="/it-admin/network/scan">
+               <Button variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
+                <Search className="mr-2 h-4 w-4" />
+                Scan Network
+              </Button>
+            </Link>
+          </RoleGuard>
+          <RoleGuard minRole={Role.MODERATOR}>
+            <Button className="bg-purple-600 hover:bg-purple-700" onClick={handleCreate}>
+              <Plus className="mr-2 h-4 w-4" />
+              Add Device
             </Button>
-          </Link>
-          <Button className="bg-purple-600 hover:bg-purple-700" onClick={handleCreate}>
-            <Plus className="mr-2 h-4 w-4" />
-            Add Device
-          </Button>
+          </RoleGuard>
         </div>
       </div>
 
@@ -183,13 +189,15 @@ export default function NetworkPage() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => handleEdit(device)}>
-                        <Edit className="mr-2 h-4 w-4" /> Edit Configuration
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(device._id)}>
-                        <Trash2 className="mr-2 h-4 w-4" /> Delete
-                    </DropdownMenuItem>
+                    <RoleGuard minRole={Role.MODERATOR}>
+                      <DropdownMenuItem onClick={() => handleEdit(device)}>
+                          <Edit className="mr-2 h-4 w-4" /> Edit Configuration
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(device._id)}>
+                          <Trash2 className="mr-2 h-4 w-4" /> Delete
+                      </DropdownMenuItem>
+                    </RoleGuard>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
@@ -287,13 +295,17 @@ export default function NetworkPage() {
               Start monitoring your infrastructure by adding routers, switches, or servers.
             </p>
              <div className="flex gap-4 justify-center">
-                <Button variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
-                     <Search className="mr-2 h-4 w-4" /> Scan Network
-                </Button>
-                <Button className="bg-purple-600 hover:bg-purple-700" onClick={handleCreate}>
-                <Plus className="mr-2 h-4 w-4" />
-                Add Device
-                </Button>
+                <RoleGuard minRole={Role.MODERATOR}>
+                  <Button variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
+                       <Search className="mr-2 h-4 w-4" /> Scan Network
+                  </Button>
+                </RoleGuard>
+                <RoleGuard minRole={Role.MODERATOR}>
+                  <Button className="bg-purple-600 hover:bg-purple-700" onClick={handleCreate}>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Add Device
+                  </Button>
+                </RoleGuard>
             </div>
           </CardContent>
         </Card>

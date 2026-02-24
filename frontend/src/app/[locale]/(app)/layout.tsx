@@ -1,12 +1,13 @@
 'use client';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useAuthStore } from '@/store/authStore';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import Header from '@/components/Header';
 import { Footer } from '@/components/layout/Footer';
+import { useAuth } from '@/hooks/useAuth';
 import useNotifications from '@/hooks/useNotifications';
+import { useAuthStore } from '@/store/authStore';
+import { useOrgStore } from '@/store/orgStore';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function AppLayout({
     children,
@@ -15,6 +16,7 @@ export default function AppLayout({
 }) {
     const { user } = useAuth();
     const { _hasHydrated, token } = useAuthStore();
+    const { fetchOrganizations, organizations } = useOrgStore();
     const router = useRouter();
     useNotifications();
 
@@ -24,6 +26,13 @@ export default function AppLayout({
             router.push('/login');
         }
     }, [user, token, _hasHydrated, router]);
+
+    // Charger les organisations une fois authentifié
+    useEffect(() => {
+        if (user && token && organizations.length === 0) {
+            fetchOrganizations();
+        }
+    }, [user, token, organizations.length, fetchOrganizations]);
 
     if (!_hasHydrated) {
         return (

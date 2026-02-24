@@ -1,5 +1,6 @@
 'use client';
 
+import { RoleGuard } from '@/components/security/RoleGuard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -16,6 +17,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import api from '@/lib/api';
+import { Role } from '@/lib/rbac/permissions';
 import { Check, ClipboardList, Clock, Edit, MoreVertical, Plus, Search, Ticket, Trash2, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -254,18 +256,20 @@ export default function ITTicketsPage() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => handleEdit(ticket)}>
-                        <Edit className="mr-2 h-4 w-4" /> Edit Details
-                    </DropdownMenuItem>
-                    {ticket.status !== 'resolved' && ticket.status !== 'closed' && (
-                         <DropdownMenuItem onClick={() => handleStatusChange(ticket, 'resolved')}>
-                            <Check className="mr-2 h-4 w-4" /> Mark Resolved
-                        </DropdownMenuItem>
-                    )}
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(ticket._id)}>
-                        <Trash2 className="mr-2 h-4 w-4" /> Delete
-                    </DropdownMenuItem>
+                    <RoleGuard minRole={Role.TECHNICIAN}>
+                      <DropdownMenuItem onClick={() => handleEdit(ticket)}>
+                          <Edit className="mr-2 h-4 w-4" /> Edit Details
+                      </DropdownMenuItem>
+                      {ticket.status !== 'resolved' && ticket.status !== 'closed' && (
+                           <DropdownMenuItem onClick={() => handleStatusChange(ticket, 'resolved')}>
+                              <Check className="mr-2 h-4 w-4" /> Mark Resolved
+                          </DropdownMenuItem>
+                      )}
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(ticket._id)}>
+                          <Trash2 className="mr-2 h-4 w-4" /> Delete
+                      </DropdownMenuItem>
+                    </RoleGuard>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
@@ -292,7 +296,9 @@ export default function ITTicketsPage() {
                  </div>
 
                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" onClick={() => handleEdit(ticket)}>View Details</Button>
+                    <RoleGuard minRole={Role.TECHNICIAN}>
+                      <Button variant="outline" size="sm" onClick={() => handleEdit(ticket)}>View Details</Button>
+                    </RoleGuard>
                  </div>
               </div>
             </CardContent>

@@ -1,5 +1,6 @@
 'use client';
 
+import { RoleGuard } from '@/components/security/RoleGuard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -15,6 +16,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import api from '@/lib/api';
+import { Role } from '@/lib/rbac/permissions';
 import { Edit, Laptop, Monitor, MoreVertical, Network, Plus, Printer, Search, Server, Smartphone, Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -170,10 +172,12 @@ export default function ITAssetsPage() {
             <Button variant="outline" onClick={() => loadAssets()}>
                 <span className="mr-2">↻</span> Refresh
             </Button>
-            <Button className="bg-primary hover:bg-primary/90" onClick={handleCreate}>
-            <Plus className="mr-2 h-4 w-4" />
-            Add Asset
-            </Button>
+            <RoleGuard minRole={Role.EDITOR}>
+              <Button className="bg-primary hover:bg-primary/90" onClick={handleCreate}>
+                <Plus className="mr-2 h-4 w-4" />
+                Add Asset
+              </Button>
+            </RoleGuard>
         </div>
       </div>
 
@@ -235,13 +239,15 @@ export default function ITAssetsPage() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => handleEdit(asset)}>
-                        <Edit className="mr-2 h-4 w-4" /> Edit
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(asset._id)}>
-                        <Trash2 className="mr-2 h-4 w-4" /> Delete
-                    </DropdownMenuItem>
+                    <RoleGuard minRole={Role.EDITOR}>
+                      <DropdownMenuItem onClick={() => handleEdit(asset)}>
+                          <Edit className="mr-2 h-4 w-4" /> Edit
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem className="text-red-600" onClick={() => handleDelete(asset._id)}>
+                          <Trash2 className="mr-2 h-4 w-4" /> Delete
+                      </DropdownMenuItem>
+                    </RoleGuard>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
@@ -294,10 +300,12 @@ export default function ITAssetsPage() {
             <p className="text-gray-500 mb-6 max-w-sm mx-auto">
               {search ? 'No assets match your search criteria.' : 'Get started by adding your first hardware asset to the inventory.'}
             </p>
-            <Button onClick={handleCreate}>
-                <Plus className="mr-2 h-4 w-4" />
-                Add Asset
-            </Button>
+            <RoleGuard minRole={Role.EDITOR}>
+              <Button onClick={handleCreate}>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Add Asset
+              </Button>
+            </RoleGuard>
           </CardContent>
         </Card>
       )}

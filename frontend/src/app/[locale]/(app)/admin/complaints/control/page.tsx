@@ -1,11 +1,13 @@
 'use client';
 
+import { RoleGuard } from '@/components/security/RoleGuard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import api from '@/lib/api';
+import { Role } from '@/lib/rbac/permissions';
 import { AlertTriangle, CheckCircle, FileText, Search, ShieldCheck, XCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -144,21 +146,25 @@ export default function ComplaintControlPage() {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Button
-                      variant="danger"
-                      onClick={() => handleRejectInit(complaint._id)}
-                      className="bg-red-50 text-red-700 hover:bg-red-100 border-red-200 border"
-                    >
-                      <XCircle className="h-4 w-4 mr-2" />
-                      Reject
-                    </Button>
-                    <Button
-                      onClick={() => handleApprove(complaint._id)}
-                      className="bg-green-600 hover:bg-green-700 text-white"
-                    >
-                      <CheckCircle className="h-4 w-4 mr-2" />
-                      Approve & Assign
-                    </Button>
+                    <RoleGuard minRole={Role.VALIDATOR}>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleRejectInit(complaint._id)}
+                        className="bg-red-50 text-red-700 hover:bg-red-100 border-red-200 border"
+                      >
+                        <XCircle className="h-4 w-4 mr-2" />
+                        Reject
+                      </Button>
+                    </RoleGuard>
+                    <RoleGuard minRole={Role.VALIDATOR}>
+                      <Button
+                        onClick={() => handleApprove(complaint._id)}
+                        className="bg-green-600 hover:bg-green-700 text-white"
+                      >
+                        <CheckCircle className="h-4 w-4 mr-2" />
+                        Approve & Assign
+                      </Button>
+                    </RoleGuard>
                   </div>
                 </div>
               </CardContent>

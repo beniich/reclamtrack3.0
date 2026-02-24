@@ -1,5 +1,7 @@
 'use client'
 
+import { RoleGuard } from '@/components/security/RoleGuard'
+import { Role } from '@/lib/rbac/permissions'
 import { useState } from 'react'
 
 export default function MailboxPage() {
@@ -242,12 +244,16 @@ export default function MailboxPage() {
                                 </span>
                             </div>
                             <div className="flex items-center gap-3 w-full sm:w-auto">
-                                <button className="flex-1 sm:flex-none px-6 py-2.5 rounded-lg border border-primary/30 text-primary font-semibold hover:bg-primary/5 transition-colors">
-                                    Test Connection
-                                </button>
-                                <button className="flex-1 sm:flex-none px-8 py-2.5 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all active:scale-95">
-                                    Save & Sync
-                                </button>
+                                <RoleGuard minRole={Role.ADMIN}>
+                                    <button className="flex-1 sm:flex-none px-6 py-2.5 rounded-lg border border-primary/30 text-primary font-semibold hover:bg-primary/5 transition-colors">
+                                        Test Connection
+                                    </button>
+                                </RoleGuard>
+                                <RoleGuard minRole={Role.ADMIN}>
+                                    <button className="flex-1 sm:flex-none px-8 py-2.5 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all active:scale-95">
+                                        Save & Sync
+                                    </button>
+                                </RoleGuard>
                             </div>
                         </div>
                     </div>

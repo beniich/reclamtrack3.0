@@ -1,7 +1,9 @@
 'use client'
 
+import { RoleGuard } from '@/components/security/RoleGuard'
 import { MetricCard } from '@/components/ui/MetricCard'
 import { Button } from '@/components/ui/button'
+import { Role } from '@/lib/rbac/permissions'
 
 export default function EdgeRoutePage() {
     return (
@@ -179,12 +181,16 @@ export default function EdgeRoutePage() {
                                 </p>
                             </div>
                             <div className="flex gap-2">
-                                <Button variant="ghost" size="sm">
-                                    Export Config
-                                </Button>
-                                <Button variant="primary" size="sm">
-                                    <span className="material-symbols-outlined text-sm">add</span> Add New Rule
-                                </Button>
+                                <RoleGuard minRole={Role.ADMIN}>
+                                    <Button variant="ghost" size="sm">
+                                        Export Config
+                                    </Button>
+                                </RoleGuard>
+                                <RoleGuard minRole={Role.ADMIN}>
+                                    <Button variant="primary" size="sm">
+                                        <span className="material-symbols-outlined text-sm">add</span> Add New Rule
+                                    </Button>
+                                </RoleGuard>
                             </div>
                         </div>
                         <div className="overflow-x-auto">
@@ -224,12 +230,14 @@ export default function EdgeRoutePage() {
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 text-right">
-                                            <button className="p-1 text-slate-400 hover:text-primary transition-colors">
-                                                <span className="material-symbols-outlined">edit</span>
-                                            </button>
-                                            <button className="p-1 text-slate-400 hover:text-primary transition-colors ml-2">
-                                                <span className="material-symbols-outlined">more_vert</span>
-                                            </button>
+                                            <RoleGuard minRole={Role.ADMIN}>
+                                                <button className="p-1 text-slate-400 hover:text-primary transition-colors">
+                                                    <span className="material-symbols-outlined">edit</span>
+                                                </button>
+                                                <button className="p-1 text-slate-400 hover:text-primary transition-colors ml-2">
+                                                    <span className="material-symbols-outlined">more_vert</span>
+                                                </button>
+                                            </RoleGuard>
                                         </td>
                                     </tr>
                                 </tbody>

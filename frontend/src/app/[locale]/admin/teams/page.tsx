@@ -1,34 +1,33 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { teamsApi } from '@/lib/api';
 import { useOrgStore } from '@/store/orgStore';
-import { teamsApi, organizationApi } from '@/lib/api';
+import { useEffect, useState } from 'react';
 // import { TeamResponse } from '@/types'; // Removed unused import
 import {
-    WaterDrop,
+    Add,
     Bolt,
-    Plumbing,
+    CalendarMonth,
     Construction,
+    FilterList,
     Group,
     LocalShipping,
-    CalendarMonth,
-    FilterList,
-    RadioButtonChecked,
     NotificationsActive,
-    Add
+    RadioButtonChecked,
+    WaterDrop
 } from '@/components/icons';
-import { Search } from 'lucide-react'; // Import direct for standard UI icons if not in icons.tsx
+import { RoleGuard } from '@/components/security/RoleGuard';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import {
     Dialog,
     DialogContent,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
-    DialogFooter
+    DialogTrigger
 } from "@/components/ui/dialog";
+import { Input } from '@/components/ui/input';
 import {
     Select,
     SelectContent,
@@ -36,6 +35,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { Role } from '@/lib/rbac/permissions';
+import { Search } from 'lucide-react'; // Import direct for standard UI icons if not in icons.tsx
 import { toast } from 'react-hot-toast';
 
 // Helper to map specialization to icon
@@ -158,46 +159,48 @@ export default function TeamsPage() {
                     </button>
                     <div className="h-6 w-px bg-slate-200 dark:border-slate-800"></div>
 
-                    <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-                        <DialogTrigger asChild>
-                            <button className="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
-                                <Add className="w-4 h-4" />
-                                New Team
-                            </button>
-                        </DialogTrigger>
-                        <DialogContent>
-                            <DialogHeader>
-                                <DialogTitle>Create New Team</DialogTitle>
-                            </DialogHeader>
-                            <div className="grid gap-4 py-4">
-                                <div className="grid gap-2">
-                                    <label className="text-sm font-medium">Team Name</label>
-                                    <Input
-                                        value={newTeamName}
-                                        onChange={(e) => setNewTeamName(e.target.value)}
-                                        placeholder="e.g. Equipe Alpha 01"
-                                    />
+                    <RoleGuard minRole={Role.MODERATOR}>
+                        <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+                            <DialogTrigger asChild>
+                                <button className="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
+                                    <Add className="w-4 h-4" />
+                                    New Team
+                                </button>
+                            </DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Create New Team</DialogTitle>
+                                </DialogHeader>
+                                <div className="grid gap-4 py-4">
+                                    <div className="grid gap-2">
+                                        <label className="text-sm font-medium">Team Name</label>
+                                        <Input
+                                            value={newTeamName}
+                                            onChange={(e) => setNewTeamName(e.target.value)}
+                                            placeholder="e.g. Equipe Alpha 01"
+                                        />
+                                    </div>
+                                    <div className="grid gap-2">
+                                        <label className="text-sm font-medium">Specialization</label>
+                                        <Select value={newTeamSpec} onValueChange={setNewTeamSpec}>
+                                            <SelectTrigger>
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="plumbing">Plumbing</SelectItem>
+                                                <SelectItem value="electrical">Electrical</SelectItem>
+                                                <SelectItem value="infrastructure">Infrastructure</SelectItem>
+                                                <SelectItem value="maintenance">Maintenance</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
                                 </div>
-                                <div className="grid gap-2">
-                                    <label className="text-sm font-medium">Specialization</label>
-                                    <Select value={newTeamSpec} onValueChange={setNewTeamSpec}>
-                                        <SelectTrigger>
-                                            <SelectValue />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="plumbing">Plumbing</SelectItem>
-                                            <SelectItem value="electrical">Electrical</SelectItem>
-                                            <SelectItem value="infrastructure">Infrastructure</SelectItem>
-                                            <SelectItem value="maintenance">Maintenance</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                            </div>
-                            <DialogFooter>
-                                <Button onClick={handleCreateTeam}>Create Team</Button>
-                            </DialogFooter>
-                        </DialogContent>
-                    </Dialog>
+                                <DialogFooter>
+                                    <Button onClick={handleCreateTeam}>Create Team</Button>
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
+                    </RoleGuard>
                 </div>
             </header>
 

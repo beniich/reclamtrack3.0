@@ -226,11 +226,12 @@ export const feedbackApi = {
 };
 
 export const fleetApi = {
-    getAll: (params?: any) => apiClient.get('/fleet', params),
-    getById: (id: string) => apiClient.get(`/fleet/${id}`),
-    create: (data: any) => apiClient.post('/fleet', data),
-    update: (id: string, data: any) => apiClient.put(`/fleet/${id}`, data),
-    delete: (id: string) => apiClient.delete(`/fleet/${id}`),
+    getVehicles: (params?: any) => apiClient.get('/fleet/vehicles', params),
+    getVehicleById: (id: string) => apiClient.get(`/fleet/vehicles/${id}`),
+    createVehicle: (data: any) => apiClient.post('/fleet/vehicles', data),
+    updateVehicle: (id: string, data: any) => apiClient.put(`/fleet/vehicles/${id}`, data),
+    updateVehicleStatus: (id: string, status: string, driverId?: string) => apiClient.put(`/fleet/vehicles/${id}/status`, { status, driverId }),
+    deleteVehicle: (id: string) => apiClient.delete(`/fleet/vehicles/${id}`),
 };
 
 export const knowledgeApi = {

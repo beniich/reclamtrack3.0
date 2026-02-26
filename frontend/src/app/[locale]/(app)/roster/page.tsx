@@ -1,17 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { rosterApi, staffApi } from '@/lib/api';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { rosterApi, staffApi } from '@/lib/api';
+import { useOrgStore } from '@/store/orgStore';
+import { useEffect, useState } from 'react';
 
 export default function RosterPage() {
     const [staff, setStaff] = useState<any[]>([]);
     const [roster, setRoster] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [currentWeek, setCurrentWeek] = useState('2024-W43'); // Example week
+    const { activeOrganization, isLoading: isOrgLoading } = useOrgStore();
 
     useEffect(() => {
         const fetchData = async () => {
+            if (!activeOrganization) return;
             try {
                 const [staffData, rosterData] = await Promise.all([
                     staffApi.getAll(),
@@ -25,8 +28,12 @@ export default function RosterPage() {
                 setLoading(false);
             }
         };
-        fetchData();
-    }, [currentWeek]);
+
+        if (!isOrgLoading) {
+            fetchData();
+        }
+    }, [currentWeek, activeOrganization, isOrgLoading]);
+
 
     if (loading) {
         return (

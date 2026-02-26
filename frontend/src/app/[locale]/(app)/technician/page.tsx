@@ -1,11 +1,22 @@
 'use client';
 
-import { useAssignments } from '@/hooks/useAssignments';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from '@/components/ui/dialog';
+import { SignaturePad } from '@/components/ui/SignaturePad';
+import { Textarea } from '@/components/ui/textarea';
+import { useAssignments } from '@/hooks/useAssignments';
 import api from '@/lib/api';
-import { toast } from 'react-hot-toast';
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export default function TechnicianPage() {
     const { data: assignments, isLoading, refetch } = useAssignments();
@@ -15,6 +26,11 @@ export default function TechnicianPage() {
     // Trouver les tâches à venir (affecté)
     const upcomingTasks = assignments?.filter((a: any) => a.status === 'affecté') || [];
 
+    const [showClosureModal, setShowClosureModal] = useState(false);
+    const [closureNote, setClosureNote] = useState('');
+    const [signature, setSignature] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const handleStatusChange = async (id: string, newStatus: string) => {
         try {
             await api.patch(`/assignments/${id}`, { status: newStatus });
@@ -22,6 +38,31 @@ export default function TechnicianPage() {
             refetch();
         } catch (error) {
             toast.error("Erreur lors de la mise à jour");
+        }
+    };
+
+    const handleFinishTask = async () => {
+        if (!activeTask || !signature) {
+            toast.error("Signature requise pour clôturer l'intervention");
+            return;
+        }
+
+        setIsSubmitting(true);
+        try {
+            await api.patch(`/assignments/${activeTask._id}/complete`, {
+                status: 'terminé',
+                closureNote,
+                signature
+            });
+            toast.success("Intervention clôturée avec succès");
+            setShowClosureModal(false);
+            setSignature(null);
+            setClosureNote('');
+            refetch();
+        } catch (error) {
+            toast.error("Erreur lors de la clôture");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -123,11 +164,11 @@ export default function TechnicianPage() {
 
                                     <div className="mt-8 flex flex-wrap gap-4">
                                         <button
-                                            onClick={() => handleStatusChange(activeTask._id, 'terminé')}
+                                            onClick={() => setShowClosureModal(true)}
                                             className="flex-1 min-w-[200px] flex items-center justify-center gap-3 bg-green-600 text-white py-4 rounded-xl font-black text-lg hover:bg-green-700 transition-colors shadow-lg shadow-green-600/20"
                                         >
                                             <span className="material-symbols-outlined">check_circle</span>
-                                            MARQUER RÉSOLU
+                                            FINALISER & SIGNER
                                         </button>
                                         <button className="flex-1 min-w-[200px] flex items-center justify-center gap-3 bg-slate-100 text-slate-900 py-4 rounded-xl font-black text-lg hover:bg-slate-200 transition-colors">
                                             <span className="material-symbols-outlined">pause</span>
@@ -182,6 +223,56 @@ export default function TechnicianPage() {
                     </div>
                 </section>
             </main>
+
+            {/* Closure Modal */}
+            <Dialog open={showClosureModal} onOpenChange={setShowClosureModal}>
+                <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Clôturer l&apos;intervention</DialogTitle>
+                        <DialogDescription>
+                            Veuillez ajouter une note de clôture et signer pour confirmer la résolution.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="space-y-4 py-4">
+                        <div className="space-y-2">
+                            <label className="text-sm font-bold uppercase tracking-wider text-slate-500">Note de clôture</label>
+                            <Textarea
+                                placeholder="Détails sur la résolution..."
+                                value={closureNote}
+                                onChange={(e) => setClosureNote(e.target.value)}
+                                className="min-h-[100px]"
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-sm font-bold uppercase tracking-wider text-slate-500">Signature du client / technicien</label>
+                            <SignaturePad
+                                onSave={(data) => setSignature(data)}
+                                onClear={() => setSignature(null)}
+                            />
+                        </div>
+                    </div>
+
+                    <DialogFooter>
+                        <button
+                            type="button"
+                            onClick={() => setShowClosureModal(false)}
+                            className="px-4 py-2 text-sm font-bold text-slate-500 hover:text-slate-700 transition-colors"
+                        >
+                            Annuler
+                        </button>
+                        <button
+                            type="button"
+                            onClick={handleFinishTask}
+                            disabled={isSubmitting || !signature}
+                            className="bg-primary text-white px-8 py-2 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 disabled:opacity-50"
+                        >
+                            {isSubmitting ? 'Envoi...' : 'Confirmer la clôture'}
+                        </button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }

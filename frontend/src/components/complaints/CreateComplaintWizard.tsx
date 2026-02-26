@@ -1,13 +1,14 @@
 'use client';
 
-import { FormStepper, complaintFormSteps } from '@/components/forms/FormStepper';
 import { FileUpload } from '@/components/forms/FileUpload';
-import { useComplaintForm } from '@/hooks/useComplaintForm';
+import { FormStepper, complaintFormSteps } from '@/components/forms/FormStepper';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useComplaintForm } from '@/hooks/useComplaintForm';
 
 
+import { Loader2, MapPin } from 'lucide-react';
 import { useState } from 'react'; // Ensure useState is imported
 
 export function CreateComplaintWizard() {
@@ -35,6 +36,40 @@ export function CreateComplaintWizard() {
     // Local state to hold files to submit
     const [files, setFiles] = useState<File[]>([]);
 
+    // Geolocation state
+    const [isLocating, setIsLocating] = useState(false);
+    const [locationError, setLocationError] = useState('');
+
+    const handleGetLocation = () => {
+        setIsLocating(true);
+        setLocationError('');
+
+        if (!navigator.geolocation) {
+            setLocationError("La géolocalisation n'est pas supportée par votre navigateur.");
+            setIsLocating(false);
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                currentForm.setValue('latitude', latitude, { shouldValidate: true });
+                currentForm.setValue('longitude', longitude, { shouldValidate: true });
+                setIsLocating(false);
+            },
+            (error) => {
+                setLocationError("Impossible d'obtenir votre position. Veuillez vérifier vos permissions.");
+                setIsLocating(false);
+                console.error("Geolocation error:", error);
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+    };
+
     const handleFileUpload = async (file: File) => {
         try {
             // Upload immediately
@@ -43,7 +78,7 @@ export function CreateComplaintWizard() {
             // Update local state for UI
             setFiles(prev => [...prev, file]);
 
-            // Update form data (assuming step 3 is active or we access step3Form via some means, 
+            // Update form data (assuming step 3 is active or we access step3Form via some means,
             // but here currentForm is step3Form when on step 3).
             // We should ensure we are on step 3 or safely update step 3 data.
             // CreateComplaintWizard renders step 3, so currentForm is step 3 form.
@@ -189,12 +224,47 @@ export function CreateComplaintWizard() {
                                 )}
                             </div>
 
-                            {/* Note: Latitude/Longitude inputs hidden or map picker would go here */}
-                            <Input type="hidden" {...currentForm.register('latitude', { valueAsNumber: true })} value={34.02} />
-                            <Input type="hidden" {...currentForm.register('longitude', { valueAsNumber: true })} value={-6.83} />
+                            <div className="grid gap-2">
+                                <Label>Coordonnées GPS</Label>
+                                <div className="flex flex-col gap-2">
+                                    <div className="flex items-center gap-3">
+                                        <Button
+                                            type="button"
+                                            variant="secondary"
+                                            onClick={handleGetLocation}
+                                            disabled={isLocating}
+                                            className="flex items-center gap-2"
+                                        >
+                                            {isLocating ? (
+                                                <Loader2 className="w-4 h-4 animate-spin" />
+                                            ) : (
+                                                <MapPin className="w-4 h-4" />
+                                            )}
+                                            {isLocating ? 'Localisation...' : 'Obtenir ma position'}
+                                        </Button>
 
-                            <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-lg text-center text-slate-500">
-                                <p>Carte de sélection de position (à intégrer)</p>
+                                        {(currentForm.watch('latitude') && currentForm.watch('longitude')) && !isLocating && (
+                                            <div className="text-sm text-green-600 dark:text-green-500 font-medium flex items-center gap-1">
+                                                Position enregistrée ✓
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {locationError && (
+                                        <p className="text-red-500 text-sm mt-1">{locationError}</p>
+                                    )}
+
+                                    {/* Inputs hidden since they are populated by the button. Also keeping them properly registered */}
+                                    <Input type="hidden" {...currentForm.register('latitude', { valueAsNumber: true })} />
+                                    <Input type="hidden" {...currentForm.register('longitude', { valueAsNumber: true })} />
+
+                                    {(currentForm.watch('latitude') && currentForm.watch('longitude')) && (
+                                        <div className="text-xs text-slate-500 flex items-center gap-4 mt-2">
+                                            <span>Lat: {Number(currentForm.watch('latitude')).toFixed(6)}</span>
+                                            <span>Lng: {Number(currentForm.watch('longitude')).toFixed(6)}</span>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     )}

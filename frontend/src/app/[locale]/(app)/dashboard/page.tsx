@@ -23,12 +23,22 @@ import { useEffect, useState } from 'react';
 
 import { ComplaintCard } from '@/components/ui/ComplaintCard';
 import { StatsCard } from '@/components/ui/StatsCard';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 import { apiClient } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import type { Complaint } from '@/types';
 
+import { useOrgStore } from '@/store/orgStore';
+
 export default function DashboardPage() {
     const t = useTranslations('Dashboard');
+    const { activeOrganization, isLoading: isOrgLoading } = useOrgStore();
     const [stats, setStats] = useState<any>({
         totalComplaints: 0,
         activeComplaints: 0,
@@ -39,14 +49,17 @@ export default function DashboardPage() {
     });
     const [recentComplaints, setRecentComplaints] = useState<Complaint[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [dateFilter, setDateFilter] = useState('today');
 
     useEffect(() => {
         const fetchData = async () => {
+            if (!activeOrganization) return;
+
             try {
                 // Fetch stats and complaints in parallel
                 const [statsRes, complaintsRes] = await Promise.all([
-                    apiClient.get('/dashboard') as Promise<any>,
-                    apiClient.get('/complaints?limit=3') as Promise<any>
+                    apiClient.get(`/dashboard?dateFilter=${dateFilter}`) as Promise<any>,
+                    apiClient.get(`/complaints?limit=3&dateFilter=${dateFilter}`) as Promise<any>
                 ]);
 
                 setStats(statsRes || {});
@@ -59,8 +72,11 @@ export default function DashboardPage() {
             }
         };
 
-        fetchData();
-    }, []);
+        if (!isOrgLoading) {
+            fetchData();
+        }
+    }, [activeOrganization, isOrgLoading, dateFilter]);
+
 
     const kpiStats = [
         {
@@ -111,6 +127,18 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="flex items-center gap-3">
+                    <Select value={dateFilter} onValueChange={setDateFilter}>
+                        <SelectTrigger className="w-[180px] bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-2xl h-[52px]">
+                            <SelectValue placeholder="Filtrer" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="today">Aujourd'hui</SelectItem>
+                            <SelectItem value="7days">7 derniers jours</SelectItem>
+                            <SelectItem value="30days">30 derniers jours</SelectItem>
+                            <SelectItem value="thisYear">Cette année</SelectItem>
+                            <SelectItem value="all">Tout le temps</SelectItem>
+                        </SelectContent>
+                    </Select>
                     <div className="hidden lg:flex flex-col items-end mr-4">
                         <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">{t('lastUpdate')}</span>
                         <span className="text-sm font-bold dark:text-slate-300">{t('justNow')}</span>

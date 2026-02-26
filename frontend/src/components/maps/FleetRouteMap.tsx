@@ -1,6 +1,7 @@
 'use client';
 
 import { complaintsApi, teamsApi } from '@/lib/api';
+import { useOrgStore } from '@/store/orgStore';
 import {
     DirectionsRenderer,
     GoogleMap,
@@ -46,6 +47,7 @@ export function FleetRouteMap() {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''
   });
 
+  const { activeOrganization, isLoading: isOrgLoading } = useOrgStore();
   const [teams, setTeams] = useState<Team[]>([]);
   const [complaints, setComplaints] = useState<Complaint[]>([]);
   const [directions, setDirections] = useState<google.maps.DirectionsResult[]>([]);
@@ -53,6 +55,7 @@ export function FleetRouteMap() {
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
+    if (!activeOrganization) return;
     try {
       const [teamsData, complaintsData] = await Promise.all([
         teamsApi.getAll(),
@@ -68,10 +71,13 @@ export function FleetRouteMap() {
   };
 
   useEffect(() => {
-    fetchData();
-    const interval = setInterval(fetchData, 15000); // Update every 15s
-    return () => clearInterval(interval);
-  }, []);
+    if (!isOrgLoading) {
+        fetchData();
+        const interval = setInterval(fetchData, 15000); // Update every 15s
+        return () => clearInterval(interval);
+    }
+  }, [activeOrganization, isOrgLoading]);
+
 
   const calculateResults = useCallback(() => {
     if (!isLoaded || !teams.length || !complaints.length) return;

@@ -4,6 +4,7 @@ import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTe
 import { Badge } from "@/components/ui/badge"
 import { useSecuritySocket } from "@/hooks/useSecuritySocket"
 import { securityApi } from "@/lib/api"
+import { useOrgStore } from "@/store/orgStore"
 import { format } from "date-fns"
 import { useEffect, useState } from "react"
 
@@ -30,9 +31,11 @@ export default function SecurityPage() {
     const [passwordAudit, setPasswordAudit] = useState<PasswordAudit | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const { firewallLogs, isConnected } = useSecuritySocket();
+    const { activeOrganization, isLoading: isOrgLoading } = useOrgStore();
 
     useEffect(() => {
         const fetchData = async () => {
+            if (!activeOrganization) return;
             try {
                 const [compliance, rdp, audit] = await Promise.all([
                     securityApi.getCompliance(),
@@ -49,8 +52,11 @@ export default function SecurityPage() {
             }
         };
 
-        fetchData();
-    }, []);
+        if (!isOrgLoading) {
+            fetchData();
+        }
+    }, [activeOrganization, isOrgLoading]);
+
 
     const activeThreats = firewallLogs.filter(l => l.action !== 'pass').length;
 

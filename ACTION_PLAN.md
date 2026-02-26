@@ -5,6 +5,7 @@
 ### Semaine 1-2: Setup & Foundation
 
 #### Jour 1-2: Configuration Projet
+
 - [x] Initialiser structure Next.js App Router
 - [x] Configurer Tailwind avec design tokens
 - [x] Installer dépendances (Zustand, React Query, Leaflet, etc.)
@@ -12,12 +13,14 @@
 - [x] Setup Git hooks (Husky + lint-staged)
 
 #### Jour 3-5: Design System
+
 - [x] Créer fichier `design-tokens.css`
 - [x] Configurer `tailwind.config.js` avec tokens
 - [x] Créer composants UI de base (Button, Card, Badge, Input)
 - [x] Documenter composants dans Storybook (optionnel)
 
 #### Jour 6-10: Composants Layout
+
 - [x] Extraire et créer `Header.tsx`
 - [x] Extraire et créer `Sidebar.tsx`
 - [x] Extraire et créer `Footer.tsx`
@@ -29,6 +32,7 @@
 ### Semaine 3-4: Pages Core
 
 #### Jour 11-13: Authentification
+
 - [x] Migrer `secure_login_screen` → `/login`
 - [x] Implémenter authStore (Zustand)
 - [x] Connecter API backend `/api/auth/login`
@@ -36,12 +40,14 @@
 - [x] Session persistence (localStorage + cookies)
 
 #### Jour 14-16: Dashboard Principal
+
 - [x] Migrer `operations_management_dashboard` → `/dashboard/operations`
 - [x] Créer composants KPICard, StatCard
 - [x] Implémenter fetching données temps réel
-- [ ] Ajouter filtres date range
+- [x] Ajouter filtres date range
 
 #### Jour 17-20: Gestion Réclamations
+
 - [x] Migrer `advanced_complaint_list_view` → `/complaints/list`
 - [x] Créer DataTable component réutilisable
 - [x] Implémenter pagination, tri, filtres
@@ -53,34 +59,38 @@
 ### Semaine 5-6: Formulaires & Maps
 
 #### Jour 21-25: Formulaire Multi-étapes
+
 - [x] Migrer `step-by-step_complaint_intake_form` → `/complaints/create`
 - [x] Implémenter stepper component
-- [ ] Validation Zod pour chaque étape
-- [ ] State management formulaire (React Hook Form)
-- [ ] Upload fichiers (photos, documents)
+- [x] Validation Zod pour chaque étape
+- [x] State management formulaire (React Hook Form)
+- [x] Upload fichiers (photos, documents)
 
 #### Jour 26-30: Cartographie
+
 - [x] Intégrer Leaflet dans projet
 - [x] Créer MapView component
 - [x] Migrer `geospatial_operations_map` → `/map` (Live Data connected)
 - [x] Clustering markers pour performance
-- [ ] Géolocalisation utilisateur
+- [x] Géolocalisation utilisateur
 
 ---
 
 ### Semaine 7-8: Équipes & Planning
 
 #### Jour 31-35: Gestion Équipes
+
 - [x] Migrer `technical_teams_directory` → `/teams/directory`
 - [x] Migrer `technical_team_profile_details` → `/teams/[id]`
 - [x] Créer TeamCard, TeamMemberList components
 - [x] API endpoints teams CRUD
 
 #### Jour 36-40: Planning & Calendrier
+
 - [x] Migrer `intervention_planning_calendar` → `/planning` (Live Data connected)
 - [x] Intégrer FullCalendar ou React Big Calendar
 - [x] Drag & drop interventions (Live updates)
-- [ ] Migrer `team_shift_&_roster_scheduler`
+- [x] Migrer `team_shift_&_roster_scheduler`
 - [x] Gestion conflits horaires (Backend validated)
 
 ---
@@ -88,6 +98,7 @@
 ### Semaine 9-10: Inventaire & Admin
 
 #### Jour 41-45: Gestion Stocks
+
 - [x] Migrer `inventory_&_stock_management_1` → `/inventory/stock`
 - [x] Migrer `material_requisition_form` → `/inventory/request` (Live submission)
 - [x] Migrer `warehouse_request_approval_portal` → `/inventory/approval`
@@ -95,10 +106,11 @@
 - [x] Notifications temps réel (Socket.io)
 
 #### Jour 46-50: Administration
+
 - [x] Migrer `system_admin_overview` → `/admin/system`
 - [x] Migrer `user_&_roles_management` → `/admin/users`
 - [x] Migrer `audit_logs_&_activity_feed` → `/admin/audit-logs`
-- [ ] RBAC (Role-Based Access Control)
+- [x] RBAC (Role-Based Access Control)
 - [x] Logs en temps réel (WebSocket)
 
 ---
@@ -106,25 +118,28 @@
 ### Semaine 11-12: Analytics & Finalisation
 
 #### Jour 51-55: Dashboards Analytics
+
 - [x] Migrer `operational_analytics_dashboard` → `/analytics` (Live Charts connected)
-- [ ] Migrer `citizen_satisfaction_dashboard` → `/analytics/satisfaction`
-- [ ] Intégrer Chart.js ou Recharts
-- [ ] Export données (Excel, CSV, PDF)
-- [ ] Migrer `reporting_&_data_archiving`
+- [x] Migrer `citizen_satisfaction_dashboard` → `/analytics/satisfaction`
+- [x] Intégrer Chart.js ou Recharts
+- [x] Export données (Excel, CSV, PDF)
+- [x] Migrer `reporting_&_data_archiving`
 
 #### Jour 56-60: Pages Restantes
-- [ ] Migrer toutes les pages secondaires
-- [ ] Interface mobile technicien
-- [ ] Portail citoyen
-- [ ] Pages e-commerce (abonnements)
-- [ ] Signature digitale
+
+- [x] Migrer toutes les pages secondaires
+- [x] Interface mobile technicien
+- [x] Portail citoyen
+- [x] Pages e-commerce (abonnements)
+- [x] Signature digitale
 
 #### Jour 61-65: Tests & Optimisation
-- [ ] Tests unitaires (Jest + React Testing Library)
-- [ ] Tests E2E (Playwright)
-- [ ] Optimisation performance (Lighthouse > 90)
-- [ ] Accessibilité (WCAG 2.1 AA)
-- [ ] Documentation finale
+
+- [x] Tests unitaires (Jest + React Testing Library)
+- [x] Tests E2E (Playwright)
+- [x] Optimisation performance (Lighthouse > 90)
+- [x] Accessibilité (WCAG 2.1 AA)
+- [x] Documentation finale
 
 ---
 
@@ -134,11 +149,11 @@
 
 ```tsx
 // components/layout/Header.tsx
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useAuthStore } from '@/store/authStore';
-import { Bell, Search, Settings, User } from 'lucide-react';
+import { useState } from "react";
+import { useAuthStore } from "@/store/authStore";
+import { Bell, Search, Settings, User } from "lucide-react";
 
 interface HeaderProps {
   showSearch?: boolean;
@@ -147,7 +162,7 @@ interface HeaderProps {
 
 export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
   const { user, logout } = useAuthStore();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 flex items-center justify-between sticky top-0 z-50">
@@ -218,7 +233,11 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
           </div>
           <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden">
             {user?.avatar ? (
-              <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+              <img
+                src={user.avatar}
+                alt={user.name}
+                className="w-full h-full object-cover"
+              />
             ) : (
               <User className="w-5 h-5 text-primary" />
             )}
@@ -236,10 +255,10 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
 
 ```tsx
 // components/layout/Sidebar.tsx
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import {
   LayoutDashboard,
   FileText,
@@ -249,7 +268,7 @@ import {
   Package,
   Settings,
   BarChart3,
-} from 'lucide-react';
+} from "lucide-react";
 
 interface MenuItem {
   label: string;
@@ -260,44 +279,44 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   {
-    label: 'Dashboard',
-    href: '/dashboard/operations',
+    label: "Dashboard",
+    href: "/dashboard/operations",
     icon: <LayoutDashboard className="w-5 h-5" />,
   },
   {
-    label: 'Complaints',
-    href: '/complaints/list',
+    label: "Complaints",
+    href: "/complaints/list",
     icon: <FileText className="w-5 h-5" />,
-    badge: '12',
+    badge: "12",
   },
   {
-    label: 'Teams',
-    href: '/teams/directory',
+    label: "Teams",
+    href: "/teams/directory",
     icon: <Users className="w-5 h-5" />,
   },
   {
-    label: 'Planning',
-    href: '/teams/planning',
+    label: "Planning",
+    href: "/teams/planning",
     icon: <Calendar className="w-5 h-5" />,
   },
   {
-    label: 'Maps',
-    href: '/maps/operations',
+    label: "Maps",
+    href: "/maps/operations",
     icon: <Map className="w-5 h-5" />,
   },
   {
-    label: 'Inventory',
-    href: '/inventory/stock',
+    label: "Inventory",
+    href: "/inventory/stock",
     icon: <Package className="w-5 h-5" />,
   },
   {
-    label: 'Analytics',
-    href: '/analytics/operations',
+    label: "Analytics",
+    href: "/analytics/operations",
     icon: <BarChart3 className="w-5 h-5" />,
   },
   {
-    label: 'Settings',
-    href: '/admin/system',
+    label: "Settings",
+    href: "/admin/system",
     icon: <Settings className="w-5 h-5" />,
   },
 ];
@@ -316,8 +335,8 @@ export function Sidebar() {
               href={item.href}
               className={`flex items-center justify-between gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${
                 isActive
-                  ? 'bg-primary text-white'
-                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'
+                  ? "bg-primary text-white"
+                  : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -340,7 +359,9 @@ export function Sidebar() {
           System Status
         </p>
         <div className="flex items-center justify-between text-xs">
-          <span className="text-slate-600 dark:text-slate-400">Response Rate</span>
+          <span className="text-slate-600 dark:text-slate-400">
+            Response Rate
+          </span>
           <span className="font-bold text-primary">94%</span>
         </div>
         <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
@@ -358,7 +379,7 @@ export function Sidebar() {
 
 ```tsx
 // components/ui/KPICard.tsx
-import { TrendingUp, TrendingDown } from 'lucide-react';
+import { TrendingUp, TrendingDown } from "lucide-react";
 
 interface KPICardProps {
   title: string;
@@ -366,48 +387,65 @@ interface KPICardProps {
   icon: React.ReactNode;
   trend?: {
     value: string;
-    direction: 'up' | 'down';
+    direction: "up" | "down";
     label?: string;
   };
   color?: string;
   onClick?: () => void;
 }
 
-export function KPICard({ title, value, icon, trend, color = 'primary', onClick }: KPICardProps) {
+export function KPICard({
+  title,
+  value,
+  icon,
+  trend,
+  color = "primary",
+  onClick,
+}: KPICardProps) {
   const colorClasses = {
-    primary: 'text-primary bg-primary/10',
-    success: 'text-green-500 bg-green-500/10',
-    warning: 'text-orange-500 bg-orange-500/10',
-    error: 'text-red-500 bg-red-500/10',
+    primary: "text-primary bg-primary/10",
+    success: "text-green-500 bg-green-500/10",
+    warning: "text-orange-500 bg-orange-500/10",
+    error: "text-red-500 bg-red-500/10",
   };
 
   return (
     <div
       className={`flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm ${
-        onClick ? 'cursor-pointer hover:shadow-md transition-shadow' : ''
+        onClick ? "cursor-pointer hover:shadow-md transition-shadow" : ""
       }`}
       onClick={onClick}
     >
       <div className="flex items-center justify-between">
-        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">{title}</p>
-        <span className={`p-1.5 rounded-lg text-lg ${colorClasses[color]}`}>{icon}</span>
+        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
+          {title}
+        </p>
+        <span className={`p-1.5 rounded-lg text-lg ${colorClasses[color]}`}>
+          {icon}
+        </span>
       </div>
 
-      <p className="text-slate-900 dark:text-white text-3xl font-bold leading-tight">{value}</p>
+      <p className="text-slate-900 dark:text-white text-3xl font-bold leading-tight">
+        {value}
+      </p>
 
       {trend && (
         <div
           className={`flex items-center gap-1 text-sm font-semibold ${
-            trend.direction === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+            trend.direction === "up"
+              ? "text-green-600 dark:text-green-400"
+              : "text-red-600 dark:text-red-400"
           }`}
         >
-          {trend.direction === 'up' ? (
+          {trend.direction === "up" ? (
             <TrendingUp className="w-4 h-4" />
           ) : (
             <TrendingDown className="w-4 h-4" />
           )}
           <span>{trend.value}</span>
-          {trend.label && <span className="text-slate-400 font-normal">{trend.label}</span>}
+          {trend.label && (
+            <span className="text-slate-400 font-normal">{trend.label}</span>
+          )}
         </div>
       )}
     </div>
@@ -421,43 +459,47 @@ export function KPICard({ title, value, icon, trend, color = 'primary', onClick 
 
 ```tsx
 // components/ui/StatusBadge.tsx
-type Status = 'new' | 'in-progress' | 'resolved' | 'urgent';
+type Status = "new" | "in-progress" | "resolved" | "urgent";
 
 interface StatusBadgeProps {
   status: Status;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   showIcon?: boolean;
 }
 
 const statusConfig = {
   new: {
-    label: 'New',
-    color: 'bg-primary/10 text-primary',
-    icon: '●',
+    label: "New",
+    color: "bg-primary/10 text-primary",
+    icon: "●",
   },
-  'in-progress': {
-    label: 'In Progress',
-    color: 'bg-amber-100 text-amber-700',
-    icon: '◐',
+  "in-progress": {
+    label: "In Progress",
+    color: "bg-amber-100 text-amber-700",
+    icon: "◐",
   },
   resolved: {
-    label: 'Resolved',
-    color: 'bg-emerald-100 text-emerald-700',
-    icon: '✓',
+    label: "Resolved",
+    color: "bg-emerald-100 text-emerald-700",
+    icon: "✓",
   },
   urgent: {
-    label: 'Urgent',
-    color: 'bg-red-100 text-red-700',
-    icon: '!',
+    label: "Urgent",
+    color: "bg-red-100 text-red-700",
+    icon: "!",
   },
 };
 
-export function StatusBadge({ status, size = 'md', showIcon = false }: StatusBadgeProps) {
+export function StatusBadge({
+  status,
+  size = "md",
+  showIcon = false,
+}: StatusBadgeProps) {
   const config = statusConfig[status];
   const sizeClasses = {
-    sm: 'px-2 py-0.5 text-[10px]',
-    md: 'px-2 py-1 text-xs',
-    lg: 'px-3 py-1.5 text-sm',
+    sm: "px-2 py-0.5 text-[10px]",
+    md: "px-2 py-1 text-xs",
+    lg: "px-3 py-1.5 text-sm",
   };
 
   return (
@@ -477,10 +519,10 @@ export function StatusBadge({ status, size = 'md', showIcon = false }: StatusBad
 
 ```tsx
 // components/ui/DataTable.tsx
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { ChevronUp, ChevronDown } from 'lucide-react';
+import { useState } from "react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 interface Column<T> {
   key: keyof T;
@@ -505,15 +547,15 @@ export function DataTable<T extends { id: string | number }>({
   pageSize = 10,
 }: DataTableProps<T>) {
   const [sortColumn, setSortColumn] = useState<keyof T | null>(null);
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleSort = (column: keyof T) => {
     if (sortColumn === column) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
       setSortColumn(column);
-      setSortDirection('asc');
+      setSortDirection("asc");
     }
   };
 
@@ -521,8 +563,8 @@ export function DataTable<T extends { id: string | number }>({
     if (!sortColumn) return 0;
     const aVal = a[sortColumn];
     const bVal = b[sortColumn];
-    if (aVal < bVal) return sortDirection === 'asc' ? -1 : 1;
-    if (aVal > bVal) return sortDirection === 'asc' ? 1 : -1;
+    if (aVal < bVal) return sortDirection === "asc" ? -1 : 1;
+    if (aVal > bVal) return sortDirection === "asc" ? 1 : -1;
     return 0;
   });
 
@@ -541,14 +583,14 @@ export function DataTable<T extends { id: string | number }>({
               {columns.map((column) => (
                 <th
                   key={String(column.key)}
-                  className={`px-5 py-3 ${column.sortable ? 'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800' : ''}`}
+                  className={`px-5 py-3 ${column.sortable ? "cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800" : ""}`}
                   onClick={() => column.sortable && handleSort(column.key)}
                 >
                   <div className="flex items-center gap-2">
                     {column.label}
                     {column.sortable && sortColumn === column.key && (
                       <span>
-                        {sortDirection === 'asc' ? (
+                        {sortDirection === "asc" ? (
                           <ChevronUp className="w-3 h-3" />
                         ) : (
                           <ChevronDown className="w-3 h-3" />
@@ -565,13 +607,15 @@ export function DataTable<T extends { id: string | number }>({
               <tr
                 key={row.id}
                 className={`hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors ${
-                  onRowClick ? 'cursor-pointer' : ''
+                  onRowClick ? "cursor-pointer" : ""
                 }`}
                 onClick={() => onRowClick?.(row)}
               >
                 {columns.map((column) => (
                   <td key={String(column.key)} className="px-5 py-4">
-                    {column.render ? column.render(row[column.key], row) : String(row[column.key])}
+                    {column.render
+                      ? column.render(row[column.key], row)
+                      : String(row[column.key])}
                   </td>
                 ))}
               </tr>
@@ -583,8 +627,9 @@ export function DataTable<T extends { id: string | number }>({
       {pagination && totalPages > 1 && (
         <div className="px-5 py-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
           <p className="text-sm text-slate-500">
-            Showing {(currentPage - 1) * pageSize + 1} to {Math.min(currentPage * pageSize, data.length)} of{' '}
-            {data.length} results
+            Showing {(currentPage - 1) * pageSize + 1} to{" "}
+            {Math.min(currentPage * pageSize, data.length)} of {data.length}{" "}
+            results
           </p>
           <div className="flex gap-2">
             <button
@@ -769,19 +814,19 @@ npm run generate:component ComponentName
 
 ### Dashboard de Suivi
 
-| Catégorie | Total | Migrées | En cours | Restantes | % Complétion |
-|-----------|-------|---------|----------|-----------|--------------|
-| Auth & Landing | 2 | 2 | 0 | 0 | 100% |
-| Dashboards | 4 | 4 | 0 | 0 | 100% |
-| Réclamations | 5 | 5 | 0 | 0 | 100% |
-| Équipes | 6 | 6 | 0 | 0 | 100% |
-| Cartographie | 2 | 2 | 0 | 0 | 100% |
-| Inventaire | 5 | 5 | 0 | 0 | 100% |
-| Documents | 3 | 3 | 0 | 0 | 100% |
-| Administration | 5 | 5 | 0 | 0 | 100% |
-| Intégrations | 3 | 3 | 0 | 0 | 100% |
-| E-commerce | 4 | 4 | 0 | 0 | 100% |
-| **TOTAL** | **39** | **39** | **0** | **0** | **100%** |
+| Catégorie      | Total  | Migrées | En cours | Restantes | % Complétion |
+| -------------- | ------ | ------- | -------- | --------- | ------------ |
+| Auth & Landing | 2      | 2       | 0        | 0         | 100%         |
+| Dashboards     | 4      | 4       | 0        | 0         | 100%         |
+| Réclamations   | 5      | 5       | 0        | 0         | 100%         |
+| Équipes        | 6      | 6       | 0        | 0         | 100%         |
+| Cartographie   | 2      | 2       | 0        | 0         | 100%         |
+| Inventaire     | 5      | 5       | 0        | 0         | 100%         |
+| Documents      | 3      | 3       | 0        | 0         | 100%         |
+| Administration | 5      | 5       | 0        | 0         | 100%         |
+| Intégrations   | 3      | 3       | 0        | 0         | 100%         |
+| E-commerce     | 4      | 4       | 0        | 0         | 100%         |
+| **TOTAL**      | **39** | **39**  | **0**    | **0**     | **100%**     |
 
 ---
 
@@ -790,29 +835,29 @@ npm run generate:component ComponentName
 ### À faire cette semaine:
 
 1. **Jour 1 (Aujourd'hui)**
-   - [ ] Créer la structure de dossiers Next.js
-   - [ ] Configurer Tailwind avec design tokens
-   - [ ] Installer toutes les dépendances
+   - [x] Créer la structure de dossiers Next.js
+   - [x] Configurer Tailwind avec design tokens
+   - [x] Installer toutes les dépendances
 
 2. **Jour 2**
-   - [ ] Créer Header component
-   - [ ] Créer Sidebar component
-   - [ ] Créer composants UI de base
+   - [x] Créer Header component
+   - [x] Créer Sidebar component
+   - [x] Créer composants UI de base
 
 3. **Jour 3**
-   - [ ] Migrer page de login
-   - [ ] Implémenter authStore
-   - [ ] Tester authentification
+   - [x] Migrer page de login
+   - [x] Implémenter authStore
+   - [x] Tester authentification
 
 4. **Jour 4**
-   - [ ] Migrer operations dashboard
-   - [ ] Créer KPICard component
-   - [ ] Connecter API dashboard
+   - [x] Migrer operations dashboard
+   - [x] Créer KPICard component
+   - [x] Connecter API dashboard
 
 5. **Jour 5**
-   - [ ] Migrer complaint list
-   - [ ] Créer DataTable component
-   - [ ] Tests E2E navigation
+   - [x] Migrer complaint list
+   - [x] Créer DataTable component
+   - [x] Tests E2E navigation
 
 ---
 

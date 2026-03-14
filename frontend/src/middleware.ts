@@ -5,7 +5,23 @@ import { routing } from './i18n/routing';
 const intlMiddleware = createMiddleware(routing);
 
 // Routes publiques qui ne nécessitent pas d'authentification
-const publicRoutes = ['/login', '/register', '/forgot-password', '/'];
+const publicRoutes = [
+    '/login',
+    '/register',
+    '/forgot-password',
+    '/',
+    '/pricing',
+    '/contact',
+    '/about',
+    '/help',
+    '/legal',
+    '/services/governance',
+    '/services/healthcare',
+    '/services/hospitality',
+    '/services/infrastructure',
+    '/services/education',
+    '/services/pressing'
+];
 
 export default function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
@@ -13,7 +29,7 @@ export default function middleware(request: NextRequest) {
     // Vérifier si la route est publique (en excluant le préfixe de locale)
     const isPublicRoute = publicRoutes.some(route => {
         const pathWithoutLocale = pathname.replace(/^\/(fr|en)/, '');
-        return pathWithoutLocale === route || pathWithoutLocale === '';
+        return pathWithoutLocale === route || pathWithoutLocale === '' || pathWithoutLocale.startsWith('/legal');
     });
 
     // Si ce n'est pas une route publique, vérifier l'authentification

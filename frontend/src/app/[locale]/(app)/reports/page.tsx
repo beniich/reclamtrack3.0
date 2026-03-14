@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import 'jspdf-autotable';
 import Link from 'next/link';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 // Types
 type ReportFormat = 'PDF' | 'EXCEL' | 'CSV';

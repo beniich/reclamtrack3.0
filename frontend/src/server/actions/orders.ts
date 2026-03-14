@@ -1,5 +1,5 @@
+import { executeWithContext } from '../../core/db/session';
 import { SessionContext } from '../../types/db';
-import { executeWithContext } from '../db/session';
 
 export async function createOrder(context: SessionContext, orderData: { title: string; amount: number }) {
   return await executeWithContext(context, async (client) => {

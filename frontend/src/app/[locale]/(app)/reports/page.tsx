@@ -3,10 +3,13 @@
 import { usePerformanceStats, useSatisfactionStats } from '@/hooks/useAnalytics';
 import api from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';
+import { saveAs } from 'file-saver';
+import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import Link from 'next/link';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import * as XLSX from 'xlsx';
 
 // Types
 type ReportFormat = 'PDF' | 'EXCEL' | 'CSV';

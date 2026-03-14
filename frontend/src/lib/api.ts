@@ -282,17 +282,29 @@ export const adminApi = {
 
 export const staffApi = {
     getAll: () => apiClient.get('/staff'),
+    getById: (id: string) => apiClient.get(`/staff/${id}`),
     create: (data: any) => apiClient.post('/staff', data),
+    update: (id: string, data: any) => apiClient.put(`/staff/${id}`, data),
+    delete: (id: string) => apiClient.delete(`/staff/${id}`),
 };
 
 export const rosterApi = {
     get: (params: { week: string }) => apiClient.get('/roster', params),
     update: (data: { week: string; shifts: any[] }) => apiClient.post('/roster/update', data),
+    deleteShift: (shiftId: string, week: string) => apiClient.delete(`/roster/shifts/${shiftId}?week=${week}`),
 };
 
 export const leaveApi = {
-    getAll: () => apiClient.get('/leave'),
+    getAll: (params?: any) => apiClient.get('/leave', params),
+    create: (data: any) => apiClient.post('/leave', data),
     updateStatus: (id: string, status: string) => apiClient.patch(`/leave/${id}/status`, { status }),
+    delete: (id: string) => apiClient.delete(`/leave/${id}`),
+};
+
+export const notificationApi = {
+    getAll: (params?: any) => apiClient.get('/notifications', params),
+    markAsRead: (id: string) => apiClient.patch(`/notifications/${id}/read`),
+    markAllRead: () => apiClient.post('/notifications/read-all'),
 };
 
 export const organizationsApi = {

@@ -1,55 +1,63 @@
-import mongoose, { Schema, Document } from 'mongoose';
 import bcrypt from 'bcryptjs';
+import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IUser extends Document {
-    name?: string;
-    email: string;
-    password?: string;
-    role: 'admin' | 'dispatcher' | 'staff' | 'citizen';
-    googleId?: string;
-    avatar?: string;
-    isEmailVerified?: boolean;
-    authProvider?: 'local' | 'google';
-    comparePassword(candidate: string): Promise<boolean>;
+  name?: string;
+  email: string;
+  password?: string;
+  role: 'admin' | 'dispatcher' | 'staff' | 'citizen' | 'technician';
+  googleId?: string;
+  avatar?: string;
+  isEmailVerified?: boolean;
+  emailVerificationToken?: string;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: Date;
+  organizationId?: mongoose.Types.ObjectId;
+  authProvider?: 'local' | 'google';
+  comparePassword(candidate: string): Promise<boolean>;
 }
 
 const UserSchema: Schema = new Schema(
-    {
-        name: { type: String },
-        email: { type: String, required: true, unique: true, lowercase: true },
-        password: {
-            type: String,
-            required: function (this: any) {
-                return !this.googleId; // Password required only if not Google auth
-            }
-        },
-        role: {
-            type: String,
-            enum: ['admin', 'dispatcher', 'staff', 'citizen', 'technician'],
-            default: 'staff'
-        },
-        googleId: { type: String, unique: true, sparse: true },
-        avatar: { type: String },
-        isEmailVerified: { type: Boolean, default: false },
-        authProvider: { type: String, enum: ['local', 'google'], default: 'local' }
+  {
+    name: { type: String },
+    email: { type: String, required: true, unique: true, lowercase: true },
+    password: {
+      type: String,
+      required: function (this: any) {
+        return !this.googleId; // Password required only if not Google auth
+      },
     },
-    { timestamps: true }
+    role: {
+      type: String,
+      enum: ['admin', 'dispatcher', 'staff', 'citizen', 'technician'],
+      default: 'staff',
+    },
+    googleId: { type: String, unique: true, sparse: true },
+    avatar: { type: String },
+    isEmailVerified: { type: Boolean, default: false },
+    emailVerificationToken: { type: String },
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
+    organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
+    authProvider: { type: String, enum: ['local', 'google'], default: 'local' },
+  },
+  { timestamps: true }
 );
 
 UserSchema.pre<IUser>('save', async function (next) {
-    if (!this.isModified('password') || !this.password) return next();
-    try {
-        const salt = await bcrypt.genSalt(10);
-        this.password = await bcrypt.hash(this.password, salt);
-        next();
-    } catch (error: any) {
-        next(error);
-    }
+  if (!this.isModified('password') || !this.password) return next();
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error: any) {
+    next(error);
+  }
 });
 
 UserSchema.methods.comparePassword = async function (candidate: string) {
-    if (!this.password) return false;
-    return bcrypt.compare(candidate, this.password);
+  if (!this.password) return false;
+  return bcrypt.compare(candidate, this.password);
 };
 
 export const User = mongoose.model<IUser>('User', UserSchema);

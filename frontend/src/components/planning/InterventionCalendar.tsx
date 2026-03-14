@@ -1,22 +1,22 @@
 
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import frLocale from '@fullcalendar/core/locales/fr';
-import { EventInput, EventClickArg, EventDropArg, DateSelectArg } from '@fullcalendar/core';
-import { toast } from 'sonner';
 import {
     Dialog,
     DialogContent,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogFooter,
 } from '@/components/ui/dialog';
-import { Calendar as CalendarIcon, Clock, Users, MapPin, AlertCircle, X } from 'lucide-react';
+import { DateSelectArg, EventClickArg, EventDropArg, EventInput } from '@fullcalendar/core';
+import frLocale from '@fullcalendar/core/locales/fr';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import FullCalendar from '@fullcalendar/react';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import { AlertCircle, Calendar as CalendarIcon, Clock, MapPin, Users, X } from 'lucide-react';
+import { useCallback, useMemo, useState } from 'react';
+import { toast } from 'sonner';
 
 interface Intervention {
     id: string;
@@ -40,6 +40,7 @@ interface Intervention {
 interface InterventionCalendarProps {
     interventions: Intervention[];
     teams: Array<{ id: string; name: string; color: string }>;
+    complaints: Array<{ _id: string; title: string; number: string; address: string }>;
     onInterventionUpdate?: (intervention: Intervention) => Promise<void>;
     onInterventionCreate?: (intervention: Partial<Intervention>) => Promise<void>;
     onInterventionDelete?: (id: string) => Promise<void>;
@@ -49,18 +50,23 @@ interface InterventionCalendarProps {
 export function InterventionCalendar({
     interventions,
     teams,
+    complaints,
     onInterventionUpdate,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onInterventionCreate,
     onInterventionDelete,
     editable = true,
 }: InterventionCalendarProps) {
-    const [selectedEvent, setSelectedEvent] = useState<Intervention | null>(null);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [selectedDateRange, setSelectedDateRange] = useState<DateSelectArg | null>(null);
     const [conflictWarning, setConflictWarning] = useState<string | null>(null);
+
+    // Form state for creation
+    const [newIntervention, setNewIntervention] = useState<Partial<Intervention>>({
+        title: '',
+        teamId: '',
+        priority: 'medium',
+        description: '',
+    });
 
     // Conversion des interventions en events FullCalendar
     const events: EventInput[] = useMemo(() => {
@@ -196,15 +202,38 @@ export function InterventionCalendar({
         setSelectedEvent(intervention);
     }, []);
 
-    // Gestion de la sélection de dates
     const handleDateSelect = useCallback(
         (selectInfo: DateSelectArg) => {
             if (!editable) return;
             setSelectedDateRange(selectInfo);
+            setNewIntervention(prev => ({
+                ...prev,
+                start: selectInfo.start,
+                end: selectInfo.end,
+            }));
             setIsCreateDialogOpen(true);
         },
         [editable]
     );
+
+    const handleCreateSubmit = async () => {
+        if (!newIntervention.title || !newIntervention.teamId || !newIntervention.complaintId) {
+            toast.error('Veuillez remplir tous les champs obligatoires');
+            return;
+        }
+
+        try {
+            await onInterventionCreate?.({
+                ...newIntervention,
+                start: selectedDateRange?.start || new Date(),
+                end: selectedDateRange?.end || new Date(Date.now() + 3600000),
+            });
+            setIsCreateDialogOpen(false);
+            setNewIntervention({ title: '', teamId: '', priority: 'medium', description: '' });
+        } catch (error) {
+            console.error('Create error:', error);
+        }
+    };
 
     // Suppression d'intervention
     const handleDelete = useCallback(async () => {
@@ -388,6 +417,104 @@ export function InterventionCalendar({
                                 className="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
                             >
                                 Fermer
+                            </button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
+            )}
+
+            {/* Create Intervention Dialog */}
+            {isCreateDialogOpen && (
+                <Dialog open={isCreateDialogOpen} onOpenChange={() => setIsCreateDialogOpen(false)}>
+                    <DialogContent className="max-w-md">
+                        <DialogHeader>
+                            <DialogTitle>Planifier une intervention</DialogTitle>
+                        </DialogHeader>
+
+                        <div className="space-y-4">
+                            <div>
+                                <label className="text-xs font-bold uppercase text-slate-500 mb-1 block">Réclamation</label>
+                                <select
+                                    value={newIntervention.complaintId}
+                                    title="Associer une réclamation"
+                                    onChange={e => {
+                                        const comp = complaints.find(c => c._id === e.target.value);
+                                        setNewIntervention({
+                                            ...newIntervention,
+                                            complaintId: e.target.value,
+                                            title: comp ? `Intervention: ${comp.title}` : newIntervention.title
+                                        });
+                                    }}
+                                    className="w-full p-2 border border-slate-200 dark:border-slate-800 rounded-lg dark:bg-slate-900"
+                                >
+                                    <option value="">Associer une réclamation</option>
+                                    {complaints.map(c => (
+                                        <option key={c._id} value={c._id}>[{c.number}] {c.title}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="text-xs font-bold uppercase text-slate-500 mb-1 block">Titre</label>
+                                <input
+                                    type="text"
+                                    value={newIntervention.title}
+                                    onChange={e => setNewIntervention({ ...newIntervention, title: e.target.value })}
+                                    className="w-full p-2 border border-slate-200 dark:border-slate-800 rounded-lg dark:bg-slate-900"
+                                    placeholder="Ex: Réparation fuite d'eau"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="text-xs font-bold uppercase text-slate-500 mb-1 block">Équipe</label>
+                                <select
+                                    value={newIntervention.teamId}
+                                    onChange={e => setNewIntervention({ ...newIntervention, teamId: e.target.value })}
+                                    className="w-full p-2 border border-slate-200 dark:border-slate-800 rounded-lg dark:bg-slate-900"
+                                >
+                                    <option value="">Sélectionner une équipe</option>
+                                    {teams.map(team => (
+                                        <option key={team.id} value={team.id}>{team.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="text-xs font-bold uppercase text-slate-500 mb-1 block">Priorité</label>
+                                <select
+                                    value={newIntervention.priority}
+                                    onChange={e => setNewIntervention({ ...newIntervention, priority: e.target.value as any })}
+                                    className="w-full p-2 border border-slate-200 dark:border-slate-800 rounded-lg dark:bg-slate-900"
+                                >
+                                    <option value="low">Faible</option>
+                                    <option value="medium">Moyenne</option>
+                                    <option value="high">Haute</option>
+                                    <option value="urgent">Urgente</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="text-xs font-bold uppercase text-slate-500 mb-1 block">Description</label>
+                                <textarea
+                                    value={newIntervention.description}
+                                    onChange={e => setNewIntervention({ ...newIntervention, description: e.target.value })}
+                                    className="w-full p-2 border border-slate-200 dark:border-slate-800 rounded-lg dark:bg-slate-900 min-h-[80px]"
+                                />
+                            </div>
+                        </div>
+
+                        <DialogFooter>
+                            <button
+                                onClick={() => setIsCreateDialogOpen(false)}
+                                className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-800 transition-colors"
+                            >
+                                Annuler
+                            </button>
+                            <button
+                                onClick={handleCreateSubmit}
+                                className="px-6 py-2 bg-primary text-white rounded-lg font-bold text-sm shadow-lg shadow-primary/20"
+                            >
+                                Créer l&apos;intervention
                             </button>
                         </DialogFooter>
                     </DialogContent>

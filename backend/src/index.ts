@@ -36,6 +36,7 @@ import memberRoutes from './routes/members.js';
 import membershipRoutes from './routes/memberships.js';
 import messageRoutes from './routes/messages.js';
 import monitoringRoutes from './routes/monitoring.js';
+import notificationRoutes from './routes/notifications.js';
 import organizationRoutes from './routes/organizations.js';
 import planningRoutes from './routes/planning.js';
 import rosterRoutes from './routes/roster.js';
@@ -127,6 +128,7 @@ app.use('/api/organizations', organizationRoutes);
 app.use('/api/memberships', membershipRoutes);
 app.use('/api', memberRoutes); // Mount at /api so paths become /api/organizations/:id/...
 app.use('/api/billing', billingRoutes);
+app.use('/api/notifications', notificationRoutes);
 app.use('/api/api-keys', apiKeysRoutes);
 
 // IT Administration Module Routes

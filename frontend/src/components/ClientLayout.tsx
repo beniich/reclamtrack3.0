@@ -1,16 +1,16 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { usePathname } from 'next/navigation';
-import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import useNotifications from '@/hooks/useNotifications';
 import { useAuthStore } from '@/store/authStore';
 import { useOrgStore } from '@/store/orgStore';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { ReactNode, useEffect, useState } from 'react';
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
+    useNotifications();
     const pathname = usePathname();
     const router = useRouter();
     const { user, _hasHydrated: authHydrated } = useAuthStore();

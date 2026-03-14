@@ -5,12 +5,14 @@
  * @module backend/routes
  */
 
+import crypto from 'crypto';
 import { Router } from 'express';
 import { body } from 'express-validator';
 import { authenticate } from '../middleware/security.js';
 import { validator } from '../middleware/validator.js';
 import AuditLog from '../models/AuditLog.js';
 import { User } from '../models/User.js';
+import { sendPasswordResetEmail, sendWelcomeEmail } from '../services/emailService.js';
 import { eventBus } from '../services/eventBus.js';
 import {
   introspectToken,
@@ -53,7 +55,16 @@ router.post(
       const exists = await User.findOne({ email });
       if (exists) return conflictResponse(res, 'Email déjà utilisé');
 
-      const user = await User.create({ email, password, name });
+      const verificationToken = crypto.randomBytes(32).toString('hex');
+      const user = await User.create({
+        email,
+        password,
+        name,
+        emailVerificationToken: verificationToken,
+      });
+
+      await sendEmailVerification(user.email, verificationToken);
+
       const tokens = await issueTokenPair(user._id.toString(), user.role, user.email, req.ip);
 
       logger.info(`✅ Inscription — ${email}`);
@@ -75,7 +86,7 @@ router.post(
 
       return createdResponse(res, {
         ...tokens,
-        user: { id: user._id, email, role: user.role },
+        user: { id: user._id, email, role: user.role, organizationId: user.organizationId },
       });
     } catch (err) {
       next(err);
@@ -127,7 +138,7 @@ router.post(
 
       return successResponse(res, {
         ...tokens,
-        user: { id: user._id, email, role: user.role },
+        user: { id: user._id, email, role: user.role, organizationId: user.organizationId },
       });
     } catch (err) {
       next(err);
@@ -148,6 +159,7 @@ router.get('/me', authenticate, async (req, res, next) => {
       name: user.name,
       role: user.role,
       avatar: user.avatar,
+      organizationId: user.organizationId,
     });
   } catch (err) {
     next(err);
@@ -222,6 +234,103 @@ router.post('/introspect', async (req, res, next) => {
 
     const payload = await introspectToken(token);
     return successResponse(res, { active: !!payload, ...(payload ?? {}) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
+// POST /api/auth/forgot-password
+// ──────────────────────────────────────────────────────────────────────────────
+router.post(
+  '/forgot-password',
+  [body('email').isEmail().normalizeEmail()],
+  validator,
+  async (req, res, next) => {
+    try {
+      const { email } = req.body;
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        // Return success even if user not found for security
+        return successResponse(res, {
+          message:
+            'Si cet email correspond à un compte, vous recevrez un lien de réinitialisation.',
+        });
+      }
+
+      const resetToken = crypto.randomBytes(32).toString('hex');
+      user.resetPasswordToken = resetToken;
+      user.resetPasswordExpires = new Date(Date.now() + 3600000); // 1 hour
+      await user.save();
+
+      await sendPasswordResetEmail(user.email, resetToken);
+
+      logger.info(`🔑 Demande reset password — ${email}`);
+      return successResponse(res, {
+        message: 'Si cet email correspond à un compte, vous recevrez un lien de réinitialisation.',
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// ──────────────────────────────────────────────────────────────────────────────
+// POST /api/auth/reset-password
+// ──────────────────────────────────────────────────────────────────────────────
+router.post(
+  '/reset-password',
+  [
+    body('token').notEmpty(),
+    body('password').isLength({ min: 8 }).withMessage('8 caractères minimum'),
+  ],
+  validator,
+  async (req, res, next) => {
+    try {
+      const { token, password } = req.body;
+      const user = await User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: { $gt: Date.now() },
+      });
+
+      if (!user) {
+        return unauthorizedResponse(res, 'Token invalide ou expiré');
+      }
+
+      user.password = password;
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpires = undefined;
+      await user.save();
+
+      logger.info(`✅ Password reset — ${user.email}`);
+      return successResponse(res, { message: 'Mot de passe mis à jour avec succès' });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// ──────────────────────────────────────────────────────────────────────────────
+// POST /api/auth/verify-email
+// ──────────────────────────────────────────────────────────────────────────────
+router.post('/verify-email', [body('token').notEmpty()], validator, async (req, res, next) => {
+  try {
+    const { token } = req.body;
+    const user = await User.findOne({ emailVerificationToken: token });
+
+    if (!user) {
+      return notFoundResponse(res, 'Token de vérification invalide');
+    }
+
+    user.isEmailVerified = true;
+    user.emailVerificationToken = undefined;
+    await user.save();
+
+    await sendWelcomeEmail(user.email, user.name);
+
+    logger.info(`📧 Email vérifié — ${user.email}`);
+    return successResponse(res, { message: 'Email vérifié avec succès' });
   } catch (err) {
     next(err);
   }

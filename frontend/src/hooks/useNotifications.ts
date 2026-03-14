@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
 import socketService from '@/lib/socket';
+import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useNotificationStore } from './useNotificationStore';
 
@@ -13,7 +13,11 @@ interface NotificationData {
 }
 
 const useNotifications = () => {
-    const { addNotification } = useNotificationStore();
+    const { addNotification, fetchNotifications } = useNotificationStore();
+
+    useEffect(() => {
+        fetchNotifications();
+    }, [fetchNotifications]);
 
     useEffect(() => {
         const socket = socketService.connect();
@@ -21,13 +25,15 @@ const useNotifications = () => {
         const handleNotification = (data: NotificationData) => {
             const { type, title, message, priority } = data;
 
-            // Add to persistent store
+            // Add to store
             addNotification({
+                id: (data as any)._id || (data as any).id || Date.now().toString(),
                 type,
                 title,
                 message,
                 priority,
-                timestamp: new Date().toISOString(), // Ensure string
+                timestamp: (data as any).createdAt || new Date().toISOString(),
+                read: false,
                 data: data.data
             });
 

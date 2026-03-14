@@ -1,5 +1,6 @@
 import { Server } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
+import { Notification } from '../models/Notification.js';
 import { logger } from '../utils/logger.js';
 
 export interface NotificationPayload {
@@ -267,21 +268,42 @@ class NotificationService {
   }
 
   // Envoyer une notification à tous
-  broadcast(data: NotificationData) {
+  async broadcast(data: NotificationData) {
     if (this.io) {
       this.io.emit('notification', data);
+
+      // Persistence for all users? Usually broadcast is for ephemeral alerts.
+      // If we want it in the notification center for everyone, we'd need to loop (expensive)
+      // or use a different approach. For now, let's keep broadcast ephemeral in DB
+      // unless we want to implement a "GlobalNotification" collection.
     }
   }
 
-  // Envoyer une notification à un utilisateur spécifique
-  sendToUser(userId: string, data: NotificationData) {
-    if (this.io) {
-      this.io.to(userId).emit('notification', data);
+  // Envoyer une notification à un utilisateur spécifique et persister
+  async sendToUser(userId: string, data: any) {
+    try {
+      // Persist to DB
+      const newNotif = await Notification.create({
+        userId,
+        type: data.type || 'info',
+        title: data.title,
+        message: data.message,
+        data: data.data,
+      });
+
+      if (this.io) {
+        this.io.to(`user:${userId}`).emit('notification', newNotif);
+      }
+      return newNotif;
+    } catch (err) {
+      logger.error(`Error sending notification to user ${userId}:`, err);
     }
   }
 
-  // Envoyer une notification à une salle spécifique
-  sendToRoom(room: string, data: NotificationData) {
+  // Envoyer une notification à une salle spécifique (ex: team) et persister pour tous les membres
+  // Note: This requires knowing who is in the team. For now, we'll just emit to the room.
+  // Real persistence for everyone in a team would need a list of memberIds.
+  async sendToRoom(room: string, data: any) {
     if (this.io) {
       this.io.to(room).emit('notification', data);
     }
@@ -294,8 +316,8 @@ class NotificationService {
   /**
    * Notify team about new complaint assignment
    */
-  async notifyComplaintAssigned(teamId: string, complaint: any) {
-    const notification = {
+  async notifyComplaintAssigned(teamId: string, complaint: any, memberIds: string[]) {
+    const payload = {
       type: 'complaint_assigned',
       title: 'Nouvelle Réclamation Assignée',
       message: `Une réclamation "${complaint.title}" a été assignée à votre équipe`,
@@ -303,16 +325,23 @@ class NotificationService {
         complaintId: complaint._id,
         category: complaint.category,
         priority: complaint.priority,
-        address: complaint.address,
       },
-      priority: complaint.priority,
-      timestamp: new Date(),
     };
 
-    // Assuming team rooms are formatted as 'team:ID'
+    // Persist for each member
+    if (memberIds && memberIds.length > 0) {
+      await Notification.insertMany(
+        memberIds.map((userId) => ({
+          userId,
+          ...payload,
+          read: false,
+        }))
+      );
+    }
+
     if (this.io) {
-      this.io.to(`team:${teamId}`).emit('notification', notification);
-      logger.info(`📧 Notification sent to team ${teamId}: ${notification.title}`);
+      this.io.to(`team:${teamId}`).emit('notification', { ...payload, timestamp: new Date() });
+      logger.info(`📧 Notification sent and persisted for team ${teamId}`);
     }
   }
 
@@ -325,7 +354,7 @@ class NotificationService {
     newStatus: string,
     userIds: string[]
   ) {
-    const notification = {
+    const payload = {
       type: 'status_update',
       title: 'Statut de Réclamation Mis à Jour',
       message: `Le statut de la réclamation est passé de "${oldStatus}" à "${newStatus}"`,
@@ -334,16 +363,24 @@ class NotificationService {
         oldStatus,
         newStatus,
       },
-      timestamp: new Date(),
     };
+
+    // Persist for all users
+    if (userIds && userIds.length > 0) {
+      await Notification.insertMany(
+        userIds.map((userId) => ({
+          userId,
+          ...payload,
+          read: false,
+        }))
+      );
+    }
 
     if (this.io) {
       userIds.forEach((userId) => {
-        // Assuming user rooms are formatted as 'user:ID' or just 'ID'
-        // The existing code has socket.join(room), so we need to ensure users join 'user:ID'
-        this.io?.to(`user:${userId}`).emit('notification', notification);
+        this.io?.to(`user:${userId}`).emit('notification', { ...payload, timestamp: new Date() });
       });
-      logger.info(`📧 Status change notification sent to ${userIds.length} users`);
+      logger.info(`📧 Status change notification sent and persisted for ${userIds.length} users`);
     }
   }
 

@@ -1,10 +1,10 @@
 'use client';
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '@/lib/api';
-import { InterventionCalendar } from '@/components/planning/InterventionCalendar';
-import { Calendar as CalendarIcon } from 'lucide-react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { InterventionCalendar } from '@/components/planning/InterventionCalendar';
+import api from '@/lib/api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Calendar as CalendarIcon } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 export default function PlanningPage() {
@@ -39,6 +39,15 @@ export default function PlanningPage() {
                 name: t.name,
                 color: t.color || '#3b82f6'
             }));
+        }
+    });
+
+    // Fetch Unassigned Complaints
+    const { data: complaints, isLoading: loadingComplaints } = useQuery({
+        queryKey: ['complaints', 'unassigned'],
+        queryFn: async () => {
+            const res = await api.get('/complaints', { status: 'nouvelle' });
+            return res.filter((c: any) => !c.assignedTeamId);
         }
     });
 
@@ -79,14 +88,14 @@ export default function PlanningPage() {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['interventions'] });
+            toast.success('Intervention supprimée');
         },
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: () => {
             toast.error('Erreur lors de la suppression');
         }
     });
 
-    if (loadingInterventions || loadingTeams) {
+    if (loadingInterventions || loadingTeams || loadingComplaints) {
         return (
             <div className="flex h-[calc(100vh-64px)] items-center justify-center bg-slate-50 dark:bg-[#0a0a14]">
                 <LoadingSpinner />
@@ -97,8 +106,13 @@ export default function PlanningPage() {
     if (errorInterventions) {
         return (
             <div className="flex h-[calc(100vh-64px)] flex-col items-center justify-center bg-slate-50 dark:bg-[#0a0a14] gap-4">
-                <p className="text-red-500 font-bold">Erreur de chargement du planning</p>
-                <button onClick={() => window.location.reload()} className="px-4 py-2 bg-primary text-white rounded-lg text-sm">Réessayer</button>
+                <p className="text-red-500 font-bold italic uppercase tracking-widest text-xs">Erreur de chargement du planning</p>
+                <button
+                    onClick={() => window.location.reload()}
+                    className="px-6 py-2 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-xl shadow-primary/20"
+                >
+                    Réessayer
+                </button>
             </div>
         );
     }
@@ -134,6 +148,7 @@ export default function PlanningPage() {
                 <InterventionCalendar
                     interventions={interventions || []}
                     teams={teams || []}
+                    complaints={complaints || []}
                     onInterventionUpdate={async (updated) => { updateMutation.mutate(updated); }}
                     onInterventionCreate={async (created) => { createMutation.mutate(created); }}
                     onInterventionDelete={async (id) => { deleteMutation.mutate(id); }}

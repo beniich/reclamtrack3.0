@@ -1,3 +1,4 @@
+import { notificationApi } from '@/lib/api';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -15,9 +16,11 @@ export interface Notification {
 interface NotificationStore {
     notifications: Notification[];
     unreadCount: number;
-    addNotification: (n: Omit<Notification, 'id' | 'read'>) => void;
-    markAsRead: (id: string) => void;
-    markAllAsRead: () => void;
+    isLoading: boolean;
+    fetchNotifications: () => Promise<void>;
+    addNotification: (n: Notification) => void;
+    markAsRead: (id: string) => Promise<void>;
+    markAllAsRead: () => Promise<void>;
     clearAll: () => void;
     removeNotification: (id: string) => void;
 }
@@ -28,37 +31,63 @@ export const useNotificationStore = create<NotificationStore>()(
             notifications: [],
             unreadCount: 0,
 
-            addNotification: (notification) => {
-                const newNotification = {
-                    ...notification,
-                    id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
-                    read: false
-                };
+            isLoading: false,
 
+            fetchNotifications: async () => {
+                set({ isLoading: true });
+                try {
+                    const response = await notificationApi.getAll();
+                    set({
+                        notifications: response.data.notifications.map((n: any) => ({
+                            id: n._id,
+                            type: n.type,
+                            title: n.title,
+                            message: n.message,
+                            timestamp: n.createdAt,
+                            read: n.read,
+                            data: n.data
+                        })),
+                        unreadCount: response.data.unreadCount
+                    });
+                } catch (error) {
+                    console.error('Failed to fetch notifications:', error);
+                } finally {
+                    set({ isLoading: false });
+                }
+            },
+
+            addNotification: (notification) => {
                 set((state) => ({
-                    notifications: [newNotification, ...state.notifications],
+                    notifications: [notification, ...state.notifications],
                     unreadCount: state.unreadCount + 1
                 }));
             },
 
-            markAsRead: (id) => {
-                const state = get();
-                const notification = state.notifications.find(n => n.id === id);
-
-                if (notification && !notification.read) {
+            markAsRead: async (id) => {
+                try {
+                    await notificationApi.markAsRead(id);
                     set((state) => ({
                         notifications: state.notifications.map(n =>
                             n.id === id ? { ...n, read: true } : n
                         ),
                         unreadCount: Math.max(0, state.unreadCount - 1)
                     }));
+                } catch (error) {
+                    console.error('Failed to mark notification as read:', error);
                 }
             },
 
-            markAllAsRead: () => set((state) => ({
-                notifications: state.notifications.map(n => ({ ...n, read: true })),
-                unreadCount: 0
-            })),
+            markAllAsRead: async () => {
+                try {
+                    await notificationApi.markAllRead();
+                    set((state) => ({
+                        notifications: state.notifications.map(n => ({ ...n, read: true })),
+                        unreadCount: 0
+                    }));
+                } catch (error) {
+                    console.error('Failed to mark all as read:', error);
+                }
+            },
 
             clearAll: () => set({ notifications: [], unreadCount: 0 }),
 

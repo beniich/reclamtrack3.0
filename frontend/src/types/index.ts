@@ -61,7 +61,8 @@ export interface User {
     email: string;
     name?: string;
     avatar?: string;
-    role: 'admin' | 'dispatcher' | 'staff';
+    role: 'admin' | 'dispatcher' | 'staff' | 'citizen' | 'technician';
+    organizationId?: string;
 }
 
 export interface Assignment {

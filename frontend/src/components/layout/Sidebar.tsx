@@ -4,12 +4,14 @@
 import { cn } from '@/lib/utils';
 import {
     BarChart3,
+    Briefcase,
     Calendar,
     FileText,
     HelpCircle,
     LayoutDashboard,
     Map,
     Package,
+    Plane,
     Settings,
     Users
 } from 'lucide-react';
@@ -69,6 +71,16 @@ const menuItems: MenuItem[] = [
         label: 'Roster',
         href: '/roster',
         icon: Users,
+    },
+    {
+        label: 'Staff',
+        href: '/staff',
+        icon: Briefcase,
+    },
+    {
+        label: 'Leaves',
+        href: '/staff/leave',
+        icon: Plane,
     },
     {
         label: 'Settings',

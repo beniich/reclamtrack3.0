@@ -1,6 +1,7 @@
 'use client';
 
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { NotificationCenter } from '@/components/notifications/NotificationCenter';
 import {
     Dialog,
     DialogContent,
@@ -12,6 +13,7 @@ import {
 import { SignaturePad } from '@/components/ui/SignaturePad';
 import { Textarea } from '@/components/ui/textarea';
 import { useAssignments } from '@/hooks/useAssignments';
+import useNotifications from '@/hooks/useNotifications';
 import api from '@/lib/api';
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
@@ -19,6 +21,7 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 export default function TechnicianPage() {
+    useNotifications();
     const { data: assignments, isLoading, refetch } = useAssignments();
 
     // Trouver la tâche active (en cours)
@@ -27,9 +30,27 @@ export default function TechnicianPage() {
     const upcomingTasks = assignments?.filter((a: any) => a.status === 'affecté') || [];
 
     const [showClosureModal, setShowClosureModal] = useState(false);
+    const [showCommentModal, setShowCommentModal] = useState(false);
+    const [comment, setComment] = useState('');
     const [closureNote, setClosureNote] = useState('');
     const [signature, setSignature] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleAddComment = async () => {
+        if (!activeTask || !comment.trim()) return;
+        setIsSubmitting(true);
+        try {
+            await api.patch(`/assignments/${activeTask._id}/comment`, { comment });
+            toast.success("Commentaire ajouté");
+            setComment('');
+            setShowCommentModal(false);
+            refetch();
+        } catch (error) {
+            toast.error("Erreur lors de l'envoi du commentaire");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     const handleStatusChange = async (id: string, newStatus: string) => {
         try {
@@ -80,6 +101,7 @@ export default function TechnicianPage() {
                         </div>
                     </div>
                     <div className="flex items-center gap-3">
+                        <NotificationCenter />
                         <div className="hidden sm:flex items-center bg-slate-100 rounded-xl px-3 py-1.5 gap-2">
                             <span className="material-symbols-outlined text-sm text-slate-500">cloud_done</span>
                             <span className="text-xs font-bold text-slate-500">SYNC</span>
@@ -170,7 +192,14 @@ export default function TechnicianPage() {
                                             <span className="material-symbols-outlined">check_circle</span>
                                             FINALISER & SIGNER
                                         </button>
-                                        <button className="flex-1 min-w-[200px] flex items-center justify-center gap-3 bg-slate-100 text-slate-900 py-4 rounded-xl font-black text-lg hover:bg-slate-200 transition-colors">
+                                        <button
+                                            onClick={() => setShowCommentModal(true)}
+                                            className="flex-1 min-w-[200px] flex items-center justify-center gap-3 bg-slate-100 text-slate-900 py-4 rounded-xl font-black text-lg hover:bg-slate-200 transition-colors"
+                                        >
+                                            <span className="material-symbols-outlined">chat_bubble</span>
+                                            COMMENTAIRE
+                                        </button>
+                                        <button className="flex-1 min-w-[200px] flex items-center justify-center gap-3 bg-slate-100 text-slate-900 py-4 rounded-xl font-black text-lg hover:bg-slate-200 transition-colors opacity-50 cursor-not-allowed">
                                             <span className="material-symbols-outlined">pause</span>
                                             PAUSE
                                         </button>
@@ -269,6 +298,48 @@ export default function TechnicianPage() {
                             className="bg-primary text-white px-8 py-2 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 disabled:opacity-50"
                         >
                             {isSubmitting ? 'Envoi...' : 'Confirmer la clôture'}
+                        </button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            {/* Comment Modal */}
+            <Dialog open={showCommentModal} onOpenChange={setShowCommentModal}>
+                <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Ajouter un commentaire</DialogTitle>
+                        <DialogDescription>
+                            Laissez un message concernant cette intervention.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="space-y-4 py-4">
+                        <div className="space-y-2">
+                            <label className="text-sm font-bold uppercase tracking-wider text-slate-500">Votre message</label>
+                            <Textarea
+                                placeholder="Écrivez ici..."
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                                className="min-h-[120px]"
+                            />
+                        </div>
+                    </div>
+
+                    <DialogFooter>
+                        <button
+                            type="button"
+                            onClick={() => setShowCommentModal(false)}
+                            className="px-4 py-2 text-sm font-bold text-slate-500 hover:text-slate-700 transition-colors"
+                        >
+                            Annuler
+                        </button>
+                        <button
+                            type="button"
+                            onClick={handleAddComment}
+                            disabled={isSubmitting || !comment.trim()}
+                            className="bg-primary text-white px-8 py-2 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 disabled:opacity-50"
+                        >
+                            {isSubmitting ? 'Envoi...' : 'Envoyer'}
                         </button>
                     </DialogFooter>
                 </DialogContent>

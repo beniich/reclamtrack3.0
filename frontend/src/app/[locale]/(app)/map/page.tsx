@@ -1,23 +1,17 @@
 'use client';
 
-import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import api from '@/lib/api';
-import { HeatmapView } from '@/components/maps/HeatmapView';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { HeatmapView } from '@/components/maps/HeatmapView';
+import api from '@/lib/api';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
-interface Complaint {
-    _id: string;
-    title: string;
-    category: string;
-    priority: 'urgent' | 'high' | 'medium' | 'low';
-    status: string;
-    latitude?: number;
-    longitude?: number;
-}
+// interface Complaint is removed since it's unused or redudant with types from elsewhere
 
 export default function MapPage() {
     const [activeTab, setActiveTab] = useState('operations');
+    const [filterCategory, setFilterCategory] = useState<string>('');
+    const [filterPriority, setFilterPriority] = useState<string>('');
 
     const { data: complaints, isLoading, error } = useQuery({
         queryKey: ['complaints'],
@@ -89,6 +83,34 @@ export default function MapPage() {
                         Heatmap Risques
                     </button>
                 </div>
+
+                <div className="flex gap-2">
+                    <select
+                        value={filterCategory}
+                        onChange={(e) => setFilterCategory(e.target.value)}
+                        className="bg-slate-100 dark:bg-slate-800 border-none rounded-xl text-[10px] font-black uppercase tracking-widest px-4 py-2 focus:ring-2 focus:ring-primary/20"
+                        title="Filtrer par catégorie"
+                    >
+                        <option value="">Toutes Catégories</option>
+                        <option value="Infrastructure">Infrastructure</option>
+                        <option value="Environnement">Environnement</option>
+                        <option value="Sécurité">Sécurité</option>
+                        <option value="Éclairage">Éclairage</option>
+                    </select>
+
+                    <select
+                        value={filterPriority}
+                        onChange={(e) => setFilterPriority(e.target.value)}
+                        className="bg-slate-100 dark:bg-slate-800 border-none rounded-xl text-[10px] font-black uppercase tracking-widest px-4 py-2 focus:ring-2 focus:ring-primary/20"
+                        title="Filtrer par priorité"
+                    >
+                        <option value="">Toutes Priorités</option>
+                        <option value="low">Basse</option>
+                        <option value="medium">Moyenne</option>
+                        <option value="high">Haute</option>
+                        <option value="urgent">Urgente</option>
+                    </select>
+                </div>
             </div>
 
             <div className="flex-1 relative overflow-hidden">
@@ -97,6 +119,8 @@ export default function MapPage() {
                     zoom={12}
                     showClusters={activeTab === 'operations'} // On affiche les clusters en mode opérations
                     center={[34.0209, -6.8416]} // Centre sur Rabat
+                    filterCategory={filterCategory}
+                    filterPriority={filterPriority}
                 />
             </div>
         </div>

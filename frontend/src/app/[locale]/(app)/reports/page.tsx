@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { usePerformanceStats, useSatisfactionStats } from '@/hooks/useAnalytics';
+import 'jspdf-autotable';
 import Link from 'next/link';
-import { useSatisfactionStats, usePerformanceStats } from '@/hooks/useAnalytics';
+import { useState } from 'react';
 
 // Types
 type ReportFormat = 'PDF' | 'EXCEL' | 'CSV';
@@ -39,10 +40,93 @@ export default function ReportsPage() {
     const { data: satisfaction, isLoading: isLoadingSat } = useSatisfactionStats();
     const { data: performance, isLoading: isLoadingPerf } = usePerformanceStats();
 
+    // Fetch All Complaints for Export
+    const { data: response } = useQuery({
+        queryKey: ['complaints', 'all-for-report'],
+        queryFn: async () => {
+            return await api.get('/complaints');
+        }
+    });
+
+    const complaints = response as any[] || [];
+
     // Handlers
-    const handleGenerate = () => {
+    const handleGenerate = async () => {
+        if (!complaints || complaints.length === 0) {
+            toast.error('Aucune donnée à exporter');
+            return;
+        }
+
         setIsGenerating(true);
-        setTimeout(() => setIsGenerating(false), 2000);
+
+        try {
+            if (selectedFormat === 'CSV') {
+                exportCSV();
+            } else if (selectedFormat === 'EXCEL') {
+                exportExcel();
+            } else if (selectedFormat === 'PDF') {
+                exportPDF();
+            }
+            toast.success(`Rapport ${selectedFormat} généré`);
+        } catch (error) {
+            console.error('Export error:', error);
+            toast.error('Erreur lors de la génération');
+        } finally {
+            setIsGenerating(false);
+        }
+    };
+
+    const exportCSV = () => {
+        const headers = ['Numéro', 'Titre', 'Catégorie', 'Priorité', 'Statut', 'Date'];
+        const rows = complaints.map((c: any) => [
+            c.number,
+            `"${c.title}"`,
+            c.category,
+            c.priority,
+            c.status,
+            `"${new Date(c.createdAt).toLocaleDateString()}"`
+        ]);
+
+        const csvContent = [headers, ...rows].map(e => e.join(",")).join("\n");
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        saveAs(blob, `rapport_reclamations_${new Date().toISOString().slice(0, 10)}.csv`);
+    };
+
+    const exportExcel = () => {
+        const worksheet = XLSX.utils.json_to_sheet(complaints.map((c: any) => ({
+            Numero: c.number,
+            Titre: c.title,
+            Categorie: c.category,
+            Priorite: c.priority,
+            Statut: c.status,
+            Date: new Date(c.createdAt).toLocaleDateString()
+        })));
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Reclamations");
+        XLSX.writeFile(workbook, `rapport_reclamations_${new Date().toISOString().slice(0, 10)}.xlsx`);
+    };
+
+    const exportPDF = () => {
+        const doc = new jsPDF();
+        doc.text("Rapport des Réclamations - ReclamTrack", 14, 15);
+
+        const tableColumn = ["Numéro", "Titre", "Catégorie", "Priorité", "Statut", "Date"];
+        const tableRows = complaints.map((c: any) => [
+            c.number,
+            c.title,
+            c.category,
+            c.priority,
+            c.status,
+            new Date(c.createdAt).toLocaleDateString()
+        ]);
+
+        (doc as any).autoTable({
+            head: [tableColumn],
+            body: tableRows,
+            startY: 20,
+        });
+
+        doc.save(`rapport_reclamations_${new Date().toISOString().slice(0, 10)}.pdf`);
     };
 
     const getStatusBadge = (status: ReportStatus) => {

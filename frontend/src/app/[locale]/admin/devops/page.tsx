@@ -11,6 +11,7 @@ const dashboards = [
     { id: 'kubernetes/node/current', name: 'K8s Node Manager', description: 'Monitor and manage Kubernetes nodes', icon: 'grid_view', color: 'green' },
     { id: 'logs', name: 'LogSense Explorer', description: 'Centralized log analytics & search', icon: 'analytics', color: 'purple' },
     { id: 'sql', name: 'SQL Query Insight', description: 'Database performance & query monitoring', icon: 'database', color: 'indigo' },
+    { id: 'advanced-db', name: 'Advanced DB Engine', description: 'Audit, Flashback & Session management', icon: 'settings_input_component', color: 'rose' },
     { id: 'pii', name: 'PII Governance', description: 'Sensitive data discovery & compliance', icon: 'shield_lock', color: 'orange' },
     { id: 'iac', name: 'IaC Deployment Diff', description: 'Terraform plan & diff visualization', icon: 'hub', color: 'teal' },
     { id: 'health', name: 'System Health Topology', description: 'Service status & health map', icon: 'activity', color: 'emerald' },

@@ -1,6 +1,8 @@
 'use client';
 
 import { usePerformanceStats, useSatisfactionStats } from '@/hooks/useAnalytics';
+import api from '@/lib/api';
+import { useQuery } from '@tanstack/react-query';
 import 'jspdf-autotable';
 import Link from 'next/link';
 import { useState } from 'react';

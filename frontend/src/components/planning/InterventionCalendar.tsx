@@ -57,6 +57,7 @@ export function InterventionCalendar({
     editable = true,
 }: InterventionCalendarProps) {
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+    const [selectedEvent, setSelectedEvent] = useState<Intervention | null>(null);
     const [selectedDateRange, setSelectedDateRange] = useState<DateSelectArg | null>(null);
     const [conflictWarning, setConflictWarning] = useState<string | null>(null);
 

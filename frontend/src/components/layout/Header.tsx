@@ -73,9 +73,9 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                     <span className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900" />
                 </button>
 
-                <button className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+                <Link href="/settings" className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors">
                     <Settings className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                </button>
+                </Link>
 
                 <div className="h-8 w-px bg-gray-200 dark:bg-gray-700 mx-2" />
 
@@ -91,6 +91,17 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                             <User className="w-5 h-5 text-primary" />
                         )}
                     </div>
+                    {/* Bouton de Déconnexion */}
+                    <button 
+                        onClick={() => {
+                            logout();
+                            window.location.href = '/login';
+                        }} 
+                        className="ml-2 p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-full transition-colors"
+                        title="Se déconnecter"
+                    >
+                        <LogOut className="w-5 h-5" />
+                    </button>
                 </div>
             </div>
         </header>

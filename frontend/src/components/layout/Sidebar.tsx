@@ -49,7 +49,7 @@ const menuItems: MenuItem[] = [
     },
     {
         label: 'Maps',
-        href: '/maps',
+        href: '/map',
         icon: Map,
     },
     {

@@ -23,11 +23,30 @@ export default async function LandingPage() {
                     </div>
 
                     <nav className="hidden md:flex items-center space-x-10 text-sm font-medium">
-                        <div className="relative group cursor-pointer">
-                            <span className="hover:text-brand-orange transition-colors flex items-center uppercase tracking-widest text-[10px] font-black">
+                        <div className="relative group cursor-pointer inline-block">
+                            <span className="hover:text-brand-orange transition-colors flex items-center uppercase tracking-widest text-[10px] font-black pb-4 -mb-4">
                                 {tNav('solutions')}
-                                <span className="material-symbols-outlined text-xs ml-1">expand_more</span>
+                                <span className="material-symbols-outlined text-xs ml-1 transition-transform group-hover:rotate-180">expand_more</span>
                             </span>
+                            {/* Dropdown Menu */}
+                            <div className="absolute top-full left-0 mt-2 w-64 bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left -translate-y-2 group-hover:translate-y-0 z-50 overflow-hidden">
+                                <div className="p-2 space-y-1">
+                                    {[
+                                        { title: 'Governance', icon: 'account_balance', href: '/services/governance' },
+                                        { title: 'Healthcare', icon: 'medical_services', href: '/services/healthcare' },
+                                        { title: 'Infrastructure', icon: 'lan', href: '/services/infrastructure' },
+                                        { title: 'Hospitality', icon: 'hotel', href: '/services/hospitality' },
+                                        { title: 'Education', icon: 'school', href: '/services/education' }
+                                    ].map((item, idx) => (
+                                        <Link key={idx} href={item.href} className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group/item">
+                                            <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover/item:bg-brand-orange/20 group-hover/item:text-brand-orange transition-colors">
+                                                <span className="material-symbols-outlined text-[18px]">{item.icon}</span>
+                                            </div>
+                                            <span className="text-sm font-bold text-slate-300 group-hover/item:text-white transition-colors">{item.title}</span>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                         <Link href="/pricing" className="hover:text-brand-orange transition-colors uppercase tracking-widest text-[10px] font-black">{tNav('pricing')}</Link>
                         <Link href="#architecture" className="hover:text-brand-orange transition-colors uppercase tracking-widest text-[10px] font-black">Architecture</Link>

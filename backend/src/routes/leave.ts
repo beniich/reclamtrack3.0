@@ -7,8 +7,8 @@ const router = Router();
 router.get('/', protect, async (req, res, next) => {
   try {
     const filter: any = {};
-    if (req.user?.organizationId) {
-      filter.organizationId = req.user.organizationId;
+    if (req.organizationId) {
+      filter.organizationId = req.organizationId;
     }
     if (req.query.staffId) {
       filter.staffId = req.query.staffId;
@@ -25,7 +25,7 @@ router.post('/', protect, async (req, res, next) => {
   try {
     const data = {
       ...req.body,
-      organizationId: req.user?.organizationId,
+      organizationId: req.organizationId,
     };
     const newLeave = await Leave.create(data);
     res.status(201).json(newLeave);

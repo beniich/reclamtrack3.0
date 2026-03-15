@@ -1,6 +1,6 @@
 import express, { Response } from 'express';
-import { auth } from '../middleware/auth';
 import { requireOrganization } from '../middleware/organization';
+import { authenticate as auth } from '../middleware/security.js';
 import ITTicket from '../models/ITTicket';
 import { AuthenticatedRequest } from '../types/request.js';
 

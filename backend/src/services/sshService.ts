@@ -38,7 +38,8 @@ const executeSafe = async (command: string, params: string[] = []): Promise<stri
   const config = getSSHConfig();
   try {
     await ssh.connect(config);
-    const result = await ssh.execCommand(command, { parameters: params });
+    const fullCommand = params.length > 0 ? `${command} ${params.join(' ')}` : command;
+    const result = await ssh.execCommand(fullCommand);
 
     if (result.code !== 0 && result.code !== null) {
       logger.error(`[SSH] Command failed (${result.code}): ${result.stderr}`);

@@ -8,7 +8,7 @@
 
 import express, { Request, Response, Router } from 'express';
 import Stripe from 'stripe';
-import { authenticate as protect } from '../middleware/security.js';
+import { authenticate } from '../middleware/security.js';
 import { PLAN_FEATURES, PLAN_MAX_USERS } from '../models/Subscription.js';
 import { updateFromStripe } from '../services/subscriptionService.js';
 import { AppError } from '../utils/AppError.js';
@@ -18,7 +18,7 @@ import { logger } from '../utils/logger.js';
 const router = Router();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
-  apiVersion: '2023-10-16', // Fixed known stable version instead of '2026-01-28.clover'
+  apiVersion: '2025-01-27.acacia' as any, // Downgrade to a known stable version or use any
 });
 
 // Map standard plans to Stripe Price IDs (from env)
@@ -31,7 +31,7 @@ const PLAN_PRICES: Record<string, string | undefined> = {
 // ──────────────────────────────────────────────────────────────────────────────
 // POST /api/billing/create-checkout-session
 // ──────────────────────────────────────────────────────────────────────────────
-router.post('/create-checkout-session', protect, async (req: Request, res: Response, next) => {
+router.post('/create-checkout-session', authenticate, async (req: Request, res: Response, next) => {
   try {
     const { planId } = req.body;
     const user = req.user!;
@@ -126,7 +126,7 @@ router.post(
         event.type === 'customer.subscription.created' ||
         event.type === 'customer.subscription.updated'
       ) {
-        const subscription = event.data.object as Stripe.Subscription;
+        const subscription = event.data.object as any;
         const stripeCustomerId = subscription.customer as string;
         const priceId = subscription.items.data[0].price.id;
 
@@ -140,7 +140,7 @@ router.post(
 
         logger.info(`[Billing] Validated mapping for subscription: ${subscription.id}`);
       } else if (event.type === 'customer.subscription.deleted') {
-        const subscription = event.data.object as Stripe.Subscription;
+        const subscription = event.data.object as any;
         const stripeCustomerId = subscription.customer as string;
 
         await updateFromStripe(stripeCustomerId, subscription.id, '', 'canceled', new Date());

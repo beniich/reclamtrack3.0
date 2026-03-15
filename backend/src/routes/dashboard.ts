@@ -1,13 +1,13 @@
 ﻿import { Router } from 'express';
 import mongoose from 'mongoose';
-import { authenticate as protect, requireOrganization } from '../middleware/security.js';
+import { authenticate, requireOrganization } from '../middleware/security.js';
 import { Complaint } from '../models/Complaint.js';
 import { Team } from '../models/Team.js';
 
 const router = Router();
 
 /* GET /api/dashboard */
-router.get('/', protect, requireOrganization, async (req: any, res, next) => {
+router.get('/', authenticate, requireOrganization, async (req: any, res, next) => {
   try {
     const organizationId = new mongoose.Types.ObjectId(req.organizationId);
 

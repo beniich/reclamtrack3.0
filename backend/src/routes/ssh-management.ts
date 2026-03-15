@@ -105,7 +105,7 @@ router.post(
   validator,
   async (req: Request, res: Response, next) => {
     try {
-      const { targetUser } = req.params;
+      const targetUser = req.params.targetUser as string;
       const { maxDays } = req.body;
 
       await enforcePasswordPolicy(targetUser, maxDays);

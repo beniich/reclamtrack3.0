@@ -1,12 +1,8 @@
 import express, { Response } from 'express';
 import rateLimit from 'express-rate-limit';
-import {
-  authenticate,
-  AuthenticatedRequest,
-  requireOrganization,
-  requireRole,
-} from '../middleware/security.js';
+import { authenticate, requireOrganization, requireRole } from '../middleware/security.js';
 import { securityService } from '../services/securityService.js';
+import { AuthenticatedRequest } from '../types/request.js';
 import {
   createdResponse,
   ErrorCodes,
@@ -265,7 +261,7 @@ router.post('/secrets', async (req: AuthenticatedRequest, res: Response) => {
     }
 
     if (!userId) {
-      return errorResponse(res, 'User identity missing', 401, ErrorCodes.AUTH_USER_MISSING);
+      return errorResponse(res, 'User identity missing', 401, ErrorCodes.AUTH_TOKEN_MISSING);
     }
 
     const { secretService } = await import('../services/secretService.js');
@@ -291,7 +287,7 @@ router.get('/secrets/:id/reveal', async (req: AuthenticatedRequest, res: Respons
     }
 
     const { secretService } = await import('../services/secretService.js');
-    const secret = await secretService.revealSecret(id, organizationId!);
+    const secret = await secretService.revealSecret(id as string, organizationId as string);
     return successResponse(res, secret);
   } catch (error: any) {
     console.error('[Security Routes] Error in reveal secret:', error);
@@ -313,7 +309,7 @@ router.delete('/secrets/:id', async (req: AuthenticatedRequest, res: Response) =
     }
 
     const { secretService } = await import('../services/secretService.js');
-    await secretService.deleteSecret(id, organizationId!);
+    await secretService.deleteSecret(id as string, organizationId as string);
     return successResponse(res, { message: 'Secret deleted' });
   } catch (error: any) {
     console.error('[Security Routes] Error in delete secret:', error);

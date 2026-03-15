@@ -1,26 +1,27 @@
 ﻿import { Router } from 'express';
-import { authenticate as protect } from '../middleware/security.js';
+import { authenticate, requireOrganization } from '../middleware/security.js';
 import { Staff } from '../models/Staff.js';
 
 const router = Router();
 
-router.get('/', protect, async (req, res, next) => {
-  try {
-    const filter: any = {};
-    if (req.user?.organizationId) {
-      filter.organizationId = req.user.organizationId;
-    }
+// Apply global middleware
+router.use(authenticate, requireOrganization);
 
-    const staff = await Staff.find(filter).sort({ name: 1 });
+router.get('/', async (req, res, next) => {
+  try {
+    const staff = await Staff.find({ organizationId: req.organizationId }).sort({ name: 1 });
     res.json(staff);
   } catch (err) {
     next(err);
   }
 });
 
-router.get('/:id', protect, async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
-    const staff = await Staff.findById(req.params.id);
+    const staff = await Staff.findOne({
+      _id: req.params.id,
+      organizationId: req.organizationId,
+    });
     if (!staff) return res.status(404).json({ message: 'Employé non trouvé' });
     res.json(staff);
   } catch (err) {
@@ -28,11 +29,11 @@ router.get('/:id', protect, async (req, res, next) => {
   }
 });
 
-router.post('/', protect, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const data = {
       ...req.body,
-      organizationId: req.user?.organizationId,
+      organizationId: req.organizationId,
     };
     const newStaff = await Staff.create(data);
     res.status(201).json(newStaff);
@@ -41,18 +42,27 @@ router.post('/', protect, async (req, res, next) => {
   }
 });
 
-router.put('/:id', protect, async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
-    const updatedStaff = await Staff.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedStaff = await Staff.findOneAndUpdate(
+      { _id: req.params.id, organizationId: req.organizationId },
+      req.body,
+      { new: true }
+    );
+    if (!updatedStaff) return res.status(404).json({ message: 'Employé non trouvé' });
     res.json(updatedStaff);
   } catch (err) {
     next(err);
   }
 });
 
-router.delete('/:id', protect, async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
-    await Staff.findByIdAndDelete(req.params.id);
+    const deleted = await Staff.findOneAndDelete({
+      _id: req.params.id,
+      organizationId: req.organizationId,
+    });
+    if (!deleted) return res.status(404).json({ message: 'Employé non trouvé' });
     res.status(204).end();
   } catch (err) {
     next(err);

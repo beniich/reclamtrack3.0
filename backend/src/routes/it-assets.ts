@@ -1,5 +1,5 @@
 import express, { Response } from 'express';
-import { auth } from '../middleware/auth';
+import { authenticate as auth } from '../middleware/security.js';
 import { requireOrganization } from '../middleware/organization';
 import ITAsset from '../models/ITAsset';
 import { AuthenticatedRequest } from '../types/request.js';

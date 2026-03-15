@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
-import SidebarLeft from "@/components/roster-scheduler/ui/SidebarLeft";
 import GanttChart from "@/components/roster-scheduler/ui/GanttChart";
-import AssignmentModal from "@/components/roster-scheduler/ui/AssignmentModal";
+import SidebarLeft from "@/components/roster-scheduler/ui/SidebarLeft";
 import { useDbSocket } from '@/hooks/useDbSocket';
+import { Link } from '@/i18n/navigation';
+import { useEffect, useState } from "react";
 
 export default function RosterPage() {
     const [showAssignmentModal, setShowAssignmentModal] = useState(false);
@@ -150,12 +150,12 @@ export default function RosterPage() {
                         </div>
                     </div>
 
-                    <a
+                    <Link
                         href="/roster-scheduler/conflicts"
                         className="block w-full text-center mt-2 py-2 text-[11px] font-bold text-blue-500 hover:bg-blue-500/10 rounded transition-colors uppercase tracking-wider border border-blue-500/30"
                     >
                         Auto-Resolve All
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

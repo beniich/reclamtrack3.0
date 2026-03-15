@@ -90,7 +90,7 @@ router.post(
 // ──────────────────────────────────────────────────────────────────────────────
 router.delete('/:id', async (req: Request, res: Response, next) => {
   try {
-    const keyId = req.params.id;
+    const keyId = req.params.id as string;
     await revokeApiKey(keyId, req.organizationId!);
     return successResponse(res, { message: 'Clé API révoquée avec succès' });
   } catch (err) {

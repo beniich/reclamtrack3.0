@@ -8,7 +8,7 @@
 
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { Membership } from '../models/Membership.js';
+import { IMembership, Membership } from '../models/Membership.js';
 import {
   AppError,
   ForbiddenAppError,
@@ -46,7 +46,11 @@ export const authenticate = (req: Request, res: Response, next: NextFunction): v
   const token = authHeader.split(' ')[1];
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
-    req.user = decoded;
+    // Standardize user object
+    req.user = {
+      ...decoded,
+      id: decoded.id,
+    };
     logger.debug(`[Auth] ✅ User ${decoded.id} authenticated`, { requestId: req.id });
     next();
   } catch (err) {
@@ -77,7 +81,7 @@ export const requireOrganization = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const userId = req.user?._id ?? req.user?.id;
+    const userId = req.user?.id || req.user?._id;
     if (!userId) {
       return next(new AppError('Non authentifié', 401, 'AUTH_USER_MISSING'));
     }
@@ -98,7 +102,7 @@ export const requireOrganization = async (
     }
 
     req.organizationId = organizationId;
-    req.membership = membership as any;
+    req.membership = membership as IMembership;
 
     logger.debug(`[Org] ✅ User ${userId} → org ${organizationId}`, { requestId: req.id });
     next();
@@ -124,7 +128,7 @@ export const requireAdmin = async (
     if (!req.membership) {
       return next(new ForbiddenAppError("Contexte d'organisation manquant", 'ORG_CONTEXT_MISSING'));
     }
-    if (!(req.membership as any).isAdmin()) {
+    if (!(req.membership as IMembership).isAdmin()) {
       return next(new ForbiddenAppError('Droits administrateur requis', 'ADMIN_REQUIRED'));
     }
     logger.debug(`[Admin] ✅ Admin access granted`, { requestId: req.id });
@@ -152,7 +156,9 @@ export const requireRole = (roles: string | string[]) => {
         );
       }
       const allowedRoles = Array.isArray(roles) ? roles : [roles];
-      const hasPermission = allowedRoles.some((role) => (req.membership as any).hasRole(role));
+      const hasPermission = allowedRoles.some((role) =>
+        (req.membership as IMembership).hasRole(role)
+      );
       if (!hasPermission) {
         return next(
           new ForbiddenAppError(`Rôle requis: ${allowedRoles.join(' ou ')}`, 'ROLE_REQUIRED')

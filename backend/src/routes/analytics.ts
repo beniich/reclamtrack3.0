@@ -3,21 +3,21 @@ import { Request, Response, Router } from 'express';
 import fs from 'fs';
 import mongoose from 'mongoose';
 import path from 'path';
-import { authenticate as auth } from '../middleware/security.js';
-import { requireOrganization } from '../middleware/security.js';
+import { authenticate, requireOrganization } from '../middleware/security.js';
 import { Complaint } from '../models/Complaint.js';
 import { Feedback } from '../models/Feedback.js';
 import { Organization } from '../models/Organization.js';
 import { saveExport } from '../services/storageService.js';
+import { AuthenticatedRequest } from '../types/request.js';
 import { logger } from '../utils/logger.js';
 
 const router = Router();
 
 // Apply organization context
-router.use(auth, requireOrganization);
+router.use(authenticate, requireOrganization);
 
 // GET /api/analytics/satisfaction - Métriques de satisfaction
-router.get('/satisfaction', async (req: Request, res: Response) => {
+router.get('/satisfaction', async (req: AuthenticatedRequest, res: Response) => {
   try {
     const { range = '30d' } = req.query;
     // Date fltering logic can be added here based on 'range'
@@ -26,7 +26,7 @@ router.get('/satisfaction', async (req: Request, res: Response) => {
 
     const matchStage: any = {
       createdAt: { $gte: startDate },
-      organizationId: (req as any).organizationId,
+      organizationId: req.organizationId,
     };
 
     // 1. Calculate Average Rating & Total Responses
@@ -125,10 +125,10 @@ router.get('/satisfaction', async (req: Request, res: Response) => {
 });
 
 // GET /api/analytics/performance - Métriques de performance
-router.get('/performance', async (req: Request, res: Response) => {
+router.get('/performance', async (req: AuthenticatedRequest, res: Response) => {
   try {
     // 1. Completion Rate
-    const organizationId = (req as any).organizationId;
+    const organizationId = req.organizationId;
     const totalComplaints = await Complaint.countDocuments({ organizationId });
     const resolvedComplaints = await Complaint.countDocuments({
       organizationId,
@@ -212,14 +212,14 @@ router.get('/performance', async (req: Request, res: Response) => {
 });
 
 // GET /api/analytics/heatmap - Données pour carte de chaleur
-router.get('/heatmap', async (req: Request, res: Response) => {
+router.get('/heatmap', async (req: AuthenticatedRequest, res: Response) => {
   try {
     const { category, priority, startDate, endDate } = req.query;
 
     const filter: any = {
       latitude: { $exists: true, $ne: null },
       longitude: { $exists: true, $ne: null },
-      organizationId: (req as any).organizationId,
+      organizationId: req.organizationId,
     };
 
     if (category) filter.category = category;
@@ -256,9 +256,9 @@ router.get('/heatmap', async (req: Request, res: Response) => {
 });
 
 // GET /api/analytics/dashboard - Dashboard global metrics
-router.get('/dashboard', async (req: Request, res: Response) => {
+router.get('/dashboard', async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const organizationId = (req as any).organizationId;
+    const organizationId = req.organizationId;
     // Aggregate high-level stats
     const totalComplaints = await Complaint.countDocuments({ organizationId });
     const activeComplaints = await Complaint.countDocuments({
@@ -302,7 +302,7 @@ router.get('/complaints', async (req: Request, res: Response) => {
 });
 
 // GET /api/analytics/teams - Team performance stats
-router.get('/teams', async (req: Request, res: Response) => {
+router.get('/teams', async (req: AuthenticatedRequest, res: Response) => {
   // Placeholder: In a real app, this would aggregate from Team and Complaint models
   res.json({
     success: true,
@@ -316,14 +316,14 @@ router.get('/teams', async (req: Request, res: Response) => {
 });
 
 // GET /api/analytics/export/:type
-router.get('/export/:type', async (req: Request, res: Response) => {
+router.get('/export/:type', async (req: AuthenticatedRequest, res: Response) => {
   const { type } = req.params;
   if (type !== 'complaints') {
     return res.status(400).json({ success: false, message: 'Invalid export type' });
   }
 
   try {
-    const organizationId = (req as any).organizationId;
+    const organizationId = req.organizationId;
 
     // exceljs imported statically
     const workbook = new ExcelJS.Workbook();
@@ -484,7 +484,7 @@ router.get('/export/:type', async (req: Request, res: Response) => {
 });
 
 // GET /api/analytics/exports/download/:filename - Download a locally saved export
-router.get('/exports/download/:filename', async (req: Request, res: Response) => {
+router.get('/exports/download/:filename', async (req: AuthenticatedRequest, res: Response) => {
   try {
     const filename = req.params.filename as string;
     // Basic validation to prevent path traversal

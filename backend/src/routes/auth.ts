@@ -12,7 +12,11 @@ import { authenticate } from '../middleware/security.js';
 import { validator } from '../middleware/validator.js';
 import AuditLog from '../models/AuditLog.js';
 import { User } from '../models/User.js';
-import { sendPasswordResetEmail, sendWelcomeEmail } from '../services/emailService.js';
+import {
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  sendWelcomeEmail,
+} from '../services/emailService.js';
 import { eventBus } from '../services/eventBus.js';
 import {
   introspectToken,

@@ -33,7 +33,6 @@ import itTicketsRoutes from './routes/it-tickets.js';
 import knowledgeRoutes from './routes/knowledge.js';
 import leaveRoutes from './routes/leave.js';
 import memberRoutes from './routes/members.js';
-import membershipRoutes from './routes/memberships.js';
 import messageRoutes from './routes/messages.js';
 import monitoringRoutes from './routes/monitoring.js';
 import notificationRoutes from './routes/notifications.js';
@@ -125,8 +124,7 @@ app.use('/api/db', dbRoutes);
 app.use('/api/audit-logs', auditRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/organizations', organizationRoutes);
-app.use('/api/memberships', membershipRoutes);
-app.use('/api', memberRoutes); // Mount at /api so paths become /api/organizations/:id/...
+app.use('/api', memberRoutes); // Handles /organizations/:id/members and related
 app.use('/api/billing', billingRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/api-keys', apiKeysRoutes);

@@ -1,0 +1,112 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+# ─── Shared env vars needed at build time ────────────────────────────────────
+env:
+  NODE_ENV: production
+  # Backend
+  JWT_SECRET: ${{ secrets.JWT_SECRET || 'ci-jwt-secret-placeholder' }}
+  JWT_REFRESH_SECRET: ${{ secrets.JWT_REFRESH_SECRET || 'ci-refresh-secret-placeholder' }}
+  MONGODB_URI: ${{ secrets.MONGODB_URI || 'mongodb://localhost:27017/reclamtrack_ci' }}
+  STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY || 'sk_test_ci_placeholder' }}
+  FRONTEND_URL: http://localhost:3000
+  PORT: 5001
+  # Frontend – NEXT_PUBLIC_* are inlined at build time so they must be set
+  NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api' }}
+  NEXT_PUBLIC_SOCKET_URL: ${{ secrets.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:5001' }}
+  NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '' }}
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_ci_placeholder' }}
+  NEXT_PUBLIC_DEBUG_WIDGET_ENABLED: "false"
+  # Server-side Next.js / NextAuth
+  NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL || 'http://localhost:3000' }}
+  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET || 'ci-nextauth-secret-placeholder' }}
+  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID || '' }}
+  GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET || '' }}
+  STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET || 'whsec_ci_placeholder' }}
+  # Database (Prisma client generation – no real DB needed during build)
+  DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/reclamtrack' }}
+
+jobs:
+  # ─────────────────────────────────────────────────────────────────────────
+  # 1. Build backend (Node.js / TypeScript)
+  # ─────────────────────────────────────────────────────────────────────────
+  backend:
+    name: Backend – TSC build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install all workspace deps
+        run: npm ci --ignore-scripts
+
+      - name: Build shared package
+        run: npm run build -w shared
+
+      - name: TypeScript compile (backend)
+        run: npm run build -w backend
+
+      - name: Run backend tests
+        run: npm test -w backend --if-present
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # 2. Build frontend (Next.js 15)
+  # ─────────────────────────────────────────────────────────────────────────
+  frontend:
+    name: Frontend – Next.js build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install all workspace deps
+        run: npm ci --ignore-scripts
+
+      - name: Build shared package
+        run: npm run build -w shared
+
+      - name: Next.js build
+        run: npm run build -w frontend
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # 3. Lint (both packages, matrix)
+  # ─────────────────────────────────────────────────────────────────────────
+  lint:
+    name: Lint – ${{ matrix.workspace }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        workspace: [backend, frontend]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install all workspace deps
+        run: npm ci --ignore-scripts
+
+      - name: Lint ${{ matrix.workspace }}
+        run: npm run lint -w ${{ matrix.workspace }} --if-present

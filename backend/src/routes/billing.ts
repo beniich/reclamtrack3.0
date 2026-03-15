@@ -53,8 +53,8 @@ router.post('/create-checkout-session', protect, async (req: Request, res: Respo
         },
       ],
       customer_email: user.email,
-      success_url: `${process.env.FRONTEND_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.FRONTEND_URL}/pricing`,
+      success_url: `${process.env.FRONTEND_URL}/fr/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.FRONTEND_URL}/fr/pricing`,
       metadata: {
         userId: user.id,
         planId: planId,

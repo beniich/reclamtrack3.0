@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import api from '../lib/api';
+import { apiClient as api } from '../lib/api';
 
 interface Plan {
     id: string;

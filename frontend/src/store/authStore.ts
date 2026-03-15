@@ -72,7 +72,8 @@ export const useAuthStore = create<AuthState>()(
                 set({ isLoading: true, error: null });
                 try {
                     const response = await authApi.googleLogin(credential);
-                    const { user, accessToken: token } = response as any;
+                    const { user, accessToken, token: fallbackToken } = response as any;
+                    const token = accessToken || fallbackToken;
 
                     if (!user || !token) {
                          throw new Error('Réponse invalide du serveur');

@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation';
 import { useAuthStore } from '@/store/authStore';
 import { GoogleLogin } from '@react-oauth/google';
 import { useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
@@ -14,6 +15,7 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     const locale = useLocale();
+    const router = useRouter();
 
     // Utilisation du store pour la gestion de l'état global
     const { login, googleLogin } = useAuthStore();
@@ -28,7 +30,7 @@ export default function LoginPage() {
 
             // Redirection avec locale pour garder le contexte i18n
             setTimeout(() => {
-                window.location.href = `/${locale}/dashboard`;
+                router.push(`/${locale}/dashboard`);
             }, 100);
 
         } catch (error: any) {
@@ -46,7 +48,7 @@ export default function LoginPage() {
                 await googleLogin(credentialResponse.credential);
                 toast.success('Connexion Google réussie !');
                 setTimeout(() => {
-                    window.location.href = `/${locale}/dashboard`;
+                    router.push(`/${locale}/dashboard`);
                 }, 100);
             }
         } catch (error: any) {

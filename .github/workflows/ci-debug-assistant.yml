@@ -1,54 +1,56 @@
 name: CI – Debug Assistant
 
 on:
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-    backend:
-        runs-on: ubuntu-latest
-        defaults:
-            run:
-                working-directory: ./backend
-        steps:
-            - uses: actions/checkout@v4
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: Set up Python 3.12
-              uses: actions/setup-python@v5
-              with:
-                  python-version: "3.12"
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
 
-            - name: Install Poetry
-              run: |
-                  curl -sSL https://install.python-poetry.org | python3 -
-                  echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Install dependencies
+        run: npm ci
 
-            - name: Install dependencies
-              run: poetry install --no-interaction --no-ansi
+      - name: Build Shared Package
+        run: npm run build --workspace=shared
 
-            - name: Lint (ruff)
-              run: poetry run ruff check .
+      - name: Build Backend
+        run: npm run build --workspace=backend
 
-            - name: Run tests & coverage
-              run: poetry run pytest -q --cov=app --cov-report=term-missing
+      - name: Run Backend Tests
+        run: npm run test --workspace=backend
 
-    frontend:
-        runs-on: ubuntu-latest
-        defaults:
-            run:
-                working-directory: ./frontend
-        steps:
-            - uses: actions/checkout@v4
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: Set up Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: "20"
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
 
-            - name: Install deps
-              run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-            - name: Build (Vite) – vérifier que le bundling passe
-              run: npm run build
+      - name: Build Shared Package
+        run: npm run build --workspace=shared
+
+      - name: Build Frontend
+        run: npm run build --workspace=frontend
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET || 'dummy_secret' }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL || 'http://localhost:3000' }}
+          NEXT_PUBLIC_API_URL: http://localhost:5001/api
+          NEXT_PUBLIC_SOCKET_URL: http://localhost:5001

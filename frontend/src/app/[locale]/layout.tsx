@@ -47,6 +47,8 @@ export default async function LocaleLayout({
                     rel="stylesheet"
                     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
                 />
+                <link rel="icon" type="image/png" href="/logo.png" />
+                <link rel="apple-touch-icon" href="/logo.png" />
             </head>
             <body className={`${inter.variable} ${sora.variable} font-sans antialiased text-slate-900 dark:text-slate-100 bg-white dark:bg-[#020617]`}>
                 <NextIntlClientProvider messages={messages} locale={locale}>

@@ -1,7 +1,0 @@
-
-> reclamtrack-frontend@1.0.0 dev
-> next dev --turbo
-
-Terminer le programme de commandes (O/N)ÿ? [?25h
-
-^C

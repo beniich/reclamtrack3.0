@@ -151,19 +151,22 @@ const ComplaintManagementSystem = () => {
                         { id: 'reclamations', label: 'Réclamations', icon: MessageSquare },
                         { id: 'equipes', label: 'Équipes', icon: Users },
                         { id: 'planning', label: 'Planning', icon: Calendar }
-                    ].map(tab => (
-                        <button
-                            key={tab.id}
-                            onClick={() => setActiveTab(tab.id)}
-                            className={cn(
-                                "flex items-center space-x-2 px-4 py-2 border-b-2 transition-colors",
-                                activeTab === tab.id ? "border-blue-600 text-blue-600" : "border-transparent text-gray-600 hover:text-gray-900"
-                            )}
-                        >
-                            <tab.icon className="h-5 w-5" />
-                            <span className="font-medium">{tab.label}</span>
-                        </button>
-                    ))}
+                    ].map(tab => {
+                        const Icon = tab.icon;
+                        return (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                                className={cn(
+                                    "flex items-center space-x-2 px-4 py-2 border-b-2 transition-colors",
+                                    activeTab === tab.id ? "border-blue-600 text-blue-600" : "border-transparent text-gray-600 hover:text-gray-900"
+                                )}
+                            >
+                                <Icon className="h-5 w-5" />
+                                <span className="font-medium">{tab.label}</span>
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
 

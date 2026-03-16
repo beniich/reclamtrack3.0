@@ -101,7 +101,6 @@ export default function LoginPage() {
                             theme="filled_blue"
                             shape="pill"
                             text="signin_with"
-
                         />
                     </div>
 

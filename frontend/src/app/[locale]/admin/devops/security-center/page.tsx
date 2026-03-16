@@ -4,6 +4,7 @@ import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTe
 import { Badge } from "@/components/ui/badge"
 import { useSecuritySocket } from "@/hooks/useSecuritySocket"
 import { securityApi } from "@/lib/api"
+import { cn } from "@/lib/utils"
 import { useOrgStore } from "@/store/orgStore"
 import { format } from "date-fns"
 import { useEffect, useState } from "react"
@@ -101,14 +102,23 @@ export default function SecurityPage() {
         >
             <div className="space-y-8 font-display">
                 {/* Security Status Banner */}
-                <div className={`p-8 rounded-[32px] border ${activeThreats > 0 ? 'border-rose-500/20 bg-rose-500/10' : 'border-emerald-500/20 bg-emerald-500/10'} flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group`}>
+                <div className={cn(
+                    "p-8 rounded-[32px] border flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group",
+                    activeThreats > 0 ? 'border-rose-500/20 bg-rose-500/10' : 'border-emerald-500/20 bg-emerald-500/10'
+                )}>
                     <div className="absolute top-0 right-0 p-12 opacity-5 scale-150 pointer-events-none group-hover:rotate-12 transition-transform duration-1000">
                         <span className="material-symbols-outlined text-9xl text-white">security_update_good</span>
                     </div>
 
                     <div className="flex items-center gap-6 relative z-10">
-                        <div className={`size-20 rounded-3xl ${activeThreats > 0 ? 'bg-rose-500/20' : 'bg-emerald-500/20'} flex items-center justify-center border ${activeThreats > 0 ? 'border-rose-500/30' : 'border-emerald-500/30'} shadow-2xl`}>
-                            <span className={`material-symbols-outlined text-4xl font-black ${activeThreats > 0 ? 'text-rose-500' : 'text-emerald-500'}`}>
+                        <div className={cn(
+                            "size-20 rounded-3xl flex items-center justify-center border shadow-2xl",
+                            activeThreats > 0 ? 'bg-rose-500/20 border-rose-500/30' : 'bg-emerald-500/20 border-emerald-500/30'
+                        )}>
+                            <span className={cn(
+                                "material-symbols-outlined text-4xl font-black",
+                                activeThreats > 0 ? 'text-rose-500' : 'text-emerald-500'
+                            )}>
                                 {activeThreats > 0 ? 'warning' : 'shield_check'}
                             </span>
                         </div>
@@ -128,7 +138,10 @@ export default function SecurityPage() {
                         <button className="px-8 py-4 bg-white dark:bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-2xl border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 transition-all">
                             Review Policy
                         </button>
-                        <button className={`px-8 py-4 ${activeThreats > 0 ? 'bg-rose-500' : 'bg-primary'} text-white text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-2xl hover:scale-105 transition-all`}>
+                        <button className={cn(
+                            "px-8 py-4 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-2xl hover:scale-105 transition-all",
+                            activeThreats > 0 ? 'bg-rose-500' : 'bg-primary'
+                        )}>
                             Isolate Network
                         </button>
                     </div>
@@ -144,7 +157,10 @@ export default function SecurityPage() {
                                     <p className="text-sm text-slate-500 font-medium">Real-time socket stream from edge firewalls</p>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <div className={`size-2 rounded-full ${isConnected ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`}></div>
+                                    <div className={cn(
+                                    "size-2 rounded-full",
+                                    isConnected ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'
+                                )}></div>
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
                                         {isConnected ? 'Edge Socket Linked' : 'Socket Disconnected'}
                                     </span>

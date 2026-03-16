@@ -1,7 +1,7 @@
+import { organizationsApi } from '@/lib/api';
+import { Membership, Organization } from '@/types';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Organization, Membership } from '@/types';
-import { organizationsApi } from '@/lib/api';
 
 interface OrgState {
     organizations: Organization[];
@@ -32,11 +32,19 @@ export const useOrgStore = create<OrgState>()(
             fetchOrganizations: async () => {
                 set({ isLoading: true, error: null });
                 try {
-                    const memberships = await organizationsApi.getMyOrganizations() as Membership[];
-                    const organizations = memberships.map((m) => {
-                        if (typeof m.organizationId === 'string') return null;
-                        return m.organizationId;
-                    }).filter(Boolean) as Organization[];
+                    const response = await organizationsApi.getMyOrganizations() as any;
+                    const organizationsData = response.organizations || [];
+
+                    const organizations = organizationsData.map((org: any) => {
+                        const { membership, ...orgData } = org;
+                        return orgData;
+                    }) as Organization[];
+
+                    const memberships = organizationsData.map((org: any) => ({
+                        organizationId: org._id,
+                        roles: org.membership?.roles || [],
+                        status: 'ACTIVE'
+                    })) as Membership[];
 
                     set({
                         organizations,

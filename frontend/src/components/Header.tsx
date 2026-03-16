@@ -16,15 +16,17 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0a0a0f] px-6 flex items-center justify-between sticky top-0 z-50 shadow-sm">
+        <header className="h-16 border-b border-cyan-500/10 glass-nav px-6 flex items-center justify-between sticky top-0 z-50">
             <div className="flex items-center gap-4">
-                <Link href="/" className="flex items-center gap-3">
-                    <div className="bg-primary p-1.5 rounded-lg text-white">
-                        <span className="material-symbols-outlined block notranslate" translate="no">cloud</span>
-                    </div>
+        <Link href="/" className="flex items-center gap-3">
+                    <img
+                        src="/logo.jpg"
+                        alt="ReclamTrack Logo"
+                        className="h-10 w-10 rounded-xl object-cover shadow-lg shadow-cyan-500/20"
+                    />
                     <div className="flex flex-col">
-                        <h1 className="text-lg font-bold leading-none tracking-tight text-slate-900 dark:text-white">CloudIndustrie</h1>
-                        <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">{t('technicalServices')}</span>
+                        <h1 className="text-lg font-display font-black leading-none tracking-tighter text-white uppercase">ReclamTrack</h1>
+                        <span className="text-[10px] uppercase tracking-widest text-cyan-400 font-black">{t('technicalServices')}</span>
                     </div>
                 </Link>
 

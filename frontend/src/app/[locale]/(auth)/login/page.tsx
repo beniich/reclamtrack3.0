@@ -63,29 +63,35 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-background-light dark:bg-background-dark transition-colors duration-200 font-display">
+        <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-brand-midnight font-display selection:bg-cyan-500 selection:text-white">
+            {/* Ambient glow */}
+            <div className="absolute top-0 right-0 w-full h-full bg-cyan-500/5 blur-[120px] -z-10 pointer-events-none"></div>
+
             {/* Logo / Branding Header */}
-            <div className="mb-8 flex flex-col items-center">
-                <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-primary/20">
-                    <span className="material-symbols-outlined text-white text-3xl notranslate" translate="no">shield_person</span>
+            <div className="mb-8 flex flex-col items-center gap-4">
+                <img
+                    src="/logo.jpg"
+                    alt="ReclamTrack Logo"
+                    className="h-20 w-20 rounded-2xl object-cover shadow-2xl shadow-cyan-500/30"
+                />
+                <div className="text-center">
+                    <h1 className="text-3xl font-black tracking-tighter text-white uppercase italic" suppressHydrationWarning>ReclamTrack</h1>
+                    <p className="text-[10px] text-cyan-400 uppercase tracking-widest font-black mt-1">Intervention Management System</p>
                 </div>
-                <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white" suppressHydrationWarning>IMS Secure</h1>
-                <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Intervention Management System</p>
             </div>
 
             {/* Login Card */}
-            <div className="w-full max-w-[440px] bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-                {/* Header Image Component Style */}
-                <div className="w-full h-32 bg-primary/10 flex items-center justify-center overflow-hidden relative">
-                    <div
-                        className="absolute inset-0 opacity-10 bg-cover bg-center"
-                        style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCf-Sk1u3Dvs0aBHThfocpPqpAV-DzyqkHPPTAUSU_PqnsG_V09B1VCGb6JWS2rQWjye7nun2qQJdaiiaK0yWglbmxz9DRxEH5JRmXPgPCQRITJFokOS5EfXcwQmRpe_1c6ChlhELBzAMb6jlZxVCucIqPk3zqRO9jnXr9PIA5H96Ybo6JO1ZBlGEnmJNzgUcvnG7SeL4_Jf0B9B6-eGi-BNtRBFLNXOIH6Ypm1NHcRllOFkisWyqOtMWeIXhezrHOY1gvd0hONs75m')" }}
-                    ></div>
-                    <div className="relative z-10 flex flex-col items-center">
-                        <h2 className="text-xl font-semibold text-primary dark:text-primary">Welcome Back</h2>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest font-medium">Authentication Required</p>
+            <div className="w-full max-w-[440px] glass-card rounded-[2rem] overflow-hidden">
+                {/* Header badge */}
+                <div className="w-full px-8 pt-8 flex flex-col items-center">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-black uppercase tracking-widest mb-6">
+                        <span className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></span>
+                        Authentification Sécurisée
                     </div>
+                    <h2 className="text-xl font-black uppercase tracking-tight text-white">Connexion</h2>
+                    <p className="text-xs text-slate-500 uppercase tracking-widest font-bold mt-1">Accès Autorisé Requis</p>
                 </div>
+
 
                 <div className="p-8">
                     <div className="mb-6 flex justify-center">

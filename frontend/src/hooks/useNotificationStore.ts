@@ -37,8 +37,9 @@ export const useNotificationStore = create<NotificationStore>()(
                 set({ isLoading: true });
                 try {
                     const response = await notificationApi.getAll();
+                    const notifications = response?.data?.notifications ?? [];
                     set({
-                        notifications: response.data.notifications.map((n: any) => ({
+                        notifications: notifications.map((n: any) => ({
                             id: n._id,
                             type: n.type,
                             title: n.title,
@@ -47,10 +48,11 @@ export const useNotificationStore = create<NotificationStore>()(
                             read: n.read,
                             data: n.data
                         })),
-                        unreadCount: response.data.unreadCount
+                        unreadCount: response?.data?.unreadCount ?? 0
                     });
                 } catch (error) {
                     console.error('Failed to fetch notifications:', error);
+                    set({ notifications: [], unreadCount: 0 });
                 } finally {
                     set({ isLoading: false });
                 }

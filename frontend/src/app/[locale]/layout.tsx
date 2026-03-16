@@ -41,16 +41,16 @@ export default async function LocaleLayout({
     const messages = await getMessages();
 
     return (
-        <html lang={locale} className="light" suppressHydrationWarning>
+        <html lang={locale} className="dark" suppressHydrationWarning>
             <head>
                 <link
                     rel="stylesheet"
                     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
                 />
-                <link rel="icon" type="image/png" href="/logo.png" />
-                <link rel="apple-touch-icon" href="/logo.png" />
+                <link rel="icon" type="image/jpeg" href="/logo.jpg" />
+                <link rel="apple-touch-icon" href="/logo.jpg" />
             </head>
-            <body className={`${inter.variable} ${sora.variable} font-sans antialiased text-slate-900 dark:text-slate-100 bg-white dark:bg-[#020617]`}>
+            <body className={`${inter.variable} ${sora.variable} font-sans antialiased text-slate-100 bg-brand-midnight min-h-screen`}>
                 <NextIntlClientProvider messages={messages} locale={locale}>
                     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''}>
                         <QueryProvider>

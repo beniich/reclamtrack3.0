@@ -1,0 +1,9 @@
+﻿src/routes/auth.ts(66,13): error TS2304: Cannot find name 'sendEmailVerification'.
+src/routes/billing.ts(138,33): error TS2339: Property 'current_period_end' does not exist on type 'Subscription'.
+src/routes/roster.ts(31,38): error TS2339: Property 'organizationId' does not exist on type '{ id: string; _id?: string | undefined; role: string; email?: string | undefined; }'.
+src/routes/roster.ts(60,38): error TS2339: Property 'organizationId' does not exist on type '{ id: string; _id?: string | undefined; role: string; email?: string | undefined; }'.
+src/routes/security.ts(264,74): error TS2339: Property 'AUTH_USER_MISSING' does not exist on type '{ readonly AUTH_TOKEN_MISSING: "AUTH_TOKEN_MISSING"; readonly AUTH_TOKEN_INVALID: "AUTH_TOKEN_INVALID"; readonly AUTH_TOKEN_EXPIRED: "AUTH_TOKEN_EXPIRED"; readonly AUTH_CREDENTIALS_INVALID: "AUTH_CREDENTIALS_INVALID"; ... 17 more ...; readonly DATABASE_ERROR: "DATABASE_ERROR"; }'.
+src/routes/security.ts(290,53): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/routes/security.ts(312,38): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.

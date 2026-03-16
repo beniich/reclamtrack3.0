@@ -1,14 +1,15 @@
 'use client';
 
-import { Suspense } from "react";
-import StatsCard from "@/components/audit/StatsCard";
 import FilterBar from "@/components/audit/FilterBar";
 import LogTable from "@/components/audit/LogTable";
+import StatsCard from "@/components/audit/StatsCard";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { Suspense } from "react";
 
 export default function AuditLogsPage() {
     return (
-        <div className="flex flex-col flex-1 w-full px-6 py-8">
+        <div className="flex flex-col flex-1 w-full px-6 py-8 bg-brand-midnight text-white selection:bg-cyan-500 selection:text-white relative">
+            <div className="absolute top-0 right-0 w-full h-full bg-cyan-500/5 blur-[120px] -z-10 pointer-events-none"></div>
             <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
                 <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-2 mb-1">
@@ -26,14 +27,14 @@ export default function AuditLogsPage() {
                 </div>
 
                 <div className="flex gap-3">
-                    <button className="flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-5 py-3 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-750 transition-all shadow-sm">
-                        <span className="material-symbols-outlined text-lg">sync</span>
-                        <span>Force Refresh</span>
+                    <button className="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 px-6 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all shadow-xl shadow-cyan-500/5 group">
+                        <span className="material-symbols-outlined text-lg group-hover:rotate-180 transition-transform duration-500">sync</span>
+                        <span>Synchroniser</span>
                     </button>
 
-                    <button className="flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-black text-white shadow-xl shadow-primary/30 hover:bg-blue-700 transition-all active:scale-95">
+                    <button className="flex items-center gap-3 rounded-2xl bg-brand-orange px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white shadow-xl shadow-orange-500/20 hover:brightness-110 transition-all active:scale-95">
                         <span className="material-symbols-outlined text-lg">download</span>
-                        <span>Export Archives</span>
+                        <span>Exporter les Archives</span>
                     </button>
                 </div>
             </div>
@@ -74,15 +75,16 @@ export default function AuditLogsPage() {
                         </h3>
                         <span className="text-xs font-bold text-slate-400">SAMPLE DATA</span>
                     </div>
-                    <div className="h-56 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-end justify-between px-8 pb-8 pt-12 shadow-inner-white overflow-hidden relative">
-                        <div className="absolute top-4 left-4 text-[10px] font-black text-slate-300">INCIDENT RATIO</div>
+                    <div className="h-56 glass-card rounded-3xl flex items-end justify-between px-8 pb-8 pt-12 overflow-hidden relative border-white/5">
+                        <div className="absolute top-4 left-4 text-[10px] font-black text-slate-500 tracking-widest italic">INCIDENT RATIO 24H</div>
                         {[0.25, 0.5, 0.33, 1, 0.75, 0.4, 0.5, 0.8, 0.2].map((h, i) => (
                             <div
                                 key={i}
-                                className="w-10 rounded-t-lg transition-all hover:scale-x-110 cursor-pointer relative group"
+                                className="w-8 rounded-t-lg transition-all hover:scale-x-110 cursor-pointer relative group"
                                 style={{
                                     height: `${h * 100}%`,
-                                    backgroundColor: i === 3 ? "rgba(36,36,235,0.9)" : `rgba(36,36,235,${h * 0.4 + 0.1})`,
+                                    background: i === 3 ? "var(--color-primary)" : `rgba(34, 211, 238, ${h * 0.4 + 0.1})`,
+                                    boxShadow: i === 3 ? "0 0 20px rgba(255, 107, 0, 0.3)" : "none"
                                 }}
                             >
                                 <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
@@ -98,23 +100,23 @@ export default function AuditLogsPage() {
                         <span className="material-symbols-outlined text-emerald-500 text-2xl">verified_user</span>
                         Security Insights
                     </h3>
-                    <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 flex flex-col gap-6 shadow-sm border-t-4 border-t-emerald-500">
+                    <div className="glass-card rounded-3xl p-8 flex flex-col gap-6 border-t-4 border-t-emerald-500/50">
                         <div className="flex items-center justify-between text-sm">
-                            <span className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Average Session Time</span>
-                            <span className="font-black text-slate-900 dark:text-white text-lg tracking-tight">42m 15s</span>
+                            <span className="text-slate-500 font-black uppercase tracking-widest text-[10px]">Temps Moyen de Session</span>
+                            <span className="font-black text-white text-lg tracking-tight italic">42m 15s</span>
                         </div>
-                        <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden shadow-inner">
-                            <div className="bg-primary h-full w-[65%] transition-all duration-1000"></div>
+                        <div className="w-full bg-white/5 rounded-full h-2 overflow-hidden">
+                            <div className="bg-cyan-500 h-full w-[65%] transition-all duration-1000 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
                         </div>
 
                         <div className="flex items-center justify-between text-sm">
-                            <span className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">System Vulnerabilities</span>
-                            <span className="font-black text-emerald-500 text-lg tracking-tight italic uppercase">Secure</span>
+                            <span className="text-slate-500 font-black uppercase tracking-widest text-[10px]">Vulnérabilités Système</span>
+                            <span className="font-black text-emerald-400 text-lg tracking-tight italic uppercase">Sécurisé</span>
                         </div>
 
-                        <div className="flex items-center gap-4 text-xs font-bold bg-emerald-50 dark:bg-emerald-900/10 text-emerald-600 dark:text-emerald-400 p-4 rounded-xl border border-emerald-100 dark:border-emerald-800 leading-relaxed shadow-sm">
-                            <span className="material-symbols-outlined text-xl scale-125">check_circle</span>
-                            <p>All core systems operating at 100% capacity. Audit integrity verified against blockchain-ready timestamps.</p>
+                        <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-widest bg-emerald-500/10 text-emerald-400 p-4 rounded-2xl border border-emerald-500/20 leading-relaxed group">
+                            <span className="material-symbols-outlined text-xl group-hover:scale-110 transition-transform">verified</span>
+                            <p>Intégrité des audits vérifiée • Timestamps immuables • 100% Opérationnel</p>
                         </div>
                     </div>
                 </div>

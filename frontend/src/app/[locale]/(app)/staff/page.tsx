@@ -47,32 +47,33 @@ export default function StaffPage() {
     }
 
     return (
-        <div className="p-6 space-y-6 bg-background-light dark:bg-background-dark min-h-screen font-display">
+        <div className="p-6 space-y-8 bg-brand-midnight min-h-screen font-display selection:bg-cyan-500 selection:text-white">
+            <div className="absolute top-0 right-0 w-full h-full bg-cyan-500/5 blur-[120px] -z-10 pointer-events-none"></div>
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                        <ShieldCheck className="text-primary w-7 h-7" />
-                        Gestion du Personnel
+                    <h1 className="text-3xl font-black text-white uppercase italic tracking-tighter flex items-center gap-3">
+                        <ShieldCheck className="text-cyan-400 w-8 h-8" />
+                        Personnel & Opérateurs
                     </h1>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
-                        Gérez vos équipes, rôles et informations de contact.
+                    <p className="text-slate-500 uppercase tracking-[0.2em] text-[10px] mt-1 font-black ml-11">
+                        CENTRE DE COMMANDE DES ÉQUIPES TECHNIQUES
                     </p>
                 </div>
-                <button className="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow-lg shadow-primary/20 transition-all flex items-center gap-2">
+                <button className="bg-brand-orange hover:brightness-110 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-orange-500/20 transition-all flex items-center gap-3">
                     <UserPlus className="w-4 h-4" />
-                    Ajouter un employé
+                    Enrôler un Agent
                 </button>
             </div>
 
             {/* Filters & Search */}
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm flex flex-col md:flex-row gap-4 items-center">
                 <div className="relative flex-1 group w-full">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5 transition-colors group-focus-within:text-primary" />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5 transition-colors group-focus-within:text-cyan-400" />
                     <input
                         type="text"
-                        placeholder="Rechercher par nom, email ou rôle..."
-                        className="w-full pl-11 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-sm outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-900 dark:text-white"
+                        placeholder="RECHERCHE PAR NOM, EMAIL OU RÔLE..."
+                        className="w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-[10px] font-bold tracking-widest outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500/50 transition-all text-white placeholder:text-slate-600 uppercase"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
@@ -92,7 +93,8 @@ export default function StaffPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {filteredStaff.length > 0 ? (
                     filteredStaff.map((member) => (
-                        <div key={member._id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow relative group">
+                        <div key={member._id} className="glass-card rounded-3xl p-6 relative group overflow-hidden">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-right from-cyan-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
                                     <MoreVertical className="w-4 h-4" />

@@ -312,7 +312,7 @@ export const organizationsApi = {
     getById: (id: string) => apiClient.get(`/organizations/${id}`),
     create: (data: any) => apiClient.post('/organizations', data),
     update: (id: string, data: any) => apiClient.put(`/organizations/${id}`, data),
-    getMyOrganizations: () => apiClient.get('/organizations/me/memberships'),
+    getMyOrganizations: () => apiClient.get('/organizations'),
     getMembers: (id: string) => apiClient.get(`/organizations/${id}/members`),
     inviteMember: (id: string, email: string, roles: string[]) =>
         apiClient.post(`/organizations/${id}/members`, { email, role: roles[0] }),

@@ -1,0 +1,25 @@
+﻿src/middleware/security.ts(80,30): error TS2339: Property '_id' does not exist on type 'JwtPayload'.
+src/routes/api-keys.ts(94,24): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/routes/auth.ts(66,13): error TS2304: Cannot find name 'sendEmailVerification'.
+src/routes/billing.ts(21,3): error TS2322: Type '"2023-10-16"' is not assignable to type '"2026-01-28.clover"'.
+src/routes/billing.ts(55,28): error TS2339: Property 'email' does not exist on type 'JwtPayload'.
+src/routes/billing.ts(138,33): error TS2339: Property 'current_period_end' does not exist on type 'Subscription'.
+src/routes/leave.ts(10,19): error TS2339: Property 'organizationId' does not exist on type 'JwtPayload'.
+src/routes/leave.ts(11,40): error TS2339: Property 'organizationId' does not exist on type 'JwtPayload'.
+src/routes/leave.ts(28,33): error TS2339: Property 'organizationId' does not exist on type 'JwtPayload'.
+src/routes/notifications.ts(14,30): error TS2339: Property '_id' does not exist on type 'JwtPayload'.
+src/routes/notifications.ts(43,47): error TS2339: Property '_id' does not exist on type 'JwtPayload'.
+src/routes/notifications.ts(61,55): error TS2339: Property '_id' does not exist on type 'JwtPayload'.
+src/routes/roster.ts(12,19): error TS2339: Property 'organizationId' does not exist on type 'JwtPayload'.
+src/routes/roster.ts(13,40): error TS2339: Property 'organizationId' does not exist on type 'JwtPayload'.
+src/routes/roster.ts(31,38): error TS2339: Property 'organizationId' does not exist on type 'JwtPayload'.
+src/routes/roster.ts(60,38): error TS2339: Property 'organizationId' does not exist on type 'JwtPayload'.
+src/routes/security.ts(5,3): error TS2305: Module '"../middleware/security.js"' has no exported member 'AuthenticatedRequest'.
+src/routes/security.ts(268,74): error TS2339: Property 'AUTH_USER_MISSING' does not exist on type '{ readonly AUTH_TOKEN_MISSING: "AUTH_TOKEN_MISSING"; readonly AUTH_TOKEN_INVALID: "AUTH_TOKEN_INVALID"; readonly AUTH_TOKEN_EXPIRED: "AUTH_TOKEN_EXPIRED"; readonly AUTH_CREDENTIALS_INVALID: "AUTH_CREDENTIALS_INVALID"; ... 17 more ...; readonly DATABASE_ERROR: "DATABASE_ERROR"; }'.
+src/routes/ssh-management.ts(111,35): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+src/routes/staff.ts(10,19): error TS2339: Property 'organizationId' does not exist on type 'JwtPayload'.
+src/routes/staff.ts(11,40): error TS2339: Property 'organizationId' does not exist on type 'JwtPayload'.
+src/routes/staff.ts(35,33): error TS2339: Property 'organizationId' does not exist on type 'JwtPayload'.
+src/services/sshService.ts(41,53): error TS2353: Object literal may only specify known properties, and 'parameters' does not exist in type 'SSHExecCommandOptions'.

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function CitizenFeedbackPage() {
     // State
@@ -49,15 +49,14 @@ export default function CitizenFeedbackPage() {
     }
 
     return (
-        <div className="relative flex flex-col w-full min-h-screen bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+        <div className="relative flex flex-col w-full min-h-screen bg-brand-midnight font-display text-white selection:bg-cyan-500 selection:text-white">
+            <div className="absolute top-0 right-0 w-full h-full bg-cyan-500/5 blur-[120px] -z-10 pointer-events-none"></div>
             {/* Navigation Header */}
-            <header className="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+            <header className="w-full glass-nav border-b border-white/5 sticky top-0 z-50">
                 <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-3">
-                        <div className="bg-primary p-1.5 rounded-lg">
-                            <span className="material-symbols-outlined text-white">public</span>
-                        </div>
-                        <span className="text-xl font-bold tracking-tight">ReclamTrack</span>
+                        <img src="/logo.jpg" alt="Logo" className="h-10 w-10 rounded-xl object-cover shadow-lg" />
+                        <span className="text-xl font-black tracking-tighter uppercase italic">ReclamTrack</span>
                     </Link>
                     <div className="flex items-center gap-6">
                         <nav className="hidden md:flex gap-6">
@@ -75,15 +74,15 @@ export default function CitizenFeedbackPage() {
             <main className="flex-1 w-full max-w-3xl mx-auto px-6 py-12">
                 {/* Page Heading */}
                 <div className="mb-10">
-                    <h1 className="text-3xl font-black tracking-tight mb-2">Share Your Feedback</h1>
-                    <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                    <h1 className="text-4xl font-black tracking-tighter mb-2 uppercase italic">Partagez votre avis</h1>
+                    <div className="flex items-center gap-2 text-cyan-400">
                         <span className="material-symbols-outlined text-lg">description</span>
-                        <span className="text-sm font-medium uppercase tracking-wider">Case ID: REC-001 — Infrastructure Repair</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest">Case ID: REC-001 — Infrastructure Repair</span>
                     </div>
                 </div>
 
                 {/* Feedback Form Card */}
-                <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-8 space-y-10">
+                <form onSubmit={handleSubmit} className="glass-card rounded-[2.5rem] p-10 space-y-12 border-white/5 shadow-2xl shadow-cyan-500/5">
                     {/* 1. Star Rating */}
                     <section>
                         <h2 className="text-lg font-bold mb-4">Overall Satisfaction</h2>

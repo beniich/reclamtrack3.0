@@ -57,53 +57,54 @@ export default function LeavePage() {
     }
 
     return (
-        <div className="p-6 space-y-6 bg-background-light dark:bg-background-dark min-h-screen font-display">
+        <div className="p-6 space-y-8 bg-brand-midnight min-h-screen font-display selection:bg-cyan-500 selection:text-white">
+            <div className="absolute top-0 left-0 w-full h-full bg-cyan-500/5 blur-[120px] -z-10 pointer-events-none"></div>
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                        <Calendar className="text-primary w-7 h-7" />
-                        Gestion des Congés
+                    <h1 className="text-3xl font-black text-white uppercase italic tracking-tighter flex items-center gap-3">
+                        <Calendar className="text-cyan-400 w-8 h-8" />
+                        Gestion des Absences
                     </h1>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
-                        Suivez et validez les demandes d'absence de vos équipes.
+                    <p className="text-slate-500 uppercase tracking-[0.2em] text-[10px] mt-1 font-black ml-11">
+                        PLANIFICATION & VALIDATION DES CONGÉS
                     </p>
                 </div>
-                <button className="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow-lg shadow-primary/20 transition-all flex items-center gap-2">
+                <button className="bg-brand-orange hover:brightness-110 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-orange-500/20 transition-all flex items-center gap-3">
                     <Plus className="w-4 h-4" />
-                    Nouvelle Demande
+                    Déposer une Demande
                 </button>
             </div>
 
             {/* Stats Overview */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {[
-                    { label: 'En attente', count: leaves.filter(l => l.status === 'Pending').length, color: 'text-amber-500', bg: 'bg-amber-500/10', icon: Clock },
-                    { label: 'Approuvés', count: leaves.filter(l => l.status === 'Approved').length, color: 'text-emerald-500', bg: 'bg-emerald-500/10', icon: CheckCircle },
-                    { label: 'Refusés', count: leaves.filter(l => l.status === 'Declined').length, color: 'text-red-500', bg: 'bg-red-500/10', icon: XCircle },
-                    { label: 'Total', count: leaves.length, color: 'text-blue-500', bg: 'bg-blue-500/10', icon: Calendar },
+                    { label: 'En attente', count: leaves.filter(l => l.status === 'Pending').length, color: 'text-amber-400', bg: 'bg-amber-400/10', icon: Clock },
+                    { label: 'Approuvés', count: leaves.filter(l => l.status === 'Approved').length, color: 'text-emerald-400', bg: 'bg-emerald-400/10', icon: CheckCircle },
+                    { label: 'Refusés', count: leaves.filter(l => l.status === 'Declined').length, color: 'text-red-400', bg: 'bg-red-400/10', icon: XCircle },
+                    { label: 'Total', count: leaves.length, color: 'text-cyan-400', bg: 'bg-cyan-400/10', icon: Calendar },
                 ].map((stat, i) => (
-                    <div key={i} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl shadow-sm flex items-center gap-4">
-                        <div className={`p-2 rounded-lg ${stat.bg}`}>
-                            <stat.icon className={`w-5 h-5 ${stat.color}`} />
+                    <div key={i} className="glass-card p-6 rounded-2xl flex items-center gap-5">
+                        <div className={`p-3 rounded-xl ${stat.bg}`}>
+                            <stat.icon className={`w-6 h-6 ${stat.color}`} />
                         </div>
                         <div>
-                            <p className="text-2xl font-bold text-slate-900 dark:text-white">{stat.count}</p>
-                            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{stat.label}</p>
+                            <p className="text-3xl font-black text-white italic tracking-tighter">{stat.count}</p>
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{stat.label}</p>
                         </div>
                     </div>
                 ))}
             </div>
 
             {/* Leave List */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden">
-                <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between gap-4">
+            <div className="glass-card rounded-3xl overflow-hidden">
+                <div className="p-6 border-b border-white/5 flex flex-col md:flex-row justify-between gap-4">
                     <div className="relative flex-1 group">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 w-4 h-4 group-focus-within:text-cyan-400 transition-colors" />
                         <input
                             type="text"
-                            placeholder="Rechercher par employé..."
-                            className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-sm outline-none focus:ring-2 focus:ring-primary/20"
+                            placeholder="FILTRER PAR EMPLOYÉ..."
+                            className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-[10px] font-bold tracking-widest text-white outline-none focus:ring-2 focus:ring-cyan-500/20 uppercase placeholder:text-slate-700"
                         />
                     </div>
                     <div className="flex gap-2">

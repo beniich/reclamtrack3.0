@@ -50,7 +50,7 @@ export default function AppLayout({
     }
 
     return (
-        <div className="flex flex-col min-h-screen bg-background">
+        <div className="flex flex-col min-h-screen bg-brand-midnight text-white">
             <Header />
             <main className="flex-1 container mx-auto px-4 py-8">
                 {children}

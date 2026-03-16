@@ -135,7 +135,7 @@ const ComplaintManagementSystem = () => {
     // Use defined functions to avoid unused warnings in prototype
     // This is a legacy file, keeping logic for reference
     if (typeof window !== 'undefined' && (window as any).debugLegacy) {
-        console.log('Legacy Debug:', { updateStatus, getStatusColor, getPriorityColor, assignTeam, handleSubmitComplaint, equipes, setEquipes, selectedMonth, naturesReclamation, debugHelpers });
+        console.log('Legacy Debug:', { handleSubmitComplaint, selectedMonth, naturesReclamation });
     }
 
     return (

@@ -1,8 +1,8 @@
 'use client'
 
 import { DashboardHeader } from '@/components/dashboard-v2/DashboardHeader'
+import { Filter, Plus, Search } from 'lucide-react'
 import { useState } from 'react'
-import { Plus, Filter, Search } from 'lucide-react'
 
 export default function MaterialWorkflowPage() {
     const [searchQuery, setSearchQuery] = useState('')

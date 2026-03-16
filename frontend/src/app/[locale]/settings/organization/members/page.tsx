@@ -1,19 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useAuthStore } from '@/store/authStore';
-import { useOrgStore } from '@/store/orgStore';
-import { organizationApi } from '@/lib/api';
+import { RoleGuard } from '@/components/security/RoleGuard';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
 import {
     Dialog,
     DialogContent,
@@ -23,6 +12,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { Input } from '@/components/ui/input';
 import {
     Select,
     SelectContent,
@@ -30,11 +20,20 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { toast } from 'react-hot-toast';
-import { Loader2, Plus, UserX, Shield, Mail } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { RoleGuard } from '@/components/security/RoleGuard';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+import { organizationApi } from '@/lib/api';
 import { Role } from '@/lib/rbac/permissions';
+import { useOrgStore } from '@/store/orgStore';
+import { Loader2, Plus, UserX } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 interface Member {
     id: string;
@@ -58,24 +57,24 @@ export default function MembersPage() {
     const [isInviting, setIsInviting] = useState(false);
     const [isInviteOpen, setIsInviteOpen] = useState(false);
 
-    useEffect(() => {
-        if (activeOrganization) {
-            fetchMembers();
-        }
-    }, [activeOrganization]);
-
-    const fetchMembers = async () => {
+    const fetchMembers = useCallback(async () => {
         if (!activeOrganization) return;
         setIsLoading(true);
         try {
             const response = await organizationApi.getMembers(activeOrganization._id);
             setMembers(response.data.data);
-        } catch (error) {
+        } catch {
             toast.error('Failed to load members');
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [activeOrganization]);
+
+    useEffect(() => {
+        if (activeOrganization) {
+            fetchMembers();
+        }
+    }, [activeOrganization, fetchMembers]);
 
     const handleInvite = async () => {
         if (!activeOrganization || !inviteEmail) return;
@@ -86,7 +85,9 @@ export default function MembersPage() {
             setInviteEmail('');
             setIsInviteOpen(false);
             fetchMembers();
-        } catch (error: any) {
+        } catch (err: unknown) {
+            const error = err as any;
+            console.error('Invite error:', error);
             toast.error(error.response?.data?.message || 'Failed to invite user');
         } finally {
             setIsInviting(false);
@@ -99,7 +100,7 @@ export default function MembersPage() {
             await organizationApi.updateMemberRole(activeOrganization._id, memberId, [newRole]);
             toast.success('Role updated');
             fetchMembers();
-        } catch (error) {
+        } catch {
             toast.error('Failed to update role');
         }
     };
@@ -110,7 +111,7 @@ export default function MembersPage() {
             await organizationApi.removeMember(activeOrganization._id, memberId);
             toast.success('Member removed');
             fetchMembers();
-        } catch (error) {
+        } catch {
             toast.error('Failed to remove member');
         }
     };

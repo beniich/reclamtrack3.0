@@ -67,8 +67,8 @@ export interface User {
 
 export interface Assignment {
     _id: string;
-    complaintId: string;
-    teamId: string;
+    complaintId: string | any;
+    teamId: string | any;
     assignedAt: string;
     status: 'affecté' | 'en cours' | 'terminé';
 }

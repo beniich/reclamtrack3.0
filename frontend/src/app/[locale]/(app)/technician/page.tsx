@@ -15,6 +15,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useAssignments } from '@/hooks/useAssignments';
 import useNotifications from '@/hooks/useNotifications';
 import api from '@/lib/api';
+import { Assignment } from '@/types';
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { useState } from 'react';
@@ -25,9 +26,9 @@ export default function TechnicianPage() {
     const { data: assignments, isLoading, refetch } = useAssignments();
 
     // Trouver la tâche active (en cours)
-    const activeTask = assignments?.find((a: any) => a.status === 'en cours');
+    const activeTask = assignments?.find((a: Assignment) => a.status === 'en cours');
     // Trouver les tâches à venir (affecté)
-    const upcomingTasks = assignments?.filter((a: any) => a.status === 'affecté') || [];
+    const upcomingTasks = assignments?.filter((a: Assignment) => a.status === 'affecté') || [];
 
     const [showClosureModal, setShowClosureModal] = useState(false);
     const [showCommentModal, setShowCommentModal] = useState(false);
@@ -45,7 +46,7 @@ export default function TechnicianPage() {
             setComment('');
             setShowCommentModal(false);
             refetch();
-        } catch (error) {
+        } catch {
             toast.error("Erreur lors de l'envoi du commentaire");
         } finally {
             setIsSubmitting(false);
@@ -57,7 +58,7 @@ export default function TechnicianPage() {
             await api.patch(`/assignments/${id}`, { status: newStatus });
             toast.success(`Statut mis à jour : ${newStatus}`);
             refetch();
-        } catch (error) {
+        } catch {
             toast.error("Erreur lors de la mise à jour");
         }
     };
@@ -80,7 +81,7 @@ export default function TechnicianPage() {
             setSignature(null);
             setClosureNote('');
             refetch();
-        } catch (error) {
+        } catch {
             toast.error("Erreur lors de la clôture");
         } finally {
             setIsSubmitting(false);
@@ -221,7 +222,7 @@ export default function TechnicianPage() {
                         interventions en attente
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {upcomingTasks.length > 0 ? upcomingTasks.map((task: any) => (
+                        {upcomingTasks.length > 0 ? upcomingTasks.map((task: Assignment) => (
                             <div key={task._id} className="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-primary/50 transition-colors">
                                 <div className="space-y-3">
                                     <div className="flex justify-between items-start">

@@ -1,6 +1,7 @@
 'use client';
 
 import { Feedback } from '@/lib/satisfaction-data';
+import { cn } from '@/lib/utils';
 
 export default function FeedbackCard({ feedback }: { feedback: Feedback }) {
     return (
@@ -28,10 +29,10 @@ export default function FeedbackCard({ feedback }: { feedback: Feedback }) {
                         {[...Array(5)].map((_, i) => (
                             <span
                                 key={i}
-                                className={`material-symbols-outlined text-sm filled-icon ${i < feedback.rating
-                                        ? "text-amber-400"
-                                        : "text-slate-300 dark:text-slate-600"
-                                    }`}
+                                className={cn(
+                                    "material-symbols-outlined text-sm filled-icon",
+                                    i < feedback.rating ? "text-amber-400" : "text-slate-300 dark:text-slate-600"
+                                )}
                             >
                                 star
                             </span>

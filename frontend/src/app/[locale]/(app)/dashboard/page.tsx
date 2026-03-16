@@ -36,10 +36,20 @@ import type { Complaint } from '@/types';
 
 import { useOrgStore } from '@/store/orgStore';
 
+interface DashboardStats {
+    totalComplaints: number;
+    activeComplaints: number;
+    resolvedToday: number;
+    activeTeams: number;
+    totalTeams?: number;
+    byStatus: Record<string, number>;
+    byCategory: Array<{ _id: string; count: number }>;
+}
+
 export default function DashboardPage() {
     const t = useTranslations('Dashboard');
     const { activeOrganization, isLoading: isOrgLoading } = useOrgStore();
-    const [stats, setStats] = useState<any>({
+    const [stats, setStats] = useState<DashboardStats>({
         totalComplaints: 0,
         activeComplaints: 0,
         resolvedToday: 0,
@@ -58,8 +68,8 @@ export default function DashboardPage() {
             try {
                 // Fetch stats and complaints in parallel
                 const [statsRes, complaintsRes] = await Promise.all([
-                    apiClient.get(`/dashboard?dateFilter=${dateFilter}`) as Promise<any>,
-                    apiClient.get(`/complaints?limit=3&dateFilter=${dateFilter}`) as Promise<any>
+                    apiClient.get(`/dashboard?dateFilter=${dateFilter}`) as Promise<DashboardStats>,
+                    apiClient.get(`/complaints?limit=3&dateFilter=${dateFilter}`) as Promise<{ data: Complaint[] }>
                 ]);
 
                 setStats(statsRes || {});
@@ -259,7 +269,7 @@ export default function DashboardPage() {
                         </div>
 
                         <div className="space-y-6">
-                            {(stats.byCategory && stats.byCategory.length > 0) ? stats.byCategory.slice(0, 3).map((cat: any, idx: number) => {
+                            {(stats.byCategory && stats.byCategory.length > 0) ? stats.byCategory.slice(0, 3).map((cat, idx: number) => {
                                 const icons = [Droplet, Lightbulb, Trash2];
                                 const colors = ['bg-blue-500', 'bg-amber-500', 'bg-emerald-500'];
                                 const percent = stats.totalComplaints > 0

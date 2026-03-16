@@ -1,6 +1,7 @@
 'use client';
 
 // Components
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function InfrastructureHeatmapPage() {
@@ -28,8 +29,8 @@ export default function InfrastructureHeatmapPage() {
                         <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
                         <input className="w-full pl-9 pr-4 py-1.5 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-primary" placeholder="Search districts..." type="text" />
                     </div>
-                    <div className="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-600">
-                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=2424eb&color=fff" alt="Profile" className="w-full h-full object-cover" />
+                    <div className="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-600 relative">
+                        <Image src="https://ui-avatars.com/api/?name=Admin+User&background=2424eb&color=fff" alt="Profile" fill className="object-cover" />
                     </div>
                 </div>
             </header>

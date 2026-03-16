@@ -1,6 +1,7 @@
 'use client';
 
 // Components
+import Image from 'next/image';
 import Link from 'next/link';
 
 // Mock Data
@@ -159,8 +160,8 @@ export default function SatisfactionDashboard() {
                             <div className="space-y-6">
                                 {mockReviews.map(review => (
                                     <div key={review.id} className="flex gap-4 p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all">
-                                        <div className="size-10 rounded-full overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700">
-                                            <img src={review.avatar} alt="Avatar" className="w-full h-full object-cover" />
+                                        <div className="size-10 rounded-full overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700 relative">
+                                            <Image src={review.avatar} alt="Avatar" fill className="object-cover" />
                                         </div>
                                         <div className="flex-1">
                                             <div className="flex justify-between items-start mb-1">

@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -57,7 +58,7 @@ export default function CitizenFeedbackPage() {
             <header className="w-full glass-nav border-b border-white/5 sticky top-0 z-50">
                 <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-3">
-                        <img src="/logo.jpg" alt="Logo" className="h-10 w-10 rounded-xl object-cover shadow-lg" />
+                        <Image src="/logo.jpg" alt="Logo" width={40} height={40} className="rounded-xl object-cover shadow-lg" />
                         <span className="text-xl font-black tracking-tighter uppercase italic">ReclamTrack</span>
                     </Link>
                     <div className="flex items-center gap-6">
@@ -65,8 +66,8 @@ export default function CitizenFeedbackPage() {
                             <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">Portal Home</Link>
                             <Link href="#" className="text-sm font-medium hover:text-primary transition-colors">Help Center</Link>
                         </nav>
-                        <div className="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center overflow-hidden">
-                            <img src="https://ui-avatars.com/api/?name=Citizen&background=2424eb&color=fff" alt="Profile" className="w-full h-full object-cover" />
+                        <div className="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center overflow-hidden relative">
+                            <Image src="https://ui-avatars.com/api/?name=Citizen&background=2424eb&color=fff" alt="Profile" fill className="object-cover" />
                         </div>
                     </div>
                 </div>
@@ -124,7 +125,10 @@ export default function CitizenFeedbackPage() {
                         <h2 className="text-lg font-bold mb-4">Satisfaction Criteria</h2>
                         <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">Which aspects of the service met your expectations?</p>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <label className={`flex items-center p-4 rounded-lg border cursor-pointer transition-colors group ${criteria.punctuality ? 'border-primary bg-primary/5' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800'}`}>
+                            <label className={cn(
+                                "flex items-center p-4 rounded-lg border cursor-pointer transition-colors group",
+                                criteria.punctuality ? "border-primary bg-primary/5" : "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
+                            )}>
                                 <input
                                     checked={criteria.punctuality}
                                     onChange={() => handleCriteriaChange('punctuality')}
@@ -133,7 +137,10 @@ export default function CitizenFeedbackPage() {
                                 />
                                 <span className="text-sm font-medium">Punctuality of the team</span>
                             </label>
-                            <label className={`flex items-center p-4 rounded-lg border cursor-pointer transition-colors group ${criteria.professionalism ? 'border-primary bg-primary/5' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800'}`}>
+                            <label className={cn(
+                                "flex items-center p-4 rounded-lg border cursor-pointer transition-colors group",
+                                criteria.professionalism ? "border-primary bg-primary/5" : "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
+                            )}>
                                 <input
                                     checked={criteria.professionalism}
                                     onChange={() => handleCriteriaChange('professionalism')}
@@ -142,7 +149,10 @@ export default function CitizenFeedbackPage() {
                                 />
                                 <span className="text-sm font-medium">Professionalism of staff</span>
                             </label>
-                            <label className={`flex items-center p-4 rounded-lg border cursor-pointer transition-colors group ${criteria.quality ? 'border-primary bg-primary/5' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800'}`}>
+                            <label className={cn(
+                                "flex items-center p-4 rounded-lg border cursor-pointer transition-colors group",
+                                criteria.quality ? "border-primary bg-primary/5" : "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
+                            )}>
                                 <input
                                     checked={criteria.quality}
                                     onChange={() => handleCriteriaChange('quality')}
@@ -151,7 +161,10 @@ export default function CitizenFeedbackPage() {
                                 />
                                 <span className="text-sm font-medium">Quality of Repair</span>
                             </label>
-                            <label className={`flex items-center p-4 rounded-lg border cursor-pointer transition-colors group ${criteria.cleanup ? 'border-primary bg-primary/5' : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800'}`}>
+                            <label className={cn(
+                                "flex items-center p-4 rounded-lg border cursor-pointer transition-colors group",
+                                criteria.cleanup ? "border-primary bg-primary/5" : "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
+                            )}>
                                 <input
                                     checked={criteria.cleanup}
                                     onChange={() => handleCriteriaChange('cleanup')}
@@ -197,8 +210,10 @@ export default function CitizenFeedbackPage() {
                         <button
                             type="submit"
                             disabled={rating === 0}
-                            className={`w-full text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2 ${rating === 0 ? 'bg-slate-300 cursor-not-allowed' : 'bg-primary hover:bg-primary/90'
-                                }`}
+                            className={cn(
+                                "w-full text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2",
+                                rating === 0 ? "bg-slate-300 cursor-not-allowed" : "bg-primary hover:bg-primary/90"
+                            )}
                         >
                             <span>Submit Feedback</span>
                             <span className="material-symbols-outlined">send</span>

@@ -1,14 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import KPICard from '@/components/feedback/satisfaction/KPICard';
-import TrendChart from '@/components/feedback/satisfaction/TrendChart';
 import FeedbackList from '@/components/feedback/satisfaction/FeedbackList';
-import TopDepartments from '@/components/feedback/satisfaction/TopDepartments';
-import SentimentKeywords from '@/components/feedback/satisfaction/SentimentKeywords';
+import KPICard from '@/components/feedback/satisfaction/KPICard';
 import ResolutionEfficiency from '@/components/feedback/satisfaction/ResolutionEfficiency';
+import SentimentKeywords from '@/components/feedback/satisfaction/SentimentKeywords';
+import TopDepartments from '@/components/feedback/satisfaction/TopDepartments';
+import TrendChart from '@/components/feedback/satisfaction/TrendChart';
 import { useSatisfactionData } from '@/hooks/useSatisfaction';
-import { Search, Bell, Download, Loader2 } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Bell, Download, Loader2, Search } from 'lucide-react';
+import { useState } from 'react';
 
 export default function SatisfactionDashboardPage() {
     const { data, isLoading, error } = useSatisfactionData();
@@ -53,7 +54,10 @@ export default function SatisfactionDashboardPage() {
                         <h2 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white">
                             Satisfaction Dashboard
                         </h2>
-                        <span className="px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 ring-1 ring-emerald-200 dark:ring-emerald-500/20">
+                        <span className={cn(
+                            "px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 ring-1",
+                            "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 ring-emerald-200 dark:ring-emerald-500/20"
+                        )}>
                             <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                             Live Data
                         </span>

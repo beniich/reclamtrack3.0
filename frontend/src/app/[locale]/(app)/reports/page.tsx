@@ -2,6 +2,8 @@
 
 import { usePerformanceStats, useSatisfactionStats } from '@/hooks/useAnalytics';
 import api from '@/lib/api';
+import { cn } from '@/lib/utils';
+import { Complaint } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import { saveAs } from 'file-saver';
 import { jsPDF } from 'jspdf';
@@ -54,7 +56,7 @@ export default function ReportsPage() {
         }
     });
 
-    const complaints = response as any[] || [];
+    const complaints = (response as { data: Complaint[] })?.data || [];
 
     // Handlers
     const handleGenerate = async () => {
@@ -84,7 +86,7 @@ export default function ReportsPage() {
 
     const exportCSV = () => {
         const headers = ['Numéro', 'Titre', 'Catégorie', 'Priorité', 'Statut', 'Date'];
-        const rows = complaints.map((c: any) => [
+        const rows = complaints.map((c) => [
             c.number,
             `"${c.title}"`,
             c.category,
@@ -99,7 +101,7 @@ export default function ReportsPage() {
     };
 
     const exportExcel = () => {
-        const worksheet = XLSX.utils.json_to_sheet(complaints.map((c: any) => ({
+        const worksheet = XLSX.utils.json_to_sheet(complaints.map((c) => ({
             Numero: c.number,
             Titre: c.title,
             Categorie: c.category,
@@ -117,7 +119,7 @@ export default function ReportsPage() {
         doc.text("Rapport des Réclamations - ReclamTrack", 14, 15);
 
         const tableColumn = ["Numéro", "Titre", "Catégorie", "Priorité", "Statut", "Date"];
-        const tableRows = complaints.map((c: any) => [
+        const tableRows = complaints.map((c) => [
             c.number,
             c.title,
             c.category,
@@ -239,7 +241,16 @@ export default function ReportsPage() {
                                         <label className="text-sm font-semibold text-slate-700 mb-2 block">Report Frequency</label>
                                         <div className="grid grid-cols-3 gap-2 bg-slate-100 p-1 rounded-lg">
                                             {(['MONTHLY', 'ANNUAL', 'CUSTOM'] as const).map(f => (
-                                                <button key={f} onClick={() => setFrequency(f)} className={`py-2 text-xs font-bold rounded-md transition-all ${frequency === f ? 'bg-white text-primary shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>{f}</button>
+                                                <button
+                                                    key={f}
+                                                    onClick={() => setFrequency(f)}
+                                                    className={cn(
+                                                        "py-2 text-xs font-bold rounded-md transition-all",
+                                                        frequency === f ? "bg-white text-primary shadow-sm" : "text-slate-500 hover:text-slate-700"
+                                                    )}
+                                                >
+                                                    {f}
+                                                </button>
                                             ))}
                                         </div>
                                     </div>
@@ -248,15 +259,15 @@ export default function ReportsPage() {
                                     <div>
                                         <label className="text-sm font-semibold text-slate-700 mb-2 block">Export Format</label>
                                         <div className="flex gap-2">
-                                            <button onClick={() => setSelectedFormat('PDF')} className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all ${selectedFormat === 'PDF' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500'}`}>
+                                            <button onClick={() => setSelectedFormat('PDF')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'PDF' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
                                                 <span className="material-symbols-outlined text-[24px]">picture_as_pdf</span>
                                                 <span className="text-[10px] font-black uppercase">PDF</span>
                                             </button>
-                                            <button onClick={() => setSelectedFormat('EXCEL')} className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all ${selectedFormat === 'EXCEL' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500'}`}>
+                                            <button onClick={() => setSelectedFormat('EXCEL')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'EXCEL' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
                                                 <span className="material-symbols-outlined text-[24px]">table_view</span>
                                                 <span className="text-[10px] font-black uppercase">Excel</span>
                                             </button>
-                                            <button onClick={() => setSelectedFormat('CSV')} className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all ${selectedFormat === 'CSV' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500'}`}>
+                                            <button onClick={() => setSelectedFormat('CSV')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'CSV' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
                                                 <span className="material-symbols-outlined text-[24px]">csv</span>
                                                 <span className="text-[10px] font-black uppercase">CSV</span>
                                             </button>
@@ -278,7 +289,7 @@ export default function ReportsPage() {
                                 <h2 className="text-slate-900 text-xl font-bold mb-6">Recent Feedback</h2>
                                 <div className="space-y-4">
                                     {satisfaction?.recentFeedback?.length ? (
-                                        satisfaction.recentFeedback.map((feedback: any) => (
+                                        satisfaction.recentFeedback.map((feedback: { id: string; rating: number; date: string; comment: string; category: string }) => (
                                             <div key={feedback.id} className="p-4 bg-slate-50 rounded-lg border border-slate-100">
                                                 <div className="flex justify-between items-start mb-2">
                                                     <div className="flex items-center gap-1 text-amber-500">

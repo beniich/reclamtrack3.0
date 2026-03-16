@@ -68,9 +68,8 @@ export default function LoginPage() {
             <div className="absolute top-0 right-0 w-full h-full bg-cyan-500/5 blur-[120px] -z-10 pointer-events-none"></div>
 
             {/* Logo / Branding Header */}
-            <div className="mb-8 flex flex-col items-center gap-4">
                 <img
-                    src="/logo.jpg"
+                    src="/logo.png"
                     alt="ReclamTrack Logo"
                     className="h-20 w-20 rounded-2xl object-cover shadow-2xl shadow-cyan-500/30"
                 />

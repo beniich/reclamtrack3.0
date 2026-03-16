@@ -336,4 +336,8 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  /* Material Symbols Fill Utility */
+  .symbol-fill {
+    font-variation-settings: 'FILL' 1;
+  }
 }

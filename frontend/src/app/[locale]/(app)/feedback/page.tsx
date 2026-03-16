@@ -33,16 +33,17 @@ export default function CitizenFeedbackPage() {
 
     if (submitted) {
         return (
-            <div className="min-h-screen bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 flex flex-col items-center justify-center p-6 text-center">
-                <div className="w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mb-6 animate-bounce">
-                    <span className="material-symbols-outlined text-6xl text-green-600 dark:text-green-400">check_circle</span>
+            <div className="min-h-screen bg-brand-midnight font-display text-white flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-full h-full bg-cyan-500/5 blur-[120px] -z-10 pointer-events-none"></div>
+                <div className="w-24 h-24 bg-emerald-500/20 rounded-full flex items-center justify-center mb-6 animate-bounce border border-emerald-500/20">
+                    <span className="material-symbols-outlined text-6xl text-emerald-400">check_circle</span>
                 </div>
-                <h1 className="text-3xl font-black tracking-tight mb-4">Thank You!</h1>
-                <p className="text-slate-500 dark:text-slate-400 max-w-md mb-8">
-                    Your feedback has been successfully submitted. We appreciate your input as it helps us improve our municipal services for everyone.
+                <h1 className="text-3xl font-black tracking-tighter uppercase italic mb-4">Merci !</h1>
+                <p className="text-slate-500 uppercase tracking-widest text-[10px] font-black max-w-md mb-8">
+                    Votre avis a été enregistré avec succès. Nous apprécions votre contribution à l'amélioration de nos services.
                 </p>
-                <Link href="/" className="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
-                    Return Home
+                <Link href="/" className="px-8 py-4 bg-brand-orange text-white rounded-2xl font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-xl shadow-orange-500/20">
+                    Retour au Portail
                 </Link>
             </div>
         );
@@ -88,21 +89,23 @@ export default function CitizenFeedbackPage() {
                         <h2 className="text-lg font-bold mb-4">Overall Satisfaction</h2>
                         <div className="flex items-center gap-2">
                             {[1, 2, 3, 4, 5].map((star) => (
-                                <button
-                                    key={star}
-                                    type="button"
-                                    className="group focus:outline-none transition-transform active:scale-95"
-                                    onMouseEnter={() => setHoverRating(star)}
-                                    onMouseLeave={() => setHoverRating(0)}
-                                    onClick={() => setRating(star)}
-                                >
-                                    <span className={`material-symbols-outlined text-4xl transition-colors ${star <= (hoverRating || rating)
-                                            ? 'text-primary'
-                                            : 'text-slate-300 dark:text-slate-700'
-                                        }`} style={{ fontVariationSettings: `'FILL' ${star <= (hoverRating || rating) ? 1 : 0}` }}>
-                                        star
-                                    </span>
-                                </button>
+                                    <button
+                                        key={star}
+                                        type="button"
+                                        title={`Voter ${star} étoiles`}
+                                        className="group focus:outline-none transition-transform active:scale-95"
+                                        onMouseEnter={() => setHoverRating(star)}
+                                        onMouseLeave={() => setHoverRating(0)}
+                                        onClick={() => setRating(star)}
+                                    >
+                                        <span className={cn(
+                                            "material-symbols-outlined text-4xl transition-colors grayscale-[0.5] group-hover:grayscale-0",
+                                            star <= (hoverRating || rating) ? 'text-amber-400' : 'text-slate-700'
+                                        )}
+                                        style={{ fontVariationSettings: `'FILL' ${star <= (hoverRating || rating) ? 1 : 0}` }}>
+                                            star
+                                        </span>
+                                    </button>
                             ))}
                             <span className="ml-4 text-sm font-semibold text-primary">
                                 {rating === 1 && 'Poor'}

@@ -44,35 +44,35 @@ export function StatsCard({
     return (
         <div
             className={cn(
-                "bg-white dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1",
+                "glass-card rounded-[2rem] p-6 border border-white/5 shadow-xl transition-all duration-500 hover:shadow-cyan-500/10 hover:-translate-y-1 group",
                 className
             )}
             style={style}
         >
-            <div className="flex items-center gap-4">
-                <div className={cn('p-3 rounded-lg border', colorVariants[color])}>
+            <div className="flex items-center gap-5">
+                <div className={cn('p-4 rounded-2xl border transition-transform duration-500 group-hover:scale-110 shadow-lg', colorVariants[color])}>
                     <Icon className="w-6 h-6" />
                 </div>
                 <div className="flex-1 overflow-hidden">
-                    <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1 truncate">
+                    <p className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-1 truncate">
                         {title}
                     </p>
                     <div className="flex items-baseline gap-2">
-                        <p className="text-2xl font-bold text-slate-900 dark:text-white">{value}</p>
+                        <p className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter leading-none">{value}</p>
                         {subtitle && (
-                            <span className="text-xs text-slate-500 dark:text-slate-400 truncate">{subtitle}</span>
+                            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-500 uppercase tracking-widest truncate">{subtitle}</span>
                         )}
                     </div>
                     {trend && (
-                        <div className="flex items-center gap-1 mt-1">
+                        <div className="flex items-center gap-2 mt-2">
                             <span className={cn(
-                                'text-xs font-bold flex items-center gap-0.5',
-                                trend.isPositive ? trendColors.positive : trendColors.negative
+                                'text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-0.5 uppercase tracking-widest',
+                                trend.isPositive ? 'bg-emerald-500/10 text-emerald-500' : 'bg-rose-500/10 text-rose-500'
                             )}>
                                 <span>{trend.isPositive ? '↑' : '↓'}</span>
                                 <span>{trend.value}</span>
                             </span>
-                            <span className="text-[10px] text-slate-400">vs mois dernier</span>
+                            <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest opacity-60">Performance</span>
                         </div>
                     )}
                 </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { LoadingSpinner } from '@/components/LoadingSpinner';
-import { leaveApi, staffApi } from '@/lib/api';
+import { leaveApi } from '@/lib/api';
 import { useOrgStore } from '@/store/orgStore';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
@@ -11,7 +11,6 @@ import { toast } from 'react-hot-toast';
 
 export default function LeavePage() {
     const [leaves, setLeaves] = useState<any[]>([]);
-    const [staff, setStaff] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const { activeOrganization, isLoading: isOrgLoading } = useOrgStore();
 
@@ -19,12 +18,10 @@ export default function LeavePage() {
         const fetchData = async () => {
             if (!activeOrganization) return;
             try {
-                const [leavesData, staffData] = await Promise.all([
-                    leaveApi.getAll(),
-                    staffApi.getAll()
+                const [leavesData] = await Promise.all([
+                    leaveApi.getAll()
                 ]);
                 setLeaves(leavesData);
-                setStaff(staffData);
             } catch (error) {
                 console.error('Error fetching leave data:', error);
                 toast.error('Impossible de charger les données de congés');
@@ -44,6 +41,7 @@ export default function LeavePage() {
             setLeaves(prev => prev.map(l => l._id === id ? { ...l, status } : l));
             toast.success(`Congé ${status === 'Approved' ? 'approuvé' : 'refusé'}`);
         } catch (error) {
+            console.error('Error updating status:', error);
             toast.error('Erreur lors de la mise à jour du statut');
         }
     };
@@ -180,19 +178,24 @@ export default function LeavePage() {
                                                 <div className="flex justify-end gap-2">
                                                     <button
                                                         onClick={() => handleStatusUpdate(leave._id, 'Approved')}
+                                                        title="Approuver la demande"
                                                         className="size-8 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 hover:bg-emerald-100 rounded-lg flex items-center justify-center transition-colors"
                                                     >
                                                         <CheckCircle className="w-4 h-4" />
                                                     </button>
                                                     <button
                                                         onClick={() => handleStatusUpdate(leave._id, 'Declined')}
+                                                        title="Refuser la demande"
                                                         className="size-8 bg-red-50 dark:bg-red-900/20 text-red-600 hover:bg-red-100 rounded-lg flex items-center justify-center transition-colors"
                                                     >
                                                         <XCircle className="w-4 h-4" />
                                                     </button>
                                                 </div>
                                             ) : (
-                                                <button className="text-slate-400 hover:text-primary transition-colors">
+                                                <button
+                                                    title="Détails de la demande"
+                                                    className="text-slate-400 hover:text-primary transition-colors"
+                                                >
                                                     <AlertCircle className="w-4 h-4" />
                                                 </button>
                                             )}

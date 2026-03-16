@@ -110,28 +110,31 @@ export default function DashboardPage() {
     ];
 
     return (
-        <div className="space-y-10 animate-in fade-in duration-700">
+        <div className="p-6 space-y-10 bg-brand-midnight min-h-screen font-display selection:bg-cyan-500 selection:text-white relative overflow-hidden">
+            {/* Ambient glow */}
+            <div className="absolute top-0 right-0 w-full h-full bg-cyan-500/5 blur-[120px] -z-10 pointer-events-none"></div>
+
             {/* Header Section */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
                 <div>
                     <div className="flex items-center gap-2 mb-2">
-                        <Activity className="w-5 h-5 text-primary animate-pulse" />
-                        <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Live Overview</span>
+                        <Activity className="w-5 h-5 text-cyan-400 animate-pulse" />
+                        <span className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.3em]">Operational Dashboard</span>
                     </div>
-                    <h2 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight uppercase italic leading-none">
-                        {t('title').split(' ')[0]} <span className="text-primary italic">{t('title').split(' ').slice(1).join(' ')}</span>
-                    </h2>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm font-medium mt-2 max-w-2xl">
-                        {t('subtitle')}
+                    <h1 className="text-3xl font-black text-white uppercase italic tracking-tighter leading-none">
+                        {t('title').split(' ')[0]} <span className="text-cyan-400 italic">{t('title').split(' ').slice(1).join(' ')}</span>
+                    </h1>
+                    <p className="text-slate-500 uppercase tracking-[0.2em] text-[10px] mt-2 font-black ml-1">
+                        CENTRE DE COMMANDE DES INTERVENTIONS TECHNIQUES
                     </p>
                 </div>
 
                 <div className="flex items-center gap-3">
                     <Select value={dateFilter} onValueChange={setDateFilter}>
-                        <SelectTrigger className="w-[180px] bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-2xl h-[52px]">
+                        <SelectTrigger className="w-[180px] bg-white/5 border-white/10 rounded-2xl h-[52px] text-white text-[10px] font-black uppercase tracking-widest">
                             <SelectValue placeholder="Filtrer" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="bg-brand-midnight border-white/10 text-white">
                             <SelectItem value="today">Aujourd'hui</SelectItem>
                             <SelectItem value="7days">7 derniers jours</SelectItem>
                             <SelectItem value="30days">30 derniers jours</SelectItem>
@@ -139,11 +142,8 @@ export default function DashboardPage() {
                             <SelectItem value="all">Tout le temps</SelectItem>
                         </SelectContent>
                     </Select>
-                    <div className="hidden lg:flex flex-col items-end mr-4">
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">{t('lastUpdate')}</span>
-                        <span className="text-sm font-bold dark:text-slate-300">{t('justNow')}</span>
-                    </div>
-                    <button className="bg-primary text-white rounded-2xl px-6 py-4 text-xs font-black uppercase tracking-widest flex items-center gap-3 shadow-xl shadow-primary/25 hover:brightness-110 active:scale-95 transition-all">
+
+                    <button className="bg-brand-orange hover:brightness-110 text-white rounded-2xl px-6 py-4 text-[10px] font-black uppercase tracking-widest flex items-center gap-3 shadow-xl shadow-orange-500/20 active:scale-95 transition-all">
                         <FileText className="w-4 h-4" />
                         {t('generateReport')}
                     </button>

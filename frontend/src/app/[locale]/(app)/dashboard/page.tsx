@@ -2,6 +2,7 @@
 
 import React from 'react';
 
+import { cn } from '@/lib/utils';
 import {
     Activity,
     AlertCircle,
@@ -31,7 +32,6 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { apiClient } from '@/lib/api';
-import { cn } from '@/lib/utils';
 import type { Complaint } from '@/types';
 
 import { useOrgStore } from '@/store/orgStore';

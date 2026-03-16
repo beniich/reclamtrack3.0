@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -100,9 +101,8 @@ export default function CitizenFeedbackPage() {
                                     >
                                         <span className={cn(
                                             "material-symbols-outlined text-4xl transition-colors grayscale-[0.5] group-hover:grayscale-0",
-                                            star <= (hoverRating || rating) ? 'text-amber-400' : 'text-slate-700'
-                                        )}
-                                        style={{ fontVariationSettings: `'FILL' ${star <= (hoverRating || rating) ? 1 : 0}` }}>
+                                            star <= (hoverRating || rating) ? 'text-amber-400 symbol-fill' : 'text-slate-700'
+                                        )}>
                                             star
                                         </span>
                                     </button>

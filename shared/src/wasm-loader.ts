@@ -32,16 +32,16 @@ export async function initWasm(wasmInput: string | URL | Response | Request | Ar
   let instance: WebAssembly.Instance;
 
   if (wasmInput instanceof Response || wasmInput instanceof Promise) {
-     const result = await WebAssembly.instantiateStreaming(wasmInput as any, imports);
-     instance = result.instance;
+     const result: any = await WebAssembly.instantiateStreaming(wasmInput as any, imports);
+     instance = result.instance || result;
   } else if (wasmInput instanceof ArrayBuffer || wasmInput instanceof Uint8Array) {
-     const result = await WebAssembly.instantiate(wasmInput, imports);
-     instance = result.instance;
+     const result: any = await WebAssembly.instantiate(wasmInput, imports);
+     instance = result.instance || result;
   } else {
      // For Next.js/Webpack, we usually pass the result of a dynamic import or fetch
      const response = await fetch(wasmInput as any);
-     const result = await WebAssembly.instantiateStreaming(response, imports);
-     instance = result.instance;
+     const result: any = await WebAssembly.instantiateStreaming(response, imports);
+     instance = result.instance || result;
   }
 
   const exports = instance.exports as unknown as WasmExports;

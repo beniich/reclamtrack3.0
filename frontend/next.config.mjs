@@ -11,6 +11,14 @@ const nextConfig = {
     NEXT_PUBLIC_SOCKET_URL: process.env.NEXT_PUBLIC_SOCKET_URL
   },
 
+  webpack: (config) => {
+    config.experiments = {
+      ...config.experiments,
+      asyncWebAssembly: true
+    };
+    return config;
+  },
+
   // Performance optimizations
   poweredByHeader: false,
   compress: true,

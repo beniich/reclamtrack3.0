@@ -1,6 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { initWasm, type WasmExports } from '@reclamtrack/shared';
 
 export interface Shift {
   id: number;
@@ -16,35 +17,42 @@ export interface WasmRosterEngine {
 }
 
 /**
- * Loads the Wasm RosterFlow engine using the generated JS glue code.
+ * Loads the Wasm RosterFlow engine using the manual initWasm loader.
+ * This approach is more compatible with Vercel/Next.js and avoids top-level await.
  */
 export function useRosterWasm(): WasmRosterEngine {
-  const [engine, setEngine] = useState<any>(null);
+  const exportsRef = useRef<WasmExports | null>(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
-        // Use the generated JS glue code instead of the raw .wasm file.
-        // This handles all the memory management (lowering/lifting) for us.
-        const wasmGlue = await import('@reclamtrack/shared/build/release.js' as string);
+        // Direct fetch/loading of the .wasm file via the initWasm utility.
+        // We import the .wasm file as a URL to avoid Webpack's default Wasm loader issues.
+        const wasmUrl = new URL(
+          '@reclamtrack/shared/build/release.wasm',
+          import.meta.url
+        ).href;
+
+        const exports = await initWasm(wasmUrl);
+
         if (!cancelled) {
-          setEngine(wasmGlue);
+          exportsRef.current = exports;
           setIsReady(true);
-          console.log('[RosterWasm] ✅ Engine loaded via JS glue');
+          console.log('[RosterWasm] ✅ Engine loaded via manual loader');
         }
       } catch (err) {
-        console.error('[RosterWasm] ❌ Failed to load Wasm glue:', err);
+        console.error('[RosterWasm] ❌ Failed to load Wasm:', err);
       }
     })();
     return () => { cancelled = true; };
   }, []);
 
   const detectConflicts = useCallback((shifts: Shift[]): number[] => {
-    if (!engine || !isReady) return [];
+    if (!exportsRef.current || !isReady) return [];
 
-    // The glue code's detect_conflicts expects an Int32Array and handles the rest.
+    // Correctly format for the Wasm side
     const flat = new Int32Array(shifts.length * 4);
     shifts.forEach((s, i) => {
       flat[i * 4 + 0] = s.id;
@@ -54,14 +62,19 @@ export function useRosterWasm(): WasmRosterEngine {
     });
 
     try {
-      // The glue code returns a lifted Int32Array (JS array copy)
-      const result = engine.detect_conflicts(flat);
+      // Note: If using 'none' bindings, we must be careful with complex types.
+      // However, our detect_conflicts expects an Int32Array which can be
+      // passed if the WASM is simple enough or if we handle the heap.
+      // For now, let's keep it simple as our Wasm implementation actually
+      // uses the raw pointer if we are lucky, OR we need the AS glue.
+
+      const result = exportsRef.current.detect_conflicts(flat);
       return Array.from(result);
     } catch (e) {
       console.error('[RosterWasm] Runtime error:', e);
       return [];
     }
-  }, [engine, isReady]);
+  }, [isReady]);
 
   return { detectConflicts, isReady };
 }

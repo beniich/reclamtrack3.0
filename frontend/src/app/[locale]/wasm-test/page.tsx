@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { initWasm } from '@reclamtrack/shared';
 
 export default function WasmTestPage() {
   const [addResult, setAddResult] = useState<number | null>(null);
@@ -8,9 +9,14 @@ export default function WasmTestPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Dynamically importing the WASM module ensures Next.js/Webpack handles
-    // the fetch and compilation behind the scenes async.
-    import('@reclamtrack/shared/build/release.wasm')
+    // Correctly point to the Wasm file using a URL resolution
+    // to avoid Webpack's 'module not found env' errors.
+    const wasmUrl = new URL(
+      '@reclamtrack/shared/build/release.wasm',
+      import.meta.url
+    ).href;
+
+    initWasm(wasmUrl)
       .then((wasm) => {
         setAddResult(wasm.add_wasm(15, 27)); // Expected: 42
         setPriorityResult(wasm.calculate_priority_wasm(100, 5)); // Expected: 100 + (5 * 10) = 150
@@ -29,7 +35,7 @@ export default function WasmTestPage() {
 
       <p className="mb-6 text-gray-700">
         This page demonstrates executing Rust/AssemblyScript logic compiled to WebAssembly
-        and loaded asynchronously within Next.js.
+        and loaded via a manual `initWasm` loader in Next.js.
       </p>
 
       {error && (
@@ -55,7 +61,7 @@ export default function WasmTestPage() {
       </div>
 
       <div className="mt-8 pt-4 border-t text-sm text-gray-500">
-        Powered by Next.js <code className="bg-gray-100 px-1 rounded">asyncWebAssembly</code> and AssemblyScript.
+        Powered by Next.js and AssemblyScript (Manual Init).
       </div>
     </div>
   );

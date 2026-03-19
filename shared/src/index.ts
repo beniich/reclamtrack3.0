@@ -43,3 +43,6 @@ export enum ComplaintStatus {
     CLOSED = 'fermée',
     REJECTED = 'rejetée'
 }
+
+export * from './wasm-loader';
+

@@ -14,12 +14,22 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { organizationsApi } from '@/lib/api';
 
 export default function OrgSelectPage() {
     const { organizations, fetchOrganizations, setActiveOrganization, isLoading } = useOrgStore();
     const { user } = useAuthStore();
     const router = useRouter();
+    const [isCreating, setIsCreating] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
+    const [newOrgName, setNewOrgName] = useState('');
+    const [newOrgSlug, setNewOrgSlug] = useState('');
 
     useEffect(() => {
         if (user) {
@@ -32,6 +42,29 @@ export default function OrgSelectPage() {
     const handleSelect = (orgId: string) => {
         setActiveOrganization(orgId);
         router.push('/dashboard'); // or where they came from
+    };
+
+    const handleCreateOrganization = async () => {
+        if (!newOrgName || !newOrgSlug) {
+            toast.error('Veuillez remplir tous les champs');
+            return;
+        }
+
+        setIsCreating(true);
+        try {
+            await organizationsApi.create({ name: newOrgName, slug: newOrgSlug });
+            toast.success('Organisation créée avec succès');
+            setOpenDialog(false);
+            setNewOrgName('');
+            setNewOrgSlug('');
+            await fetchOrganizations();
+        } catch (error: any) {
+            console.error('Erreur lors de la création de l\'organisation:', error);
+            const message = error.response?.data?.message || error.response?.data?.error || 'Échec de la création de l\'organisation';
+            toast.error(message);
+        } finally {
+            setIsCreating(false);
+        }
     };
 
     if (isLoading && organizations.length === 0) {
@@ -113,18 +146,63 @@ export default function OrgSelectPage() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: organizations.length * 0.1 }}
                     >
-                        <Card className="border-2 border-dashed border-slate-300 hover:border-primary/50 hover:bg-slate-50/50 transition-all h-full flex flex-col justify-center items-center p-8 group cursor-pointer">
-                            <div className="p-4 bg-slate-100 rounded-full group-hover:bg-primary/10 transition-colors mb-4 border border-slate-200 group-hover:border-primary/30">
-                                <Plus className="h-8 w-8 text-slate-400 group-hover:text-primary" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-slate-900 mb-2">Nouvelle Organisation</h3>
-                            <p className="text-sm text-slate-500 text-center mb-6">
-                                Créez un nouvel espace de travail pour une autre structure.
-                            </p>
-                            <Button variant="outline" className="w-full">
-                                Créer
-                            </Button>
-                        </Card>
+                        <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+                            <DialogTrigger asChild>
+                                <Card className="border-2 border-dashed border-slate-300 hover:border-primary/50 hover:bg-slate-50/50 transition-all h-full flex flex-col justify-center items-center p-8 group cursor-pointer">
+                                    <div className="p-4 bg-slate-100 rounded-full group-hover:bg-primary/10 transition-colors mb-4 border border-slate-200 group-hover:border-primary/30">
+                                        <Plus className="h-8 w-8 text-slate-400 group-hover:text-primary" />
+                                    </div>
+                                    <h3 className="text-lg font-semibold text-slate-900 mb-2">Nouvelle Organisation</h3>
+                                    <p className="text-sm text-slate-500 text-center mb-6">
+                                        Créez un nouvel espace de travail pour une autre structure.
+                                    </p>
+                                    <Button variant="outline" className="w-full">
+                                        Créer
+                                    </Button>
+                                </Card>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[425px]">
+                                <DialogHeader>
+                                    <DialogTitle>Créer une organisation</DialogTitle>
+                                    <DialogDescription>
+                                        Configurez votre nouvel espace de travail. Cliquez sur créer une fois terminé.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="grid gap-4 py-4">
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="name">Nom</Label>
+                                        <Input
+                                            id="name"
+                                            value={newOrgName}
+                                            onChange={(e) => setNewOrgName(e.target.value)}
+                                            placeholder="Ex: Mon Entreprise"
+                                        />
+                                    </div>
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="slug">Slug (URL)</Label>
+                                        <Input
+                                            id="slug"
+                                            value={newOrgSlug}
+                                            onChange={(e) => setNewOrgSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))}
+                                            placeholder="Ex: mon-entreprise"
+                                        />
+                                        <p className="text-[10px] text-slate-500">Uniquement des minuscules, des chiffres et des tirets.</p>
+                                    </div>
+                                </div>
+                                <DialogFooter>
+                                    <Button disabled={isCreating} onClick={handleCreateOrganization}>
+                                        {isCreating ? (
+                                            <>
+                                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                                Création...
+                                            </>
+                                        ) : (
+                                            'Créer'
+                                        )}
+                                    </Button>
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
                     </motion.div>
                 </div>
 

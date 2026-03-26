@@ -83,7 +83,12 @@ export default function DashboardPage() {
         };
 
         if (!isOrgLoading) {
-            fetchData();
+            if (!activeOrganization) {
+                // Done loading orgs but none active => stop loading to show empty state instead of infinite skeleton
+                setIsLoading(false);
+            } else {
+                fetchData();
+            }
         }
     }, [activeOrganization, isOrgLoading, dateFilter]);
 

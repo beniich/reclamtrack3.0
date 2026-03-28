@@ -35,6 +35,7 @@ import { apiClient } from '@/lib/api';
 import type { Complaint } from '@/types';
 
 import { useOrgStore } from '@/store/orgStore';
+import { ServiceLifecycle } from '@/components/dashboard-v2/ServiceLifecycle';
 
 interface DashboardStats {
     totalComplaints: number;
@@ -170,6 +171,11 @@ export default function DashboardPage() {
                 {kpiStats.map((stat, i) => (
                     <StatsCard key={i} {...stat} className="animate-in slide-in-from-bottom-4 duration-500 fill-mode-both" style={{ animationDelay: `${i * 100}ms` }} />
                 ))}
+            </div>
+
+            {/* Service Lifecycle Mock Section */}
+            <div className="animate-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
+                <ServiceLifecycle />
             </div>
 
             {/* Main Content Grid */}

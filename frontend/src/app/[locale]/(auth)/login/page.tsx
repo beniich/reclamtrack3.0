@@ -42,6 +42,25 @@ export default function LoginPage() {
         }
     };
 
+    const handleQuickLogin = async (role: 'admin' | 'superadmin') => {
+        const credentials = role === 'admin' 
+            ? { email: 'admin@reclamtrack.com', pass: 'Admin123!' }
+            : { email: 'superadmin@reclamtrack.com', pass: 'SuperAdmin123!' };
+            
+        setLoading(true);
+        try {
+            await login(credentials.email, credentials.pass);
+            toast.success(`Connexion ${role} réussie !`);
+            setTimeout(() => {
+                router.push(`/${locale}/org-select`);
+            }, 100);
+        } catch (error: any) {
+            toast.error("Échec de l'accès rapide");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const handleGoogleSuccess = async (credentialResponse: { credential?: string }) => {
         try {
             if (credentialResponse.credential) {
@@ -190,6 +209,25 @@ export default function LoginPage() {
                                 </>
                             )}
                         </button>
+
+                        <div className="pt-4 grid grid-cols-2 gap-3">
+                            <button
+                                type="button"
+                                onClick={() => handleQuickLogin('admin')}
+                                className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-black uppercase tracking-widest hover:bg-cyan-500/20 transition-all"
+                            >
+                                <span className="material-symbols-outlined text-sm">shield_person</span>
+                                Admin Demo
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => handleQuickLogin('superadmin')}
+                                className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-black uppercase tracking-widest hover:bg-purple-500/20 transition-all"
+                            >
+                                <span className="material-symbols-outlined text-sm">monitoring</span>
+                                SuperAdmin
+                            </button>
+                        </div>
                     </form>
 
                     {/* Security Footer inside card */}

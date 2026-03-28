@@ -28,6 +28,7 @@ const SERVICES = {
     notifications: process.env.NOTIFICATION_SERVICE_URL || 'http://localhost:3004',
     analytics: process.env.ANALYTICS_SERVICE_URL || 'http://localhost:3005',
     inventory: process.env.INVENTORY_SERVICE_URL || 'http://localhost:3006',
+    ai: process.env.AI_SERVICE_URL || 'http://localhost:3007',
     legacy: process.env.LEGACY_BACKEND_URL || 'http://localhost:5009'
 };
 
@@ -38,6 +39,7 @@ app.use('/api/teams', createProxyMiddleware({ target: SERVICES.teams, changeOrig
 app.use('/api/notifications', createProxyMiddleware({ target: SERVICES.notifications, changeOrigin: true }));
 app.use('/api/analytics', createProxyMiddleware({ target: SERVICES.analytics, changeOrigin: true }));
 app.use('/api/inventory', createProxyMiddleware({ target: SERVICES.inventory, changeOrigin: true }));
+app.use('/api/ai', createProxyMiddleware({ target: SERVICES.ai, changeOrigin: true }));
 
 // Fallback to Legacy Backend
 app.use('/api', createProxyMiddleware({ target: SERVICES.legacy, changeOrigin: true }));

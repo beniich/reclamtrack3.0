@@ -105,6 +105,25 @@ services:
 
   # --- Microservices ---
 
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - ollama-data:/root/.ollama
+    ports:
+      - "11434:11434"
+
+  ai-service:
+    build: ./microservices/ai-service
+    ports: ["3007:3007"]
+    environment:
+      - PORT=3007
+      - OLLAMA_URL=http://ollama:11434
+      - KAFKA_BROKER=kafka:9092
+    depends_on:
+      - kafka
+      - ollama
+
   auth-service:
     build: ./microservices/auth-service
     ports: ["3001:3001"]
@@ -204,4 +223,4 @@ volumes:
   mongo-data:
   prometheus-data:
   grafana-data:
-
+  ollama-data:

@@ -4,6 +4,7 @@ import { NotificationCenter } from '@/components/notifications/NotificationCente
 import { useAuthStore } from '@/store/authStore';
 import { BarChart3, CalendarDays, ChevronDown, FileText, LayoutDashboard, LogOut, Map, Menu, MessagesSquare, Settings as SettingsIcon, Shield, Truck, Users, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -18,10 +19,12 @@ export default function Header() {
     return (
         <header className="h-16 border-b border-cyan-500/10 glass-nav px-6 flex items-center justify-between sticky top-0 z-50">
             <div className="flex items-center gap-4">
-        <Link href="/" className="flex items-center gap-3">
-                    <img
-                        src="/logo.jpg"
+                <Link href="/" className="flex items-center gap-3">
+                    <Image
+                        src="/logo.png"
                         alt="ReclamTrack Logo"
+                        width={40}
+                        height={40}
                         className="h-10 w-10 rounded-xl object-cover shadow-lg shadow-cyan-500/20"
                     />
                     <div className="flex flex-col">
@@ -97,13 +100,13 @@ export default function Header() {
                                             <span>Suivi Temps Réel</span>
                                         </div>
                                     </Link>
-                                    <Link href="/it-assets" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                    <Link href="/it-admin/assets" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                                         <div className="flex items-center gap-2">
                                             <LayoutDashboard className="text-sm w-4 h-4" />
                                             <span>IT Assets</span>
                                         </div>
                                     </Link>
-                                    <Link href="/it-helpdesk" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                    <Link href="/it-admin/tickets" className="block px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                                         <div className="flex items-center gap-2">
                                             <FileText className="text-sm w-4 h-4" />
                                             <span>IT Helpdesk</span>

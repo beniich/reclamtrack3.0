@@ -2,6 +2,7 @@
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import { AIAssistantWidget } from '@/components/AIAssistantWidget';
 import useNotifications from '@/hooks/useNotifications';
 import { useAuthStore } from '@/store/authStore';
 import { useOrgStore } from '@/store/orgStore';
@@ -98,6 +99,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
                 {children}
             </main>
             <Footer />
+            <AIAssistantWidget />
         </div>
     );
 }

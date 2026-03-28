@@ -1,6 +1,7 @@
 import { ApiResponse } from '@/types';
 import { API_ROUTES } from '@reclamtrack/shared';
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import { getMockDataForRoute } from './mockApi';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
 console.log('[API] Using Base URL:', API_BASE_URL);
@@ -53,6 +54,17 @@ class ApiClient {
                 return response;
             },
             (error: AxiosError<ApiResponse>) => {
+                const config = error.config;
+                // === DEMO MODE BYPASS ===
+                // If it's a Network Error (backend offline/Vercel) OR explicitly set to true
+                if (!error.response || process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+                    console.log(`[DEMO MODE] Intercepting failing request to ${config?.url}`);
+                    const mockData = getMockDataForRoute(config?.url || '', config?.method || 'get', config?.data);
+                    if (mockData !== undefined) {
+                        return Promise.resolve({ data: { success: true, data: mockData } });
+                    }
+                }
+
                 if (error.response) {
                     const status = error.response.status;
                     const data = error.response.data;

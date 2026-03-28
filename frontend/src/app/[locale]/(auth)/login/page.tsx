@@ -30,7 +30,7 @@ export default function LoginPage() {
 
             // Redirection avec locale pour garder le contexte i18n
             setTimeout(() => {
-                router.push(`/${locale}/org-select`);
+                router.push(`/${locale}/dashboard`);
             }, 100);
 
         } catch (error: any) {
@@ -52,7 +52,7 @@ export default function LoginPage() {
             await login(credentials.email, credentials.pass);
             toast.success(`Connexion ${role} réussie !`);
             setTimeout(() => {
-                router.push(`/${locale}/org-select`);
+                router.push(`/${locale}/dashboard`);
             }, 100);
         } catch (error: any) {
             toast.error("Échec de l'accès rapide");
@@ -67,7 +67,7 @@ export default function LoginPage() {
                 await googleLogin(credentialResponse.credential);
                 toast.success('Connexion Google réussie !');
                 setTimeout(() => {
-                    router.push(`/${locale}/org-select`);
+                    router.push(`/${locale}/dashboard`);
                 }, 100);
             }
         } catch (error: any) {

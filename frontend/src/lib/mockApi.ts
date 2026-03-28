@@ -24,14 +24,17 @@ export const getMockDataForRoute = (url: string, _method?: string, _requestData?
     }
 
     if (url.includes('/organizations')) {
-        return [
-            {
-                _id: 'mock-org-1',
-                name: 'ReclamTrack Enterprise (Demo)',
-                slug: 'reclamtrack-demo',
-                subscription: { plan: 'ENTERPRISE', status: 'ACTIVE' }
-            }
-        ];
+        return {
+            organizations: [
+                {
+                    _id: 'mock-org-1',
+                    name: 'ReclamTrack Enterprise (Demo)',
+                    slug: 'reclamtrack-demo',
+                    subscription: { plan: 'ENTERPRISE', status: 'ACTIVE' },
+                    membership: { roles: ['OWNER'] }
+                }
+            ]
+        };
     }
 
     // Analytics Dashboard Data

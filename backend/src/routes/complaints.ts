@@ -4,11 +4,15 @@ import { complaintController } from '../controllers/complaintController.js';
 import { authenticate, requireOrganization, requireRole } from '../middleware/security.js';
 import { upload } from '../middleware/upload.js';
 import { validator } from '../middleware/validator.js';
+import { complaintCreationLimiter, globalLimiter } from '../middleware/rateLimiters.js';
 
 const router = Router();
 
 // Apply authentication and organization context to all complaint routes
 router.use(authenticate, requireOrganization);
+
+// Apply a global rate limit to ALL operations below
+router.use(globalLimiter);
 
 // GET /api/complaints/stats - Must be before /:id route
 router.get('/stats', complaintController.getStats.bind(complaintController));
@@ -22,19 +26,20 @@ router.get('/:id', complaintController.getById.bind(complaintController));
 // POST /api/complaints
 router.post(
   '/',
+  complaintCreationLimiter,
   upload.array('photos', 5), // Handle up to 5 photos
   [
     // Step 1: Info
-    body('category').notEmpty().withMessage('Category is required'),
-    body('subcategory').notEmpty().withMessage('Subcategory is required'),
+    body('category').notEmpty().withMessage('Category is required').trim().escape(),
+    body('subcategory').notEmpty().withMessage('Subcategory is required').trim().escape(),
     body('priority').isIn(['low', 'medium', 'high', 'urgent']),
-    body('title').notEmpty(),
-    body('description').notEmpty(),
+    body('title').notEmpty().trim().escape(),
+    body('description').notEmpty().trim().escape(),
 
     // Step 2: Location
-    body('address').notEmpty(),
-    body('city').notEmpty(),
-    body('district').notEmpty(),
+    body('address').notEmpty().trim().escape(),
+    body('city').notEmpty().trim().escape(),
+    body('district').notEmpty().trim().escape(),
 
     // Step 4: Contact
     body('isAnonymous').optional().isBoolean(),
@@ -46,6 +51,7 @@ router.post(
 // PUT /api/complaints/:id
 router.put(
   '/:id',
+  requireRole(['ADMIN', 'OWNER', 'TECH_LEAD', 'AGENT']),
   [
     param('id').isMongoId(),
     body('status').optional().isIn(['nouvelle', 'en cours', 'résolue', 'fermée', 'rejetée']),
@@ -59,6 +65,7 @@ router.put(
 // DELETE /api/complaints/:id
 router.delete(
   '/:id',
+  requireRole(['ADMIN', 'OWNER']),
   [param('id').isMongoId()],
   validator,
   complaintController.delete.bind(complaintController)
@@ -79,7 +86,7 @@ router.post(
   requireRole(['ADMIN', 'OWNER', 'TECH_LEAD']),
   [
     param('id').isMongoId(),
-    body('rejectionReason').notEmpty().withMessage('Rejection reason is required'),
+    body('rejectionReason').notEmpty().withMessage('Rejection reason is required').trim().escape(),
   ],
   validator,
   complaintController.reject.bind(complaintController)

@@ -1,10 +1,31 @@
+export type ComplaintStatus = 'nouvelle' | 'en cours' | 'résolue' | 'fermée' | 'rejetée';
+export type Priority = 'low' | 'medium' | 'high' | 'urgent';
+
+export interface TimelineEvent {
+    _id?: string;
+    eventType: 'created' | 'assigned' | 'status_changed' | 'commented' | 'resolved' | 'closed' | 'rejected' | 'priority_changed';
+    message: string;
+    actorName?: string;
+    oldValue?: string;
+    newValue?: string;
+    createdAt: string;
+}
+
+export interface ComplaintComment {
+    _id?: string;
+    content: string;
+    authorName: string;
+    isInternal: boolean;
+    createdAt: string;
+}
+
 export interface Complaint {
     _id: string;
     number: string;
     // Step 1
     category: string;
     subcategory: string;
-    priority: 'low' | 'medium' | 'high' | 'urgent';
+    priority: Priority;
     title: string;
     description: string;
 
@@ -13,8 +34,7 @@ export interface Complaint {
     city: string;
     district: string;
     postalCode?: string;
-    latitude?: number;
-    longitude?: number;
+    location?: { latitude: number; longitude: number };
 
     // Step 3
     photos: string[];
@@ -29,15 +49,25 @@ export interface Complaint {
     phone?: string;
 
     // Workflow
-    status: 'nouvelle' | 'en cours' | 'résolue' | 'fermée' | 'rejetée';
-    assignedTeamId?: { _id: string; name: string }; // Populated
-    technicianId?: { _id: string; name: string; email: string }; // Populated
+    status: ComplaintStatus;
+    assignedTeamId?: { _id: string; name: string; status?: string };
+    technicianId?: { _id: string; name: string; email: string };
+    assignedAt?: string;
+
+    // SLA & lifecycle
+    slaDueDate?: string;
+    resolvedAt?: string;
+    closedAt?: string;
+    rejectedAt?: string;
+    resolutionTimeMs?: number;
+    slaBreached?: boolean;   // Computed by backend
+
+    // Rich data
+    timeline: TimelineEvent[];
+    comments: ComplaintComment[];
 
     createdAt: string;
     updatedAt: string;
-
-    // Legacy support (optional)
-    leakType?: string;
 }
 
 export interface Team {

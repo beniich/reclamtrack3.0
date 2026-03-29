@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 
-export default function InventoryPage({ params }: { params: { locale: string } }) {
-    redirect(`/${params.locale}/inventory/inventory`);
+export default async function InventoryPage({ params }: { params: Promise<{ locale: string }> }) {
+    const { locale } = await params;
+    redirect(`/${locale}/inventory/inventory`);
 }

@@ -51,38 +51,83 @@ const run = async () => {
               recipient: payload.email,
               type: 'EMAIL',
               subject: 'Bienvenue sur ReclamTrack',
-              content: 'Merci de votre inscription...',
+              content: 'Merci de votre inscription. Votre compte est actif.',
               relatedEntityId: payload.userId,
               relatedEntityType: 'User'
             });
           }
 
+          // ── COMPLAINT_CREATED → confirmation email au déclarant ──────────
           if (topic === 'complaint-events' && payload.type === 'COMPLAINT_CREATED') {
-            const complaintId = payload.data?.complaintId || payload.complaintId;
-            const title = payload.data?.title || payload.title;
-            const category = payload.data?.category || payload.category;
+            const { complaintId, number, category, priority, email } = payload;
+            console.log(`📧 COMPLAINT_CREATED [${number}] → confirmation to ${email || 'admin'}`);
 
-            console.log(`📧 SENDING COMPLAINT CONFIRMATION [${title}]`);
-            // Simulate processing error for testing DLQ if needed
-            // if (title.includes('FAIL')) throw new Error('Simulated Processing Error');
+            const slaMap: Record<string, string> = {
+              urgent: '4 heures', high: '24 heures', medium: '72 heures', low: '7 jours'
+            };
 
             await Notification.create({
-              recipient: 'admin@reclamtrack.com',
+              recipient: email || 'admin@reclamtrack.com',
               type: 'EMAIL',
-              subject: `Nouvelle Réclamation: ${title}`,
-              content: `Une nouvelle réclamation a été créée dans la catégorie ${category}`,
+              subject: `✅ Réclamation ${number} enregistrée`,
+              content: `Votre réclamation "${number}" (catégorie : ${category}) a bien été reçue.\n` +
+                       `Priorité : ${priority} — Délai de traitement SLA : ${slaMap[priority] ?? 'N/A'}.\n` +
+                       `Vous serez notifié à chaque mise à jour.`,
               relatedEntityId: complaintId,
               relatedEntityType: 'Complaint'
             });
           }
 
-          if (topic === 'complaint-events' && payload.type === 'COMPLAINT_STATUS_UPDATED') {
-            console.log(`📧 SENDING STATUS UPDATE [${payload.complaintId}] -> ${payload.newStatus}`);
+          // ── COMPLAINT_ASSIGNED → notif technicien ────────────────────────
+          if (topic === 'complaint-events' && payload.type === 'COMPLAINT_ASSIGNED') {
+            const { number, teamName, technicianName } = payload;
+            console.log(`📧 COMPLAINT_ASSIGNED [${number}] → team: ${teamName}`);
+
             await Notification.create({
-              recipient: 'user@example.com',
+              recipient: 'dispatcher@reclamtrack.com',
+              type: 'IN_APP',
+              subject: `Assignation : ${number}`,
+              content: `La réclamation ${number} a été assignée à ${teamName}${technicianName ? ` (technicien : ${technicianName})` : ''}.`,
+              relatedEntityId: payload.complaintId,
+              relatedEntityType: 'Complaint'
+            });
+          }
+
+          // ── COMPLAINT_STATUS_UPDATED → email déclarant ───────────────────
+          if (topic === 'complaint-events' && payload.type === 'COMPLAINT_STATUS_UPDATED') {
+            const { number, oldStatus, newStatus, email } = payload;
+            console.log(`📧 STATUS_UPDATED [${number}] ${oldStatus} → ${newStatus}`);
+
+            const statusLabels: Record<string, string> = {
+              'en cours': 'En cours de traitement',
+              'résolue':  'Résolue ✅',
+              'fermée':   'Clôturée',
+              'rejetée':  'Rejetée',
+            };
+
+            await Notification.create({
+              recipient: email || 'admin@reclamtrack.com',
               type: 'EMAIL',
-              subject: `Mise à jour Réclamation`,
-              content: `Votre réclamation est passée au statut : ${payload.newStatus}`,
+              subject: `Mise à jour réclamation ${number}`,
+              content: `Votre réclamation ${number} est désormais : ${statusLabels[newStatus] ?? newStatus}.`,
+              relatedEntityId: payload.complaintId,
+              relatedEntityType: 'Complaint'
+            });
+          }
+
+          // ── COMPLAINT_SLA_BREACH → alerte managers ───────────────────────
+          if (topic === 'complaint-events' && payload.type === 'COMPLAINT_SLA_BREACH') {
+            const { number, category, priority, overdueByMs } = payload;
+            const overdueH = Math.round((overdueByMs ?? 0) / 3_600_000);
+            console.warn(`🚨 SLA_BREACH [${number}] — ${overdueH}h overdue`);
+
+            await Notification.create({
+              recipient: 'manager@reclamtrack.com',
+              type: 'EMAIL',
+              subject: `🚨 SLA dépassé — Réclamation ${number}`,
+              content: `La réclamation ${number} (catégorie : ${category}, priorité : ${priority}) ` +
+                       `dépasse son délai SLA de ${overdueH} heure(s).\n` +
+                       `Une intervention immédiate est requise.`,
               relatedEntityId: payload.complaintId,
               relatedEntityType: 'Complaint'
             });

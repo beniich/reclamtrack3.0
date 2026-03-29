@@ -37,3 +37,14 @@ export const exportLimiter = rateLimit({
   windowMs: 60 * 1000,
   max: 30,
 });
+
+/** Strict limiter for creating complaints (prevent spam: 5 requêtes / 15 minutes) */
+export const complaintCreationLimiter = rateLimit({
+  ...baseLimitOptions,
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  handler: () => {
+    throw new AppError('Trop de réclamations créées récemment — réessayez plus tard', 429, 'RATE_LIMIT_EXCEEDED');
+  },
+});
+

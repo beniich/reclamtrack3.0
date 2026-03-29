@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Centre de Diagnostic Système - Dashboard</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'glass-bg': 'rgba(15, 15, 25, 0.7)',
+            'glass-border': 'rgba(255, 255, 255, 0.1)',
+            'ai-purple': '#a855f7',
+            'terminal-green': '#4ade80',
+            'status-online': '#22c55e',
+            'status-warning': '#eab308',
+            'status-error': '#ef4444',
+          },
+          backgroundImage: {
+            'space-gradient': 'radial-gradient(circle at center, #1e1b4b 0%, #020617 100%)',
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="global-effects">body {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAtwl9qhXO1P2wcsvzNGAvyHDJahMKd58bpmQ34eFeWf2k6VFj979mJj0tKsZUH8v2F1XjCjVwSBtdrC3sYedjh80bUILegxbUhKKUPkRbpVnrULJj8izEgJcoA_HZUfLh_xVfsQknJyRwz48bxZkQnNLglxJ6nikUA0XBNa-kwQ9Br0-djDh0KfPROw4d8glm8RVeIAgziwZzYb7Dj0PqjXiDBNCjtZF9S1OgGPo9EcgClDZNkrc7xfgal-th_qwqrkBM5hJcsivE);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: "Inter", system-ui, -apple-system, sans-serif
+    }
+.glass-panel {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1)
+    }
+.terminal-scrollbar::-webkit-scrollbar {
+    width: 4px
+    }
+.terminal-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2)
+    }
+.terminal-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px
+    }</style>
+<style data-purpose="animations">
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 0.4; }
+    }
+    .animate-pulse-soft {
+      animation: pulse-soft 3s infinite ease-in-out;
+    }
+    .hover-scale {
+      transition: transform 0.2s ease;
+    }
+    .hover-scale:hover {
+      transform: scale(1.02);
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 lg:p-8">
+<!-- BEGIN: Main Dashboard Container -->
+<main class="w-full max-w-7xl glass-panel rounded-3xl overflow-hidden shadow-2xl flex flex-col" data-purpose="dashboard-main-frame">
+<!-- BEGIN: Top Navigation Header -->
+<header class="flex items-center justify-between px-8 py-6 border-b border-glass-border">
+<div class="flex items-center space-x-3" data-purpose="branding">
+<div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center shadow-lg shadow-purple-500/20">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h1 class="text-white text-xl font-bold tracking-tight uppercase">Centre de Diagnostic Système</h1>
+</div>
+<nav class="hidden md:flex items-center space-x-8 text-gray-400 font-medium">
+<a class="hover:text-white transition-colors" href="#">ACCUEIL</a>
+<a class="hover:text-white transition-colors" href="#">ANALYSES</a>
+<a class="text-white bg-white/10 px-4 py-1.5 rounded-full border border-white/20" href="#">DIAGNOSTICS</a>
+<a class="hover:text-white transition-colors" href="#">PARAMÈTRES</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
+<svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</header>
+<!-- END: Top Navigation Header -->
+<!-- BEGIN: Dashboard Content Grid -->
+<div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 p-8 overflow-hidden">
+<!-- BEGIN: Left Column - Core AI Visualization -->
+<section class="lg:col-span-8 flex flex-col space-y-6">
+<div class="relative flex-1 glass-panel rounded-2xl border border-white/5 overflow-hidden group">
+<!-- Background Core Image -->
+<img alt="Cœur de l'IA" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700" src="https://lh3.googleusercontent.com/aida/ADBb0ugw46CqjvhYK8Ngz6EKVBkEWx0eHIDwy5kuJ1bkZxseilmZmipmEcEi6TXADYdbwj9_gKQJpWbkUE93CmiloQkg1jY5t9bbrZYPZ4zOceZju2Z2Lux56iAv53fHk8x6Jwqg6uNmiI2LEDQ-7GVjq06FNeb97oXQcBn_Ul9rkR0bX5UUnTW_6VbA0kez5t0ChR_Mqq0cTG0j4LhA9iqLUKW4OSicihTPa_y56R3VVo3raCB1z1m5MD-P5dE"/>
+<!-- Overlay Label -->
+<div class="absolute top-6 left-1/2 -translate-x-1/2">
+<h2 class="text-white/90 text-2xl font-bold tracking-widest uppercase">MOTEUR IA CENTRAL</h2>
+</div>
+<!-- BEGIN: Floating Stats Panel (Bottom Left) -->
+<div class="absolute bottom-6 left-6 w-64 glass-panel rounded-xl p-4 border border-white/10" data-purpose="metrics-panel">
+<div class="space-y-3">
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] text-gray-400 uppercase font-bold">
+<span>Charge CPU</span>
+<span class="text-white">78%</span>
+</div>
+<div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-blue-500 w-[78%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] text-gray-400 uppercase font-bold">
+<span>Mémoire : <span class="text-white">64.5 GB / 128 GB</span></span>
+</div>
+<div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-purple-500 w-[50%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] text-gray-400 uppercase font-bold">
+<span>I/O Réseau</span>
+<span class="text-white">1.2 GB/s</span>
+</div>
+<div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-cyan-500 w-[65%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] text-gray-400 uppercase font-bold">
+<span>Utilisation GPU</span>
+<span class="text-white">92%</span>
+</div>
+<div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-orange-500 w-[92%] animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- END: Floating Stats Panel -->
+</div>
+</section>
+<!-- END: Left Column -->
+<!-- BEGIN: Right Column - Status & Logs -->
+<section class="lg:col-span-4 flex flex-col space-y-6 h-full">
+<!-- Status Widgets -->
+<div class="space-y-3" data-purpose="service-status-list">
+<!-- Redis Status -->
+<div class="glass-panel border-l-4 border-status-online rounded-xl p-4 flex items-center justify-between hover-scale cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-status-online/20 flex items-center justify-center">
+<svg class="w-4 h-4 text-status-online" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"></path></svg>
+</div>
+<div>
+<p class="text-[10px] font-bold text-gray-400 uppercase">CACHE REDIS</p>
+<p class="text-sm font-semibold text-status-online uppercase">EN LIGNE <span class="text-[10px] text-gray-500 font-normal">(98ms)</span></p>
+</div>
+</div>
+<div class="bg-status-online/10 p-2 rounded-lg">
+<svg class="w-5 h-5 text-status-online" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Kafka Status -->
+<div class="glass-panel border-l-4 border-status-warning rounded-xl p-4 flex items-center justify-between hover-scale cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-status-warning/20 flex items-center justify-center">
+<svg class="w-4 h-4 text-status-warning" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
+</div>
+<div>
+<p class="text-[10px] font-bold text-gray-400 uppercase">FLUX KAFKA</p>
+<p class="text-sm font-semibold text-status-warning uppercase">STABLE <span class="text-[10px] text-gray-500 font-normal">(Rééquilibrage)</span></p>
+</div>
+</div>
+<div class="bg-status-warning/10 p-2 rounded-lg">
+<svg class="w-5 h-5 text-status-warning" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- MLFlow Status -->
+<div class="glass-panel border-l-4 border-status-error rounded-xl p-4 flex items-center justify-between hover-scale cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-status-error/20 flex items-center justify-center">
+<svg class="w-4 h-4 text-status-error" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L1 21h22L12 2zm1 14h-2v-2h2v2zm0-4h-2V8h2v4z"></path></svg>
+</div>
+<div>
+<p class="text-[10px] font-bold text-gray-400 uppercase">SERVEUR MLFLOW</p>
+<p class="text-sm font-semibold text-status-error uppercase">DÉGRADÉ <span class="text-[10px] text-gray-500 font-normal">(Latence haute)</span></p>
+</div>
+</div>
+<div class="bg-status-error/10 p-2 rounded-lg">
+<svg class="w-5 h-5 text-status-error" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+<!-- Terminal Logs Container -->
+<div class="flex-1 glass-panel rounded-2xl flex flex-col overflow-hidden min-h-[300px]" data-purpose="diagnostic-logs">
+<header class="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
+<h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">LOGS DIAGNOSTICS &amp; ALERTES</h3>
+<svg class="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 15l7-7 7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</header>
+<div class="flex-1 p-4 overflow-y-auto font-mono text-[11px] space-y-2 terminal-scrollbar" id="log-terminal">
+<div class="flex items-start">
+<span class="text-gray-500 mr-2">[14:32:05]</span>
+<p><span class="text-terminal-green font-bold">INFO:</span> Cœur IA optimisé pour le traitement par lots.</p>
+</div>
+<div class="flex items-start">
+<span class="text-gray-500 mr-2">[14:31:58]</span>
+<p><span class="text-status-warning font-bold">WARN:</span> Rééquilibrage de la partition Kafka 3.</p>
+</div>
+<div class="flex items-start">
+<span class="text-gray-500 mr-2">[14:31:45]</span>
+<p><span class="text-status-error font-bold">ERROR:</span> Timeout de récupération d'artefact MLflow.</p>
+</div>
+<div class="flex items-start">
+<span class="text-gray-500 mr-2">[14:31:30]</span>
+<p><span class="text-status-error font-bold bg-status-error/20 px-1">ALERT:</span> Anomalie détectée dans le flux de données 'V-9.0a'.</p>
+</div>
+<div class="flex items-start">
+<span class="text-gray-500 mr-2">[14:31:12]</span>
+<p><span class="text-terminal-green font-bold">INFO:</span> Augmentation du taux d'éviction du cache Redis.</p>
+</div>
+</div>
+<!-- Log Footer / Search -->
+<div class="p-3 border-t border-white/5 flex items-center space-x-2 bg-white/5">
+<div class="flex-1 relative">
+<input class="w-full bg-black/30 border-0 rounded-md text-[10px] text-gray-300 focus:ring-1 focus:ring-purple-500 placeholder:text-gray-600 pl-8 h-8" placeholder="RECHERCHER LOGS" type="text"/>
+<svg class="w-3 h-3 text-gray-600 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="flex space-x-1">
+<button class="px-2 py-1 bg-white/10 hover:bg-white/20 rounded text-[9px] font-bold text-white transition-colors">TOUT</button>
+<button class="px-2 py-1 bg-status-error/20 hover:bg-status-error/30 rounded text-[9px] font-bold text-status-error transition-colors">ERREUR</button>
+<button class="px-2 py-1 bg-status-warning/20 hover:bg-status-warning/30 rounded text-[9px] font-bold text-status-warning transition-colors">WARN</button>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Right Column -->
+</div>
+<!-- END: Dashboard Content Grid -->
+<!-- BEGIN: Footer -->
+<footer class="px-8 py-4 border-t border-glass-border flex flex-col sm:flex-row items-center justify-between text-[10px] text-gray-500 uppercase tracking-widest bg-black/20">
+<p>© 2024 SYSTEM DIAGNOSTIC CENTER. TOUS DROITS RÉSERVÉS.</p>
+<div class="flex items-center space-x-6 mt-3 sm:mt-0">
+<a class="hover:text-white transition-colors" href="#">Facebook</a>
+<a class="hover:text-white transition-colors" href="#">Twitter</a>
+<a class="hover:text-white transition-colors" href="#">Instagram</a>
+<a class="hover:text-white transition-colors" href="#">Discord</a>
+</div>
+</footer>
+<!-- END: Footer -->
+</main>
+<!-- END: Main Dashboard Container -->
+<!-- BEGIN: Interactive Logic -->
+<script data-purpose="event-handlers">
+    // Mocking real-time log updates
+    const logContainer = document.getElementById('log-terminal');
+    const logs = [
+      { time: '14:33:01', type: 'INFO', msg: 'Analyse périodique des nœuds terminée.' },
+      { time: '14:33:15', type: 'WARN', msg: 'Utilisation mémoire approchant le seuil critique (85%).' },
+      { time: '14:33:42', type: 'INFO', msg: 'Session utilisateur rafraîchie avec succès.' }
+    ];
+    let logIndex = 0;
+
+    function addLog() {
+      if (logIndex >= logs.length) logIndex = 0;
+      const log = logs[logIndex];
+      const div = document.createElement('div');
+      div.className = 'flex items-start opacity-0 translate-x-2 transition-all duration-500';
+      
+      let typeClass = 'text-terminal-green';
+      if(log.type === 'WARN') typeClass = 'text-status-warning';
+      if(log.type === 'ERROR') typeClass = 'text-status-error';
+
+      div.innerHTML = `
+        <span class="text-gray-500 mr-2">[${log.time}]</span>
+        <p><span class="${typeClass} font-bold">${log.type}:</span> ${log.msg}</p>
+      `;
+      
+      logContainer.appendChild(div);
+      
+      // Animate entry
+      setTimeout(() => {
+        div.classList.remove('opacity-0', 'translate-x-2');
+      }, 100);
+
+      // Auto scroll
+      logContainer.scrollTop = logContainer.scrollHeight;
+      logIndex++;
+    }
+
+    // Add a new log every 8 seconds
+    setInterval(addLog, 8000);
+  </script>
+<!-- END: Interactive Logic -->
+</body></html>

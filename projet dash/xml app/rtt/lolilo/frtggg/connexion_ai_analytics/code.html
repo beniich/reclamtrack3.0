@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Connexion - AI DATA ANALYTICS</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-background">/* Deep space background with the provided base image */
+body {
+    background-image: url(https://lh3.googleusercontent.com/aida/ADBb0ugDlmJ0G_ddf6ZnQEdkzX7EQpNUT3k3oYsa0meHwhbd6yNgdZAeHfuHQVUst14fw7nr2caQYZaYfXeSiuqARdT4hjzzzKxb7sW7oD6oahOZUIky6HbY_fhRW372klfLg9jQfD5Rl3gBi9IoYam_OTeGuLzoJGRRfSH0Pe4fFi6hO3jhzbhqgcyx8F-icCR_owBTSWhlG94_9ehf2YVFVXNhhsxWQ16EzFQCaf7Xttm1VBgw3kkpCAjQmQ);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column
+    }
+/* Glassmorphism effect for the login card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8)
+    }
+/* Overlay for consistent readability across potential background variations */
+.bg-overlay {
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%)
+    }</style>
+<style data-purpose="typography-and-inputs">
+    /* Custom input styling to match the glassmorphic aesthetic */
+    .input-field {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    .input-field:focus {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.5);
+      outline: none;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    .input-field::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body class="relative text-white font-sans selection:bg-orange-500 selection:text-white">
+<!-- BEGIN: MainHeader -->
+<header class="w-full p-8 flex justify-start items-center relative z-10" data-purpose="site-header">
+<div class="flex items-center space-x-3">
+<!-- Logo and Site Name -->
+<div class="flex items-center">
+<svg class="w-10 h-10 mr-2" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="url(#logo-gradient)"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="logo-gradient" x1="2" x2="22" y1="2" y2="22">
+<stop stop-color="#4F46E5"></stop>
+<stop offset="1" stop-color="#A855F7"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="flex flex-col leading-tight">
+<span class="text-xl font-bold tracking-wider">AI DATA</span>
+<span class="text-xs font-light tracking-widest text-gray-400">ANALYTICS</span>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: LoginSection -->
+<main class="flex-grow flex items-center justify-center p-4 relative z-10" data-purpose="main-login-container">
+<div class="glass-card w-full max-w-md rounded-3xl p-10 flex flex-col items-center">
+<h1 class="text-3xl font-semibold mb-10 tracking-wide">Connexion</h1>
+<form action="#" class="w-full space-y-6" data-purpose="login-form" method="POST">
+<!-- Email Input Group -->
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<svg class="h-5 w-5 text-gray-400 group-focus-within:text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<input class="input-field w-full pl-12 pr-4 py-3.5 rounded-xl text-sm transition-all duration-200" id="email" name="email" placeholder="Adresse e-mail" required="" type="email"/>
+</div>
+<!-- Password Input Group -->
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<svg class="h-5 w-5 text-gray-400 group-focus-within:text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<input class="input-field w-full pl-12 pr-12 py-3.5 rounded-xl text-sm transition-all duration-200" id="password" name="password" placeholder="Mot de passe" required="" type="password"/>
+<div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+<button aria-label="Toggle password visibility" class="text-gray-400 hover:text-white focus:outline-none" type="button">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+<!-- Login Button -->
+<button class="w-full bg-[#FF8500] hover:bg-[#E67700] text-white font-bold py-3.5 px-4 rounded-full text-lg shadow-lg transition-transform active:scale-95 duration-200" data-purpose="submit-button" type="submit">
+          Login
+        </button>
+<!-- Form Links -->
+<div class="text-center space-y-4 pt-4">
+<a class="block text-sm text-gray-300 hover:text-white underline decoration-gray-500 underline-offset-4 transition-colors" href="#">
+            Mot de passe oublié?
+          </a>
+<p class="text-sm text-gray-400">
+            Pas encore de compte? <a class="text-white hover:underline underline-offset-4" href="#">S'inscrire.</a>
+</p>
+</div>
+</form>
+</div>
+</main>
+<!-- END: LoginSection -->
+<!-- BEGIN: MainFooter -->
+<footer class="w-full py-8 px-4 text-center text-sm text-gray-400 relative z-10" data-purpose="site-footer">
+<nav class="mb-4">
+<ul class="flex justify-center space-x-6">
+<li><a class="hover:text-white transition-colors" href="#">Home</a></li>
+<li><a class="hover:text-white transition-colors" href="#">About</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Contact</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Privacy Policy</a></li>
+</ul>
+</nav>
+<p>© 2024 AI DATA ANALYTICS. All Rights Reserved.</p>
+</footer>
+<!-- END: MainFooter -->
+<!-- Simple interaction for password visibility -->
+<script data-purpose="form-interactivity">
+    document.querySelector('button[aria-label="Toggle password visibility"]').addEventListener('click', function() {
+      const passwordInput = document.getElementById('password');
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      
+      // Toggle eye icon (simplified)
+      this.classList.toggle('text-white');
+    });
+  </script>
+</body></html>

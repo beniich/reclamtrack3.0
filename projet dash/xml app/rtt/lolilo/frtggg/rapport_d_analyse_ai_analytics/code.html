@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rapport d'Analyse AI - NeuroFlex v4</title>
+<!-- BEGIN: External Scripts -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- END: External Scripts -->
+<style data-purpose="custom-animations">
+    @keyframes glow {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .glow-effect {
+      animation: glow 3s ease-in-out infinite;
+    }
+  </style>
+<style data-purpose="layout-styling">
+    body {
+      background-color: #0b0d17;
+      background-image: radial-gradient(circle at 50% 50%, #1a1c2e 0%, #0b0d17 100%);
+      color: #e2e8f0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.5rem;
+    }
+    .card-border-gradient {
+      border: 1px solid rgba(255, 107, 0, 0.3);
+      position: relative;
+    }
+    .progress-bar-gradient {
+      background: linear-gradient(to top, #6366f1, #a855f7);
+    }
+  </style>
+</head>
+<body class="p-4 md:p-8">
+<!-- BEGIN: MainHeader -->
+<header class="max-w-7xl mx-auto flex flex-wrap items-center justify-between mb-8 px-4" data-purpose="navigation-header">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(79,70,229,0.5)]">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4.5a2.5 2.5 0 0 0-4.96-.46 2.5 2.5 0 0 0-1.98 3 2.5 2.5 0 0 0 .98 4.96 2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 1.98 3 2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 4.96.46 2.5 2.5 0 0 0 1.98-3 2.5 2.5 0 0 0-.98-4.96 2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 12 4.5Z"></path><path d="M12 12h.01"></path></svg>
+</div>
+<h1 class="text-2xl font-bold tracking-wider text-white">AI DATA</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+<a class="hover:text-white transition-colors" href="#">Tableau de bord</a>
+<a class="text-indigo-400 border-b-2 border-indigo-400 pb-1" href="#">Analyse</a>
+<a class="hover:text-white transition-colors" href="#">Modèles</a>
+<a class="hover:text-white transition-colors" href="#">Paramètres</a>
+<button class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center overflow-hidden">
+<img alt="Avatar Utilisateur" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAowzXeFThHT5B682qY0PNaT7FF0naaNSaN8QvPaDK9BNfB3F_a7NJL5xCg3dhCtO5jwxjyvd7O9c7L55rwKiyTRBQQ7_kPxoNW801yMcv4IhzHgXalAVpxkE2lr1GQPcxCwrUcm87obmd73YtlW4gBvnAIrMU1Z3OW92woZ5Jb_WOhlW9feWj1Be993jmw3YGOCzS1-owQNQmcWeub__1m1iaIajwdMFMUaFZLuv_jH3V6367KMkgHgqY9G51OScc_kgwte1GidDM"/>
+</button>
+</nav>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: ReportContainer -->
+<main class="max-w-7xl mx-auto glass-panel p-6 md:p-10 shadow-2xl relative overflow-hidden" data-purpose="analysis-report-container">
+<!-- Background Decoration -->
+<div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+<!-- BEGIN: ReportHeader -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 border-b border-white/10 pb-8">
+<div>
+<h2 class="text-3xl md:text-4xl font-bold text-white mb-2">Rapport d'Analyse IA: NeuroFlex v4</h2>
+<p class="text-slate-400">Évaluation de la Performance &amp; des Hyperparamètres — Généré le 26 oct. 2024</p>
+</div>
+<button class="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/20 px-6 py-3 rounded-full text-white transition-all shadow-lg backdrop-blur-sm" data-purpose="download-button">
+<span>Télécharger PDF/HTML</span>
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+</button>
+</div>
+<!-- END: ReportHeader -->
+<!-- BEGIN: KeyMetrics -->
+<section class="mb-10" data-purpose="key-metrics-summary">
+<h3 class="text-lg font-semibold text-slate-300 mb-6 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span>
+        Résumé des indicateurs clés
+      </h3>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex flex-col items-center">
+<span class="text-slate-400 text-xs uppercase tracking-widest mb-1">Précision</span>
+<span class="text-2xl md:text-3xl font-bold text-white">96,5%</span>
+<div class="w-full h-1 bg-white/10 mt-3 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[96.5%]"></div>
+</div>
+</div>
+<div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex flex-col items-center">
+<span class="text-slate-400 text-xs uppercase tracking-widest mb-1">Perte</span>
+<span class="text-2xl md:text-3xl font-bold text-white">0,02</span>
+<div class="w-full h-1 bg-white/10 mt-3 rounded-full overflow-hidden">
+<div class="h-full bg-rose-500 w-[15%]"></div>
+</div>
+</div>
+<div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex flex-col items-center">
+<span class="text-slate-400 text-xs uppercase tracking-widest mb-1">Précision (Prec)</span>
+<span class="text-2xl md:text-3xl font-bold text-white">94,8%</span>
+<div class="w-full h-1 bg-white/10 mt-3 rounded-full overflow-hidden">
+<div class="h-full bg-blue-500 w-[94.8%]"></div>
+</div>
+</div>
+<div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex flex-col items-center">
+<span class="text-slate-400 text-xs uppercase tracking-widest mb-1">Rappel</span>
+<span class="text-2xl md:text-3xl font-bold text-white">95,2%</span>
+<div class="w-full h-1 bg-white/10 mt-3 rounded-full overflow-hidden">
+<div class="h-full bg-purple-500 w-[95.2%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: KeyMetrics -->
+<!-- BEGIN: MainChartsRow -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+<!-- BEGIN: PerformanceChart -->
+<section class="card-border-gradient rounded-3xl p-6 bg-slate-900/40" data-purpose="model-performance-chart">
+<h3 class="text-lg font-semibold text-slate-300 mb-2">Performance du Modèle</h3>
+<p class="text-xs text-slate-500 mb-8 uppercase tracking-widest">Score F1 vs. Époques</p>
+<div class="relative h-64 flex items-end justify-between px-2">
+<!-- Simplified Visual Chart -->
+<div class="flex flex-col items-center group w-full">
+<span class="text-[10px] text-slate-500 mb-1 opacity-0 group-hover:opacity-100 transition-opacity">0,85</span>
+<div class="w-6 md:w-8 progress-bar-gradient rounded-t-md" style="height: 140px;"></div>
+<span class="text-xs text-slate-400 mt-2">1</span>
+</div>
+<div class="flex flex-col items-center group w-full">
+<span class="text-[10px] text-slate-500 mb-1 opacity-0 group-hover:opacity-100 transition-opacity">0,92</span>
+<div class="w-6 md:w-8 progress-bar-gradient rounded-t-md" style="height: 155px;"></div>
+<span class="text-xs text-slate-400 mt-2">2</span>
+</div>
+<div class="flex flex-col items-center group w-full">
+<span class="text-[10px] text-slate-500 mb-1 opacity-0 group-hover:opacity-100 transition-opacity">0,82</span>
+<div class="w-6 md:w-8 progress-bar-gradient rounded-t-md opacity-80" style="height: 135px;"></div>
+<span class="text-xs text-slate-400 mt-2">3</span>
+</div>
+<div class="flex flex-col items-center group w-full">
+<span class="text-[10px] text-slate-500 mb-1 opacity-0 group-hover:opacity-100 transition-opacity">0,02</span>
+<div class="w-6 md:w-8 progress-bar-gradient rounded-t-md" style="height: 160px;"></div>
+<span class="text-xs text-slate-400 mt-2">4</span>
+</div>
+<div class="flex flex-col items-center group w-full">
+<span class="text-[10px] text-slate-500 mb-1 opacity-0 group-hover:opacity-100 transition-opacity">0,95</span>
+<div class="w-6 md:w-8 progress-bar-gradient rounded-t-md" style="height: 175px;"></div>
+<span class="text-xs text-slate-400 mt-2">5</span>
+</div>
+<div class="flex flex-col items-center group w-full">
+<span class="text-[10px] text-slate-500 mb-1 opacity-0 group-hover:opacity-100 transition-opacity">0,85</span>
+<div class="w-6 md:w-8 progress-bar-gradient rounded-t-md" style="height: 185px;"></div>
+<span class="text-xs text-slate-400 mt-2">6</span>
+</div>
+<div class="flex flex-col items-center group w-full">
+<span class="text-[10px] text-slate-500 mb-1 opacity-0 group-hover:opacity-100 transition-opacity">0,95</span>
+<div class="w-6 md:w-8 progress-bar-gradient rounded-t-md" style="height: 195px;"></div>
+<span class="text-xs text-slate-400 mt-2">7</span>
+</div>
+<div class="flex flex-col items-center group w-full">
+<span class="text-[10px] text-slate-500 mb-1 opacity-0 group-hover:opacity-100 transition-opacity">0,85</span>
+<div class="w-6 md:w-8 progress-bar-gradient rounded-t-md" style="height: 190px;"></div>
+<span class="text-xs text-slate-400 mt-2">8</span>
+</div>
+<div class="flex flex-col items-center group w-full">
+<span class="text-[10px] text-slate-500 mb-1 opacity-0 group-hover:opacity-100 transition-opacity">0,97</span>
+<div class="w-6 md:w-8 progress-bar-gradient rounded-t-md" style="height: 205px;"></div>
+<span class="text-xs text-slate-400 mt-2">9</span>
+</div>
+<div class="flex flex-col items-center group w-full relative">
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-slate-800 border border-slate-600 px-2 py-1 rounded text-[10px] text-white whitespace-nowrap z-10">
+              Époque 10: 0,87 F1
+            </div>
+<span class="text-[10px] text-slate-500 mb-1">0,87</span>
+<div class="w-6 md:w-8 progress-bar-gradient rounded-t-md border-t-2 border-white/30" style="height: 215px;"></div>
+<span class="text-xs text-slate-400 mt-2 font-bold">10</span>
+</div>
+</div>
+</section>
+<!-- END: PerformanceChart -->
+<!-- BEGIN: ImportanceChart -->
+<section class="card-border-gradient rounded-3xl p-6 bg-slate-900/40 flex flex-col" data-purpose="hyperparameter-importance">
+<h3 class="text-lg font-semibold text-slate-300 mb-2">Importance des Hyperparamètres</h3>
+<p class="text-xs text-slate-500 mb-8 uppercase tracking-widest">Distribution par Impact</p>
+<div class="flex-1 flex flex-col md:flex-row items-center justify-center gap-8">
+<div class="relative w-48 h-48" data-purpose="pie-chart-visual">
+<svg class="w-full h-full drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]" viewbox="0 0 100 100">
+<!-- Learning Rate 40% -->
+<path d="M 50 50 L 50 0 A 50 50 0 0 1 97.5 65.4 Z" fill="#f97316"></path>
+<!-- Batch Size 25% -->
+<path d="M 50 50 L 97.5 65.4 A 50 50 0 0 1 50 100 Z" fill="#fb923c"></path>
+<!-- Dropout 20% -->
+<path d="M 50 50 L 50 100 A 50 50 0 0 1 7.3 75 Z" fill="#a855f7"></path>
+<!-- Optimizer 15% -->
+<path d="M 50 50 L 7.3 75 A 50 50 0 0 1 50 0 Z" fill="#6366f1"></path>
+</svg>
+<!-- Callout -->
+<div class="absolute top-1/2 left-full -translate-y-1/2 ml-[-20px] bg-black/60 backdrop-blur border border-white/20 p-2 rounded text-[10px] text-white min-w-[120px] z-10 shadow-xl">
+<p class="font-bold">Taux d'Apprentissage: 40%</p>
+<p class="text-rose-400">(Critique)</p>
+</div>
+</div>
+<div class="space-y-3 text-xs">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-orange-500 rounded"></span>
+<span class="text-slate-300">Taux d'Apprentissage: 40%</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-orange-400 rounded"></span>
+<span class="text-slate-300">Taille du Lot: 25%</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-purple-500 rounded"></span>
+<span class="text-slate-300">Dropout: 20%</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-indigo-500 rounded"></span>
+<span class="text-slate-300">Optimiseur: 15%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ImportanceChart -->
+</div>
+<!-- END: MainChartsRow -->
+<!-- BEGIN: TrackingLog -->
+<section class="card-border-gradient rounded-3xl overflow-hidden" data-purpose="hyperparameter-log">
+<div class="px-6 py-4 bg-white/5 border-b border-white/10">
+<h3 class="text-lg font-semibold text-slate-300">Suivi détaillé des Hyperparamètres &amp; Log</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm" id="tracking-table">
+<thead>
+<tr class="text-slate-500 border-b border-white/5">
+<th class="px-6 py-4 font-medium uppercase tracking-wider">Paramètre</th>
+<th class="px-6 py-4 font-medium uppercase tracking-wider">Valeur</th>
+<th class="px-6 py-4 font-medium uppercase tracking-wider">Impact</th>
+<th class="px-6 py-4 font-medium uppercase tracking-wider">Dernière Mise à Jour</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5 text-slate-300">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">Taux d'Apprentissage</td>
+<td class="px-6 py-4 font-mono">0.001</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-rose-500/20 text-rose-400 text-[10px] font-bold uppercase">Élevé</span></td>
+<td class="px-6 py-4">10:45 AM</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">Taille du Lot</td>
+<td class="px-6 py-4 font-mono">64</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-orange-500/20 text-orange-400 text-[10px] font-bold uppercase">Moyen</span></td>
+<td class="px-6 py-4">10:30 AM</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">Optimiseur</td>
+<td class="px-6 py-4 font-mono">15</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-slate-500/20 text-slate-400 text-[10px] font-bold uppercase">Faible</span></td>
+<td class="px-6 py-4">10:30 AM</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- END: TrackingLog -->
+</main>
+<!-- END: ReportContainer -->
+<!-- BEGIN: Footer -->
+<footer class="max-w-7xl mx-auto mt-8 px-4 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4" data-purpose="page-footer">
+<p>© 2024 FUTURISTIC AI DATA. TOUS DROITS RÉSERVÉS.</p>
+<div class="flex gap-6">
+<a class="hover:text-slate-300 transition-colors" href="#">Politique de Confidentialité</a>
+<a class="hover:text-slate-300 transition-colors" href="#">Conditions d'Utilisation</a>
+<a class="hover:text-slate-300 transition-colors" href="#">Contact</a>
+</div>
+</footer>
+<!-- END: Footer -->
+</body></html>

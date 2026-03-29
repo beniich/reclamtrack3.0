@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Documentation API Développeur - Futuristic AI Data</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts for a tech look -->
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&amp;family=Inter:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-theme">
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top right, #1e1b4b, #0f172a, #020617);
+      color: #e2e8f0;
+    }
+    .code-font {
+      font-family: 'Fira Code', monospace;
+    }
+    .glass-panel {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+    .neon-border {
+      border: 1px solid rgba(249, 115, 22, 0.5);
+      box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
+    }
+    .sidebar-gradient {
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+    }
+    .active-nav-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 3px solid #f97316;
+    }
+    /* Syntax highlighting specific colors */
+    .syntax-keyword { color: #c678dd; }
+    .syntax-string { color: #98c379; }
+    .syntax-variable { color: #e06c75; }
+    .syntax-function { color: #61afef; }
+    .syntax-comment { color: #5c6370; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- BEGIN: Page Header -->
+<header class="p-8 pb-4" data-purpose="page-title-section">
+<h1 class="text-4xl font-extrabold tracking-tighter uppercase text-white mb-2">
+      Documentation <span class="text-orange-500">API Développeur</span>
+</h1>
+</header>
+<!-- END: Page Header -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-grow flex p-8 gap-8 max-w-[1400px] mx-auto w-full">
+<!-- BEGIN: Endpoint Navigation Sidebar -->
+<aside class="w-1/4 glass-panel rounded-2xl p-6 border-orange-500/30 border" data-purpose="navigation-sidebar">
+<h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Navigation des Points de Terminaison</h2>
+<nav class="space-y-8">
+<!-- Auth Section -->
+<section>
+<h3 class="text-sm font-semibold text-white mb-3 uppercase">Authentification</h3>
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-3 p-2 rounded-lg active-nav-item text-white" href="#">
+<svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                /token
+              </a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-2 rounded-lg text-gray-400 hover:text-white transition" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                /refresh
+              </a>
+</li>
+</ul>
+</section>
+<!-- Data Section -->
+<section>
+<h3 class="text-sm font-semibold text-white mb-3 uppercase">Données</h3>
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-3 p-2 rounded-lg text-gray-400 hover:text-white transition" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                /data/ingest
+              </a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-2 rounded-lg text-gray-400 hover:text-white transition" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                /data/list
+              </a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-2 rounded-lg text-gray-400 hover:text-white transition" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                /data/query
+              </a>
+</li>
+</ul>
+</section>
+<!-- Inference Section -->
+<section>
+<h3 class="text-sm font-semibold text-white mb-3 uppercase">Inférence de Modèle</h3>
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-3 p-2 rounded-lg text-gray-400 hover:text-white transition" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                /models/list
+              </a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-2 rounded-lg text-gray-400 hover:text-white transition" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                /models/predict
+              </a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-2 rounded-lg text-gray-400 hover:text-white transition" href="#">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.183.244l-.28.19a2 2 0 00-.596 2.48l.04.07a2 2 0 002.303 1.027l2.575-.515a2 2 0 011.056.044l3.523 1.222a2 2 0 001.665-.3l.13-.09a2 2 0 00.77-1.74l-.293-4.236z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                /models/train
+              </a>
+</li>
+</ul>
+</section>
+</nav>
+</aside>
+<!-- END: Endpoint Navigation Sidebar -->
+<!-- BEGIN: Endpoint Details Content -->
+<article class="w-3/4 glass-panel rounded-2xl p-8 overflow-y-auto" data-purpose="endpoint-documentation-content">
+<header class="mb-8">
+<h2 class="text-3xl font-bold text-white mb-2">AUTHENTIFICATION (Auth API)</h2>
+<p class="text-gray-400 text-lg">Générez des jetons d'accès pour une communication API sécurisée. Nécessite une Clé API et un Secret.</p>
+</header>
+<!-- BEGIN: Request Code Snippet -->
+<section class="mb-8" data-purpose="request-code-section">
+<div class="bg-[#1e1e1e] rounded-xl border border-orange-500/50 p-6 relative">
+<!-- Copy icon placeholder -->
+<div class="absolute top-4 right-4 text-gray-500 hover:text-white cursor-pointer">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<pre class="code-font text-sm leading-relaxed overflow-x-auto"><span class="syntax-keyword">import</span> requests
+
+url = <span class="syntax-string">"https://api.aidata.ai/v1/auth/token"</span>
+payload = {
+    <span class="syntax-string">"api_key"</span>: <span class="syntax-string">"VOTRE_CLÉ_API"</span>,
+    <span class="syntax-string">"api_secret"</span>: <span class="syntax-string">"VOTRE_SECRET_API"</span>
+}
+
+response = requests.<span class="syntax-function">post</span>(url, json=payload)
+
+<span class="syntax-function">print</span>(response.<span class="syntax-function">json</span>())</pre>
+</div>
+<div class="flex gap-4 mt-4 justify-end">
+<button class="px-6 py-2 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-full border border-slate-500 transition">COPIER LE SNIPPET</button>
+<button class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full shadow-lg shadow-indigo-500/20 transition">EXÉCUTER LA REQUÊTE</button>
+</div>
+</section>
+<!-- END: Request Code Snippet -->
+<!-- BEGIN: Response Code Snippet -->
+<section class="mb-8" data-purpose="response-code-section">
+<div class="bg-[#1e1e1e] rounded-xl border border-gray-700 p-6 relative">
+<div class="absolute top-4 right-4 text-gray-500">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<pre class="code-font text-sm text-sky-400">{
+  <span class="syntax-string">"access_token"</span>: <span class="syntax-string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.TbeIS8oSVA... "</span>,
+  <span class="syntax-string">"token_type"</span>: <span class="syntax-string">"bearer"</span>,
+  <span class="syntax-string">"expires_in"</span>: <span class="text-orange-400">3600</span>
+}</pre>
+</div>
+</section>
+<!-- END: Response Code Snippet -->
+<!-- BEGIN: Parameters & Responses Table -->
+<section class="grid grid-cols-2 gap-6" data-purpose="tables-section">
+<!-- Parameters Table -->
+<div class="bg-slate-800/40 rounded-xl p-4 border border-slate-700">
+<h4 class="text-sm font-bold text-white uppercase mb-4 border-b border-slate-700 pb-2">Paramètres</h4>
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="text-gray-500">
+<th class="pb-2">Nom</th>
+<th class="pb-2">Description</th>
+</tr>
+</thead>
+<tbody class="text-gray-300">
+<tr class="border-b border-slate-700/50">
+<td class="py-2 font-mono text-orange-300">api_key</td>
+<td class="py-2">Clé unique de l'application</td>
+</tr>
+<tr>
+<td class="py-2 font-mono text-orange-300">api_secret</td>
+<td class="py-2">Secret utilisé pour l'authentification</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Responses Table -->
+<div class="bg-slate-800/40 rounded-xl p-4 border border-slate-700">
+<h4 class="text-sm font-bold text-white uppercase mb-4 border-b border-slate-700 pb-2">Réponses</h4>
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="text-gray-500">
+<th class="pb-2">Valeur</th>
+<th class="pb-2">Type</th>
+<th class="pb-2">Code</th>
+</tr>
+</thead>
+<tbody class="text-gray-300">
+<tr class="border-b border-slate-700/50">
+<td class="py-2 font-mono">token</td>
+<td class="py-2 text-indigo-300">string</td>
+<td class="py-2 text-green-400">200</td>
+</tr>
+<tr>
+<td class="py-2 font-mono">error</td>
+<td class="py-2 text-indigo-300">object</td>
+<td class="py-2 text-red-400">401</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- END: Parameters & Responses Table -->
+</article>
+<!-- END: Endpoint Details Content -->
+</main>
+<!-- END: Main Content Area -->
+<!-- BEGIN: Footer -->
+<footer class="p-6 text-center text-gray-500 text-xs tracking-wider" data-purpose="footer">
+<p>© 2024 Futuristic AI Data. Tous droits réservés.</p>
+</footer>
+<!-- END: Footer -->
+</body></html>

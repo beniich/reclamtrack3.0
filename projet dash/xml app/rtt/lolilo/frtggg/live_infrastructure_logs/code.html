@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#00363a",
+              "secondary-fixed": "#f8d8ff",
+              "on-error-container": "#ffdad6",
+              "outline-variant": "#3a494b",
+              "inverse-primary": "#00696f",
+              "error": "#ffb4ab",
+              "primary-fixed": "#74f5ff",
+              "secondary-fixed-dim": "#ebb2ff",
+              "tertiary-fixed-dim": "#bbc3ff",
+              "surface-container-highest": "#343341",
+              "on-tertiary-fixed": "#000f5d",
+              "surface-variant": "#343341",
+              "error-container": "#93000a",
+              "on-secondary": "#520072",
+              "surface-tint": "#00dbe7",
+              "on-error": "#690005",
+              "tertiary-fixed": "#dee0ff",
+              "tertiary": "#f8f6ff",
+              "on-secondary-container": "#fff6fc",
+              "surface-container-low": "#1a1a27",
+              "on-primary-container": "#006a71",
+              "on-secondary-fixed": "#320047",
+              "surface-bright": "#383846",
+              "primary-container": "#00f2ff",
+              "on-tertiary": "#001d93",
+              "tertiary-container": "#d5d8ff",
+              "on-surface": "#e3e0f3",
+              "on-tertiary-container": "#2a49ef",
+              "surface-container-lowest": "#0d0d19",
+              "inverse-surface": "#e3e0f3",
+              "surface-dim": "#12121f",
+              "primary-fixed-dim": "#00dbe7",
+              "secondary-container": "#b600f8",
+              "on-secondary-fixed-variant": "#74009f",
+              "surface": "#12121f",
+              "surface-container-high": "#292936",
+              "on-surface-variant": "#b9cacb",
+              "on-primary-fixed-variant": "#004f54",
+              "on-tertiary-fixed-variant": "#002ccd",
+              "secondary": "#ebb2ff",
+              "background": "#12121f",
+              "on-background": "#e3e0f3",
+              "surface-container": "#1f1e2b",
+              "on-primary-fixed": "#002022",
+              "primary": "#e1fdff",
+              "inverse-on-surface": "#2f2f3d",
+              "outline": "#849495"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .terminal-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .terminal-scroll::-webkit-scrollbar-track {
+            background: rgba(26, 26, 39, 0.5);
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background: rgba(0, 242, 255, 0.2);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+        }
+        .mono-text {
+            font-family: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", monospace;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-zinc-950/60 backdrop-blur-xl flex justify-between items-center px-6 h-16 shadow-[0_0_20px_rgba(0,242,255,0.08)]">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 font-['Space_Grotesk']">NEURAL_OBSERVATORY</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<button class="text-zinc-400 hover:text-cyan-300 hover:bg-white/5 transition-all px-3 py-1 font-['Space_Grotesk'] tracking-tight">NODES</button>
+<button class="text-cyan-400 font-bold border-b-2 border-cyan-400 px-3 py-1 font-['Space_Grotesk'] tracking-tight">OBSERVATORY</button>
+<button class="text-zinc-400 hover:text-cyan-300 hover:bg-white/5 transition-all px-3 py-1 font-['Space_Grotesk'] tracking-tight">STREAMS</button>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-cyan-400 cursor-pointer p-2 hover:bg-white/5 rounded-full transition-colors" data-icon="sensors">sensors</span>
+<span class="material-symbols-outlined text-cyan-400 cursor-pointer p-2 hover:bg-white/5 rounded-full transition-colors" data-icon="memory">memory</span>
+<span class="material-symbols-outlined text-cyan-400 cursor-pointer p-2 hover:bg-white/5 rounded-full transition-colors" data-icon="account_tree">account_tree</span>
+</div>
+<img alt="User System Administrator Profile" class="w-8 h-8 rounded-full border border-primary-container/30" data-alt="Close-up portrait of a digital human interface with glowing neon neural patterns reflected in the eyes, high-tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzEXUM9xMvvxbogohT705IzvXjoLyhbIrATFCaoDpVTv0_agNVmM5N6KA5aLNL7oHPLjl0VnsWhWE_lvbIcDMGC9RS9NdqulWH92pccomjM2cXykpq9vMh1KDgOZ11ycBiDpcEc7UFFuQ8RGxC4LZMVceLFWl0JE1NCbtqPaVbnWTFAD-HNX6v300-_G0p7N5a6lzcZqIM9q9Vm1y8vB8ai23DWSh5PsskOdTddjQph9a70b2_218TVCMK9QeE3AFE0n5RrARqDCo"/>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 z-40 bg-zinc-950/80 backdrop-blur-2xl flex flex-col py-8 px-4 gap-4 shadow-[10px_0_30px_rgba(0,0,0,0.5)] hidden md:flex pt-20">
+<div class="flex items-center gap-3 px-2 mb-6">
+<div class="w-10 h-10 rounded bg-cyan-400/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-cyan-400" data-icon="terminal" data-weight="fill" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<p class="font-black text-cyan-400 text-sm tracking-tighter">SYSTEM_ALPHA</p>
+<p class="text-[10px] uppercase tracking-widest text-zinc-500">Optimal/Active</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-cyan-400 bg-cyan-400/10 border-r-2 border-cyan-400 font-['Space_Grotesk'] uppercase text-xs tracking-widest transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+                Observatory
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="Psychology">psychology</span>
+                Neural Nets
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="lan">lan</span>
+                Kafka Streams
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+                MLflow Ops
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+                Data Lake
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="shield_lock">shield_lock</span>
+                Security
+            </a>
+</nav>
+<button class="mt-4 w-full py-3 bg-cyan-400/10 border border-cyan-400 text-cyan-400 text-[10px] font-bold tracking-[0.2em] hover:bg-cyan-400 hover:text-on-primary transition-colors">
+            DEPLOY MODEL
+        </button>
+<div class="mt-auto border-t border-zinc-900/50 pt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help">help</span>
+                Support
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-20 p-6 min-h-screen">
+<div class="max-w-[1600px] mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<h1 class="text-4xl md:text-5xl font-['Space_Grotesk'] font-bold text-surface-bright tracking-tight mb-2">SYSTEM_LOGS.EXE</h1>
+<p class="text-on-surface-variant font-mono text-sm flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                        REAL-TIME STREAMING: CORE_NODE_01
+                    </p>
+</div>
+<div class="flex gap-3">
+<div class="bg-surface-container p-4 rounded-xl border border-outline-variant/10 flex items-center gap-4 glass-panel">
+<div class="text-right">
+<p class="text-[10px] text-zinc-500 uppercase tracking-widest">Uptime</p>
+<p class="text-cyan-400 font-mono font-bold">142:22:04</p>
+</div>
+<span class="material-symbols-outlined text-zinc-600" data-icon="timer">timer</span>
+</div>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Terminal Section (Left/Main) -->
+<div class="lg:col-span-8 space-y-6">
+<div class="bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/15 shadow-2xl">
+<!-- Terminal Header -->
+<div class="bg-surface-container-high px-4 py-2 flex items-center justify-between border-b border-outline-variant/10">
+<div class="flex items-center gap-2">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+</div>
+<span class="text-[10px] text-zinc-400 font-mono ml-4 uppercase tracking-widest">fastapi_server.log — 80x24</span>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-zinc-500 text-sm cursor-pointer hover:text-white" data-icon="search">search</span>
+<span class="material-symbols-outlined text-zinc-500 text-sm cursor-pointer hover:text-white" data-icon="download">download</span>
+<span class="material-symbols-outlined text-zinc-500 text-sm cursor-pointer hover:text-white" data-icon="close">close</span>
+</div>
+</div>
+<!-- Console Area -->
+<div class="p-6 h-[500px] overflow-y-auto terminal-scroll bg-surface-container-lowest mono-text text-[13px] leading-relaxed">
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:01.002</span>
+<span class="text-cyan-400 font-bold shrink-0">[INFO]</span>
+<span class="text-zinc-300">Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)</span>
+</div>
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:02.154</span>
+<span class="text-cyan-400 font-bold shrink-0">[INFO]</span>
+<span class="text-zinc-300">Started reloader process [14022] using statreload</span>
+</div>
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:03.441</span>
+<span class="text-cyan-400 font-bold shrink-0">[INFO]</span>
+<span class="text-zinc-300">Application startup complete.</span>
+</div>
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:10.882</span>
+<span class="text-green-400 font-bold shrink-0">[KAFKA]</span>
+<span class="text-zinc-400">Topic 'NEURAL_INPUT' joined. Current partition offset: 499210</span>
+</div>
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:12.001</span>
+<span class="text-cyan-400 font-bold shrink-0">[INFO]</span>
+<span class="text-zinc-300">GET /api/v1/health_check HTTP/1.1" 200 OK</span>
+</div>
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:15.223</span>
+<span class="text-yellow-400 font-bold shrink-0">[WARN]</span>
+<span class="text-yellow-200/80">Redis connection latency above threshold: 45ms (Expected &lt;10ms)</span>
+</div>
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:18.045</span>
+<span class="text-green-400 font-bold shrink-0">[KAFKA]</span>
+<span class="text-zinc-400">Produced message to 'PREDICTION_SINK' - Hash: 0x82f..91</span>
+</div>
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:22.910</span>
+<span class="text-error font-bold shrink-0">[ERROR]</span>
+<span class="text-error">Postgres connection reset by peer - retrying in 500ms...</span>
+</div>
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:23.411</span>
+<span class="text-cyan-400 font-bold shrink-0">[INFO]</span>
+<span class="text-zinc-300">Postgres connection re-established. Pool size: 20</span>
+</div>
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:25.551</span>
+<span class="text-green-400 font-bold shrink-0">[KAFKA]</span>
+<span class="text-zinc-400">Batch of 500 messages acknowledged. Latency: 12ms</span>
+</div>
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:28.102</span>
+<span class="text-cyan-400 font-bold shrink-0">[INFO]</span>
+<span class="text-zinc-300">POST /api/v1/inference/predict HTTP/1.1" 201 Created</span>
+</div>
+<div class="flex gap-4 mb-2">
+<span class="text-zinc-600 shrink-0">2023-11-20 14:45:30.000</span>
+<span class="text-cyan-400 font-bold shrink-0">[INFO]</span>
+<span class="text-zinc-300 italic opacity-50"># system heartbeat pulse...</span>
+</div>
+<div class="flex gap-4">
+<span class="text-cyan-400">_</span>
+</div>
+</div>
+</div>
+<!-- Async Stats Card -->
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 glass-panel">
+<h3 class="font-['Space_Grotesk'] text-xs uppercase tracking-[0.3em] text-zinc-500 mb-6">Inference Performance</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="space-y-1">
+<p class="text-[10px] text-zinc-500 uppercase">Requests / Sec</p>
+<p class="text-2xl font-bold font-['Space_Grotesk'] text-surface-bright">1,248.5</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] text-zinc-500 uppercase">Avg Latency</p>
+<p class="text-2xl font-bold font-['Space_Grotesk'] text-primary-container">12.4ms</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] text-zinc-500 uppercase">P99 Latency</p>
+<p class="text-2xl font-bold font-['Space_Grotesk'] text-secondary">48.1ms</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] text-zinc-500 uppercase">Err Rate</p>
+<p class="text-2xl font-bold font-['Space_Grotesk'] text-error">0.02%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Health Gauges (Right Side Panel) -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Gauge 1: Postgres -->
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/10 glass-panel">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="font-['Space_Grotesk'] font-bold text-lg text-surface-bright tracking-tight">PostgreSQL</h3>
+<p class="text-[10px] text-zinc-500 uppercase tracking-widest">Master Cluster DB_01</p>
+</div>
+<span class="material-symbols-outlined text-cyan-400" data-icon="database">database</span>
+</div>
+<div class="relative flex justify-center py-4">
+<!-- Circular Gauge Placeholder (CSS based) -->
+<div class="relative w-40 h-40">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-variant/20" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-cyan-400 drop-shadow-[0_0_8px_rgba(0,242,255,0.4)]" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-dasharray="440" stroke-dashoffset="88" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-bold font-['Space_Grotesk'] text-surface-bright">82%</span>
+<span class="text-[10px] uppercase text-zinc-500">Connections</span>
+</div>
+</div>
+</div>
+<div class="mt-6 space-y-4">
+<div class="flex justify-between items-center text-xs">
+<span class="text-zinc-400">Memory Usage</span>
+<span class="text-on-surface font-mono">12.4 / 16 GB</span>
+</div>
+<div class="w-full bg-surface-variant/30 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[78%]"></div>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-zinc-400">I/O Wait</span>
+<span class="text-on-surface font-mono">1.2ms</span>
+</div>
+</div>
+</div>
+<!-- Gauge 2: Redis -->
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/10 glass-panel">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="font-['Space_Grotesk'] font-bold text-lg text-surface-bright tracking-tight">Redis Cache</h3>
+<p class="text-[10px] text-zinc-500 uppercase tracking-widest">Fast-Response Tier</p>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="bolt">bolt</span>
+</div>
+<div class="relative flex justify-center py-4">
+<div class="relative w-40 h-40">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-variant/20" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary drop-shadow-[0_0_8px_rgba(182,0,248,0.4)]" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-dasharray="440" stroke-dashoffset="310" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-bold font-['Space_Grotesk'] text-surface-bright">29%</span>
+<span class="text-[10px] uppercase text-zinc-500">Memory</span>
+</div>
+</div>
+</div>
+<div class="mt-6 space-y-4">
+<div class="flex justify-between items-center text-xs">
+<span class="text-zinc-400">Hit Rate</span>
+<span class="text-secondary font-mono">99.2%</span>
+</div>
+<div class="w-full bg-surface-variant/30 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[99%]"></div>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-zinc-400">Evictions/Sec</span>
+<span class="text-on-surface font-mono">0.0</span>
+</div>
+</div>
+</div>
+<!-- Map/Node Activity Preview -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/10 overflow-hidden relative group">
+<div class="p-6 pb-0 relative z-10">
+<h3 class="font-['Space_Grotesk'] font-bold text-xs uppercase tracking-[0.2em] text-zinc-500 mb-2">Node Distribution</h3>
+</div>
+<div class="h-48 w-full relative">
+<img class="w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Digital dark world map with neon cyan data nodes and connecting web-like lines on a dark background" data-location="Global Server Grid" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC00ZT5L-k2SGnKqoCVshSJk9rGuBNhC5LWnxDoCT-dsWWI_0KWFPONMMXm_OFEl5sEPJ0SCwtccVJU2HCyTRdpmYmxRq0TbfC5rb7MFEDi_4IJpL1fRuigLtgOKnsGuwiz5p0MtSqoHB7dZ_qJhY95Z-GuN0mtg4YqmR1PUMUUEojLsBK5bnKenIkDe34AFrQOB9Ll61SyK36RjdrCxyYhRXF7FLmzG0_MiOmA2yc9NVL-OYrJdeBcPFoueFL4sZsBrruXX7uH-bg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+<div class="absolute top-1/2 left-1/4 w-3 h-3 bg-cyan-400 rounded-full glow-cyan animate-pulse"></div>
+<div class="absolute top-1/3 left-1/2 w-2 h-2 bg-secondary rounded-full animate-ping"></div>
+<div class="absolute bottom-1/4 right-1/3 w-3 h-3 bg-cyan-400 rounded-full glow-cyan"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Visual Polish: Ambient Glows -->
+<div class="fixed top-[-10%] right-[-10%] w-[40%] h-[40%] bg-cyan-400/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-purple-500/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+</body></html>

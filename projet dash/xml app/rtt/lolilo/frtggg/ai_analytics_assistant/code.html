@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#00363a",
+              "secondary-fixed": "#f8d8ff",
+              "on-error-container": "#ffdad6",
+              "outline-variant": "#3a494b",
+              "inverse-primary": "#00696f",
+              "error": "#ffb4ab",
+              "primary-fixed": "#74f5ff",
+              "secondary-fixed-dim": "#ebb2ff",
+              "tertiary-fixed-dim": "#bbc3ff",
+              "surface-container-highest": "#343341",
+              "on-tertiary-fixed": "#000f5d",
+              "surface-variant": "#343341",
+              "error-container": "#93000a",
+              "on-secondary": "#520072",
+              "surface-tint": "#00dbe7",
+              "on-error": "#690005",
+              "tertiary-fixed": "#dee0ff",
+              "tertiary": "#f8f6ff",
+              "on-secondary-container": "#fff6fc",
+              "surface-container-low": "#1a1a27",
+              "on-primary-container": "#006a71",
+              "on-secondary-fixed": "#320047",
+              "surface-bright": "#383846",
+              "primary-container": "#00f2ff",
+              "on-tertiary": "#001d93",
+              "tertiary-container": "#d5d8ff",
+              "on-surface": "#e3e0f3",
+              "on-tertiary-container": "#2a49ef",
+              "surface-container-lowest": "#0d0d19",
+              "inverse-surface": "#e3e0f3",
+              "surface-dim": "#12121f",
+              "primary-fixed-dim": "#00dbe7",
+              "secondary-container": "#b600f8",
+              "on-secondary-fixed-variant": "#74009f",
+              "surface": "#12121f",
+              "surface-container-high": "#292936",
+              "on-surface-variant": "#b9cacb",
+              "on-primary-fixed-variant": "#004f54",
+              "on-tertiary-fixed-variant": "#002ccd",
+              "secondary": "#ebb2ff",
+              "background": "#12121f",
+              "on-background": "#e3e0f3",
+              "surface-container": "#1f1e2b",
+              "on-primary-fixed": "#002022",
+              "primary": "#e1fdff",
+              "inverse-on-surface": "#2f2f3d",
+              "outline": "#849495"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(31, 30, 43, 0.7);
+            backdrop-filter: blur(16px);
+        }
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+        }
+        .liquid-neon {
+            background: linear-gradient(45deg, #00f2ff, #b600f8);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-zinc-950/60 backdrop-blur-xl flex justify-between items-center px-6 h-16 shadow-[0_0_20px_rgba(0,242,255,0.08)]">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 font-['Space_Grotesk']">NEURAL_OBSERVATORY</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8">
+<a class="text-cyan-400 font-bold border-b-2 border-cyan-400 font-['Space_Grotesk'] tracking-tight hover:text-cyan-300 hover:bg-white/5 transition-all active:scale-95 duration-200" href="#">Observatory</a>
+<a class="text-zinc-400 font-['Space_Grotesk'] tracking-tight hover:text-cyan-300 hover:bg-white/5 transition-all active:scale-95 duration-200" href="#">Neural Nets</a>
+<a class="text-zinc-400 font-['Space_Grotesk'] tracking-tight hover:text-cyan-300 hover:bg-white/5 transition-all active:scale-95 duration-200" href="#">Kafka Streams</a>
+</div>
+<div class="flex items-center gap-3 ml-4">
+<span class="material-symbols-outlined text-cyan-400 cursor-pointer hover:bg-white/5 p-2 rounded-full transition-all">sensors</span>
+<span class="material-symbols-outlined text-cyan-400 cursor-pointer hover:bg-white/5 p-2 rounded-full transition-all">memory</span>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-cyan-400/30">
+<img alt="User System Administrator Profile" data-alt="professional headshot of a system administrator in a dark studio with blue ambient technological rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMZ3y8eQ1jVwUf6GmdzatvR1MfnUjOhpyh5xoyEpZHkzR3o3VYcXfpHvOwWXZWQDck1L090WzBzBW0k7WHVhvfu0pGmoOGG37q1_tuEz-0LzNOlzJ8WpacItnd-PEiOIxHhzdlL3TSEsHxuFWu1A--xedSWKAS4X-6bU48_j4ZEJms0-buEaEl9Kna-f7gNSnyTHiqiQtp3nUc7srv14umkHUY6NOFlES31hzrN2cSazhYNvSD2zdQgosd1j3Kt07fYmzxKqVt37w"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 z-40 bg-zinc-950/80 backdrop-blur-2xl flex flex-col py-8 px-4 gap-4 shadow-[10px_0_30px_rgba(0,0,0,0.5)] border-r border-outline-variant/10">
+<div class="mt-16 mb-8 px-2">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-cyan-400/10 flex items-center justify-center border border-cyan-400/20">
+<span class="material-symbols-outlined text-cyan-400" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<div>
+<h3 class="font-black text-cyan-400 font-['Space_Grotesk'] uppercase text-xs tracking-widest">SYSTEM_ALPHA</h3>
+<p class="text-[10px] text-zinc-500 uppercase tracking-tighter">Optimal/Active</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-cyan-400 bg-cyan-400/10 border-r-2 border-cyan-400 font-['Space_Grotesk'] uppercase text-xs tracking-widest hover:translate-x-1 duration-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">visibility</span>
+<span>Observatory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest hover:bg-zinc-800/50 hover:translate-x-1 duration-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">psychology</span>
+<span>Neural Nets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest hover:bg-zinc-800/50 hover:translate-x-1 duration-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">lan</span>
+<span>Kafka Streams</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest hover:bg-zinc-800/50 hover:translate-x-1 duration-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span>MLflow Ops</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest hover:bg-zinc-800/50 hover:translate-x-1 duration-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">database</span>
+<span>Data Lake</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-xs tracking-widest hover:bg-zinc-800/50 hover:translate-x-1 duration-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">shield_lock</span>
+<span>Security</span>
+</a>
+</nav>
+<button class="w-full py-3 mt-4 liquid-neon rounded-sm font-['Space_Grotesk'] text-[10px] font-bold tracking-[0.2em] text-white hover:brightness-110 transition-all active:scale-95">
+            DEPLOY MODEL
+        </button>
+<div class="pt-6 border-t border-zinc-800/50 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-[10px] tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-zinc-500 hover:text-zinc-300 font-['Space_Grotesk'] uppercase text-[10px] tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-16 min-h-screen bg-surface-dim relative overflow-hidden">
+<!-- Background Ambient Effects -->
+<div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary-container/5 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] left-[10%] w-[400px] h-[400px] bg-secondary-container/5 blur-[100px] rounded-full"></div>
+<div class="p-10 max-w-7xl mx-auto grid grid-cols-12 gap-8">
+<!-- Hero Stats / Editorial Header -->
+<div class="col-span-12 mb-4">
+<h1 class="font-headline text-5xl font-bold text-surface-bright tracking-tight mb-2">Neural Hub <span class="text-primary-container">OS_01</span></h1>
+<p class="text-on-surface-variant font-body max-w-2xl leading-relaxed">System-wide monitoring of deep learning clusters. Real-time telemetry and predictive diagnostic interface for decentralized neural nodes.</p>
+</div>
+<!-- Bento Grid Section -->
+<div class="col-span-12 lg:col-span-8 grid grid-cols-2 gap-6">
+<!-- Large Graphic Card -->
+<div class="col-span-2 aspect-[21/9] rounded-xl overflow-hidden relative group bg-surface-container-low border border-outline-variant/10 shadow-xl">
+<img class="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700" data-alt="abstract digital visualization of neural networks and glowing data points in 3D dark space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyH1N2fUsB1tngQ-CqbXxgktxolhFdEnQIWP2MHQ7aexopRRzJYH1Q-1yLcXhMFZbxT_PKq5mSAxtFzpDS-DyKhylEiuhst3R1YnmUI5LtzSy-zctrXKoNn6LIHPcktYXZSqVBTzuMEPciV7MG6fA6DupqhIES51fUkHZwGwUdFgH_dpNNg5EexRjkzB2vwvCsKzd043AHmrmwPhyDb0F_OoFFMk2XcwXgf4EDqGqy14TL7KuKbZCmd1-oNk9T6h3HIkD7gRyzmiQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute bottom-6 left-8">
+<span class="text-[10px] tracking-[0.3em] font-headline text-primary-container uppercase">Cluster Latency</span>
+<div class="font-headline text-4xl font-light text-white mt-1">12.4ms <span class="text-lg text-emerald-400">↓ 2.1%</span></div>
+</div>
+</div>
+<!-- Metric Card 1 -->
+<div class="bg-surface-container rounded-xl p-6 border border-outline-variant/5 hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-secondary-container">dynamic_feed</span>
+<span class="text-[10px] bg-secondary-container/10 text-secondary-fixed px-2 py-0.5 rounded-full">LIVE</span>
+</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest font-headline">Inference Load</div>
+<div class="text-2xl font-headline mt-1">84.2 TPS</div>
+<div class="mt-4 h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full liquid-neon w-[84%]"></div>
+</div>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-surface-container rounded-xl p-6 border border-outline-variant/5 hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary-container">database</span>
+<span class="text-[10px] bg-primary-container/10 text-primary-container px-2 py-0.5 rounded-full">ACTIVE</span>
+</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest font-headline">Token Reservoir</div>
+<div class="text-2xl font-headline mt-1">1.28 PB</div>
+<div class="mt-4 flex gap-1 items-end h-8">
+<div class="w-full bg-primary-container/20 h-[40%]"></div>
+<div class="w-full bg-primary-container/20 h-[60%]"></div>
+<div class="w-full bg-primary-container/20 h-[55%]"></div>
+<div class="w-full bg-primary-container/20 h-[90%]"></div>
+<div class="w-full bg-primary-container h-[75%]"></div>
+</div>
+</div>
+</div>
+<!-- Side Secondary Column -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/5 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/10 blur-3xl rounded-full"></div>
+<h2 class="font-headline text-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">analytics</span>
+                        Model Drift Analysis
+                    </h2>
+<ul class="space-y-6">
+<li class="flex items-center gap-4 group">
+<div class="h-10 w-10 rounded bg-surface-container-highest flex items-center justify-center border border-outline-variant/10 text-on-surface-variant group-hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-sm">schema</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-headline tracking-wide uppercase text-on-surface">GPT-L4 Pipeline</p>
+<p class="text-[10px] text-on-surface-variant">Stability: 99.2%</p>
+</div>
+</li>
+<li class="flex items-center gap-4 group">
+<div class="h-10 w-10 rounded bg-surface-container-highest flex items-center justify-center border border-outline-variant/10 text-on-surface-variant group-hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-sm">hub</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-headline tracking-wide uppercase text-on-surface">Edge-Node Cluster</p>
+<p class="text-[10px] text-on-surface-variant">Sync Lag: 42ms</p>
+</div>
+</li>
+<li class="flex items-center gap-4 group">
+<div class="h-10 w-10 rounded bg-surface-container-highest flex items-center justify-center border border-outline-variant/10 text-on-surface-variant group-hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-sm">cloud_sync</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-headline tracking-wide uppercase text-on-surface">Data Lake Ingress</p>
+<p class="text-[10px] text-on-surface-variant">Flow rate: Nominal</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Decorative Glass Card -->
+<div class="bg-gradient-to-br from-surface-container to-surface-container-highest rounded-xl p-8 border border-white/5 relative group cursor-pointer">
+<span class="material-symbols-outlined absolute top-4 right-4 text-on-surface-variant opacity-20 group-hover:opacity-100 transition-opacity">north_east</span>
+<p class="font-headline text-3xl font-black text-on-surface mb-2">99.98%</p>
+<p class="text-[10px] uppercase tracking-widest text-primary-container font-bold">Uptime Reliability</p>
+</div>
+</div>
+</div>
+<!-- Floating Chat Interface -->
+<div class="fixed bottom-8 right-8 z-[60] w-[400px] flex flex-col pointer-events-none">
+<!-- Chat Window Container -->
+<div class="glass-panel rounded-2xl border border-white/10 shadow-2xl pointer-events-auto flex flex-col h-[520px] neon-glow overflow-hidden">
+<!-- Chat Header -->
+<div class="p-4 bg-zinc-900/40 border-b border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="h-10 w-10 rounded-full liquid-neon flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="absolute -bottom-0.5 -right-0.5 h-3 w-3 bg-emerald-500 rounded-full border-2 border-surface-container"></div>
+</div>
+<div>
+<h4 class="font-headline text-sm font-bold tracking-tight">AI CORE ASSISTANT</h4>
+<p class="text-[10px] text-emerald-400 uppercase tracking-widest font-bold">Systems Operational</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">minimize</span>
+</button>
+<button class="text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+</div>
+<!-- Chat Body -->
+<div class="flex-1 overflow-y-auto p-5 space-y-6 hide-scrollbar">
+<!-- AI Message -->
+<div class="flex gap-3 max-w-[85%]">
+<div class="h-8 w-8 rounded-full bg-surface-container-highest border border-white/5 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-primary-container">smart_toy</span>
+</div>
+<div class="bg-surface-container-highest/60 rounded-2xl rounded-tl-none p-3 border border-white/5">
+<p class="text-xs leading-relaxed text-on-surface">Greetings, Administrator. I've detected a minor variance in the <span class="text-primary-container">Neural_L4</span> node. Would you like me to run a diagnostic?</p>
+<span class="text-[9px] text-on-surface-variant mt-2 block">14:02 PM</span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex flex-row-reverse gap-3 max-w-[85%] ml-auto">
+<div class="h-8 w-8 rounded-full overflow-hidden border border-cyan-400/30 flex-shrink-0">
+<img alt="User Avatar" data-alt="close-up of a system administrator with a focused expression and technological light reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWLPs3LAkcUzTwpgVgBSQx8uqttJngCb5nYs_KbBzz5o5KHHNIu2VptgQaSKpVATOjbdbSvE1uv-HUknASpVJF-L5xXEPez1lwpUSxMiVfrEmKKWKHc_hqgst35dQRL0exPaaGNXwDOKssMgZwVdPq0Y7BU-kMaYmVWrLEYJ6kmCZHV7Tg0ynvSRQzWB4o61gzoLMBrdJURc7tPMY_Rcgne8BVWc0lS1crLGI9NtDouisrN9z3AyOUul44y-zQzTKjTPTvLtpHmBI"/>
+</div>
+<div class="bg-primary-container/10 rounded-2xl rounded-tr-none p-3 border border-primary-container/20">
+<p class="text-xs leading-relaxed text-on-surface">Yes, execute diagnostic and check for model drift in the last epoch.</p>
+<span class="text-[9px] text-on-surface-variant mt-2 block text-right">14:03 PM</span>
+</div>
+</div>
+<!-- AI Processing -->
+<div class="flex gap-3 max-w-[85%]">
+<div class="h-8 w-8 rounded-full bg-surface-container-highest border border-white/5 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-primary-container">smart_toy</span>
+</div>
+<div class="bg-surface-container-highest/60 rounded-2xl rounded-tl-none p-3 border border-white/5">
+<div class="flex gap-1.5 mb-2">
+<div class="w-1.5 h-1.5 bg-primary-container rounded-full animate-pulse"></div>
+<div class="w-1.5 h-1.5 bg-primary-container/50 rounded-full animate-pulse [animation-delay:0.2s]"></div>
+<div class="w-1.5 h-1.5 bg-primary-container/20 rounded-full animate-pulse [animation-delay:0.4s]"></div>
+</div>
+<p class="text-xs leading-relaxed text-on-surface-variant italic">Analyzing neural weights...</p>
+</div>
+</div>
+</div>
+<!-- Chat Footer / Input -->
+<div class="p-4 bg-zinc-900/40 border-t border-white/5 space-y-4">
+<!-- Suggested Actions -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full border border-primary-container/20 bg-primary-container/5 text-[10px] text-primary-container hover:bg-primary-container/10 transition-colors">
+                            Check Model Status
+                        </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full border border-secondary-container/20 bg-secondary-container/5 text-[10px] text-secondary-container hover:bg-secondary-container/10 transition-colors">
+                            Analyze Data Drift
+                        </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] text-on-surface-variant hover:bg-white/10 transition-colors">
+                            System Logs
+                        </button>
+</div>
+<!-- Input Bar -->
+<div class="flex items-center gap-3 bg-surface-container-highest/80 rounded-xl px-4 py-2 border border-white/10 group focus-within:border-primary-container/50 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-primary-container transition-colors">add_circle</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs text-on-surface w-full placeholder:text-zinc-600" placeholder="Issue a system command..." type="text"/>
+<button class="h-8 w-8 liquid-neon rounded-lg flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

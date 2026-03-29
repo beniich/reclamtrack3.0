@@ -17,7 +17,7 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <header className="h-16 border-b border-cyan-500/10 glass-nav px-6 flex items-center justify-between sticky top-0 z-50">
+        <header className="h-16 border-b border-indigo-500/10 glass-nav px-6 flex items-center justify-between sticky top-0 z-50">
             <div className="flex items-center gap-4">
                 <Link href="/" className="flex items-center gap-3">
                     <Image

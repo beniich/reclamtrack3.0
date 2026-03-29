@@ -90,18 +90,20 @@ export function Sidebar() {
     return (
         <aside
             className={cn(
-                'relative flex flex-col h-[calc(100vh-4rem)] sticky top-0 hidden lg:flex transition-all duration-300 ease-in-out z-30',
-                'bg-[#0d1b2e]/95 backdrop-blur-xl border-r border-white/[0.06]',
-                collapsed ? 'w-[68px]' : 'w-64'
+                'relative flex flex-col h-[calc(100vh-6rem)] sticky top-4 my-4 ml-4 hidden lg:flex transition-all duration-500 ease-in-out z-30',
+                'bg-slate-900/40 backdrop-blur-3xl border border-white/[0.08] rounded-[2.5rem] overflow-hidden group/sidebar',
+                collapsed ? 'w-[80px]' : 'w-72'
             )}
             style={{
-                background: 'linear-gradient(180deg, #0a1628 0%, #0d1b2e 50%, #0a1525 100%)',
-                boxShadow: '4px 0 24px rgba(0,0,0,0.4)',
+                background: 'linear-gradient(165deg, rgba(30, 27, 75, 0.4) 0%, rgba(51, 65, 85, 0.2) 50%, rgba(15, 23, 42, 0.4) 100%)',
+                boxShadow: '0 20px 50px -12px rgba(99, 102, 241, 0.15)',
             }}
         >
-            {/* Ambient glow top */}
-            <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-indigo-600/8 to-transparent pointer-events-none" />
-            <div className="absolute top-8 left-8 w-32 h-32 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+            {/* Ambient glows for the premium look */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-[60px] pointer-events-none" />
+            <div className="absolute bottom-10 left-0 w-32 h-32 bg-purple-600/10 rounded-full blur-[60px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-blue-500/5 rounded-full blur-[80px] pointer-events-none" />
+
 
             {/* Collapse Toggle */}
             <button
@@ -141,18 +143,17 @@ export function Sidebar() {
                                             : 'text-slate-400 hover:bg-white/[0.04] hover:text-slate-200'
                                     )}
                                 >
-                                    {/* Active left bar */}
+                                    {/* Active left bar glow */}
                                     {active && (
-                                        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-indigo-400 rounded-full shadow-[0_0_8px_2px_rgba(129,140,248,0.5)]" />
+                                        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-purple-500 rounded-full shadow-[0_0_12px_rgba(168,85,247,0.6)]" />
                                     )}
 
-                                    {/* Icon container */}
                                     <span
                                         className={cn(
-                                            'flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-200',
+                                            'flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-300',
                                             active
-                                                ? 'bg-indigo-500/20 text-indigo-300'
-                                                : 'text-slate-500 group-hover/item:text-slate-300 group-hover/item:bg-white/5'
+                                                ? 'bg-purple-500/20 text-purple-300 ring-1 ring-purple-500/30'
+                                                : 'text-slate-500 group-hover/item:text-purple-300 group-hover/item:bg-purple-500/10'
                                         )}
                                     >
                                         <Icon className="w-4 h-4" />

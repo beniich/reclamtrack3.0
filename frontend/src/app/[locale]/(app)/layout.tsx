@@ -47,12 +47,18 @@ export default function AppLayout({
     if (!user) return null;
 
     return (
-        <div className="flex flex-col min-h-screen bg-brand-midnight text-white">
+        <div className="flex flex-col min-h-screen bg-[#0a0f1a] text-white selection:bg-indigo-500/30">
             <Header />
-            <div className="flex flex-1 overflow-hidden">
+            <div className="flex flex-1 relative overflow-hidden">
+                {/* Background decorative elements */}
+                <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full" />
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-900/10 blur-[120px] rounded-full" />
+                </div>
+
                 <Sidebar />
-                <main className="flex-1 overflow-y-auto min-h-0">
-                    <div className="max-w-[1600px] mx-auto px-4 sm:px-6 py-6">
+                <main className="flex-1 overflow-y-auto min-h-0 relative">
+                    <div className="max-w-[1600px] mx-auto px-6 py-8">
                         {children}
                     </div>
                 </main>
@@ -60,5 +66,6 @@ export default function AppLayout({
             <Footer />
         </div>
     );
+
 }
 

@@ -43,8 +43,10 @@ describe('Staff Routes', () => {
   describe('GET /api/staff', () => {
     it('should return staff members', async () => {
       const mockStaff = [{ _id: '1', name: 'John Doe' }];
-      // @ts-expect-error - Staff.find().sort result is not correctly inferred as a mock
-      (Staff.find().sort as jest.Mock).mockResolvedValue(mockStaff);
+      (Staff.find as jest.Mock).mockReturnValue({
+        sort: jest.fn().mockResolvedValue(mockStaff),
+      });
+
 
       const res = await request(app).get('/api/staff');
 

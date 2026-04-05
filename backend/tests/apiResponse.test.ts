@@ -3,9 +3,8 @@
  */
 
 import { Response } from 'express';
-// @ts-expect-error - Jest globals are not typed in this environment
-
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+
 import {
   ErrorCodes,
   createdResponse,
@@ -17,12 +16,13 @@ import {
 
 // Mock Response object
 const mockResponse = () => {
-  const res: Partial<Response> = {};
+  const res: any = {};
   res.status = jest.fn().mockReturnValue(res);
   res.json = jest.fn().mockReturnValue(res);
   res.send = jest.fn().mockReturnValue(res);
   return res as Response;
 };
+
 
 describe('API Response Utilities', () => {
   let res: Response;

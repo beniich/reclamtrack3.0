@@ -3,8 +3,8 @@
  */
 
 import { NextFunction, Request, Response } from 'express';
-// @ts-expect-error - Jest globals are not typed in this environment
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+
 import jwt from 'jsonwebtoken';
 import { authenticate } from '../src/middleware/security.js';
 
@@ -22,12 +22,13 @@ describe('Security Middleware', () => {
     };
     res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
+      json: jest.fn().mockReturnThis(),
+    } as any;
+
     next = jest.fn();
-    // @ts-expect-error - jwt.verify is mocked and TypeScript cannot infer the mock type
-    (jwt.verify as jest.Mock).mockClear();
+    (jwt.verify as any).mockClear();
   });
+
 
   describe('authenticate', () => {
     it('should return 401 if Authorization header is missing', () => {
@@ -41,7 +42,8 @@ describe('Security Middleware', () => {
     });
 
     it('should return 401 if Authorization format is invalid', () => {
-      req.headers.authorization = 'IncorrectFormat Token123';
+      (req.headers as any).authorization = 'IncorrectFormat Token123';
+
 
       authenticate(req as Request, res as Response, next);
 
@@ -50,11 +52,11 @@ describe('Security Middleware', () => {
     });
 
     it('should call next() and attach user if token is valid', () => {
-      req.headers.authorization = 'Bearer ValidToken123';
-      const userPayload = { id: '123', role: 'USER' };
+      req.headers = { authorization: 'Bearer ValidToken123' };
 
-      // @ts-expect-error - mockReturnValue is specific to jest.Mock
-      (jwt.verify as jest.Mock).mockReturnValue(userPayload);
+      const userPayload = { id: '123', role: 'USER' };
+      (jwt.verify as any).mockReturnValue(userPayload);
+
 
       authenticate(req as Request, res as Response, next);
 
@@ -67,11 +69,11 @@ describe('Security Middleware', () => {
     });
 
     it('should return 401 if token verification fails', () => {
-      req.headers.authorization = 'Bearer BadToken';
-      // @ts-expect-error - mockImplementation is specific to jest.Mock
-      (jwt.verify as jest.Mock).mockImplementation(() => {
+      (req.headers as any).authorization = 'Bearer BadToken';
+      (jwt.verify as any).mockImplementation(() => {
         throw new Error('Invalid token');
       });
+
 
       authenticate(req as Request, res as Response, next);
 

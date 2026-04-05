@@ -1,8 +1,8 @@
-﻿import express, { Response } from 'express';
+import express, { Response } from 'express';
 import { authenticate as auth } from '../middleware/security.js';
 import { requireAdmin, requireOrganization } from '../middleware/security.js';
 import NetworkDevice from '../models/NetworkDevice.js';
-import defaultNetworkService from '../services/networkService.js';
+import defaultNetworkService, { NetworkService } from '../services/networkService.js';
 import { AuthenticatedRequest } from '../types/request.js';
 
 const router = express.Router();
@@ -56,11 +56,15 @@ router.get('/device/:id/check', async (req: AuthenticatedRequest, res: Response)
     let snmpData = {};
     if (pingRes.alive) {
       // Use community string from device config or default
-      const service = new (require('../services/networkService.js').NetworkService)(
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const { NetworkService } = (await import('../services/networkService.js')) as any;
+
+      const service = new NetworkService(
         (device as any).snmpCommunity || process.env.SNMP_COMMUNITY || 'public'
       );
-      snmpData = await service.getSnmpSystemInfo(device.ipAddress);
+      snmpData = await (service as any).getSnmpSystemInfo(device.ipAddress);
     }
+
 
     res.json({
       device: {
@@ -95,12 +99,17 @@ router.post(
         return res.status(404).json({ error: 'Device not found' });
       }
 
-      const service = new (require('../services/networkService.js').NetworkService)(
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const { NetworkService } = (await import('../services/networkService.js')) as any;
+
+      const service = new NetworkService(
         (device as any).snmpCommunity || process.env.SNMP_COMMUNITY || 'public'
       );
 
       // Full SNMP Walk (simulated via getSnmpSystemInfo for now)
-      const snmpData = await service.getSnmpSystemInfo(device.ipAddress);
+      const snmpData = await (service as any).getSnmpSystemInfo(device.ipAddress);
+
+
 
       // Update Device Info
       if (snmpData) {

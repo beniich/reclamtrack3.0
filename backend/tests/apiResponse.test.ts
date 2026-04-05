@@ -3,7 +3,8 @@
  */
 
 import { Response } from 'express';
-// @ts-ignore
+// @ts-expect-error - Jest globals are not typed in this environment
+
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import {
   ErrorCodes,

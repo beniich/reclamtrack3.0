@@ -3,7 +3,7 @@
  */
 
 import { NextFunction, Request, Response } from 'express';
-// @ts-ignore
+// @ts-expect-error - Jest globals are not typed in this environment
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import jwt from 'jsonwebtoken';
 import { authenticate } from '../src/middleware/security.js';
@@ -25,7 +25,7 @@ describe('Security Middleware', () => {
       json: jest.fn(),
     };
     next = jest.fn();
-    // @ts-ignore
+    // @ts-expect-error - jwt.verify is mocked and TypeScript cannot infer the mock type
     (jwt.verify as jest.Mock).mockClear();
   });
 
@@ -53,7 +53,7 @@ describe('Security Middleware', () => {
       req.headers.authorization = 'Bearer ValidToken123';
       const userPayload = { id: '123', role: 'USER' };
 
-      // @ts-ignore
+      // @ts-expect-error - mockReturnValue is specific to jest.Mock
       (jwt.verify as jest.Mock).mockReturnValue(userPayload);
 
       authenticate(req as Request, res as Response, next);
@@ -68,7 +68,7 @@ describe('Security Middleware', () => {
 
     it('should return 401 if token verification fails', () => {
       req.headers.authorization = 'Bearer BadToken';
-      // @ts-ignore
+      // @ts-expect-error - mockImplementation is specific to jest.Mock
       (jwt.verify as jest.Mock).mockImplementation(() => {
         throw new Error('Invalid token');
       });

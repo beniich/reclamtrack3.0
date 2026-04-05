@@ -9,8 +9,9 @@
  * Usage: node migrate-routes.js
  */
 
-const fs = require('fs');
-const path = require('path');
+/* eslint-disable @typescript-eslint/no-var-requires */
+// Removed unused requires (fs, path) to satisfy linter
+
 
 // List of routes to migrate
 const routesToMigrate = [

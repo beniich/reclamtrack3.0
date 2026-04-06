@@ -1,8 +1,9 @@
 'use client';
 
-import Header from '@/components/Header';
 import { Footer } from '@/components/layout/Footer';
+import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
+
 import { useAuth } from '@/hooks/useAuth';
 import useNotifications from '@/hooks/useNotifications';
 import { useAuthStore } from '@/store/authStore';

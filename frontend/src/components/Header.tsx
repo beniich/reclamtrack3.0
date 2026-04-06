@@ -10,6 +10,8 @@ import { useState } from 'react';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { OrganizationSelector } from './organization/OrganizationSelector';
 
+import { AnimatedLogo } from '@/components/shared/AnimatedLogo';
+
 export default function Header() {
     const { user, logout } = useAuthStore();
     const t = useTranslations('Navbar');
@@ -17,21 +19,16 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <header className="h-16 border-b border-indigo-500/10 glass-nav px-6 flex items-center justify-between sticky top-0 z-50">
+        <header className="h-16 border-b border-indigo-500/10 glass-nav px-6 flex items-center justify-between sticky top-0 z-50 transition-all duration-300">
             <div className="flex items-center gap-4">
-                <Link href="/" className="flex items-center gap-3">
-                    <Image
-                        src="/logo.png"
-                        alt="ReclamTrack Logo"
-                        width={40}
-                        height={40}
-                        className="h-10 w-10 rounded-xl object-cover shadow-lg shadow-cyan-500/20"
-                    />
+                <Link href="/dashboard" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                    <AnimatedLogo size={40} />
                     <div className="flex flex-col">
                         <h1 className="text-lg font-display font-black leading-none tracking-tighter text-white uppercase">ReclamTrack</h1>
                         <span className="text-[10px] uppercase tracking-widest text-cyan-400 font-black">{t('technicalServices')}</span>
                     </div>
                 </Link>
+
 
                 <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 mx-2 hidden lg:block"></div>
 

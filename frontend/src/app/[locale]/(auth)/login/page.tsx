@@ -89,12 +89,13 @@ export default function LoginPage() {
 
             {/* Logo / Branding Header */}
             <div className="mb-8 flex flex-col items-center gap-4">
-                <AnimatedLogo size={80} />
+                <AnimatedLogo size={200} />
                 <div className="text-center">
                     <h1 className="text-3xl font-black tracking-tighter text-white uppercase italic" suppressHydrationWarning>ReclamTrack</h1>
                     <p className="text-[10px] text-cyan-400 uppercase tracking-widest font-black mt-1">Intervention Management System</p>
                 </div>
             </div>
+
 
 
             {/* Login Card */}

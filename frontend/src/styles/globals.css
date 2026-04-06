@@ -350,4 +350,32 @@
   .symbol-fill {
     font-variation-settings: 'FILL' 1;
   }
+
+  /* Logo Animations */
+  .logo-cloud {
+    animation: floating-logo 6s ease-in-out infinite;
+  }
+  .logo-bolt {
+    animation: pulsing-bolt 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(157, 78, 221, 0.6));
+  }
+  .logo-circuit {
+    animation: flickering-circuit 4s linear infinite;
+  }
+
+  @keyframes floating-logo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  @keyframes pulsing-bolt {
+    0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 8px rgba(157, 78, 221, 0.6)); }
+    50% { transform: scale(1.05); opacity: 0.9; filter: drop-shadow(0 0 15px rgba(157, 78, 221, 0.9)); }
+  }
+  @keyframes flickering-circuit {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+    70% { opacity: 0.9; }
+    80% { opacity: 0.7; }
+  }
 }
+

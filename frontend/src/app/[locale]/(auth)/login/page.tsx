@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatedLogo } from '@/components/shared/AnimatedLogo';
 import { Link } from '@/i18n/navigation';
 import { useAuthStore } from '@/store/authStore';
 import { GoogleLogin } from '@react-oauth/google';
@@ -17,8 +18,8 @@ export default function LoginPage() {
     const locale = useLocale();
     const router = useRouter();
 
-    // Utilisation du store pour la gestion de l'état global
     const { login, googleLogin } = useAuthStore();
+
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -88,16 +89,13 @@ export default function LoginPage() {
 
             {/* Logo / Branding Header */}
             <div className="mb-8 flex flex-col items-center gap-4">
-                <img
-                    src="/logo.png"
-                    alt="ReclamTrack Logo"
-                    className="h-20 w-20 rounded-2xl object-cover shadow-2xl shadow-cyan-500/30"
-                />
+                <AnimatedLogo size={80} />
                 <div className="text-center">
                     <h1 className="text-3xl font-black tracking-tighter text-white uppercase italic" suppressHydrationWarning>ReclamTrack</h1>
                     <p className="text-[10px] text-cyan-400 uppercase tracking-widest font-black mt-1">Intervention Management System</p>
                 </div>
             </div>
+
 
             {/* Login Card */}
             <div className="w-full max-w-[440px] glass-card rounded-[2rem] overflow-hidden">

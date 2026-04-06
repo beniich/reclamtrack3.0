@@ -1,0 +1,509 @@
+﻿
+> reclamtrack-backend@1.0.0 lint
+> eslint . --ext .ts,.js
+
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\routes\ad.js
+  9:22  warning  'req' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\routes\googleAuth.js
+  12:41  warning  'next' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\routes\monitoring.js
+  49:34  error  Require statement not part of import statement  @typescript-eslint/no-var-requires
+  80:30  error  Require statement not part of import statement  @typescript-eslint/no-var-requires
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\routes\network.js
+  11:23  warning  'status' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\routes\organizations.js
+  128:15  warning  'userId' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\routes\roster.js
+  26:15  warning  'activeLeaves' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\scripts\performance-diagnostic.js
+  14:16  warning  'measureApiEndpoint' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\services\adService.js
+  48:38  warning  'reject' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\services\complaintService.js
+  162:48  warning  'approvedBy' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  213:64  warning  'rejectedBy' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\services\networkService.js
+  21:15  warning  'results' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  44:38  warning  'reject' is defined but never used. Allowed unused args must match /^_/u            @typescript-eslint/no-unused-vars
+  64:27  warning  'oidStr' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\services\sagaConsumer.js
+  9:35  warning  'topic' is defined but never used. Allowed unused args must match /^_/u      @typescript-eslint/no-unused-vars
+  9:42  warning  'partition' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\services\socketService.js
+  17:40  warning  'token' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\dist\services\subscriptionService.js
+  71:11  warning  'sub' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\scripts\migrate-routes.js
+  12:7   warning  'fs' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  12:12  error    Require statement not part of import statement                                   @typescript-eslint/no-var-requires
+  13:7   warning  'path' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  13:14  error    Require statement not part of import statement                                   @typescript-eslint/no-var-requires
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\config\db.ts
+   9:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  19:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\controllers\complaintController.ts
+    9:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   37:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   53:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   67:30  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   68:38  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   82:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   92:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  116:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  126:30  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  143:79  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  156:70  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  169:30  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  170:38  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  210:30  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  211:38  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\middleware\errorHandler.ts
+   56:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   58:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  110:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  123:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\middleware\organization.ts
+   8:48  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  50:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  63:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  73:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  89:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\middleware\upload.ts
+  28:26  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:46  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\models\ADSyncLog.ts
+  23:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\models\AuditLog.ts
+  8:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\models\ITAsset.ts
+  63:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\models\Notification.ts
+  9:10  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\models\User.ts
+  26:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  53:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\ad.ts
+  13:22  warning  'req' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  38:19  warning  Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+  50:19  warning  Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+  73:19  warning  Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+  86:19  warning  Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\admin.ts
+    9:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   10:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  120:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  130:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\analytics.ts
+   27:23  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   62:43  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  219:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  383:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  384:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  402:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  476:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\assignments.ts
+   13:38  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   22:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  113:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  146:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\audit.ts
+  13:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  24:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  62:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\billing.ts
+   21:38  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  119:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  129:51  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  143:51  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\dashboard.ts
+   10:64  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  106:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  106:26  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\devops.ts
+  28:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  51:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\feedback.ts
+  12:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\fleet.ts
+  68:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\googleAuth.ts
+  14:60  warning  'next' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  87:19  warning  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\interventions.ts
+   35:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   71:32  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  106:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  145:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  178:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\inventory.ts
+  135:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  173:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  186:38  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  207:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  209:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  237:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  256:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  277:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  331:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  350:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  363:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  365:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  385:50  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  423:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\it-assets.ts
+   17:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   37:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   74:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   95:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  117:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  137:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  156:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  187:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\it-tickets.ts
+   17:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   40:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   97:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  121:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  164:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  173:23  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  197:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  226:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  261:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  268:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  292:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\knowledge.ts
+  12:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\leave.ts
+  9:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\members.ts
+   19:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   36:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   57:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   93:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  111:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  127:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  143:15  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  155:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\messages.ts
+   9:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  14:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  47:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\monitoring.ts
+   34:19  warning  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+   59:28  error    Require statement not part of import statement  @typescript-eslint/no-var-requires
+   60:20  warning  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+   77:19  warning  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+   98:28  error    Require statement not part of import statement  @typescript-eslint/no-var-requires
+   99:20  warning  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  108:46  warning  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  128:21  warning  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\network.ts
+   15:19  warning  'status' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   17:18  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+   31:19  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+   50:19  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+   65:19  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+   85:19  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  104:19  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  135:19  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  142:49  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  162:19  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  169:34  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  201:19  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\organizations.ts
+   28:15  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+   76:21  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+   87:43  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  100:33  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  108:19  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  118:67  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  133:19  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  143:69  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+  145:11  warning  'userId' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  163:19  warning  Unexpected any. Specify a different type                                           @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\planning.ts
+  18:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\roster.ts
+   8:64  warning  Unexpected any. Specify a different type                                                 @typescript-eslint/no-explicit-any
+  11:19  warning  Unexpected any. Specify a different type                                                 @typescript-eslint/no-explicit-any
+  25:71  warning  Unexpected any. Specify a different type                                                 @typescript-eslint/no-explicit-any
+  31:37  warning  Unexpected any. Specify a different type                                                 @typescript-eslint/no-explicit-any
+  32:11  warning  'activeLeaves' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  53:15  warning  Unexpected any. Specify a different type                                                 @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\scheduler.ts
+  37:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\security.ts
+   38:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   52:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   66:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   91:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  111:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  147:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  162:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  178:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  193:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  208:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  223:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  244:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  270:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  292:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  314:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  335:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\routes\teams.ts
+   5:16  warning  'param' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  17:65  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  43:41  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  69:63  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\scripts\performance-diagnostic.ts
+  25:16  warning  'measureApiEndpoint' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  38:21  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  72:21  warning  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\scripts\seedE2E.ts
+   1:8   warning  'mongoose' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  29:29  warning  Unexpected any. Specify a different type                                    @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\scripts\seedPlanning.ts
+  1:8  warning  'mongoose' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\scripts\test-monitoring-access.ts
+   38:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   58:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   73:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  117:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  141:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  166:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\scripts\testAPI.ts
+  35:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\scripts\verify-connection.ts
+  13:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\adService.ts
+   26:15  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+   27:23  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+   58:52  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+   71:34  warning  'reject' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+   72:54  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+   87:38  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+   97:40  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+  107:57  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+  107:70  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+  118:13  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+  120:62  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+  125:21  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+  202:23  warning  Unexpected any. Specify a different type                                  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\complaintService.ts
+   11:35  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+   12:18  warning  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  200:62  warning  'approvedBy' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  265:5   warning  'rejectedBy' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\eventBus.ts
+   8:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  20:64  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\networkService.ts
+   3:8   warning  'NetworkDevice' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   4:8   warning  'ITAsset' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  46:11  warning  'results' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  74:34  warning  'reject' is defined but never used. Allowed unused args must match /^_/u            @typescript-eslint/no-unused-vars
+  86:40  warning  Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+  86:55  warning  Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+  98:17  warning  'oidStr' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\pfSenseService.ts
+   95:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  125:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  177:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  208:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  226:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\sagaConsumer.ts
+  11:35  warning  'topic' is defined but never used. Allowed unused args must match /^_/u      @typescript-eslint/no-unused-vars
+  11:42  warning  'partition' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\schedulingService.ts
+  3:21  warning  'IComplaint' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\secretService.ts
+  31:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  63:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\securityAuditService.ts
+  25:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  26:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  27:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\securityService.ts
+   32:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   34:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   54:78  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  100:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  116:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  147:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  192:43  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  210:42  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\security\index.ts
+  170:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\socketService.ts
+   10:10  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+   39:34  warning  'token' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+   56:50  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+   66:61  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+   78:66  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  283:42  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  306:40  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  319:60  warning  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\sshService.ts
+  54:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\subscriptionService.ts
+  97:9  warning  'sub' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\services\tokenService.ts
+  220:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\types\request.ts
+  11:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\src\utils\apiResponse.ts
+   6:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  67:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  85:64  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\test-login.ts
+  23:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\test-stripe.ts
+  19:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  29:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\tests\apiResponse.test.ts
+  6:1  error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\tests\auth.test.ts
+  43:15  warning  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+  43:25  warning  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+  43:35  warning  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+  43:40  warning  'next' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  43:46  warning  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\tests\security.test.ts
+   6:1   error    Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+  28:5   error    Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+  56:7   error    Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+  65:22  warning  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  71:7   error    Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+C:\Users\pc gold\projet dash\ticket\reclamtrack\backend\tests\staff.test.ts
+   7:23  warning  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+   7:33  warning  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+   7:44  warning  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  11:30  warning  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  11:40  warning  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  11:51  warning  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  15:23  warning  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  15:33  warning  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  15:44  warning  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  46:7   error    Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+Ô£û 307 problems (12 errors, 295 warnings)
+
+node.exe : npm error 
+Lifecycle script `lint` 
+failed with error:
+Au caractère Ligne:1 : 1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (n  
+  pm error Lifec...led    
+ with error::String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+npm error code 1
+npm error path 
+C:\Users\pc gold\projet da
+sh\ticket\reclamtrack\back
+end
+npm error workspace 
+reclamtrack-backend@1.0.0
+npm error location 
+C:\Users\pc gold\projet da
+sh\ticket\reclamtrack\back
+end
+npm error command failed
+npm error command cmd.exe 
+/d /s /c eslint . --ext 
+.ts,.js

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useAuthStore } from '@/store/authStore';
 import { Bell, Search, Settings, User, LogOut } from 'lucide-react';
-import { Button } from '@/components/ui/button'; // Assuming Button component exists
+import { AnimatedLogo } from '@/components/shared/AnimatedLogo';
 
 interface HeaderProps {
     showSearch?: boolean;
@@ -21,19 +21,19 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
             {/* Logo & Breadcrumbs */}
             <div className="flex items-center gap-8">
                 <div className="flex items-center gap-3">
-                    <div className="bg-primary p-1.5 rounded-lg text-white">
-                        <span className="material-symbols-outlined block">account_balance</span>
-                        {/* Note: Ensure Material Symbols are loaded or use Lucide Icon replacement if preferred */}
-                    </div>
-                    <div className="flex flex-col">
-                        <h1 className="text-lg font-bold leading-none tracking-tight text-gray-900 dark:text-white">
-                            ReclamTrack
-                        </h1>
-                        <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">
-                            Municipal Services
-                        </span>
-                    </div>
+                    <Link href="/dashboard" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
+                        <AnimatedLogo size={36} />
+                        <div className="flex flex-col">
+                            <h1 className="text-lg font-bold leading-none tracking-tight text-gray-900 dark:text-white">
+                                ReclamTrack
+                            </h1>
+                            <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">
+                                Municipal Services
+                            </span>
+                        </div>
+                    </Link>
                 </div>
+
 
                 {breadcrumbs && (
                     <nav className="hidden md:flex items-center gap-2 text-sm">

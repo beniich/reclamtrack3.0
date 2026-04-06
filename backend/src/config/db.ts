@@ -1,25 +1,34 @@
 import mongoose from 'mongoose';
 import { logger } from '../utils/logger.js';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+
+let mongod: MongoMemoryServer | null = null;
 
 export const connectDB = async () => {
     try {
-        const mongoUri = process.env.MONGODB_URI;
+        let mongoUri = process.env.MONGODB_URI;
 
-        if (!mongoUri || mongoUri.includes('username:password')) {
-            (global as any).IS_DEMO_MODE = true;
-            logger.warn('⚠️  MongoDB non configuré - Mode DÉMO activé (données en mémoire)');
-            logger.warn('💡 Pour activer MongoDB, configure MONGODB_URI dans backend/.env');
-            return;
+        if (!mongoUri || mongoUri.includes('username:password') || process.env.USE_MEMORY_DB === 'true') {
+            logger.info('🧠 Initialisation de MongoDB en mémoire (Mode Temporaire)...');
+            mongod = await MongoMemoryServer.create();
+            mongoUri = mongod.getUri();
+            (global as any).IS_MEMORY_DB = true;
         }
 
         await mongoose.connect(mongoUri);
-        logger.info('✅ MongoDB connecté');
+        logger.info(`✅ MongoDB connecté (${(global as any).IS_MEMORY_DB ? 'MEMOIRE' : 'PERSISTANT'})`);
     } catch (err) {
-        mongoose.set('bufferCommands', false);
         (global as any).IS_DEMO_MODE = true;
         logger.warn('⚠️  Impossible de se connecter à MongoDB - Mode DÉMO activé');
         logger.warn('💡 Erreur:', err instanceof Error ? err.message : err);
-        logger.warn('💡 L\'application continuera sans base de données (données en mémoire)');
-        // Ne pas quitter le processus, continuer en mode démo
     }
 };
+
+
+export const disconnectDB = async () => {
+    await mongoose.disconnect();
+    if (mongod) {
+        await mongod.stop();
+    }
+};
+

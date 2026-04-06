@@ -1,0 +1,11 @@
+﻿
+> reclamtrack-frontend@1.0.0 build
+> next build
+
+   Ôû▓ Next.js 15.1.12
+   - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+ Ô£ô Compiled successfully
+   Skipping linting
+   Checking validity of types ...

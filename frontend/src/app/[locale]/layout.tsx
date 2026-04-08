@@ -6,6 +6,7 @@ import { AuthProvider } from '@/providers/AuthProvider';
 import { CallProvider } from '@/providers/CallProvider';
 import { QueryProvider } from '@/providers/QueryProvider';
 import '@/styles/globals.css';
+import { Analytics } from '@vercel/analytics/next';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -78,6 +79,7 @@ export default async function LocaleLayout({
                         </QueryProvider>
                     </GoogleOAuthProvider>
                 </NextIntlClientProvider>
+                <Analytics />
             </body>
         </html>
     );

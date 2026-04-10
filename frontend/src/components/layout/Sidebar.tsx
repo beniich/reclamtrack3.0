@@ -20,6 +20,7 @@ import {
     MessageSquare,
     ShieldCheck,
     ChevronRight,
+    Shapes,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -44,6 +45,7 @@ const menuGroups: MenuGroup[] = [
         items: [
             { label: 'Dashboard',     href: '/dashboard',          icon: LayoutDashboard },
             { label: 'Réclamations',  href: '/complaints',         icon: FileText,   badge: 'live', badgeColor: 'bg-cyan-500' },
+            { label: 'Écosystème',    href: '/ecosystem',          icon: Shapes,     badge: 'Alpha', badgeColor: 'bg-purple-500' },
             { label: 'Carte',         href: '/map',                icon: Map },
             { label: 'Analyses',      href: '/analytics',          icon: BarChart3 },
         ],

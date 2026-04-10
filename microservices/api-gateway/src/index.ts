@@ -4,6 +4,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 
+import { applyCleanPipe } from './middlewares/clean-pipe';
+
 dotenv.config();
 
 const app = express();
@@ -12,6 +14,7 @@ const PORT = process.env.PORT || 5001;
 // Middleware
 app.use(cors());
 app.use(morgan('dev'));
+app.use(applyCleanPipe);
 
 const formatDate = () => new Date().toISOString();
 

@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+// ... code continues ...
+import JsonLd from '@/components/seo/JsonLd';
 import { 
   HeartIcon, 
   UserGroupIcon, 

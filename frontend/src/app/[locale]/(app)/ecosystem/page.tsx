@@ -11,7 +11,8 @@ import {
   WrenchScrewdriverIcon, // Industrie/Bolt/Mecanicpro
   ShoppingCartIcon, // E-commerce
   BoltIcon, // Cloud/Nexus
-  ChevronRightIcon
+  ChevronRightIcon,
+  ChartPieIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 

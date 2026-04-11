@@ -93,35 +93,47 @@
   }
 
   .dark {
-    /* ===== Dark Mode Overrides ===== */
-    --background: 222.2 84% 4.9%;
+    /* ===== Dark Mode Overrides (Electric Orange & Violet) ===== */
+    --background: 222 47% 4%;
     --foreground: 210 40% 98%;
 
-    --background-light: #1e1e2e;
-    --background-dark: var(--dark-amethyst);
+    --background-light: #0d1117;
+    --background-dark: #020617;
 
-    --card: 222.2 84% 4.9%;
+    --color-primary: #ff6d00;
+    --color-primary-light: #ff9e00;
+    --color-primary-dark: #ff5400;
+
+    --color-secondary: #7b2cbf;
+    --color-secondary-light: #9d4edd;
+    --color-secondary-dark: #3c096c;
+
+    --card: 222 47% 4%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 222 47% 4%;
     --popover-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
+    --muted: 217.2 32.6% 12%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 217.2 32.6% 12%;
     --accent-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 222 47% 12%;
+    --input: 222 47% 12%;
+    --ring: 25 100% 50%; /* Electric Orange */
 
-    /* Dark mode shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+    /* Custom Glass for Dark Mode */
+    --glass-background: rgba(13, 17, 23, 0.7);
+    --glass-border: rgba(255, 109, 0, 0.1);
+
+    /* Dark mode shadows with color tint */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.6);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.6);
+    --shadow-lg: 0 10px 15px -3px rgba(255, 109, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(123, 44, 191, 0.1);
   }
 }
 

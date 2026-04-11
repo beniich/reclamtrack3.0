@@ -126,31 +126,31 @@ export default function DashboardPage() {
     ];
 
     return (
-        <div className="p-6 space-y-10 bg-slate-50 min-h-screen font-display selection:bg-indigo-500/10 relative overflow-hidden">
+        <div className="p-6 space-y-10 bg-slate-50 dark:bg-slate-950 min-h-screen font-display selection:bg-indigo-500/10 dark:selection:bg-orange-500/10 relative overflow-hidden">
             {/* Ambient glow */}
-            <div className="absolute top-0 right-0 w-full h-full bg-indigo-500/5 blur-[120px] -z-10 pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-full h-full bg-indigo-500/5 dark:bg-orange-500/5 blur-[120px] -z-10 pointer-events-none"></div>
 
             {/* Header Section */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
                 <div>
                     <div className="flex items-center gap-2 mb-2">
-                        <Activity className="w-5 h-5 text-indigo-600 animate-pulse" />
-                        <span className="text-[10px] font-black text-indigo-600 uppercase tracking-[0.3em]">Operational Dashboard</span>
+                        <Activity className="w-5 h-5 text-indigo-600 dark:text-orange-400 animate-pulse" />
+                        <span className="text-[10px] font-black text-indigo-600 dark:text-orange-400 uppercase tracking-[0.3em]">Operational Dashboard</span>
                     </div>
-                    <h1 className="text-3xl font-black text-slate-900 uppercase italic tracking-tighter leading-none">
-                        {t('title').split(' ')[0]} <span className="text-indigo-600 italic">{t('title').split(' ').slice(1).join(' ')}</span>
+                    <h1 className="text-3xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter leading-none">
+                        {t('title').split(' ')[0]} <span className="text-indigo-600 dark:text-orange-400 italic">{t('title').split(' ').slice(1).join(' ')}</span>
                     </h1>
-                    <p className="text-slate-500 uppercase tracking-[0.2em] text-[10px] mt-2 font-black ml-1">
+                    <p className="text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] text-[10px] mt-2 font-black ml-1">
                         CENTRE DE COMMANDE DES INTERVENTIONS TECHNIQUES
                     </p>
                 </div>
 
                 <div className="flex items-center gap-3">
                     <Select value={dateFilter} onValueChange={setDateFilter}>
-                        <SelectTrigger className="w-[180px] bg-white border-slate-200 rounded-2xl h-[52px] text-slate-700 text-[10px] font-black uppercase tracking-widest hover:border-indigo-300">
+                        <SelectTrigger className="w-[180px] bg-white dark:bg-slate-900 border-slate-200 dark:border-orange-500/20 rounded-2xl h-[52px] text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-indigo-300 dark:hover:border-orange-500/50">
                             <SelectValue placeholder="Filtrer" />
                         </SelectTrigger>
-                        <SelectContent className="bg-white border-slate-200 text-slate-700">
+                        <SelectContent className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
                             <SelectItem value="today">Aujourd'hui</SelectItem>
                             <SelectItem value="7days">7 derniers jours</SelectItem>
                             <SelectItem value="30days">30 derniers jours</SelectItem>
@@ -159,7 +159,7 @@ export default function DashboardPage() {
                         </SelectContent>
                     </Select>
 
-                    <button className="bg-indigo-600 hover:brightness-110 text-white rounded-2xl px-6 py-4 text-[10px] font-black uppercase tracking-widest flex items-center gap-3 shadow-lg shadow-indigo-600/20 active:scale-95 transition-all">
+                    <button className="bg-indigo-600 dark:bg-orange-500 hover:brightness-110 text-white rounded-2xl px-6 py-4 text-[10px] font-black uppercase tracking-widest flex items-center gap-3 shadow-lg shadow-indigo-600/20 dark:shadow-orange-600/20 active:scale-95 transition-all">
                         <FileText className="w-4 h-4" />
                         {t('generateReport')}
                     </button>
@@ -184,14 +184,14 @@ export default function DashboardPage() {
                 <div className="xl:col-span-2 space-y-6">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
+                            <div className="p-2 bg-indigo-50 dark:bg-orange-500/10 text-indigo-600 dark:text-orange-400 rounded-lg">
                                 <TrendingUp className="w-5 h-5" />
                             </div>
-                            <h3 className="text-xl font-black text-slate-900 uppercase italic tracking-tight">{t('recentComplaints')}</h3>
+                            <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase italic tracking-tight">{t('recentComplaints')}</h3>
                         </div>
                         <Link
                             href="/complaints"
-                            className="group flex items-center gap-2 text-xs font-black text-primary uppercase tracking-widest hover:underline"
+                            className="group flex items-center gap-2 text-xs font-black text-primary dark:text-orange-400 uppercase tracking-widest hover:underline"
                         >
                             {t('viewAll')}
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -208,20 +208,20 @@ export default function DashboardPage() {
                                 <ComplaintCard key={complaint._id} complaint={complaint} className="animate-in zoom-in-95 duration-500" />
                             ))
                         ) : (
-                            <div className="col-span-full py-20 bg-white rounded-[2rem] border border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400">
+                            <div className="col-span-full py-20 bg-white dark:bg-slate-900/50 rounded-[2rem] border border-dashed border-slate-200 dark:border-orange-500/20 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500">
                                 <AlertCircle className="w-12 h-12 mb-4 opacity-20" />
                                 <p className="font-bold italic">Aucune réclamation récente trouvée.</p>
                             </div>
                         )}
                     </div>
 
-                    <div className="bg-gradient-to-r from-indigo-50 to-transparent p-8 rounded-[2rem] border border-indigo-100 flex items-center justify-between overflow-hidden relative">
-                        <div className="absolute -right-10 top-0 size-40 bg-indigo-100/50 rounded-full blur-3xl"></div>
+                    <div className="bg-gradient-to-r from-indigo-50 to-transparent dark:from-orange-500/5 dark:to-transparent p-8 rounded-[2rem] border border-indigo-100 dark:border-orange-500/20 flex items-center justify-between overflow-hidden relative">
+                        <div className="absolute -right-10 top-0 size-40 bg-indigo-100/50 dark:bg-orange-500/10 rounded-full blur-3xl"></div>
                         <div className="relative z-10">
-                            <h4 className="text-lg font-black text-indigo-800 uppercase italic leading-none mb-2">Besoin d&apos;aide opérationnelle ?</h4>
-                            <p className="text-sm text-slate-600 font-medium">Consultez les guides SOP ou contactez le support technique.</p>
+                            <h4 className="text-lg font-black text-indigo-800 dark:text-orange-300 uppercase italic leading-none mb-2">Besoin d&apos;aide opérationnelle ?</h4>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Consultez les guides SOP ou contactez le support technique.</p>
                         </div>
-                        <button className="relative z-10 px-6 py-3 bg-white text-indigo-600 border border-indigo-200 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-sm hover:bg-indigo-600 hover:text-white transition-all">
+                        <button className="relative z-10 px-6 py-3 bg-white dark:bg-slate-900 text-indigo-600 dark:text-orange-400 border border-indigo-200 dark:border-orange-500/30 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-sm hover:bg-indigo-600 dark:hover:bg-orange-500 hover:text-white transition-all">
                             Voir SOP
                         </button>
                     </div>
@@ -230,13 +230,13 @@ export default function DashboardPage() {
                 {/* Sidebar Stats & Activity */}
                 <aside className="space-y-8">
                     {/* Live Activity Feed */}
-                    <div className="bg-white rounded-[2.5rem] border border-slate-200 overflow-hidden flex flex-col shadow-xl shadow-slate-200/50 transition-all">
-                        <div className="p-8 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-orange-500/10 rounded-[2.5rem] overflow-hidden flex flex-col shadow-xl shadow-slate-200/50 dark:shadow-orange-500/5 transition-all">
+                        <div className="p-8 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/20">
                             <div>
-                                <h3 className="font-black text-xl text-slate-900 uppercase italic tracking-tighter">{t('liveActivity')}</h3>
+                                <h3 className="font-black text-xl text-slate-900 dark:text-white uppercase italic tracking-tighter">{t('liveActivity')}</h3>
                                 <div className="flex items-center gap-2 mt-2">
                                     <div className="size-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
-                                    <span className="text-[9px] font-black text-emerald-600 uppercase tracking-[0.3em] font-sans">{t('realTime')}</span>
+                                    <span className="text-[9px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-[0.3em] font-sans">{t('realTime')}</span>
                                 </div>
                             </div>
                             <div className="p-2 bg-white rounded-xl border border-slate-200 shadow-sm">
@@ -251,15 +251,15 @@ export default function DashboardPage() {
                                 { color: 'text-purple-400', icon: Users, title: 'Maintenance Préventive', desc: 'Secteur Hassan en cours', time: '2h' },
                             ].map((act, i) => (
                                 <div key={i} className="flex gap-5 group cursor-pointer animate-in slide-in-from-right-4 duration-500" style={{ animationDelay: `${i * 100}ms` }}>
-                                    <div className={cn("size-10 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 group-hover:border-slate-300 transition-all shadow-sm", act.color)}>
+                                    <div className={cn("size-10 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-slate-100 dark:border-slate-700 group-hover:border-slate-300 dark:group-hover:border-orange-500/30 transition-all shadow-sm", act.color)}>
                                         <act.icon className="w-5 h-5" />
                                     </div>
-                                    <div className="flex-1 border-b border-slate-100 pb-4">
+                                    <div className="flex-1 border-b border-slate-100 dark:border-slate-800 pb-4">
                                         <div className="flex items-center justify-between mb-1">
-                                            <p className="text-[11px] font-black text-slate-800 uppercase tracking-tight italic">{act.title}</p>
-                                            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{act.time}</p>
+                                            <p className="text-[11px] font-black text-slate-800 dark:text-white uppercase tracking-tight italic">{act.title}</p>
+                                            <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">{act.time}</p>
                                         </div>
-                                        <p className="text-xs text-slate-500 font-medium leading-relaxed">{act.desc}</p>
+                                        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{act.desc}</p>
                                     </div>
                                 </div>
                             ))}
@@ -267,14 +267,14 @@ export default function DashboardPage() {
                     </div>
 
                     {/* Sector Breakdown Card */}
-                    <div className="bg-white rounded-[2.5rem] border border-slate-200 p-8 shadow-sm">
+                    <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-orange-500/10 p-8 shadow-sm">
                         <div className="mb-8 flex items-center justify-between">
                             <div>
-                                <h3 className="font-black text-lg text-slate-900 uppercase italic tracking-tight leading-none">{t('sectorBreakdown')}</h3>
-                                <p className="text-[10px] font-bold text-slate-400 uppercase mt-2 tracking-widest">{t('operationalImpact')}</p>
+                                <h3 className="font-black text-lg text-slate-900 dark:text-white uppercase italic tracking-tight leading-none">{t('sectorBreakdown')}</h3>
+                                <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase mt-2 tracking-widest">{t('operationalImpact')}</p>
                             </div>
-                            <div className="p-2 bg-slate-50 rounded-xl border border-slate-100 shadow-sm">
-                                <CalendarIcon className="w-4 h-4 text-slate-400" />
+                            <div className="p-2 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                                <CalendarIcon className="w-4 h-4 text-slate-400 dark:text-slate-500" />
                             </div>
                         </div>
 
@@ -293,11 +293,11 @@ export default function DashboardPage() {
                                                 <div className={cn("size-8 rounded-xl text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform", colors[idx % colors.length])}>
                                                     {React.createElement(icons[idx % icons.length], { className: "w-4 h-4" })}
                                                 </div>
-                                                <span className="text-[11px] font-black text-slate-700 uppercase tracking-tight">{cat._id}</span>
+                                                <span className="text-[11px] font-black text-slate-700 dark:text-slate-300 uppercase tracking-tight">{cat._id}</span>
                                             </div>
-                                            <span className="text-xs font-black text-slate-900 lowercase">{percent}%</span>
+                                            <span className="text-xs font-black text-slate-900 dark:text-white lowercase">{percent}%</span>
                                         </div>
-                                        <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                                        <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
                                             <div className={cn("h-full rounded-full transition-all duration-1000", colors[idx % colors.length])} style={{ width: `${percent}%` }}></div>
                                         </div>
                                     </div>

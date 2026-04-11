@@ -93,7 +93,7 @@ export function Sidebar() {
         <aside
             className={cn(
                 'relative flex flex-col h-[calc(100vh-6rem)] sticky top-4 my-4 ml-4 hidden lg:flex transition-all duration-500 ease-in-out z-30',
-                'bg-white/70 backdrop-blur-3xl border border-slate-200 shadow-xl shadow-slate-200/50 rounded-[2.5rem] overflow-hidden group/sidebar',
+                'bg-white/70 dark:bg-slate-900/50 backdrop-blur-3xl border border-slate-200 dark:border-orange-500/10 shadow-xl shadow-slate-200/50 dark:shadow-orange-500/5 rounded-[2.5rem] overflow-hidden group/sidebar',
                 collapsed ? 'w-[80px]' : 'w-72'
             )}
         >
@@ -107,7 +107,7 @@ export function Sidebar() {
             <button
                 onClick={() => setCollapsed((c) => !c)}
                 className={cn(
-                    'absolute -right-3 top-6 z-50 w-6 h-6 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-300 transition-all shadow-md',
+                    'absolute -right-3 top-6 z-50 w-6 h-6 rounded-full border border-slate-200 dark:border-orange-500/20 bg-white dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-indigo-600 dark:hover:text-orange-400 hover:border-indigo-300 dark:hover:border-orange-500/30 transition-all shadow-md',
                 )}
             >
                 <ChevronRight className={cn('w-3 h-3 transition-transform duration-300', collapsed ? '' : 'rotate-180')} />
@@ -119,11 +119,11 @@ export function Sidebar() {
                     <div key={group.title} className="mb-2">
                         {/* Group Label */}
                         {!collapsed && (
-                            <p className="px-4 pt-3 pb-1 text-[9px] font-black text-slate-400 uppercase tracking-[0.25em] select-none">
+                            <p className="px-4 pt-3 pb-1 text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.25em] select-none">
                                 {group.title}
                             </p>
                         )}
-                        {collapsed && <div className="mx-3 my-2 h-px bg-slate-100" />}
+                        {collapsed && <div className="mx-3 my-2 h-px bg-slate-100 dark:bg-slate-800" />}
 
                         {group.items.map((item) => {
                             const active = isActive(item.href);
@@ -137,8 +137,8 @@ export function Sidebar() {
                                     className={cn(
                                         'relative flex items-center gap-3 mx-2 px-3 py-2.5 rounded-xl transition-all duration-200 group/item select-none',
                                         active
-                                            ? 'bg-slate-100 text-slate-900 shadow-sm'
-                                            : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                                            ? 'bg-slate-100 dark:bg-orange-500/10 text-slate-900 dark:text-orange-400 shadow-sm'
+                                            : 'text-slate-500 group-hover/item:text-slate-900 dark:group-hover/item:text-orange-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                                     )}
                                 >
                                     {/* Active left bar glow */}
@@ -150,8 +150,8 @@ export function Sidebar() {
                                         className={cn(
                                             'flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-300',
                                             active
-                                                ? 'bg-purple-500/20 text-purple-300 ring-1 ring-purple-500/30'
-                                                : 'text-slate-500 group-hover/item:text-purple-300 group-hover/item:bg-purple-500/10'
+                                                ? 'bg-purple-500/20 dark:bg-orange-500/20 text-purple-600 dark:text-orange-400 ring-1 ring-purple-500/30'
+                                                : 'text-slate-500 group-hover/item:text-purple-600 dark:group-hover/item:text-orange-400 group-hover/item:bg-purple-500/10'
                                         )}
                                     >
                                         <Icon className="w-4 h-4" />
@@ -161,7 +161,7 @@ export function Sidebar() {
                                     {!collapsed && (
                                         <span className={cn(
                                             'text-sm font-semibold whitespace-nowrap truncate transition-all duration-200',
-                                            active ? 'text-slate-900' : 'text-slate-500 group-hover/item:text-slate-900'
+                                            active ? 'text-slate-900 dark:text-white' : 'text-slate-500 group-hover/item:text-slate-900 dark:group-hover/item:text-white'
                                         )}>
                                             {item.label}
                                         </span>
@@ -189,7 +189,7 @@ export function Sidebar() {
                 {/* System status */}
                 <div className={cn(
                     'flex items-center gap-3 px-3 py-2.5 rounded-xl',
-                    !collapsed && 'bg-slate-50 border border-slate-100'
+                    !collapsed && 'bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800'
                 )}>
                     <span className="relative flex-shrink-0">
                         <span className="w-2 h-2 rounded-full bg-emerald-500 block" />
@@ -197,12 +197,12 @@ export function Sidebar() {
                     </span>
                     {!collapsed && (
                         <div className="flex-1 min-w-0">
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Système</p>
+                            <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Système</p>
                             <div className="flex items-center gap-2 mt-1">
-                                <div className="flex-1 h-1 bg-slate-200 rounded-full overflow-hidden">
-                                    <div className="h-full w-[94%] bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full" />
+                                <div className="flex-1 h-1 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                                    <div className="h-full w-[94%] bg-gradient-to-r from-indigo-500 to-indigo-400 dark:from-orange-500 dark:to-orange-400 rounded-full" />
                                 </div>
-                                <span className="text-[10px] font-black text-slate-400">94%</span>
+                                <span className="text-[10px] font-black text-slate-400 dark:text-slate-500">94%</span>
                             </div>
                         </div>
                     )}

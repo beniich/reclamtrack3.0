@@ -30,31 +30,31 @@ const sora = Sora({
 
 export const metadata: Metadata = {
     title: {
-        template: '%s | CloudIndustre LTD',
-        default: 'CloudIndustre LTD — Industrial Cloud Solutions & Ecosystem Architecture',
+        template: '%s | CloudIndustry LTD',
+        default: 'CloudIndustry LTD — Industrial Cloud Solutions & Ecosystem Architecture',
     },
-    description: 'CloudIndustre LTD provides high-performance, secure, and modular cloud solutions for healthcare, industry, and governance. Built for the future of industrial intelligence.',
+    description: 'CloudIndustry LTD provides high-performance, secure, and modular cloud solutions for healthcare, industry, and governance. Built for the future of industrial intelligence.',
     keywords: ['industrial cloud', 'SaaS ecosystem', 'UK business solutions', 'Doctic Care', 'MecanicPro', 'Enterprise ERP'],
-    authors: [{ name: 'CloudIndustre LTD' }],
+    authors: [{ name: 'CloudIndustry LTD' }],
     viewport: 'width=device-width, initial-scale=1',
     robots: 'index, follow',
     openGraph: {
         type: 'website',
         locale: 'en_GB',
-        url: 'https://cloudindustre.co.uk',
-        siteName: 'CloudIndustre LTD',
+        url: 'https://cloudindustry.co.uk',
+        siteName: 'CloudIndustry LTD',
         images: [
             {
                 url: '/og-image.jpg',
                 width: 1200,
                 height: 630,
-                alt: 'CloudIndustre LTD — Industrial Intelligence',
+                alt: 'CloudIndustry LTD — Industrial Intelligence',
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'CloudIndustre LTD — Industrial Cloud Solutions',
+        title: 'CloudIndustry LTD — Industrial Cloud Solutions',
         description: 'Engineering Industrial Intelligence. Sovereign, Secure, Modular.',
         images: ['/og-image.jpg'],
     },
@@ -69,7 +69,7 @@ export default async function LocaleLayout({
 }) {
     const { locale } = await params;
 
-    if (!routing.locales.includes(locale as "en" | "fr")) {
+    if (!routing.locales.includes(locale as "en" | "fr" | "en-GB")) {
         notFound();
     }
 
@@ -91,12 +91,12 @@ export default async function LocaleLayout({
                         data={{
                             "@context": "https://schema.org",
                             "@type": "Organization",
-                            "name": "CloudIndustre LTD",
-                            "url": "https://cloudindustre.co.uk",
-                            "logo": "https://cloudindustre.co.uk/logo.jpg",
+                            "name": "CloudIndustry LTD",
+                            "url": "https://cloudindustry.co.uk",
+                            "logo": "https://cloudindustry.co.uk/logo.jpg",
                             "sameAs": [
-                                "https://www.linkedin.com/company/cloudindustre",
-                                "https://facebook.com/cloudindustre"
+                                "https://www.linkedin.com/company/cloudindustry",
+                                "https://facebook.com/cloudindustry"
                             ],
                             "contactPoint": {
                                 "@type": "ContactPoint",

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'GymXX | CloudIndustre LTD',
+    title: 'GymXX | CloudIndustry LTD',
     description: 'High-performance member OS for fitness clubs and sports centers.',
 };
 

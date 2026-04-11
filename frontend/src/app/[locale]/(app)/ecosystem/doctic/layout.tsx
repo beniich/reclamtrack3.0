@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Doctic Care | CloudIndustre LTD',
+    title: 'Doctic Care | CloudIndustry LTD',
     description: 'Advanced Industrial Health OS for clinics and hospitals. Optimize patient flows and medical resources with Doctic Care.',
 };
 

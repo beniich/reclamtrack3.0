@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 const locales = ['en', 'fr'];
-const BASE_URL = 'https://cloudindustre.co.uk';
+const BASE_URL = 'https://cloudindustry.co.uk';
 
 const modules = [
   'doctic',

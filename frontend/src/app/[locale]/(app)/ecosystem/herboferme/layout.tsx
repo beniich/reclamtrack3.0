@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Herboferme | CloudIndustre LTD',
+    title: 'Herboferme | CloudIndustry LTD',
     description: 'Precision Agriculture OS. Monitor soil health and crop distribution in real-time.',
 };
 

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'BiggMag Marketplace | CloudIndustre LTD',
+    title: 'BiggMag Marketplace | CloudIndustry LTD',
     description: 'Enterprise Marketplace engine for global retail and logistics management.',
 };
 

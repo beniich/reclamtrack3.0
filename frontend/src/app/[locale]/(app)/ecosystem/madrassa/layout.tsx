@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Madrassa | CloudIndustre LTD',
+    title: 'Madrassa | CloudIndustry LTD',
     description: 'Modern LMS and school management platform for digital-first educational institutions.',
 };
 

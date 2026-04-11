@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Wordex | CloudIndustre LTD',
+    title: 'Wordex | CloudIndustry LTD',
     description: 'Industrial linguistic processing and advanced SEO analytics dashboard.',
 };
 

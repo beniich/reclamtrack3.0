@@ -22,20 +22,20 @@ export default function AdminDbPage() {
     const ActiveComponent = TABS.find(tab => tab.id === activeTabId)?.component || BDRDashboard;
 
     return (
-        <div className="flex flex-col h-screen bg-slate-50 dark:bg-slate-900 transition-colors overflow-hidden">
+        <div className="flex flex-col h-screen bg-slate-50 transition-colors overflow-hidden">
             {/* Navigation Bar */}
-            <header className="h-16 flex items-center justify-between px-6 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 z-50 shadow-sm flex-shrink-0">
+            <header className="h-16 flex items-center justify-between px-6 bg-white border-b border-slate-200 z-50 shadow-sm flex-shrink-0">
                 <div className="flex items-center gap-4">
-                    <h1 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Enterprise DB Admin</h1>
-                    <div className="h-6 w-px bg-slate-200 dark:bg-slate-700"></div>
-                    <div className="flex bg-slate-100 dark:bg-slate-900/50 rounded-lg p-1 gap-1">
+                    <h1 className="text-xl font-black text-slate-900 tracking-tight">Enterprise DB Admin</h1>
+                    <div className="h-6 w-px bg-slate-200"></div>
+                    <div className="flex bg-slate-100 rounded-lg p-1 gap-1">
                         {TABS.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTabId(tab.id)}
-                                className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-bold transition-all ${activeTabId === tab.id
-                                        ? 'bg-white dark:bg-slate-700 text-primary shadow-sm'
-                                        : 'text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-700/50'
+                                className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-[10px] uppercase font-black tracking-widest transition-all ${activeTabId === tab.id
+                                        ? 'bg-white text-indigo-600 shadow-sm border border-slate-200'
+                                        : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'
                                     }`}
                             >
                                 <span className="material-symbols-outlined text-[18px]">{tab.icon}</span>

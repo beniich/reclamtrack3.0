@@ -93,13 +93,9 @@ export function Sidebar() {
         <aside
             className={cn(
                 'relative flex flex-col h-[calc(100vh-6rem)] sticky top-4 my-4 ml-4 hidden lg:flex transition-all duration-500 ease-in-out z-30',
-                'bg-slate-900/40 backdrop-blur-3xl border border-white/[0.08] rounded-[2.5rem] overflow-hidden group/sidebar',
+                'bg-white/70 backdrop-blur-3xl border border-slate-200 shadow-xl shadow-slate-200/50 rounded-[2.5rem] overflow-hidden group/sidebar',
                 collapsed ? 'w-[80px]' : 'w-72'
             )}
-            style={{
-                background: 'linear-gradient(165deg, rgba(30, 27, 75, 0.4) 0%, rgba(51, 65, 85, 0.2) 50%, rgba(15, 23, 42, 0.4) 100%)',
-                boxShadow: '0 20px 50px -12px rgba(99, 102, 241, 0.15)',
-            }}
         >
             {/* Ambient glows for the premium look */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-[60px] pointer-events-none" />
@@ -111,7 +107,7 @@ export function Sidebar() {
             <button
                 onClick={() => setCollapsed((c) => !c)}
                 className={cn(
-                    'absolute -right-3 top-6 z-50 w-6 h-6 rounded-full border border-white/10 bg-[#0d1b2e] flex items-center justify-center text-slate-400 hover:text-white hover:border-white/20 transition-all shadow-lg',
+                    'absolute -right-3 top-6 z-50 w-6 h-6 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-300 transition-all shadow-md',
                 )}
             >
                 <ChevronRight className={cn('w-3 h-3 transition-transform duration-300', collapsed ? '' : 'rotate-180')} />
@@ -123,11 +119,11 @@ export function Sidebar() {
                     <div key={group.title} className="mb-2">
                         {/* Group Label */}
                         {!collapsed && (
-                            <p className="px-4 pt-3 pb-1 text-[9px] font-black text-white/20 uppercase tracking-[0.25em] select-none">
+                            <p className="px-4 pt-3 pb-1 text-[9px] font-black text-slate-400 uppercase tracking-[0.25em] select-none">
                                 {group.title}
                             </p>
                         )}
-                        {collapsed && <div className="mx-3 my-2 h-px bg-white/[0.06]" />}
+                        {collapsed && <div className="mx-3 my-2 h-px bg-slate-100" />}
 
                         {group.items.map((item) => {
                             const active = isActive(item.href);
@@ -141,13 +137,13 @@ export function Sidebar() {
                                     className={cn(
                                         'relative flex items-center gap-3 mx-2 px-3 py-2.5 rounded-xl transition-all duration-200 group/item select-none',
                                         active
-                                            ? 'bg-white/[0.08] text-white shadow-lg'
-                                            : 'text-slate-400 hover:bg-white/[0.04] hover:text-slate-200'
+                                            ? 'bg-slate-100 text-slate-900 shadow-sm'
+                                            : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
                                     )}
                                 >
                                     {/* Active left bar glow */}
                                     {active && (
-                                        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-purple-500 rounded-full shadow-[0_0_12px_rgba(168,85,247,0.6)]" />
+                                        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-indigo-500 rounded-full shadow-[0_0_12px_rgba(99,102,241,0.3)]" />
                                     )}
 
                                     <span
@@ -165,7 +161,7 @@ export function Sidebar() {
                                     {!collapsed && (
                                         <span className={cn(
                                             'text-sm font-semibold whitespace-nowrap truncate transition-all duration-200',
-                                            active ? 'text-white' : 'text-slate-400 group-hover/item:text-slate-200'
+                                            active ? 'text-slate-900' : 'text-slate-500 group-hover/item:text-slate-900'
                                         )}>
                                             {item.label}
                                         </span>
@@ -193,20 +189,20 @@ export function Sidebar() {
                 {/* System status */}
                 <div className={cn(
                     'flex items-center gap-3 px-3 py-2.5 rounded-xl',
-                    !collapsed && 'bg-white/[0.03] border border-white/[0.05]'
+                    !collapsed && 'bg-slate-50 border border-slate-100'
                 )}>
                     <span className="relative flex-shrink-0">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 block" />
-                        <span className="absolute inset-0 w-2 h-2 rounded-full bg-emerald-400 animate-ping opacity-60" />
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 block" />
+                        <span className="absolute inset-0 w-2 h-2 rounded-full bg-emerald-500 animate-ping opacity-40" />
                     </span>
                     {!collapsed && (
                         <div className="flex-1 min-w-0">
-                            <p className="text-[10px] font-black text-white/40 uppercase tracking-widest">Système</p>
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Système</p>
                             <div className="flex items-center gap-2 mt-1">
-                                <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
-                                    <div className="h-full w-[94%] bg-gradient-to-r from-indigo-500 to-cyan-400 rounded-full" />
+                                <div className="flex-1 h-1 bg-slate-200 rounded-full overflow-hidden">
+                                    <div className="h-full w-[94%] bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full" />
                                 </div>
-                                <span className="text-[10px] font-black text-white/40">94%</span>
+                                <span className="text-[10px] font-black text-slate-400">94%</span>
                             </div>
                         </div>
                     )}

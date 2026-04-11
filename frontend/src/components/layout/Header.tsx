@@ -17,18 +17,18 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
     const [searchQuery, setSearchQuery] = useState('');
 
     return (
-        <header className="h-16 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-slate-900 px-6 flex items-center justify-between sticky top-0 z-50">
+        <header className="h-16 border-b border-slate-200 bg-white/80 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-50">
             {/* Logo & Breadcrumbs */}
             <div className="flex items-center gap-8">
                 <div className="flex items-center gap-3">
                     <Link href="/dashboard" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
                         <AnimatedLogo size={36} />
                         <div className="flex flex-col">
-                            <h1 className="text-lg font-bold leading-none tracking-tight text-gray-900 dark:text-white">
-                                ReclamTrack
+                            <h1 className="text-lg font-bold leading-none tracking-tight text-slate-900">
+                                CloudIndustry LTD
                             </h1>
-                            <span className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">
-                                Municipal Services
+                            <span className="text-[10px] uppercase tracking-widest text-indigo-600 font-black">
+                                Industrial Intelligence
                             </span>
                         </div>
                     </Link>
@@ -42,7 +42,7 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                                 {i > 0 && <span className="text-gray-400">/</span>}
                                 <Link
                                     href={crumb.href}
-                                    className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
+                                    className="text-slate-500 hover:text-indigo-600 transition-colors"
                                 >
                                     {crumb.label}
                                 </Link>
@@ -54,8 +54,8 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
 
             {/* Search Bar */}
             {showSearch && (
-                <div className="hidden md:flex items-center bg-gray-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 w-80 relative">
-                    <Search className="text-gray-400 w-4 h-4 absolute left-3" />
+                <div className="hidden md:flex items-center bg-slate-100 rounded-lg px-3 py-1.5 w-80 relative group focus-within:ring-2 focus-within:ring-indigo-500/20 transition-all">
+                    <Search className="text-slate-400 w-4 h-4 absolute left-3 group-focus-within:text-indigo-500" />
                     <input
                         type="text"
                         value={searchQuery}
@@ -68,21 +68,21 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
 
             {/* Actions */}
             <div className="flex items-center gap-4">
-                <button className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full relative transition-colors">
-                    <Bell className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                    <span className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900" />
+                <button className="p-2 hover:bg-slate-100 rounded-full relative transition-colors">
+                    <Bell className="w-5 h-5 text-slate-500" />
+                    <span className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white" />
                 </button>
 
-                <Link href="/settings" className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors">
-                    <Settings className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                <Link href="/settings" className="p-2 hover:bg-slate-100 rounded-full transition-colors">
+                    <Settings className="w-5 h-5 text-slate-500" />
                 </Link>
 
                 <div className="h-8 w-px bg-gray-200 dark:bg-gray-700 mx-2" />
 
                 <div className="flex items-center gap-3 pl-2">
                     <div className="text-right hidden sm:block">
-                        <p className="text-xs font-semibold text-gray-900 dark:text-white">{user?.name}</p>
-                        <p className="text-[10px] text-gray-500 uppercase">{user?.role}</p>
+                        <p className="text-xs font-semibold text-slate-900">{user?.name}</p>
+                        <p className="text-[10px] text-slate-500 uppercase">{user?.role}</p>
                     </div>
                     <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden">
                         {user?.avatar ? (
@@ -97,7 +97,7 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                             logout();
                             window.location.href = '/login';
                         }} 
-                        className="ml-2 p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-full transition-colors"
+                        className="ml-2 p-2 text-red-500 hover:bg-red-50 rounded-full transition-colors"
                         title="Se déconnecter"
                     >
                         <LogOut className="w-5 h-5" />

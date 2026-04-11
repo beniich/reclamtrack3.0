@@ -36,10 +36,10 @@ export default function AppLayout({
 
     if (!_hasHydrated) {
         return (
-            <div className="flex items-center justify-center min-h-screen bg-[#0a1628]">
+            <div className="flex items-center justify-center min-h-screen bg-slate-50">
                 <div className="flex flex-col items-center gap-4">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500" />
-                    <p className="text-sm text-white/30 font-medium">Initialisation...</p>
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600" />
+                    <p className="text-sm text-slate-400 font-medium">Initialisation...</p>
                 </div>
             </div>
         );
@@ -48,13 +48,13 @@ export default function AppLayout({
     if (!user) return null;
 
     return (
-        <div className="flex flex-col min-h-screen bg-[#0a0f1a] text-white selection:bg-indigo-500/30">
+        <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 selection:bg-indigo-500/10">
             <Header />
             <div className="flex flex-1 relative overflow-hidden">
                 {/* Background decorative elements */}
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
-                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full" />
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-900/10 blur-[120px] rounded-full" />
+                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-500/5 blur-[120px] rounded-full" />
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/5 blur-[120px] rounded-full" />
                 </div>
 
                 <Sidebar />

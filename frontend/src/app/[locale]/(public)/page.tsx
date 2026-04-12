@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { Logo } from '@/components/shared/Logo';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button/Button';
 import Image from 'next/image';
 
 export default async function LandingPage() {

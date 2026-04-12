@@ -1,12 +1,14 @@
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
-import { Link } from '@/i18n/navigation';
+import { Logo } from '@/components/shared/Logo';
+import { ThemeToggle } from '@/components/shared/ThemeToggle';
+import { Button } from '@/components/ui/button';
 
 export default async function LandingPage() {
     const tNav = await getTranslations('Navbar');
     const tLanding = await getTranslations('Landing');
     const tFooter = await getTranslations('Footer');
+    const tCommon = await getTranslations('Common');
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 font-sans selection:bg-indigo-500 selection:text-white transition-colors duration-300">
@@ -14,12 +16,7 @@ export default async function LandingPage() {
             <header className="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/50 backdrop-blur-md border-b border-slate-200 dark:border-orange-500/10">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center space-x-2 group cursor-pointer">
-                        <div className="w-8 h-8 bg-indigo-600 dark:bg-orange-500 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform shadow-lg shadow-indigo-600/20">
-                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
-                            </svg>
-                        </div>
-                        <span className="text-xl font-display font-black tracking-tight text-slate-900 dark:text-white uppercase italic">CloudIndustry <span className="text-indigo-600 dark:text-orange-400 not-italic font-bold">LTD</span></span>
+                        <Logo size={40} showText={true} />
                     </div>
 
                     <nav className="hidden md:flex items-center space-x-10 text-sm font-medium">
@@ -32,11 +29,11 @@ export default async function LandingPage() {
                             <div className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-orange-500/10 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left -translate-y-2 group-hover:translate-y-0 z-50 overflow-hidden">
                                 <div className="p-2 space-y-1">
                                     {[
-                                        { title: 'Governance', icon: 'account_balance', href: '/services/governance' },
-                                        { title: 'Healthcare', icon: 'medical_services', href: '/services/healthcare' },
-                                        { title: 'Infrastructure', icon: 'lan', href: '/services/infrastructure' },
-                                        { title: 'Hospitality', icon: 'hotel', href: '/services/hospitality' },
-                                        { title: 'Education', icon: 'school', href: '/services/education' }
+                                        { title: tCommon('governance'), icon: 'account_balance', href: '/services/governance' },
+                                        { title: tCommon('healthcare'), icon: 'medical_services', href: '/services/healthcare' },
+                                        { title: tCommon('infrastructure'), icon: 'lan', href: '/services/infrastructure' },
+                                        { title: tCommon('hospitality'), icon: 'hotel', href: '/services/hospitality' },
+                                        { title: tCommon('education'), icon: 'school', href: '/services/education' }
                                     ].map((item, idx) => (
                                         <Link key={idx} href={item.href} className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group/item">
                                             <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center group-hover/item:bg-indigo-600/10 group-hover/item:text-indigo-600 transition-colors">
@@ -49,10 +46,11 @@ export default async function LandingPage() {
                             </div>
                         </div>
                         <Link href="/pricing" className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-orange-400 transition-colors uppercase tracking-widest text-[10px] font-black">{tNav('pricing')}</Link>
-                        <Link href="#architecture" className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-orange-400 transition-colors uppercase tracking-widest text-[10px] font-black">Architecture</Link>
+                        <Link href="#architecture" className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-orange-400 transition-colors uppercase tracking-widest text-[10px] font-black">{tNav('architecture')}</Link>
                     </nav>
 
                     <div className="flex items-center space-x-6">
+                        <ThemeToggle />
                         <LanguageSwitcher />
                         <Link href="/login" className="hidden sm:block text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 hover:text-indigo-600 dark:hover:text-orange-400 transition-colors">
                             {tNav('login')}
@@ -66,7 +64,7 @@ export default async function LandingPage() {
 
             <main className="flex-1">
                 {/* Hero Section */}
-                <section className="relative pt-48 pb-32 overflow-hidden bg-white dark:bg-slate-950">
+                <section className="relative pt-48 pb-32 overflow-hidden bg-white dark:bg-background">
                     <div className="absolute top-0 right-0 -mr-20 w-[600px] h-[600px] bg-indigo-500/5 dark:bg-orange-500/5 blur-[150px] rounded-full"></div>
                     <div className="absolute bottom-0 left-0 -ml-20 w-[500px] h-[500px] bg-blue-500/5 dark:bg-violet-500/5 blur-[150px] rounded-full"></div>
 
@@ -76,9 +74,11 @@ export default async function LandingPage() {
                             <span className="text-slate-500 dark:text-slate-400">{tLanding('heroBadge')}</span>
                         </div>
 
-                        <h1 className="text-5xl md:text-8xl font-display font-extrabold leading-[0.9] mb-10 tracking-tighter uppercase italic text-slate-900 dark:text-white">
-                            {tLanding('heroTitle').split(' ').slice(0, 4).join(' ')} <br />
-                            <span className="text-indigo-600 dark:text-orange-400 not-italic">{tLanding('heroTitle').split(' ').slice(4).join(' ')}</span>
+                        <h1 className="text-6xl md:text-[7rem] font-display font-black leading-[0.85] mb-12 tracking-tighter uppercase italic text-slate-900 dark:text-white max-w-6xl mx-auto">
+                            {tLanding('heroTitle').split(' ').slice(0, -4).join(' ')} <br />
+                            <span className="text-indigo-600 dark:text-orange-500 not-italic">
+                                {tLanding('heroTitle').split(' ').slice(-4).join(' ')}
+                            </span>
                         </h1>
 
                         <p className="max-w-3xl mx-auto text-xl md:text-2xl text-slate-500 dark:text-slate-400 mb-12 leading-relaxed font-light">
@@ -86,12 +86,16 @@ export default async function LandingPage() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                            <Link href="/login" className="w-full sm:w-auto px-10 py-5 bg-indigo-600 dark:bg-orange-500 hover:bg-indigo-700 dark:hover:brightness-110 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-indigo-600/20 dark:shadow-orange-600/20 transform hover:scale-105 active:scale-95">
-                                {tLanding('bookDemo')}
+                            <Link href="/login" className="w-full sm:w-auto">
+                                <Button variant="primary" size="xl" className="w-full">
+                                    {tLanding('bookDemo')}
+                                </Button>
                             </Link>
-                            <Link href="/login" className="w-full sm:w-auto px-10 py-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-orange-500/20 text-slate-900 dark:text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-2 shadow-sm">
-                                {tLanding('viewRoadmap')}
-                                <span className="material-symbols-outlined text-sm">rocket_launch</span>
+                            <Link href="/login" className="w-full sm:w-auto">
+                                <Button variant="outline" size="xl" className="w-full gap-3">
+                                    {tLanding('viewRoadmap')}
+                                    <span className="material-symbols-outlined text-base">rocket_launch</span>
+                                </Button>
                             </Link>
                         </div>
 
@@ -159,7 +163,7 @@ export default async function LandingPage() {
                                     </div>
                                     <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-tight">{tLanding(service.title)}</h3>
                                     <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 group-hover:border-indigo-300 dark:group-hover:border-orange-500/30 transition-all flex-grow">
-                                        <p className="font-black text-indigo-600 dark:text-orange-400 mb-3 text-xs uppercase tracking-widest">Protocol Active</p>
+                                        <p className="font-black text-indigo-600 dark:text-orange-400 mb-3 text-xs uppercase tracking-widest">{tCommon('protocolActive')}</p>
                                         <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-light">
                                             {tLanding(service.desc)}
                                         </p>
@@ -250,9 +254,11 @@ export default async function LandingPage() {
                 <section className="py-40 text-center px-6">
                     <div className="max-w-5xl mx-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-orange-500/10 p-16 md:p-32 rounded-[4rem] relative overflow-hidden group shadow-2xl">
                         <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-transparent via-indigo-600 dark:via-orange-500 to-transparent opacity-50"></div>
-                        <h2 className="text-4xl md:text-7xl font-display font-black text-slate-900 dark:text-white mb-10 uppercase italic tracking-tighter leading-[0.9]">
-                            {tLanding('ctaTitle')}
-                        </h2>
+                        <h1 className="text-6xl md:text-8xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter leading-[0.9] mb-10">
+                            L'ÉCOSYSTÈME SAAS <br />
+                            COMPLET POUR <br />
+                            <span className="text-indigo-700 dark:text-orange-500">LES INDUSTRIES <br /> DE DEMAIN.</span>
+                        </h1>
                         <p className="text-slate-500 dark:text-slate-400 text-xl font-light mb-16 tracking-tight">
                             {tLanding('ctaSubtitle')}
                         </p>
@@ -270,24 +276,19 @@ export default async function LandingPage() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-white dark:bg-slate-950 pt-32 pb-16 border-t border-slate-200 dark:border-orange-500/10 relative overflow-hidden" id="footer">
+            <footer className="bg-white dark:bg-background pt-32 pb-16 border-t border-slate-200 dark:border-indigo-500/10 relative overflow-hidden" id="footer">
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-20 lg:gap-10 mb-24">
                         <div className="col-span-2 space-y-10">
                             <div className="flex items-center space-x-3 group cursor-pointer">
-                                <div className="w-10 h-10 bg-indigo-600 dark:bg-orange-500 rounded-xl flex items-center justify-center shadow-xl shadow-indigo-600/20 dark:shadow-orange-600/20">
-                                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
-                                    </svg>
-                                </div>
-                                <span className="text-2xl font-display font-black text-slate-900 dark:text-white uppercase italic">CloudIndustry <span className="text-indigo-600 dark:text-orange-400 not-italic font-bold">LTD</span></span>
+                                <Logo size={40} showText={true} />
                             </div>
                             <p className="text-slate-500 dark:text-slate-400 text-lg font-light leading-relaxed max-w-sm">
                                 {tFooter('description')}
                             </p>
                             <div className="flex space-x-6">
                                 {['public', 'alternate_email', 'hub'].map((icon, i) => (
-                                    <Link key={i} href="#" className="w-12 h-12 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-orange-500/20 rounded-2xl flex items-center justify-center text-slate-400 dark:text-slate-500 hover:text-indigo-600 dark:hover:text-orange-400 hover:border-indigo-300 dark:hover:border-orange-500/50 transition-all duration-500 shadow-sm">
+                                    <Link key={i} href="#" className="w-12 h-12 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-indigo-500/20 rounded-2xl flex items-center justify-center text-slate-400 dark:text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-500/50 transition-all duration-500 shadow-sm">
                                         <span className="material-symbols-outlined">{icon}</span>
                                     </Link>
                                 ))}
@@ -320,7 +321,7 @@ export default async function LandingPage() {
                         <div className="flex items-center gap-6">
                             <span className="text-[10px] font-black text-slate-400 flex items-center uppercase tracking-[0.2em]">
                                 <span className="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-pulse"></span>
-                                All Systems Nominal
+                                {tCommon('allSystemsNominal')}
                             </span>
                         </div>
                     </div>

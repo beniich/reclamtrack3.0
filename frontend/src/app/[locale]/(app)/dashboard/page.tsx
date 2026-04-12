@@ -126,7 +126,7 @@ export default function DashboardPage() {
     ];
 
     return (
-        <div className="p-6 space-y-10 bg-slate-50 dark:bg-slate-950 min-h-screen font-display selection:bg-indigo-500/10 dark:selection:bg-orange-500/10 relative overflow-hidden">
+        <div className="p-6 space-y-10 bg-slate-50 dark:bg-background min-h-screen font-display selection:bg-indigo-500/10 dark:selection:bg-orange-500/10 relative overflow-hidden">
             {/* Ambient glow */}
             <div className="absolute top-0 right-0 w-full h-full bg-indigo-500/5 dark:bg-orange-500/5 blur-[120px] -z-10 pointer-events-none"></div>
 
@@ -135,27 +135,32 @@ export default function DashboardPage() {
                 <div>
                     <div className="flex items-center gap-2 mb-2">
                         <Activity className="w-5 h-5 text-indigo-600 dark:text-orange-400 animate-pulse" />
-                        <span className="text-[10px] font-black text-indigo-600 dark:text-orange-400 uppercase tracking-[0.3em]">Operational Dashboard</span>
+                        <div className="flex flex-col">
+                        <span className="text-[10px] font-black text-indigo-600 dark:text-orange-400 uppercase tracking-[0.3em]">{t('title')}</span>
+                        <div className="flex items-center gap-4">
+                            <h2 className="text-3xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter">
+                                RECLAMTRACK <span className="text-orange-500 not-italic">PRO</span>
+                            </h2>
+                            <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 hidden md:block"></div>
+                            <p className="text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] text-[10px] mt-2 font-black ml-1">
+                                {t('subtitle')}
+                            </p>
+                        </div>
                     </div>
-                    <h1 className="text-3xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter leading-none">
-                        {t('title').split(' ')[0]} <span className="text-indigo-600 dark:text-orange-400 italic">{t('title').split(' ').slice(1).join(' ')}</span>
-                    </h1>
-                    <p className="text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] text-[10px] mt-2 font-black ml-1">
-                        CENTRE DE COMMANDE DES INTERVENTIONS TECHNIQUES
-                    </p>
+                    </div>
                 </div>
 
                 <div className="flex items-center gap-3">
                     <Select value={dateFilter} onValueChange={setDateFilter}>
                         <SelectTrigger className="w-[180px] bg-white dark:bg-slate-900 border-slate-200 dark:border-orange-500/20 rounded-2xl h-[52px] text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-indigo-300 dark:hover:border-orange-500/50">
-                            <SelectValue placeholder="Filtrer" />
+                            <SelectValue placeholder={t('filter')} />
                         </SelectTrigger>
                         <SelectContent className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
-                            <SelectItem value="today">Aujourd'hui</SelectItem>
-                            <SelectItem value="7days">7 derniers jours</SelectItem>
-                            <SelectItem value="30days">30 derniers jours</SelectItem>
-                            <SelectItem value="thisYear">Cette année</SelectItem>
-                            <SelectItem value="all">Tout le temps</SelectItem>
+                            <SelectItem value="today">{t('today')}</SelectItem>
+                            <SelectItem value="7days">{t('last7Days')}</SelectItem>
+                            <SelectItem value="30days">{t('last30Days')}</SelectItem>
+                            <SelectItem value="thisYear">{t('thisYear')}</SelectItem>
+                            <SelectItem value="all">{t('allTime')}</SelectItem>
                         </SelectContent>
                     </Select>
 
@@ -218,12 +223,20 @@ export default function DashboardPage() {
                     <div className="bg-gradient-to-r from-indigo-50 to-transparent dark:from-orange-500/5 dark:to-transparent p-8 rounded-[2rem] border border-indigo-100 dark:border-orange-500/20 flex items-center justify-between overflow-hidden relative">
                         <div className="absolute -right-10 top-0 size-40 bg-indigo-100/50 dark:bg-orange-500/10 rounded-full blur-3xl"></div>
                         <div className="relative z-10">
-                            <h4 className="text-lg font-black text-indigo-800 dark:text-orange-300 uppercase italic leading-none mb-2">Besoin d&apos;aide opérationnelle ?</h4>
-                            <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Consultez les guides SOP ou contactez le support technique.</p>
+                                <div className="p-6 rounded-3xl bg-indigo-50 dark:bg-orange-500/5 border border-indigo-100 dark:border-orange-500/10 relative overflow-hidden group">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 dark:bg-orange-500/10 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-indigo-500/10 transition-colors"></div>
+                                    <div className="relative">
+                                        <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-900 shadow-sm flex items-center justify-center mb-4">
+                                            <span className="material-symbols-outlined text-indigo-600 dark:text-orange-400">help_center</span>
+                                        </div>
+                                        <h4 className="text-lg font-black text-indigo-800 dark:text-orange-300 uppercase italic leading-none mb-2">{t('quickStatsTitle')}</h4>
+                                        <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">{t('quickStatsDescription')}</p>
+                                        <button className="mt-4 w-full py-2.5 rounded-xl bg-indigo-600 dark:bg-orange-500 text-white text-xs font-black uppercase tracking-widest hover:bg-indigo-700 dark:hover:brightness-110 shadow-lg shadow-indigo-600/20 dark:shadow-orange-600/20 transition-all">
+                                            {t('viewSOP')}
+                                        </button>
+                                    </div>
+                                </div>
                         </div>
-                        <button className="relative z-10 px-6 py-3 bg-white dark:bg-slate-900 text-indigo-600 dark:text-orange-400 border border-indigo-200 dark:border-orange-500/30 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-sm hover:bg-indigo-600 dark:hover:bg-orange-500 hover:text-white transition-all">
-                            Voir SOP
-                        </button>
                     </div>
                 </div>
 

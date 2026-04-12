@@ -1,6 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 
 export type ComplaintStatus = 'new' | 'in_progress' | 'resolved' | 'closed'
 export type ComplaintPriority = 'low' | 'medium' | 'high' | 'critical'
@@ -16,6 +17,8 @@ interface PriorityBadgeProps {
 }
 
 export function StatusBadge({ status, className }: StatusBadgeProps) {
+    const t = useTranslations('Common')
+    
     const variants = {
         new: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
         in_progress: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
@@ -23,11 +26,11 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
         closed: 'bg-slate-500/10 text-slate-400 border-slate-500/20',
     }
 
-    const labels = {
-        new: 'Nouveau',
-        in_progress: 'En Cours',
-        resolved: 'Résolu',
-        closed: 'Fermé',
+    const labels: Record<ComplaintStatus, string> = {
+        new: t('new'),
+        in_progress: t('in_progress'),
+        resolved: t('resolved'),
+        closed: t('closed'),
     }
 
     return (
@@ -44,6 +47,8 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
 }
 
 export function PriorityBadge({ priority, className }: PriorityBadgeProps) {
+    const t = useTranslations('Common')
+    
     const variants = {
         low: 'bg-slate-500/10 text-slate-400 border-slate-500/20',
         medium: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
@@ -51,11 +56,11 @@ export function PriorityBadge({ priority, className }: PriorityBadgeProps) {
         critical: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
     }
 
-    const labels = {
-        low: 'Priorité Basse',
-        medium: 'Priorité Moyenne',
-        high: 'Priorité Haute',
-        critical: 'Critique',
+    const labels: Record<ComplaintPriority, string> = {
+        low: t('low'),
+        medium: t('medium'),
+        high: t('high'),
+        critical: t('critical'),
     }
 
     return (

@@ -1,4 +1,6 @@
 'use client';
+import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
 
 import { cn } from '@/lib/utils';
 import {
@@ -25,7 +27,9 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { ThemeToggle } from '@/components/shared/ThemeToggle';
 
+// Type definitions
 interface MenuItem {
     label: string;
     href: string;
@@ -39,49 +43,50 @@ interface MenuGroup {
     items: MenuItem[];
 }
 
-const menuGroups: MenuGroup[] = [
-    {
-        title: 'Principal',
-        items: [
-            { label: 'Dashboard',     href: '/dashboard',          icon: LayoutDashboard },
-            { label: 'Réclamations',  href: '/complaints',         icon: FileText,   badge: 'live', badgeColor: 'bg-cyan-500' },
-            { label: 'Écosystème',    href: '/ecosystem',          icon: Shapes,     badge: 'Alpha', badgeColor: 'bg-purple-500' },
-            { label: 'Carte',         href: '/map',                icon: Map },
-            { label: 'Analyses',      href: '/analytics',          icon: BarChart3 },
-        ],
-    },
-    {
-        title: 'Opérations',
-        items: [
-            { label: 'Équipes',       href: '/teams',              icon: Users },
-            { label: 'Planning',      href: '/planning',           icon: Calendar },
-            { label: 'Roster',        href: '/roster',             icon: ClipboardList },
-            { label: 'Flotte',        href: '/fleet',              icon: Truck },
-            { label: 'Inventaire',    href: '/inventory',          icon: Package },
-        ],
-    },
-    {
-        title: 'RH & Support',
-        items: [
-            { label: 'Personnel',     href: '/staff',              icon: Briefcase },
-            { label: 'Congés',        href: '/staff/leave',        icon: Plane },
-            { label: 'Techniciens',   href: '/technician',         icon: Wrench },
-            { label: 'Messages',      href: '/messages',           icon: MessageSquare },
-        ],
-    },
-    {
-        title: 'Administration',
-        items: [
-            { label: 'Audit Logs',    href: '/audit-logs',         icon: ShieldCheck },
-            { label: 'Satisfaction',  href: '/feedback/satisfaction', icon: AlertTriangle },
-            { label: 'Paramètres',    href: '/settings',           icon: Settings },
-        ],
-    },
-];
-
 export function Sidebar() {
+    const t = useTranslations('Sidebar');
     const pathname = usePathname();
     const [collapsed, setCollapsed] = useState(false);
+
+    const menuGroups: MenuGroup[] = useMemo(() => [
+        {
+            title: t('main'),
+            items: [
+                { label: t('dashboard'),     href: '/dashboard',          icon: LayoutDashboard },
+                { label: t('complaints'),    href: '/complaints',         icon: FileText,   badge: 'live', badgeColor: 'bg-cyan-500' },
+                { label: t('ecosystem'),     href: '/ecosystem',          icon: Shapes,     badge: 'Alpha', badgeColor: 'bg-purple-500' },
+                { label: t('map'),           href: '/map',                icon: Map },
+                { label: t('analytics'),     href: '/analytics',          icon: BarChart3 },
+            ],
+        },
+        {
+            title: t('ops'),
+            items: [
+                { label: t('teams'),       href: '/teams',              icon: Users },
+                { label: t('planning'),    href: '/planning',           icon: Calendar },
+                { label: t('roster'),      href: '/roster',             icon: ClipboardList },
+                { label: t('fleet'),       href: '/fleet',              icon: Truck },
+                { label: t('inventory'),   href: '/inventory',          icon: Package },
+            ],
+        },
+        {
+            title: t('hr'),
+            items: [
+                { label: t('staff'),       href: '/staff',              icon: Briefcase },
+                { label: t('leave'),       href: '/staff/leave',        icon: Plane },
+                { label: t('technicians'), href: '/technician',         icon: Wrench },
+                { label: t('messages'),    href: '/messages',           icon: MessageSquare },
+            ],
+        },
+        {
+            title: t('admin'),
+            items: [
+                { label: t('auditLogs'),    href: '/audit-logs',         icon: ShieldCheck },
+                { label: t('satisfaction'), href: '/feedback/satisfaction', icon: AlertTriangle },
+                { label: t('settings'),     href: '/settings',           icon: Settings },
+            ],
+        },
+    ], [t]);
 
     const isActive = (href: string) => {
         // Remove locale prefix for comparison
@@ -142,8 +147,7 @@ export function Sidebar() {
                                     )}
                                 >
                                     {/* Active left bar glow */}
-                                    {active && (
-                                        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-indigo-500 rounded-full shadow-[0_0_12px_rgba(99,102,241,0.3)]" />
+                                        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-orange-500 rounded-full shadow-[0_0_12px_rgba(249,115,22,0.3)]" />
                                     )}
 
                                     <span
@@ -186,6 +190,11 @@ export function Sidebar() {
 
             {/* Footer */}
             <div className={cn('shrink-0 border-t border-white/[0.06] p-3 space-y-1')}>
+                {/* Theme Toggle in Sidebar */}
+                <div className="flex justify-center py-2">
+                    <ThemeToggle />
+                </div>
+
                 {/* System status */}
                 <div className={cn(
                     'flex items-center gap-3 px-3 py-2.5 rounded-xl',
@@ -197,7 +206,7 @@ export function Sidebar() {
                     </span>
                     {!collapsed && (
                         <div className="flex-1 min-w-0">
-                            <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Système</p>
+                            <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">{t('system')}</p>
                             <div className="flex items-center gap-2 mt-1">
                                 <div className="flex-1 h-1 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                                     <div className="h-full w-[94%] bg-gradient-to-r from-indigo-500 to-indigo-400 dark:from-orange-500 dark:to-orange-400 rounded-full" />
@@ -218,7 +227,7 @@ export function Sidebar() {
                     <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg group-hover/item:bg-white/5 transition-all">
                         <HelpCircle className="w-4 h-4" />
                     </span>
-                    {!collapsed && <span className="text-sm font-semibold">Aide</span>}
+                    {!collapsed && <span className="text-sm font-semibold">{t('help') || 'Help'}</span>}
                 </Link>
             </div>
         </aside>

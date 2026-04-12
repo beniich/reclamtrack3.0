@@ -93,47 +93,47 @@
   }
 
   .dark {
-    /* ===== Dark Mode Overrides (Electric Orange & Violet) ===== */
-    --background: 222 47% 4%;
+    /* ===== Dark Mode Overrides (Deep Violet & Electric Orange) ===== */
+    --background: 260 40% 12%;
     --foreground: 210 40% 98%;
 
-    --background-light: #0d1117;
-    --background-dark: #020617;
+    --background-light: #251a3a;
+    --background-dark: #1a0b2e;
 
     --color-primary: #ff6d00;
     --color-primary-light: #ff9e00;
     --color-primary-dark: #ff5400;
 
-    --color-secondary: #7b2cbf;
-    --color-secondary-light: #9d4edd;
-    --color-secondary-dark: #3c096c;
+    --color-secondary: #9d4edd;
+    --color-secondary-light: #c77dff;
+    --color-secondary-dark: #5a189a;
 
-    --card: 222 47% 4%;
+    --card: 260 40% 15%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 4%;
+    --popover: 260 60% 7%;
     --popover-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 12%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 260 40% 15%;
+    --muted-foreground: 260 20% 70%;
 
-    --accent: 217.2 32.6% 12%;
+    --accent: 260 50% 20%;
     --accent-foreground: 210 40% 98%;
 
-    --border: 222 47% 12%;
-    --input: 222 47% 12%;
+    --border: 260 50% 15%;
+    --input: 260 50% 15%;
     --ring: 25 100% 50%; /* Electric Orange */
 
     /* Custom Glass for Dark Mode */
-    --glass-background: rgba(13, 17, 23, 0.7);
-    --glass-border: rgba(255, 109, 0, 0.1);
+    --glass-background: rgba(15, 1, 37, 0.7);
+    --glass-border: rgba(255, 109, 0, 0.2);
 
-    /* Dark mode shadows with color tint */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
-    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.6);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.6);
-    --shadow-lg: 0 10px 15px -3px rgba(255, 109, 0, 0.05);
-    --shadow-xl: 0 20px 25px -5px rgba(123, 44, 191, 0.1);
+    /* Dark mode shadows with violet/orange tint */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.8);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.9);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.9);
+    --shadow-lg: 0 10px 15px -3px rgba(255, 109, 0, 0.15);
+    --shadow-xl: 0 20px 25px -5px rgba(157, 78, 221, 0.2);
   }
 }
 

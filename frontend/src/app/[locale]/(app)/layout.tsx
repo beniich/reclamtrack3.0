@@ -48,7 +48,7 @@ export default function AppLayout({
     if (!user) return null;
 
     return (
-        <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 selection:bg-indigo-500/10">
+        <div className="flex flex-col min-h-screen bg-background text-foreground selection:bg-indigo-500/10 transition-colors duration-500">
             <Header />
             <div className="flex flex-1 relative overflow-hidden">
                 {/* Background decorative elements */}

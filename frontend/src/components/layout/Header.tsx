@@ -1,11 +1,12 @@
-
 'use client';
+import { useTranslations } from 'next-intl';
 
 import { useState } from 'react';
 import Link from 'next/link';
 import { useAuthStore } from '@/store/authStore';
 import { Bell, Search, Settings, User, LogOut } from 'lucide-react';
-import { AnimatedLogo } from '@/components/shared/AnimatedLogo';
+import { Logo } from '@/components/shared/Logo';
+import { ThemeToggle } from '@/components/shared/ThemeToggle';
 
 interface HeaderProps {
     showSearch?: boolean;
@@ -13,6 +14,8 @@ interface HeaderProps {
 }
 
 export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
+    const tCommon = useTranslations('Common');
+    const tNav = useTranslations('Navbar');
     const { user, logout } = useAuthStore();
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -22,15 +25,7 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
             <div className="flex items-center gap-8">
                 <div className="flex items-center gap-3">
                     <Link href="/dashboard" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
-                        <AnimatedLogo size={36} />
-                        <div className="flex flex-col">
-                            <h1 className="text-lg font-bold leading-none tracking-tight text-slate-900 dark:text-white">
-                                CloudIndustry LTD
-                            </h1>
-                            <span className="text-[10px] uppercase tracking-widest text-indigo-600 dark:text-orange-400 font-black">
-                                Industrial Intelligence
-                            </span>
-                        </div>
+                        <Logo size={40} showText={true} />
                     </Link>
                 </div>
 
@@ -61,13 +56,15 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="bg-transparent border-none focus:ring-0 text-sm w-full pl-8 placeholder:text-gray-400 outline-none text-slate-900 dark:text-white"
-                        placeholder="Search complaint ID, location..."
+                        placeholder={tCommon('loading') === 'Loading...' ? "Search..." : "Rechercher..."} 
                     />
                 </div>
             )}
 
             {/* Actions */}
             <div className="flex items-center gap-4">
+                <ThemeToggle />
+                
                 <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full relative transition-colors group">
                     <Bell className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-orange-400" />
                     <span className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900" />
@@ -98,7 +95,7 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                             window.location.href = '/login';
                         }} 
                         className="ml-2 p-2 text-red-500 hover:bg-red-50 rounded-full transition-colors"
-                        title="Se déconnecter"
+                        title={tNav('logout')}
                     >
                         <LogOut className="w-5 h-5" />
                     </button>

@@ -13,6 +13,7 @@ import { getMessages } from 'next-intl/server';
 import { Inter, Sora } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import NextTopLoader from 'nextjs-toploader';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 
 import type { Metadata } from 'next';
 
@@ -76,7 +77,7 @@ export default async function LocaleLayout({
     const messages = await getMessages();
 
     return (
-        <html lang={locale} className="dark" suppressHydrationWarning>
+        <html lang={locale} suppressHydrationWarning>
             <head>
                 <link
                     rel="stylesheet"
@@ -85,7 +86,7 @@ export default async function LocaleLayout({
                 <link rel="icon" type="image/jpeg" href="/logo.jpg" />
                 <link rel="apple-touch-icon" href="/logo.jpg" />
             </head>
-            <body className={`${inter.variable} ${sora.variable} font-sans antialiased text-slate-100 bg-brand-midnight min-h-screen`}>
+            <body className={`${inter.variable} ${sora.variable} font-sans antialiased bg-background text-foreground min-h-screen`}>
                 <NextIntlClientProvider messages={messages} locale={locale}>
                     <JsonLd
                         data={{
@@ -109,27 +110,29 @@ export default async function LocaleLayout({
                     />
                     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''}>
                         <QueryProvider>
-                            <AuthProvider>
-                                <CallProvider>
-                                    <NextTopLoader
-                                        color="var(--pumpkin-spice)"
-                                        initialPosition={0.08}
-                                        crawlSpeed={200}
-                                        height={3}
-                                        crawl={true}
-                                        showSpinner={false}
-                                        easing="ease"
-                                        speed={200}
-                                        shadow="0 0 10px var(--pumpkin-spice),0 0 5px var(--pumpkin-spice)"
-                                        zIndex={1600}
-                                        showAtBottom={false}
-                                    />
-                                    {children}
-                                    <NotificationToast />
-                                    <DebugWidget />
-                                    <MiniMcLarenLoader />
-                                </CallProvider>
-                            </AuthProvider>
+                            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                                <AuthProvider>
+                                    <CallProvider>
+                                        <NextTopLoader
+                                            color="var(--pumpkin-spice)"
+                                            initialPosition={0.08}
+                                            crawlSpeed={200}
+                                            height={3}
+                                            crawl={true}
+                                            showSpinner={false}
+                                            easing="ease"
+                                            speed={200}
+                                            shadow="0 0 10px var(--pumpkin-spice),0 0 5px var(--pumpkin-spice)"
+                                            zIndex={1600}
+                                            showAtBottom={false}
+                                        />
+                                        {children}
+                                        <NotificationToast />
+                                        <DebugWidget />
+                                        <MiniMcLarenLoader />
+                                    </CallProvider>
+                                </AuthProvider>
+                            </ThemeProvider>
                         </QueryProvider>
                     </GoogleOAuthProvider>
                 </NextIntlClientProvider>

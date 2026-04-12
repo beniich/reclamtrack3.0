@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { Calendar, Clock, MapPin, ChevronRight } from 'lucide-react'
 import { StatusBadge, PriorityBadge } from '../StatusBadge/StatusBadge'
@@ -13,6 +14,7 @@ export interface ComplaintCardProps {
 }
 
 export function ComplaintCard({ complaint, className }: ComplaintCardProps) {
+    const t = useTranslations('Common')
     // Map our internal statuses/priorities to the ones expected by the badges if necessary
     // or define the badges to handle our internal types.
 
@@ -66,14 +68,14 @@ export function ComplaintCard({ complaint, className }: ComplaintCardProps) {
                         </span>
                     </div>
                     <div>
-                        <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Technicien</p>
+                        <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">{t('technician')}</p>
                         <p className="text-[11px] font-bold text-slate-900 dark:text-white">
-                            {(complaint.technicianId as any)?.name || 'Non assigné'}
+                            {(complaint.technicianId as any)?.name || t('notAssigned')}
                         </p>
                     </div>
                 </div>
                 <div className="flex items-center gap-2 text-indigo-600 dark:text-orange-400 font-black text-[10px] uppercase tracking-widest group-hover:gap-3 transition-all">
-                    Détails <ChevronRight className="w-4 h-4" />
+                    {t('details')} <ChevronRight className="w-4 h-4" />
                 </div>
             </div>
         </Link>

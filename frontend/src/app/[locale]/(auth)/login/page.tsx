@@ -1,15 +1,16 @@
 'use client';
 
-import { AnimatedLogo } from '@/components/shared/AnimatedLogo';
+import { Logo } from '@/components/shared/Logo';
 import { Link } from '@/i18n/navigation';
 import { useAuthStore } from '@/store/authStore';
 import { GoogleLogin } from '@react-oauth/google';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 export default function LoginPage() {
+    const t = useTranslations('Auth');
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -83,17 +84,14 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-slate-50 dark:bg-slate-950 font-display selection:bg-indigo-500 selection:text-white transition-colors duration-300 relative overflow-hidden">
+        <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-slate-50 dark:bg-background font-display selection:bg-indigo-500 selection:text-white transition-colors duration-300 relative overflow-hidden">
             {/* Ambient glow */}
             <div className="absolute top-0 right-0 w-full h-full bg-indigo-500/5 dark:bg-orange-500/5 blur-[120px] -z-10 pointer-events-none"></div>
 
             {/* Logo / Branding Header */}
-            <div className="mb-8 flex flex-col items-center gap-4">
-                <AnimatedLogo size={180} />
-                <div className="text-center">
-                    <h1 className="text-3xl font-black tracking-tighter text-slate-900 dark:text-white uppercase italic" suppressHydrationWarning>CloudIndustry <span className="text-indigo-600 dark:text-orange-400 not-italic">LTD</span></h1>
-                    <p className="text-[10px] text-indigo-600 dark:text-orange-400 uppercase tracking-widest font-black mt-1">Industrial Intelligence Solutions</p>
-                </div>
+            <div className="mb-8 flex flex-col items-center gap-6">
+                <Logo size={80} showText={true} className="flex-col !gap-6 scale-125" />
+                <p className="text-[10px] text-indigo-600 dark:text-orange-400 uppercase tracking-widest font-black mt-2">Industrial Intelligence Solutions</p>
             </div>
 
             {/* Login Card */}
@@ -102,10 +100,10 @@ export default function LoginPage() {
                 <div className="w-full px-8 pt-8 flex flex-col items-center">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-orange-500/10 border border-indigo-100 dark:border-orange-500/20 text-indigo-600 dark:text-orange-400 text-[10px] font-black uppercase tracking-widest mb-6">
                         <span className="w-2 h-2 bg-indigo-600 dark:bg-orange-500 rounded-full animate-pulse"></span>
-                        Authentification Sécurisée
+                        {t('secureAuth')}
                     </div>
-                    <h2 className="text-xl font-black uppercase tracking-tight text-slate-900 dark:text-white">Connexion</h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold mt-1">Accès Entreprise Requis</p>
+                    <h2 className="text-xl font-black uppercase tracking-tight text-slate-900 dark:text-white">{t('login')}</h2>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold mt-1">{t('enterpriseAccess')}</p>
                 </div>
 
 
@@ -125,21 +123,21 @@ export default function LoginPage() {
                             <div className="w-full border-t border-slate-100 dark:border-slate-800"></div>
                         </div>
                         <div className="relative flex justify-center text-[10px] font-black uppercase tracking-widest text-slate-400">
-                            <span className="px-4 bg-white dark:bg-slate-900">Ou continuer avec</span>
+                            <span className="px-4 bg-white dark:bg-slate-900">{t('continueWith')}</span>
                         </div>
                     </div>
 
                     <form className="space-y-6" onSubmit={handleLogin}>
                         {/* Username/Email Field */}
                         <div>
-                            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2" htmlFor="identifier">Identifiant Professionnel</label>
+                            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2" htmlFor="identifier">{t('identifierEmail')}</label>
                             <div className="relative">
                                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xl notranslate" translate="no">mail</span>
                                 <input
                                     className="w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-orange-500/20 focus:border-indigo-500 dark:focus:border-orange-500 transition-all text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 font-medium text-sm outline-none"
                                     id="identifier"
                                     name="identifier"
-                                    placeholder="email@cloudindustry.co.uk"
+                                    placeholder={t('emailPlaceholder')}
                                     type="text"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
@@ -151,8 +149,8 @@ export default function LoginPage() {
                         {/* Password Field */}
                         <div>
                             <div className="flex justify-between items-center mb-2">
-                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400" htmlFor="password">Mot de passe</label>
-                                <Link className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-orange-400 hover:text-indigo-700 dark:hover:text-orange-300" href="/forgot-password">Oublié ?</Link>
+                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400" htmlFor="password">{t('password')}</label>
+                                <Link className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-orange-400 hover:text-indigo-700 dark:hover:text-orange-300" href="/forgot-password">{t('forgotPassword')}</Link>
                             </div>
                             <div className="relative">
                                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xl notranslate" translate="no">lock</span>
@@ -160,7 +158,7 @@ export default function LoginPage() {
                                     className="w-full pl-11 pr-12 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-orange-500/20 focus:border-indigo-500 dark:focus:border-orange-500 transition-all text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 font-medium text-sm outline-none"
                                     id="password"
                                     name="password"
-                                    placeholder="••••••••"
+                                    placeholder={t('passwordPlaceholder')}
                                     type={showPassword ? "text" : "password"}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
@@ -185,11 +183,11 @@ export default function LoginPage() {
                             {loading ? (
                                 <>
                                     <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></span>
-                                    <span>Connexion...</span>
+                                    <span>{t('signingIn')}</span>
                                 </>
                             ) : (
                                 <>
-                                    <span>Se connecter</span>
+                                    <span>{t('signIn')}</span>
                                     <span className="material-symbols-outlined text-lg notranslate" translate="no">login</span>
                                 </>
                             )}
@@ -202,7 +200,7 @@ export default function LoginPage() {
                                 className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest hover:bg-slate-100 dark:hover:bg-slate-700 transition-all"
                             >
                                 <span className="material-symbols-outlined text-sm">shield_person</span>
-                                Admin Demo
+                                {t('adminDemo')}
                             </button>
                             <button
                                 type="button"
@@ -210,7 +208,7 @@ export default function LoginPage() {
                                 className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-indigo-50 dark:bg-orange-500/10 border border-indigo-100 dark:border-orange-500/20 text-indigo-600 dark:text-orange-400 text-[10px] font-black uppercase tracking-widest hover:bg-indigo-100 dark:hover:bg-orange-500/20 transition-all"
                             >
                                 <span className="material-symbols-outlined text-sm">monitoring</span>
-                                SuperAdmin
+                                {t('superAdmin')}
                             </button>
                         </div>
                     </form>
@@ -218,27 +216,27 @@ export default function LoginPage() {
                     {/* Security Footer inside card */}
                     <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-center gap-2 text-slate-400 dark:text-slate-500">
                         <span className="material-symbols-outlined text-sm notranslate" translate="no">encrypted</span>
-                        <span className="text-[10px] font-bold uppercase tracking-widest">Connexion chiffrée SSL / TLS</span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest">{t('sslEncrypted')}</span>
                     </div>
                 </div>
             </div>
 
             {/* Footer Links */}
             <div className="mt-8 flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">
-                <a className="hover:text-indigo-600 dark:hover:text-orange-400 transition-colors" href="#">Security Policy</a>
-                <a className="hover:text-indigo-600 dark:hover:text-orange-400 transition-colors" href="#">Help Center</a>
-                <a className="hover:text-indigo-600 dark:hover:text-orange-400 transition-colors" href="#">Privacy</a>
+                <a className="hover:text-indigo-600 dark:hover:text-orange-400 transition-colors" href="#">{t('securityPolicy')}</a>
+                <a className="hover:text-indigo-600 dark:hover:text-orange-400 transition-colors" href="#">{t('helpCenter')}</a>
+                <a className="hover:text-indigo-600 dark:hover:text-orange-400 transition-colors" href="#">{t('privacy')}</a>
             </div>
 
             <div className="mt-8 text-center text-xs">
-                <span className="text-slate-500 dark:text-slate-400 font-medium">New member of CloudIndustry? </span>
+                <span className="text-slate-500 dark:text-slate-400 font-medium">{t('newMember')} </span>
                 <Link href="/register" className="text-indigo-600 dark:text-orange-400 hover:text-indigo-700 dark:hover:text-orange-300 font-black uppercase tracking-widest ml-1">
-                    Request Access
+                    {t('requestAccess')}
                 </Link>
             </div>
 
             <p className="mt-12 text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">
-                © {new Date().getFullYear()} CloudIndustry LTD. London, UK.
+                © {new Date().getFullYear()} ReclamTrack Pro. London, UK.
             </p>
         </div>
     );

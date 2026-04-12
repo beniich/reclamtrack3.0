@@ -14,6 +14,7 @@ import { Inter, Sora } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import NextTopLoader from 'nextjs-toploader';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { Provider as ChakraProvider } from '@/components/ui/chakra/provider';
 
 import type { Metadata } from 'next';
 
@@ -126,7 +127,9 @@ export default async function LocaleLayout({
                                             zIndex={1600}
                                             showAtBottom={false}
                                         />
-                                        {children}
+                                        <ChakraProvider>
+                                            {children}
+                                        </ChakraProvider>
                                         <NotificationToast />
                                         <DebugWidget />
                                         <MiniMcLarenLoader />

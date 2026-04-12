@@ -21,6 +21,7 @@ import {
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { Box, Badge } from '@chakra-ui/react';
 
 import { ComplaintCard } from '@/components/ui/ComplaintCard';
 import { StatsCard } from '@/components/ui/StatsCard';
@@ -140,6 +141,9 @@ export default function DashboardPage() {
                         <div className="flex items-center gap-4">
                             <h2 className="text-3xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter">
                                 RECLAMTRACK <span className="text-orange-500 not-italic">PRO</span>
+                                <Badge colorPalette="orange" variant="solid" size="sm" ml={4} borderRadius="full" px={3}>
+                                    Chakra v3 Active
+                                </Badge>
                             </h2>
                             <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 hidden md:block"></div>
                             <p className="text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] text-[10px] mt-2 font-black ml-1">

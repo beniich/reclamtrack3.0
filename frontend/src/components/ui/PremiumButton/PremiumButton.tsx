@@ -8,6 +8,7 @@ export interface ButtonProps extends HTMLMotionProps<"button"> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   isLoading?: boolean;
+  children?: React.ReactNode;
 }
 
 export function Button({ 

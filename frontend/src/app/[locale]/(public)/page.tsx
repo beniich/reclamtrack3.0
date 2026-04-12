@@ -1,8 +1,10 @@
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 import { Logo } from '@/components/shared/Logo';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 export default async function LandingPage() {
     const tNav = await getTranslations('Navbar');

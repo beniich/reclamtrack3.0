@@ -5,6 +5,7 @@ import { Logo } from '@/components/shared/Logo';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
 import { PremiumButton as Button } from '@/components/ui/PremiumButton';
 import Image from 'next/image';
+import { TypewriterText } from '@/components/animations/TypewriterText';
 
 export default async function LandingPage() {
     const tNav = await getTranslations('Navbar');
@@ -256,11 +257,15 @@ export default async function LandingPage() {
                 <section className="py-40 text-center px-6">
                     <div className="max-w-5xl mx-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-orange-500/10 p-16 md:p-32 rounded-[4rem] relative overflow-hidden group shadow-2xl">
                         <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-transparent via-indigo-600 dark:via-orange-500 to-transparent opacity-50"></div>
-                        <h1 className="text-6xl md:text-8xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter leading-[0.9] mb-10">
-                            L'ÉCOSYSTÈME SAAS <br />
-                            COMPLET POUR <br />
-                            <span className="text-indigo-700 dark:text-orange-500">LES INDUSTRIES <br /> DE DEMAIN.</span>
-                        </h1>
+                        <TypewriterText 
+                            className="text-6xl md:text-8xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter leading-[0.9] mb-10"
+                            lines={[
+                                { text: "L'ÉCOSYSTÈME SAAS" },
+                                { text: "COMPLET POUR" },
+                                { text: "LES INDUSTRIES DE DEMAIN.", className: "text-indigo-700 dark:text-orange-500" }
+                            ]}
+                            speed={60}
+                        />
                         <p className="text-slate-500 dark:text-slate-400 text-xl font-light mb-16 tracking-tight">
                             {tLanding('ctaSubtitle')}
                         </p>

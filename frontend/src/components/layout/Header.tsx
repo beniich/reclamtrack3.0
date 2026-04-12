@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/store/authStore';
+import { useUIStore } from '@/store/uiStore';
 import { Bell, Search, Settings, User, LogOut, Bot, Sparkles } from 'lucide-react';
 import { Logo } from '@/components/shared/Logo';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
@@ -19,6 +20,7 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
     const tCommon = useTranslations('Common');
     const tNav = useTranslations('Navbar');
     const { user, logout } = useAuthStore();
+    const { toggleAISidekick } = useUIStore();
     const [searchQuery, setSearchQuery] = useState('');
 
     return (
@@ -69,6 +71,7 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                                     className="p-1.5 rounded-lg bg-orange-500/10 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 cursor-pointer"
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
+                                    onClick={toggleAISidekick}
                                 >
                                     <Bot className="w-4 h-4 animate-agent-point" />
                                 </motion.div>

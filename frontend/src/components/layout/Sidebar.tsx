@@ -147,6 +147,7 @@ export function Sidebar() {
                                     )}
                                 >
                                     {/* Active left bar glow */}
+                                    {active && (
                                         <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-orange-500 rounded-full shadow-[0_0_12px_rgba(249,115,22,0.3)]" />
                                     )}
 

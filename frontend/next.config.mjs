@@ -17,18 +17,19 @@ const nextConfig = {
       asyncWebAssembly: true
     };
 
-    // Paper.js uses a Node.js canvas build that requires jsdom
-    // which is not available in the Vercel build. We alias paper to
-    // the browser-only build to prevent the Node canvas module from loading.
-    if (!isServer) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        // Force browser build of paper
-        'paper': require.resolve('paper/dist/paper-full.js'),
-      };
+    // Paper.js bundles a Node.js canvas adapter that requires jsdom.
+    // jsdom is not available in the Vercel/webpack build environment.
+    // Solution: externalize 'paper' on the server so it is never bundled SSR.
+    // Client-side, the dynamic import with ssr:false already prevents SSR execution.
+    if (isServer) {
+      const existingExternals = config.externals || [];
+      config.externals = [
+        ...(Array.isArray(existingExternals) ? existingExternals : [existingExternals]),
+        'paper',
+      ];
     }
 
-    // Exclude the problematic Node canvas module from all builds
+    // Prevent canvas/jsdom from breaking the client bundle too
     config.resolve.fallback = {
       ...config.resolve.fallback,
       canvas: false,

@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/authStore';
 import { Bell, Search, Settings, User, LogOut, Bot, Sparkles } from 'lucide-react';
 import { Logo } from '@/components/shared/Logo';

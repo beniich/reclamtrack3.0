@@ -11,11 +11,30 @@ const nextConfig = {
     NEXT_PUBLIC_SOCKET_URL: process.env.NEXT_PUBLIC_SOCKET_URL
   },
 
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     config.experiments = {
       ...config.experiments,
       asyncWebAssembly: true
     };
+
+    // Paper.js uses a Node.js canvas build that requires jsdom
+    // which is not available in the Vercel build. We alias paper to
+    // the browser-only build to prevent the Node canvas module from loading.
+    if (!isServer) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        // Force browser build of paper
+        'paper': require.resolve('paper/dist/paper-full.js'),
+      };
+    }
+
+    // Exclude the problematic Node canvas module from all builds
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      canvas: false,
+      jsdom: false,
+    };
+
     return config;
   },
 

@@ -67,6 +67,7 @@ export function Sidebar() {
                 { label: t('roster'),      href: '/roster',             icon: ClipboardList },
                 { label: t('fleet'),       href: '/fleet',              icon: Truck },
                 { label: t('inventory'),   href: '/inventory',          icon: Package },
+                { label: t('designStudio'), href: '/technical-design',   icon: Shapes, badge: 'CAD', badgeColor: 'bg-orange-500' },
             ],
         },
         {

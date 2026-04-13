@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import anime from 'animejs/lib/anime.es.js';
 import { cn } from '@/lib/utils';
 import { useInView } from 'framer-motion';
 
@@ -28,48 +27,59 @@ export const TypewriterText: React.FC<TypewriterTextProps> = ({
 }) => {
     const containerRef = useRef<HTMLHeadingElement>(null);
     const isInView = useInView(containerRef, { once: triggerOnce, amount: 0.5 });
+    const [visibleChars, setVisibleChars] = useState<number[]>(lines.map(() => 0));
     const [isComplete, setIsComplete] = useState(false);
     const hasStarted = useRef(false);
 
     useEffect(() => {
-        if (!containerRef.current || !isInView || hasStarted.current) return;
-        
+        if (!isInView || hasStarted.current) return;
         hasStarted.current = true;
 
-        // Reset visibility
-        const chars = containerRef.current.querySelectorAll('.char');
-        anime.set(chars, { opacity: 0 });
+        // Build a flat sequence of all chars with their line index
+        const sequence: Array<{ lineIdx: number; delay: number }> = [];
+        let accumulatedDelay = 0;
 
-        const tl = anime.timeline({
-            easing: 'linear',
-            complete: () => {
-                setIsComplete(true);
-                if (onComplete) onComplete();
+        lines.forEach((line, lineIdx) => {
+            accumulatedDelay += line.delayBefore || 0;
+            for (let i = 0; i < line.text.length; i++) {
+                sequence.push({ lineIdx, delay: accumulatedDelay });
+                accumulatedDelay += speed;
             }
         });
 
-        let totalDelay = 0;
-
-        lines.forEach((line, lineIdx) => {
-            const lineChars = containerRef.current?.querySelectorAll(`.line-${lineIdx} .char`);
-            if (!lineChars) return;
-
-            tl.add({
-                targets: lineChars,
-                opacity: [0, 1],
-                duration: speed,
-                delay: anime.stagger(speed, { start: line.delayBefore || 0 }),
-            });
+        // Reveal chars one by one using setTimeout
+        sequence.forEach(({ lineIdx, delay }) => {
+            setTimeout(() => {
+                setVisibleChars(prev => {
+                    const next = [...prev];
+                    next[lineIdx] = next[lineIdx] + 1;
+                    return next;
+                });
+            }, delay);
         });
 
-    }, [lines, speed, onComplete]);
+        // Fire onComplete after all chars are shown
+        const totalDuration = sequence.length > 0 ? sequence[sequence.length - 1].delay + speed : 0;
+        setTimeout(() => {
+            setIsComplete(true);
+            onComplete?.();
+        }, totalDuration);
+
+    }, [isInView]);
 
     return (
-        <h1 ref={containerRef} className={cn("relative", className)}>
+        <h1 ref={containerRef} className={cn('relative', className)}>
             {lines.map((line, lineIdx) => (
-                <div key={lineIdx} className={cn("block line-" + lineIdx, line.className)}>
+                <div key={lineIdx} className={cn('block', line.className)}>
                     {line.text.split('').map((char, charIdx) => (
-                        <span key={charIdx} className="char inline-block whitespace-pre">
+                        <span
+                            key={charIdx}
+                            className="inline-block whitespace-pre"
+                            style={{
+                                opacity: charIdx < visibleChars[lineIdx] ? 1 : 0,
+                                transition: `opacity ${speed * 0.5}ms ease`,
+                            }}
+                        >
                             {char}
                         </span>
                     ))}

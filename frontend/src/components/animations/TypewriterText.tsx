@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { anime } from 'animejs';
+import anime from 'animejs/lib/anime.es.js';
 import { cn } from '@/lib/utils';
 import { useInView } from 'framer-motion';
 

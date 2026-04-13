@@ -226,6 +226,66 @@ export default function ITAdminDashboard() {
             </CardContent>
           </Card>
         </Link>
+
+        {/* SSH Management */}
+        <Link href="/it-admin/ssh" className="block">
+          <Card className="bg-gradient-to-br from-slate-700 to-slate-900 border-slate-600 text-white hover:shadow-lg transition-shadow cursor-pointer h-full">
+            <CardHeader>
+              <CardTitle className="flex items-center text-white">
+                <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Gestion SSH
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-slate-300 mb-4">Gestion des clés métiers et accès serveurs sécurisés</p>
+              <div className="bg-slate-800 text-slate-100 px-4 py-2 rounded-md font-medium hover:bg-slate-700 transition-colors border border-slate-600 text-center">
+                 Configurer SSH →
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
+        
+        {/* Monitoring */}
+        <Link href="/it-admin/monitoring" className="block">
+          <Card className="bg-gradient-to-br from-emerald-500 to-emerald-700 text-white hover:shadow-lg transition-shadow cursor-pointer h-full">
+            <CardHeader>
+              <CardTitle className="flex items-center text-white">
+                <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                Supervision
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-emerald-100 mb-4">Logs système, métriques Prometheus & Grafana</p>
+              <div className="bg-white text-emerald-700 px-4 py-2 rounded-md font-medium hover:bg-emerald-50 transition-colors text-center">
+                 Voir Statistiques →
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
+
+        {/* DevOps */}
+        <Link href="/it-admin/devops" className="block">
+          <Card className="bg-gradient-to-br from-cyan-500 to-cyan-700 text-white hover:shadow-lg transition-shadow cursor-pointer h-full">
+            <CardHeader>
+              <CardTitle className="flex items-center text-white">
+                <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                CI/CD & DevOps
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-cyan-100 mb-4">Déploiements, versioning et pipelines</p>
+              <div className="bg-white text-cyan-700 px-4 py-2 rounded-md font-medium hover:bg-cyan-50 transition-colors text-center">
+                 Gérer DevOps →
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
 
       {/* Recent Alerts - Placeholder */}

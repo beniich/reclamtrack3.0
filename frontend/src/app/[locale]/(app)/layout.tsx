@@ -48,23 +48,25 @@ export default function AppLayout({
     if (!user) return null;
 
     return (
-        <div className="flex flex-col min-h-screen bg-background text-foreground selection:bg-indigo-500/10 transition-colors duration-500">
-            <Header />
-            <div className="flex flex-1 relative overflow-hidden">
+        <div className="flex min-h-screen bg-background text-foreground selection:bg-indigo-500/10 transition-colors duration-500 overflow-hidden">
+            <Sidebar />
+            
+            <div className="flex flex-col flex-1 relative overflow-hidden h-screen">
                 {/* Background decorative elements */}
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
                     <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-500/5 blur-[120px] rounded-full" />
                     <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/5 blur-[120px] rounded-full" />
                 </div>
 
-                <Sidebar />
-                <main className="flex-1 overflow-y-auto min-h-0 relative">
+                <Header />
+                
+                <main className="flex-1 overflow-y-auto min-h-0 relative scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-200/50 dark:scrollbar-thumb-violet-500/10">
                     <div className="max-w-[1600px] mx-auto px-6 py-8">
                         {children}
                     </div>
+                    <Footer />
                 </main>
             </div>
-            <Footer />
         </div>
     );
 

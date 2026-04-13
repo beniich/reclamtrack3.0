@@ -16,6 +16,7 @@ interface Stats {
   urgentTickets: number;
   adUsers: number;
   lastAdSync?: string;
+  complianceScore: number;
 }
 
 interface Alert {
@@ -38,15 +39,17 @@ export default function ITAdminDashboard() {
   const loadDashboardData = async () => {
     try {
       // Load stats from all modules
-      const [assetsRes, networkRes, ticketsRes] = await Promise.all([
+      const [assetsRes, networkRes, ticketsRes, complianceRes] = await Promise.all([
         api.get('/api/it-assets/stats'),
         api.get('/api/network/stats'),
         api.get('/api/it-tickets/stats'),
+        api.get('/api/compliance/report').catch(() => ({ data: { score: 0 } })),
       ]);
 
       const assetsStats = assetsRes.data.stats;
       const networkStats = networkRes.data.stats;
       const ticketsStats = ticketsRes.data.stats;
+      const complianceStats = complianceRes.data?.data || complianceRes.data;
 
       // Aggregate stats
       const dashboardStats: Stats = {
@@ -58,6 +61,7 @@ export default function ITAdminDashboard() {
         urgentTickets: ticketsStats.byPriority?.find((p: any) => p._id === 'urgent' || p._id === 'critical')?.count || 0,
         adUsers: 0, // TODO: AD integration
         lastAdSync: undefined,
+        complianceScore: complianceStats.score || 0,
       };
 
       setStats(dashboardStats);
@@ -142,19 +146,24 @@ export default function ITAdminDashboard() {
           </CardContent>
         </Card>
 
-        {/* AD Users Card */}
-        <Card className="bg-white shadow-sm hover:shadow-md transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">AD Users</CardTitle>
-            <Users className="h-5 w-5 text-indigo-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-gray-900">{stats?.adUsers || 0}</div>
-            <p className="text-xs text-gray-500 mt-2">
-              {stats?.lastAdSync ? `Last sync: ${new Date(stats.lastAdSync).toLocaleDateString()}` : 'Not configured'}
-            </p>
-          </CardContent>
-        </Card>
+        {/* Security Compliance Card */}
+        <Link href="/admin/devops/compliance" className="block">
+          <Card className="bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-gray-600">Compliance Audit</CardTitle>
+              <AlertTriangle className={`h-5 w-5 ${(stats?.complianceScore || 0) < 80 ? 'text-amber-500' : 'text-emerald-500'}`} />
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-gray-900">{stats?.complianceScore || 0}%</div>
+              <div className="flex items-center mt-2 text-sm">
+                <span className={`font-medium ${(stats?.complianceScore || 0) < 80 ? 'text-amber-600' : 'text-emerald-600'}`}>
+                  {(stats?.complianceScore || 0) < 80 ? 'Audit required' : 'SOC 2 Compliant'}
+                </span>
+                <span className="text-gray-500 ml-1">status</span>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
 
       {/* Quick Access */}

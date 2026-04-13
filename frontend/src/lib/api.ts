@@ -358,6 +358,12 @@ export const securityApi = {
     getSecretStats: () => apiClient.get('/security/secrets/stats'),
 };
 
+export const complianceApi = {
+    getReport: () => apiClient.get('/compliance/report'),
+    getEvents: () => apiClient.get('/compliance/events'),
+    exportExcel: () => apiClient.download('/compliance/export/excel', `compliance-report-${Date.now()}.xlsx`),
+};
+
 // IT Assets API
 export const itAssetsApi = {
     getAll: (params?: any) => apiClient.get('/it-assets', params),

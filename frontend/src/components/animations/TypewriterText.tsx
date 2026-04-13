@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import * as animejs from 'animejs';
-// Handle both ESM and CJS variations depending on the bundler environment
-const anime = (animejs as any).default || animejs;
+import anime from 'animejs/lib/anime.es.js';
 import { cn } from '@/lib/utils';
 import { useInView } from 'framer-motion';
 

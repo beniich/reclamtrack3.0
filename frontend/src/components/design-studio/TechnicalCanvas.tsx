@@ -135,7 +135,7 @@ export const TechnicalCanvas: React.FC<TechnicalCanvasProps> = ({ onReady, linke
                     <Minimize2 size={18} />
                 </button>
                 <div className="w-px h-6 bg-slate-200 dark:bg-slate-700 mx-1" />
-                <button onClick={() => project?.activeLayer.clear()} className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 rounded-lg" title="Clear Canvas">
+                <button onClick={() => project?.activeLayer.removeChildren()} className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 rounded-lg" title="Clear Canvas">
                     <Trash2 size={18} />
                 </button>
                 <button onClick={handleExport} className="p-2 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded-lg" title="Export SVG">

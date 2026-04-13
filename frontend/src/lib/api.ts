@@ -192,11 +192,11 @@ export const complaintsApi = {
 };
 
 export const teamsApi = {
-    getAll: (params?: any) => apiClient.get(API_ROUTES.teams.root, params),
-    getById: (id: string) => apiClient.get(API_ROUTES.teams.byId(id)),
-    create: (data: any) => apiClient.post(API_ROUTES.teams.root, data),
-    update: (id: string, data: any) => apiClient.put(API_ROUTES.teams.byId(id), data),
-    delete: (id: string) => apiClient.delete(API_ROUTES.teams.byId(id)),
+    getAll: (params?: any) => apiClient.get('/hr/teams', params),
+    getById: (id: string) => apiClient.get(`/hr/teams/${id}`),
+    create: (data: any) => apiClient.post('/hr/teams', data),
+    update: (id: string, data: any) => apiClient.put(`/hr/teams/${id}`, data),
+    delete: (id: string) => apiClient.delete(`/hr/teams/${id}`),
 };
 
 export const interventionsApi = {
@@ -293,24 +293,24 @@ export const adminApi = {
 };
 
 export const staffApi = {
-    getAll: () => apiClient.get('/staff'),
-    getById: (id: string) => apiClient.get(`/staff/${id}`),
-    create: (data: any) => apiClient.post('/staff', data),
-    update: (id: string, data: any) => apiClient.put(`/staff/${id}`, data),
-    delete: (id: string) => apiClient.delete(`/staff/${id}`),
+    getAll: () => apiClient.get('/hr/staff'),
+    getById: (id: string) => apiClient.get(`/hr/staff/${id}`),
+    create: (data: any) => apiClient.post('/hr/staff', data),
+    update: (id: string, data: any) => apiClient.put(`/hr/staff/${id}`, data),
+    delete: (id: string) => apiClient.delete(`/hr/staff/${id}`),
 };
 
 export const rosterApi = {
-    get: (params: { week: string }) => apiClient.get('/roster', params),
-    update: (data: { week: string; shifts: any[] }) => apiClient.post('/roster/update', data),
-    deleteShift: (shiftId: string, week: string) => apiClient.delete(`/roster/shifts/${shiftId}?week=${week}`),
+    get: (params: { week: string }) => apiClient.get('/hr/roster', params),
+    update: (data: { week: string; shifts: any[] }) => apiClient.post('/hr/roster/update', data),
+    deleteShift: (shiftId: string, week: string) => apiClient.delete(`/hr/roster/shifts/${shiftId}?week=${week}`),
 };
 
 export const leaveApi = {
-    getAll: (params?: any) => apiClient.get('/leave', params),
-    create: (data: any) => apiClient.post('/leave', data),
-    updateStatus: (id: string, status: string) => apiClient.patch(`/leave/${id}/status`, { status }),
-    delete: (id: string) => apiClient.delete(`/leave/${id}`),
+    getAll: (params?: any) => apiClient.get('/hr/leave', params),
+    create: (data: any) => apiClient.post('/hr/leave', data),
+    updateStatus: (id: string, status: string) => apiClient.patch(`/hr/leave/${id}/status`, { status }),
+    delete: (id: string) => apiClient.delete(`/hr/leave/${id}`),
 };
 
 export const notificationApi = {

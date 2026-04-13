@@ -105,7 +105,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/auth', authRoutes);
 app.use('/api/auth', googleAuthRoutes);
 app.use('/api/complaints', complaintRoutes);
-app.use('/api/teams', teamRoutes);
 app.use('/api/assignments', assignmentRoutes);
 app.use('/api/planning', planningRoutes);
 app.use('/api/dashboard', dashboardRoutes);
@@ -118,9 +117,10 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/knowledge', knowledgeRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/staff', staffRoutes);
-app.use('/api/roster', rosterRoutes);
-app.use('/api/leave', leaveRoutes);
+
+import hrRoutes from './routes/hr.js';
+app.use('/api/hr', hrRoutes);
+
 app.use('/api/db', dbRoutes);
 app.use('/api/audit-logs', auditRoutes);
 app.use('/api/upload', uploadRoutes);

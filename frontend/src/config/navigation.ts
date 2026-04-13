@@ -240,8 +240,8 @@ export const apiRoutes = {
         delete: (id: string) => `/api/complaints/${id}`
     },
     teams: {
-        list: '/api/teams',
-        details: (id: string) => `/api/teams/${id}`
+        list: '/api/hr/teams',
+        details: (id: string) => `/api/hr/teams/${id}`
     },
     planning: {
         list: '/api/planning',

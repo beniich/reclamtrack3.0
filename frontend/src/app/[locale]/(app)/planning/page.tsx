@@ -32,7 +32,7 @@ export default function PlanningPage() {
     const { data: teams, isLoading: loadingTeams } = useQuery({
         queryKey: ['teams'],
         queryFn: async () => {
-            const res = await api.get('/teams');
+            const res = await api.get('/hr/teams');
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return res.map((t: any) => ({
                 id: t._id,

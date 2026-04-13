@@ -14,6 +14,25 @@ export interface IUser extends Document {
   resetPasswordExpires?: Date;
   organizationId?: mongoose.Types.ObjectId;
   authProvider?: 'local' | 'google';
+  
+  // SOC 2 IAM enhancements
+  mfaEnabled?: boolean;
+  mfaSecret?: string;
+  mfaBackupCodes?: string[];
+  lastLoginAt?: Date;
+  lastLoginIp?: string;
+  failedLoginCount?: number;
+  lockedUntil?: Date;
+  passwordChangedAt?: Date;
+  passwordHistory?: string[];
+  activeSessions?: Array<{
+    tokenHash: string;
+    ipAddress: string;
+    userAgent: string;
+    createdAt: Date;
+    lastActivityAt: Date;
+  }>;
+  
   comparePassword(candidate: string): Promise<boolean>;
 }
 
@@ -40,6 +59,26 @@ const UserSchema: Schema = new Schema(
     resetPasswordExpires: { type: Date },
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     authProvider: { type: String, enum: ['local', 'google'], default: 'local' },
+    // SOC 2 IAM enhancements
+    mfaEnabled: { type: Boolean, default: false },
+    mfaSecret: { type: String },
+    mfaBackupCodes: [{ type: String }],
+    
+    lastLoginAt: { type: Date },
+    lastLoginIp: { type: String },
+    failedLoginCount: { type: Number, default: 0 },
+    lockedUntil: { type: Date },
+    
+    passwordChangedAt: { type: Date },
+    passwordHistory: [{ type: String }],
+    
+    activeSessions: [{
+        tokenHash: String,
+        ipAddress: String,
+        userAgent: String,
+        createdAt: Date,
+        lastActivityAt: Date
+    }]
   },
   { timestamps: true }
 );

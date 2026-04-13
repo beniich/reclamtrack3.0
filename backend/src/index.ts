@@ -20,6 +20,7 @@ import auditRoutes from './routes/audit.js';
 import authRoutes from './routes/auth.js';
 import billingRoutes from './routes/billing.js';
 import complaintRoutes from './routes/complaints.js';
+import complianceRoutes from './routes/compliance.js';
 import dashboardRoutes from './routes/dashboard.js';
 import dbRoutes from './routes/db.js';
 import devopsRoutes from './routes/devops.js';
@@ -98,8 +99,13 @@ app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 // Swagger Documentation
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
+import { auditTrail } from './middleware/auditTrail.js';
+
 const swaggerDocument = YAML.load('./docs/openapi.yaml');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+// Global Audit Middleware (SOC 2 CC6.1 Compliant)
+app.use('/api', auditTrail('DATA_ACCESS', 'INFO'));
 
 // Mount routes
 app.use('/api/auth', authRoutes);
@@ -123,6 +129,7 @@ app.use('/api/hr', hrRoutes);
 
 app.use('/api/db', dbRoutes);
 app.use('/api/audit-logs', auditRoutes);
+app.use('/api/compliance', complianceRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/organizations', organizationRoutes);
 app.use('/api', memberRoutes); // Handles /organizations/:id/members and related

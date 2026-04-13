@@ -34,8 +34,9 @@ import {
 } from '../utils/apiResponse.js';
 import { logger } from '../utils/logger.js';
 
-const router = Router();
+import { securityDetectionService } from '../services/securityDetectionService.js';
 
+const router = Router();
 // ──────────────────────────────────────────────────────────────────────────────
 // POST /api/auth/register
 // ──────────────────────────────────────────────────────────────────────────────
@@ -77,6 +78,9 @@ router.post(
         userId: user._id,
         targetId: user._id.toString(),
         targetType: 'User',
+        category: 'AUTH',
+        severity: 'INFO',
+        outcome: 'SUCCESS',
         details: { email, role: user.role },
         ipAddress: req.ip,
       });
@@ -112,12 +116,38 @@ router.post(
 
       if (!user) {
         logger.warn(`Login failed: user not found – ${email}`);
+        
+        await AuditLog.create({
+            action: 'LOGIN',
+            targetType: 'Session',
+            category: 'AUTH',
+            severity: 'MEDIUM',
+            outcome: 'FAILURE',
+            details: { email, reason: 'user_not_found' },
+            ipAddress: req.ip,
+        });
+        
+        await securityDetectionService.detectBruteForce(req.ip, email);
         return unauthorizedResponse(res, 'Identifiants invalides');
       }
 
       const matched = await user.comparePassword(password);
       if (!matched) {
         logger.warn(`Login failed: bad password – ${email}`);
+        
+        await AuditLog.create({
+            action: 'LOGIN',
+            userId: user._id,
+            targetId: user._id.toString(),
+            targetType: 'Session',
+            category: 'AUTH',
+            severity: 'MEDIUM',
+            outcome: 'FAILURE',
+            details: { email, reason: 'bad_password' },
+            ipAddress: req.ip,
+        });
+        
+        await securityDetectionService.detectBruteForce(req.ip, email);
         return unauthorizedResponse(res, 'Identifiants invalides');
       }
 
@@ -129,6 +159,9 @@ router.post(
         userId: user._id,
         targetId: user._id.toString(),
         targetType: 'Session',
+        category: 'AUTH',
+        severity: 'INFO',
+        outcome: 'SUCCESS',
         details: { email, role: user.role },
         ipAddress: req.ip,
       });

@@ -99,7 +99,11 @@ export function Sidebar() {
         <aside
             className={cn(
                 'relative flex flex-col h-[calc(100vh-6rem)] sticky top-4 my-4 ml-4 hidden lg:flex transition-all duration-500 ease-in-out z-30',
-                'bg-white/70 dark:bg-slate-900/50 backdrop-blur-3xl border border-slate-200 dark:border-orange-500/10 shadow-xl shadow-slate-200/50 dark:shadow-orange-500/5 rounded-[2.5rem] overflow-hidden group/sidebar',
+                // Angular borders + electric violet glow
+                'bg-white/70 dark:bg-slate-900/60 backdrop-blur-3xl rounded-xl overflow-hidden group/sidebar',
+                'border border-slate-200 dark:border-violet-800/40',
+                'shadow-lg dark:shadow-[0_0_0_1px_rgba(139,92,246,0.2),0_8px_32px_-4px_rgba(139,92,246,0.35)]',
+                'dark:hover:shadow-[0_0_0_1px_rgba(139,92,246,0.4),0_12px_40px_-4px_rgba(139,92,246,0.5)] transition-shadow',
                 collapsed ? 'w-[80px]' : 'w-72'
             )}
         >

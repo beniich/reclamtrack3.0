@@ -19,7 +19,7 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <header className="h-16 border-b border-indigo-500/10 glass-nav px-6 flex items-center justify-between sticky top-0 z-50 transition-all duration-300">
+        <header className="h-16 border-b border-slate-200/80 dark:border-violet-900/50 bg-white/75 dark:bg-[#0f0125]/80 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-50 transition-all duration-300 dark:shadow-[0_1px_0_rgba(139,92,246,0.2),0_4px_24px_-4px_rgba(91,24,154,0.4)]">
             <div className="flex items-center gap-4">
                 <Link href="/dashboard" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
                     <AnimatedLogo size={40} />

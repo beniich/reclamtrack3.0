@@ -106,13 +106,13 @@ export default async function LocaleLayout({
                                 "telephone": "+44-000-000-000",
                                 "contactType": "customer service",
                                 "areaServed": "GB",
-                                "availableLanguage": ["en", "fr"]
+                                "availableLanguage": ["en", "en"]
                             }
                         }}
                     />
                     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''}>
                         <QueryProvider>
-                            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
                                 <AuthProvider>
                                     <CallProvider>
                                         <NextTopLoader

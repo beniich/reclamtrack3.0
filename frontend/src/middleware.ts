@@ -52,7 +52,7 @@ export default function middleware(request: NextRequest) {
 
         // Si pas de token et pas sur la page de login, rediriger vers login
         if (!token && !pathname.includes('/login')) {
-            const locale = pathname.split('/')[1] || 'fr';
+            const locale = pathname.split('/')[1] || 'en';
             const loginUrl = new URL(`/${locale}/login`, request.url);
             return NextResponse.redirect(loginUrl);
         }

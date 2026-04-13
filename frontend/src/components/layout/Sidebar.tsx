@@ -105,14 +105,15 @@ export function Sidebar() {
                 collapsed ? 'w-20' : 'w-72'
             )}
         >
-            {/* Collapse Toggle - High contrast electric effect */}
+            {/* Collapse Toggle - High contrast electric effect - Moved to top right */}
             <button
                 onClick={() => setCollapsed((c) => !c)}
                 className={cn(
-                    'absolute -right-5 top-12 z-50 w-10 h-10 rounded-xl flex items-center justify-center transition-all shadow-2xl',
+                    'absolute top-6 z-50 w-10 h-10 rounded-xl flex items-center justify-center transition-all shadow-2xl',
                     'bg-white dark:bg-[#1a0b2e] border-2 border-violet-500 text-violet-500',
                     'hover:scale-110 active:scale-95 hover:bg-violet-500 hover:text-white',
-                    'shadow-[0_0_20px_rgba(139,92,246,0.5)]'
+                    'shadow-[0_0_20px_rgba(139,92,246,0.5)]',
+                    collapsed ? 'left-1/2 -translate-x-1/2' : 'right-4'
                 )}
             >
                 <ChevronRight className={cn('w-6 h-6 transition-transform duration-500', collapsed ? '' : 'rotate-180')} />

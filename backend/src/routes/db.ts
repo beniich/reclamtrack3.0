@@ -2,8 +2,11 @@
 import express, { Request, Response } from 'express';
 import { generateMetrics, generateNetVizMetrics, generateQueueMetrics, generateDBAMetrics } from '../data/db-generator.js';
 import { clusters, backups, networkNodes, networkConnections, cloudCosts } from '../data/db-fixtures.js';
+import { authenticate, requireAdmin } from '../middleware/security.js';
 
 const router = express.Router();
+
+router.use(authenticate, requireAdmin); // Database metrics require Admin access
 
 /**
  * GET /api/db/metrics

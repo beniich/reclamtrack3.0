@@ -1,7 +1,11 @@
 import { Router } from 'express';
 import { upload } from '../middleware/upload.js';
+import { authenticate } from '../middleware/security.js';
 
 const router = Router();
+
+router.use(authenticate); // Require authentication for file uploads
+
 
 // POST /api/upload
 router.post('/', upload.single('file'), (req, res) => {

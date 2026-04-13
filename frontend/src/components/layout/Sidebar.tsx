@@ -100,7 +100,7 @@ export function Sidebar() {
             className={cn(
                 'relative flex flex-col h-screen sticky top-0 hidden lg:flex transition-all duration-500 ease-in-out z-40',
                 // Sharp borders + intense electric violet glow on the edge
-                'bg-white/90 dark:bg-[#0c041d]/95 backdrop-blur-3xl border-r-2 border-slate-200 dark:border-violet-500/30 group/sidebar',
+                'bg-white/90 dark:bg-[#25084a]/95 backdrop-blur-3xl border-r-2 border-slate-200 dark:border-violet-500/30 group/sidebar',
                 'shadow-[4px_0_24px_-4px_rgba(139,92,246,0.1)] dark:shadow-[10px_0_40px_-10px_rgba(139,92,246,0.5)]',
                 collapsed ? 'w-20' : 'w-72'
             )}

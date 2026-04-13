@@ -94,21 +94,21 @@
 
   .dark {
     /* ===== Dark Mode Overrides (Deep Violet & Electric Orange) ===== */
-    --background: 260 40% 12%;
+    --background: 265 79% 21%; /* #310b5e - Deep Violet from image */
     --foreground: 210 40% 98%;
 
-    --background-light: #251a3a;
-    --background-dark: #1a0b2e;
+    --background-light: #3d0e75;
+    --background-dark: #25084a;
 
-    --color-primary: #ff6d00;
-    --color-primary-light: #ff9e00;
-    --color-primary-dark: #ff5400;
+    --color-primary: #ff6d00; /* Electric Orange from image */
+    --color-primary-light: #ff8500;
+    --color-primary-dark: #e65c00;
 
     --color-secondary: #9d4edd;
     --color-secondary-light: #c77dff;
     --color-secondary-dark: #5a189a;
 
-    --card: 260 40% 15%;
+    --card: 265 70% 25%;
     --card-foreground: 210 40% 98%;
 
     --popover: 260 60% 7%;

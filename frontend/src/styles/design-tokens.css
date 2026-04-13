@@ -6,11 +6,11 @@
   --deep-saffron: #ff9100;
   --amber-glow: #ff9e00;
 
-  --dark-amethyst: #240046;
-  --indigo-ink: #3c096c;
-  --indigo-velvet: #5a189a;
-  --royal-violet: #7b2cbf;
-  --lavender-purple: #9d4edd;
+  --dark-amethyst: #25084a;
+  --indigo-ink: #310b5e;
+  --indigo-velvet: #3d0e75;
+  --royal-violet: #5a189a;
+  --lavender-purple: #7b2cbf;
 
   /* Colors - Primary Palette (Mapped to Violet and Orange) */
   --color-primary: var(--pumpkin-spice);

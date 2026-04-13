@@ -5,9 +5,12 @@ import { TechnicalCanvas } from './TechnicalCanvas';
 import { ComponentLibrary } from './ComponentLibrary';
 import { AICmdBar } from './AICmdBar';
 import paper from 'paper';
+import { Save, Loader2 } from 'lucide-react';
+import { useSchemaStore } from '@/store/schemaStore';
 
 export const TechnicalStudio: React.FC = () => {
     const [project, setProject] = useState<paper.Project | null>(null);
+    const { createSchema, isLoading } = useSchemaStore();
 
     const handleComponentSelect = (comp: any) => {
         if (!project) return;
@@ -43,12 +46,38 @@ export const TechnicalStudio: React.FC = () => {
         path.position = project.view.center;
     };
 
+    const handleSave = async () => {
+        if (!project) return;
+        
+        const name = window.prompt("Nommez votre schéma technique :");
+        if (!name) return;
+
+        const projectData = project.exportJSON();
+        await createSchema({
+            name,
+            description: "Schéma généré depuis l'Industrial Studio",
+            projectData: projectData
+        });
+    };
+
     return (
         <div className="flex h-[calc(100vh-10rem)] w-full gap-6 p-2">
             <ComponentLibrary onSelect={handleComponentSelect} />
             
-            <div className="flex-1 flex flex-col gap-4">
-                <div className="flex-1 min-h-0">
+            <div className="flex-1 flex flex-col gap-4 relative">
+                {/* Save Toolbar */}
+                <div className="absolute top-4 right-4 z-10">
+                    <button
+                        onClick={handleSave}
+                        disabled={isLoading || !project}
+                        className="flex items-center gap-2 bg-[#0f0125]/90 hover:bg-[#0f0125] border border-orange-500/30 text-white px-4 py-2 rounded-xl shadow-lg shadow-orange-500/10 backdrop-blur-md transition-all disabled:opacity-50"
+                    >
+                        {isLoading ? <Loader2 size={16} className="animate-spin text-orange-500" /> : <Save size={16} className="text-orange-500" />}
+                        <span className="text-xs font-bold uppercase tracking-widest">Sauvegarder</span>
+                    </button>
+                </div>
+
+                <div className="flex-1 min-h-0 bg-white dark:bg-slate-900 rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-orange-500/10 shadow-inner">
                     <TechnicalCanvas onReady={(p) => setProject(p)} />
                 </div>
                 

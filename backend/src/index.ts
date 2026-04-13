@@ -43,6 +43,7 @@ import schedulerRoutes from './routes/scheduler.js';
 import staffRoutes from './routes/staff.js';
 import teamRoutes from './routes/teams.js';
 import uploadRoutes from './routes/upload.js';
+import technicalSchemaRoutes from './routes/technical-schemas.js';
 
 // IT Administration Module Routes
 import adRoutes from './routes/ad.js';
@@ -138,6 +139,7 @@ app.use('/api/monitoring', monitoringRoutes);
 app.use('/api/security', securityRoutes);
 app.use('/api/devops', devopsRoutes);
 app.use('/api/ssh', sshRoutes);
+app.use('/api/technical-schemas', technicalSchemaRoutes);
 
 // Health check
 app.get('/', (req, res) => {

@@ -7,10 +7,10 @@ interface LogoProps {
     className?: string;
     size?: number;
     showText?: boolean;
-    variant?: 'white' | 'orange';
+    variant?: 'white' | 'violet';
 }
 
-export function Logo({ className = "", size = 32, showText = false, variant = 'orange' }: LogoProps) {
+export function Logo({ className = "", size = 32, showText = false, variant = 'violet' }: LogoProps) {
     return (
         <div className={`flex items-center gap-3 ${className}`}>
             <motion.div 
@@ -19,28 +19,29 @@ export function Logo({ className = "", size = 32, showText = false, variant = 'o
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
             >
-                {/* Branding Icon Container */}
-                <div className="absolute inset-0 bg-transparent rounded-xl border-orange-500/20 rotate-3 group-hover:rotate-6 transition-transform"></div>
+                {/* Branding Icon Container with Electric Glow */}
+                <div className="absolute inset-0 bg-violet-500/10 rounded-xl border border-violet-500/20 rotate-3 group-hover:rotate-6 transition-transform"></div>
                 
-                {/* Purple Shield Logo Image */}
+                {/* Updated Logo Image */}
                 <img 
-                    src="/assets/shield_logo.png" 
+                    src="/assets/logo/logo.png" 
                     alt="ReclamTrack Pro Logo"
-                    className="relative z-10 w-full h-full object-contain drop-shadow-lg"
+                    className="relative z-10 w-full h-full object-contain drop-shadow-[0_0_12px_rgba(139,92,246,0.5)]"
                 />
 
-                {/* Glow Effect */}
-                <div className="absolute inset-0 bg-orange-500/10 blur-xl rounded-full animate-pulse-slow"></div>
+                {/* Intense Violet Glow */}
+                <div className="absolute inset-0 bg-violet-600/15 blur-2xl rounded-full animate-pulse"></div>
             </motion.div>
 
             {showText && (
                 <div className="flex flex-col">
                     <h1 className="text-xl font-display font-black tracking-tighter uppercase italic leading-none">
                         <span className="text-slate-900 dark:text-white">RECLAMTRACK</span>
-                        <span className="text-orange-500 ml-1.5 not-italic">PRO</span>
+                        <span className="text-violet-500 ml-1.5 not-italic">PRO</span>
                     </h1>
                 </div>
             )}
         </div>
     );
 }
+

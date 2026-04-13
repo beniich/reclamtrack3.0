@@ -1,2 +1,0 @@
-﻿C:\Users\pc gold\projet dash\herbute\frontend\src\components\shared
-C:\Users\pc gold\projet dash\herbute\frontend\src\components\devops-dashboards\shared

@@ -219,7 +219,7 @@ export default function DashboardPage() {
                         ) : (
                             <div className="col-span-full py-20 bg-white dark:bg-slate-900/50 rounded-[2rem] border border-dashed border-slate-200 dark:border-orange-500/20 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500">
                                 <AlertCircle className="w-12 h-12 mb-4 opacity-20" />
-                                <p className="font-bold italic">Aucune réclamation récente trouvée.</p>
+                                <p className="font-bold italic">No recent complaints found.</p>
                             </div>
                         )}
                     </div>
@@ -262,10 +262,10 @@ export default function DashboardPage() {
                         </div>
                         <div className="flex-1 overflow-y-auto p-8 space-y-8 max-h-[480px] scrollbar-hide">
                             {[
-                                { color: 'text-blue-400', icon: Droplet, title: 'Nouvelle Réclamation', desc: '# REC-2039 - Fuite à Agdal', time: '2 min' },
-                                { color: 'text-amber-400', icon: Construction, title: 'Équipe B4 Dépêchée', desc: 'Assignée au ticket #REC-2038', time: '14 min' },
-                                { color: 'text-emerald-400', icon: CheckCircle2, title: 'Ticket Résolu', desc: '#REC-2035 - Clôturé avec succès', time: '1h' },
-                                { color: 'text-purple-400', icon: Users, title: 'Maintenance Préventive', desc: 'Secteur Hassan en cours', time: '2h' },
+                                { color: 'text-blue-400', icon: Droplet, title: 'New Complaint', desc: '# REC-2039 - Leak at Agdal', time: '2 min' },
+                                { color: 'text-amber-400', icon: Construction, title: 'Team B4 Dispatched', desc: 'Assigned to ticket #REC-2038', time: '14 min' },
+                                { color: 'text-emerald-400', icon: CheckCircle2, title: 'Ticket Resolved', desc: '#REC-2035 - Successfully closed', time: '1h' },
+                                { color: 'text-purple-400', icon: Users, title: 'Preventive Maintenance', desc: 'Hassan sector in progress', time: '2h' },
                             ].map((act, i) => (
                                 <div key={i} className="flex gap-5 group cursor-pointer animate-in slide-in-from-right-4 duration-500" style={{ animationDelay: `${i * 100}ms` }}>
                                     <div className={cn("size-10 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-slate-100 dark:border-slate-700 group-hover:border-slate-300 dark:group-hover:border-orange-500/30 transition-all shadow-sm", act.color)}>
@@ -320,7 +320,7 @@ export default function DashboardPage() {
                                     </div>
                                 );
                             }) : (
-                                <p className="text-xs text-slate-500 italic">Aucune donnée de catégorie disponible.</p>
+                                <p className="text-xs text-slate-500 italic">No category data available.</p>
                             )}
                         </div>
                     </div>

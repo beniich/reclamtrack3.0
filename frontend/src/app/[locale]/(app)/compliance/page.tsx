@@ -25,7 +25,7 @@ export default function ComplianceCenterPage() {
         queryKey: ['compliance-report'],
         queryFn: async () => {
             const res = await api.get('/compliance/report');
-            return res.data;
+            return res;
         }
     });
 
@@ -33,8 +33,18 @@ export default function ComplianceCenterPage() {
         queryKey: ['compliance-reports'],
         queryFn: async () => {
              const res = await api.get('/compliance/reports');
-             return res.data;
+             return res; // api.get already returns res.data.data or res.data
         }
+    });
+
+    const { data: sessions, isLoading: isSessionsLoading } = useQuery({
+        queryKey: ['security-sessions'],
+        queryFn: () => api.get('/auth/sessions')
+    });
+
+    const { data: events, isLoading: isEventsLoading } = useQuery({
+        queryKey: ['security-events'],
+        queryFn: () => api.get('/compliance/events')
     });
 
     const runAuditMutation = async () => {

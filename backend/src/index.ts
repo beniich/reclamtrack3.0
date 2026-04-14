@@ -161,6 +161,8 @@ import fleetAgentRoutes from './routes/fleetAgent.js';
 app.use('/api/fleet-agent', fleetAgentRoutes);
 import smartVisionRoutes from './routes/smartVision.js';
 app.use('/api/smart-vision', smartVisionRoutes);
+import simulationRoutes from './routes/simulation.js';
+app.use('/api/simulation', simulationRoutes);
 
 // Health check
 app.get('/', (req, res) => {

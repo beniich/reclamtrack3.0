@@ -215,7 +215,7 @@ export default function ComplianceCenterPage() {
                          {classificationData.map(item => (
                              <div key={item.name} className="flex justify-between items-center text-[10px] font-bold uppercase">
                                  <span className="text-slate-400">{item.name}</span>
-                                 <span>{item.value} entries</span>
+                                 <span>{item.value as any} entries</span>
                              </div>
                          ))}
                     </div>

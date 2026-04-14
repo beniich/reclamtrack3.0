@@ -66,6 +66,26 @@ export interface Complaint {
     timeline: TimelineEvent[];
     comments: ComplaintComment[];
 
+    // GMAO / Industrial fields
+    assetId?: {
+        _id: string;
+        name: string;
+        code: string;
+        criticality?: 'A' | 'B' | 'C';
+        [key: string]: any;
+    };
+    impact?: number;
+
+    // Enhanced reporter data
+    reporterAddress?: string;
+    reporterLocation?: { latitude: number; longitude: number };
+    reporterMetadata?: {
+        os?: string;
+        browser?: string;
+        ip?: string;
+        [key: string]: any;
+    };
+
     createdAt: string;
     updatedAt: string;
 }

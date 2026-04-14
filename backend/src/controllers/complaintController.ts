@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import AuditLog from '../models/AuditLog.js';
 import { complaintService } from '../services/complaintService.js';
 import { eventBus } from '../services/eventBus.js';
+import { PrivacyShield } from '../utils/privacyShield.js';
 
 /**
  * Standard API response format
@@ -52,6 +53,20 @@ export class ComplaintController {
         req.params.id as string,
         (req as any).organizationId
       );
+
+      // --- Privacy Shield (SOC 2 Implementation) ---
+      const userRole = (req as any).user?.role;
+      if (userRole !== 'admin' && userRole !== 'super_admin' && userRole !== 'auditor') {
+          if (complaint.phone) complaint.phone = PrivacyShield.maskPhone(complaint.phone);
+          if (complaint.email) complaint.email = PrivacyShield.maskEmail(complaint.email);
+          if (complaint.reporterAddress) complaint.reporterAddress = 'Masqué (Confidentialité)';
+          if (complaint.reporterLocation) {
+              const blurred = PrivacyShield.blurLocation(complaint.reporterLocation.latitude, complaint.reporterLocation.longitude);
+              complaint.reporterLocation.latitude = blurred.lat;
+              complaint.reporterLocation.longitude = blurred.lng;
+          }
+      }
+
       res.json(formatResponse(complaint));
     } catch (error) {
       next(error);

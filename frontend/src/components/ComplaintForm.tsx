@@ -9,10 +9,12 @@ import { Button } from './ui/button';
 interface FormValues {
     firstName: string;
     lastName: string;
-    address: string;
+    address: string; // Adresse incident
+    reporterAddress: string; // Adresse domicile réclamant
     phone: string;
     leakType: string;
     description?: string;
+    reporterLocation?: { latitude: number; longitude: number; accuracy: number };
 }
 
 export default function ComplaintForm() {
@@ -21,10 +23,12 @@ export default function ComplaintForm() {
         firstName: '',
         lastName: '',
         address: '',
+        reporterAddress: '',
         phone: '',
         leakType: '',
         description: ''
     });
+    const [geoLoading, setGeoLoading] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -32,12 +36,40 @@ export default function ComplaintForm() {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
 
+    const captureLocation = () => {
+        setGeoLoading(true);
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                setValues(v => ({
+                    ...v,
+                    reporterLocation: {
+                        latitude: pos.coords.latitude,
+                        longitude: pos.coords.longitude,
+                        accuracy: pos.coords.accuracy
+                    }
+                }));
+                setGeoLoading(false);
+            },
+            () => {
+                setError("Impossible de récupérer votre position.");
+                setGeoLoading(false);
+            }
+        );
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
         try {
-            await api.post('/complaints', values);
+            const payload = {
+                ...values,
+                reporterMetadata: {
+                    browser: navigator.userAgent,
+                    os: navigator.platform
+                }
+            };
+            await api.post('/complaints', payload);
             router.push('/complaints/list');
         } catch (e: any) {
             setError(e.response?.data?.message || 'Erreur lors de l\'enregistrement');
@@ -74,15 +106,41 @@ export default function ComplaintForm() {
                     />
                 </div>
 
-                <input
-                    type="text"
-                    name="address"
-                    placeholder="Adresse"
-                    required
-                    value={values.address}
-                    onChange={handleChange}
-                    className="border rounded p-2 w-full"
-                />
+                <div className="space-y-2">
+                    <label className="text-xs font-bold text-slate-500 uppercase">Localisation de l'incident</label>
+                    <input
+                        type="text"
+                        name="address"
+                        placeholder="Adresse de l'incident (Rue, Quartier...)"
+                        required
+                        value={values.address}
+                        onChange={handleChange}
+                        className="border rounded p-2 w-full"
+                    />
+                </div>
+
+                <div className="space-y-2">
+                    <label className="text-xs font-bold text-slate-500 uppercase">Votre adresse (Réclamant)</label>
+                    <input
+                        type="text"
+                        name="reporterAddress"
+                        placeholder="Votre adresse de résidence"
+                        value={values.reporterAddress}
+                        onChange={handleChange}
+                        className="border rounded p-2 w-full"
+                    />
+                </div>
+
+                <div className="flex items-center gap-4 py-2">
+                    <button 
+                        type="button"
+                        onClick={captureLocation}
+                        className={`text-[10px] font-black uppercase px-3 py-2 rounded-lg border transition-all ${values.reporterLocation ? 'bg-emerald-50 text-emerald-600 border-emerald-200' : 'bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100'}`}
+                    >
+                        {geoLoading ? 'Localisation...' : values.reporterLocation ? '✓ Position GPS Capturée' : '📍 Capturer ma position GPS'}
+                    </button>
+                    {values.reporterLocation && <span className="text-[9px] text-slate-400 font-mono">{values.reporterLocation.latitude.toFixed(4)}, {values.reporterLocation.longitude.toFixed(4)}</span>}
+                </div>
 
                 <input
                     type="tel"

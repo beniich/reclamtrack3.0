@@ -113,7 +113,6 @@ router.post(
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ email });
-
       if (!user) {
         logger.warn(`Login failed: user not found – ${email}`);
         
@@ -131,9 +130,27 @@ router.post(
         return unauthorizedResponse(res, 'Identifiants invalides');
       }
 
+      // Check if account is locked
+      if (user.lockedUntil && user.lockedUntil > new Date()) {
+          const waitTime = Math.ceil((user.lockedUntil.getTime() - Date.now()) / 60000);
+          return res.status(403).json({
+              success: false,
+              message: `Compte verrouillé. Réessayez dans ${waitTime} minutes.`,
+              code: 'ACCOUNT_LOCKED'
+          });
+      }
+
       const matched = await user.comparePassword(password);
       if (!matched) {
-        logger.warn(`Login failed: bad password – ${email}`);
+        // Increment failed count and lock if necessary
+        user.failedLoginCount = (user.failedLoginCount || 0) + 1;
+        if (user.failedLoginCount >= 5) {
+            user.lockedUntil = new Date(Date.now() + 30 * 60000); // Lock for 30 mins
+            logger.warn(`🚫 Account locked — ${email} after 5 failed attempts`);
+        }
+        await user.save();
+
+        logger.warn(`Login failed: bad password – ${email} (Attempt ${user.failedLoginCount})`);
         
         await AuditLog.create({
             action: 'LOGIN',
@@ -143,13 +160,20 @@ router.post(
             category: 'AUTH',
             severity: 'MEDIUM',
             outcome: 'FAILURE',
-            details: { email, reason: 'bad_password' },
+            details: { email, reason: 'bad_password', attempt: user.failedLoginCount },
             ipAddress: req.ip,
         });
         
         await securityDetectionService.detectBruteForce(req.ip, email);
         return unauthorizedResponse(res, 'Identifiants invalides');
       }
+
+      // Reset lockout stats on success
+      user.failedLoginCount = 0;
+      user.lockedUntil = undefined;
+      user.lastLoginAt = new Date();
+      user.lastLoginIp = req.ip;
+      await user.save();
 
       const tokens = await issueTokenPair(user._id.toString(), user.role, user.email, req.ip);
 
@@ -371,6 +395,33 @@ router.post('/verify-email', [body('token').notEmpty()], validator, async (req, 
   } catch (err) {
     next(err);
   }
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
+// Sessions Management (SOC 2 CC6.1)
+// ──────────────────────────────────────────────────────────────────────────────
+
+router.get('/sessions', authenticate, async (req, res, next) => {
+    try {
+        const { getActiveSessionsForUser } = await import('../services/tokenService.js');
+        const sessions = await getActiveSessionsForUser(req.user!.id);
+        
+        return successResponse(res, sessions);
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.delete('/sessions/:hash', authenticate, async (req, res, next) => {
+    try {
+        const { revokeTokenByHash } = await import('../services/tokenService.js');
+        await revokeTokenByHash(req.params.hash as string);
+        
+        logger.info(`🚫 Session revoked manually: ${req.params.hash}`);
+        return successResponse(res, { message: 'Session révoquée' });
+    } catch (err) {
+        next(err);
+    }
 });
 
 export default router;

@@ -19,10 +19,13 @@ export const auditTrail = (category: 'AUTH' | 'DATA_ACCESS' | 'CONFIG_CHANGE' | 
              if (req.method === 'OPTIONS') return;
              if (req.method === 'GET' && severity === 'INFO') return; // Don't spam DB with every GET
 
+             const userId = (req as any).user?._id || (req as any).user?.id;
+             const action = `${req.method} ${req.route?.path || req.path}`;
+
              try {
                  const log = new AuditLog({
-                     action: `${req.method} ${req.route?.path || req.path}`,
-                     userId: (req as any).user?._id || (req as any).user?.id,
+                     action,
+                     userId,
                      organizationId: (req as any).organizationId,
                      category,
                      severity,
@@ -39,9 +42,20 @@ export const auditTrail = (category: 'AUTH' | 'DATA_ACCESS' | 'CONFIG_CHANGE' | 
                      }
                  });
                  await log.save();
+
+                 // Trigger Security Detection for non-INFO events
+                 if (severity !== 'INFO' || outcome === 'FAILURE') {
+                     const { securityDetectionService } = await import('../services/securityDetectionService.js');
+                     if (outcome === 'FAILURE' && category === 'AUTH') {
+                         await securityDetectionService.detectBruteForce(req.ip || '0.0.0.0', req.body?.email || 'unknown');
+                     }
+
+                     if (userId) {
+                         await securityDetectionService.detectAnomalousAccess(userId.toString(), req.ip || '0.0.0.0', action);
+                     }
+                 }
              } catch (error) {
                  logger.error('Failed to save audit log:', error);
-                 // We don't block the response if audit fails, but we loudly complain in server logs
              }
         });
 

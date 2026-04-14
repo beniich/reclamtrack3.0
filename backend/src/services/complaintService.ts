@@ -27,6 +27,7 @@ export class ComplaintService {
     const complaints = await Complaint.find(query)
       .populate('assignedTeamId', 'name specialization')
       .populate('technicianId', 'firstName lastName email')
+      .populate('assetId', 'name code category criticality')
       .sort({ createdAt: -1 });
 
     return complaints;
@@ -42,7 +43,8 @@ export class ComplaintService {
 
     const complaint = await Complaint.findOne({ _id: id, organizationId })
       .populate('assignedTeamId', 'name specialization')
-      .populate('technicianId', 'firstName lastName email');
+      .populate('technicianId', 'firstName lastName email')
+      .populate('assetId', 'name code category criticality');
 
     if (!complaint) {
       throw new Error('Complaint not found');
@@ -135,7 +137,8 @@ export class ComplaintService {
       { new: true, runValidators: true }
     )
       .populate('assignedTeamId', 'name specialization')
-      .populate('technicianId', 'firstName lastName email');
+      .populate('technicianId', 'firstName lastName email')
+      .populate('assetId', 'name code category criticality');
 
     if (!complaint) {
       throw new Error('Complaint not found');

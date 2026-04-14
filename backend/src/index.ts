@@ -45,6 +45,11 @@ import staffRoutes from './routes/staff.js';
 import teamRoutes from './routes/teams.js';
 import uploadRoutes from './routes/upload.js';
 import technicalSchemaRoutes from './routes/technical-schemas.js';
+import assetRoutes from './routes/assets.js';
+import workOrderRoutes from './routes/workOrders.js';
+import maintenancePlanRoutes from './routes/maintenancePlans.js';
+import mroRoutes from './routes/mro.js';
+import auditAgentRoutes from './routes/auditAgent.js';
 
 // IT Administration Module Routes
 import adRoutes from './routes/ad.js';
@@ -147,6 +152,15 @@ app.use('/api/security', securityRoutes);
 app.use('/api/devops', devopsRoutes);
 app.use('/api/ssh', sshRoutes);
 app.use('/api/technical-schemas', technicalSchemaRoutes);
+app.use('/api/assets', assetRoutes);
+app.use('/api/work-orders', workOrderRoutes);
+app.use('/api/maintenance-plans', maintenancePlanRoutes);
+app.use('/api/mro', mroRoutes);
+app.use('/api/audit-agent', auditAgentRoutes);
+import fleetAgentRoutes from './routes/fleetAgent.js';
+app.use('/api/fleet-agent', fleetAgentRoutes);
+import smartVisionRoutes from './routes/smartVision.js';
+app.use('/api/smart-vision', smartVisionRoutes);
 
 // Health check
 app.get('/', (req, res) => {

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {
     Calendar, Clock, MapPin, Phone, ArrowLeft, Printer,
     Edit, MessageSquare, ShieldCheck, AlertCircle, AlertTriangle,
-    User, CheckCircle2, XCircle, Send, Lock, Loader2
+    User, CheckCircle2, XCircle, Send, Lock, Loader2, Wrench
 } from 'lucide-react';
 import { apiClient } from '@/lib/api';
 import { StatusBadge, PriorityBadge } from '@/components/ui/StatusBadge';
@@ -130,6 +130,23 @@ export default function ComplaintDetailPage() {
             toast.error("Erreur lors de l'envoi du commentaire.");
         } finally {
             setSendingComment(false);
+        }
+    };
+
+    const handleConvertToWorkOrder = async () => {
+        if (!complaint) return;
+        setActionLoading('convert');
+        try {
+            const res: any = await apiClient.post(`/work-orders/convert/${complaintId}`);
+            toast.success(`Ordre de Travail créé : ${res.data.number}`);
+            // Rediriger vers l'OT fraîchement créé après un court délai
+            setTimeout(() => {
+                router.push(`/work-orders/${res.data._id}`);
+            }, 1500);
+        } catch (err: any) {
+            toast.error(err?.response?.data?.message || "Erreur de conversion.");
+        } finally {
+            setActionLoading(null);
         }
     };
 
@@ -388,10 +405,62 @@ export default function ComplaintDetailPage() {
                                 <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
                                     <MapPin className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
                                     <div>
-                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Localisation</p>
+                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Localisation Incident</p>
                                         <p className="text-sm font-bold text-slate-700 dark:text-slate-200 leading-relaxed">{complaint.address}</p>
                                     </div>
                                 </div>
+
+                                {/* Industrial Asset Section (GMAO Link) */}
+                                {complaint.assetId && (
+                                    <div className="mt-4 p-4 rounded-2xl bg-slate-900 border border-slate-800 shadow-inner relative overflow-hidden group">
+                                        <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                                            <Wrench className="w-12 h-12 text-white" />
+                                        </div>
+                                        <div className="relative z-10">
+                                            <div className="flex items-center justify-between mb-3">
+                                                <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.2em]">Équipement Associé</span>
+                                                <span className={`px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest border
+                                                    ${(complaint.assetId as any).criticality === 'A' ? 'bg-rose-500/20 text-rose-400 border-rose-500/30' : 
+                                                      (complaint.assetId as any).criticality === 'B' ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' : 
+                                                      'bg-cyan-500/20 text-cyan-400 border-cyan-500/30'}`}>
+                                                    {(complaint.assetId as any).criticality === 'A' ? 'Vital (A)' : 
+                                                     (complaint.assetId as any).criticality === 'B' ? 'Important (B)' : 'Secondaire (C)'}
+                                                </span>
+                                            </div>
+                                            <h5 className="text-sm font-black text-white truncate">{(complaint.assetId as any).name}</h5>
+                                            <p className="text-[10px] text-slate-400 font-bold mt-0.5">Code : {(complaint.assetId as any).code}</p>
+                                            
+                                            <div className="mt-3 pt-3 border-t border-white/5 flex items-center gap-2">
+                                                <div className="p-1 bg-white/10 rounded-md">
+                                                    <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                                                </div>
+                                                <p className="text-[9px] text-white/60 font-medium leading-tight italic">
+                                                    Priorité {complaint.priority} héritée de l'actif (Impact IA: {complaint.impact}/5).
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                                {complaint.reporterAddress && (
+                                    <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                                        <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                                        <div>
+                                            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Adresse du Réclamant</p>
+                                            <p className="text-sm font-bold text-slate-700 dark:text-slate-200 leading-relaxed">{complaint.reporterAddress}</p>
+                                        </div>
+                                    </div>
+                                )}
+                                {complaint.reporterLocation && (
+                                    <div className="flex items-center gap-3 p-3 rounded-xl bg-orange-50 dark:bg-orange-500/10 border border-orange-500/20">
+                                        <MapPin className="w-4 h-4 text-orange-500 shrink-0" />
+                                        <div>
+                                            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">GPS Réclamant</p>
+                                            <p className="text-[10px] font-mono font-bold text-orange-600 dark:text-orange-400">
+                                                {complaint.reporterLocation.latitude.toFixed(5)}, {complaint.reporterLocation.longitude.toFixed(5)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
                                 {complaint.assignedTeamId && (
                                     <div className="flex items-center gap-3 p-3 rounded-xl bg-blue-50 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900">
                                         <User className="w-4 h-4 text-blue-500 shrink-0" />
@@ -402,6 +471,20 @@ export default function ComplaintDetailPage() {
                                     </div>
                                 )}
                             </div>
+
+                            {/* Metadata Système */}
+                            {complaint.reporterMetadata && (
+                                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                                    <div className="flex flex-col">
+                                        <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">OS / Appareil</p>
+                                        <p className="text-[10px] font-bold text-slate-500 truncate w-24">{complaint.reporterMetadata.os || 'Inconnu'}</p>
+                                    </div>
+                                    <div className="flex flex-col items-end text-right">
+                                        <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Navigateur</p>
+                                        <p className="text-[10px] font-bold text-slate-500 truncate w-24">{complaint.reporterMetadata.browser?.split(' ')[0] || 'Inconnu'}</p>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -476,6 +559,21 @@ export default function ComplaintDetailPage() {
                                 >
                                     {actionLoading === 'fermée' ? <Loader2 className="w-4 h-4 animate-spin text-slate-400" /> : <Lock className="w-4 h-4 text-slate-400" />}
                                     <span className="text-[10px] font-black uppercase tracking-widest">Clôturer le dossier</span>
+                                </button>
+                            )}
+
+                            {/* Conversion en OT (GMAO Integration) */}
+                            {complaint.status !== 'fermée' && complaint.status !== 'rejetée' && (
+                                <button
+                                    onClick={handleConvertToWorkOrder}
+                                    disabled={!!actionLoading}
+                                    className="col-span-2 mt-4 flex items-center justify-center gap-3 py-5 rounded-2xl bg-indigo-600 text-white hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/30 transition-all disabled:opacity-50 shadow-xl"
+                                >
+                                    {actionLoading === 'convert' ? <Loader2 className="w-5 h-5 animate-spin" /> : <Wrench className="w-5 h-5" />}
+                                    <div className="text-left">
+                                        <p className="text-[11px] font-black uppercase tracking-widest leading-none">Maintenance GMAO</p>
+                                        <p className="text-[9px] font-bold opacity-80 uppercase tracking-tighter mt-1">Convertir en Ordre de Travail</p>
+                                    </div>
                                 </button>
                             )}
                         </div>

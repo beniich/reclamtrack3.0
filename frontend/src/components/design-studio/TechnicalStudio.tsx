@@ -1,17 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TechnicalCanvas } from './TechnicalCanvas';
 import { ComponentLibrary } from './ComponentLibrary';
 import { AICmdBar } from './AICmdBar';
 import paper from 'paper';
-import { Save, Loader2, FolderOpen, History, X } from 'lucide-react';
+import { Save, Loader2, FolderOpen, History, X, Info, Settings, ShieldCheck, Wrench, Box } from 'lucide-react';
 import { useSchemaStore, TechnicalSchema } from '@/store/schemaStore';
 import { format } from 'date-fns';
 
 export const TechnicalStudio: React.FC = () => {
     const [project, setProject] = useState<paper.Project | null>(null);
     const [showHistory, setShowHistory] = useState(false);
+    const [selectedAsset, setSelectedAsset] = useState<any | null>(null);
     const { createSchema, schemas, fetchSchemas, isLoading } = useSchemaStore();
 
     useEffect(() => {
@@ -71,6 +72,24 @@ export const TechnicalStudio: React.FC = () => {
         project.clear();
         project.importJSON(schema.projectData);
         setShowHistory(false);
+    };
+
+    const handleSelectItem = (info: any) => {
+        if (!info) {
+            setSelectedAsset(null);
+            return;
+        }
+        
+        // Mocking Digital Twin Data lookup
+        const isPump = info.name.toLowerCase().includes('pompe');
+        setSelectedAsset({
+            ...info,
+            id: isPump ? 'USINE-L1-POMPE-001' : 'COMP-TECH-042',
+            status: isPump ? 'Maintenance' : 'Opérationnel',
+            lastMaintenance: isPump ? '12 Mars 2026' : '01 Jan 2026',
+            mtbf: isPump ? '420h' : '1.2kh',
+            isRealAsset: true
+        });
     };
 
     return (
@@ -141,8 +160,68 @@ export const TechnicalStudio: React.FC = () => {
                     </div>
                 )}
 
-                <div className="flex-1 min-h-0 bg-white dark:bg-slate-900 rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-orange-500/10 shadow-inner">
-                    <TechnicalCanvas onReady={(p) => setProject(p)} />
+                <div className="flex-1 min-h-0 bg-white dark:bg-slate-900 rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-orange-500/10 shadow-inner flex relative">
+                    <TechnicalCanvas 
+                        onReady={(p) => setProject(p)} 
+                        onSelectItem={handleSelectItem}
+                    />
+
+                    {/* GMAO Digital Twin Sidebar */}
+                    {selectedAsset && (
+                        <div className="absolute top-4 right-4 bottom-4 w-72 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-[2rem] shadow-2xl p-6 flex flex-col animate-in slide-in-from-right duration-300 z-20">
+                            <div className="flex items-start justify-between mb-6">
+                                <div className="p-3 bg-indigo-500/10 text-indigo-500 rounded-xl">
+                                    <Box size={24} />
+                                </div>
+                                <button onClick={() => setSelectedAsset(null)} className="text-slate-400">
+                                    <X size={20} />
+                                </button>
+                            </div>
+
+                            <div className="mb-6">
+                                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Identifiant Actif</p>
+                                <h4 className="text-lg font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-none">{selectedAsset.id}</h4>
+                                <p className="text-xs font-bold text-indigo-500 mt-1">{selectedAsset.name}</p>
+                            </div>
+
+                            <div className="space-y-4 flex-1">
+                                <div className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <span className="text-[9px] font-black uppercase text-slate-400 tracking-widest">État Santé</span>
+                                        <span className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest ${selectedAsset.status === 'Opérationnel' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-amber-500/10 text-amber-500'}`}>
+                                            {selectedAsset.status}
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <ShieldCheck size={14} className={selectedAsset.status === 'Opérationnel' ? 'text-emerald-500' : 'text-amber-500'} />
+                                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Diagnostique OK</span>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div className="p-3 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-100 dark:border-white/5">
+                                        <p className="text-[8px] font-black text-slate-400 uppercase mb-1">Dernière PM</p>
+                                        <p className="text-[10px] font-bold text-slate-700 dark:text-slate-300">{selectedAsset.lastMaintenance}</p>
+                                    </div>
+                                    <div className="p-3 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-100 dark:border-white/5">
+                                        <p className="text-[8px] font-black text-slate-400 uppercase mb-1">MTBF (Fiab.)</p>
+                                        <p className="text-[10px] font-bold text-slate-700 dark:text-slate-300">{selectedAsset.mtbf}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="space-y-2 pt-4">
+                                <Link href={`/assets/1`} className="block">
+                                    <button className="w-full py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2">
+                                        <Info size={14} /> Fiche Complète
+                                    </button>
+                                </Link>
+                                <button className="w-full py-3 border border-indigo-500/30 text-indigo-500 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-indigo-500/10 transition-colors">
+                                    <Wrench size={14} /> Créer un Job (OT)
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 
                 <AICmdBar onGenerate={handleAIGenerate} />

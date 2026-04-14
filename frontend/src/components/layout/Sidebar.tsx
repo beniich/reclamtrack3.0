@@ -23,6 +23,9 @@ import {
     ShieldCheck,
     ChevronRight,
     Shapes,
+    Box,
+    ArchiveRestore,
+    FileBarChart,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -57,6 +60,7 @@ export function Sidebar() {
                 { label: t('ecosystem'),     href: '/ecosystem',          icon: Shapes,     badge: 'Alpha', badgeColor: 'bg-purple-500' },
                 { label: t('map'),           href: '/map',                icon: Map },
                 { label: t('analytics'),     href: '/analytics',          icon: BarChart3 },
+                { label: 'Rapports GMAO',    href: '/reports/maintenance', icon: FileBarChart, badge: 'KPI', badgeColor: 'bg-indigo-500' },
             ],
         },
         {
@@ -67,6 +71,10 @@ export function Sidebar() {
                 { label: t('roster'),      href: '/roster',             icon: ClipboardList },
                 { label: t('fleet'),       href: '/fleet',              icon: Truck },
                 { label: t('inventory'),   href: '/inventory',          icon: Package },
+                { label: 'Magasin MRO',    href: '/inventory/mro',      icon: ArchiveRestore, badge: 'Stock', badgeColor: 'bg-blue-500' },
+                { label: 'Équipements',    href: '/assets',             icon: Box, badge: 'GMAO', badgeColor: 'bg-emerald-500' },
+                { label: 'Ordres Travail', href: '/work-orders',        icon: Wrench, badge: 'OT', badgeColor: 'bg-red-500' },
+                { label: 'Maintenance PM', href: '/maintenance',        icon: Calendar, badge: 'PM', badgeColor: 'bg-amber-500' },
                 { label: t('designStudio'), href: '/technical-design',   icon: Shapes, badge: 'CAD', badgeColor: 'bg-orange-500' },
             ],
         },

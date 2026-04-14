@@ -224,3 +224,23 @@ export const introspectToken = async (
     email: user.email,
   };
 };
+/**
+ * Get all non-revoked, non-expired refresh tokens for a user.
+ */
+export const getActiveSessionsForUser = async (userId: string) => {
+    return await RefreshToken.find({
+        userId,
+        revokedAt: null,
+        expiresAt: { $gt: new Date() }
+    }).sort({ createdAt: -1 });
+};
+
+/**
+ * Revoke a token by its hash (useful for revocation from a dashboard).
+ */
+export const revokeTokenByHash = async (tokenHash: string): Promise<void> => {
+    await RefreshToken.updateOne(
+        { tokenHash, revokedAt: null },
+        { revokedAt: new Date() }
+    );
+};

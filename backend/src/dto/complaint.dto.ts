@@ -14,6 +14,7 @@ export interface CreateComplaintDto {
   priority?: 'low' | 'medium' | 'high' | 'urgent';
   category?: string;
   location?: string;
+  assetId?: string;
 }
 
 export interface UpdateComplaintDto {
@@ -23,6 +24,7 @@ export interface UpdateComplaintDto {
   priority?: 'low' | 'medium' | 'high' | 'urgent';
   assignedTeamId?: string;
   resolution?: string;
+  assetId?: string;
 }
 
 export interface QueryComplaintDto {
@@ -54,6 +56,7 @@ export const createComplaintValidators = [
     .withMessage(`Priorité invalide. Valeurs: ${VALID_PRIORITIES.join(', ')}`),
   body('category').optional().trim().isLength({ max: 100 }),
   body('location').optional().trim().isLength({ max: 200 }),
+  body('assetId').optional().isMongoId().withMessage('assetId invalide'),
 ];
 
 export const updateComplaintValidators = [
@@ -66,6 +69,7 @@ export const updateComplaintValidators = [
   body('priority').optional().isIn(VALID_PRIORITIES),
   body('assignedTeamId').optional().isMongoId().withMessage('assignedTeamId invalide'),
   body('resolution').optional().trim().isLength({ max: 2000 }),
+  body('assetId').optional().isMongoId().withMessage('assetId invalide'),
 ];
 
 export const queryComplaintValidators = [

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file billing.ts
  * @description Organization billing routes. Handles Stripe checkout sessions,
  *              plan retrieval, and the Stripe webhook for provisioning
@@ -16,9 +16,9 @@ import { successResponse } from '../utils/apiResponse.js';
 import { logger } from '../utils/logger.js';
 
 const router = Router();
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
-  apiVersion: '2025-01-27.acacia' as any, // Downgrade to a known stable version or use any
+const StripeConstructor = Stripe as any;
+const stripe = new StripeConstructor(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
+  apiVersion: '2025-01-27.acacia', 
 });
 
 // Map standard plans to Stripe Price IDs (from env)
@@ -113,9 +113,9 @@ router.post(
         throw new AppError('Configuration Stripe webhook manquante', 500, 'STRIPE_CONFIG_ERROR');
       }
 
-      let event: Stripe.Event;
+      let event: any;
       try {
-        event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+        event = (stripe as any).webhooks.constructEvent(req.body, sig, endpointSecret);
       } catch (err: any) {
         logger.error(`[Billing] Webhook signature verification failed: ${err.message}`);
         throw new AppError('Signature Webhook invalide', 400, 'STRIPE_SIGNATURE_INVALID');

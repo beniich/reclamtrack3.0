@@ -1,4 +1,4 @@
-﻿import ExcelJS from 'exceljs';
+import ExcelJS from 'exceljs';
 import { Request, Response, Router } from 'express';
 import fs from 'fs';
 import mongoose from 'mongoose';
@@ -10,6 +10,7 @@ import { Organization } from '../models/Organization.js';
 import { saveExport } from '../services/storageService.js';
 import { AuthenticatedRequest } from '../types/request.js';
 import { logger } from '../utils/logger.js';
+import { getMaintenanceKPIs, getOEEAnalytics } from '../controllers/analytics.controller.js';
 
 const router = Router();
 
@@ -300,6 +301,10 @@ router.get('/complaints', async (req: Request, res: Response) => {
   // Redirect to performance which has similar data
   res.redirect('/api/analytics/performance');
 });
+
+// --- GMAO / Maintenance Analytics ---
+router.get('/gmao/kpis', getMaintenanceKPIs);
+router.get('/gmao/oee', getOEEAnalytics);
 
 // GET /api/analytics/teams - Team performance stats
 router.get('/teams', async (req: AuthenticatedRequest, res: Response) => {

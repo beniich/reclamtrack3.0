@@ -39,7 +39,9 @@ export class SecurityDetectionService {
                     await event.save();
                     logger.warn(`🚨 SECURITY EVENT: Brute force detected from ${ipAddress}`);
                     
-                    // In a real scenario, we might trigger a webhook/email here for CRITICAL
+                    // Phase 3 - Automated Alerts
+                    const { sendSecurityAlert } = await import('./emailService.js');
+                    await sendSecurityAlert(event.type, event.severity, event.description, event.evidence);
                 }
             }
         } catch (error) {
@@ -48,12 +50,48 @@ export class SecurityDetectionService {
     }
 
     /**
-     * Checks for access outside designated business hours or impossible travel
+     * Checks for session anomalies (e.g. IP change mid-session)
      */
-    async detectAnomalousAccess(userId: string, ipAddress: string) {
-        // Implementation for behavioral analysis 
-        // e.g. Accessing from a new country suddenly
-        return; 
+    async detectSessionAnomaly(userId: string, sessionId: string, currentIp: string, lastIp?: string) {
+        if (lastIp && currentIp !== lastIp) {
+            const event = new SecurityEvent({
+                type: 'ANOMALY',
+                severity: 'MEDIUM',
+                affectedUsers: [userId],
+                sourceIp: currentIp,
+                description: `Session IP change detected: User ${userId} switched from ${lastIp} to ${currentIp} in session ${sessionId}`,
+                evidence: { sessionId, previousIp: lastIp, currentIp }
+            });
+            await event.save();
+            logger.warn(`🚨 SECURITY EVENT: Session hijacking risk (IP jump) for user ${userId}`);
+        }
+    }
+
+    /**
+     * Checks for access outside designated business hours or from unexpected locations
+     */
+    async detectAnomalousAccess(userId: string, ipAddress: string, action: string) {
+        try {
+            // Check for access during "Ghost Hours" (e.g., 2 AM - 5 AM) for sensitive actions
+            const hour = new Date().getHours();
+            if ((hour >= 2 && hour <= 5) && ['DELETE', 'DOWNLOAD_ALL'].some(a => action.includes(a))) {
+                const event = new SecurityEvent({
+                    type: 'ANOMALY',
+                    severity: 'HIGH',
+                    affectedUsers: [userId],
+                    sourceIp: ipAddress,
+                    description: `Sensitive action '${action}' detected during suspicious hours (Ghost Hours)`,
+                    evidence: { hour, action, ipAddress }
+                });
+                await event.save();
+
+                // Phase 3 - Automated Alerts
+                const { sendSecurityAlert } = await import('./emailService.js');
+                await sendSecurityAlert(event.type, event.severity, event.description, event.evidence);
+            }
+        } catch (error) {
+            logger.error('Error in detectAnomalousAccess:', error);
+        }
     }
 }
 

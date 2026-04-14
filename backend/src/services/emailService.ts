@@ -91,3 +91,31 @@ export const sendWelcomeEmail = async (to: string, name?: string) => {
     html,
   });
 };
+/**
+ * Envoie une alerte de sécurité critique
+ */
+export const sendSecurityAlert = async (type: string, severity: string, description: string, evidence: any) => {
+    const adminEmail = process.env.SECURITY_ADMIN_EMAIL || process.env.SMTP_USER;
+    if (!adminEmail) return;
+
+    const html = `
+        <div style="font-family: sans-serif; border: 2px solid #ef4444; padding: 20px; border-radius: 10px;">
+            <h1 style="color: #ef4444;">🚨 ALERTE SÉCURITÉ CRITIQUE - ReclamTrack</h1>
+            <p><strong>Type d'incident :</strong> ${type}</p>
+            <p><strong>Sévérité :</strong> <span style="padding: 2px 8px; background-color: #ef4444; color: white; border-radius: 4px;">${severity}</span></p>
+            <p><strong>Description :</strong> ${description}</p>
+            <hr />
+            <h3>Preuves / Détails :</h3>
+            <pre style="background-color: #f1f5f9; padding: 10px; border-radius: 5px;">${JSON.stringify(evidence, null, 2)}</pre>
+            <p style="margin-top: 20px;">
+                <a href="${process.env.FRONTEND_URL}/compliance" style="padding: 10px 20px; background-color: #0f172a; color: white; text-decoration: none; border-radius: 5px;">Accéder au Compliance Center</a>
+            </p>
+        </div>
+    `;
+
+    return sendMail({
+        to: adminEmail,
+        subject: `[ALERTE ${severity}] Incident de sécurité détecté : ${type}`,
+        html,
+    });
+};

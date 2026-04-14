@@ -1,350 +1,135 @@
 'use client';
 
-import { LoadingSpinner } from '@/components/LoadingSpinner';
-import { NotificationCenter } from '@/components/notifications/NotificationCenter';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle
-} from '@/components/ui/dialog';
-import { SignaturePad } from '@/components/ui/SignaturePad';
-import { Textarea } from '@/components/ui/textarea';
-import { useAssignments } from '@/hooks/useAssignments';
-import useNotifications from '@/hooks/useNotifications';
-import api from '@/lib/api';
-import { Assignment } from '@/types';
-import { formatDistanceToNow } from 'date-fns';
-import { fr } from 'date-fns/locale';
-import { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import React from 'react';
+import Link from 'next/link';
+import { 
+    QrCode, ListChecks, History, Map, 
+    Bell, User, Wrench, Clock, CheckCircle2,
+    ChevronRight, Scan, AlertCircle
+} from 'lucide-react';
 
-export default function TechnicianPage() {
-    useNotifications();
-    const { data: assignments, isLoading, refetch } = useAssignments();
-
-    // Trouver la tâche active (en cours)
-    const activeTask = assignments?.find((a: Assignment) => a.status === 'en cours');
-    // Trouver les tâches à venir (affecté)
-    const upcomingTasks = assignments?.filter((a: Assignment) => a.status === 'affecté') || [];
-
-    const [showClosureModal, setShowClosureModal] = useState(false);
-    const [showCommentModal, setShowCommentModal] = useState(false);
-    const [comment, setComment] = useState('');
-    const [closureNote, setClosureNote] = useState('');
-    const [signature, setSignature] = useState<string | null>(null);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const handleAddComment = async () => {
-        if (!activeTask || !comment.trim()) return;
-        setIsSubmitting(true);
-        try {
-            await api.patch(`/assignments/${activeTask._id}/comment`, { comment });
-            toast.success("Commentaire ajouté");
-            setComment('');
-            setShowCommentModal(false);
-            refetch();
-        } catch {
-            toast.error("Erreur lors de l'envoi du commentaire");
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    const handleStatusChange = async (id: string, newStatus: string) => {
-        try {
-            await api.patch(`/assignments/${id}`, { status: newStatus });
-            toast.success(`Statut mis à jour : ${newStatus}`);
-            refetch();
-        } catch {
-            toast.error("Erreur lors de la mise à jour");
-        }
-    };
-
-    const handleFinishTask = async () => {
-        if (!activeTask || !signature) {
-            toast.error("Signature requise pour clôturer l'intervention");
-            return;
-        }
-
-        setIsSubmitting(true);
-        try {
-            await api.patch(`/assignments/${activeTask._id}/complete`, {
-                status: 'terminé',
-                closureNote,
-                signature
-            });
-            toast.success("Intervention clôturée avec succès");
-            setShowClosureModal(false);
-            setSignature(null);
-            setClosureNote('');
-            refetch();
-        } catch {
-            toast.error("Erreur lors de la clôture");
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    if (isLoading) return <div className="h-screen flex items-center justify-center"><LoadingSpinner /></div>;
+export default function TechnicianPortalPage() {
+    // Mock tasks for the technician
+    const activeTasks = [
+        { id: '1', number: 'WO-8821', title: 'Fuite Pompe P1', priority: 'urgent', time: '14:00', asset: 'Pompe Ligne 1' },
+        { id: '2', number: 'WO-8825', title: 'Préventif TGBT', priority: 'medium', time: '16:30', asset: 'Sous-station A' },
+    ];
 
     return (
-        <div className="bg-background-light text-slate-900 min-h-screen font-display flex flex-col">
-            {/* Tech Header */}
-            <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 px-4 lg:px-10 py-3">
-                <div className="max-w-[1200px] mx-auto flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-6">
-                        <div className="flex items-center gap-3 text-primary">
-                            <span className="material-symbols-outlined text-3xl font-bold">bolt</span>
-                            <h2 className="text-slate-900 text-xl font-black leading-tight tracking-tight">TECHFLOW</h2>
-                        </div>
+        <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-900 dark:text-white flex flex-col max-w-lg mx-auto relative shadow-2xl overflow-hidden font-display">
+            {/* Mobile Status Bar Simulation */}
+            <div className="bg-white dark:bg-slate-900 px-6 py-4 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
+                <div className="flex items-center gap-2">
+                    <div className="size-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-black text-xs shadow-lg shadow-indigo-500/20">
+                        AB
                     </div>
-                    <div className="flex items-center gap-3">
-                        <NotificationCenter />
-                        <div className="hidden sm:flex items-center bg-slate-100 rounded-xl px-3 py-1.5 gap-2">
-                            <span className="material-symbols-outlined text-sm text-slate-500">cloud_done</span>
-                            <span className="text-xs font-bold text-slate-500">SYNC</span>
-                        </div>
+                    <div>
+                        <p className="text-[10px] font-black uppercase tracking-tighter text-slate-400 leading-none">Technicien</p>
+                        <p className="text-xs font-black italic uppercase tracking-tighter text-slate-900 dark:text-white mt-0.5">Amine Benali</p>
                     </div>
                 </div>
-            </header>
+                <div className="relative p-2 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                    <Bell className="w-5 h-5 text-slate-500" />
+                    <span className="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+                </div>
+            </div>
 
-            <main className="flex-1 w-full max-w-[1200px] mx-auto p-4 lg:p-10 space-y-8">
-                {/* Title & Status */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                    <div className="space-y-1">
-                        <p className="text-primary font-bold text-sm uppercase tracking-widest">Tableau de Bord Technicien</p>
-                        <h1 className="text-4xl font-black tracking-tight">Agenda du Jour</h1>
-                        <p className="text-slate-500 flex items-center gap-2">
-                            <span className="material-symbols-outlined text-sm">calendar_today</span>
-                            {new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'short' })} • {upcomingTasks.length} interventions en attente
-                        </p>
-                    </div>
-                    <div className="flex gap-2">
-                        <button
-                            onClick={() => refetch()}
-                            className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white border border-slate-200 rounded-xl px-6 py-3 font-bold text-sm hover:bg-slate-50 transition-colors"
-                        >
-                            <span className="material-symbols-outlined text-lg">sync</span>
-                            Rafraîchir
+            {/* Main Action - QR Scan Hero */}
+            <div className="px-6 py-8">
+                <div className="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-[2.5rem] p-8 text-white shadow-[0_20px_40px_rgba(79,70,229,0.3)] relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                    <div className="relative z-10">
+                        <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest mb-4">
+                            <div className="size-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                            Scanner Prêt
+                        </div>
+                        <h2 className="text-2xl font-black uppercase italic tracking-tighter mb-2 leading-tight">Intervention<br/>Sur Site</h2>
+                        <p className="text-xs text-indigo-100 font-medium mb-8 leading-relaxed max-w-[200px]">Scannez le QR Code de la machine pour voir l'historique.</p>
+                        
+                        <button className="w-full h-[60px] bg-white text-indigo-600 rounded-2xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-3 shadow-xl active:scale-95 transition-all">
+                            <QrCode className="w-5 h-5" /> Lancer le Scanner
                         </button>
                     </div>
                 </div>
+            </div>
 
-                {/* Active Task Section */}
-                {activeTask ? (
-                    <section className="space-y-4">
-                        <div className="flex items-center justify-between">
-                            <h2 className="text-xl font-bold flex items-center gap-2">
-                                <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
-                                Tâche Active
-                            </h2>
-                            <span className="text-xs font-black bg-red-100 text-red-600 px-3 py-1 rounded-full uppercase">
-                                Priorité: {activeTask.complaintId?.priority || 'Normale'}
-                            </span>
-                        </div>
-                        <div className="bg-white rounded-2xl border border-primary/20 shadow-xl shadow-primary/5 overflow-hidden">
-                            <div className="flex flex-col lg:flex-row">
-                                {/* Map Placeholder - Could be replaced by real map later */}
-                                <div className="lg:w-1/3 min-h-[240px] relative bg-slate-200">
-                                    <div className="absolute inset-0 bg-primary/10 flex items-center justify-center">
-                                        <span className="material-symbols-outlined text-6xl text-primary opacity-20">map</span>
+            {/* Tasks List Container */}
+            <div className="px-6 flex-1 bg-white dark:bg-slate-900 rounded-t-[3rem] shadow-[0_-20px_50px_rgba(0,0,0,0.05)] pt-8 pb-32">
+                <div className="flex items-center justify-between mb-8">
+                    <div>
+                        <h3 className="text-sm font-black uppercase italic tracking-tighter flex items-center gap-2">
+                            <ListChecks className="w-4 h-4 text-indigo-500" /> Mes Missions
+                        </h3>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">Planning du 14 Avril</p>
+                    </div>
+                    <span className="text-[9px] font-black uppercase tracking-widest bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-xl text-slate-500 border border-slate-200/50 dark:border-slate-700">{activeTasks.length} Activités</span>
+                </div>
+
+                <div className="space-y-4">
+                    {activeTasks.map((task) => (
+                        <Link href={`/work-orders/${task.id}`} key={task.id}>
+                            <div className="bg-slate-50 dark:bg-slate-800/30 rounded-3xl p-5 flex items-center gap-4 border border-slate-100 dark:border-slate-800/50 active:bg-slate-100 dark:active:bg-slate-800 transition-all cursor-pointer group">
+                                <div className={`size-14 rounded-2xl flex items-center justify-center shrink-0 border-2 ${task.priority === 'urgent' ? 'bg-red-500/5 text-red-500 border-red-500/20 shadow-lg shadow-red-500/10' : 'bg-indigo-500/5 text-indigo-500 border-indigo-500/20'}`}>
+                                    <Wrench className="w-6 h-6" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="text-[9px] font-mono font-black text-slate-400 bg-white dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-100 dark:border-slate-700">#{task.number}</span>
+                                        {task.priority === 'urgent' && <div className="text-[8px] font-black bg-red-500 text-white px-1.5 py-0.5 rounded uppercase flex items-center gap-1">URGENT</div>}
                                     </div>
-                                    <div className="absolute bottom-4 left-4 right-4">
-                                        <button className="w-full flex items-center justify-center gap-2 bg-primary text-white py-4 rounded-xl font-black shadow-lg shadow-primary/40 hover:scale-[1.02] transition-transform">
-                                            <span className="material-symbols-outlined">directions_car</span>
-                                            OUVRIR NAVIGATION GPS
-                                        </button>
+                                    <p className="text-base font-black italic uppercase tracking-tighter text-slate-900 dark:text-white line-clamp-1">{task.title}</p>
+                                    <div className="flex items-center gap-3 mt-1 text-slate-400">
+                                        <span className="text-[10px] font-bold flex items-center gap-1"><Clock className="w-3 h-3" /> {task.time}</span>
+                                        <span className="text-[10px] font-bold flex items-center gap-1 italic opacity-60">@ {task.asset}</span>
                                     </div>
                                 </div>
-
-                                {/* Content Area */}
-                                <div className="lg:w-2/3 p-6 lg:p-8 flex flex-col justify-between">
-                                    <div className="space-y-4">
-                                        <div className="flex flex-wrap items-center justify-between gap-3">
-                                            <span className="bg-primary/10 text-primary text-xs font-black px-3 py-1 rounded-full uppercase">
-                                                {activeTask.complaintId?.category} • {activeTask.teamId?.name}
-                                            </span>
-                                            <div className="flex items-center gap-2 text-primary font-mono font-bold text-xl">
-                                                <span className="material-symbols-outlined">timer</span>
-                                                {formatDistanceToNow(new Date(activeTask.assignedAt), { locale: fr })}
-                                            </div>
-                                        </div>
-                                        <div className="space-y-2">
-                                            <h3 className="text-2xl font-black">{activeTask.complaintId?.title}</h3>
-                                            <p className="text-slate-500 text-lg flex items-start gap-2">
-                                                <span className="material-symbols-outlined text-primary">location_on</span>
-                                                {activeTask.complaintId?.address}
-                                            </p>
-                                            <div className="p-4 bg-slate-50 rounded-xl border-l-4 border-primary">
-                                                <p className="text-sm font-bold uppercase text-slate-500 mb-1">Description</p>
-                                                <p className="text-slate-900">{activeTask.complaintId?.description}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-8 flex flex-wrap gap-4">
-                                        <button
-                                            onClick={() => setShowClosureModal(true)}
-                                            className="flex-1 min-w-[200px] flex items-center justify-center gap-3 bg-green-600 text-white py-4 rounded-xl font-black text-lg hover:bg-green-700 transition-colors shadow-lg shadow-green-600/20"
-                                        >
-                                            <span className="material-symbols-outlined">check_circle</span>
-                                            FINALISER & SIGNER
-                                        </button>
-                                        <button
-                                            onClick={() => setShowCommentModal(true)}
-                                            className="flex-1 min-w-[200px] flex items-center justify-center gap-3 bg-slate-100 text-slate-900 py-4 rounded-xl font-black text-lg hover:bg-slate-200 transition-colors"
-                                        >
-                                            <span className="material-symbols-outlined">chat_bubble</span>
-                                            COMMENTAIRE
-                                        </button>
-                                        <button className="flex-1 min-w-[200px] flex items-center justify-center gap-3 bg-slate-100 text-slate-900 py-4 rounded-xl font-black text-lg hover:bg-slate-200 transition-colors opacity-50 cursor-not-allowed">
-                                            <span className="material-symbols-outlined">pause</span>
-                                            PAUSE
-                                        </button>
-                                    </div>
+                                <div className="size-10 rounded-full border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-300 group-hover:text-indigo-500 group-hover:border-indigo-500/30 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-500/10 transition-all">
+                                    <ChevronRight className="w-5 h-5" />
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                ) : (
-                    <section className="bg-slate-50 p-8 rounded-2xl border border-slate-200 text-center">
-                        <p className="text-slate-500 font-medium">Aucune intervention active pour le moment.</p>
-                    </section>
-                )}
+                        </Link>
+                    ))}
+                </div>
 
-                {/* Upcoming List */}
-                <section className="space-y-4">
-                    <h2 className="text-xl font-bold flex items-center gap-2">
-                        <span className="material-symbols-outlined text-primary">list_alt</span>
-                        interventions en attente
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {upcomingTasks.length > 0 ? upcomingTasks.map((task: Assignment) => (
-                            <div key={task._id} className="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-primary/50 transition-colors">
-                                <div className="space-y-3">
-                                    <div className="flex justify-between items-start">
-                                        <span className="text-xs font-black bg-slate-100 px-2 py-1 rounded">
-                                            {task.complaintId?.category}
-                                        </span>
-                                        <span className="text-xs font-bold text-slate-500">
-                                            {new Date(task.assignedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                        </span>
-                                    </div>
-                                    <h4 className="font-bold text-lg leading-tight">{task.complaintId?.title}</h4>
-                                    <p className="text-sm text-slate-500 line-clamp-1">
-                                        {task.complaintId?.address} • {task.complaintId?.priority}
-                                    </p>
-                                </div>
-                                <div className="mt-6 flex gap-2">
-                                    <button
-                                        onClick={() => handleStatusChange(task._id, 'en cours')}
-                                        className="flex-1 bg-primary text-white py-2 rounded-lg font-bold text-sm"
-                                    >
-                                        DÉMARRER
-                                    </button>
-                                </div>
-                            </div>
-                        )) : (
-                            <p className="col-span-2 text-slate-400 italic text-sm">Aucune intervention en attente.</p>
-                        )}
+                <div className="mt-8 p-4 rounded-3xl bg-amber-500/5 border border-amber-500/20 flex gap-4 items-center">
+                    <div className="size-10 rounded-xl bg-amber-500/20 text-amber-600 flex items-center justify-center shrink-0">
+                        <AlertCircle className="w-5 h-5" />
                     </div>
-                </section>
-            </main>
-
-            {/* Closure Modal */}
-            <Dialog open={showClosureModal} onOpenChange={setShowClosureModal}>
-                <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                        <DialogTitle>Clôturer l&apos;intervention</DialogTitle>
-                        <DialogDescription>
-                            Veuillez ajouter une note de clôture et signer pour confirmer la résolution.
-                        </DialogDescription>
-                    </DialogHeader>
-
-                    <div className="space-y-4 py-4">
-                        <div className="space-y-2">
-                            <label className="text-sm font-bold uppercase tracking-wider text-slate-500">Note de clôture</label>
-                            <Textarea
-                                placeholder="Détails sur la résolution..."
-                                value={closureNote}
-                                onChange={(e) => setClosureNote(e.target.value)}
-                                className="min-h-[100px]"
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-sm font-bold uppercase tracking-wider text-slate-500">Signature du client / technicien</label>
-                            <SignaturePad
-                                onSave={(data) => setSignature(data)}
-                                onClear={() => setSignature(null)}
-                            />
-                        </div>
+                    <div>
+                        <p className="text-xs font-black uppercase text-amber-700 dark:text-amber-500 italic">Rappel Sécurité</p>
+                        <p className="text-[10px] font-medium text-amber-600/80">Port des EPI obligatoire sur la ligne de production 4.</p>
                     </div>
+                </div>
+            </div>
 
-                    <DialogFooter>
-                        <button
-                            type="button"
-                            onClick={() => setShowClosureModal(false)}
-                            className="px-4 py-2 text-sm font-bold text-slate-500 hover:text-slate-700 transition-colors"
-                        >
-                            Annuler
-                        </button>
-                        <button
-                            type="button"
-                            onClick={handleFinishTask}
-                            disabled={isSubmitting || !signature}
-                            className="bg-primary text-white px-8 py-2 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 disabled:opacity-50"
-                        >
-                            {isSubmitting ? 'Envoi...' : 'Confirmer la clôture'}
-                        </button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
-
-            {/* Comment Modal */}
-            <Dialog open={showCommentModal} onOpenChange={setShowCommentModal}>
-                <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                        <DialogTitle>Ajouter un commentaire</DialogTitle>
-                        <DialogDescription>
-                            Laissez un message concernant cette intervention.
-                        </DialogDescription>
-                    </DialogHeader>
-
-                    <div className="space-y-4 py-4">
-                        <div className="space-y-2">
-                            <label className="text-sm font-bold uppercase tracking-wider text-slate-500">Votre message</label>
-                            <Textarea
-                                placeholder="Écrivez ici..."
-                                value={comment}
-                                onChange={(e) => setComment(e.target.value)}
-                                className="min-h-[120px]"
-                            />
-                        </div>
+            {/* Bottom Floating Navigation (Premium Design) */}
+            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-lg bg-slate-900/90 dark:bg-slate-100/10 backdrop-blur-2xl border border-white/10 px-8 py-3 rounded-[2.5rem] flex justify-between items-center z-50 shadow-2xl">
+                <button className="flex flex-col items-center gap-1 text-white">
+                    <Wrench className="w-5 h-5" />
+                    <span className="text-[7px] font-black uppercase tracking-widest">Jobs</span>
+                </button>
+                <button className="flex flex-col items-center gap-1 text-slate-400">
+                    <History className="w-5 h-5" />
+                    <span className="text-[7px] font-black uppercase tracking-widest">Logs</span>
+                </button>
+                
+                {/* Center Scan Button with intense glow */}
+                <div className="relative -mt-10">
+                    <div className="absolute inset-0 bg-indigo-500 blur-2xl opacity-50 animate-pulse"></div>
+                    <div className="relative size-14 bg-indigo-600 rounded-full border-4 border-slate-900 flex items-center justify-center text-white shadow-xl active:scale-90 transition-transform cursor-pointer">
+                        <Scan className="w-6 h-6" />
                     </div>
+                </div>
 
-                    <DialogFooter>
-                        <button
-                            type="button"
-                            onClick={() => setShowCommentModal(false)}
-                            className="px-4 py-2 text-sm font-bold text-slate-500 hover:text-slate-700 transition-colors"
-                        >
-                            Annuler
-                        </button>
-                        <button
-                            type="button"
-                            onClick={handleAddComment}
-                            disabled={isSubmitting || !comment.trim()}
-                            className="bg-primary text-white px-8 py-2 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 disabled:opacity-50"
-                        >
-                            {isSubmitting ? 'Envoi...' : 'Envoyer'}
-                        </button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
+                <button className="flex flex-col items-center gap-1 text-slate-400">
+                    <Map className="w-5 h-5" />
+                    <span className="text-[7px] font-black uppercase tracking-widest">Map</span>
+                </button>
+                <button className="flex flex-col items-center gap-1 text-slate-400">
+                    <User className="w-5 h-5" />
+                    <span className="text-[7px] font-black uppercase tracking-widest">Me</span>
+                </button>
+            </div>
         </div>
     );
 }

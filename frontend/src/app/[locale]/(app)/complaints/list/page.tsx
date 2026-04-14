@@ -6,12 +6,13 @@ import api from '@/lib/api';
 import type { Complaint, ComplaintStatus, Priority } from '@/types';
 import {
     AlertTriangle, ChevronLeft, ChevronRight, Download,
-    Filter, Loader2, Plus, RefreshCw, Search, X
+    Filter, Loader2, Plus, RefreshCw, Search, X, Zap
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
+import { SmartTicketVisionHeader } from '@/components/complaints/SmartTicketVision';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Meta { page: number; limit: number; total: number; totalPages: number; }
@@ -191,6 +192,9 @@ export default function ComplaintListPage() {
                 </div>
             </div>
 
+            {/* Smart IA Insights */}
+            <SmartTicketVisionHeader />
+
             {/* ── Status Tabs ── */}
             <div className="flex items-center gap-2 flex-wrap">
                 {STATUSES.map((s) => (
@@ -316,11 +320,16 @@ export default function ComplaintListPage() {
                                         {/* N° / Date */}
                                         <td className="px-6 py-4">
                                             <div className="flex flex-col gap-1">
-                                                <span className="text-sm font-black text-cyan-400 bg-cyan-500/10 px-2 py-1 rounded-lg border border-cyan-500/20 inline-block group-hover/row:scale-105 transition-transform">
+                                                <span className={`text-sm font-black px-2 py-1 rounded-lg border inline-block group-hover/row:scale-105 transition-all
+                                                    ${c.priority === 'urgent' 
+                                                        ? 'text-rose-400 bg-rose-500/10 border-rose-500/20 shadow-[0_0_15px_rgba(244,63,94,0.3)]' 
+                                                        : 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20'}
+                                                `}>
                                                     #{c.number || c._id?.slice(-6)}
                                                 </span>
-                                                <span className="text-[10px] text-slate-600 font-bold uppercase tracking-widest">
+                                                <span className="text-[10px] text-slate-600 font-bold uppercase tracking-widest flex items-center gap-1">
                                                     {new Date(c.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
+                                                    {c.priority === 'urgent' && <Zap className="w-2.5 h-2.5 text-orange-500 animate-pulse" />}
                                                 </span>
                                             </div>
                                         </td>

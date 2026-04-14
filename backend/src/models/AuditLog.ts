@@ -9,6 +9,7 @@ export interface IAuditLog extends Document {
     targetType?: string;
     category: 'AUTH' | 'DATA_ACCESS' | 'CONFIG_CHANGE' | 'SECURITY' | 'COMPLIANCE' | 'SYSTEM';
     severity: 'INFO' | 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+    classification: 'PUBLIC' | 'INTERNAL' | 'CONFIDENTIAL' | 'RESTRICTED';
     outcome: 'SUCCESS' | 'FAILURE' | 'BLOCKED';
     
     // Context
@@ -51,6 +52,11 @@ const AuditLogSchema: Schema = new Schema({
         type: String,
         enum: ['SUCCESS', 'FAILURE', 'BLOCKED'],
         default: 'SUCCESS'
+    },
+    classification: {
+        type: String,
+        enum: ['PUBLIC', 'INTERNAL', 'CONFIDENTIAL', 'RESTRICTED'],
+        default: 'INTERNAL'
     },
 
     ipAddress: { type: String },

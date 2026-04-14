@@ -15,6 +15,7 @@ export interface IITAsset extends Document {
     | 'ups'
     | 'other';
   status: 'active' | 'inactive' | 'maintenance' | 'retired' | 'broken';
+  classification: 'PUBLIC' | 'INTERNAL' | 'CONFIDENTIAL' | 'RESTRICTED';
   manufacturer?: string;
   deviceModel?: string;
   serialNumber?: string;
@@ -103,6 +104,11 @@ const ITAssetSchema = new Schema<IITAsset>(
       type: String,
       enum: ['active', 'inactive', 'maintenance', 'retired', 'broken'],
       default: 'active',
+    },
+    classification: {
+      type: String,
+      enum: ['PUBLIC', 'INTERNAL', 'CONFIDENTIAL', 'RESTRICTED'],
+      default: 'INTERNAL',
     },
 
     // Hardware info

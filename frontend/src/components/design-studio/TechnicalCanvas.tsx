@@ -13,12 +13,20 @@ interface ComponentData {
     category: 'plumbing' | 'electrical' | 'mechanical';
 }
 
+interface SelectedItemInfo {
+    name: string;
+    category: string;
+    assetId?: string;
+    status?: string;
+}
+
 interface TechnicalCanvasProps {
     onReady?: (project: paper.Project) => void;
+    onSelectItem?: (info: SelectedItemInfo | null) => void;
     linkedTicket?: string;
 }
 
-export const TechnicalCanvas: React.FC<TechnicalCanvasProps> = ({ onReady, linkedTicket }) => {
+export const TechnicalCanvas: React.FC<TechnicalCanvasProps> = ({ onReady, onSelectItem, linkedTicket }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [project, setProject] = useState<paper.Project | null>(null);
     const [zoom, setZoom] = useState(1);
@@ -48,10 +56,28 @@ export const TechnicalCanvas: React.FC<TechnicalCanvasProps> = ({ onReady, linke
             });
 
             if (hitResult && hitResult.item) {
+                // Clear previous selection
+                if (selectedItem) {
+                    selectedItem.shadowBlur = 0;
+                    selectedItem.selected = false;
+                }
+
                 selectedItem = hitResult.item;
                 selectedItem.bringToFront();
+                selectedItem.selected = true;
+                selectedItem.shadowColor = new paper.Color('#6366f1');
+                selectedItem.shadowBlur = 10;
+
+                if (onSelectItem) {
+                    onSelectItem(selectedItem.data as SelectedItemInfo);
+                }
             } else {
+                if (selectedItem) {
+                    selectedItem.shadowBlur = 0;
+                    selectedItem.selected = false;
+                }
                 selectedItem = null;
+                if (onSelectItem) onSelectItem(null);
             }
         };
 

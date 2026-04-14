@@ -79,14 +79,93 @@ router.get('/export/excel', authenticate, requireOrganization, requireAdmin, asy
             { metric: 'Stale Passwords (>90d)', value: report.details.iam.stalePasswordsCount }
         ]);
 
+        // Detail Sheet: Data Classification (Pillar 5)
+        const classificationSheet = workbook.addWorksheet('Data Inventory (Pillar 5)');
+        classificationSheet.columns = [
+            { header: 'Classification Label', key: 'label', width: 25 },
+            { header: 'Count', key: 'count', width: 15 }
+        ];
+        Object.entries(report.details.classification).forEach(([label, count]) => {
+            classificationSheet.addRow({ label, count });
+        });
+
+        // Detail Sheet: Security Events
+        const eventSheet = workbook.addWorksheet('Security Incidents');
+        const { default: SecurityEvent } = await import('../models/SecurityEvent.js');
+        const events = await SecurityEvent.find({ organizationId }).sort({ detectedAt: -1 });
+
+        eventSheet.columns = [
+            { header: 'Date', key: 'date', width: 20 },
+            { header: 'Type', key: 'type', width: 20 },
+            { header: 'Severity', key: 'severity', width: 15 },
+            { header: 'Status', key: 'status', width: 15 },
+            { header: 'Description', key: 'description', width: 60 }
+        ];
+
+        events.forEach(e => {
+            eventSheet.addRow({
+                date: e.detectedAt.toISOString(),
+                type: e.type,
+                severity: e.severity,
+                status: e.status,
+                description: e.description
+            });
+        });
+
         res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        res.setHeader('Content-Disposition', `attachment; filename=Compliance_Audit_${Date.now()}.xlsx`);
+        res.setHeader('Content-Disposition', `attachment; filename=Compliance_Dossier_ISO27001_${Date.now()}.xlsx`);
 
         await workbook.xlsx.write(res);
         res.end();
     } catch (error) {
         logger.error('Error exporting compliance excel:', error);
         res.status(500).json({ success: false, message: 'Server error exporting report' });
+    }
+});
+
+// POST /api/compliance/audit-internal - Trigger IA Internal Audit & Generate Report
+router.post('/audit-internal', authenticate, requireAdmin, async (req, res) => {
+    try {
+        const { internalAuditService } = await import('../services/internalAuditService.js');
+        const result = await internalAuditService.performAudit();
+        
+        res.json({
+            success: true,
+            message: 'Audit interne IA completed',
+            data: {
+                path: result.path,
+                report: result.content
+            }
+        });
+    } catch (error) {
+        logger.error('Error performing internal audit:', error);
+        res.status(500).json({ success: false, message: 'Internal audit failed' });
+    }
+});
+
+// GET /api/compliance/reports - List archived audit reports
+router.get('/reports', authenticate, requireAdmin, async (req, res) => {
+    try {
+        const fs = await import('fs');
+        const path = await import('path');
+        const reportDir = path.join(process.cwd(), 'reports', 'compliance');
+        
+        if (!fs.existsSync(reportDir)) {
+            return res.json({ success: true, data: [] });
+        }
+        
+        const files = fs.readdirSync(reportDir)
+            .filter(f => f.endsWith('.md'))
+            .map(f => ({
+                name: f,
+                date: f.match(/\d{4}_\d{2}/)?.[0] || 'Unknown',
+                path: `/reports/compliance/${f}`
+            }));
+            
+        res.json({ success: true, data: files });
+    } catch (error) {
+        logger.error('Error listing reports:', error);
+        res.status(500).json({ success: false, message: 'Failed to list reports' });
     }
 });
 

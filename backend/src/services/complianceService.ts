@@ -12,11 +12,13 @@ export class ComplianceService {
         const [
             iamStats,
             securityEvents,
-            auditStats
+            auditStats,
+            classificationStats
         ] = await Promise.all([
             this.getIAMStats(query),
             this.getSecurityEventsStats(query),
-            this.getAuditLogStats(query)
+            this.getAuditLogStats(query),
+            this.getClassificationStats()
         ]);
 
         const score = this.calculateOverallScore(iamStats, securityEvents, auditStats);
@@ -28,10 +30,32 @@ export class ComplianceService {
             details: {
                 iam: iamStats,
                 securityEvents,
-                audit: auditStats
+                audit: auditStats,
+                classification: classificationStats
             },
             controls: this.getControlMaturity(iamStats, securityEvents, auditStats)
         };
+    }
+
+    private async getClassificationStats() {
+        const AuditLog = (await import('../models/AuditLog.js')).default;
+        
+        const stats = await AuditLog.aggregate([
+            { $group: { _id: '$classification', count: { $sum: 1 } } }
+        ]);
+
+        const result: Record<string, number> = {
+            PUBLIC: 0,
+            INTERNAL: 0,
+            CONFIDENTIAL: 0,
+            RESTRICTED: 0
+        };
+
+        stats.forEach(s => {
+            if (s._id) result[s._id] = s.count;
+        });
+
+        return result;
     }
 
     private async getIAMStats(query: any) {

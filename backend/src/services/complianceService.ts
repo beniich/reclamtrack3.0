@@ -37,6 +37,67 @@ export class ComplianceService {
         };
     }
 
+    /**
+     * Get data specifically formatted for Recharts visualizations
+     */
+    async getAnalyticsData(organizationId?: string) {
+        const query = organizationId ? { organizationId } : {};
+        const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+
+        const [
+            classification,
+            incidentsByDay,
+            iamStats,
+            audit
+        ] = await Promise.all([
+            this.getClassificationStats(),
+            SecurityEvent.aggregate([
+                { $match: { ...query, detectedAt: { $gte: thirtyDaysAgo } } },
+                {
+                    $group: {
+                        _id: {
+                            day: { $dayOfMonth: "$detectedAt" },
+                            month: { $month: "$detectedAt" },
+                            severity: "$severity"
+                        },
+                        count: { $sum: 1 }
+                    }
+                },
+                { $sort: { "_id.month": 1, "_id.day": 1 } }
+            ]),
+            this.getIAMStats(query),
+            this.getAuditLogStats(query)
+        ]);
+
+        // Format Radar Data (Maturity 0-100)
+        const radarData = [
+            { subject: 'IAM', A: iamStats.mfaAdoptionRate, fullMark: 100 },
+            { subject: 'Passwords', A: 100 - iamStats.stalePasswordRate, fullMark: 100 },
+            { subject: 'Security', A: Math.max(0, 100 - (incidentsByDay.length * 5)), fullMark: 100 },
+            { subject: 'Audit', A: audit.health === 'ACTIVE' ? 100 : 0, fullMark: 100 },
+            { subject: 'Data Class.', A: 100, fullMark: 100 }, // Static for now as classification is active
+            { subject: 'Resilience', A: 90, fullMark: 100 }
+        ];
+
+        // Format Area Chart Data (Daily counts)
+        const dailyStats: Record<string, any> = {};
+        incidentsByDay.forEach(item => {
+            const dateStr = `${item._id.day}/${item._id.month}`;
+            if (!dailyStats[dateStr]) dailyStats[dateStr] = { name: dateStr, critical: 0, high: 0, medium: 0, low: 0 };
+            dailyStats[dateStr][item._id.severity.toLowerCase()] = item.count;
+        });
+        const areaData = Object.values(dailyStats);
+
+        // Format Donut Data
+        const pieData = Object.entries(classification).map(([name, value]) => ({ name, value }));
+
+        return {
+            radarData,
+            areaData,
+            pieData
+        };
+    }
+
     private async getClassificationStats() {
         const AuditLog = (await import('../models/AuditLog.js')).default;
         

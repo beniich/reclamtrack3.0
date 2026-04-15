@@ -28,6 +28,8 @@ interface ITTicket {
   title: string;
   description: string;
   category: 'hardware' | 'software' | 'network' | 'access' | 'security' | 'other';
+  impact: 'low' | 'medium' | 'high' | 'critical';
+  urgency: 'low' | 'medium' | 'high' | 'critical';
   priority: 'low' | 'medium' | 'high' | 'critical' | 'urgent';
   status: 'new' | 'assigned' | 'in_progress' | 'pending' | 'resolved' | 'closed';
   assetId?: string;
@@ -56,7 +58,8 @@ export default function ITTicketsPage() {
   // Form State
   const [formData, setFormData] = useState<Partial<ITTicket>>({
     category: 'other',
-    priority: 'medium',
+    impact: 'medium',
+    urgency: 'medium',
     status: 'new',
   });
 
@@ -82,7 +85,7 @@ export default function ITTicketsPage() {
 
   const handleCreate = () => {
     setEditingTicket(null);
-    setFormData({ category: 'other', priority: 'medium', status: 'new' });
+    setFormData({ category: 'other', impact: 'medium', urgency: 'medium', status: 'new' });
     setIsDialogOpen(true);
   };
 
@@ -375,21 +378,36 @@ export default function ITTicketsPage() {
                         </SelectContent>
                     </Select>
                 </div>
+            <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                    <Label htmlFor="priority">Priority *</Label>
-                    <Select value={formData.priority} onValueChange={(val: any) => setFormData({...formData, priority: val})}>
+                    <Label htmlFor="impact">Impact *</Label>
+                    <Select value={formData.impact} onValueChange={(val: any) => setFormData({...formData, impact: val})}>
                         <SelectTrigger>
-                            <SelectValue placeholder="Select Priority" />
+                            <SelectValue placeholder="Select Impact" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="low">Low</SelectItem>
-                            <SelectItem value="medium">Medium</SelectItem>
-                            <SelectItem value="high">High</SelectItem>
-                            <SelectItem value="urgent">Urgent</SelectItem>
-                            <SelectItem value="critical">Critical</SelectItem>
+                            <SelectItem value="low">Low (1 user)</SelectItem>
+                            <SelectItem value="medium">Medium (Team)</SelectItem>
+                            <SelectItem value="high">High (Departement)</SelectItem>
+                            <SelectItem value="critical">Critical (Organization)</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
+                <div className="space-y-2">
+                    <Label htmlFor="urgency">Urgency *</Label>
+                    <Select value={formData.urgency} onValueChange={(val: any) => setFormData({...formData, urgency: val})}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Select Urgency" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="low">Low (Next Week)</SelectItem>
+                            <SelectItem value="medium">Medium (48h)</SelectItem>
+                            <SelectItem value="high">High (Today)</SelectItem>
+                            <SelectItem value="critical">Critical (Immediate)</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+            </div>
             </div>
 
             {editingTicket && (

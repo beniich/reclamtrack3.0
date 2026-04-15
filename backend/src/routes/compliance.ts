@@ -22,6 +22,22 @@ router.get('/report', authenticate, requireOrganization, requireAdmin, async (re
     }
 });
 
+// GET /api/compliance/analytics - Get charts data for dashboard
+router.get('/analytics', authenticate, requireOrganization, requireAdmin, async (req, res) => {
+    try {
+        const organizationId = (req as any).organizationId;
+        const analytics = await complianceService.getAnalyticsData(organizationId);
+        
+        res.json({
+            success: true,
+            data: analytics
+        });
+    } catch (error) {
+        logger.error('Error fetching compliance analytics:', error);
+        res.status(500).json({ success: false, message: 'Server error fetching analytics' });
+    }
+});
+
 // GET /api/compliance/events - Get security incidents
 router.get('/events', authenticate, requireOrganization, requireAdmin, async (req, res) => {
     try {

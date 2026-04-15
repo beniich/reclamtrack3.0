@@ -12,6 +12,8 @@ import {
     CheckCircle2, XCircle, Clock, Trash2, Globe, Eye
 } from 'lucide-react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { ComplianceGraphics } from '@/components/audit/ComplianceGraphics';
+import { complianceApi } from '@/lib/api';
 
 const CLASSIFICATION_COLORS: Record<string, string> = {
     PUBLIC: '#22c55e',
@@ -44,7 +46,12 @@ export default function ComplianceCenterPage() {
 
     const { data: events, isLoading: isEventsLoading } = useQuery({
         queryKey: ['security-events'],
-        queryFn: () => api.get('/compliance/events')
+        queryFn: () => complianceApi.getEvents()
+    });
+
+    const { data: analytics, isLoading: isAnalyticsLoading } = useQuery({
+        queryKey: ['compliance-analytics'],
+        queryFn: () => complianceApi.getAnalytics()
     });
 
     const runAuditMutation = async () => {
@@ -58,7 +65,7 @@ export default function ComplianceCenterPage() {
         }
     };
 
-    if (isReportLoading || isEventsLoading || isSessionsLoading) {
+    if (isReportLoading || isEventsLoading || isSessionsLoading || isAnalyticsLoading) {
         return (
             <div className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-slate-50 dark:bg-[#0a0a14]">
                 <LoadingSpinner />
@@ -124,6 +131,15 @@ export default function ComplianceCenterPage() {
                         </div>
                     ))}
                 </div>
+            )}
+
+            {/* Premium Analytics Graphics */}
+            {analytics && (
+                <ComplianceGraphics 
+                    radarData={analytics.radarData}
+                    areaData={analytics.areaData}
+                    pieData={analytics.pieData}
+                />
             )}
 
             {/* Score & IAM Stats */}
@@ -195,25 +211,6 @@ export default function ComplianceCenterPage() {
                         <Database className="w-4 h-4 text-primary" />
                         Pillar 5 — Data Labels
                     </h3>
-                    <div className="h-[250px] w-full">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <PieChart>
-                                <Pie
-                                    data={classificationData}
-                                    innerRadius={60}
-                                    outerRadius={80}
-                                    paddingAngle={5}
-                                    dataKey="value"
-                                >
-                                    {classificationData.map((entry) => (
-                                        <Cell key={entry.name} fill={CLASSIFICATION_COLORS[entry.name] || '#ccc'} />
-                                    ))}
-                                </Pie>
-                                <Tooltip />
-                                <Legend wrapperStyle={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase' }} />
-                            </PieChart>
-                        </ResponsiveContainer>
-                    </div>
                     <div className="mt-auto space-y-3 pt-6 border-t border-slate-100 dark:border-slate-800">
                          {classificationData.map(item => (
                              <div key={item.name} className="flex justify-between items-center text-[10px] font-bold uppercase">

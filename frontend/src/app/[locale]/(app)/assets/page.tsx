@@ -13,10 +13,10 @@ import {
 export default function AssetsRegistryPage() {
     // Mock data for Phase 1 presentation
     const mockAssets = [
-        { id: '1', code: 'USINE-L1-POMPE-001', name: 'Pompe Hydraulique Principale', category: 'Mécanique', status: 'operational', site: 'Usine Nord', criticality: 'A', classification: 'INTERNAL' },
-        { id: '2', code: 'CVC-TOIT-04', name: 'Unité CVC Bloc B', category: 'HVAC', status: 'maintenance', site: 'Siège Social', criticality: 'B', classification: 'CONFIDENTIAL' },
-        { id: '3', code: 'ELEC-TGBT-01', name: 'Tableau Général Basse Tension', category: 'Électrique', status: 'operational', site: 'Usine Sud', criticality: 'A', classification: 'RESTRICTED' },
-        { id: '4', code: 'PROD-CONV-12', name: 'Convoyeur Ligne de Tri', category: 'Mécanique', status: 'faulty', site: 'Entrepôt Central', criticality: 'A', classification: 'INTERNAL' },
+        { id: '1', code: 'USINE-L1-POMPE-001', name: 'Pompe Hydraulique Principale', category: 'Mécanique', status: 'operational', site: 'Usine Nord', criticality: 'A', classification: 'INTERNAL', value: 12500, budget: 1500, hasGeo: true },
+        { id: '2', code: 'CVC-TOIT-04', name: 'Unité CVC Bloc B', category: 'HVAC', status: 'maintenance', site: 'Siège Social', criticality: 'B', classification: 'CONFIDENTIAL', value: 45000, budget: 5000, hasGeo: false },
+        { id: '3', code: 'ELEC-TGBT-01', name: 'Tableau Général Basse Tension', category: 'Électrique', status: 'operational', site: 'Usine Sud', criticality: 'A', classification: 'RESTRICTED', value: 85000, budget: 2000, hasGeo: true },
+        { id: '4', code: 'PROD-CONV-12', name: 'Convoyeur Ligne de Tri', category: 'Mécanique', status: 'faulty', site: 'Entrepôt Central', criticality: 'A', classification: 'INTERNAL', value: 22000, budget: 3500, hasGeo: true },
     ];
 
     const getStatusColor = (status: string) => {
@@ -144,9 +144,21 @@ export default function AssetsRegistryPage() {
                             <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase italic tracking-tight mb-1 group-hover:text-indigo-600 dark:group-hover:text-orange-400 transition-colors">
                                 {asset.name}
                             </h3>
-                            <p className="text-xs font-mono text-slate-500 dark:text-slate-400 bg-slate-100/50 dark:bg-slate-800/50 px-2 py-1 rounded inline-block mb-6">
+                            <p className="text-xs font-mono text-slate-500 dark:text-slate-400 bg-slate-100/50 dark:bg-slate-800/50 px-2 py-1 rounded inline-block mb-3">
                                 {asset.code}
                             </p>
+
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="flex flex-col">
+                                    <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Valeur Actuelle</span>
+                                    <span className="text-xs font-black text-slate-900 dark:text-white">{asset.value.toLocaleString()} €</span>
+                                </div>
+                                <div className="h-6 w-px bg-slate-100 dark:bg-slate-800"></div>
+                                <div className="flex flex-col">
+                                    <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Budget Maint.</span>
+                                    <span className="text-xs font-black text-emerald-600 dark:text-emerald-500">{asset.budget.toLocaleString()} €</span>
+                                </div>
+                            </div>
 
                             <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800/50">
                                 <div className="flex items-center gap-4">
@@ -156,7 +168,10 @@ export default function AssetsRegistryPage() {
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">Localisation</span>
-                                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{asset.site}</span>
+                                        <div className="flex items-center gap-1.5">
+                                            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{asset.site}</span>
+                                            {asset.hasGeo && <MapPin className="w-3 h-3 text-indigo-500 dark:text-orange-500" />}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="size-8 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center group-hover:bg-indigo-600 dark:group-hover:bg-orange-500 group-hover:text-white transition-all">

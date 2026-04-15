@@ -360,6 +360,7 @@ export const securityApi = {
 
 export const complianceApi = {
     getReport: () => apiClient.get('/compliance/report'),
+    getAnalytics: () => apiClient.get('/compliance/analytics'),
     getEvents: () => apiClient.get('/compliance/events'),
     exportExcel: () => apiClient.download('/compliance/export/excel', `compliance-report-${Date.now()}.xlsx`),
 };

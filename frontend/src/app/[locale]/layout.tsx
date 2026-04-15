@@ -41,6 +41,13 @@ export const metadata: Metadata = {
     authors: [{ name: 'CloudIndustry LTD' }],
     viewport: 'width=device-width, initial-scale=1',
     robots: 'index, follow',
+    manifest: '/manifest.json',
+    themeColor: '#f97316',
+    appleWebApp: {
+        capable: true,
+        statusBarStyle: 'default',
+        title: 'ReclamTrack',
+    },
     openGraph: {
         type: 'website',
         locale: 'en_GB',

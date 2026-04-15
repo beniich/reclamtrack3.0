@@ -3,6 +3,7 @@ import { requireOrganization } from '../middleware/organization';
 import { authenticate as auth } from '../middleware/security.js';
 import ITTicket from '../models/ITTicket';
 import { AuthenticatedRequest } from '../types/request.js';
+import { calculatePriority, ImpactLevel, UrgencyLevel } from '../services/priorityMatrixService';
 
 const router = express.Router();
 
@@ -136,7 +137,9 @@ router.post('/', async (req: AuthenticatedRequest, res: Response) => {
       low: { response: 480, resolution: 10080 }, // 8h, 7 days
     };
 
-    const priority = req.body.priority || 'medium';
+    const impact = (req.body.impact || 'medium') as ImpactLevel;
+    const urgency = (req.body.urgency || 'medium') as UrgencyLevel;
+    const priority = calculatePriority(impact, urgency);
     const sla = slaMinutes[priority as keyof typeof slaMinutes];
 
     const now = new Date();
@@ -145,6 +148,9 @@ router.post('/', async (req: AuthenticatedRequest, res: Response) => {
 
     const ticket = await ITTicket.create({
       ...req.body,
+      impact,
+      urgency,
+      priority,
       organizationId: req.organizationId,
       requestedBy: req.user!._id || req.user!.id,
       sla: {
@@ -171,6 +177,16 @@ router.post('/', async (req: AuthenticatedRequest, res: Response) => {
 router.put('/:id', async (req: AuthenticatedRequest, res: Response) => {
   try {
     const updateData: any = { ...req.body };
+
+    // Update priority if impact or urgency changed
+    if (req.body.impact || req.body.urgency) {
+      const currentTicket = await ITTicket.findById(req.params.id);
+      if (currentTicket) {
+        const impact = (req.body.impact || currentTicket.impact) as ImpactLevel;
+        const urgency = (req.body.urgency || currentTicket.urgency) as UrgencyLevel;
+        updateData.priority = calculatePriority(impact, urgency);
+      }
+    }
 
     // Update timestamps based on status changes
     if (req.body.status === 'resolved' && !updateData.resolvedAt) {

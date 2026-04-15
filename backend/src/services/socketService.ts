@@ -384,27 +384,48 @@ class NotificationService {
     }
   }
 
+      logger.info(`📢 Urgent alert sent: ${message}`);
+    }
+  }
+
   /**
-   * Send urgent alert
+   * Notify about GMAO/Maintenance events
    */
-  async sendUrgentAlert(message: string, recipientIds?: string[]) {
-    const notification = {
+  async notifyGMAOAlert(assetName: string, message: string, severity: 'warn' | 'error' | 'critical', teamId?: string) {
+    const payload = {
       type: 'alert',
-      title: '⚠️ Alerte Urgente',
+      title: `🛠 GMAO: ${assetName}`,
       message,
-      priority: 'urgent',
+      priority: severity === 'critical' ? 'urgent' : severity === 'error' ? 'high' : 'medium',
       timestamp: new Date(),
     };
 
     if (this.io) {
-      if (recipientIds && recipientIds.length > 0) {
-        recipientIds.forEach((userId) => {
-          this.io?.to(`user:${userId}`).emit('notification', notification);
-        });
+      const target = teamId ? `team:${teamId}` : 'notification';
+      if (teamId) {
+        this.io.to(target).emit('notification', payload);
       } else {
-        this.io.emit('notification', notification);
+        this.io.emit('notification', payload);
       }
-      logger.info(`📢 Urgent alert sent: ${message}`);
+      logger.info(`🛠 GMAO Alert sent for ${assetName}: ${message}`);
+    }
+  }
+
+  /**
+   * Notify about Compliance/Security incidents
+   */
+  async notifyComplianceAlert(incidentType: string, severity: string, description: string) {
+    const payload = {
+      type: 'alert',
+      title: `🛡 Sécurité: ${incidentType}`,
+      message: description,
+      priority: severity === 'CRITICAL' ? 'urgent' : 'high',
+      timestamp: new Date(),
+    };
+
+    if (this.io) {
+      this.io.emit('notification', payload); // Security alerts are usually broadcast to all admins
+      logger.info(`🛡 Compliance Alert sent: ${incidentType}`);
     }
   }
 }

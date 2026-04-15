@@ -17,6 +17,13 @@ export interface IAsset extends Document {
   qrCode: string;
   installDate: Date;
   warrantyExpiry?: Date;
+  acquisitionCost?: number;
+  currentValue?: number;
+  maintenanceBudget?: number;
+  coordinates?: {
+    lat: number;
+    lng: number;
+  };
   parentAsset?: mongoose.Types.ObjectId;
 }
 
@@ -37,6 +44,13 @@ const AssetSchema: Schema = new Schema({
   qrCode: { type: String },
   installDate: { type: Date },
   warrantyExpiry: { type: Date },
+  acquisitionCost: { type: Number },
+  currentValue: { type: Number },
+  maintenanceBudget: { type: Number },
+  coordinates: {
+    lat: { type: Number },
+    lng: { type: Number }
+  },
   parentAsset: { type: mongoose.Schema.Types.ObjectId, ref: 'Asset' }
 }, { timestamps: true });
 

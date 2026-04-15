@@ -1,0 +1,21 @@
+{
+  "name": "CloudIndustry ReclamTrack",
+  "short_name": "ReclamTrack",
+  "description": "Industrial Cloud Solutions & GMAO Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a14",
+  "theme_color": "#f97316",
+  "icons": [
+    {
+      "src": "/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

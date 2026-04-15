@@ -130,22 +130,39 @@ export class ComplianceService {
     private getControlMaturity(iamStats: any, securityEvents: any, auditStats: any) {
         return [
             {
-                id: 'CC6.1',
-                framework: 'SOC 2',
-                name: 'Audit Logging & Monitoring',
-                status: auditStats.health === 'ACTIVE' ? 'PASS' : 'FAIL'
+                id: 'CC6.1 / A.12.4.1',
+                framework: 'SOC 2 / ISO 27001',
+                name: 'Event Logging & Monitoring',
+                status: auditStats.health === 'ACTIVE' ? 'PASS' : 'FAIL',
+                details: `${auditStats.eventsLast24h} logs générés ces dernières 24h.`
             },
             {
-                id: 'CC6.2',
-                framework: 'SOC 2',
-                name: 'Access Control (MFA & Password)',
-                status: iamStats.mfaAdoptionRate >= 90 ? 'PASS' : (iamStats.mfaAdoptionRate > 0 ? 'PARTIAL' : 'FAIL')
+                id: 'CC6.2 / A.9.4.2',
+                framework: 'SOC 2 / ISO 27001',
+                name: 'Access Control (MFA)',
+                status: iamStats.mfaAdoptionRate >= 95 ? 'PASS' : (iamStats.mfaAdoptionRate > 60 ? 'PARTIAL' : 'FAIL'),
+                details: `${iamStats.mfaEnabledCount}/${iamStats.totalUsers} utilisateurs protégés.`
             },
             {
-                id: 'CC7.1',
-                framework: 'SOC 2',
-                name: 'Security Incident Response',
-                status: securityEvents.openCritical === 0 ? 'PASS' : 'FAIL'
+                id: 'CC7.1 / A.16.1.2',
+                framework: 'SOC 2 / ISO 27001',
+                name: 'Incident Response Management',
+                status: securityEvents.openCritical === 0 ? 'PASS' : 'FAIL',
+                details: `${securityEvents.openCritical} incidents critiques en cours.`
+            },
+            {
+                id: 'A.9.2.3',
+                framework: 'ISO 27001',
+                name: 'Management of Privileged Access',
+                status: iamStats.stalePasswordRate < 10 ? 'PASS' : 'PARTIAL',
+                details: `${iamStats.stalePasswordsCount} mots de passe non renouvelés.`
+            },
+            {
+                id: 'A.8.2.1',
+                framework: 'ISO 27001',
+                name: 'Classification of Information',
+                status: 'PASS',
+                details: 'Système de tagging (PUBLIC/INTERNAL/CONFIDENTIAL) actif.'
             }
         ];
     }

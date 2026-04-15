@@ -96,7 +96,10 @@ export default function ComplianceCenterPage() {
                         <ShieldCheck className="w-4 h-4" />
                         Run IA Audit
                     </button>
-                    <button className="h-12 px-6 bg-slate-900 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl border border-slate-800 flex items-center gap-3">
+                    <button 
+                        onClick={() => window.open(`${process.env.NEXT_PUBLIC_API_URL}/compliance/export/excel`, '_blank')}
+                        className="h-12 px-6 bg-slate-900 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl border border-slate-800 flex items-center gap-3 hover:text-white transition-colors"
+                    >
                         <Download className="w-4 h-4" />
                         Export Audit Dossier
                     </button>
@@ -237,6 +240,9 @@ export default function ComplianceCenterPage() {
                                             <span className="text-[10px] font-black text-slate-400 uppercase">• {control.id}</span>
                                         </div>
                                         <h5 className="font-bold text-slate-900 dark:text-white uppercase tracking-tighter">{control.name}</h5>
+                                        {control.details && (
+                                            <p className="text-[9px] text-slate-500 font-medium lowercase italic mt-0.5">{control.details}</p>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">

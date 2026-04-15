@@ -6,6 +6,8 @@ export interface IITTicket extends Document {
   title: string;
   description: string;
   category: 'hardware' | 'software' | 'network' | 'account' | 'printer' | 'security' | 'other';
+  impact: 'low' | 'medium' | 'high' | 'critical';
+  urgency: 'low' | 'medium' | 'high' | 'critical';
   priority: 'low' | 'medium' | 'high' | 'urgent' | 'critical';
   status: 'new' | 'assigned' | 'in_progress' | 'pending' | 'resolved' | 'closed';
   requestedBy: mongoose.Types.ObjectId;
@@ -77,6 +79,16 @@ const ITTicketSchema = new Schema<IITTicket>(
       type: String,
       enum: ['hardware', 'software', 'network', 'account', 'printer', 'security', 'other'],
       required: true,
+    },
+    impact: {
+      type: String,
+      enum: ['low', 'medium', 'high', 'critical'],
+      default: 'medium',
+    },
+    urgency: {
+      type: String,
+      enum: ['low', 'medium', 'high', 'critical'],
+      default: 'medium',
     },
     priority: {
       type: String,

@@ -35,5 +35,6 @@ const matrix: Record<ImpactLevel, Record<UrgencyLevel, PriorityLevel>> = {
 };
 
 export const calculatePriority = (impact: ImpactLevel, urgency: UrgencyLevel): PriorityLevel => {
+  if (!matrix[impact]) return 'medium';
   return matrix[impact][urgency] || 'medium';
 };

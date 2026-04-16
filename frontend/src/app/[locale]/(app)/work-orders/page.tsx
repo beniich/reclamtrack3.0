@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
     Wrench, Plus, Search, Filter,
-    CheckCircle2, AlertCircle, Calendar, Play
+    CheckCircle2, AlertCircle, Calendar, Play,
+    Layout, Truck
 } from 'lucide-react';
 import { 
     Select, SelectContent, SelectItem, SelectTrigger, SelectValue 

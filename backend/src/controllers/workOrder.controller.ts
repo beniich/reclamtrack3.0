@@ -81,7 +81,7 @@ export const convertComplaintToWorkOrder = async (req: Request, res: Response) =
       title: `Rép. : ${complaint.title}`,
       description: complaint.description,
       type: 'corrective',
-      priority: complaint.priority === 'urgent' ? 'emergency' : 'high',
+      priority: complaint.priority === 'urgent' ? 'urgent' : 'high',
       status: 'pending',
       complaintId: complaint._id,
       assetId: complaint.assetId, // Link the asset if it was selected in the ticket

@@ -94,14 +94,14 @@ export default function DashboardPage() {
             value: mKpis?.mttr || '0.00',
             trend: { value: '-15%', isPositive: true },
             icon: Zap,
-            color: 'orange' as const,
+            color: 'amber' as const,
         },
         {
             title: "MTBF (Heures)",
             value: mKpis?.mtbf || '0.00',
             trend: { value: '+5%', isPositive: true },
             icon: Shield,
-            color: 'indigo' as const,
+            color: 'purple' as const,
         },
         {
             title: "Disponibilité",

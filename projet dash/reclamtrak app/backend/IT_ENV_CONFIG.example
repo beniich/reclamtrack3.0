@@ -1,0 +1,20 @@
+# Active Directory Configuration
+# Required for IT Administration Module
+
+# URL of the LDAP server (ldaps:// is recommended for secure connection)
+AD_URL=ldaps://your-ad-server.example.com:636
+
+# Base DN (Distinguished Name) where users are located
+AD_BASE_DN=dc=example,dc=com
+
+# Admin account for binding/querying AD
+AD_USERNAME=admin@example.com
+AD_PASSWORD=your_secure_password
+
+# Network Monitoring (Optional)
+# SNMP community string for network devices
+SNMP_DEFAULT_COMMUNITY=public
+SNMP_DEFAULT_VERSION=2c
+
+# Refresh intervals (in seconds)
+MONITORING_INTERVAL=300

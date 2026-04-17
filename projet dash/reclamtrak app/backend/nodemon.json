@@ -1,0 +1,11 @@
+{
+    "extends": null,
+    "watch": [
+        "src"
+    ],
+    "ext": "ts",
+    "ignore": [
+        "src/**/*.test.ts"
+    ],
+    "exec": "tsx"
+}

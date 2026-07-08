@@ -4,6 +4,7 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { rosterApi, staffApi } from '@/lib/api';
 import { useOrgStore } from '@/store/orgStore';
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function RosterPage() {
     const [staff, setStaff] = useState<any[]>([]);
@@ -49,18 +50,18 @@ export default function RosterPage() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div className="flex items-center gap-3">
                     <div className="flex items-center bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-1 shadow-sm">
-                        <button className="material-symbols-outlined p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">chevron_left</button>
+                        <Button variant="ghost" className="material-symbols-outlined p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">chevron_left</Button>
                         <div className="px-4 text-sm font-bold text-slate-700 dark:text-slate-200">Oct 23 - Oct 29, 2023</div>
-                        <button className="material-symbols-outlined p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">chevron_right</button>
+                        <Button variant="ghost" className="material-symbols-outlined p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">chevron_right</Button>
                     </div>
-                    <button className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium shadow-sm hover:bg-slate-50">Today</button>
+                    <Button variant="secondary" className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium shadow-sm hover:bg-slate-50">Today</Button>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium shadow-sm">
+                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium shadow-sm">
                         <span className="material-symbols-outlined text-lg">filter_list</span>
                         Filter
                     </button>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-blue-700 transition-colors">
+                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-blue-700 transition-colors">
                         <span className="material-symbols-outlined text-lg">publish</span>
                         Publish Roster
                     </button>

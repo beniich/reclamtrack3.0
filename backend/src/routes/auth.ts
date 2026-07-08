@@ -424,4 +424,60 @@ router.delete('/sessions/:hash', authenticate, async (req, res, next) => {
     }
 });
 
+// ──────────────────────────────────────────────────────────────────────────────
+// 2FA (TOTP)
+// ──────────────────────────────────────────────────────────────────────────────
+
+router.post('/2fa/setup', authenticate, asyncHandler(async (req, res) => {
+  // Skeleton: Generate TOTP secret and QR code URI
+  successResponse(res, { secret: 'dummy_secret', qrCode: 'dummy_qr' });
+}));
+
+router.post('/2fa/verify', authenticate, [
+  body('code').isString().isLength({ min: 6, max: 6 }),
+], validator, asyncHandler(async (req, res) => {
+  // Skeleton: Verify TOTP code and enable 2FA
+  successResponse(res, { message: '2FA activé avec succès' });
+}));
+
+router.post('/2fa/disable', authenticate, [
+  body('code').isString().isLength({ min: 6, max: 6 }),
+], validator, asyncHandler(async (req, res) => {
+  // Skeleton: Verify TOTP code and disable 2FA
+  successResponse(res, { message: '2FA désactivé avec succès' });
+}));
+
+// ──────────────────────────────────────────────────────────────────────────────
+// Password Reset
+// ──────────────────────────────────────────────────────────────────────────────
+
+router.post('/password-reset/request', [
+  body('email').isEmail().normalizeEmail(),
+], validator, asyncHandler(async (req, res) => {
+  // Skeleton: Generate reset token and send email
+  successResponse(res, { message: 'Email de réinitialisation envoyé si le compte existe' });
+}));
+
+router.post('/password-reset/confirm', [
+  body('token').isString(),
+  body('newPassword').isLength({ min: 8 }),
+], validator, asyncHandler(async (req, res) => {
+  // Skeleton: Verify token and update password
+  successResponse(res, { message: 'Mot de passe mis à jour avec succès' });
+}));
+
+// ──────────────────────────────────────────────────────────────────────────────
+// Session Management
+// ──────────────────────────────────────────────────────────────────────────────
+
+router.get('/sessions', authenticate, asyncHandler(async (req, res) => {
+  // Skeleton: List active sessions (requires DB tracking of refresh tokens)
+  successResponse(res, [{ id: 'session_1', device: 'Chrome / Windows', lastActive: new Date() }]);
+}));
+
+router.delete('/sessions/:id', authenticate, asyncHandler(async (req, res) => {
+  // Skeleton: Revoke a specific session
+  successResponse(res, { message: 'Session révoquée' });
+}));
+
 export default router;

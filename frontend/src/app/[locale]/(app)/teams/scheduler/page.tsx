@@ -13,6 +13,7 @@ import {
 import { format, addDays, startOfWeek, endOfWeek, eachDayOfInterval } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
 
 interface ShiftType {
     id: string;
@@ -207,7 +208,7 @@ export default function TeamShiftSchedulerPage() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <button
+                    <button type="button"
                         onClick={duplicateWeek}
                         className="px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center gap-2"
                     >
@@ -215,7 +216,7 @@ export default function TeamShiftSchedulerPage() {
                         Dupliquer semaine
                     </button>
 
-                    <button className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2">
+                    <button type="button" className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2">
                         <Download className="w-4 h-4" />
                         Exporter
                     </button>
@@ -245,7 +246,7 @@ export default function TeamShiftSchedulerPage() {
 
             {/* Week Navigation */}
             <div className="flex items-center justify-between bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4">
-                <button
+                <button type="button"
                     onClick={() => setCurrentWeek(addDays(currentWeek, -7))}
                     className="px-4 py-2 border rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800"
                 >
@@ -257,7 +258,7 @@ export default function TeamShiftSchedulerPage() {
                     {format(weekEnd, 'dd MMM yyyy', { locale: fr })}
                 </h2>
 
-                <button
+                <button type="button"
                     onClick={() => setCurrentWeek(addDays(currentWeek, 7))}
                     className="px-4 py-2 border rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800"
                 >
@@ -335,7 +336,7 @@ export default function TeamShiftSchedulerPage() {
                                                                 }}
                                                             >
                                                                 <span className="font-medium truncate">{member?.name}</span>
-                                                                <button
+                                                                <button type="button"
                                                                     onClick={(e) => {
                                                                         e.stopPropagation();
                                                                         removeAssignment(assignment.id);
@@ -398,7 +399,7 @@ export default function TeamShiftSchedulerPage() {
                                 );
 
                                 return (
-                                    <button
+                                    <button type="button"
                                         key={member.id}
                                         onClick={() => assignMember(member.id, selectedCell.date, selectedCell.shiftId)}
                                         disabled={alreadyAssigned}
@@ -417,12 +418,7 @@ export default function TeamShiftSchedulerPage() {
                             })}
                         </div>
 
-                        <button
-                            onClick={() => setSelectedCell(null)}
-                            className="mt-4 w-full px-4 py-2 border rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800"
-                        >
-                            Annuler
-                        </button>
+                        <Button variant="secondary" className="mt-4 w-full px-4 py-2 border rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800" onClick={() => setSelectedCell(null)}>Annuler</Button>
                     </div>
                 </div>
             )}

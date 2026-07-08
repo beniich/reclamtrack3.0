@@ -3,6 +3,7 @@
 import { DashboardHeader } from '@/components/dashboard-v2/DashboardHeader'
 import { KPICard } from '@/components/dashboard-v2/KPICard'
 import { StatusIndicator } from '@/components/dashboard-v2/StatusIndicator'
+import { Button } from '@/components/ui/button';
 
 export default function DatabaseTopologyPage() {
     return (
@@ -16,7 +17,7 @@ export default function DatabaseTopologyPage() {
                             <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
                             <span className="text-xs font-medium text-emerald-400">Cluster: Healthy</span>
                         </div>
-                        <button className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 transition-all">
+                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 transition-all">
                             <span className="material-symbols-outlined text-sm">bolt</span>
                             Force Failover
                         </button>

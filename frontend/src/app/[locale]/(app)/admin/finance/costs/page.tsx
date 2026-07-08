@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 // Types
 interface CostEntry {
@@ -57,7 +58,7 @@ export default function CostTrackingPage() {
                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
                             <input className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-white placeholder:text-slate-400" placeholder="Search tickets..." type="text" />
                         </div>
-                        <button className="hidden lg:flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold transition-all shadow-sm">
+                        <button type="button" className="hidden lg:flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold transition-all shadow-sm">
                             <span className="material-symbols-outlined text-sm">receipt_long</span>
                             <span>Bulk Invoice</span>
                         </button>
@@ -76,11 +77,11 @@ export default function CostTrackingPage() {
                         <p className="text-slate-500 dark:text-slate-400 text-base">Detailed overview of material and labor expenses for all maintenance tickets.</p>
                     </div>
                     <div className="flex items-center gap-3">
-                        <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                             <span className="material-symbols-outlined text-lg">calendar_month</span>
                             <span>Last 30 Days</span>
                         </button>
-                        <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 transition-colors">
+                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 transition-colors">
                             <span className="material-symbols-outlined text-lg">download</span>
                             <span>Export CSV</span>
                         </button>
@@ -177,9 +178,7 @@ export default function CostTrackingPage() {
                                 <option>Pending</option>
                                 <option>Over Budget</option>
                             </select>
-                            <button className="flex-1 sm:flex-none px-6 py-2 bg-primary text-white text-sm font-black rounded-lg transition-colors hover:bg-primary/90">
-                                Apply Filter
-                            </button>
+                            <Button variant="primary" className="flex-1 sm:flex-none px-6 py-2 bg-primary text-white text-sm font-black rounded-lg transition-colors hover:bg-primary/90">Apply Filter</Button>
                         </div>
                     </div>
                     <div className="overflow-x-auto">
@@ -217,7 +216,7 @@ export default function CostTrackingPage() {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-center">
-                                            <button className="text-slate-400 hover:text-primary transition-colors">
+                                            <button type="button" className="text-slate-400 hover:text-primary transition-colors">
                                                 <span className="material-symbols-outlined">receipt_long</span>
                                             </button>
                                         </td>
@@ -230,11 +229,11 @@ export default function CostTrackingPage() {
                     <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/30 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
                         <p className="text-xs font-bold text-slate-500 uppercase">Showing {filteredCosts.length} entries</p>
                         <div className="flex items-center gap-1">
-                            <button className="p-2 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors disabled:opacity-30" disabled>
+                            <button type="button" className="p-2 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors disabled:opacity-30" disabled>
                                 <span className="material-symbols-outlined text-sm">chevron_left</span>
                             </button>
-                            <button className="w-8 h-8 rounded bg-primary text-white text-[11px] font-black">1</button>
-                            <button className="p-2 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                            <Button variant="primary" className="w-8 h-8 rounded bg-primary text-white text-[11px] font-black">1</Button>
+                            <button type="button" className="p-2 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
                                 <span className="material-symbols-outlined text-sm">chevron_right</span>
                             </button>
                         </div>

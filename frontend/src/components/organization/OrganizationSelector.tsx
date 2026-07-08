@@ -37,7 +37,7 @@ export const OrganizationSelector: React.FC = () => {
 
     if (organizations.length === 0) {
         return (
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button type="button" variant="outline" size="sm" className="gap-2">
                 <Plus className="h-4 w-4" />
                 Créer une organisation
             </Button>
@@ -47,7 +47,7 @@ export const OrganizationSelector: React.FC = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button
+                <Button type="button"
                     variant="ghost"
                     className="flex items-center gap-2 px-2 hover:bg-slate-100 transition-colors"
                 >

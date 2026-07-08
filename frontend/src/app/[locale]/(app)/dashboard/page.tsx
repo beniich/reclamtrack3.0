@@ -23,6 +23,7 @@ import { apiClient } from '@/lib/api';
 import type { Complaint } from '@/types';
 import { useOrgStore } from '@/store/orgStore';
 import { ServiceLifecycle } from '@/components/dashboard-v2/ServiceLifecycle';
+import { Button } from '@/components/ui/button';
 
 interface DashboardStats {
     totalComplaints: number;
@@ -150,7 +151,7 @@ export default function DashboardPage() {
                         </SelectContent>
                     </Select>
 
-                    <button className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl px-8 h-[56px] text-[10px] font-black uppercase tracking-widest flex items-center gap-3 shadow-2xl hover:brightness-110 transition-all active:scale-95">
+                    <button type="button" className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl px-8 h-[56px] text-[10px] font-black uppercase tracking-widest flex items-center gap-3 shadow-2xl hover:brightness-110 transition-all active:scale-95">
                         <FileText className="w-4 h-4" /> Générer Report
                     </button>
                 </div>

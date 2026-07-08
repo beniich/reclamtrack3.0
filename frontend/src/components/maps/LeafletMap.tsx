@@ -137,7 +137,7 @@ export default function LeafletMap({ teams, complaints, center = [33.5731, -7.58
                   </div>
                   <h4 className="text-[11px] font-black text-slate-800 leading-tight mb-2 line-clamp-1 uppercase italic">{complaint.title}</h4>
                   <p className="text-[9px] text-slate-500 mb-3 line-clamp-2 leading-relaxed">{complaint.description}</p>
-                  <button className="w-full py-2 bg-slate-900 text-white text-[9px] font-black rounded-lg uppercase tracking-widest hover:bg-indigo-600 transition-colors">
+                  <button type="button" className="w-full py-2 bg-slate-900 text-white text-[9px] font-black rounded-lg uppercase tracking-widest hover:bg-indigo-600 transition-colors">
                     Ouvrir Détails
                   </button>
                 </div>

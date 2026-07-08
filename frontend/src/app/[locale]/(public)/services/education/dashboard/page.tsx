@@ -26,6 +26,7 @@ import {
     XAxis,
     YAxis
 } from 'recharts';
+import { Button } from '@/components/ui/button';
 
 const PERFORMANCE_DATA = [
     { name: 'Sep', score: 72 },
@@ -70,7 +71,7 @@ export default function EducationDashboard() {
                         { id: 'grades', icon: BarChart3, label: 'Carnet de Notes' },
                         { id: 'settings', icon: Settings, label: 'Paramètres' },
                     ].map((item) => (
-                        <button
+                        <button type="button"
                             key={item.id}
                             onClick={() => setActiveTab(item.id)}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
@@ -88,7 +89,7 @@ export default function EducationDashboard() {
                 <div className="glass-card rounded-2xl p-5 border-brand-orange/20">
                     <div className="text-[10px] font-black uppercase tracking-widest text-brand-orange mb-2">Support Premium</div>
                     <p className="text-[10px] text-slate-400 font-light leading-relaxed mb-4">Besoin d'aide pour la configuration de l'IA ?</p>
-                    <button className="w-full py-2 bg-white/5 hover:bg-white/10 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all">Contacter Sam</button>
+                    <Button variant="ghost" className="w-full py-2 bg-white/5 hover:bg-white/10 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all">Contacter Sam</Button>
                 </div>
             </aside>
 
@@ -131,12 +132,10 @@ export default function EducationDashboard() {
                             <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mt-1">Secteur : Rabat-Centre • Lycée Excellence</p>
                         </div>
                         <div className="flex gap-4">
-                            <button className="px-6 py-3 glass-card rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-white/5 transition-all">
+                            <button type="button" className="px-6 py-3 glass-card rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-white/5 transition-all">
                                 <span className="material-symbols-outlined text-sm">download</span> Rapport PDF
                             </button>
-                            <button className="px-6 py-3 bg-brand-orange rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-orange/20 hover:scale-105 transition-all outline-none">
-                                Nouvel Examen
-                            </button>
+                            <Button variant="ghost" className="px-6 py-3 bg-brand-orange rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-orange/20 hover:scale-105 transition-all outline-none">Nouvel Examen</Button>
                         </div>
                     </div>
 
@@ -224,9 +223,7 @@ export default function EducationDashboard() {
                                         <MoreVertical className="w-4 h-4 text-slate-700 cursor-pointer" />
                                     </div>
                                 ))}
-                                <button className="w-full py-4 border border-white/5 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white hover:bg-white/5 transition-all">
-                                    Voir Calendrier Complet
-                                </button>
+                                <Button variant="ghost" className="w-full py-4 border border-white/5 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white hover:bg-white/5 transition-all">Voir Calendrier Complet</Button>
                             </div>
                         </div>
                     </div>
@@ -279,7 +276,7 @@ export default function EducationDashboard() {
                                                 </span>
                                             </td>
                                             <td className="py-6 text-right">
-                                                <button className="p-2 hover:bg-white/5 rounded-lg transition-all">
+                                                <button type="button" className="p-2 hover:bg-white/5 rounded-lg transition-all">
                                                     <MoreVertical className="w-4 h-4 text-slate-600" />
                                                 </button>
                                             </td>

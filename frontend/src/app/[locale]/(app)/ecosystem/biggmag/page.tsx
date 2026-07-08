@@ -12,6 +12,7 @@ import {
   ChartBarIcon,
   Squares2X2Icon
 } from '@heroicons/react/24/outline';
+import { Button } from '@/components/ui/button';
 
 export default function BiggMagDashboard() {
   return (
@@ -28,9 +29,7 @@ export default function BiggMagDashboard() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <button className="px-6 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-rose-500 transition-all shadow-lg">
-            Nouveau Produit
-          </button>
+          <Button variant="danger" className="px-6 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-rose-500 transition-all shadow-lg">Nouveau Produit</Button>
           <div className="w-10 h-10 rounded-full bg-slate-100 border border-slate-200" />
         </div>
       </div>
@@ -105,7 +104,7 @@ export default function BiggMagDashboard() {
             <Squares2X2Icon className="absolute -right-4 -top-4 w-32 h-32 opacity-10 group-hover:rotate-12 transition-transform" />
             <h3 className="text-xl font-black mb-2 italic">Insights IA</h3>
             <p className="text-sm text-rose-100 font-medium leading-relaxed mb-6">"Le produit 'Sneakers Air Pro' a un taux de rebond de 40%. Suggère d'optimiser les images et de réduire le prix de 5%."</p>
-            <button className="w-full py-3 bg-white text-rose-500 rounded-2xl font-black uppercase text-xs tracking-widest shadow-xl hover:scale-[1.03] transition-all">Optimiser Maintenant</button>
+            <Button variant="ghost" className="w-full py-3 bg-white text-rose-500 rounded-2xl font-black uppercase text-xs tracking-widest shadow-xl hover:scale-[1.03] transition-all">Optimiser Maintenant</Button>
           </div>
 
           <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">

@@ -54,7 +54,7 @@ export default function CheckoutSuccessPage() {
                     </div>
                 ) : (
                     <div className="space-y-3">
-                        <Button
+                        <Button type="button"
                             className="w-full gap-2"
                             onClick={() => router.push('/dashboard')}
                         >

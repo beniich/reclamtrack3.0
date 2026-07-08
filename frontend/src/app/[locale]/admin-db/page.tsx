@@ -7,6 +7,7 @@ import NetVizDashboard from "@/components/admin-db/dashboards/NetVizDashboard";
 import QManagerDashboard from "@/components/admin-db/dashboards/QManagerDashboard";
 import CloudMonitorDashboard from "@/components/admin-db/dashboards/CloudMonitorDashboard";
 import DBASentinelDashboard from "@/components/admin-db/dashboards/DBASentinelDashboard";
+import { Button } from '@/components/ui/button';
 
 export default function AdminDbPage() {
     const t = useTranslations('Admin');
@@ -33,7 +34,7 @@ export default function AdminDbPage() {
                     <div className="h-6 w-px bg-slate-200 dark:bg-slate-700"></div>
                     <div className="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-1 gap-1">
                         {TABS.map((tab) => (
-                            <button
+                            <button type="button"
                                 key={tab.id}
                                 onClick={() => setActiveTabId(tab.id)}
                                 className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-[10px] uppercase font-black tracking-widest transition-all ${activeTabId === tab.id

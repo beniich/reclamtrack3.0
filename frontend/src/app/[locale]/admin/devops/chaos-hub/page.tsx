@@ -2,6 +2,7 @@
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { useState } from "react"
+import { Button } from '@/components/ui/button';
 
 export default function ChaosHubPage() {
     const [experiments] = useState([
@@ -69,9 +70,7 @@ export default function ChaosHubPage() {
                                 <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest">Time Remaining</p>
                                 <p className="text-2xl font-mono font-black text-primary">00:12:45</p>
                             </div>
-                            <button className="px-8 py-3 bg-rose-600 text-white font-black rounded-xl shadow-xl shadow-rose-600/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-xs">
-                                Abort Experiment
-                            </button>
+                            <Button variant="danger" className="px-8 py-3 bg-rose-600 text-white font-black rounded-xl shadow-xl shadow-rose-600/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-xs">Abort Experiment</Button>
                         </div>
                     </div>
                     <div className="mt-6">
@@ -182,7 +181,7 @@ export default function ChaosHubPage() {
                                             {exp.date}
                                         </td>
                                         <td className="px-6 py-4 text-right">
-                                            <button className="material-symbols-outlined text-primary hover:text-primary-dark transition-colors">description</button>
+                                            <Button variant="ghost" className="material-symbols-outlined text-primary hover:text-primary-dark transition-colors">description</Button>
                                         </td>
                                     </tr>
                                 ))}

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function ContactPage() {
     const [sent, setSent] = useState(false);
@@ -96,7 +97,7 @@ export default function ContactPage() {
                                     <p className="text-slate-600 dark:text-slate-400 max-w-sm mx-auto mb-10 leading-relaxed">
                                         Your signal has been received. Our operations team will initiate contact within the next 120 minutes.
                                     </p>
-                                    <button onClick={() => setSent(false)} className="text-primary font-black text-xs uppercase tracking-widest hover:scale-110 transition-transform">Send New Signal</button>
+                                    <Button variant="ghost" className="text-primary font-black text-xs uppercase tracking-widest hover:scale-110 transition-transform" onClick={() => setSent(false)}>Send New Signal</Button>
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="bg-white dark:bg-background-dark border border-primary/10 rounded-[40px] p-8 md:p-12 shadow-2xl shadow-primary/5 space-y-10 relative overflow-hidden group">

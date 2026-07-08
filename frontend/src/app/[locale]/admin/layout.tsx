@@ -6,6 +6,7 @@ import { Role } from '@/lib/rbac/permissions';
 import { useAuthStore } from '@/store/authStore';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function AdminLayout({
     children,
@@ -65,12 +66,7 @@ export default function AdminLayout({
                         Vous n'avez pas les permissions nécessaires pour accéder à l'administration.
                         Veuillez contacter votre administrateur si vous pensez qu'il s'agit d'une erreur.
                     </p>
-                    <button
-                        onClick={() => router.push('/dashboard')}
-                        className="px-6 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors"
-                    >
-                        Retour au tableau de bord
-                    </button>
+                    <Button variant="secondary" className="px-6 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors" onClick={() => router.push('/dashboard')}>Retour au tableau de bord</Button>
                 </div>
             </div>
         );

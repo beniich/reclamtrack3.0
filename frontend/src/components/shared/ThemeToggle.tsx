@@ -32,25 +32,27 @@ export function ThemeToggle() {
       />
 
       {/* Light Toggle */}
-      <button
+      <button type="button"
         onClick={() => setTheme('light')}
         className={cn(
           "relative z-10 w-11 h-8 flex items-center justify-center transition-colors",
           !isDark ? "text-indigo-600" : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
         )}
         title="Mode Clair"
+        aria-label="Activer le mode clair"
       >
         <Sun className="w-4 h-4" />
       </button>
 
       {/* Dark Toggle */}
-      <button
+      <button type="button"
         onClick={() => setTheme('dark')}
         className={cn(
           "relative z-10 w-11 h-8 flex items-center justify-center transition-colors",
           isDark ? "text-white" : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
         )}
         title="Mode Sombre"
+        aria-label="Activer le mode sombre"
       >
         <Moon className="w-4 h-4" />
       </button>

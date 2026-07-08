@@ -24,6 +24,7 @@ import {
     Slash,
     Minus
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function SecurityDashboard() {
     const { metrics, loading } = useSecurityMetrics();
@@ -129,15 +130,15 @@ export default function SecurityDashboard() {
 
                     <div className="flex items-center gap-3">
                         <div className="flex bg-slate-100 dark:bg-slate-900 p-1 rounded-lg">
-                            <button className="px-3 py-1 text-xs font-semibold rounded-md transition-colors bg-white dark:bg-blue-600 text-slate-900 dark:text-white shadow-sm">Prod</button>
-                            <button className="px-3 py-1 text-xs font-semibold rounded-md transition-colors text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Staging</button>
+                            <Button variant="primary" className="px-3 py-1 text-xs font-semibold rounded-md transition-colors bg-white dark:bg-blue-600 text-slate-900 dark:text-white shadow-sm">Prod</Button>
+                            <Button variant="ghost" className="px-3 py-1 text-xs font-semibold rounded-md transition-colors text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Staging</Button>
                         </div>
                         <div className="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-2"></div>
                         <div className="flex items-center gap-2">
-                            <button className="size-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900">
+                            <button type="button" className="size-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900">
                                 <RefreshCcw className="size-4" />
                             </button>
-                            <button className="size-9 flex items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+                            <button type="button" className="size-9 flex items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg shadow-blue-600/20">
                                 <Share2 className="size-4" />
                             </button>
                         </div>
@@ -337,7 +338,7 @@ export default function SecurityDashboard() {
                         <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
                             <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
                                 <h3 className="font-semibold text-base">Top Failed Endpoints</h3>
-                                <button className="text-xs text-blue-600 font-medium">View all</button>
+                                <Button variant="ghost" className="text-xs text-blue-600 font-medium">View all</Button>
                             </div>
                             <table className="w-full text-left text-sm">
                                 <thead>
@@ -391,7 +392,7 @@ export default function SecurityDashboard() {
                                     <Search className="absolute left-2 top-1.5 text-slate-400 text-sm size-4" />
                                     <input type="text" className="pl-8 py-1 rounded-md bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs w-48 " placeholder="Filter logs..." />
                                 </div>
-                                <button className="size-8 flex items-center justify-center rounded-md border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-rose-500">
+                                <button type="button" className="size-8 flex items-center justify-center rounded-md border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-rose-500">
                                     <Slash className="size-4" />
                                 </button>
                             </div>

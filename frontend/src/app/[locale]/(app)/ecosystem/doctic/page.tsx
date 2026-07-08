@@ -14,6 +14,7 @@ import {
   ArrowTrendingUpIcon,
   ChatBubbleLeftRightIcon
 } from '@heroicons/react/24/outline';
+import { Button } from '@/components/ui/button';
 
 export default function DocticDashboard() {
   const stats = [
@@ -32,9 +33,7 @@ export default function DocticDashboard() {
           <p className="text-slate-500 text-sm">Bonjour, Dr. Benali • Vendredi 10 Avril 2026</p>
         </div>
         <div className="flex gap-4">
-          <button className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl text-sm font-medium hover:bg-emerald-500/20 transition-all">
-            Nouvelle Consultation
-          </button>
+          <Button variant="ghost" className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl text-sm font-medium hover:bg-emerald-500/20 transition-all">Nouvelle Consultation</Button>
           <div className="w-10 h-10 rounded-full bg-slate-800 border border-white/10" />
         </div>
       </div>
@@ -70,7 +69,7 @@ export default function DocticDashboard() {
                 <CalendarIcon className="w-5 h-5 text-emerald-500" />
                 Planning du jour
               </h2>
-              <button className="text-xs text-emerald-500 hover:underline">Voir tout</button>
+              <Button variant="ghost" className="text-xs text-emerald-500 hover:underline">Voir tout</Button>
             </div>
             
             <div className="space-y-4">
@@ -107,8 +106,8 @@ export default function DocticDashboard() {
               Basé sur les derniers rapports d'analyses du Patient El Fassi, l'IA suggère une vérification de la tension artérielle lors de la prochaine séance.
             </p>
             <div className="flex gap-2">
-              <button className="text-xs px-3 py-1.5 bg-emerald-500 text-white rounded-lg font-medium">Accepter Suggestion</button>
-              <button className="text-xs px-3 py-1.5 bg-white/5 text-slate-300 rounded-lg">Ignorer</button>
+              <Button variant="ghost" className="text-xs px-3 py-1.5 bg-emerald-500 text-white rounded-lg font-medium">Accepter Suggestion</Button>
+              <Button variant="ghost" className="text-xs px-3 py-1.5 bg-white/5 text-slate-300 rounded-lg">Ignorer</Button>
             </div>
           </div>
         </div>
@@ -121,9 +120,7 @@ export default function DocticDashboard() {
             </div>
             <h3 className="text-white font-medium mb-1">Salle d'attente virtuelle</h3>
             <p className="text-xs text-slate-500 mb-4">3 patients attendent en ligne</p>
-            <button className="w-full py-2 bg-emerald-500 text-white rounded-xl text-sm font-bold shadow-lg shadow-emerald-500/20">
-              Ouvrir la Salle
-            </button>
+            <Button variant="ghost" className="w-full py-2 bg-emerald-500 text-white rounded-xl text-sm font-bold shadow-lg shadow-emerald-500/20">Ouvrir la Salle</Button>
           </div>
 
           <div className="bg-[#161b22] border border-white/5 rounded-2xl p-6">

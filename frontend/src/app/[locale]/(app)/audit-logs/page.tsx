@@ -5,6 +5,7 @@ import LogTable from "@/components/audit/LogTable";
 import StatsCard from "@/components/audit/StatsCard";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { Suspense } from "react";
+import { Button } from '@/components/ui/button';
 
 export default function AuditLogsPage() {
     return (
@@ -27,12 +28,12 @@ export default function AuditLogsPage() {
                 </div>
 
                 <div className="flex gap-3">
-                    <button className="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 px-6 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all shadow-xl shadow-cyan-500/5 group">
+                    <button type="button" className="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 px-6 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all shadow-xl shadow-cyan-500/5 group">
                         <span className="material-symbols-outlined text-lg group-hover:rotate-180 transition-transform duration-500">sync</span>
                         <span>Synchroniser</span>
                     </button>
 
-                    <button className="flex items-center gap-3 rounded-2xl bg-brand-orange px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white shadow-xl shadow-orange-500/20 hover:brightness-110 transition-all active:scale-95">
+                    <button type="button" className="flex items-center gap-3 rounded-2xl bg-brand-orange px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white shadow-xl shadow-orange-500/20 hover:brightness-110 transition-all active:scale-95">
                         <span className="material-symbols-outlined text-lg">download</span>
                         <span>Exporter les Archives</span>
                     </button>

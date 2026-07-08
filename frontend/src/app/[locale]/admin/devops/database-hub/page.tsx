@@ -2,6 +2,7 @@
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { Badge } from "@/components/ui/badge"
+import { Button } from '@/components/ui/button';
 
 export default function DatabasePage() {
     const kpis = [
@@ -65,12 +66,8 @@ export default function DatabasePage() {
                         </div>
                     </div>
                     <div className="flex gap-3">
-                        <button className="px-6 py-3 bg-slate-100 dark:bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-200 dark:hover:bg-white/10 transition-all">
-                            Maintenance Mode
-                        </button>
-                        <button className="px-6 py-3 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-xl shadow-primary/20 hover:scale-105 transition-all">
-                            New Instance
-                        </button>
+                        <Button variant="ghost" className="px-6 py-3 bg-slate-100 dark:bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-200 dark:hover:bg-white/10 transition-all">Maintenance Mode</Button>
+                        <Button variant="primary" className="px-6 py-3 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-xl shadow-primary/20 hover:scale-105 transition-all">New Instance</Button>
                     </div>
                 </div>
 
@@ -157,9 +154,7 @@ export default function DatabasePage() {
                                    <h3 className="text-2xl font-black text-white uppercase tracking-tight">Slow Query Analysis</h3>
                                    <p className="text-slate-400 font-medium max-w-md">3 queries are consuming 82% of I/O resources. Visualizing execution paths...</p>
                                </div>
-                               <button className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl border border-white/10 transition-all backdrop-blur-md">
-                                   Launch QueryViz
-                               </button>
+                               <Button variant="ghost" className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl border border-white/10 transition-all backdrop-blur-md">Launch QueryViz</Button>
                            </div>
                         </div>
                     </div>
@@ -194,7 +189,7 @@ export default function DatabasePage() {
                                     { name: "Backup Verification", icon: "verified" },
                                     { name: "User Access Audit", icon: "admin_panel_settings" }
                                 ].map((tool, i) => (
-                                    <button key={i} className="w-full flex items-center justify-between p-4 bg-slate-100 dark:bg-white/5 rounded-2xl border border-transparent hover:border-primary/30 hover:bg-white/10 transition-all text-left group">
+                                    <button type="button" key={i} className="w-full flex items-center justify-between p-4 bg-slate-100 dark:bg-white/5 rounded-2xl border border-transparent hover:border-primary/30 hover:bg-white/10 transition-all text-left group">
                                         <div className="flex items-center gap-3">
                                             <span className="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">{tool.icon}</span>
                                             <span className="text-[10px] font-black uppercase tracking-widest">{tool.name}</span>

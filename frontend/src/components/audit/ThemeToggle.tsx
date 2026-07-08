@@ -22,7 +22,7 @@ export default function ThemeToggle() {
     };
 
     return (
-        <button
+        <button type="button"
             onClick={toggle}
             className="flex size-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
             title="Toggle dark mode"

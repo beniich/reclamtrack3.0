@@ -1,4 +1,6 @@
 
+import { Button } from '@/components/ui/button';
+
 export default function GovernanceLanding() {
     return (
         <div className="min-h-screen bg-brand-midnight text-white flex flex-col items-center justify-center p-6 text-center">
@@ -16,12 +18,8 @@ export default function GovernanceLanding() {
                     de gestion des réclamations et d'e-gouvernance de nouvelle génération.
                 </p>
                 <div className="flex flex-wrap justify-center gap-6 pt-10">
-                    <button className="px-10 py-5 bg-brand-orange text-white font-black rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-brand-orange/20 hover:scale-105 transition-all">
-                        Demander une Consultation
-                    </button>
-                    <button className="px-10 py-5 glass-card rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-white/5 transition-all">
-                        Nos Références
-                    </button>
+                    <Button variant="ghost" className="px-10 py-5 bg-brand-orange text-white font-black rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-brand-orange/20 hover:scale-105 transition-all">Demander une Consultation</Button>
+                    <Button variant="ghost" className="px-10 py-5 glass-card rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-white/5 transition-all">Nos Références</Button>
                 </div>
             </div>
         </div>

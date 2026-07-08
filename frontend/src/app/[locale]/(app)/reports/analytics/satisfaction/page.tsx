@@ -3,6 +3,7 @@
 // Components
 import Image from 'next/image';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 // Mock Data
 const mockReviews = [
@@ -58,7 +59,7 @@ export default function SatisfactionDashboard() {
                         </nav>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+                        <button type="button" className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
                             <span className="material-symbols-outlined text-sm">download</span> Export Reports
                         </button>
                     </div>
@@ -122,8 +123,8 @@ export default function SatisfactionDashboard() {
                             <div className="flex justify-between items-center mb-6">
                                 <h4 className="font-bold text-lg text-slate-900 dark:text-white">Satisfaction Trends</h4>
                                 <div className="flex gap-2">
-                                    <button className="px-3 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 font-medium text-slate-600 dark:text-slate-300">Weekly</button>
-                                    <button className="px-3 py-1 text-xs rounded-lg bg-primary text-white font-medium">Monthly</button>
+                                    <Button variant="secondary" className="px-3 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 font-medium text-slate-600 dark:text-slate-300">Weekly</Button>
+                                    <Button variant="primary" className="px-3 py-1 text-xs rounded-lg bg-primary text-white font-medium">Monthly</Button>
                                 </div>
                             </div>
                             <div className="h-64 relative w-full">
@@ -187,9 +188,7 @@ export default function SatisfactionDashboard() {
                                     </div>
                                 ))}
                             </div>
-                            <button className="w-full mt-6 py-2 text-sm font-semibold text-primary hover:bg-primary/5 rounded-lg border border-primary/20 transition-colors">
-                                View All 1,240 Reviews
-                            </button>
+                            <Button variant="primary" className="w-full mt-6 py-2 text-sm font-semibold text-primary hover:bg-primary/5 rounded-lg border border-primary/20 transition-colors">View All 1,240 Reviews</Button>
                         </section>
                     </div>
 

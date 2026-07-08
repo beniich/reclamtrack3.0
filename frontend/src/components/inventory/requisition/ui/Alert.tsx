@@ -55,7 +55,7 @@ export const Alert: React.FC<AlertProps> = ({
                     <div className="text-sm italic">{children}</div>
                 </div>
                 {onClose && (
-                    <button
+                    <button type="button"
                         onClick={onClose}
                         className="flex-shrink-0 text-current opacity-60 hover:opacity-100 transition-opacity"
                     >

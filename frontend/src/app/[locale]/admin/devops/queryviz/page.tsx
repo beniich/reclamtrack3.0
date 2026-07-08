@@ -42,11 +42,11 @@ export default function QueryVizPage() {
                         <span className="text-sm font-medium">PostgreSQL 15.4</span>
                     </div>
                     <div className="flex gap-2">
-                        <Button variant="primary">
+                        <Button type="button" variant="primary">
                             <span className="material-symbols-outlined text-sm">play_arrow</span>
                             Analyze Query
                         </Button>
-                        <button className="p-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
+                        <button type="button" className="p-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
                             <span className="material-symbols-outlined">share</span>
                         </button>
                     </div>
@@ -123,9 +123,7 @@ export default function QueryVizPage() {
                                             </p>
                                         </div>
                                     </div>
-                                    <button className="w-full mt-2 py-1 text-[10px] font-bold border border-primary/30 rounded group-hover:bg-primary group-hover:text-white transition-all uppercase tracking-tighter">
-                                        Copy SQL Fix
-                                    </button>
+                                    <Button variant="primary" className="w-full mt-2 py-1 text-[10px] font-bold border border-primary/30 rounded group-hover:bg-primary group-hover:text-white transition-all uppercase tracking-tighter">Copy SQL Fix</Button>
                                 </div>
 
                                 <div className="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
@@ -149,24 +147,20 @@ export default function QueryVizPage() {
                     {/* Canvas Toolbar */}
                     <div className="absolute top-4 left-4 z-10 flex gap-2">
                         <div className="flex items-center bg-white dark:bg-slate-900 p-1 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm">
-                            <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
+                            <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
                                 <span className="material-symbols-outlined text-xl">zoom_in</span>
                             </button>
-                            <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
+                            <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
                                 <span className="material-symbols-outlined text-xl">zoom_out</span>
                             </button>
                             <div className="w-px h-4 bg-slate-200 dark:bg-slate-800 mx-1"></div>
-                            <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
+                            <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
                                 <span className="material-symbols-outlined text-xl">center_focus_strong</span>
                             </button>
                         </div>
                         <div className="flex items-center bg-white dark:bg-slate-900 p-1 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm">
-                            <button className="px-3 py-1.5 text-xs font-bold bg-primary text-white rounded">
-                                Visual
-                            </button>
-                            <button className="px-3 py-1.5 text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800 rounded">
-                                Raw JSON
-                            </button>
+                            <Button variant="primary" className="px-3 py-1.5 text-xs font-bold bg-primary text-white rounded">Visual</Button>
+                            <Button variant="secondary" className="px-3 py-1.5 text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800 rounded">Raw JSON</Button>
                         </div>
                     </div>
 
@@ -388,10 +382,8 @@ export default function QueryVizPage() {
                                 is highly selective, consider adding a partial index to improve lookup performance.
                             </p>
                             <div className="mt-4 flex gap-2">
-                                <button className="flex-1 py-2 bg-primary text-white text-[10px] font-bold rounded hover:bg-primary/90 transition-all uppercase">
-                                    Apply Optimization
-                                </button>
-                                <button className="px-3 py-2 border border-slate-200 dark:border-slate-800 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                                <Button variant="primary" className="flex-1 py-2 bg-primary text-white text-[10px] font-bold rounded hover:bg-primary/90 transition-all uppercase">Apply Optimization</Button>
+                                <button type="button" className="px-3 py-2 border border-slate-200 dark:border-slate-800 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
                                     <span className="material-symbols-outlined text-xs">more_horiz</span>
                                 </button>
                             </div>
@@ -410,7 +402,7 @@ export default function QueryVizPage() {
                     <span>Database: analytics_warehouse</span>
                 </div>
                 <div className="flex gap-4 items-center">
-                    <button className="hover:text-primary transition-colors flex items-center gap-1">
+                    <button type="button" className="hover:text-primary transition-colors flex items-center gap-1">
                         <span className="material-symbols-outlined text-sm">terminal</span> Console
                     </button>
                     <div className="w-px h-3 bg-slate-200 dark:bg-slate-800"></div>

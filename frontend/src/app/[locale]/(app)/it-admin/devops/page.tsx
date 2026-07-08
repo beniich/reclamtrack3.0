@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { GitBranch, GitCommit, GitMerge, RefreshCw } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function DevOpsPage() {
     return (
@@ -11,7 +12,7 @@ export default function DevOpsPage() {
                     <h1 className="text-3xl font-bold tracking-tight text-slate-900">Outils DevOps & CI/CD</h1>
                     <p className="text-slate-500 mt-2">Gestion des déploiements continus et pipelines Vercel/GitHub</p>
                 </div>
-                <button className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-xl hover:bg-slate-800 transition-colors">
+                <button type="button" className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-xl hover:bg-slate-800 transition-colors">
                     <RefreshCw size={18} />
                     <span>Déclencher Build</span>
                 </button>

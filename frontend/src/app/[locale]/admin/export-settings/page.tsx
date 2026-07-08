@@ -4,6 +4,7 @@ import api from "@/lib/api"
 import { CheckCircle, Cloud, HardDrive, Loader2, Save } from "lucide-react"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
+import { Button } from '@/components/ui/button';
 
 export default function ExportSettingsPage() {
     const [loading, setLoading] = useState(true)
@@ -67,7 +68,7 @@ export default function ExportSettingsPage() {
 
             {/* Storage Mode Selection */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <button
+                <button type="button"
                     onClick={() => setSettings(s => ({ ...s, exportStorage: 'local' }))}
                     className={`relative p-6 rounded-2xl border-2 text-left transition-all flex flex-col gap-3 ${
                         settings.exportStorage === 'local'
@@ -92,7 +93,7 @@ export default function ExportSettingsPage() {
                     </p>
                 </button>
 
-                <button
+                <button type="button"
                     onClick={() => setSettings(s => ({ ...s, exportStorage: 'google_drive' }))}
                     className={`relative p-6 rounded-2xl border-2 text-left transition-all flex flex-col gap-3 ${
                         settings.exportStorage === 'google_drive'
@@ -162,7 +163,7 @@ export default function ExportSettingsPage() {
             )}
 
             <div className="flex justify-end">
-                <button
+                <button type="button"
                     onClick={handleSave}
                     disabled={saving}
                     className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-60 text-white px-8 py-3 rounded-xl font-black text-sm transition-all shadow-lg shadow-blue-900/30"

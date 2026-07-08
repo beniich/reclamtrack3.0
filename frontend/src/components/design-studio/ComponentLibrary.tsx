@@ -72,7 +72,7 @@ export const ComponentLibrary: React.FC<ComponentLibraryProps> = ({ onSelect }) 
             {/* Tabs */}
             <div className="flex bg-slate-100 dark:bg-slate-900 p-1 rounded-[1.2rem] gap-1">
                 {tabs.map(tab => (
-                    <button
+                    <button type="button"
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
                         className={cn(
@@ -91,7 +91,7 @@ export const ComponentLibrary: React.FC<ComponentLibraryProps> = ({ onSelect }) 
             {/* Component Grid */}
             <div className="flex-1 overflow-y-auto grid grid-cols-2 gap-3 pr-2 scrollbar-thin">
                 {filtered.map(comp => (
-                    <button
+                    <button type="button"
                         key={comp.name}
                         onClick={() => onSelect(comp)}
                         className="flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-slate-900 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 border border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-orange-500/50 rounded-2xl transition-all group"

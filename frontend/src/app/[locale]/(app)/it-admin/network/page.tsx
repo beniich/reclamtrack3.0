@@ -149,14 +149,14 @@ export default function NetworkPage() {
         <div className="flex gap-2">
           <RoleGuard minRole={Role.MODERATOR}>
             <Link href="/it-admin/network/scan">
-               <Button variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
+               <Button type="button" variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
                 <Search className="mr-2 h-4 w-4" />
                 Scan Network
               </Button>
             </Link>
           </RoleGuard>
           <RoleGuard minRole={Role.MODERATOR}>
-            <Button className="bg-purple-600 hover:bg-purple-700" onClick={handleCreate}>
+            <Button type="button" className="bg-purple-600 hover:bg-purple-700" onClick={handleCreate}>
               <Plus className="mr-2 h-4 w-4" />
               Add Device
             </Button>
@@ -182,7 +182,7 @@ export default function NetworkPage() {
 
                  <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 p-0">
+                    <Button type="button" variant="ghost" className="h-8 w-8 p-0">
                       <span className="sr-only">Open menu</span>
                       <MoreVertical className="h-4 w-4" />
                     </Button>
@@ -296,12 +296,12 @@ export default function NetworkPage() {
             </p>
              <div className="flex gap-4 justify-center">
                 <RoleGuard minRole={Role.MODERATOR}>
-                  <Button variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
+                  <Button type="button" variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
                        <Search className="mr-2 h-4 w-4" /> Scan Network
                   </Button>
                 </RoleGuard>
                 <RoleGuard minRole={Role.MODERATOR}>
-                  <Button className="bg-purple-600 hover:bg-purple-700" onClick={handleCreate}>
+                  <Button type="button" className="bg-purple-600 hover:bg-purple-700" onClick={handleCreate}>
                   <Plus className="mr-2 h-4 w-4" />
                   Add Device
                   </Button>

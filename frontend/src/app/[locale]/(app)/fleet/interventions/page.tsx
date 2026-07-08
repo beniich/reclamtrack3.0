@@ -1,6 +1,7 @@
 'use client';
 
 import { Calendar, ChevronRight, MapPin, User, Wrench } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function FleetInterventionsPage() {
     const interventions = [
@@ -16,7 +17,7 @@ export default function FleetInterventionsPage() {
                     <h2 className="text-2xl font-black text-slate-900 dark:text-white">Interventions</h2>
                     <p className="text-sm text-slate-500 font-medium">Schedule and track maintenance interventions for your fleet.</p>
                 </div>
-                <button className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95">
+                <button type="button" className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95">
                     <Wrench className="w-4 h-4" />
                     Schedule Intervention
                 </button>

@@ -68,7 +68,7 @@ export default function Header() {
 
                             {/* More Menu */}
                             <div className="relative group">
-                                <button className="hover:text-primary transition-colors flex items-center gap-1">
+                                <button type="button" className="hover:text-primary transition-colors flex items-center gap-1">
                                     {t('more')}
                                     <ChevronDown className="w-4 h-4" />
                                 </button>
@@ -158,7 +158,7 @@ export default function Header() {
                                 <p className="text-xs font-semibold text-slate-900 dark:text-white">{user.email.split('@')[0]}</p>
                                 <p className="text-[10px] text-slate-500 uppercase">{user.role}</p>
                             </div>
-                            <button
+                            <button type="button"
                                 onClick={logout}
                                 className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-500 hover:text-red-600 transition-colors"
                                 title={t('logout')}
@@ -183,7 +183,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <div className="flex items-center gap-4 lg:hidden">
                 <LanguageSwitcher />
-                <button
+                <button type="button"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     className="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
                     aria-label="Toggle menu"
@@ -211,7 +211,7 @@ export default function Header() {
                                     <SettingsIcon size={18} />
                                     <span>{t('settings')}</span>
                                 </Link>
-                                <button
+                                <button type="button"
                                     onClick={() => { logout(); setIsMenuOpen(false); }}
                                     className="w-full flex items-center gap-2 px-4 py-2 rounded-lg text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors text-left"
                                 >

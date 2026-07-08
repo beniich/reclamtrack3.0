@@ -18,6 +18,7 @@ import {
   ExclamationTriangleIcon,
   PresentationChartLineIcon
 } from '@heroicons/react/24/outline';
+import { Button } from '@/components/ui/button';
 
 // Metadata must be in a Server Component or exported from a separate file if using 'use client'
 // For now, I will keep the component logic and the user can move metadata to a layout or page layout if needed.
@@ -149,12 +150,8 @@ export default function MecanicProDashboard() {
               </div>
 
               <div className="mt-auto space-y-4">
-                 <button className="w-full py-4 bg-orange-600 text-black font-black uppercase text-xs tracking-[0.2em] shadow-2xl shadow-orange-900/20 hover:bg-orange-500 transition-colors">
-                    Emergency Reset
-                 </button>
-                 <button className="w-full py-4 bg-transparent border border-white/10 text-white font-black uppercase text-xs tracking-[0.2em] hover:bg-white/5 transition-colors">
-                    Export Analysis
-                 </button>
+                 <Button variant="ghost" className="w-full py-4 bg-orange-600 text-black font-black uppercase text-xs tracking-[0.2em] shadow-2xl shadow-orange-900/20 hover:bg-orange-500 transition-colors">Emergency Reset</Button>
+                 <Button variant="ghost" className="w-full py-4 bg-transparent border border-white/10 text-white font-black uppercase text-xs tracking-[0.2em] hover:bg-white/5 transition-colors">Export Analysis</Button>
               </div>
            </div>
 

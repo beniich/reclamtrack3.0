@@ -71,24 +71,24 @@ export default function CloudMonitorDashboard() {
                     <span className="material-symbols-outlined text-[24px]">cloud</span>
                 </div>
                 <nav className="flex-1 flex flex-col gap-4 w-full px-2">
-                    <button className="w-full aspect-square rounded-xl bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/20 transition-all group relative">
+                    <button type="button" className="w-full aspect-square rounded-xl bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/20 transition-all group relative">
                         <span className="material-symbols-outlined">dashboard</span>
                         <div className="absolute left-14 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50">Overview</div>
                     </button>
-                    <button className="w-full aspect-square rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition-all group relative">
+                    <button type="button" className="w-full aspect-square rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition-all group relative">
                         <span className="material-symbols-outlined">attach_money</span>
                         <div className="absolute left-14 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50">Cost Analysis</div>
                     </button>
-                    <button className="w-full aspect-square rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition-all group relative">
+                    <button type="button" className="w-full aspect-square rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition-all group relative">
                         <span className="material-symbols-outlined">security</span>
                         <div className="absolute left-14 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50">Security Groups</div>
                     </button>
-                    <button className="w-full aspect-square rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition-all group relative">
+                    <button type="button" className="w-full aspect-square rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition-all group relative">
                         <span className="material-symbols-outlined">settings</span>
                         <div className="absolute left-14 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50">Settings</div>
                     </button>
                 </nav>
-                <button className="w-10 h-10 rounded-full overflow-hidden border-2 border-white dark:border-slate-700 shadow-lg">
+                <button type="button" className="w-10 h-10 rounded-full overflow-hidden border-2 border-white dark:border-slate-700 shadow-lg">
                     <img src="https://ui-avatars.com/api/?name=Admin+User&background=random" alt="User" />
                 </button>
             </aside>
@@ -103,20 +103,20 @@ export default function CloudMonitorDashboard() {
                     </div>
                     <div className="flex items-center gap-4">
                         <div className="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-1">
-                            <button className="px-4 py-2 text-sm font-bold text-slate-900 dark:text-white bg-white dark:bg-slate-700 shadow rounded-md flex items-center gap-2">
+                            <button type="button" className="px-4 py-2 text-sm font-bold text-slate-900 dark:text-white bg-white dark:bg-slate-700 shadow rounded-md flex items-center gap-2">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" className="h-4 w-auto" alt="AWS" />
                                 AWS
                             </button>
-                            <button className="px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white flex items-center gap-2">
+                            <button type="button" className="px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white flex items-center gap-2">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/dec/Google_Cloud_Logo.svg" className="h-4 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all" alt="GCP" />
                                 GCP
                             </button>
-                            <button className="px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white flex items-center gap-2">
+                            <button type="button" className="px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white flex items-center gap-2">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" className="h-4 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all" alt="Azure" />
                                 Azure
                             </button>
                         </div>
-                        <button className="h-10 w-10 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800">
+                        <button type="button" className="h-10 w-10 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800">
                             <span className="material-symbols-outlined">notifications</span>
                             <span className="absolute top-6 right-8 h-2.5 w-2.5 rounded-full bg-red-500 border-2 border-white dark:border-slate-900"></span>
                         </button>
@@ -146,7 +146,7 @@ export default function CloudMonitorDashboard() {
                                 <p className="text-slate-500 dark:text-slate-400 font-medium mb-1">Projected Savings</p>
                                 <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2">${resources.savings.toLocaleString()}</h2>
                                 <p className="text-sm text-slate-500">Available via Reserved Instances</p>
-                                <button className="mt-4 text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all">
+                                <button type="button" className="mt-4 text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all">
                                     Review Recommendations <span className="material-symbols-outlined text-sm">arrow_forward</span>
                                 </button>
                             </div>
@@ -177,8 +177,8 @@ export default function CloudMonitorDashboard() {
                                 <div className="flex justify-between items-center mb-6">
                                     <h3 className="font-bold text-lg text-slate-900 dark:text-white">Cost Trend Analysis</h3>
                                     <div className="flex gap-2">
-                                        <button className="px-3 py-1 rounded-md text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white">Daily</button>
-                                        <button className="px-3 py-1 rounded-md text-xs font-medium text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800">Weekly</button>
+                                        <button type="button" className="px-3 py-1 rounded-md text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white">Daily</button>
+                                        <button type="button" className="px-3 py-1 rounded-md text-xs font-medium text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800">Weekly</button>
                                     </div>
                                 </div>
                                 <div className="flex-1 w-full relative chart-container rounded-lg border border-slate-100 dark:border-slate-700/50 overflow-hidden">
@@ -236,7 +236,7 @@ export default function CloudMonitorDashboard() {
                             <div>
                                 <h4 className="font-bold text-amber-800 dark:text-amber-400 text-sm">Cost Anomaly Detected</h4>
                                 <p className="text-sm text-amber-700 dark:text-amber-300 mt-1">One of your RDS instances (db-prod-primary) showed a +240% cost spike in the last 6 hours due to high IOPS.</p>
-                                <button className="mt-3 text-xs font-bold text-amber-900 dark:text-amber-100 underline hover:no-underline">Investigate Resource</button>
+                                <button type="button" className="mt-3 text-xs font-bold text-amber-900 dark:text-amber-100 underline hover:no-underline">Investigate Resource</button>
                             </div>
                         </div>
                     </div>

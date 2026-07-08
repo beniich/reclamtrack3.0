@@ -2,6 +2,7 @@
 
 import DashboardTemplate from '@/components/devops-dashboards/shared/DashboardTemplate'
 import { Badge } from "@/components/ui/badge"
+import { Button } from '@/components/ui/button';
 
 export default function SSLManagerDashboard() {
   const kpis = [
@@ -61,9 +62,7 @@ export default function SSLManagerDashboard() {
                     </p>
                 </div>
             </div>
-            <button className="px-8 py-4 bg-rose-500 text-white rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl shadow-rose-500/30 hover:scale-[1.05] active:scale-95 transition-all relative z-10">
-                Renew All Critical
-            </button>
+            <Button variant="danger" className="px-8 py-4 bg-rose-500 text-white rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl shadow-rose-500/30 hover:scale-[1.05] active:scale-95 transition-all relative z-10">Renew All Critical</Button>
         </div>
 
         {/* Certificates Table - Glassmorphism */}
@@ -74,12 +73,8 @@ export default function SSLManagerDashboard() {
                 <p className="text-sm text-slate-500 font-medium">Real-time certificate health & chain validation</p>
             </div>
             <div className="flex gap-3">
-              <button className="px-5 py-2.5 text-[10px] font-black uppercase tracking-widest bg-slate-100 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-200 dark:hover:bg-white/10 transition-all">
-                Discovery Scan
-              </button>
-              <button className="px-5 py-2.5 text-[10px] font-black uppercase tracking-widest bg-primary text-white rounded-xl shadow-lg shadow-primary/20 hover:scale-105 transition-all">
-                Add Domain
-              </button>
+              <Button variant="ghost" className="px-5 py-2.5 text-[10px] font-black uppercase tracking-widest bg-slate-100 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-200 dark:hover:bg-white/10 transition-all">Discovery Scan</Button>
+              <Button variant="primary" className="px-5 py-2.5 text-[10px] font-black uppercase tracking-widest bg-primary text-white rounded-xl shadow-lg shadow-primary/20 hover:scale-105 transition-all">Add Domain</Button>
             </div>
           </div>
 
@@ -132,7 +127,7 @@ export default function SSLManagerDashboard() {
                     </div>
                   </td>
                   <td className="px-8 py-6 text-right">
-                    <button className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
+                    <button type="button" className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
                       <span className="material-symbols-outlined">settings</span>
                     </button>
                   </td>
@@ -175,9 +170,7 @@ export default function SSLManagerDashboard() {
                     </div>
                   </td>
                   <td className="px-8 py-6 text-right">
-                    <button className="px-4 py-2 bg-rose-500 text-white rounded-lg text-[10px] font-black uppercase tracking-widest shadow-lg shadow-rose-500/20 opacity-0 group-hover:opacity-100 transition-all">
-                      Fix Now
-                    </button>
+                    <Button variant="danger" className="px-4 py-2 bg-rose-500 text-white rounded-lg text-[10px] font-black uppercase tracking-widest shadow-lg shadow-rose-500/20 opacity-0 group-hover:opacity-100 transition-all">Fix Now</Button>
                   </td>
                 </tr>
 
@@ -218,7 +211,7 @@ export default function SSLManagerDashboard() {
                     </div>
                   </td>
                   <td className="px-8 py-6 text-right">
-                    <button className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
+                    <button type="button" className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
                       <span className="material-symbols-outlined">settings</span>
                     </button>
                   </td>
@@ -236,7 +229,7 @@ export default function SSLManagerDashboard() {
                 <h3 className="font-black text-xl uppercase tracking-tight">Domain Coverage Map</h3>
                 <p className="text-sm text-slate-500 font-medium">Infrastructure-wide certificate deployment status</p>
               </div>
-              <button className="text-primary text-[10px] font-black uppercase tracking-widest hover:underline">Scan All Assets</button>
+              <Button variant="ghost" className="text-primary text-[10px] font-black uppercase tracking-widest hover:underline">Scan All Assets</Button>
             </div>
 
             <div className="space-y-4">
@@ -277,7 +270,7 @@ export default function SSLManagerDashboard() {
                   { label: 'Compliance Report', icon: 'verified' },
                   { label: 'Bulk Import', icon: 'file_upload' }
                 ].map((action, idx) => (
-                  <button key={idx} className="w-full flex items-center justify-between p-4 bg-white dark:bg-white/5 rounded-2xl border border-primary/10 hover:border-primary/40 hover:scale-[1.02] active:scale-95 transition-all text-left shadow-sm">
+                  <button type="button" key={idx} className="w-full flex items-center justify-between p-4 bg-white dark:bg-white/5 rounded-2xl border border-primary/10 hover:border-primary/40 hover:scale-[1.02] active:scale-95 transition-all text-left shadow-sm">
                     <div className="flex items-center gap-3">
                         <span className="material-symbols-outlined text-primary text-xl">{action.icon}</span>
                         <span className="text-[10px] font-black uppercase tracking-widest">{action.label}</span>

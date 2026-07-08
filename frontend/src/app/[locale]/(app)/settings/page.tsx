@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 export default function SettingsPage() {
     return (
         <div className="bg-background-light font-display min-h-[calc(100vh-64px)] overflow-y-auto">
@@ -23,15 +24,15 @@ export default function SettingsPage() {
                                     <div className="w-24 h-24 rounded-full border-4 border-slate-50 overflow-hidden shadow-md bg-slate-200">
                                         {/* Placeholder Avatar */}
                                     </div>
-                                    <button className="absolute bottom-0 right-0 p-2 bg-primary text-white rounded-full shadow-lg hover:scale-105 transition-transform">
+                                    <button type="button" className="absolute bottom-0 right-0 p-2 bg-primary text-white rounded-full shadow-lg hover:scale-105 transition-transform">
                                         <span className="material-symbols-outlined text-sm">photo_camera</span>
                                     </button>
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-slate-900">Photo de Profil</h3>
                                     <div className="flex gap-2 mt-3">
-                                        <button className="text-sm font-semibold px-4 py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors">Changer Photo</button>
-                                        <button className="text-sm font-semibold px-4 py-2 text-slate-400 hover:text-red-500 transition-colors">Supprimer</button>
+                                        <Button variant="primary" className="text-sm font-semibold px-4 py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors">Changer Photo</Button>
+                                        <Button variant="ghost" className="text-sm font-semibold px-4 py-2 text-slate-400 hover:text-red-500 transition-colors">Supprimer</Button>
                                     </div>
                                 </div>
                             </div>
@@ -73,12 +74,8 @@ export default function SettingsPage() {
 
                     {/* Action Footer */}
                     <div className="flex items-center justify-end gap-4 mt-12 pb-20">
-                        <button className="px-6 py-3 rounded-lg border border-slate-200 font-bold hover:bg-slate-50 transition-colors">
-                            Annuler
-                        </button>
-                        <button className="px-8 py-3 rounded-lg bg-primary text-white font-bold hover:shadow-lg hover:shadow-primary/30 transition-all">
-                            Enregistrer
-                        </button>
+                        <Button variant="ghost" className="px-6 py-3 rounded-lg border border-slate-200 font-bold hover:bg-slate-50 transition-colors">Annuler</Button>
+                        <Button variant="primary" className="px-8 py-3 rounded-lg bg-primary text-white font-bold hover:shadow-lg hover:shadow-primary/30 transition-all">Enregistrer</Button>
                     </div>
                 </main>
             </div>

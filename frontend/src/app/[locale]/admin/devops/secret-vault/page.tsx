@@ -160,7 +160,7 @@ export default function SecretVaultPage() {
 
             <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
               <DialogTrigger asChild>
-                <button className="px-6 py-3 bg-primary text-white font-black rounded-xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-xs flex items-center gap-2">
+                <button type="button" className="px-6 py-3 bg-primary text-white font-black rounded-xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-xs flex items-center gap-2">
                   <span className="material-symbols-outlined text-sm">add</span>
                   New Secret
                 </button>
@@ -239,7 +239,7 @@ export default function SecretVaultPage() {
                   </div>
                 </div>
                 <DialogFooter>
-                  <Button onClick={handleCreate} className="w-full bg-primary hover:bg-primary-dark rounded-xl font-black uppercase tracking-widest h-12">Store Secret</Button>
+                  <Button type="button" onClick={handleCreate} className="w-full bg-primary hover:bg-primary-dark rounded-xl font-black uppercase tracking-widest h-12">Store Secret</Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
@@ -274,7 +274,7 @@ export default function SecretVaultPage() {
                         </div>
                       </div>
                       <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
-                        <button
+                        <button type="button"
                             className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors"
                             onClick={() => handleReveal(secret._id)}
                         >
@@ -282,7 +282,7 @@ export default function SecretVaultPage() {
                               {revealedSecret === secret._id ? 'visibility_off' : 'visibility'}
                           </span>
                         </button>
-                        <button
+                        <button type="button"
                             className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 transition-colors"
                             onClick={() => handleDelete(secret._id)}
                         >
@@ -295,7 +295,7 @@ export default function SecretVaultPage() {
                       {revealedSecret === secret._id ? (
                         <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-primary/20 font-mono text-sm break-all flex justify-between items-center animate-in slide-in-from-top-2">
                           <span className="text-primary font-bold overflow-hidden text-ellipsis mr-4">{revealedValue}</span>
-                          <button
+                          <button type="button"
                             className="px-4 py-2 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-primary/20"
                             onClick={() => {
                                 navigator.clipboard.writeText(revealedValue);

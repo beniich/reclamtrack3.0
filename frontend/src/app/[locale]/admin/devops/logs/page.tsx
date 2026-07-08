@@ -19,6 +19,7 @@ import {
     ChevronRight,
     MoreHorizontal
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function LogSenseDashboard() {
     return (
@@ -84,7 +85,7 @@ export default function LogSenseDashboard() {
                         <div className="space-y-1">
                             <div className="flex items-center justify-between px-2 py-1.5 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400">
                                 <span>api-service</span>
-                                <button className="hover:text-white"><Trash2 className="size-3" /></button>
+                                <button type="button" className="hover:text-white"><Trash2 className="size-3" /></button>
                             </div>
                             <div className="flex items-center justify-between px-2 py-1 text-slate-500 hover:text-slate-300">
                                 <span>+ Add source filter</span>
@@ -95,7 +96,7 @@ export default function LogSenseDashboard() {
 
                 {/* Sidebar Footer */}
                 <div className="p-4 border-t border-slate-800">
-                    <button className="flex items-center gap-2 text-slate-500 hover:text-slate-300 transition-colors w-full">
+                    <button type="button" className="flex items-center gap-2 text-slate-500 hover:text-slate-300 transition-colors w-full">
                         <Settings className="size-4" />
                         <span>Configuration</span>
                     </button>
@@ -121,10 +122,8 @@ export default function LogSenseDashboard() {
                                 <span className="bg-slate-800 text-slate-400 px-1.5 rounded text-[10px] border border-slate-700">/</span>
                             </div>
                         </div>
-                        <button className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded text-sm transition-colors">
-                            Run Query
-                        </button>
-                        <button className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded">
+                        <Button variant="primary" className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded text-sm transition-colors">Run Query</Button>
+                        <button type="button" className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded">
                             <Download className="size-4" />
                         </button>
                     </div>
@@ -178,7 +177,7 @@ export default function LogSenseDashboard() {
                                     Failed to connect to database: Connection refused at tcp://db-primary:5432
                                 </td>
                                 <td className="px-2 py-1 text-right">
-                                    <button className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
+                                    <button type="button" className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
                                 </td>
                             </tr>
 
@@ -194,7 +193,7 @@ export default function LogSenseDashboard() {
                                     GET /v1/users/profile - 200 OK - 45ms
                                 </td>
                                 <td className="px-2 py-1 text-right">
-                                    <button className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
+                                    <button type="button" className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
                                 </td>
                             </tr>
                             {/* Additional Rows would go here */}
@@ -210,7 +209,7 @@ export default function LogSenseDashboard() {
                                         Processing job #{4920 + i} complete. Payload size: {120 + i * 10} bytes.
                                     </td>
                                     <td className="px-2 py-1 text-right">
-                                        <button className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
+                                        <button type="button" className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
                                     </td>
                                 </tr>
                             ))}
@@ -225,9 +224,9 @@ export default function LogSenseDashboard() {
                         <span className="text-blue-500 font-bold">0.045s query time</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <button className="p-1 hover:bg-slate-800 rounded hover:text-slate-300 disabled:opacity-50"><ChevronLeft className="size-3" /></button>
+                        <button type="button" className="p-1 hover:bg-slate-800 rounded hover:text-slate-300 disabled:opacity-50"><ChevronLeft className="size-3" /></button>
                         <span className="text-slate-300">Page 1</span>
-                        <button className="p-1 hover:bg-slate-800 rounded hover:text-slate-300"><ChevronRight className="size-3" /></button>
+                        <button type="button" className="p-1 hover:bg-slate-800 rounded hover:text-slate-300"><ChevronRight className="size-3" /></button>
                     </div>
                 </footer>
             </main>

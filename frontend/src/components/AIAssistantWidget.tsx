@@ -95,7 +95,7 @@ export function AIAssistantWidget() {
                                 </div>
                             </div>
                         </div>
-                        <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-white/20 rounded-lg transition-colors">
+                        <button type="button" onClick={() => setIsOpen(false)} className="p-1 hover:bg-white/20 rounded-lg transition-colors">
                             <X className="w-5 h-5" />
                         </button>
                     </div>
@@ -143,7 +143,7 @@ export function AIAssistantWidget() {
                                 className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none max-h-32"
                                 rows={1}
                             />
-                            <button
+                            <button type="button"
                                 onClick={handleSend}
                                 disabled={!input.trim() || loading}
                                 className="absolute right-2 bottom-2 p-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 transition-colors"
@@ -162,7 +162,7 @@ export function AIAssistantWidget() {
 
             {/* The Floating Toggle Button */}
             {!isOpen && (
-                <button
+                <button type="button"
                     onClick={() => setIsOpen(true)}
                     className="w-14 h-14 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all text-white relative group"
                 >

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Loader2, QrCode, AlertTriangle, Box } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function QRScanRedirectPage() {
     const params = useParams();
@@ -76,12 +77,7 @@ export default function QRScanRedirectPage() {
                     <>
                         <h2 className="text-2xl font-black uppercase italic tracking-tighter text-red-500">Code Inconnu</h2>
                         <p className="text-sm font-medium text-slate-400">Ce QR Code ne correspond à aucun actif dans le registre GMAO.</p>
-                        <button 
-                            onClick={() => router.push('/technician')}
-                            className="mt-8 px-6 py-3 bg-white text-slate-900 rounded-xl font-black uppercase tracking-widest text-[10px]"
-                        >
-                            Retour au portail
-                        </button>
+                        <Button variant="ghost" className="mt-8 px-6 py-3 bg-white text-slate-900 rounded-xl font-black uppercase tracking-widest text-[10px]" onClick={() => router.push('/technician')}>Retour au portail</Button>
                     </>
                 )}
             </div>

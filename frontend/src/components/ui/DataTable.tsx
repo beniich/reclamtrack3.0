@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { ChevronUp, ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface Column<T> {
     key: keyof T | string;
@@ -127,20 +128,18 @@ export function DataTable<T extends { id: string | number }>({
                         <span className="font-bold text-slate-900 dark:text-white">{data.length}</span> results
                     </p>
                     <div className="flex gap-2">
-                        <button
+                        <Button variant="outline" size="sm"
                             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                             disabled={currentPage === 1}
-                            className="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
                         >
                             Previous
-                        </button>
-                        <button
+                        </Button>
+                        <Button variant="outline" size="sm"
                             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                             disabled={currentPage === totalPages}
-                            className="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
                         >
                             Next
-                        </button>
+                        </Button>
                     </div>
                 </div>
             )}

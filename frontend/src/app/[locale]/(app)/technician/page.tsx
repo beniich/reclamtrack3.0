@@ -7,6 +7,7 @@ import {
     Bell, User, Wrench, Clock, CheckCircle2,
     ChevronRight, Scan, AlertCircle
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function TechnicianPortalPage() {
     // Mock tasks for the technician
@@ -46,7 +47,7 @@ export default function TechnicianPortalPage() {
                         <h2 className="text-2xl font-black uppercase italic tracking-tighter mb-2 leading-tight">Intervention<br/>Sur Site</h2>
                         <p className="text-xs text-indigo-100 font-medium mb-8 leading-relaxed max-w-[200px]">Scannez le QR Code de la machine pour voir l'historique.</p>
                         
-                        <button className="w-full h-[60px] bg-white text-indigo-600 rounded-2xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-3 shadow-xl active:scale-95 transition-all">
+                        <button type="button" className="w-full h-[60px] bg-white text-indigo-600 rounded-2xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-3 shadow-xl active:scale-95 transition-all">
                             <QrCode className="w-5 h-5" /> Lancer le Scanner
                         </button>
                     </div>
@@ -104,11 +105,11 @@ export default function TechnicianPortalPage() {
 
             {/* Bottom Floating Navigation (Premium Design) */}
             <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-lg bg-slate-900/90 dark:bg-slate-100/10 backdrop-blur-2xl border border-white/10 px-8 py-3 rounded-[2.5rem] flex justify-between items-center z-50 shadow-2xl">
-                <button className="flex flex-col items-center gap-1 text-white">
+                <button type="button" className="flex flex-col items-center gap-1 text-white">
                     <Wrench className="w-5 h-5" />
                     <span className="text-[7px] font-black uppercase tracking-widest">Jobs</span>
                 </button>
-                <button className="flex flex-col items-center gap-1 text-slate-400">
+                <button type="button" className="flex flex-col items-center gap-1 text-slate-400">
                     <History className="w-5 h-5" />
                     <span className="text-[7px] font-black uppercase tracking-widest">Logs</span>
                 </button>
@@ -121,11 +122,11 @@ export default function TechnicianPortalPage() {
                     </div>
                 </div>
 
-                <button className="flex flex-col items-center gap-1 text-slate-400">
+                <button type="button" className="flex flex-col items-center gap-1 text-slate-400">
                     <Map className="w-5 h-5" />
                     <span className="text-[7px] font-black uppercase tracking-widest">Map</span>
                 </button>
-                <button className="flex flex-col items-center gap-1 text-slate-400">
+                <button type="button" className="flex flex-col items-center gap-1 text-slate-400">
                     <User className="w-5 h-5" />
                     <span className="text-[7px] font-black uppercase tracking-widest">Me</span>
                 </button>

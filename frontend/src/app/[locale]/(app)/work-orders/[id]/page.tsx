@@ -7,6 +7,7 @@ import {
     ArrowLeft, Wrench, Clock, CheckCircle2, 
     Calendar, Users, FileText, Camera, ShieldCheck, Download
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function WorkOrderDetailsPage() {
     const params = useParams();
@@ -47,10 +48,10 @@ export default function WorkOrderDetailsPage() {
                 </Link>
 
                 <div className="flex gap-3">
-                    <button className="px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] font-black uppercase tracking-widest hover:border-red-300 dark:hover:border-red-500/50 flex items-center gap-2 transition-all shadow-sm">
+                    <button type="button" className="px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] font-black uppercase tracking-widest hover:border-red-300 dark:hover:border-red-500/50 flex items-center gap-2 transition-all shadow-sm">
                         <Download className="w-4 h-4 text-slate-400" /> Export PDF
                     </button>
-                    <button className="px-5 py-3 rounded-xl bg-emerald-600 shadow-emerald-600/20 text-white text-[10px] font-black uppercase tracking-widest hover:brightness-110 flex items-center gap-2 transition-all shadow-lg">
+                    <button type="button" className="px-5 py-3 rounded-xl bg-emerald-600 shadow-emerald-600/20 text-white text-[10px] font-black uppercase tracking-widest hover:brightness-110 flex items-center gap-2 transition-all shadow-lg">
                         <ShieldCheck className="w-4 h-4" /> Finaliser l'OT
                     </button>
                 </div>
@@ -104,7 +105,7 @@ export default function WorkOrderDetailsPage() {
                         <div className="space-y-3">
                             {wo.checklist.map((item, idx) => (
                                 <div key={idx} className={`p-4 rounded-xl border flex items-center gap-4 transition-all ${item.done ? 'bg-emerald-50 dark:bg-emerald-500/5 border-emerald-200 dark:border-emerald-500/20 opacity-80' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700/50'}`}>
-                                    <button className={`size-6 rounded-md flex items-center justify-center border-2 ${item.done ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 dark:border-slate-600'}`}>
+                                    <button type="button" className={`size-6 rounded-md flex items-center justify-center border-2 ${item.done ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 dark:border-slate-600'}`}>
                                         {item.done && <CheckCircle2 className="w-4 h-4" />}
                                     </button>
                                     <span className={`text-sm font-bold ${item.done ? 'text-emerald-700 dark:text-emerald-400 line-through' : 'text-slate-700 dark:text-slate-300'}`}>

@@ -13,6 +13,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '@/lib/api';
 import { Skeleton } from '@chakra-ui/react';
+import { Button } from '@/components/ui/button';
 
 export default function WorkOrdersPage() {
     const [search, setSearch] = useState('');
@@ -98,10 +99,8 @@ export default function WorkOrdersPage() {
                 </div>
 
                 <div className="flex gap-3">
-                    <button className="h-[52px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white rounded-2xl px-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-slate-50 transition-all">
-                        Historique
-                    </button>
-                    <button className="h-[52px] bg-red-600 dark:bg-red-500 hover:brightness-110 text-white rounded-2xl px-8 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-2xl shadow-red-600/20 transition-all">
+                    <Button variant="secondary" className="h-[52px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white rounded-2xl px-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-slate-50 transition-all">Historique</Button>
+                    <button type="button" className="h-[52px] bg-red-600 dark:bg-red-500 hover:brightness-110 text-white rounded-2xl px-8 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-2xl shadow-red-600/20 transition-all">
                         <Plus className="w-4 h-4" /> Créer OT Industrial
                     </button>
                 </div>
@@ -145,7 +144,7 @@ export default function WorkOrdersPage() {
                         </SelectContent>
                     </Select>
                     
-                    <button className="w-[56px] h-[56px] flex items-center justify-center bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl hover:bg-slate-50 transition-colors shadow-sm">
+                    <button type="button" className="w-[56px] h-[56px] flex items-center justify-center bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl hover:bg-slate-50 transition-colors shadow-sm">
                         <Filter className="w-4 h-4 text-slate-700 dark:text-slate-300" />
                     </button>
                 </div>
@@ -221,7 +220,7 @@ export default function WorkOrdersPage() {
                                                 <div className={`h-full ${wo.status === 'closed' ? 'w-full bg-emerald-500' : 'w-1/3 bg-red-500'} rounded-full`}></div>
                                             </div>
                                         </div>
-                                        <button className="size-12 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 flex items-center justify-center text-slate-400 group-hover:text-red-500 group-hover:border-red-500/30 transition-all">
+                                        <button type="button" className="size-12 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 flex items-center justify-center text-slate-400 group-hover:text-red-500 group-hover:border-red-500/30 transition-all">
                                             <Play className="w-5 h-5" />
                                         </button>
                                     </div>

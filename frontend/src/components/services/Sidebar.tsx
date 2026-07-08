@@ -28,7 +28,7 @@ export function Sidebar() {
     return (
         <>
             {/* Mobile Toggle */}
-            <button
+            <button type="button"
                 className="fixed top-4 left-4 z-50 md:hidden p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
                 onClick={() => setOpen(!open)}
             >
@@ -88,7 +88,7 @@ export function Sidebar() {
 
                 {/* Footer */}
                 <div className="flex flex-col gap-4 w-full mt-auto">
-                    <button className={cn(
+                    <button type="button" className={cn(
                         'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
                         'text-slate-600 dark:text-slate-400 hover:text-red-500',
                         'md:justify-center md:px-3 md:group-hover:justify-start'

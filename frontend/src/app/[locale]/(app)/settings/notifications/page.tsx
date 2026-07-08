@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function NotificationSettingsPage() {
     return (
@@ -66,12 +67,8 @@ export default function NotificationSettingsPage() {
                                 <p className="text-slate-500 max-w-2xl">Configure how the system communicates with users and field teams. Manage SMS/Email triggers and customize templates for every stage of the intervention lifecycle.</p>
                             </div>
                             <div className="flex items-center gap-3">
-                                <button className="px-4 py-2 text-sm font-medium border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-                                    Reset Defaults
-                                </button>
-                                <button className="px-6 py-2 text-sm font-medium bg-primary text-white rounded-lg hover:opacity-90 transition-opacity">
-                                    Save Changes
-                                </button>
+                                <Button variant="secondary" className="px-4 py-2 text-sm font-medium border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Reset Defaults</Button>
+                                <Button variant="primary" className="px-6 py-2 text-sm font-medium bg-primary text-white rounded-lg hover:opacity-90 transition-opacity">Save Changes</Button>
                             </div>
                         </div>
 
@@ -113,7 +110,7 @@ export default function NotificationSettingsPage() {
                                     <div className="space-y-3">
                                         <div className="flex items-center justify-between">
                                             <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Template</label>
-                                            <button className="text-xs text-primary font-medium flex items-center gap-1 hover:underline">
+                                            <button type="button" className="text-xs text-primary font-medium flex items-center gap-1 hover:underline">
                                                 <span className="material-symbols-outlined text-[14px]">add_circle</span> Insert Variable
                                             </button>
                                         </div>
@@ -246,10 +243,8 @@ export default function NotificationSettingsPage() {
 
                         {/* Footer Actions */}
                         <div className="mt-10 pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-4">
-                            <button className="px-8 py-3 text-sm font-semibold text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors">Discard changes</button>
-                            <button className="px-8 py-3 bg-primary text-white text-sm font-bold rounded-lg shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
-                                Save Notification Profile
-                            </button>
+                            <Button variant="ghost" className="px-8 py-3 text-sm font-semibold text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors">Discard changes</Button>
+                            <Button variant="primary" className="px-8 py-3 bg-primary text-white text-sm font-bold rounded-lg shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">Save Notification Profile</Button>
                         </div>
                     </div>
                 </main>

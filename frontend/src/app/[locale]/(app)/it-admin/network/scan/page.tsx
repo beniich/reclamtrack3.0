@@ -76,7 +76,7 @@ export default function NetworkScanPage() {
               <p className="text-xs text-gray-500 mt-1">Will scan from .1 to .254</p>
             </div>
             <div className="flex items-end">
-              <Button
+              <Button type="button"
                 onClick={handleScan}
                 disabled={scanning || !subnet}
                 className="bg-purple-600 hover:bg-purple-700 w-32"
@@ -129,7 +129,7 @@ export default function NetworkScanPage() {
                         {host.responseTime ? `${host.responseTime}ms` : '< 1ms'}
                       </td>
                       <td className="px-4 py-3">
-                        <Button variant="outline" size="sm" className="text-xs">
+                        <Button type="button" variant="outline" size="sm" className="text-xs">
                           Add to Inventory
                         </Button>
                       </td>

@@ -90,12 +90,12 @@ export default async function LandingPage() {
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                             <Link href="/login" className="w-full sm:w-auto">
-                                <Button variant="primary" size="xl" className="w-full">
+                                <Button type="button" variant="primary" size="xl" className="w-full">
                                     {tLanding('bookDemo')}
                                 </Button>
                             </Link>
                             <Link href="/login" className="w-full sm:w-auto">
-                                <Button variant="outline" size="xl" className="w-full gap-3">
+                                <Button type="button" variant="outline" size="xl" className="w-full gap-3">
                                     {tLanding('viewRoadmap')}
                                     <span className="material-symbols-outlined text-base">rocket_launch</span>
                                 </Button>

@@ -14,6 +14,7 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { formatDate, formatTime } from '@/lib/utils';
 import type { Complaint, ComplaintComment, ComplaintStatus, TimelineEvent } from '@/types';
 import toast from 'react-hot-toast';
+import { Button } from '@/components/ui/button';
 
 // ─── Timeline Icon ─────────────────────────────────────────────────────────────
 function TimelineIcon({ type }: { type: TimelineEvent['eventType'] }) {
@@ -163,9 +164,7 @@ export default function ComplaintDetailPage() {
                 <AlertCircle className="w-12 h-12 text-rose-500" />
             </div>
             <h2 className="text-xl font-bold text-slate-900 dark:text-white">{error || 'Introuvable'}</h2>
-            <button onClick={() => router.back()} className="px-6 py-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-sm font-bold">
-                Retour
-            </button>
+            <Button variant="secondary" className="px-6 py-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-sm font-bold" onClick={() => router.back()}>Retour</Button>
         </div>
     );
 
@@ -226,7 +225,7 @@ export default function ComplaintDetailPage() {
                     </div>
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
-                    <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl font-bold text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl font-bold text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
                         <Printer className="w-4 h-4" /> Imprimer
                     </button>
                 </div>
@@ -360,7 +359,7 @@ export default function ComplaintDetailPage() {
                                     <input type="checkbox" checked={isInternal} onChange={(e) => setIsInternal(e.target.checked)} className="w-4 h-4 rounded" />
                                     <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Note interne</span>
                                 </label>
-                                <button
+                                <button type="button"
                                     onClick={handleSendComment}
                                     disabled={sendingComment || !commentText.trim()}
                                     className="flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
@@ -496,7 +495,7 @@ export default function ComplaintDetailPage() {
                         <div className="grid grid-cols-2 gap-3 relative z-10">
                             {/* Résoudre */}
                             {complaint.status === 'en cours' && (
-                                <button
+                                <button type="button"
                                     onClick={() => changeStatus('résolue', 'Résolue')}
                                     disabled={actionLoading === 'résolue'}
                                     className="flex flex-col items-center gap-2 py-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-emerald-500 hover:border-emerald-500 transition-all disabled:opacity-50"
@@ -508,7 +507,7 @@ export default function ComplaintDetailPage() {
 
                             {/* Assigner */}
                             {complaint.status !== 'fermée' && complaint.status !== 'rejetée' && (
-                                <button
+                                <button type="button"
                                     onClick={() => setShowAssignModal(true)}
                                     disabled={!!actionLoading}
                                     className="flex flex-col items-center gap-2 py-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-primary hover:border-primary transition-all disabled:opacity-50"
@@ -520,7 +519,7 @@ export default function ComplaintDetailPage() {
 
                             {/* Urgent */}
                             {complaint.priority !== 'urgent' && complaint.status !== 'fermée' && (
-                                <button
+                                <button type="button"
                                     onClick={async () => {
                                         setActionLoading('urgent');
                                         try {
@@ -540,7 +539,7 @@ export default function ComplaintDetailPage() {
 
                             {/* Rejeter */}
                             {(complaint.status === 'nouvelle' || complaint.status === 'en cours') && (
-                                <button
+                                <button type="button"
                                     onClick={() => changeStatus('rejetée', 'Rejetée')}
                                     disabled={!!actionLoading}
                                     className="flex flex-col items-center gap-2 py-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-slate-700 hover:border-slate-600 transition-all disabled:opacity-50"
@@ -552,7 +551,7 @@ export default function ComplaintDetailPage() {
 
                             {/* Fermer */}
                             {complaint.status === 'résolue' && (
-                                <button
+                                <button type="button"
                                     onClick={() => changeStatus('fermée', 'Fermée')}
                                     disabled={!!actionLoading}
                                     className="col-span-2 flex items-center justify-center gap-2 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-slate-700 hover:border-slate-600 transition-all disabled:opacity-50"
@@ -564,7 +563,7 @@ export default function ComplaintDetailPage() {
 
                             {/* Conversion en OT (GMAO Integration) */}
                             {complaint.status !== 'fermée' && complaint.status !== 'rejetée' && (
-                                <button
+                                <button type="button"
                                     onClick={handleConvertToWorkOrder}
                                     disabled={!!actionLoading}
                                     className="col-span-2 mt-4 flex items-center justify-center gap-3 py-5 rounded-2xl bg-indigo-600 text-white hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/30 transition-all disabled:opacity-50 shadow-xl"
@@ -609,13 +608,8 @@ export default function ComplaintDetailPage() {
                             </div>
                         </div>
                         <div className="flex gap-3 mt-8">
-                            <button
-                                onClick={() => setShowAssignModal(false)}
-                                className="flex-1 py-3 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
-                            >
-                                Annuler
-                            </button>
-                            <button
+                            <Button variant="secondary" className="flex-1 py-3 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" onClick={() => setShowAssignModal(false)}>Annuler</Button>
+                            <button type="button"
                                 onClick={handleAssign}
                                 disabled={actionLoading === 'assign'}
                                 className="flex-1 py-3 rounded-xl bg-primary text-white text-sm font-bold hover:brightness-110 disabled:opacity-50 transition-all"

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function PlanningPage() {
     return (
@@ -26,7 +27,7 @@ export default function PlanningPage() {
                         <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
                         <input className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-400" placeholder="Search interventions..." type="text" />
                     </div>
-                    <button className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all">
+                    <button type="button" className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all">
                         <span className="material-symbols-outlined text-lg">add</span>
                         New Intervention
                     </button>
@@ -49,8 +50,8 @@ export default function PlanningPage() {
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="text-sm font-bold">October 2023</h3>
                                 <div className="flex gap-1">
-                                    <button className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-500"><span className="material-symbols-outlined text-base">chevron_left</span></button>
-                                    <button className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-500"><span className="material-symbols-outlined text-base">chevron_right</span></button>
+                                    <button type="button" className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-500"><span className="material-symbols-outlined text-base">chevron_left</span></button>
+                                    <button type="button" className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-500"><span className="material-symbols-outlined text-base">chevron_right</span></button>
                                 </div>
                             </div>
                             <div className="grid grid-cols-7 text-center text-[10px] font-bold text-slate-400 mb-2">
@@ -120,9 +121,7 @@ export default function PlanningPage() {
                     </div>
 
                     <div className="mt-auto p-5 border-t border-slate-100 dark:border-slate-800">
-                        <button className="w-full py-2 bg-slate-100 dark:bg-slate-800 text-sm font-bold rounded-lg hover:bg-slate-200 transition-colors">
-                            Optimize Schedule
-                        </button>
+                        <Button variant="secondary" className="w-full py-2 bg-slate-100 dark:bg-slate-800 text-sm font-bold rounded-lg hover:bg-slate-200 transition-colors">Optimize Schedule</Button>
                     </div>
                 </aside>
 
@@ -132,18 +131,18 @@ export default function PlanningPage() {
                     <div className="bg-white dark:bg-slate-900 px-6 py-4 flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
                         <div className="flex items-center gap-4">
                             <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-                                <button className="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded shadow-sm transition-all"><span className="material-symbols-outlined text-lg">chevron_left</span></button>
-                                <button className="px-4 py-1.5 text-sm font-bold bg-white dark:bg-slate-700 rounded shadow-sm">Today</button>
-                                <button className="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded shadow-sm transition-all"><span className="material-symbols-outlined text-lg">chevron_right</span></button>
+                                <button type="button" className="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded shadow-sm transition-all"><span className="material-symbols-outlined text-lg">chevron_left</span></button>
+                                <Button variant="ghost" className="px-4 py-1.5 text-sm font-bold bg-white dark:bg-slate-700 rounded shadow-sm">Today</Button>
+                                <button type="button" className="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded shadow-sm transition-all"><span className="material-symbols-outlined text-lg">chevron_right</span></button>
                             </div>
                             <h1 className="text-xl font-bold">October 2 – 8, 2023</h1>
                         </div>
                         <div className="flex items-center gap-4">
                             <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-                                <button className="px-4 py-1.5 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-all">Month</button>
-                                <button className="px-4 py-1.5 text-sm font-bold bg-white dark:bg-slate-700 rounded shadow-sm text-primary">Week</button>
-                                <button className="px-4 py-1.5 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-all">Day</button>
-                                <button className="px-4 py-1.5 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-all">List</button>
+                                <Button variant="ghost" className="px-4 py-1.5 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-all">Month</Button>
+                                <Button variant="ghost" className="px-4 py-1.5 text-sm font-bold bg-white dark:bg-slate-700 rounded shadow-sm text-primary">Week</Button>
+                                <Button variant="ghost" className="px-4 py-1.5 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-all">Day</Button>
+                                <Button variant="ghost" className="px-4 py-1.5 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-all">List</Button>
                             </div>
                         </div>
                     </div>
@@ -266,7 +265,7 @@ export default function PlanningPage() {
                         <span className="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded mb-1 inline-block">SELECTED INTERVENTION</span>
                         <h4 className="text-sm font-bold">#INT-8291 Details</h4>
                     </div>
-                    <button className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">close</span></button>
+                    <button type="button" className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">close</span></button>
                 </div>
                 <div className="space-y-4">
                     <div className="flex items-start gap-3">
@@ -284,8 +283,8 @@ export default function PlanningPage() {
                         </div>
                     </div>
                     <div className="pt-4 flex gap-2">
-                        <button className="flex-1 py-2 bg-primary text-white text-xs font-bold rounded-lg">Edit Details</button>
-                        <button className="flex-1 py-2 border border-slate-200 dark:border-slate-700 text-xs font-bold rounded-lg">Reschedule</button>
+                        <Button variant="primary" className="flex-1 py-2 bg-primary text-white text-xs font-bold rounded-lg">Edit Details</Button>
+                        <Button variant="outline" className="flex-1 py-2 border border-slate-200 dark:border-slate-700 text-xs font-bold rounded-lg">Reschedule</Button>
                     </div>
                 </div>
             </div>

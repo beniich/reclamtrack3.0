@@ -7,6 +7,7 @@ import {
     ArrowLeft, Settings, History, PenTool, AlertTriangle, 
     CheckCircle2, Box, Calendar, Wrench, BarChart2, Activity, Shield
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function AssetDetailsPage() {
     const params = useParams();
@@ -44,10 +45,10 @@ export default function AssetDetailsPage() {
                 </Link>
 
                 <div className="flex gap-3">
-                    <button className="px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] font-black uppercase tracking-widest hover:border-indigo-300 dark:hover:border-orange-500/50 flex items-center gap-2 transition-all shadow-sm">
+                    <button type="button" className="px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] font-black uppercase tracking-widest hover:border-indigo-300 dark:hover:border-orange-500/50 flex items-center gap-2 transition-all shadow-sm">
                         <PenTool className="w-4 h-4 text-slate-400" /> Signaler Panne
                     </button>
-                    <button className="px-5 py-3 rounded-xl bg-indigo-600 dark:bg-orange-500 text-white text-[10px] font-black uppercase tracking-widest hover:brightness-110 flex items-center gap-2 transition-all shadow-lg shadow-indigo-600/20 dark:shadow-orange-600/20">
+                    <button type="button" className="px-5 py-3 rounded-xl bg-indigo-600 dark:bg-orange-500 text-white text-[10px] font-black uppercase tracking-widest hover:brightness-110 flex items-center gap-2 transition-all shadow-lg shadow-indigo-600/20 dark:shadow-orange-600/20">
                         <Wrench className="w-4 h-4" /> Créer OT
                     </button>
                 </div>

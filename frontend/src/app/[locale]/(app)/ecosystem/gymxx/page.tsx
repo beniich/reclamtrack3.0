@@ -12,6 +12,7 @@ import {
   AcademicCapIcon,
   ClockIcon
 } from '@heroicons/react/24/outline';
+import { Button } from '@/components/ui/button';
 
 export default function GymXXDashboard() {
   return (
@@ -38,9 +39,7 @@ export default function GymXXDashboard() {
              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
              <span className="text-xs font-black uppercase text-white">Live_Sync</span>
            </div>
-           <button className="px-6 py-2 bg-cyan-500 text-black font-black uppercase text-xs tracking-widest rounded-sm hover:scale-105 transition-all">
-             Nouveau Membre
-           </button>
+           <Button variant="ghost" className="px-6 py-2 bg-cyan-500 text-black font-black uppercase text-xs tracking-widest rounded-sm hover:scale-105 transition-all">Nouveau Membre</Button>
         </div>
       </div>
 
@@ -115,7 +114,7 @@ export default function GymXXDashboard() {
               </div>
               <h3 className="text-lg font-black text-white uppercase italic mb-3">Goal_Optimizer IX</h3>
               <p className="text-xs leading-relaxed text-white/40 mb-8 italic">"Augmentez l'intensité des cardio-trainings de 15% le mardi pour compenser la baisse d'activité saisonnière constatée l'an dernier."</p>
-              <button className="w-full py-4 bg-white text-black font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-cyan-500 transition-colors shadow-2xl shadow-cyan-500/10">Appliquer Stratégie</button>
+              <Button variant="ghost" className="w-full py-4 bg-white text-black font-black uppercase text-[10px] tracking-widest rounded-2xl hover:bg-cyan-500 transition-colors shadow-2xl shadow-cyan-500/10">Appliquer Stratégie</Button>
            </div>
 
            <div className="bg-white/[0.02] border border-white/5 p-8 rounded-[3rem]">

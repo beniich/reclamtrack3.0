@@ -2,6 +2,7 @@
 
 import { StatusIndicator } from '@/components/shared/StatusIndicator';
 import { Activity, Zap, Share } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function APMTracesPage() {
     return (
@@ -13,7 +14,7 @@ export default function APMTracesPage() {
                         <div className="flex items-center gap-3 mb-2">
                             <StatusIndicator status="healthy" label="Success" />
                             <h1 className="text-white text-2xl font-mono font-bold">tr-8821-x9</h1>
-                            <button className="text-slate-500 hover:text-slate-300">📋</button>
+                            <button type="button" className="text-slate-500 hover:text-slate-300">📋</button>
                         </div>
                         <p className="text-slate-400 text-sm">
                             Request to <code className="text-primary bg-primary/10 px-1 rounded">/api/v1/orders/checkout</code> initiated by user-882
@@ -29,7 +30,7 @@ export default function APMTracesPage() {
                             <p className="text-white text-xl font-bold">12</p>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <button className="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg flex items-center gap-2">
+                            <button type="button" className="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg flex items-center gap-2">
                                 <Share className="w-4 h-4" /> Export Trace
                             </button>
                         </div>

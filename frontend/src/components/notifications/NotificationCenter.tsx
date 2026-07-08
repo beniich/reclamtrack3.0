@@ -43,7 +43,7 @@ export function NotificationCenter() {
     return (
         <div className="relative" ref={panelRef}>
             {/* Badge déclencheur */}
-            <button
+            <button type="button"
                 onClick={() => setIsOpen(!isOpen)}
                 className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 aria-label="Notifications"
@@ -70,7 +70,7 @@ export function NotificationCenter() {
                             <h2 className="font-bold text-slate-900 dark:text-slate-100">Notifications</h2>
                             <div className="flex gap-2">
                                 {unreadCount > 0 && (
-                                    <button
+                                    <button type="button"
                                         onClick={() => markAllAsRead()}
                                         className="text-xs text-primary font-medium hover:underline"
                                     >
@@ -113,7 +113,7 @@ export function NotificationCenter() {
                                                 </div>
                                             </div>
 
-                                            <button
+                                            <button type="button"
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     removeNotification(notification.id);
@@ -131,7 +131,7 @@ export function NotificationCenter() {
 
                         {notifications.length > 0 && (
                             <div className="p-2 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900">
-                                <button
+                                <button type="button"
                                     onClick={() => clearAll()}
                                     className="w-full py-2 text-xs text-slate-500 hover:text-red-600 font-medium transition-colors flex items-center justify-center gap-2"
                                 >

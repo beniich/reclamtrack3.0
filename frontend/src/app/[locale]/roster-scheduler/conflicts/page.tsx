@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function ConflictResolutionPage() {
     return (
@@ -37,7 +38,7 @@ export default function ConflictResolutionPage() {
                             </div>
                         </div>
                     </div>
-                    <button className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2">
+                    <button type="button" className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2">
                         <span className="material-symbols-outlined text-sm">done_all</span>
                         Resolve All Issues
                     </button>
@@ -178,9 +179,7 @@ export default function ConflictResolutionPage() {
                                                     Move <span className="text-slate-200 font-bold">Alex Henderson</span> to Team 02 (Priority) and reassign <span className="text-slate-200 font-bold">Sarah Jenkins</span> to Team 01 (Water).
                                                 </p>
                                             </div>
-                                            <button className="bg-blue-500/10 text-blue-500 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider hover:bg-blue-500 hover:text-white transition-all">
-                                                Apply Fix
-                                            </button>
+                                            <Button variant="primary" className="bg-blue-500/10 text-blue-500 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider hover:bg-blue-500 hover:text-white transition-all">Apply Fix</Button>
                                         </div>
 
                                         <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 hover:border-slate-600 transition-colors cursor-pointer opacity-70 group">
@@ -191,9 +190,7 @@ export default function ConflictResolutionPage() {
                                                 <p className="text-sm font-semibold text-slate-200">Postpone Grid Operations</p>
                                                 <p className="text-xs text-slate-500 mt-1">Delay 'Power Line 4' start time to 12:30. Reduces city safety coverage by 14%.</p>
                                             </div>
-                                            <button className="border border-slate-700 text-slate-400 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider hover:bg-slate-700 transition-all">
-                                                Select
-                                            </button>
+                                            <Button variant="ghost" className="border border-slate-700 text-slate-400 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider hover:bg-slate-700 transition-all">Select</Button>
                                         </div>
                                     </div>
 
@@ -286,10 +283,8 @@ export default function ConflictResolutionPage() {
                     </div>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button className="px-6 py-2 text-xs font-bold text-slate-400 hover:text-white transition-colors">Discard Changes</button>
-                    <button className="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-2 rounded-lg text-xs font-bold shadow-lg shadow-emerald-500/20 transition-all">
-                        Confirm Resolution
-                    </button>
+                    <Button variant="ghost" className="px-6 py-2 text-xs font-bold text-slate-400 hover:text-white transition-colors">Discard Changes</Button>
+                    <Button variant="ghost" className="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-2 rounded-lg text-xs font-bold shadow-lg shadow-emerald-500/20 transition-all">Confirm Resolution</Button>
                 </div>
             </footer>
         </div>

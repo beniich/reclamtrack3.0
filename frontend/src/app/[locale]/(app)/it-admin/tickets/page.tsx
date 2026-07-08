@@ -189,10 +189,10 @@ export default function ITTicketsPage() {
           <p className="text-gray-500 mt-1">Track, manage, and resolve IT support requests.</p>
         </div>
         <div className="flex gap-2">
-            <Button variant="outline" onClick={() => loadTickets()}>
+            <Button type="button" variant="outline" onClick={() => loadTickets()}>
                 <span className="mr-2">↻</span> Refresh
             </Button>
-            <Button className="bg-orange-600 hover:bg-orange-700" onClick={handleCreate}>
+            <Button type="button" className="bg-orange-600 hover:bg-orange-700" onClick={handleCreate}>
             <Plus className="mr-2 h-4 w-4" />
             Create Ticket
             </Button>
@@ -252,7 +252,7 @@ export default function ITTicketsPage() {
 
                  <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 p-0">
+                    <Button type="button" variant="ghost" className="h-8 w-8 p-0">
                       <span className="sr-only">Open menu</span>
                       <MoreVertical className="h-4 w-4" />
                     </Button>
@@ -300,7 +300,7 @@ export default function ITTicketsPage() {
 
                  <div className="flex gap-2">
                     <RoleGuard minRole={Role.TECHNICIAN}>
-                      <Button variant="outline" size="sm" onClick={() => handleEdit(ticket)}>View Details</Button>
+                      <Button type="button" variant="outline" size="sm" onClick={() => handleEdit(ticket)}>View Details</Button>
                     </RoleGuard>
                  </div>
               </div>
@@ -320,7 +320,7 @@ export default function ITTicketsPage() {
             <p className="text-gray-500 mb-6 max-w-sm mx-auto">
               {search ? 'No tickets match your search filters.' : 'There are no active IT support tickets at the moment.'}
             </p>
-            <Button onClick={handleCreate} className="bg-orange-600 hover:bg-orange-700">
+            <Button type="button" onClick={handleCreate} className="bg-orange-600 hover:bg-orange-700">
                 <Plus className="mr-2 h-4 w-4" />
                 Create First Ticket
             </Button>

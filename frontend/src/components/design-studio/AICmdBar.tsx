@@ -55,7 +55,7 @@ export const AICmdBar: React.FC<AICmdBarProps> = ({ onGenerate }) => {
                 />
             </div>
 
-            <button 
+            <button type="button" 
                 onClick={handleSend}
                 disabled={loading || !prompt.trim()}
                 className={cn(

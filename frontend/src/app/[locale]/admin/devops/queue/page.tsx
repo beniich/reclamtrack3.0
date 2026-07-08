@@ -4,6 +4,7 @@ import { Footer } from "@/components/devops-dashboards/layout/Footer"
 import { Header } from "@/components/devops-dashboards/layout/Header"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { Button } from '@/components/ui/button';
 
 interface Job {
     id: string
@@ -64,10 +65,8 @@ export default function QueuePage() {
                         </p>
                     </div>
                     <div className="flex items-center gap-3">
-                        <button className="px-4 py-2 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20 font-bold hover:bg-red-500/20 transition-all">
-                            Purge Failed Jobs
-                        </button>
-                        <button className="px-4 py-2 rounded-lg bg-primary text-white font-bold hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2">
+                        <Button variant="danger" className="px-4 py-2 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20 font-bold hover:bg-red-500/20 transition-all">Purge Failed Jobs</Button>
+                        <button type="button" className="px-4 py-2 rounded-lg bg-primary text-white font-bold hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2">
                             <span className="material-symbols-outlined text-sm">refresh</span>
                             Force Refresh
                         </button>
@@ -201,7 +200,7 @@ export default function QueuePage() {
                                     Use <code className="text-primary font-mono bg-primary/10 px-1 rounded">queue.obliterate()</code> to completely
                                     reset a queue and its metadata during debugging.
                                 </p>
-                                <button className="text-xs font-bold text-primary flex items-center gap-1 hover:gap-2 transition-all">
+                                <button type="button" className="text-xs font-bold text-primary flex items-center gap-1 hover:gap-2 transition-all">
                                     Read docs <span className="material-symbols-outlined text-xs">arrow_forward</span>
                                 </button>
                             </div>

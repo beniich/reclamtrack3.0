@@ -3,6 +3,7 @@
 import { KPICard } from '@/components/shared/KPICard';
 import { Database, Shield, AlertTriangle, CheckCircle } from 'lucide-react';
 import { usePIIData } from '@/lib/hooks/usePIIData';
+import { Button } from '@/components/ui/button';
 
 export default function PIIDiscoveryPage() {
     const { metrics, assets, loading } = usePIIData();
@@ -20,10 +21,8 @@ export default function PIIDiscoveryPage() {
                     </p>
                 </div>
                 <div className="flex gap-3">
-                    <button className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-sm font-semibold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                        Export CSV
-                    </button>
-                    <button className="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2">
+                    <Button variant="secondary" className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-sm font-semibold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Export CSV</Button>
+                    <button type="button" className="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2">
                         <Database className="w-4 h-4" />
                         New Discovery Scan
                     </button>
@@ -198,10 +197,10 @@ export default function PIIDiscoveryPage() {
                         </span>
                     </div>
                     <div className="flex gap-2">
-                        <button className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200 dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800">
+                        <button type="button" className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200 dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800">
                             <span>🔽</span> Filter
                         </button>
-                        <button className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200 dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 text-primary">
+                        <button type="button" className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200 dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 text-primary">
                             <span>📥</span> Export CSV
                         </button>
                     </div>
@@ -261,7 +260,7 @@ export default function PIIDiscoveryPage() {
                                         </span>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <button className="text-primary font-bold text-xs hover:underline">Inspect</button>
+                                        <Button variant="ghost" className="text-primary font-bold text-xs hover:underline">Inspect</Button>
                                     </td>
                                 </tr>
                             ))}
@@ -272,9 +271,9 @@ export default function PIIDiscoveryPage() {
                 <div className="p-4 border-t border-slate-200 dark:border-border-dark flex justify-between items-center text-xs text-slate-500 font-medium">
                     <p>Showing 1 to 3 of 892 assets</p>
                     <div className="flex gap-1">
-                        <button className="p-1.5 px-3 rounded-md bg-primary text-white">1</button>
-                        <button className="p-1.5 px-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">2</button>
-                        <button className="p-1.5 px-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">3</button>
+                        <Button variant="primary" className="p-1.5 px-3 rounded-md bg-primary text-white">1</Button>
+                        <Button variant="secondary" className="p-1.5 px-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">2</Button>
+                        <Button variant="secondary" className="p-1.5 px-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">3</Button>
                     </div>
                 </div>
             </div>
@@ -292,7 +291,7 @@ export default function PIIDiscoveryPage() {
                     <h4 className="text-xs font-bold">Incremental Scan</h4>
                     <p className="text-[10px] text-slate-500">Checking S3 Bucket logs...</p>
                 </div>
-                <button className="text-slate-400 hover:text-slate-200">✕</button>
+                <button type="button" className="text-slate-400 hover:text-slate-200">✕</button>
             </div>
         </div>
     );

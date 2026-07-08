@@ -57,7 +57,7 @@ export function Modal({
                         )}
                     </div>
                     {closeButton && (
-                        <button
+                        <button type="button"
                             onClick={onClose}
                             className={cn(
                                 'p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg',

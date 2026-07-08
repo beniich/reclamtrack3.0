@@ -23,6 +23,7 @@ import {
     XAxis,
     YAxis
 } from 'recharts';
+import { Button } from '@/components/ui/button';
 
 const FLOW_DATA = [
     { time: '08:00', admissions: 12, capacity: 45 },
@@ -68,7 +69,7 @@ export default function HealthcareDashboard() {
                         { id: 'analytics', icon: TrendingUp, label: 'Analytiques' },
                         { id: 'records', icon: ClipboardList, label: 'Dossiers' },
                     ].map((item) => (
-                        <button
+                        <button type="button"
                             key={item.id}
                             onClick={() => setActiveTab(item.id)}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
@@ -89,7 +90,7 @@ export default function HealthcareDashboard() {
                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                         <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Opérationnel</span>
                     </div>
-                    <button className="w-full py-2 bg-white/5 hover:bg-white/10 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all">Audit Sécurité</button>
+                    <Button variant="ghost" className="w-full py-2 bg-white/5 hover:bg-white/10 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all">Audit Sécurité</Button>
                 </div>
             </aside>
 
@@ -129,12 +130,8 @@ export default function HealthcareDashboard() {
                             <p className="text-slate-500 text-[10px] font-black uppercase tracking-[.3em]">Mise à jour : Temps Réel (0.8s lag)</p>
                         </div>
                         <div className="flex gap-4">
-                            <button className="px-6 py-4 bg-cyan-500 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-cyan-500/20 hover:scale-105 transition-all outline-none">
-                                Nouvelle Admission
-                            </button>
-                            <button className="px-6 py-4 glass-card rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/5 transition-all">
-                                Rapports Légaux
-                            </button>
+                            <Button variant="ghost" className="px-6 py-4 bg-cyan-500 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-cyan-500/20 hover:scale-105 transition-all outline-none">Nouvelle Admission</Button>
+                            <Button variant="ghost" className="px-6 py-4 glass-card rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/5 transition-all">Rapports Légaux</Button>
                         </div>
                     </div>
 
@@ -231,9 +228,7 @@ export default function HealthcareDashboard() {
                                     </div>
                                 ))}
                             </div>
-                            <button className="w-full py-5 border border-cyan-500/10 rounded-2xl text-[10px] font-black uppercase tracking-widest text-cyan-400 hover:bg-cyan-500 hover:text-white transition-all">
-                                Gestion des Réaffectations
-                            </button>
+                            <Button variant="ghost" className="w-full py-5 border border-cyan-500/10 rounded-2xl text-[10px] font-black uppercase tracking-widest text-cyan-400 hover:bg-cyan-500 hover:text-white transition-all">Gestion des Réaffectations</Button>
                         </div>
                     </div>
 
@@ -293,7 +288,7 @@ export default function HealthcareDashboard() {
                                                 </div>
                                             </td>
                                             <td className="py-8 text-right">
-                                                <button className="p-3 hover:bg-white/5 rounded-xl transition-all">
+                                                <button type="button" className="p-3 hover:bg-white/5 rounded-xl transition-all">
                                                     <MoreVertical className="w-4 h-4 text-slate-600" />
                                                 </button>
                                             </td>

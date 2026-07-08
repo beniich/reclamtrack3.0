@@ -6,6 +6,7 @@ import { useOrgStore } from '@/store/orgStore';
 import { Building2, Edit2, Filter, Mail, MoreVertical, Phone, Search, ShieldCheck, Trash2, UserPlus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { Button } from '@/components/ui/button';
 
 export default function StaffPage() {
     const [staff, setStaff] = useState<any[]>([]);
@@ -60,7 +61,7 @@ export default function StaffPage() {
                         CENTRE DE COMMANDE DES ÉQUIPES TECHNIQUES
                     </p>
                 </div>
-                <button className="bg-brand-orange hover:brightness-110 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-orange-500/20 transition-all flex items-center gap-3">
+                <button type="button" className="bg-brand-orange hover:brightness-110 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-orange-500/20 transition-all flex items-center gap-3">
                     <UserPlus className="w-4 h-4" />
                     Enrôler un Agent
                 </button>
@@ -79,13 +80,11 @@ export default function StaffPage() {
                     />
                 </div>
                 <div className="flex gap-2 w-full md:w-auto">
-                    <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors text-slate-700 dark:text-slate-300">
+                    <button type="button" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors text-slate-700 dark:text-slate-300">
                         <Filter className="w-4 h-4" />
                         Filtrer
                     </button>
-                    <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors text-slate-700 dark:text-slate-300">
-                        Exporter
-                    </button>
+                    <Button variant="secondary" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors text-slate-700 dark:text-slate-300">Exporter</Button>
                 </div>
             </div>
 
@@ -96,7 +95,7 @@ export default function StaffPage() {
                         <div key={member._id} className="glass-card rounded-3xl p-6 relative group overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-right from-cyan-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
+                                <button type="button" className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
                                     <MoreVertical className="w-4 h-4" />
                                 </button>
                             </div>
@@ -143,11 +142,11 @@ export default function StaffPage() {
                             </div>
 
                             <div className="mt-6 flex gap-2">
-                                <button className="flex-1 py-2 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700 transition-all flex items-center justify-center gap-2">
+                                <button type="button" className="flex-1 py-2 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700 transition-all flex items-center justify-center gap-2">
                                     <Edit2 className="w-3 h-3" />
                                     Modifier
                                 </button>
-                                <button className="flex-1 py-2 bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400 text-xs font-bold rounded-lg border border-red-200 dark:border-red-800/50 transition-all flex items-center justify-center gap-2">
+                                <button type="button" className="flex-1 py-2 bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400 text-xs font-bold rounded-lg border border-red-200 dark:border-red-800/50 transition-all flex items-center justify-center gap-2">
                                     <Trash2 className="w-3 h-3" />
                                     Supprimer
                                 </button>
@@ -163,9 +162,7 @@ export default function StaffPage() {
                         <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 max-w-xs px-4">
                             Nous n'avons trouvé aucun membre du personnel correspondant à votre recherche.
                         </p>
-                        <button className="mt-6 text-primary font-bold hover:underline">
-                            Réinitialiser la recherche
-                        </button>
+                        <Button variant="ghost" className="mt-6 text-primary font-bold hover:underline">Réinitialiser la recherche</Button>
                     </div>
                 )}
             </div>

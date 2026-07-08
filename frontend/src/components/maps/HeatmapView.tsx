@@ -234,7 +234,7 @@ export function HeatmapView({
                 <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-2 space-y-2">
                     <p className="text-xs font-bold text-slate-500 uppercase px-2">Vue</p>
 
-                    <button
+                    <button type="button"
                         onClick={() => setMapMode('heatmap')}
                         className={`w-full px-3 py-2 rounded-md text-sm font-medium transition-colors ${mapMode === 'heatmap'
                                 ? 'bg-primary text-white'
@@ -246,7 +246,7 @@ export function HeatmapView({
                     </button>
 
                     {showClusters && (
-                        <button
+                        <button type="button"
                             onClick={() => setMapMode('clusters')}
                             className={`w-full px-3 py-2 rounded-md text-sm font-medium transition-colors ${mapMode === 'clusters'
                                     ? 'bg-primary text-white'
@@ -259,7 +259,7 @@ export function HeatmapView({
                     )}
 
                     {showClusters && (
-                        <button
+                        <button type="button"
                             onClick={() => setMapMode('both')}
                             className={`w-full px-3 py-2 rounded-md text-sm font-medium transition-colors ${mapMode === 'both'
                                     ? 'bg-primary text-white'
@@ -291,7 +291,7 @@ export function HeatmapView({
                 )}
 
                 {/* Export Button */}
-                <button
+                <button type="button"
                     onClick={exportHeatmapImage}
                     className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
                     title="Exporter l'image"

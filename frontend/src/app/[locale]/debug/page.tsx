@@ -1,6 +1,7 @@
 import React from 'react';
 import { AnalyticsDashboard } from '@/components/AnalyticsDashboard';
 import { fetchWithErrorId } from '@/utils/network';
+import { Button } from '@/components/ui/button';
 
 export default function DebugPage() {
     // Fonction simple pour tester le déclenchement d'erreur (client-side)
@@ -20,7 +21,7 @@ export default function DebugPage() {
                     <h1 className="text-2xl font-bold">🛠️ Debug Assistant Dashboard</h1>
                     <p className="text-slate-500 mt-2">Vue d'ensemble des erreurs et diagnostics IA</p>
                 </div>
-                <button
+                <button type="button"
                     onClick={triggerError}
                     className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md font-medium transition-colors"
                 >

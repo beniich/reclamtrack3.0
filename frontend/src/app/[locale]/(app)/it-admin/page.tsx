@@ -6,6 +6,7 @@ import { AlertTriangle, Network, Server, Ticket, TrendingUp, Users } from 'lucid
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 interface Stats {
   totalAssets: number;
@@ -330,9 +331,7 @@ export default function ITAdminDashboard() {
                       </p>
                     </div>
                   </div>
-                  <button className="text-blue-600 hover:underline text-sm font-medium">
-                    View details
-                  </button>
+                  <Button variant="ghost" className="text-blue-600 hover:underline text-sm font-medium">View details</Button>
                 </div>
               ))}
             </div>

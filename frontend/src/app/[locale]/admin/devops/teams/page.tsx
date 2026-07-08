@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { Button } from '@/components/ui/button';
 
 export default function TeamsPage() {
     return (
@@ -89,7 +90,7 @@ export default function TeamsPage() {
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="size-10 flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors relative">
+                        <button type="button" className="size-10 flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors relative">
                             <span className="material-symbols-outlined">notifications</span>
                             <span className="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
                         </button>
@@ -100,7 +101,7 @@ export default function TeamsPage() {
                         >
                             <span className="material-symbols-outlined">home</span>
                         </Link>
-                        <button className="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
+                        <button type="button" className="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
                             <span className="material-symbols-outlined text-sm">add</span>
                             New Team
                         </button>
@@ -144,12 +145,12 @@ export default function TeamsPage() {
                     {/* Filters Bar */}
                     <div className="flex items-center justify-between flex-wrap gap-4">
                         <div className="flex items-center gap-3">
-                            <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-white">
+                            <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-white">
                                 <span className="material-symbols-outlined text-lg">filter_list</span>
                                 All Specialties
                                 <span className="material-symbols-outlined text-lg">expand_more</span>
                             </button>
-                            <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-white">
+                            <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-white">
                                 <span className="material-symbols-outlined text-lg">radio_button_checked</span>
                                 Status: Any
                                 <span className="material-symbols-outlined text-lg">expand_more</span>
@@ -219,9 +220,7 @@ export default function TeamsPage() {
 
                     {/* Pagination */}
                     <div className="flex justify-center py-6">
-                        <button className="px-6 py-2 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-white">
-                            Load More Teams
-                        </button>
+                        <Button variant="secondary" className="px-6 py-2 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-white">Load More Teams</Button>
                     </div>
                 </div>
             </main>
@@ -282,7 +281,7 @@ function TeamCard({
                 </div>
             </div>
             <div className="px-5 pb-5 mt-auto">
-                <button className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white transition-all rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
+                <button type="button" className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white transition-all rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
                     <span className="material-symbols-outlined text-lg">calendar_month</span>
                     View Schedule
                 </button>

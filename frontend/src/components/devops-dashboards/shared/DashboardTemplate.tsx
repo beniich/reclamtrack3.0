@@ -35,10 +35,10 @@ export default function DashboardTemplate({
                         <h1 className="text-2xl font-black tracking-tight">{title}</h1>
                     </div>
                     <div className="flex items-center gap-2">
-                        <button className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
+                        <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
                             <span className="material-symbols-outlined">refresh</span>
                         </button>
-                        <button className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
+                        <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
                             <span className="material-symbols-outlined">settings</span>
                         </button>
                     </div>

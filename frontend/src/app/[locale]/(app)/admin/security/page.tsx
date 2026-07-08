@@ -97,7 +97,7 @@ export default function SecurityCenterPage() {
           </h1>
           <p className="text-gray-600 mt-1">Centralized security monitoring and management</p>
         </div>
-        <Button onClick={loadSecurityData} variant="outline">
+        <Button type="button" onClick={loadSecurityData} variant="outline">
           <RefreshCw className="h-4 w-4 mr-2" />
           Refresh
         </Button>
@@ -292,7 +292,7 @@ export default function SecurityCenterPage() {
                   Quick Actions (PowerShell)
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     onClick={() => runPowerShellScript('Get-GPOReport')}
                     className="justify-start"
@@ -300,7 +300,7 @@ export default function SecurityCenterPage() {
                     <PlayCircle className="h-4 w-4 mr-2" />
                     Generate GPO Report
                   </Button>
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     onClick={() => runPowerShellScript('Sync-ADUsers')}
                     className="justify-start"
@@ -308,7 +308,7 @@ export default function SecurityCenterPage() {
                     <RefreshCw className="h-4 w-4 mr-2" />
                     Sync AD Users
                   </Button>
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     onClick={() => runPowerShellScript('Get-ADReplicationStatus')}
                     className="justify-start"
@@ -316,7 +316,7 @@ export default function SecurityCenterPage() {
                     <Activity className="h-4 w-4 mr-2" />
                     Check AD Replication
                   </Button>
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     onClick={() => runPowerShellScript('Backup-GPO')}
                     className="justify-start"
@@ -343,7 +343,7 @@ export default function SecurityCenterPage() {
               </div>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button variant="outline" size="sm">
+                  <Button type="button" variant="outline" size="sm">
                     <Network className="h-4 w-4 mr-2" />
                     Connect
                   </Button>
@@ -370,7 +370,7 @@ export default function SecurityCenterPage() {
                     </div>
                   </div>
                   <DialogFooter>
-                    <Button onClick={() => toast.success('Connected (Mock)!')}>Connect</Button>
+                    <Button type="button" onClick={() => toast.success('Connected (Mock)!')}>Connect</Button>
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
@@ -522,7 +522,7 @@ export default function SecurityCenterPage() {
                                   </span>
                                 </td>
                                 <td className="px-4 py-3 text-right">
-                                  <Button variant="ghost" size="sm" className="text-blue-600 h-8">Remediate</Button>
+                                  <Button type="button" variant="ghost" size="sm" className="text-blue-600 h-8">Remediate</Button>
                                 </td>
                               </tr>
                             ))}
@@ -572,7 +572,7 @@ export default function SecurityCenterPage() {
                </div>
             </div>
             <Link href="/admin/devops/secret-vault">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold px-8 rounded-xl h-14">
+              <Button type="button" size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold px-8 rounded-xl h-14">
                 Access Vault
               </Button>
             </Link>

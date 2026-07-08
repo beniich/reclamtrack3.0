@@ -12,6 +12,7 @@ import {
   CheckBadgeIcon,
   Square3Stack3DIcon
 } from '@heroicons/react/24/outline';
+import { Button } from '@/components/ui/button';
 
 export default function MadrassaDashboard() {
   return (
@@ -63,7 +64,7 @@ export default function MadrassaDashboard() {
             </div>
             <h4 className="text-sm font-bold mb-2">Mise à jour Système</h4>
             <p className="text-xs text-indigo-100 leading-relaxed mb-4">La nouvelle version du module d'examens est disponible. Essayez l'auto-correction par IA.</p>
-            <button className="text-xs bg-white text-indigo-600 px-4 py-2 rounded-xl font-bold hover:shadow-lg transition-all">En savoir plus</button>
+            <Button variant="ghost" className="text-xs bg-white text-indigo-600 px-4 py-2 rounded-xl font-bold hover:shadow-lg transition-all">En savoir plus</Button>
           </div>
         </div>
 
@@ -149,9 +150,7 @@ export default function MadrassaDashboard() {
                  </div>
                ))}
              </div>
-             <button className="w-full mt-6 py-3 border border-indigo-100 text-indigo-600 font-bold rounded-2xl text-xs hover:bg-indigo-50 transition-all">
-               Voir la messagerie
-             </button>
+             <Button variant="primary" className="w-full mt-6 py-3 border border-indigo-100 text-indigo-600 font-bold rounded-2xl text-xs hover:bg-indigo-50 transition-all">Voir la messagerie</Button>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import { DateSelectArg, EventClickArg, EventDropArg, EventInput } from '@fullcalendar/core';
 import frLocale from '@fullcalendar/core/locales/fr';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -264,12 +265,13 @@ export function InterventionCalendar({
                             {conflictWarning}
                         </p>
                     </div>
-                    <button
+                    <Button variant="transparent" size="icon"
                         onClick={() => setConflictWarning(null)}
                         className="ml-auto p-1 hover:bg-amber-100 dark:hover:bg-amber-800 rounded"
+                        aria-label="Fermer l'avertissement"
                     >
                         <X className="w-4 h-4 text-amber-600" />
-                    </button>
+                    </Button>
                 </div>
             )}
 
@@ -407,18 +409,18 @@ export function InterventionCalendar({
                         </div>
 
                         <DialogFooter>
-                            <button
+                            <Button
+                                variant="danger"
                                 onClick={handleDelete}
-                                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
                             >
                                 Supprimer
-                            </button>
-                            <button
+                            </Button>
+                            <Button
+                                variant="secondary"
                                 onClick={() => setSelectedEvent(null)}
-                                className="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
                             >
                                 Fermer
-                            </button>
+                            </Button>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
@@ -505,18 +507,18 @@ export function InterventionCalendar({
                         </div>
 
                         <DialogFooter>
-                            <button
+                            <Button
+                                variant="ghost"
                                 onClick={() => setIsCreateDialogOpen(false)}
-                                className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-800 transition-colors"
                             >
                                 Annuler
-                            </button>
-                            <button
+                            </Button>
+                            <Button
+                                variant="primary"
                                 onClick={handleCreateSubmit}
-                                className="px-6 py-2 bg-primary text-white rounded-lg font-bold text-sm shadow-lg shadow-primary/20"
                             >
                                 Créer l&apos;intervention
-                            </button>
+                            </Button>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>

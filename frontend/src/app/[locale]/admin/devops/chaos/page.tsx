@@ -21,7 +21,7 @@ export default function ChaosHubPage() {
                         </div>
                     </div>
                     <RoleGuard allowedRoles={[Role.OWNER, Role.ADMIN]}>
-                        <Button variant="danger">
+                        <Button type="button" variant="danger">
                             <span className="material-symbols-outlined">warning</span>
                             New Experiment
                         </Button>
@@ -45,7 +45,7 @@ export default function ChaosHubPage() {
                                 FAULT-INJECTION-V2 is currently being deployed to this cluster. The experiment hub will be available shortly.
                             </p>
                         </div>
-                        <Button variant="secondary" onClick={() => window.history.back()}>
+                        <Button type="button" variant="secondary" onClick={() => window.history.back()}>
                             Return to DevOps Suite
                         </Button>
                     </div>

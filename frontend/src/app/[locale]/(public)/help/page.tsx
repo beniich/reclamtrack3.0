@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const faqs = [
     {
@@ -71,7 +72,7 @@ export default function HelpPage() {
                                     placeholder="Search for answers, guides, or API docs..."
                                     className="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white py-4 px-4 font-medium"
                                 />
-                                <button className="bg-primary text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest hidden sm:block">Search</button>
+                                <Button variant="primary" className="bg-primary text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest hidden sm:block">Search</Button>
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Calendar as CalendarIcon, ChevronLeft, ChevronRight, CheckCircle2, Clock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function MaintenanceCalendarPage() {
     // Mock simple calendar data
@@ -29,7 +30,7 @@ export default function MaintenanceCalendarPage() {
                 </div>
 
                 <Link href="/maintenance">
-                    <button className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-emerald-300 dark:hover:border-emerald-500/50 flex items-center gap-2 transition-all shadow-sm">
+                    <button type="button" className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-emerald-300 dark:hover:border-emerald-500/50 flex items-center gap-2 transition-all shadow-sm">
                         <ArrowLeft className="w-4 h-4" /> Mode Liste
                     </button>
                 </Link>
@@ -41,11 +42,11 @@ export default function MaintenanceCalendarPage() {
                 <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/20">
                     <div className="flex items-center gap-4">
                         <div className="flex items-center bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
-                            <button className="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"><ChevronLeft className="w-4 h-4" /></button>
+                            <button type="button" className="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"><ChevronLeft className="w-4 h-4" /></button>
                             <span className="px-4 text-[10px] font-black uppercase tracking-widest border-x border-slate-200 dark:border-slate-800 py-2 text-slate-900 dark:text-white">Avril 2026 (Sem 15)</span>
-                            <button className="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"><ChevronRight className="w-4 h-4" /></button>
+                            <button type="button" className="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"><ChevronRight className="w-4 h-4" /></button>
                         </div>
-                        <button className="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-[10px] font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">Aujourd'hui</button>
+                        <Button variant="secondary" className="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-[10px] font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">Aujourd'hui</Button>
                     </div>
                 </div>
 

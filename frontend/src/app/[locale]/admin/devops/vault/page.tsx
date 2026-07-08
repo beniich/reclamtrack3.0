@@ -2,6 +2,7 @@
 
 import { StatusIndicator } from '@/components/shared/StatusIndicator';
 import { Lock, RotateCw, Shield, Clock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function SecretsManagementPage() {
     return (
@@ -17,12 +18,10 @@ export default function SecretsManagementPage() {
                     </p>
                 </div>
                 <div className="flex gap-3">
-                    <button className="px-5 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold flex items-center gap-2">
+                    <button type="button" className="px-5 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold flex items-center gap-2">
                         <RotateCw className="w-4 h-4" /> Rotate Now
                     </button>
-                    <button className="px-5 py-2.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-bold">
-                        Retrieve Secret
-                    </button>
+                    <Button variant="secondary" className="px-5 py-2.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-bold">Retrieve Secret</Button>
                 </div>
             </div>
 
@@ -34,7 +33,7 @@ export default function SecretsManagementPage() {
                             <RotateCw className="w-5 h-5 text-primary" />
                             Rotation Configuration
                         </h3>
-                        <button className="text-primary text-xs font-bold hover:underline">Edit Policy</button>
+                        <Button variant="ghost" className="text-primary text-xs font-bold hover:underline">Edit Policy</Button>
                     </div>
                     <div className="space-y-6">
                         <div className="flex items-center justify-between">
@@ -75,7 +74,7 @@ export default function SecretsManagementPage() {
             <div className="dashboard-card overflow-hidden">
                 <div className="p-6 border-b border-slate-200 dark:border-border-dark flex items-center justify-between">
                     <h3 className="text-base font-bold">Recent Access Logs</h3>
-                    <button className="text-primary text-xs font-bold">View All</button>
+                    <Button variant="ghost" className="text-primary text-xs font-bold">View All</Button>
                 </div>
                 <table className="data-table">
                     <thead>

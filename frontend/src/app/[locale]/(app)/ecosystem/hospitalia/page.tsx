@@ -12,6 +12,7 @@ import {
   CreditCardIcon,
   MapPinIcon
 } from '@heroicons/react/24/outline';
+import { Button } from '@/components/ui/button';
 
 export default function HospitaliaDashboard() {
   return (
@@ -99,9 +100,7 @@ export default function HospitaliaDashboard() {
               <SparklesIcon className="absolute -right-10 -bottom-10 w-48 h-48 opacity-[0.03] group-hover:scale-125 transition-transform duration-1000" />
               <h3 className="text-2xl font-light text-white mb-4 italic">Service Concierge IA</h3>
               <p className="text-sm leading-relaxed text-amber-100/60 mb-8">"L'Invité de la Suite Impériale a réservé un vol pour 18h. Le transfert VIP est positionné et la valise sera récupérée à 16h30."</p>
-              <button className="w-full py-4 bg-amber-500 text-slate-950 font-black uppercase text-xs tracking-widest rounded-2xl shadow-2xl shadow-amber-500/20 hover:scale-[1.03] transition-all">
-                Détails Transfert
-              </button>
+              <Button variant="ghost" className="w-full py-4 bg-amber-500 text-slate-950 font-black uppercase text-xs tracking-widest rounded-2xl shadow-2xl shadow-amber-500/20 hover:scale-[1.03] transition-all">Détails Transfert</Button>
            </div>
 
            <div className="bg-white/[0.02] border border-white/5 p-8 rounded-[3rem] backdrop-blur-xl">

@@ -154,17 +154,17 @@ export const TechnicalCanvas: React.FC<TechnicalCanvasProps> = ({ onReady, onSel
         <div className="relative w-full h-full bg-slate-50 dark:bg-slate-900 overflow-hidden border border-slate-200 dark:border-orange-500/10 rounded-3xl">
             {/* Toolbar Overlay */}
             <div className="absolute top-4 left-4 z-10 flex items-center gap-2 p-1.5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 rounded-2xl shadow-lg">
-                <button onClick={handleZoomIn} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-400" title="Zoom In">
+                <button type="button" onClick={handleZoomIn} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-400" title="Zoom In">
                     <Maximize2 size={18} />
                 </button>
-                <button onClick={handleZoomOut} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-400" title="Zoom Out">
+                <button type="button" onClick={handleZoomOut} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-400" title="Zoom Out">
                     <Minimize2 size={18} />
                 </button>
                 <div className="w-px h-6 bg-slate-200 dark:bg-slate-700 mx-1" />
-                <button onClick={() => project?.activeLayer.removeChildren()} className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 rounded-lg" title="Clear Canvas">
+                <button type="button" onClick={() => project?.activeLayer.removeChildren()} className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 rounded-lg" title="Clear Canvas">
                     <Trash2 size={18} />
                 </button>
-                <button onClick={handleExport} className="p-2 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded-lg" title="Export SVG">
+                <button type="button" onClick={handleExport} className="p-2 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded-lg" title="Export SVG">
                     <Download size={18} />
                 </button>
             </div>

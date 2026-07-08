@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic';
 import { apiClient } from '@/lib/api';
 import toast from 'react-hot-toast';
 import { Skeleton } from '@chakra-ui/react';
+import { Button } from '@/components/ui/button';
 
 // Import dynamique de la carte pour éviter les erreurs SSR (window is not defined)
 const LeafletMap = dynamic(() => import('@/components/maps/LeafletMap'), { 
@@ -86,10 +87,10 @@ export default function FleetMapPage() {
                 </div>
 
                 <div className="flex gap-3">
-                    <button className="px-5 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-slate-200 transition-all">
+                    <button type="button" className="px-5 py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-slate-200 transition-all">
                         <Filter className="w-3.5 h-3.5" /> Filtres
                     </button>
-                    <button className="px-5 py-2.5 rounded-2xl bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-indigo-600/30 hover:brightness-110 active:scale-95 transition-all">
+                    <button type="button" className="px-5 py-2.5 rounded-2xl bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-indigo-600/30 hover:brightness-110 active:scale-95 transition-all">
                         <Activity className="w-3.5 h-3.5" /> IA Optimization
                     </button>
                 </div>
@@ -120,7 +121,7 @@ export default function FleetMapPage() {
                                 </div>
                             ))}
                             {complaints.length > 5 && (
-                                <button className="w-full py-3 text-[9px] font-black text-slate-400 uppercase tracking-widest hover:text-indigo-500 transition-colors">
+                                <button type="button" className="w-full py-3 text-[9px] font-black text-slate-400 uppercase tracking-widest hover:text-indigo-500 transition-colors">
                                     + {complaints.length - 5} autres signalements
                                 </button>
                             )}
@@ -176,7 +177,7 @@ export default function FleetMapPage() {
                              <p className="text-[11px] text-indigo-100/70 font-medium mb-8 leading-relaxed">
                                 Synchronisez les flux GPS temps réel et activez l'IA de routage pour vos techniciens de terrain.
                              </p>
-                             <button 
+                             <button type="button" 
                                 onClick={toggleSimulation}
                                 className={`w-full py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all shadow-xl
                                     ${simulating ? 'bg-emerald-500 text-white' : 'bg-white text-indigo-600 hover:bg-slate-50'}

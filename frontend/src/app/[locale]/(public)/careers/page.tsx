@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const jobs = [
     { title: 'Senior Full-Stack Engineer', dept: 'Engineering', location: 'Remote / Global', type: 'Full-time', badge: '🔥 Hot' },
@@ -120,7 +121,7 @@ export default function CareersPage() {
                                                 <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">schedule</span> {job.type}</span>
                                             </div>
                                         </div>
-                                        <button className="bg-primary/5 group-hover:bg-primary text-primary group-hover:text-white h-12 w-12 md:h-14 md:w-14 rounded-xl flex items-center justify-center transition-all duration-300">
+                                        <button type="button" className="bg-primary/5 group-hover:bg-primary text-primary group-hover:text-white h-12 w-12 md:h-14 md:w-14 rounded-xl flex items-center justify-center transition-all duration-300">
                                             <span className="material-symbols-outlined">arrow_forward</span>
                                         </button>
                                     </div>

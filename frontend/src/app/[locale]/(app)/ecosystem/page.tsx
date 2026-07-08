@@ -15,6 +15,7 @@ import {
   ChartPieIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function EcosystemDashboard() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -210,7 +211,7 @@ export default function EcosystemDashboard() {
             <p className="text-slate-500">Nos ingénieurs conçoivent votre écosystème personnalisé de A à Z. Contactez-nous pour intégrer un nouveau pipeline.</p>
           </div>
           
-          <button className="relative z-10 px-8 py-4 bg-indigo-600 text-white rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2 shadow-xl shadow-indigo-600/20">
+          <button type="button" className="relative z-10 px-8 py-4 bg-indigo-600 text-white rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2 shadow-xl shadow-indigo-600/20">
             Contactez le support
             <ChevronRightIcon className="w-5 h-5" />
           </button>

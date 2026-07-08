@@ -65,7 +65,7 @@ export default function DebugWidget() {
                 }}
             >
                 <strong>IA Debug Console</strong>
-                <button
+                <button type="button"
                     onClick={() => setVisible(false)}
                     style={{
                         background: "transparent",
@@ -121,7 +121,7 @@ export default function DebugWidget() {
                                 >
                                     {info.suggested_patch}
                                 </pre>
-                                <button
+                                <button type="button"
                                     onClick={() => navigator.clipboard.writeText(info.suggested_patch)}
                                     style={{
                                         marginTop: "0.5rem",

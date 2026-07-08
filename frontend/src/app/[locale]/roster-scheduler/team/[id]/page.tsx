@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 export default function TeamCapacityPage() {
     const params = useParams();
@@ -80,7 +81,7 @@ export default function TeamCapacityPage() {
                             <span className="text-xs font-semibold">Active</span>
                         </div>
                     </div>
-                    <button className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
+                    <button type="button" className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
                         <span className="material-symbols-outlined text-sm">edit</span>
                         Modify Assignments
                     </button>

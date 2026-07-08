@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function SystemInfoPage() {
     return (
@@ -30,7 +31,7 @@ export default function SystemInfoPage() {
                                 <input className="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 h-full placeholder:text-slate-500 text-sm pl-2" placeholder="Search system docs..." value="" />
                             </div>
                         </label>
-                        <button className="flex size-10 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                        <button type="button" className="flex size-10 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
                             <span className="material-symbols-outlined text-[20px]">notifications</span>
                         </button>
                         <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-slate-200 dark:border-slate-700" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBu9xYS9IJJYPjFYsIYjZt8GZwMFYMGBoyR-A3EdQnMfgvKwKgHVhEZfGPwc9owpwvORhtOizux2VxzTBIOcx-B8krDUg4gcUmCEgeMQq2xQyfR9_8BXea1DaTsgwJaW6dSSLBxJVcE4dpi0NaGCxgt7qvIuSSPiqacLiJZOA-JhkueSjSiSDxmuR-6u8OILDmI4Mk0Y4VGiv2fHU5xqHQ0pzwmek_jCZ2UL1MPAadLcXCLdDdrpvdIisJeeiOxC5UGWcJahDzGfjCB")' }}></div>
@@ -52,13 +53,11 @@ export default function SystemInfoPage() {
                                     IA-native et sécurisée par des protocoles de nouvelle génération.
                                 </p>
                                 <div className="flex flex-wrap gap-4 mt-8">
-                                    <button className="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all">
+                                    <button type="button" className="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all">
                                         <span className="material-symbols-outlined text-[18px]">play_circle</span>
                                         System Demo
                                     </button>
-                                    <button className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                                        Download Documentation
-                                    </button>
+                                    <Button variant="secondary" className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Download Documentation</Button>
                                 </div>
                             </div>
                             <div className="flex-1 w-full max-w-md relative hidden md:block">

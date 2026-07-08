@@ -7,6 +7,7 @@ import {
     ArrowUpRight, ArrowDownRight, Zap, Target,
     FileBarChart, Filter, Download, Calendar
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function MaintenanceReportsPage() {
     // Mock data for Phase 5 Analytics
@@ -40,10 +41,10 @@ export default function MaintenanceReportsPage() {
                 </div>
 
                 <div className="flex gap-3">
-                    <button className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-indigo-300 dark:hover:border-indigo-500/50 flex items-center gap-2 transition-all shadow-sm">
+                    <button type="button" className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-indigo-300 dark:hover:border-indigo-500/50 flex items-center gap-2 transition-all shadow-sm">
                         <Calendar className="w-4 h-4" /> 30 derniers jours
                     </button>
-                    <button className="h-[52px] bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl px-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl hover:scale-105 transition-all">
+                    <button type="button" className="h-[52px] bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl px-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl hover:scale-105 transition-all">
                         <Download className="w-4 h-4" /> Rapport Mensuel PDF
                     </button>
                 </div>
@@ -81,7 +82,7 @@ export default function MaintenanceReportsPage() {
                         </div>
                         <div className="flex gap-2">
                             {['Hebdo', 'Mensuel', 'Trim'].map((t) => (
-                                <button key={t} className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${t === 'Mensuel' ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 hover:bg-slate-200'}`}>
+                                <button type="button" key={t} className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${t === 'Mensuel' ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 hover:bg-slate-200'}`}>
                                     {t}
                                 </button>
                             ))}

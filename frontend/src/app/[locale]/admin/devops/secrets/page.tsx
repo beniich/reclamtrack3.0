@@ -21,7 +21,7 @@ export default function SecretsPage() {
                         </div>
                     </div>
                     <RoleGuard minRole={Role.ADMIN}>
-                        <Button variant="primary">
+                        <Button type="button" variant="primary">
                             <span className="material-symbols-outlined">add</span>
                             New Secret
                         </Button>
@@ -45,7 +45,7 @@ export default function SecretsPage() {
                                 This management interface is currently under development. Please use the command line utility `rt-vault` for all secret operations.
                             </p>
                         </div>
-                        <Button variant="secondary" onClick={() => window.history.back()}>
+                        <Button type="button" variant="secondary" onClick={() => window.history.back()}>
                             Return to DevOps Suite
                         </Button>
                     </div>

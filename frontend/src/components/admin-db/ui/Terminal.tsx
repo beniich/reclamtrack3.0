@@ -59,13 +59,13 @@ export default function Terminal() {
                     Console SQL Interactive
                 </h2>
                 <div className="flex gap-1 bg-slate-800 p-0.5 rounded-md">
-                    <button className="px-2 py-1 text-xs font-bold bg-slate-700 text-white rounded">
+                    <button type="button" className="px-2 py-1 text-xs font-bold bg-slate-700 text-white rounded">
                         SELECT
                     </button>
-                    <button className="px-2 py-1 text-xs font-bold text-slate-400 hover:text-white">
+                    <button type="button" className="px-2 py-1 text-xs font-bold text-slate-400 hover:text-white">
                         INSERT
                     </button>
-                    <button className="px-2 py-1 text-xs font-bold text-slate-400 hover:text-white">
+                    <button type="button" className="px-2 py-1 text-xs font-bold text-slate-400 hover:text-white">
                         BACKUP
                     </button>
                 </div>

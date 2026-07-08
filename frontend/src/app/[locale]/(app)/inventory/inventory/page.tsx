@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 // Types
 type StockStatus = 'IN_STOCK' | 'LOW_STOCK' | 'OUT_OF_STOCK';
@@ -190,11 +191,11 @@ export default function InventoryPage() {
                         <p className="text-slate-500 dark:text-slate-400 mt-1">Monitor and manage critical spare parts, equipment, and field consumables.</p>
                     </div>
                     <div className="flex gap-3">
-                        <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                             <span className="material-symbols-outlined text-lg">download</span>
                             Export CSV
                         </button>
-                        <button className="flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-lg font-bold text-sm hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all">
+                        <button type="button" className="flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-lg font-bold text-sm hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all">
                             <span className="material-symbols-outlined text-lg">add_shopping_cart</span>
                             Request Stock
                         </button>
@@ -321,9 +322,9 @@ export default function InventoryPage() {
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             {item.status === 'OUT_OF_STOCK' ? (
-                                                <button className="text-primary hover:underline text-sm font-bold">Order Now</button>
+                                                <Button variant="ghost" className="text-primary hover:underline text-sm font-bold">Order Now</Button>
                                             ) : (
-                                                <button className="text-slate-500 hover:text-primary transition-colors">
+                                                <button type="button" className="text-slate-500 hover:text-primary transition-colors">
                                                     <span className="material-symbols-outlined">more_horiz</span>
                                                 </button>
                                             )}

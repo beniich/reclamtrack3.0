@@ -60,7 +60,7 @@ export default function ArchitecturePage() {
                                 <span className="size-2 bg-green-500 rounded-full animate-pulse" />
                                 <span className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase tracking-tighter">Cluster Status: Healthy</span>
                             </div>
-                            <Button size="sm" className="gap-2 shadow-lg shadow-primary/20">
+                            <Button type="button" size="sm" className="gap-2 shadow-lg shadow-primary/20">
                                 <CloudUpload className="w-4 h-4" />
                                 <span>Deploy Changes</span>
                             </Button>

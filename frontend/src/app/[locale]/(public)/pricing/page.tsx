@@ -6,6 +6,7 @@ import { CheckCircle2 } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function PricingPage() {
     const [isYearly, setIsYearly] = useState(false);
@@ -121,13 +122,13 @@ export default function PricingPage() {
 
                         {/* Billing Toggle */}
                         <div className="flex items-center justify-center gap-4 bg-slate-100 dark:bg-white/5 p-1.5 rounded-xl border border-slate-200 dark:border-white/10 w-fit mx-auto">
-                            <button
+                            <button type="button"
                                 onClick={() => setIsYearly(false)}
                                 className={`px-6 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${!isYearly ? 'bg-white dark:bg-primary text-primary dark:text-white shadow-lg' : 'text-slate-500 hover:text-slate-700 dark:hover:text-white'}`}
                             >
                                 Monthly
                             </button>
-                            <button
+                            <button type="button"
                                 onClick={() => setIsYearly(true)}
                                 className={`px-6 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all relative ${isYearly ? 'bg-white dark:bg-primary text-primary dark:text-white shadow-lg' : 'text-slate-500 hover:text-slate-700 dark:hover:text-white'}`}
                             >
@@ -188,7 +189,7 @@ export default function PricingPage() {
                                     ))}
                                 </div>
 
-                                <button
+                                <button type="button"
                                     onClick={() => handlePlanSelect(plan.id)}
                                     disabled={isLoading}
                                     className={`w-full py-4 px-6 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${plan.popular

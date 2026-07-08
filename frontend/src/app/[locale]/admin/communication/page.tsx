@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useCall } from '@/providers/CallProvider';
 import { useAuthStore } from '@/store/authStore';
+import { Button } from '@/components/ui/button';
 
 export default function CommunicationPage() {
     const { user } = useAuthStore();
@@ -58,7 +59,7 @@ export default function CommunicationPage() {
                         </div>
 
                         <div className="flex gap-2">
-                            <button
+                            <button type="button"
                                 onClick={() => callUser(targetId)}
                                 disabled={!targetId || callState !== 'idle'}
                                 className={`flex-1 py-2 px-4 rounded-lg font-medium text-white shadow-lg transition-all ${!targetId || callState !== 'idle'

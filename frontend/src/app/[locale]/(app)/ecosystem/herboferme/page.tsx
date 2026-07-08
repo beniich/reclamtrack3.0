@@ -12,6 +12,7 @@ import {
   ChartPieIcon,
   LifebuoyIcon
 } from '@heroicons/react/24/outline';
+import { Button } from '@/components/ui/button';
 
 export default function HerbofermeDashboard() {
   return (
@@ -112,9 +113,7 @@ export default function HerbofermeDashboard() {
                   "L'IA détecte un risque d'infestation mineure sur la parcelle B-12. Activation suggérée du système de pulvérisation naturelle à 18h00."
                 </p>
              </div>
-             <button className="w-full py-3 bg-emerald-500 text-emerald-950 font-black uppercase text-xs tracking-widest rounded-xl shadow-xl shadow-emerald-500/20 hover:scale-[1.02] transition-all">
-                Appliquer Protocole
-             </button>
+             <Button variant="ghost" className="w-full py-3 bg-emerald-500 text-emerald-950 font-black uppercase text-xs tracking-widest rounded-xl shadow-xl shadow-emerald-500/20 hover:scale-[1.02] transition-all">Appliquer Protocole</Button>
              
              <div className="mt-8 space-y-4">
                 <p className="text-[10px] font-bold text-emerald-500/30 uppercase tracking-[0.3em]">Alertes Sensores</p>

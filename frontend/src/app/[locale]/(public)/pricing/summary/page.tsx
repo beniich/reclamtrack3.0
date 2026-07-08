@@ -8,6 +8,7 @@ import {
     Lock
 } from 'lucide-react';
 import { BadgeCheck } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function OrderSummaryPage() {
     return (
@@ -70,7 +71,7 @@ export default function OrderSummaryPage() {
                                     <span className="text-sm font-semibold text-slate-900 dark:text-white">Billed Monthly</span>
                                     <span className="text-xs text-slate-500 dark:text-slate-400">Next billing on March 12, 2026</span>
                                 </div>
-                                <button className="bg-white dark:bg-slate-700 px-4 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 text-xs font-bold text-slate-700 dark:text-white hover:bg-slate-50 transition-colors">
+                                <button type="button" className="bg-white dark:bg-slate-700 px-4 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 text-xs font-bold text-slate-700 dark:text-white hover:bg-slate-50 transition-colors">
                                     Switch to Yearly (Save 20%)
                                 </button>
                             </div>
@@ -103,7 +104,7 @@ export default function OrderSummaryPage() {
                                             placeholder="CMS2026"
                                             type="text"
                                         />
-                                        <button className="bg-primary px-4 py-2 text-white text-xs font-bold rounded-lg hover:opacity-90 transition-opacity uppercase">Apply</button>
+                                        <Button variant="primary" className="bg-primary px-4 py-2 text-white text-xs font-bold rounded-lg hover:opacity-90 transition-opacity uppercase">Apply</Button>
                                     </div>
                                 </div>
 

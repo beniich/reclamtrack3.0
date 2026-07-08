@@ -54,7 +54,7 @@ function TabsTrigger({ value, className = '', children, ...props }: TabsTriggerP
   const ctx = React.useContext(TabsContext)
   const isActive = ctx.value === value
   return (
-    <button
+    <button type="button"
       role="tab"
       aria-selected={isActive}
       onClick={() => ctx.onValueChange(value)}

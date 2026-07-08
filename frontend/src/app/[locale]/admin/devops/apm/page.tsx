@@ -2,6 +2,7 @@
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { Badge } from "@/components/ui/badge"
+import { Button } from '@/components/ui/button';
 
 export default function APMDashboard() {
     const kpis = [
@@ -136,9 +137,7 @@ export default function APMDashboard() {
                                    <h3 className="text-2xl font-black text-white uppercase tracking-tight">Trace Explorer</h3>
                                    <p className="text-slate-400 font-medium max-w-sm">Deep-dive into individual request lifecycles. 12 traces flagged as abnormal in the last 5 minutes.</p>
                                </div>
-                               <button className="px-8 py-4 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-xl hover:scale-105 transition-all">
-                                   Open Jaeger View
-                               </button>
+                               <Button variant="primary" className="px-8 py-4 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-xl hover:scale-105 transition-all">Open Jaeger View</Button>
                            </div>
                         </div>
                     </div>

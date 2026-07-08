@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 // Types
 interface RequestItem {
@@ -127,7 +128,7 @@ export default function WarehouseApprovalsPage() {
                             Pending Requests
                             <span className="bg-primary/10 text-primary text-xs font-bold px-2 py-0.5 rounded-full">{requests.length}</span>
                         </h2>
-                        <button className="text-slate-400 hover:text-slate-600">
+                        <button type="button" className="text-slate-400 hover:text-slate-600">
                             <span className="material-symbols-outlined text-sm">filter_list</span>
                         </button>
                     </div>
@@ -173,7 +174,7 @@ export default function WarehouseApprovalsPage() {
                                         <p className="text-slate-500 dark:text-slate-400">Requested by {selectedRequest.requester} • Created Oct 24, 2023</p>
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 transition-colors">
+                                        <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 transition-colors">
                                             <span className="material-symbols-outlined">print</span>
                                         </button>
                                     </div>
@@ -288,10 +289,8 @@ export default function WarehouseApprovalsPage() {
                                     ></textarea>
                                 </div>
                                 <div className="flex items-center gap-3 w-full md:w-auto shrink-0">
-                                    <button className="flex-1 md:flex-none px-6 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300">
-                                        Reject
-                                    </button>
-                                    <button onClick={handleApprove} className="flex-1 md:flex-none px-8 py-2.5 rounded-lg bg-primary text-white font-bold text-sm hover:bg-blue-700 shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2">
+                                    <Button variant="secondary" className="flex-1 md:flex-none px-6 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300">Reject</Button>
+                                    <button type="button" onClick={handleApprove} className="flex-1 md:flex-none px-8 py-2.5 rounded-lg bg-primary text-white font-bold text-sm hover:bg-blue-700 shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2">
                                         <span className="material-symbols-outlined text-sm">task_alt</span>
                                         Approve Request
                                     </button>

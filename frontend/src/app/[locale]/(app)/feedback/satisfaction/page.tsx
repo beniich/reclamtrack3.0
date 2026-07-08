@@ -10,6 +10,7 @@ import { useSatisfactionData } from '@/hooks/useSatisfaction';
 import { cn } from '@/lib/utils';
 import { Bell, Download, Loader2, Search } from 'lucide-react';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function SatisfactionDashboardPage() {
     const { data, isLoading, error } = useSatisfactionData();
@@ -80,11 +81,11 @@ export default function SatisfactionDashboardPage() {
                         />
                     </div>
 
-                    <button className="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                    <button type="button" className="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                         <Bell className="size-5" />
                     </button>
 
-                    <button className="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-primary/90 transition-all active:scale-95 shadow-lg shadow-primary/20">
+                    <button type="button" className="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-primary/90 transition-all active:scale-95 shadow-lg shadow-primary/20">
                         <Download className="size-4" />
                         Exporter
                     </button>

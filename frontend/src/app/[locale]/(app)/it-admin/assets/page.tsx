@@ -169,11 +169,11 @@ export default function ITAssetsPage() {
           <p className="text-gray-500 mt-1">Manage hardware, track assignments, and monitor status.</p>
         </div>
         <div className="flex gap-2">
-            <Button variant="outline" onClick={() => loadAssets()}>
+            <Button type="button" variant="outline" onClick={() => loadAssets()}>
                 <span className="mr-2">↻</span> Refresh
             </Button>
             <RoleGuard minRole={Role.EDITOR}>
-              <Button className="bg-primary hover:bg-primary/90" onClick={handleCreate}>
+              <Button type="button" className="bg-primary hover:bg-primary/90" onClick={handleCreate}>
                 <Plus className="mr-2 h-4 w-4" />
                 Add Asset
               </Button>
@@ -232,7 +232,7 @@ export default function ITAssetsPage() {
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 p-0">
+                    <Button type="button" variant="ghost" className="h-8 w-8 p-0">
                       <span className="sr-only">Open menu</span>
                       <MoreVertical className="h-4 w-4" />
                     </Button>
@@ -301,7 +301,7 @@ export default function ITAssetsPage() {
               {search ? 'No assets match your search criteria.' : 'Get started by adding your first hardware asset to the inventory.'}
             </p>
             <RoleGuard minRole={Role.EDITOR}>
-              <Button onClick={handleCreate}>
+              <Button type="button" onClick={handleCreate}>
                   <Plus className="mr-2 h-4 w-4" />
                   Add Asset
               </Button>

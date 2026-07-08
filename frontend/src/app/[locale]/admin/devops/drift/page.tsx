@@ -1,6 +1,7 @@
 "use client"
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
+import { Button } from '@/components/ui/button';
 
 export default function InfrastructureDriftPage() {
     const kpis = [
@@ -58,12 +59,8 @@ export default function InfrastructureDriftPage() {
                         </div>
                     </div>
                     <div className="flex items-center gap-3">
-                        <button className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-white/5 font-bold text-xs uppercase tracking-wider">
-                            Ignore Drift
-                        </button>
-                        <button className="px-6 py-2 rounded-lg bg-primary text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
-                            Run Terraform Plan
-                        </button>
+                        <Button variant="ghost" className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-white/5 font-bold text-xs uppercase tracking-wider">Ignore Drift</Button>
+                        <Button variant="primary" className="px-6 py-2 rounded-lg bg-primary text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">Run Terraform Plan</Button>
                     </div>
                 </div>
 
@@ -147,9 +144,7 @@ export default function InfrastructureDriftPage() {
                                 </div>
                             </div>
                         </div>
-                        <button className="px-8 py-4 bg-primary text-white font-black rounded-2xl shadow-2xl shadow-primary/20 hover:brightness-110 active:scale-95 transition-all uppercase tracking-widest text-sm">
-                            Apply Remediation
-                        </button>
+                        <Button variant="primary" className="px-8 py-4 bg-primary text-white font-black rounded-2xl shadow-2xl shadow-primary/20 hover:brightness-110 active:scale-95 transition-all uppercase tracking-widest text-sm">Apply Remediation</Button>
                     </div>
                 </div>
             </div>

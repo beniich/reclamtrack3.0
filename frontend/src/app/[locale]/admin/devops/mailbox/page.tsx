@@ -3,6 +3,7 @@
 import { RoleGuard } from '@/components/security/RoleGuard'
 import { Role } from '@/lib/rbac/permissions'
 import { useState } from 'react'
+import { Button } from '@/components/ui/button';
 
 export default function MailboxPage() {
     const [syncAttachments, setSyncAttachments] = useState(true)
@@ -35,7 +36,7 @@ export default function MailboxPage() {
                                 Connection Active
                             </span>
                         </div>
-                        <button className="text-slate-400 hover:text-white transition-colors">
+                        <button type="button" className="text-slate-400 hover:text-white transition-colors">
                             <span className="material-symbols-outlined">help_outline</span>
                         </button>
                     </div>
@@ -56,7 +57,7 @@ export default function MailboxPage() {
 
                             <div className="grid grid-cols-2 gap-3">
                                 {['Gmail', 'Outlook', 'iCloud', 'Custom'].map((provider, idx) => (
-                                    <button
+                                    <button type="button"
                                         key={provider}
                                         className={`flex flex-col items-center justify-center p-4 rounded-lg border transition-all ${idx === 1
                                                 ? 'border-primary bg-primary/5 dark:bg-primary/10'
@@ -176,7 +177,7 @@ export default function MailboxPage() {
                                             className="w-full bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-primary/20 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                                             defaultValue="••••••••••••"
                                         />
-                                        <button className="absolute right-3 top-2.5 text-slate-400 hover:text-primary">
+                                        <button type="button" className="absolute right-3 top-2.5 text-slate-400 hover:text-primary">
                                             <span className="material-symbols-outlined text-xl">visibility_off</span>
                                         </button>
                                     </div>
@@ -245,14 +246,10 @@ export default function MailboxPage() {
                             </div>
                             <div className="flex items-center gap-3 w-full sm:w-auto">
                                 <RoleGuard minRole={Role.ADMIN}>
-                                    <button className="flex-1 sm:flex-none px-6 py-2.5 rounded-lg border border-primary/30 text-primary font-semibold hover:bg-primary/5 transition-colors">
-                                        Test Connection
-                                    </button>
+                                    <Button variant="primary" className="flex-1 sm:flex-none px-6 py-2.5 rounded-lg border border-primary/30 text-primary font-semibold hover:bg-primary/5 transition-colors">Test Connection</Button>
                                 </RoleGuard>
                                 <RoleGuard minRole={Role.ADMIN}>
-                                    <button className="flex-1 sm:flex-none px-8 py-2.5 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all active:scale-95">
-                                        Save & Sync
-                                    </button>
+                                    <Button variant="primary" className="flex-1 sm:flex-none px-8 py-2.5 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all active:scale-95">Save & Sync</Button>
                                 </RoleGuard>
                             </div>
                         </div>

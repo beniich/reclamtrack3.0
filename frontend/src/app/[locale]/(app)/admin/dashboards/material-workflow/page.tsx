@@ -3,6 +3,7 @@
 import { DashboardHeader } from '@/components/dashboard-v2/DashboardHeader'
 import { Filter, Plus, Search } from 'lucide-react'
 import { useState } from 'react'
+import { Button } from '@/components/ui/button';
 
 export default function MaterialWorkflowPage() {
     const [searchQuery, setSearchQuery] = useState('')
@@ -25,11 +26,11 @@ export default function MaterialWorkflowPage() {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
                         </div>
-                        <button className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-[#1a2233] rounded-lg transition-all">
+                        <button type="button" className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-[#1a2233] rounded-lg transition-all">
                             <Filter className="h-5 w-5" />
                         </button>
                         <div className="h-8 w-[1px] bg-slate-200 dark:bg-slate-800"></div>
-                        <button className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 shadow-lg shadow-primary/20 transition-all">
+                        <button type="button" className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 shadow-lg shadow-primary/20 transition-all">
                             <Plus className="h-4 w-4" />
                             New Request
                         </button>
@@ -79,10 +80,8 @@ export default function MaterialWorkflowPage() {
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-between gap-2 mt-4">
-                                    <button className="flex-1 text-[11px] font-bold py-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
-                                        Details
-                                    </button>
-                                    <button className="flex-1 text-[11px] font-bold py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-all flex items-center justify-center gap-1">
+                                    <Button variant="secondary" className="flex-1 text-[11px] font-bold py-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Details</Button>
+                                    <button type="button" className="flex-1 text-[11px] font-bold py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-all flex items-center justify-center gap-1">
                                         Approve <span className="material-symbols-outlined text-xs">arrow_forward</span>
                                     </button>
                                 </div>
@@ -111,9 +110,7 @@ export default function MaterialWorkflowPage() {
                                     </div>
                                     <span className="text-[10px] text-slate-500">+4 more items</span>
                                 </div>
-                                <button className="w-full text-[11px] font-bold py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-all">
-                                    Review Impact
-                                </button>
+                                <Button variant="primary" className="w-full text-[11px] font-bold py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-all">Review Impact</Button>
                             </div>
                         </div>
                     </div>
@@ -155,9 +152,7 @@ export default function MaterialWorkflowPage() {
                                         </div>
                                         <span className="text-[10px] text-slate-500">Assigned: Mike T.</span>
                                     </div>
-                                    <button className="material-symbols-outlined text-slate-400 hover:text-primary transition-colors text-lg">
-                                        check_circle_outline
-                                    </button>
+                                    <Button variant="ghost" className="material-symbols-outlined text-slate-400 hover:text-primary transition-colors text-lg">check_circle_outline</Button>
                                 </div>
                             </div>
                         </div>
@@ -184,7 +179,7 @@ export default function MaterialWorkflowPage() {
                                 <div className="flex items-center justify-center p-4 bg-slate-100 dark:bg-[#101622] rounded-lg mb-4 border border-dashed border-slate-300 dark:border-slate-800">
                                     <span className="material-symbols-outlined text-4xl text-slate-400">qr_code_2</span>
                                 </div>
-                                <button className="w-full text-[11px] font-bold py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-all flex items-center justify-center gap-1">
+                                <button type="button" className="w-full text-[11px] font-bold py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-all flex items-center justify-center gap-1">
                                     <span className="material-symbols-outlined text-sm">local_shipping</span> Confirm Dispatch
                                 </button>
                             </div>

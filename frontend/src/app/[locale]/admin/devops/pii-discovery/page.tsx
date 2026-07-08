@@ -28,7 +28,7 @@ export default function PIIDiscoveryPage() {
                 <div className="flex items-center gap-3">
                     <div className="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-1.5 border border-slate-200 dark:border-slate-700">
                         {['Overview', 'Database Scan', 'File System', 'Alerts'].map((tab) => (
-                            <button
+                            <button type="button"
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
                                 className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${activeTab === tab
@@ -40,7 +40,7 @@ export default function PIIDiscoveryPage() {
                             </button>
                         ))}
                     </div>
-                    <Button variant="primary">
+                    <Button type="button" variant="primary">
                         <span className="material-symbols-outlined">search</span>
                         New Scan
                     </Button>
@@ -199,7 +199,7 @@ export default function PIIDiscoveryPage() {
                                     </div>
                                 ))}
                             </div>
-                            <Button variant="ghost" className="w-full mt-8">View Compliance Map</Button>
+                            <Button type="button" variant="ghost" className="w-full mt-8">View Compliance Map</Button>
                         </div>
 
                         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm border-t-4 border-t-orange-500">

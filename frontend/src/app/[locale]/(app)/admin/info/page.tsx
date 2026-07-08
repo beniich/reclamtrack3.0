@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function SystemInfoPage() {
     return (
@@ -37,13 +38,11 @@ export default function SystemInfoPage() {
                                 Our mission is to ensure service efficiency and rapid response to municipal needs through a streamlined, automated lifecycle management system.
                             </p>
                             <div className="flex flex-wrap gap-4 mt-8">
-                                <button className="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+                                <button type="button" className="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
                                     <span className="material-symbols-outlined text-[18px]">play_circle</span>
                                     System Demo
                                 </button>
-                                <button className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                                    Download Documentation
-                                </button>
+                                <Button variant="secondary" className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Download Documentation</Button>
                             </div>
                         </div>
                         <div className="flex-1 w-full max-w-md relative hidden md:block">
@@ -89,7 +88,7 @@ export default function SystemInfoPage() {
                             <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Team Capabilities</h2>
                             <p className="text-slate-500 dark:text-slate-400">Expertise sectors available for field assignment.</p>
                         </div>
-                        <button className="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+                        <button type="button" className="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
                             View All Departments <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
                         </button>
                     </div>
@@ -127,9 +126,7 @@ export default function SystemInfoPage() {
                             <div className="text-xs font-bold uppercase tracking-widest text-white/70">Active Teams</div>
                         </div>
                     </div>
-                    <button className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-slate-100 transition-colors whitespace-nowrap shadow-lg">
-                        View Active Dashboard
-                    </button>
+                    <Button variant="ghost" className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-slate-100 transition-colors whitespace-nowrap shadow-lg">View Active Dashboard</Button>
                 </section>
             </main>
         </div>

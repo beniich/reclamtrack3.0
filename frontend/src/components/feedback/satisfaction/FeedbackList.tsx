@@ -35,7 +35,7 @@ export default function FeedbackList({ feedbacks }: Props) {
             </div>
 
             {feedbacks.length > 0 && (
-                <button className="w-full mt-6 py-2.5 text-sm font-bold text-primary hover:bg-primary/5 rounded-xl border border-primary/20 transition-all active:scale-[0.98]">
+                <button type="button" className="w-full mt-6 py-2.5 text-sm font-bold text-primary hover:bg-primary/5 rounded-xl border border-primary/20 transition-all active:scale-[0.98]">
                     View All {feedbacks.length} Reviews
                 </button>
             )}

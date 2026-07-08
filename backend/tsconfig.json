@@ -6,16 +6,26 @@
         "outDir": "./dist",
         "rootDir": "./src",
         "strict": true,
+        "noImplicitAny": true,
+        "noUncheckedIndexedAccess": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
-        "noImplicitAny": false
+        "declaration": true,
+        "declarationMap": true,
+        "incremental": true,
+        "tsBuildInfoFile": "./dist/.tsbuildinfo",
+        "paths": {
+            "@/*": ["./src/*"]
+        }
     },
     "include": [
         "src/**/*.ts"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "dist",
+        "tests"
     ]
 }

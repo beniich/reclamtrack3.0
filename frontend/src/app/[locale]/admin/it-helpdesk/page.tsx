@@ -3,6 +3,7 @@
 import { itTicketsApi } from "@/lib/api"
 import { format } from "date-fns"
 import { useEffect, useState } from "react"
+import { Button } from '@/components/ui/button';
 
 export default function ITHelpdeskPage() {
     const [tickets, setTickets] = useState<any[]>([])
@@ -49,11 +50,11 @@ export default function ITHelpdeskPage() {
                     <p className="text-slate-500 text-sm">Monitor and resolve IT infrastructure support requests.</p>
                 </div>
                 <div className="flex gap-3">
-                    <button className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2">
+                    <button type="button" className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2">
                         <span className="material-symbols-outlined text-sm">filter_list</span>
                         Filters
                     </button>
-                    <button className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
+                    <button type="button" className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
                         <span className="material-symbols-outlined text-sm">add_circle</span>
                         New Ticket
                     </button>
@@ -125,8 +126,8 @@ export default function ITHelpdeskPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button className="p-1.5 hover:bg-blue-500/20 text-blue-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">visibility</span></button>
-                                                <button className="p-1.5 hover:bg-green-500/20 text-green-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">check_circle</span></button>
+                                                <button type="button" className="p-1.5 hover:bg-blue-500/20 text-blue-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">visibility</span></button>
+                                                <button type="button" className="p-1.5 hover:bg-green-500/20 text-green-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">check_circle</span></button>
                                             </div>
                                         </td>
                                     </tr>

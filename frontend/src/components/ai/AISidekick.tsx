@@ -301,7 +301,7 @@ export const AISidekick: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button
+                            <button type="button"
                                 onClick={closeAISidekick}
                                 className="relative w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-full text-white/40 hover:text-white transition-all"
                             >
@@ -330,7 +330,7 @@ export const AISidekick: React.FC = () => {
                         {/* Quick Prompts */}
                         <div className="px-4 pb-2 flex gap-2 flex-wrap">
                             {quickPrompts.map(p => (
-                                <button
+                                <button type="button"
                                     key={p}
                                     onClick={() => { setInput(p); }}
                                     className="text-[10px] font-bold px-3 py-1.5 bg-white/5 hover:bg-orange-500/20 border border-white/10 hover:border-orange-500/40 rounded-full text-slate-400 hover:text-orange-400 transition-all uppercase tracking-wide"
@@ -352,7 +352,7 @@ export const AISidekick: React.FC = () => {
                                     placeholder="Requête opérationnelle..."
                                     className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-10 pr-14 text-sm text-white placeholder:text-slate-600 focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500/30 outline-none transition-all"
                                 />
-                                <button
+                                <button type="button"
                                     onClick={handleSend}
                                     disabled={!input.trim() || isTyping}
                                     className={cn(

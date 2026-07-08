@@ -12,6 +12,7 @@ import {
   AdjustmentsHorizontalIcon,
   RocketLaunchIcon
 } from '@heroicons/react/24/outline';
+import { Button } from '@/components/ui/button';
 
 export default function WordexDashboard() {
   return (
@@ -43,7 +44,7 @@ export default function WordexDashboard() {
                placeholder="Filtrer les tokens..."
              />
            </div>
-           <button className="p-2.5 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all text-white">
+           <button type="button" className="p-2.5 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all text-white">
              <AdjustmentsHorizontalIcon className="w-5 h-5" />
            </button>
         </div>
@@ -105,7 +106,7 @@ export default function WordexDashboard() {
                <RocketLaunchIcon className="w-12 h-12 text-white/20 absolute -right-4 -bottom-4 rotate-12" />
                <h3 className="text-lg font-bold mb-2">Déployer Workflow</h3>
                <p className="text-xs text-white/70 leading-relaxed mb-6">Optimisez vos assets numériques avec notre pipeline de traitement GPU haute performance.</p>
-               <button className="bg-white text-indigo-600 px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl">Activer</button>
+               <Button variant="ghost" className="bg-white text-indigo-600 px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl">Activer</Button>
              </div>
 
              <div className="bg-white/[0.02] border border-white/10 p-8 rounded-3xl backdrop-blur-xl">

@@ -280,7 +280,7 @@ function FilePreviewCard({ file, onRemove, variant = 'compact' }: FilePreviewCar
                 )}
 
                 {/* Remove Button */}
-                <button
+                <button type="button"
                     onClick={onRemove}
                     className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                 >
@@ -330,7 +330,7 @@ function FilePreviewCard({ file, onRemove, variant = 'compact' }: FilePreviewCar
             </div>
 
             {/* Remove Button */}
-            <button
+            <button type="button"
                 onClick={onRemove}
                 className="shrink-0 p-1.5 hover:bg-red-100 dark:hover:bg-red-900/20 text-red-500 rounded-lg transition-colors"
             >

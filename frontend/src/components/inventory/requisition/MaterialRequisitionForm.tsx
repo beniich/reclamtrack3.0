@@ -477,13 +477,15 @@ export const MaterialRequisitionForm: React.FC = () => {
                                                             <span className="flex items-center gap-1.5"><DollarSign className="size-3" /> {formatCurrency(material.unitPrice)}/pce</span>
                                                         </div>
                                                     </div>
-                                                    <button
+                                                    <Button
                                                         type="button"
+                                                        variant="ghost"
                                                         onClick={() => handleRemoveItem(index)}
-                                                        className="size-10 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-rose-500 hover:bg-rose-50 transition-all"
+                                                        className="size-10 p-0 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-rose-500 hover:bg-rose-50 transition-all"
+                                                        aria-label="Supprimer cet article"
                                                     >
                                                         <Trash2 className="size-5" />
-                                                    </button>
+                                                    </Button>
                                                 </div>
 
                                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">

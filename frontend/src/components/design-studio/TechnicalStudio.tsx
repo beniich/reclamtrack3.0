@@ -100,7 +100,7 @@ export const TechnicalStudio: React.FC = () => {
             <div className="flex-1 flex flex-col gap-4 relative">
                 {/* Save/History Toolbar */}
                 <div className="absolute top-4 right-4 z-10 flex gap-2">
-                    <button
+                    <button type="button"
                         onClick={() => setShowHistory(true)}
                         className="flex items-center gap-2 bg-[#0f0125]/90 hover:bg-[#0f0125] border border-blue-500/30 text-white px-4 py-2 rounded-xl shadow-lg shadow-blue-500/10 backdrop-blur-md transition-all"
                     >
@@ -108,7 +108,7 @@ export const TechnicalStudio: React.FC = () => {
                         <span className="text-xs font-bold uppercase tracking-widest px-2 border-l border-white/10">Archives</span>
                     </button>
                     
-                    <button
+                    <button type="button"
                         onClick={handleSave}
                         disabled={isLoading || !project}
                         className="flex items-center gap-2 bg-[#0f0125]/90 hover:bg-[#0f0125] border border-orange-500/30 text-white px-4 py-2 rounded-xl shadow-lg shadow-orange-500/10 backdrop-blur-md transition-all disabled:opacity-50"
@@ -127,7 +127,7 @@ export const TechnicalStudio: React.FC = () => {
                                     <FolderOpen size={20} className="text-orange-500" />
                                     <h3 className="text-sm font-black text-white uppercase tracking-tighter">Schémas Archivés</h3>
                                 </div>
-                                <button onClick={() => setShowHistory(false)} className="text-slate-400 hover:text-white">
+                                <button type="button" onClick={() => setShowHistory(false)} className="text-slate-400 hover:text-white">
                                     <X size={20} />
                                 </button>
                             </div>
@@ -144,7 +144,7 @@ export const TechnicalStudio: React.FC = () => {
                                     </div>
                                 ) : (
                                     schemas.map((s) => (
-                                        <button
+                                        <button type="button"
                                             key={s._id}
                                             onClick={() => handleLoadSchema(s)}
                                             className="w-full text-left p-4 bg-[#310B5E]/30 border border-white/5 hover:border-orange-500/40 rounded-2xl group transition-all"
@@ -174,7 +174,7 @@ export const TechnicalStudio: React.FC = () => {
                                 <div className="p-3 bg-indigo-500/10 text-indigo-500 rounded-xl">
                                     <Box size={24} />
                                 </div>
-                                <button onClick={() => setSelectedAsset(null)} className="text-slate-400">
+                                <button type="button" onClick={() => setSelectedAsset(null)} className="text-slate-400">
                                     <X size={20} />
                                 </button>
                             </div>
@@ -213,11 +213,11 @@ export const TechnicalStudio: React.FC = () => {
 
                             <div className="space-y-2 pt-4">
                                 <Link href={`/assets/1`} className="block">
-                                    <button className="w-full py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2">
+                                    <button type="button" className="w-full py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2">
                                         <Info size={14} /> Fiche Complète
                                     </button>
                                 </Link>
-                                <button className="w-full py-3 border border-indigo-500/30 text-indigo-500 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-indigo-500/10 transition-colors">
+                                <button type="button" className="w-full py-3 border border-indigo-500/30 text-indigo-500 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-indigo-500/10 transition-colors">
                                     <Wrench size={14} /> Créer un Job (OT)
                                 </button>
                             </div>

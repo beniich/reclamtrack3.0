@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function CitizenFeedbackPage() {
     // State
@@ -199,9 +200,7 @@ export default function CitizenFeedbackPage() {
                             </div>
                             <p className="text-sm font-bold mb-1">Drag and Drop Photo of Completed Work</p>
                             <p className="text-xs text-slate-500">PNG, JPG or PDF up to 10MB</p>
-                            <button type="button" className="mt-4 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-semibold shadow-sm hover:shadow transition-all">
-                                Browse Files
-                            </button>
+                            <Button variant="secondary" className="mt-4 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-semibold shadow-sm hover:shadow transition-all">Browse Files</Button>
                         </div>
                     </section>
 

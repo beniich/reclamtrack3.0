@@ -6,6 +6,7 @@ import api from '@/lib/api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Calendar as CalendarIcon, Plus } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { Button } from '@/components/ui/button';
 
 export default function PlanningPage() {
     const queryClient = useQueryClient();
@@ -107,12 +108,7 @@ export default function PlanningPage() {
         return (
             <div className="flex h-[calc(100vh-64px)] flex-col items-center justify-center bg-slate-50 dark:bg-[#0a0a14] gap-4">
                 <p className="text-red-500 font-bold italic uppercase tracking-widest text-xs">Erreur de chargement du planning</p>
-                <button
-                    onClick={() => window.location.reload()}
-                    className="px-6 py-2 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-xl shadow-primary/20"
-                >
-                    Réessayer
-                </button>
+                <Button variant="primary" className="px-6 py-2 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-xl shadow-primary/20" onClick={() => window.location.reload()}>Réessayer</Button>
             </div>
         );
     }
@@ -139,7 +135,7 @@ export default function PlanningPage() {
                             {team.name}
                         </div>
                     ))}
-                    <button className="flex items-center gap-2 px-5 py-2.5 bg-brand-orange text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-orange-500/30 hover:brightness-110 active:scale-95 transition-all ml-4">
+                    <button type="button" className="flex items-center gap-2 px-5 py-2.5 bg-brand-orange text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-orange-500/30 hover:brightness-110 active:scale-95 transition-all ml-4">
                         <Plus className="w-4 h-4" />
                         Nouvelle Équipe
                     </button>

@@ -75,7 +75,7 @@ export default function ActiveDirectoryPage() {
           <p className="text-gray-600 mt-1">Manage AD synchronization and users</p>
         </div>
         <RoleGuard minRole={Role.ADMIN}>
-          <Button onClick={handleSync} disabled={syncing || status?.status !== 'connected'}>
+          <Button type="button" onClick={handleSync} disabled={syncing || status?.status !== 'connected'}>
             <RefreshCw className={`mr-2 h-4 w-4 ${syncing ? 'animate-spin' : ''}`} />
             {syncing ? 'Syncing...' : 'Sync Now'}
           </Button>
@@ -113,7 +113,7 @@ export default function ActiveDirectoryPage() {
           <CardContent>
             <p className="text-gray-600 mb-4">View users imported from Active Directory.</p>
             <RoleGuard minRole={Role.MODERATOR}>
-              <Button variant="outline" className="w-full">View AD Users</Button>
+              <Button type="button" variant="outline" className="w-full">View AD Users</Button>
             </RoleGuard>
           </CardContent>
         </Card>
@@ -142,7 +142,7 @@ export default function ActiveDirectoryPage() {
                </div>
             </div>
             <RoleGuard minRole={Role.ADMIN}>
-              <Button variant="outline" className="w-full mt-4">Edit Configuration</Button>
+              <Button type="button" variant="outline" className="w-full mt-4">Edit Configuration</Button>
             </RoleGuard>
           </CardContent>
         </Card>

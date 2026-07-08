@@ -76,7 +76,7 @@ export function ServiceCard({
                                     {detail.value}
                                 </span>
                                 {detail.highlight && (
-                                    <button className="opacity-0 group-hover/line:opacity-100 transition-opacity text-slate-400 hover:text-primary p-1">
+                                    <button type="button" className="opacity-0 group-hover/line:opacity-100 transition-opacity text-slate-400 hover:text-primary p-1">
                                         📋
                                     </button>
                                 )}
@@ -91,7 +91,7 @@ export function ServiceCard({
                 'bg-slate-50 dark:bg-slate-800/50 p-4 border-t border-slate-100 dark:border-slate-800',
                 'flex gap-3'
             )}>
-                <button
+                <button type="button"
                     onClick={onReportIssue}
                     className={cn(
                         'flex-1 bg-primary text-white py-2 px-4 rounded-lg font-semibold text-sm',
@@ -101,7 +101,7 @@ export function ServiceCard({
                     <AlertCircle className="w-4 h-4" />
                     Report Issue
                 </button>
-                <button
+                <button type="button"
                     onClick={onInfo}
                     className={cn(
                         'bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600',

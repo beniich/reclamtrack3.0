@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function TeamDetailsPage() {
     // Dans une vraie application, on utiliserait params.id pour fetcher les données
@@ -22,11 +23,11 @@ export default function TeamDetailsPage() {
                     <p className="text-slate-500 dark:text-slate-400 text-lg">Lead: Sarah Jenkins • ID: TECH-7729 • Field Operations</p>
                 </div>
                 <div className="flex gap-3">
-                    <button className="flex items-center gap-2 px-4 h-11 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg font-bold text-sm hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+                    <button type="button" className="flex items-center gap-2 px-4 h-11 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg font-bold text-sm hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
                         <span className="material-symbols-outlined text-lg">edit</span>
                         Edit Profile
                     </button>
-                    <button className="flex items-center gap-2 px-6 h-11 bg-primary text-white rounded-lg font-bold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">
+                    <button type="button" className="flex items-center gap-2 px-6 h-11 bg-primary text-white rounded-lg font-bold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">
                         <span className="material-symbols-outlined text-lg">assignment_add</span>
                         Assign New Task
                     </button>
@@ -92,7 +93,7 @@ export default function TeamDetailsPage() {
                                     <p className="text-slate-900 dark:text-white font-bold text-sm">Sarah Jenkins</p>
                                     <p className="text-slate-500 dark:text-slate-400 text-xs">Team Lead • Specialized</p>
                                 </div>
-                                <button className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-primary transition-all">
+                                <button type="button" className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-primary transition-all">
                                     <span className="material-symbols-outlined text-xl">chat</span>
                                 </button>
                             </div>
@@ -105,7 +106,7 @@ export default function TeamDetailsPage() {
                                     <p className="text-slate-900 dark:text-white font-bold text-sm">David Chen</p>
                                     <p className="text-slate-500 dark:text-slate-400 text-xs">Senior Technician</p>
                                 </div>
-                                <button className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-primary transition-all">
+                                <button type="button" className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-primary transition-all">
                                     <span className="material-symbols-outlined text-xl">chat</span>
                                 </button>
                             </div>
@@ -118,14 +119,12 @@ export default function TeamDetailsPage() {
                                     <p className="text-slate-900 dark:text-white font-bold text-sm">Alex Rivera</p>
                                     <p className="text-slate-500 dark:text-slate-400 text-xs">Assistant Technician</p>
                                 </div>
-                                <button className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-primary transition-all">
+                                <button type="button" className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-primary transition-all">
                                     <span className="material-symbols-outlined text-xl">chat</span>
                                 </button>
                             </div>
                         </div>
-                        <button className="w-full py-4 text-center text-slate-500 dark:text-slate-400 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 border-t border-slate-100 dark:border-slate-800">
-                            View Full Contact Details
-                        </button>
+                        <Button variant="secondary" className="w-full py-4 text-center text-slate-500 dark:text-slate-400 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 border-t border-slate-100 dark:border-slate-800">View Full Contact Details</Button>
                     </div>
                     <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
                         <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-6">Activity Trend</h3>
@@ -167,9 +166,9 @@ export default function TeamDetailsPage() {
                         <div className="px-6 pt-6 flex flex-wrap justify-between items-center gap-4">
                             <h3 className="text-slate-900 dark:text-white font-bold text-lg">Intervention History</h3>
                             <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-                                <button className="px-4 py-1.5 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-md text-sm font-bold shadow-sm">All</button>
-                                <button className="px-4 py-1.5 text-slate-500 dark:text-slate-400 text-sm font-medium hover:text-slate-900 dark:hover:text-white">Pending</button>
-                                <button className="px-4 py-1.5 text-slate-500 dark:text-slate-400 text-sm font-medium hover:text-slate-900 dark:hover:text-white">Completed</button>
+                                <Button variant="ghost" className="px-4 py-1.5 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-md text-sm font-bold shadow-sm">All</Button>
+                                <Button variant="ghost" className="px-4 py-1.5 text-slate-500 dark:text-slate-400 text-sm font-medium hover:text-slate-900 dark:hover:text-white">Pending</Button>
+                                <Button variant="ghost" className="px-4 py-1.5 text-slate-500 dark:text-slate-400 text-sm font-medium hover:text-slate-900 dark:hover:text-white">Completed</Button>
                             </div>
                         </div>
                         <div className="p-6 overflow-x-auto">
@@ -272,7 +271,7 @@ export default function TeamDetailsPage() {
                             </table>
                         </div>
                         <div className="mt-auto p-4 border-t border-slate-100 dark:border-slate-800 flex justify-center">
-                            <button className="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all">
+                            <button type="button" className="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all">
                                 View All Interventions
                                 <span className="material-symbols-outlined text-lg">arrow_forward</span>
                             </button>

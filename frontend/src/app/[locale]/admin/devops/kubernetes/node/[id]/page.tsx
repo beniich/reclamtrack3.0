@@ -16,6 +16,7 @@ import {
     BarChart2,
     LineChart
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function KubernetesNodeDashboard() {
     return (
@@ -47,7 +48,7 @@ export default function KubernetesNodeDashboard() {
                             </div>
                         </label>
                         <div className="flex gap-2">
-                            <button className="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+                            <button type="button" className="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
                                 <Bell className="size-5" />
                             </button>
                             <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-blue-600/20 bg-slate-200">
@@ -81,10 +82,10 @@ export default function KubernetesNodeDashboard() {
                             </p>
                         </div>
                         <div className="flex gap-3">
-                            <button className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-white text-sm font-bold rounded-lg transition-colors border border-slate-200 dark:border-transparent">
+                            <button type="button" className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-white text-sm font-bold rounded-lg transition-colors border border-slate-200 dark:border-transparent">
                                 <RefreshCcw className="size-4" /> Refresh
                             </button>
-                            <button className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg transition-colors">
+                            <button type="button" className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg transition-colors">
                                 <Slash className="size-4" /> Drain Node
                             </button>
                         </div>
@@ -212,8 +213,8 @@ export default function KubernetesNodeDashboard() {
                             <div className="flex items-center gap-3">
                                 <span className="text-xs font-semibold text-slate-500 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full">Total: 12 Pods</span>
                                 <div className="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700">
-                                    <button className="px-3 py-1.5 bg-blue-600 text-white text-xs font-bold">All</button>
-                                    <button className="px-3 py-1.5 bg-transparent text-slate-500 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800">Errors</button>
+                                    <Button variant="primary" className="px-3 py-1.5 bg-blue-600 text-white text-xs font-bold">All</Button>
+                                    <Button variant="secondary" className="px-3 py-1.5 bg-transparent text-slate-500 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800">Errors</Button>
                                 </div>
                             </div>
                         </div>
@@ -263,7 +264,7 @@ export default function KubernetesNodeDashboard() {
                                         <td className="px-6 py-4 text-xs font-bold text-slate-500">0</td>
                                         <td className="px-6 py-4 text-xs font-medium text-slate-500">4d 12h</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button className="p-1 hover:text-blue-600 transition-colors">
+                                            <button type="button" className="p-1 hover:text-blue-600 transition-colors">
                                                 <MoreVertical className="size-4" />
                                             </button>
                                         </td>
@@ -300,7 +301,7 @@ export default function KubernetesNodeDashboard() {
                                         <td className="px-6 py-4 text-xs font-bold text-slate-500">2</td>
                                         <td className="px-6 py-4 text-xs font-medium text-slate-500">12d 5h</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button className="p-1 hover:text-blue-600 transition-colors">
+                                            <button type="button" className="p-1 hover:text-blue-600 transition-colors">
                                                 <MoreVertical className="size-4" />
                                             </button>
                                         </td>
@@ -337,7 +338,7 @@ export default function KubernetesNodeDashboard() {
                                         <td className="px-6 py-4 text-xs font-bold text-red-500">14</td>
                                         <td className="px-6 py-4 text-xs font-medium text-slate-500">22m</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button className="p-1 hover:text-blue-600 transition-colors">
+                                            <button type="button" className="p-1 hover:text-blue-600 transition-colors">
                                                 <MoreVertical className="size-4" />
                                             </button>
                                         </td>
@@ -374,7 +375,7 @@ export default function KubernetesNodeDashboard() {
                                         <td className="px-6 py-4 text-xs font-bold text-slate-500">0</td>
                                         <td className="px-6 py-4 text-xs font-medium text-slate-500">1m</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button className="p-1 hover:text-blue-600 transition-colors">
+                                            <button type="button" className="p-1 hover:text-blue-600 transition-colors">
                                                 <MoreVertical className="size-4" />
                                             </button>
                                         </td>
@@ -386,8 +387,8 @@ export default function KubernetesNodeDashboard() {
                         <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center">
                             <p className="text-xs text-slate-500 font-medium tracking-wide">Showing 1-4 of 12 pods</p>
                             <div className="flex gap-2">
-                                <button className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded text-xs font-bold opacity-50 cursor-not-allowed">Prev</button>
-                                <button className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700">Next</button>
+                                <Button variant="secondary" className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded text-xs font-bold opacity-50 cursor-not-allowed">Prev</Button>
+                                <Button variant="secondary" className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700">Next</Button>
                             </div>
                         </div>
                     </div>

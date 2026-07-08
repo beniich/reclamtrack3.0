@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Map, Settings, AlertTriangle, PlayCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function AssetMapPage() {
     return (
@@ -27,7 +28,7 @@ export default function AssetMapPage() {
                 </div>
 
                 <Link href="/assets">
-                    <button className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-indigo-300 dark:hover:border-orange-500/50 flex items-center gap-2 transition-all shadow-sm">
+                    <button type="button" className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-indigo-300 dark:hover:border-orange-500/50 flex items-center gap-2 transition-all shadow-sm">
                         <ArrowLeft className="w-4 h-4" /> Mode Registre
                     </button>
                 </Link>
@@ -77,7 +78,7 @@ export default function AssetMapPage() {
                     <p className="text-xs font-medium text-slate-500 dark:text-slate-400 max-w-sm text-center mb-8">
                         L'intégration BIM / WebGL sera déployée lors de la phase 2. Actuellement, naviguez via le Registre standard.
                     </p>
-                    <button className="px-6 py-3 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-transform flex items-center gap-2 shadow-xl">
+                    <button type="button" className="px-6 py-3 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-transform flex items-center gap-2 shadow-xl">
                         <PlayCircle className="w-4 h-4" /> Voir Démo BIM
                     </button>
                 </div>

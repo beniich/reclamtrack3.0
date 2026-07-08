@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const posts = [
     {
@@ -143,9 +144,7 @@ export default function BlogPage() {
                         <p className="text-blue-100 mb-8">Recevez les meilleurs articles directs dans votre boîte mail, une fois par semaine.</p>
                         <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                             <input className="flex-1 h-12 rounded-xl px-4 text-slate-900 outline-none" placeholder="votre@email.fr" type="email" />
-                            <button className="bg-white text-primary px-6 h-12 rounded-xl font-black hover:scale-105 transition-all flex-shrink-0">
-                                S&apos;abonner
-                            </button>
+                            <Button variant="ghost" className="bg-white text-primary px-6 h-12 rounded-xl font-black hover:scale-105 transition-all flex-shrink-0">S&apos;abonner</Button>
                         </div>
                     </div>
                 </section>

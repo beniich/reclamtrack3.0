@@ -1,6 +1,7 @@
 'use client'
 
 import DashboardTemplate from '@/components/devops-dashboards/shared/DashboardTemplate'
+import { Button } from '@/components/ui/button';
 
 
 export default function RateLimitingDashboard() {
@@ -52,9 +53,7 @@ export default function RateLimitingDashboard() {
           <div className="p-6 border-b border-slate-200 dark:border-border-dark flex items-center justify-between">
             <h3 className="font-bold text-lg">Resource Variables</h3>
             <div className="flex gap-2">
-              <button className="px-3 py-1.5 text-xs font-semibold bg-slate-100 dark:bg-slate-800 rounded-md border border-slate-200 dark:border-slate-700">
-                Filter
-              </button>
+              <Button variant="secondary" className="px-3 py-1.5 text-xs font-semibold bg-slate-100 dark:bg-slate-800 rounded-md border border-slate-200 dark:border-slate-700">Filter</Button>
             </div>
           </div>
 
@@ -94,10 +93,10 @@ export default function RateLimitingDashboard() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
+                      <button type="button" className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
                         <span className="material-symbols-outlined text-lg">edit</span>
                       </button>
-                      <button className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
+                      <button type="button" className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
                         <span className="material-symbols-outlined text-lg">delete</span>
                       </button>
                     </div>
@@ -130,10 +129,10 @@ export default function RateLimitingDashboard() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
+                      <button type="button" className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
                         <span className="material-symbols-outlined text-lg">edit</span>
                       </button>
-                      <button className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
+                      <button type="button" className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
                         <span className="material-symbols-outlined text-lg">delete</span>
                       </button>
                     </div>
@@ -169,18 +168,12 @@ export default function RateLimitingDashboard() {
             <div className="space-y-2">
               <label className="text-sm font-semibold">Algorithm</label>
               <div className="grid grid-cols-2 gap-2">
-                <button className="px-3 py-2 rounded-lg text-xs font-bold bg-primary text-white">
-                  Token Bucket
-                </button>
-                <button className="px-3 py-2 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                  Sliding Window
-                </button>
+                <Button variant="primary" className="px-3 py-2 rounded-lg text-xs font-bold bg-primary text-white">Token Bucket</Button>
+                <Button variant="secondary" className="px-3 py-2 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Sliding Window</Button>
               </div>
             </div>
 
-            <button className="w-full py-3 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg font-bold text-sm transition-colors mt-2">
-              Update Configuration
-            </button>
+            <Button variant="primary" className="w-full py-3 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg font-bold text-sm transition-colors mt-2">Update Configuration</Button>
           </div>
         </div>
       </section>
@@ -203,9 +196,7 @@ export default function RateLimitingDashboard() {
               <option>Last 7 Days</option>
               <option>Custom Window</option>
             </select>
-            <button className="bg-slate-900 dark:bg-white dark:text-slate-900 text-white px-4 py-2 rounded-lg text-xs font-bold hover:opacity-90 transition-all">
-              Run Simulation
-            </button>
+            <Button variant="secondary" className="bg-slate-900 dark:bg-white dark:text-slate-900 text-white px-4 py-2 rounded-lg text-xs font-bold hover:opacity-90 transition-all">Run Simulation</Button>
           </div>
         </div>
 

@@ -65,10 +65,10 @@ export default function EdgeRoutePage() {
                         </div>
                     </label>
                     <div className="flex gap-2">
-                        <button className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                        <button type="button" className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
                             <span className="material-symbols-outlined">notifications</span>
                         </button>
-                        <button className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                        <button type="button" className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
                             <span className="material-symbols-outlined">settings</span>
                         </button>
                     </div>
@@ -124,10 +124,10 @@ export default function EdgeRoutePage() {
                             </div>
                             {/* Zoom Controls */}
                             <div className="absolute bottom-4 right-4 flex flex-col gap-1">
-                                <button className="size-8 bg-slate-800 hover:bg-slate-700 rounded-t-lg flex items-center justify-center border border-slate-700 text-white">
+                                <button type="button" className="size-8 bg-slate-800 hover:bg-slate-700 rounded-t-lg flex items-center justify-center border border-slate-700 text-white">
                                     <span className="material-symbols-outlined text-xs">add</span>
                                 </button>
-                                <button className="size-8 bg-slate-800 hover:bg-slate-700 rounded-b-lg flex items-center justify-center border border-slate-700 border-t-0 text-white">
+                                <button type="button" className="size-8 bg-slate-800 hover:bg-slate-700 rounded-b-lg flex items-center justify-center border border-slate-700 border-t-0 text-white">
                                     <span className="material-symbols-outlined text-xs">remove</span>
                                 </button>
                             </div>
@@ -182,12 +182,12 @@ export default function EdgeRoutePage() {
                             </div>
                             <div className="flex gap-2">
                                 <RoleGuard minRole={Role.ADMIN}>
-                                    <Button variant="ghost" size="sm">
+                                    <Button type="button" variant="ghost" size="sm">
                                         Export Config
                                     </Button>
                                 </RoleGuard>
                                 <RoleGuard minRole={Role.ADMIN}>
-                                    <Button variant="primary" size="sm">
+                                    <Button type="button" variant="primary" size="sm">
                                         <span className="material-symbols-outlined text-sm">add</span> Add New Rule
                                     </Button>
                                 </RoleGuard>
@@ -231,10 +231,10 @@ export default function EdgeRoutePage() {
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <RoleGuard minRole={Role.ADMIN}>
-                                                <button className="p-1 text-slate-400 hover:text-primary transition-colors">
+                                                <button type="button" className="p-1 text-slate-400 hover:text-primary transition-colors">
                                                     <span className="material-symbols-outlined">edit</span>
                                                 </button>
-                                                <button className="p-1 text-slate-400 hover:text-primary transition-colors ml-2">
+                                                <button type="button" className="p-1 text-slate-400 hover:text-primary transition-colors ml-2">
                                                     <span className="material-symbols-outlined">more_vert</span>
                                                 </button>
                                             </RoleGuard>

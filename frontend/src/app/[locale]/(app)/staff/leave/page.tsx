@@ -8,6 +8,7 @@ import { fr } from 'date-fns/locale';
 import { AlertCircle, ArrowRight, Calendar, CheckCircle, Clock, Filter, Plus, Search, XCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { Button } from '@/components/ui/button';
 
 export default function LeavePage() {
     const [leaves, setLeaves] = useState<any[]>([]);
@@ -68,7 +69,7 @@ export default function LeavePage() {
                         PLANIFICATION & VALIDATION DES CONGÉS
                     </p>
                 </div>
-                <button className="bg-brand-orange hover:brightness-110 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-orange-500/20 transition-all flex items-center gap-3">
+                <button type="button" className="bg-brand-orange hover:brightness-110 text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-orange-500/20 transition-all flex items-center gap-3">
                     <Plus className="w-4 h-4" />
                     Déposer une Demande
                 </button>
@@ -106,7 +107,7 @@ export default function LeavePage() {
                         />
                     </div>
                     <div className="flex gap-2">
-                        <button className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-400">
+                        <button type="button" className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-400">
                             <Filter className="w-3.5 h-3.5" />
                             Statut
                         </button>
@@ -176,14 +177,14 @@ export default function LeavePage() {
                                         <td className="px-6 py-4 text-right">
                                             {leave.status === 'Pending' ? (
                                                 <div className="flex justify-end gap-2">
-                                                    <button
+                                                    <button type="button"
                                                         onClick={() => handleStatusUpdate(leave._id, 'Approved')}
                                                         title="Approuver la demande"
                                                         className="size-8 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 hover:bg-emerald-100 rounded-lg flex items-center justify-center transition-colors"
                                                     >
                                                         <CheckCircle className="w-4 h-4" />
                                                     </button>
-                                                    <button
+                                                    <button type="button"
                                                         onClick={() => handleStatusUpdate(leave._id, 'Declined')}
                                                         title="Refuser la demande"
                                                         className="size-8 bg-red-50 dark:bg-red-900/20 text-red-600 hover:bg-red-100 rounded-lg flex items-center justify-center transition-colors"
@@ -192,7 +193,7 @@ export default function LeavePage() {
                                                     </button>
                                                 </div>
                                             ) : (
-                                                <button
+                                                <button type="button"
                                                     title="Détails de la demande"
                                                     className="text-slate-400 hover:text-primary transition-colors"
                                                 >

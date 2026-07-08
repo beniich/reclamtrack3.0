@@ -73,7 +73,7 @@ export function ExportButton<T extends Record<string, any>>({
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant={variant} size={size} disabled={isExporting}>
+                <Button type="button" variant={variant} size={size} disabled={isExporting}>
                     <Download className="w-4 h-4 mr-2" />
                     Exporter
                 </Button>

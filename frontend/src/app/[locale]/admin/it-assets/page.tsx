@@ -2,6 +2,7 @@
 
 import { itAssetsApi } from "@/lib/api"
 import { useEffect, useState } from "react"
+import { Button } from '@/components/ui/button';
 
 export default function ITAssetsPage() {
     const [assets, setAssets] = useState<any[]>([])
@@ -42,7 +43,7 @@ export default function ITAssetsPage() {
                     <h1 className="text-2xl font-bold text-white uppercase tracking-tight">IT Assets Inventory</h1>
                     <p className="text-slate-500 text-sm">Manage enterprise hardware and infrastructure assets.</p>
                 </div>
-                <button className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
+                <button type="button" className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
                     <span className="material-symbols-outlined text-sm">add</span>
                     Register New Asset
                 </button>
@@ -112,9 +113,9 @@ export default function ITAssetsPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button className="p-1.5 hover:bg-blue-500/20 text-blue-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">edit</span></button>
-                                                <button className="p-1.5 hover:bg-yellow-500/20 text-yellow-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">history</span></button>
-                                                <button className="p-1.5 hover:bg-red-500/20 text-red-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">delete</span></button>
+                                                <button type="button" className="p-1.5 hover:bg-blue-500/20 text-blue-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">edit</span></button>
+                                                <button type="button" className="p-1.5 hover:bg-yellow-500/20 text-yellow-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">history</span></button>
+                                                <button type="button" className="p-1.5 hover:bg-red-500/20 text-red-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">delete</span></button>
                                             </div>
                                         </td>
                                     </tr>

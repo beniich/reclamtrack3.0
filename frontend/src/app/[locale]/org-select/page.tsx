@@ -132,7 +132,7 @@ export default function OrgSelectPage() {
                                     </div>
                                 </CardContent>
                                 <CardFooter className="pt-2">
-                                    <Button variant="ghost" className="w-full justify-between group-hover:bg-primary group-hover:text-white transition-all">
+                                    <Button type="button" variant="ghost" className="w-full justify-between group-hover:bg-primary group-hover:text-white transition-all">
                                         Entrer
                                         <ArrowRight className="h-4 w-4" />
                                     </Button>
@@ -156,7 +156,7 @@ export default function OrgSelectPage() {
                                     <p className="text-sm text-slate-500 text-center mb-6">
                                         Créez un nouvel espace de travail pour une autre structure.
                                     </p>
-                                    <Button variant="outline" className="w-full">
+                                    <Button type="button" variant="outline" className="w-full">
                                         Créer
                                     </Button>
                                 </Card>
@@ -190,7 +190,7 @@ export default function OrgSelectPage() {
                                     </div>
                                 </div>
                                 <DialogFooter>
-                                    <Button disabled={isCreating} onClick={handleCreateOrganization}>
+                                    <Button type="button" disabled={isCreating} onClick={handleCreateOrganization}>
                                         {isCreating ? (
                                             <>
                                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

@@ -7,6 +7,7 @@ import {
     ArrowLeft, Package, MapPin, Search, 
     ArrowDownRight, ArrowUpRight, Wrench, FileText, Settings
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function MROItemDetailsPage() {
     const params = useParams();
@@ -42,10 +43,10 @@ export default function MROItemDetailsPage() {
                 </Link>
 
                 <div className="flex gap-3">
-                    <button className="px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] font-black uppercase tracking-widest hover:border-red-300 dark:hover:border-red-500/50 flex items-center gap-2 transition-all text-red-600 shadow-sm">
+                    <button type="button" className="px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[10px] font-black uppercase tracking-widest hover:border-red-300 dark:hover:border-red-500/50 flex items-center gap-2 transition-all text-red-600 shadow-sm">
                         <ArrowDownRight className="w-4 h-4" /> Sortie (Conso OT)
                     </button>
-                    <button className="px-5 py-3 rounded-xl bg-emerald-600 text-white text-[10px] font-black uppercase tracking-widest hover:brightness-110 flex items-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
+                    <button type="button" className="px-5 py-3 rounded-xl bg-emerald-600 text-white text-[10px] font-black uppercase tracking-widest hover:brightness-110 flex items-center gap-2 transition-all shadow-lg shadow-emerald-500/20">
                         <ArrowUpRight className="w-4 h-4" /> Entrée (Réception)
                     </button>
                 </div>

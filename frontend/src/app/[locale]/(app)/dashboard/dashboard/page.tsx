@@ -27,7 +27,7 @@ export default function OperationsDashboard() {
                         <Calendar className="w-4 h-4 text-slate-400" />
                         Last 24 Hours
                     </div>
-                    <Button className="font-bold flex items-center gap-2">
+                    <Button type="button" className="font-bold flex items-center gap-2">
                         <Download className="w-4 h-4" />
                         Export Report
                     </Button>
@@ -93,7 +93,7 @@ export default function OperationsDashboard() {
                 <div className="xl:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col h-[500px]">
                     <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/20">
                         <h3 className="font-bold text-lg">Recent Complaints</h3>
-                        <Button variant="ghost" size="sm" className="text-primary font-bold hover:underline">View All List</Button>
+                        <Button type="button" variant="ghost" size="sm" className="text-primary font-bold hover:underline">View All List</Button>
                     </div>
                     <div className="flex-1 flex items-center justify-center text-slate-400">
                         <p>Complaints Table Component Placeholder</p>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 // Types
 interface Category {
@@ -114,7 +115,7 @@ export default function ServiceCategoriesPage() {
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
                         </div>
-                        <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-blue-700 transition-colors">
+                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-blue-700 transition-colors">
                             <span className="material-symbols-outlined text-sm">add</span>
                             Add Category
                         </button>
@@ -130,7 +131,7 @@ export default function ServiceCategoriesPage() {
                         <p className="text-slate-500 dark:text-slate-400 text-lg">Define how complaints are categorized, prioritized, and routed to technical teams.</p>
                     </div>
                     <div className="flex gap-3">
-                        <button className="flex items-center gap-2 px-4 h-10 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800">
+                        <button type="button" className="flex items-center gap-2 px-4 h-10 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800">
                             <span className="material-symbols-outlined text-lg">download</span>
                             Export CSV
                         </button>
@@ -209,7 +210,7 @@ export default function ServiceCategoriesPage() {
                                             {getPriorityBadge(category.priority)}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <button
+                                            <button type="button"
                                                 onClick={() => toggleStatus(category.id)}
                                                 className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${category.status === 'Active' ? 'bg-primary' : 'bg-slate-200 dark:bg-slate-700'}`}
                                             >
@@ -218,10 +219,10 @@ export default function ServiceCategoriesPage() {
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex justify-end gap-2">
-                                                <button className="p-2 text-slate-400 hover:text-primary rounded-lg transition-colors">
+                                                <button type="button" className="p-2 text-slate-400 hover:text-primary rounded-lg transition-colors">
                                                     <span className="material-symbols-outlined text-xl">edit</span>
                                                 </button>
-                                                <button onClick={() => deleteCategory(category.id)} className="p-2 text-slate-400 hover:text-red-500 rounded-lg transition-colors">
+                                                <button type="button" onClick={() => deleteCategory(category.id)} className="p-2 text-slate-400 hover:text-red-500 rounded-lg transition-colors">
                                                     <span className="material-symbols-outlined text-xl">delete</span>
                                                 </button>
                                             </div>

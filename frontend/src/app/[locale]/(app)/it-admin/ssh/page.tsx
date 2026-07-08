@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Terminal, Key, Shield, Plus, Lock } from 'lucide-react';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function SSHManagementPage() {
     return (
@@ -12,7 +13,7 @@ export default function SSHManagementPage() {
                     <h1 className="text-3xl font-bold tracking-tight text-slate-900">Gestion SSH</h1>
                     <p className="text-slate-500 mt-2">Gérez les paires de clés SSH et les accès serveurs sécurisés</p>
                 </div>
-                <button className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-xl hover:bg-slate-800 transition-colors">
+                <button type="button" className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-xl hover:bg-slate-800 transition-colors">
                     <Plus size={18} />
                     <span>Nouvelle Clé</span>
                 </button>

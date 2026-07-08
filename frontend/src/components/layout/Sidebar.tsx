@@ -31,6 +31,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
+import { Button } from '@/components/ui/button';
 
 // Type definitions
 interface MenuItem {
@@ -114,10 +115,11 @@ export function Sidebar() {
             )}
         >
             {/* Collapse Toggle - High contrast electric effect - Moved to top right */}
-            <button
+            <Button variant="transparent" size="icon"
                 onClick={() => setCollapsed((c) => !c)}
+                aria-label={collapsed ? 'Ouvrir le menu' : 'Fermer le menu'}
                 className={cn(
-                    'absolute top-6 z-50 w-10 h-10 rounded-xl flex items-center justify-center transition-all shadow-2xl',
+                    'absolute top-6 z-50 w-10 h-10 rounded-xl flex items-center justify-center shadow-2xl',
                     'bg-white dark:bg-[#1a0b2e] border-2 border-violet-500 text-violet-500',
                     'hover:scale-110 active:scale-95 hover:bg-violet-500 hover:text-white',
                     'shadow-[0_0_20px_rgba(139,92,246,0.5)]',
@@ -125,7 +127,7 @@ export function Sidebar() {
                 )}
             >
                 <ChevronRight className={cn('w-6 h-6 transition-transform duration-500', collapsed ? '' : 'rotate-180')} />
-            </button>
+            </Button>
 
             {/* Ambient glows for the premium look */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-[60px] pointer-events-none" />

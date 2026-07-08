@@ -2,6 +2,7 @@
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { Badge } from "@/components/ui/badge"
+import { Button } from '@/components/ui/button';
 
 export default function CloudMonitorPage() {
     const kpis = [
@@ -202,7 +203,7 @@ export default function CloudMonitorPage() {
                                     { name: "Budget Alerts", icon: "notifications_active" },
                                     { name: "Multi-Cloud IAM", icon: "account_tree" }
                                 ].map((tool, i) => (
-                                    <button key={i} className="w-full h-14 flex items-center justify-between px-6 bg-slate-100 dark:bg-white/5 rounded-2xl border border-transparent hover:border-primary/50 hover:bg-white/10 transition-all text-left group">
+                                    <button type="button" key={i} className="w-full h-14 flex items-center justify-between px-6 bg-slate-100 dark:bg-white/5 rounded-2xl border border-transparent hover:border-primary/50 hover:bg-white/10 transition-all text-left group">
                                         <div className="flex items-center gap-3">
                                             <span className="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">{tool.icon}</span>
                                             <span className="text-[10px] font-black uppercase tracking-widest">{tool.name}</span>

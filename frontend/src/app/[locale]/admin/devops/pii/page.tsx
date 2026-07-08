@@ -18,6 +18,7 @@ import {
     MoreVertical,
     Filter
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function PiiGovernanceDashboard() {
     return (
@@ -40,7 +41,7 @@ export default function PiiGovernanceDashboard() {
                         <AlertTriangle className="size-4" />
                         <span>3 Critical Risks Found</span>
                     </div>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-lg transition-colors shadow-sm shadow-indigo-200 dark:shadow-none">
+                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-lg transition-colors shadow-sm shadow-indigo-200 dark:shadow-none">
                         <RefreshCw className="size-4" /> Start Scan
                     </button>
                 </div>
@@ -99,7 +100,7 @@ export default function PiiGovernanceDashboard() {
                                 <Search className="absolute left-2.5 top-2.5 size-4 text-slate-400" />
                                 <input type="text" placeholder="Search tables or columns..." className="pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm w-full sm:w-64 focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-400" />
                             </div>
-                            <button className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-500">
+                            <button type="button" className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-500">
                                 <Filter className="size-4" />
                             </button>
                         </div>
@@ -143,7 +144,7 @@ export default function PiiGovernanceDashboard() {
                                     </td>
                                     <td className="px-6 py-4 text-slate-500">us-east-1</td>
                                     <td className="px-6 py-4 text-right">
-                                        <button className="text-slate-400 hover:text-indigo-600"><MoreVertical className="size-4" /></button>
+                                        <button type="button" className="text-slate-400 hover:text-indigo-600"><MoreVertical className="size-4" /></button>
                                     </td>
                                 </tr>
 
@@ -171,7 +172,7 @@ export default function PiiGovernanceDashboard() {
                                     </td>
                                     <td className="px-6 py-4 text-slate-500">global</td>
                                     <td className="px-6 py-4 text-right">
-                                        <button className="text-slate-400 hover:text-indigo-600"><MoreVertical className="size-4" /></button>
+                                        <button type="button" className="text-slate-400 hover:text-indigo-600"><MoreVertical className="size-4" /></button>
                                     </td>
                                 </tr>
 
@@ -199,7 +200,7 @@ export default function PiiGovernanceDashboard() {
                                     </td>
                                     <td className="px-6 py-4 text-slate-500">eu-central-1</td>
                                     <td className="px-6 py-4 text-right">
-                                        <button className="text-slate-400 hover:text-indigo-600"><MoreVertical className="size-4" /></button>
+                                        <button type="button" className="text-slate-400 hover:text-indigo-600"><MoreVertical className="size-4" /></button>
                                     </td>
                                 </tr>
 
@@ -208,7 +209,7 @@ export default function PiiGovernanceDashboard() {
                     </div>
 
                     <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex justify-center">
-                        <button className="text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors">View All Discovered items</button>
+                        <Button variant="ghost" className="text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors">View All Discovered items</Button>
                     </div>
                 </div>
 

@@ -272,7 +272,7 @@ export const CallProvider = ({ children }: { children: React.ReactNode }) => {
                     <div className="p-4 flex justify-center gap-6 bg-slate-50 dark:bg-slate-900/95 backdrop-blur border-t border-slate-200 dark:border-slate-800">
                         {callState === 'incoming' ? (
                             <>
-                                <button
+                                <button type="button"
                                     onClick={answerCall}
                                     className="flex flex-col items-center gap-1 group"
                                 >
@@ -282,7 +282,7 @@ export const CallProvider = ({ children }: { children: React.ReactNode }) => {
                                     <span className="text-[10px] font-medium text-green-600 dark:text-green-400">Accepter</span>
                                 </button>
 
-                                <button
+                                <button type="button"
                                     onClick={rejectCall}
                                     className="flex flex-col items-center gap-1 group"
                                 >
@@ -293,7 +293,7 @@ export const CallProvider = ({ children }: { children: React.ReactNode }) => {
                                 </button>
                             </>
                         ) : (
-                            <button
+                            <button type="button"
                                 onClick={endCall}
                                 className="flex items-center gap-2 px-6 py-2 bg-red-500 hover:bg-red-600 rounded-full text-white shadow-lg shadow-red-500/20 font-medium text-sm transition-all transform hover:scale-105"
                             >

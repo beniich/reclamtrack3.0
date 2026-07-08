@@ -2,6 +2,7 @@
 
 import { AlertCircle, CheckCircle2, Clock, Filter, Plus, Search } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 interface Complaint {
     _id: string;
@@ -134,11 +135,11 @@ export default function FleetComplaintsPage() {
                     <p className="text-sm text-slate-500 font-medium">Manage and track vehicle-related issues reported by drivers.</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                         <Filter className="w-4 h-4" />
                         Filters
                     </button>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors">
+                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors">
                         <Plus className="w-4 h-4" />
                         New Complaint
                     </button>
@@ -218,7 +219,7 @@ export default function FleetComplaintsPage() {
                                     {new Date(item.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
                                 </td>
                                 <td className="px-6 py-4 text-right relative">
-                                    <button
+                                    <button type="button"
                                         onClick={() => setOpenMenuId(openMenuId === item._id ? null : item._id)}
                                         className="p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors"
                                     >
@@ -226,7 +227,7 @@ export default function FleetComplaintsPage() {
                                     </button>
                                     {openMenuId === item._id && (
                                         <div className="absolute right-6 top-12 z-50 bg-white dark:bg-[#1c1c30] border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl min-w-[160px] overflow-hidden">
-                                            <button
+                                            <button type="button"
                                                 onClick={() => setOpenMenuId(null)}
                                                 className="w-full text-left px-4 py-3 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-3 transition-colors"
                                             >
@@ -234,7 +235,7 @@ export default function FleetComplaintsPage() {
                                                 View Details
                                             </button>
                                             {item.status !== 'resolue' && item.status !== 'resolved' && (
-                                                <button
+                                                <button type="button"
                                                     onClick={() => handleResolve(item._id)}
                                                     className="w-full text-left px-4 py-3 text-sm font-medium text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 flex items-center gap-3 transition-colors"
                                                 >
@@ -242,7 +243,7 @@ export default function FleetComplaintsPage() {
                                                     Mark Resolved
                                                 </button>
                                             )}
-                                            <button
+                                            <button type="button"
                                                 onClick={() => handleDelete(item._id)}
                                                 className="w-full text-left px-4 py-3 text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-3 border-t border-slate-100 dark:border-slate-700 transition-colors"
                                             >

@@ -10,6 +10,7 @@ import { useUIStore } from '@/store/uiStore';
 import { Bell, Search, Settings, User, LogOut, Bot, Sparkles } from 'lucide-react';
 import { Logo } from '@/components/shared/Logo';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
+import { Button } from '@/components/ui/button';
 
 interface HeaderProps {
     showSearch?: boolean;
@@ -86,10 +87,10 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                 <div className="flex items-center gap-2 pr-4 border-r border-slate-200 dark:border-slate-800">
                     <ThemeToggle />
                     
-                    <button className="p-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl relative transition-all group">
+                    <Button variant="transparent" size="icon" className="rounded-xl relative group" aria-label="Notifications">
                         <Bell className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-orange-500" />
                         <span className="absolute top-3 right-3 w-2 h-2 bg-orange-500 rounded-full border-2 border-white dark:border-[#0f0125] group-hover:scale-110 transition-transform" />
-                    </button>
+                    </Button>
 
                     <Link href="/settings" className="p-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all group">
                         <Settings className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-orange-500" />
@@ -125,15 +126,16 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                         </div>
                     </motion.div>
 
-                    <button 
+                    <Button variant="transparent" size="icon"
                         onClick={() => {
                             logout();
                         }} 
-                        className="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
+                        className="text-slate-400 hover:text-red-500 hover:bg-red-500/10 rounded-xl"
                         title={tNav('logout')}
+                        aria-label={tNav('logout')}
                     >
                         <LogOut className="w-5 h-5" />
-                    </button>
+                    </Button>
                 </div>
             </div>
         </header>

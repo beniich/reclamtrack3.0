@@ -131,7 +131,7 @@ export default function MembersPage() {
                 <RoleGuard minRole={Role.ADMIN}>
                     <Dialog open={isInviteOpen} onOpenChange={setIsInviteOpen}>
                         <DialogTrigger asChild>
-                            <Button className="gap-2">
+                            <Button type="button" className="gap-2">
                                 <Plus className="w-4 h-4" /> Invite Member
                             </Button>
                         </DialogTrigger>
@@ -167,8 +167,8 @@ export default function MembersPage() {
                                 </div>
                             </div>
                             <DialogFooter>
-                                <Button variant="outline" onClick={() => setIsInviteOpen(false)}>Cancel</Button>
-                                <Button onClick={handleInvite} disabled={isInviting}>
+                                <Button type="button" variant="outline" onClick={() => setIsInviteOpen(false)}>Cancel</Button>
+                                <Button type="button" onClick={handleInvite} disabled={isInviting}>
                                     {isInviting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                                     Send Invitation
                                 </Button>
@@ -253,7 +253,7 @@ export default function MembersPage() {
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <RoleGuard minRole={Role.ADMIN}>
-                                            <Button
+                                            <Button type="button"
                                                 variant="ghost"
                                                 size="icon"
                                                 className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10"

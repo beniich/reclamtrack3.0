@@ -108,7 +108,7 @@ export const MaterialSearch: React.FC<MaterialSearchProps> = ({
                         const isSelected = index === selectedIndex;
 
                         return (
-                            <button
+                            <button type="button"
                                 key={material.id}
                                 onClick={() => handleSelect(material)}
                                 className={cn(

@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 // Types
 type SOPStatus = 'ACTIVE' | 'DRAFT' | 'REVIEW' | 'ARCHIVED';
@@ -150,7 +151,7 @@ export default function KnowledgeBasePage() {
                         <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-4">Main Categories</p>
                         <div className="space-y-1">
                             {categories.map(category => (
-                                <button
+                                <button type="button"
                                     key={category}
                                     onClick={() => setSelectedCategory(category)}
                                     className={`flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${selectedCategory === category
@@ -173,7 +174,7 @@ export default function KnowledgeBasePage() {
                     <div className="mt-auto p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-800">
                         <p className="text-xs font-bold mb-2 text-slate-700 dark:text-slate-300">Need Live Support?</p>
                         <p className="text-[11px] text-slate-500 mb-3">Direct line to Central Dispatch for urgent clarifications.</p>
-                        <button className="w-full py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-slate-700 dark:text-slate-300">
+                        <button type="button" className="w-full py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-slate-700 dark:text-slate-300">
                             <span className="material-symbols-outlined text-sm">call</span>
                             Call Supervisor
                         </button>
@@ -195,11 +196,11 @@ export default function KnowledgeBasePage() {
                                 <p className="text-slate-500 mt-1 max-w-2xl font-medium">Technical guides and step-by-step intervention protocols for field operators and customer service desk.</p>
                             </div>
                             <div className="flex items-center gap-3">
-                                <button className="flex items-center gap-2 px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-lg text-sm font-bold bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors">
+                                <button type="button" className="flex items-center gap-2 px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-lg text-sm font-bold bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors">
                                     <span className="material-symbols-outlined text-lg">download</span>
                                     Export All
                                 </button>
-                                <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
+                                <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
                                     <span className="material-symbols-outlined text-lg">add</span>
                                     Create SOP
                                 </button>
@@ -241,7 +242,7 @@ export default function KnowledgeBasePage() {
                                                 </div>
                                             ))}
                                         </div>
-                                        <button className="text-primary text-xs font-bold hover:underline">
+                                        <button type="button" className="text-primary text-xs font-bold hover:underline">
                                             {sop.status === 'DRAFT' ? 'Resume Draft' : 'View Protocol'}
                                         </button>
                                     </div>

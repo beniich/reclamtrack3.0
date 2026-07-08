@@ -9,6 +9,7 @@ import {
 import { 
     Select, SelectContent, SelectItem, SelectTrigger, SelectValue 
 } from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
 
 export default function AssetsRegistryPage() {
     // Mock data for Phase 1 presentation
@@ -70,11 +71,11 @@ export default function AssetsRegistryPage() {
 
                 <div className="flex gap-3">
                     <Link href="/assets/map">
-                        <button className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-indigo-300 dark:hover:border-orange-500/50 flex items-center gap-2 transition-all shadow-sm">
+                        <button type="button" className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-indigo-300 dark:hover:border-orange-500/50 flex items-center gap-2 transition-all shadow-sm">
                             <MapPin className="w-4 h-4" /> Vue Plan
                         </button>
                     </Link>
-                    <button className="h-[52px] bg-indigo-600 dark:bg-orange-500 hover:brightness-110 text-white rounded-2xl px-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-indigo-600/20 dark:shadow-orange-600/20 transition-all">
+                    <button type="button" className="h-[52px] bg-indigo-600 dark:bg-orange-500 hover:brightness-110 text-white rounded-2xl px-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-indigo-600/20 dark:shadow-orange-600/20 transition-all">
                         <Plus className="w-4 h-4" /> Nouvel Équipement
                     </button>
                 </div>
@@ -114,7 +115,7 @@ export default function AssetsRegistryPage() {
                             <SelectItem value="RESTRICTED">RESTRICTED</SelectItem>
                         </SelectContent>
                     </Select>
-                    <button className="w-[52px] h-[52px] flex items-center justify-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                    <button type="button" className="w-[52px] h-[52px] flex items-center justify-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                         <Filter className="w-4 h-4 text-slate-700 dark:text-slate-300" />
                     </button>
                 </div>

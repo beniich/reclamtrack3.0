@@ -16,4 +16,27 @@ module.exports = {
     ],
   },
   extensionsToTreatAsEsm: ['.ts'],
+  // ── Coverage ──────────────────────────────────────────────────────────────
+  collectCoverage: false, // Activate via --coverage flag in CI
+  collectCoverageFrom: [
+    'src/**/*.ts',
+    '!src/**/*.d.ts',
+    '!src/scripts/**',
+    '!src/index.ts',
+  ],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'html'],
+  coverageThreshold: {
+    global: {
+      lines: 60,
+      functions: 60,
+      branches: 40,
+      statements: 60,
+    },
+  },
+  // ── Test metadata ─────────────────────────────────────────────────────────
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
+  verbose: true,
+  // ── Timeout ───────────────────────────────────────────────────────────────
+  testTimeout: 15000,
 };

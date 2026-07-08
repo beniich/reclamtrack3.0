@@ -1,6 +1,7 @@
 'use client';
 
 import { Bell, Fuel, Gauge, Shield } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function FleetSettingsPage() {
     return (
@@ -88,16 +89,14 @@ export default function FleetSettingsPage() {
 
                     <div className="space-y-4">
                         <p className="text-xs text-slate-500">Manage who can dispatch vehicles and schedule maintenance.</p>
-                        <button className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-sm font-bold transition-colors">
-                            Manage Permissions
-                        </button>
+                        <Button variant="secondary" className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-sm font-bold transition-colors">Manage Permissions</Button>
                     </div>
                 </div>
             </div>
 
             <div className="flex justify-end gap-4 border-t border-slate-200 dark:border-slate-800 pt-8">
-                <button className="px-6 py-2 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-bold">Reset Defaults</button>
-                <button className="px-8 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20">Save Changes</button>
+                <Button variant="outline" className="px-6 py-2 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-bold">Reset Defaults</Button>
+                <Button variant="primary" className="px-8 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20">Save Changes</Button>
             </div>
         </div>
     );

@@ -3,13 +3,17 @@ import express from 'express';
 import helmet from 'helmet';
 import { createServer } from 'http';
 import path from 'path';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
 import { connectDB } from './config/db.js';
 import { envValidator } from './config/envValidator.js';
+import { auditTrail } from './middleware/auditTrail.js';
 import errorHandler from './middleware/errorHandler.js';
 import { globalLimiter } from './middleware/rateLimiters.js';
 import { requestId } from './middleware/requestId.js';
 import { authenticate, requireAdmin, securityHeaders } from './middleware/security.js';
 import { initSocket } from './services/socketService.js';
+import { startSagaConsumer } from './services/sagaConsumer.js';
 import { logger } from './utils/logger.js';
 
 import adminRoutes from './routes/admin.js';
@@ -27,7 +31,9 @@ import devopsRoutes from './routes/devops.js';
 import eventsRoutes from './routes/events.js';
 import feedbackRoutes from './routes/feedback.js';
 import fleetRoutes from './routes/fleet.js';
+import fleetAgentRoutes from './routes/fleetAgent.js';
 import googleAuthRoutes from './routes/googleAuth.js';
+import hrRoutes from './routes/hr.js';
 import interventionRoutes from './routes/interventions.js';
 import inventoryRoutes from './routes/inventory.js';
 import itTicketsRoutes from './routes/it-tickets.js';
@@ -41,6 +47,8 @@ import organizationRoutes from './routes/organizations.js';
 import planningRoutes from './routes/planning.js';
 import rosterRoutes from './routes/roster.js';
 import schedulerRoutes from './routes/scheduler.js';
+import simulationRoutes from './routes/simulation.js';
+import smartVisionRoutes from './routes/smartVision.js';
 import staffRoutes from './routes/staff.js';
 import teamRoutes from './routes/teams.js';
 import uploadRoutes from './routes/upload.js';
@@ -58,7 +66,10 @@ import networkRoutes from './routes/network.js';
 import securityRoutes from './routes/security.js';
 import sshRoutes from './routes/ssh-management.js';
 
-// ...
+// New feature routes
+import reportsRoutes from './routes/reports.js';
+import webhooksRoutes from './routes/webhooks.js';
+import integrationsRoutes from './routes/integrations.js';
 
 // Validate environment
 envValidator();
@@ -102,11 +113,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 // Swagger Documentation
-import swaggerUi from 'swagger-ui-express';
-import YAML from 'yamljs';
-import { auditTrail } from './middleware/auditTrail.js';
-
-const swaggerDocument = YAML.load('./docs/openapi.yaml');
+const swaggerDocument = YAML.load('./docs/openapi.yaml') as Record<string, unknown>;
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Global Audit Middleware (SOC 2 CC6.1 Compliant)
@@ -128,8 +135,6 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/knowledge', knowledgeRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/admin', adminRoutes);
-
-import hrRoutes from './routes/hr.js';
 app.use('/api/hr', hrRoutes);
 
 app.use('/api/db', dbRoutes);
@@ -157,12 +162,13 @@ app.use('/api/work-orders', workOrderRoutes);
 app.use('/api/maintenance-plans', maintenancePlanRoutes);
 app.use('/api/mro', mroRoutes);
 app.use('/api/audit-agent', auditAgentRoutes);
-import fleetAgentRoutes from './routes/fleetAgent.js';
 app.use('/api/fleet-agent', fleetAgentRoutes);
-import smartVisionRoutes from './routes/smartVision.js';
 app.use('/api/smart-vision', smartVisionRoutes);
-import simulationRoutes from './routes/simulation.js';
 app.use('/api/simulation', simulationRoutes);
+// New feature routes
+app.use('/api/reports', reportsRoutes);
+app.use('/api/webhooks', webhooksRoutes);
+app.use('/api/integrations', integrationsRoutes);
 
 // Health check
 app.get('/', (req, res) => {
@@ -193,30 +199,58 @@ app.use(errorHandler);
 // Initialize Socket.IO
 initSocket(httpServer);
 
-// Start server
-import { startSagaConsumer } from './services/sagaConsumer.js';
-
 // HTTP event bridge
 app.use('/events', eventsRoutes);
 
-const start = async () => {
+// ─── Server startup ───────────────────────────────────────────────────────────
+const PORT = process.env['PORT'] ?? 5001;
+
+const start = async (): Promise<void> => {
   try {
     await connectDB();
 
-    if (process.env.DISABLE_KAFKA !== 'true') {
+    if (process.env['DISABLE_KAFKA'] !== 'true') {
       await startSagaConsumer();
     } else {
-      console.log('⚠️ Kafka Disabled. Backend ready for HTTP events.');
+      logger.warn('⚠️  Kafka disabled — backend ready for HTTP events.');
     }
 
-    const PORT = process.env.PORT || 5001;
     httpServer.listen(PORT, () => {
-      logger.info(`🚀 API ReclamTrack écoute sur le port ${PORT}`);
+      logger.info(`🚀 API ReclamTrack listening on port ${PORT}`);
     });
   } catch (err) {
-    logger.error('❌ Échec démarrage serveur', err);
+    logger.error('❌ Server startup failed', { error: err });
     process.exit(1);
   }
 };
+
+// ─── Graceful shutdown ────────────────────────────────────────────────────────
+const shutdown = (signal: string): void => {
+  logger.info(`🛑 ${signal} received — shutting down gracefully…`);
+  httpServer.close(() => {
+    logger.info('✅ HTTP server closed.');
+    process.exit(0);
+  });
+
+  // Force exit after 10s if connections do not drain
+  setTimeout(() => {
+    logger.error('⏱️  Forced shutdown after 10s timeout.');
+    process.exit(1);
+  }, 10_000).unref();
+};
+
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT',  () => shutdown('SIGINT'));
+
+// Handle unhandled promise rejections — prevent silent failures
+process.on('unhandledRejection', (reason: unknown) => {
+  logger.error('💥 Unhandled Promise Rejection', { reason });
+});
+
+// Handle uncaught exceptions — log then exit (let orchestrator restart)
+process.on('uncaughtException', (err: Error) => {
+  logger.error('💥 Uncaught Exception', { error: err.message, stack: err.stack });
+  process.exit(1);
+});
 
 start();

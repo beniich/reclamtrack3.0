@@ -17,6 +17,7 @@ import {
     Lock,
     RefreshCcw
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function DrFailoverDashboard() {
     return (
@@ -155,7 +156,7 @@ export default function DrFailoverDashboard() {
                                 </label>
                             </div>
 
-                            <button className="w-full max-w-sm py-3 bg-slate-200 dark:bg-slate-800 text-slate-400 font-bold rounded-lg cursor-not-allowed flex items-center justify-center gap-2" disabled>
+                            <button type="button" className="w-full max-w-sm py-3 bg-slate-200 dark:bg-slate-800 text-slate-400 font-bold rounded-lg cursor-not-allowed flex items-center justify-center gap-2" disabled>
                                 <SwitchCamera className="size-5" /> Initiate Regional Failover
                             </button>
                         </div>
@@ -167,7 +168,7 @@ export default function DrFailoverDashboard() {
                             <h3 className="font-bold text-lg flex items-center gap-2">
                                 <RefreshCcw className="size-5 text-slate-500" /> Recent Drills
                             </h3>
-                            <button className="text-xs text-blue-600 hover:underline">View Audit Logs</button>
+                            <Button variant="ghost" className="text-xs text-blue-600 hover:underline">View Audit Logs</Button>
                         </div>
                         <div className="divide-y divide-slate-100 dark:divide-slate-800">
                             <div className="p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">

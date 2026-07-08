@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function InfrastructureLanding() {
     const t = useTranslations('Infrastructure');
@@ -135,7 +136,7 @@ export default function InfrastructureLanding() {
                                 </div>
                                 <h3 className="text-2xl font-black uppercase tracking-tight mb-6">{f.title}</h3>
                                 <p className="text-slate-400 font-light leading-relaxed mb-10">{f.desc}</p>
-                                <button className="text-[10px] font-black uppercase tracking-widest text-blue-500 flex items-center gap-2 hover:gap-4 transition-all group">
+                                <button type="button" className="text-[10px] font-black uppercase tracking-widest text-blue-500 flex items-center gap-2 hover:gap-4 transition-all group">
                                     En savoir plus <span className="material-symbols-outlined text-sm">arrow_forward</span>
                                 </button>
                             </div>

@@ -1,6 +1,7 @@
 'use client'
 
 import DashboardTemplate from '@/components/devops-dashboards/shared/DashboardTemplate'
+import { Button } from '@/components/ui/button';
 
 export default function DBQueryPerformance() {
   const kpis = [
@@ -119,9 +120,7 @@ export default function DBQueryPerformance() {
                   <p className="text-sm dark:text-slate-200 leading-snug">Query #8293 is performing a full table scan on 2.4M rows.</p>
                 </div>
               </div>
-              <button className="w-full mt-6 py-2.5 bg-primary text-white font-bold rounded-lg text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
-                Apply Optimizations
-              </button>
+              <Button variant="primary" className="w-full mt-6 py-2.5 bg-primary text-white font-bold rounded-lg text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">Apply Optimizations</Button>
             </div>
           </section>
 

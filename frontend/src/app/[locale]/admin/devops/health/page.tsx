@@ -21,6 +21,7 @@ import {
     ShieldCheck,
     MousePointer2
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function SystemHealthDashboard() {
     return (
@@ -52,7 +53,7 @@ export default function SystemHealthDashboard() {
                             <span>Latency: 42ms</span>
                         </div>
                     </div>
-                    <button className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium rounded-lg transition-colors border border-slate-700">
+                    <button type="button" className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium rounded-lg transition-colors border border-slate-700">
                         <RefreshCcw className="size-4" /> <span className="hidden sm:inline">Refresh</span>
                     </button>
                 </div>
@@ -67,8 +68,8 @@ export default function SystemHealthDashboard() {
                     {/* Topology Map (Center) */}
                     <div className="lg:col-span-2 bg-slate-900/40 border border-slate-800 rounded-2xl p-6 relative min-h-[500px] flex items-center justify-center overflow-hidden group">
                         <div className="absolute top-4 left-4 z-20 flex gap-2">
-                            <button className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><LayoutGrid className="size-4" /></button>
-                            <button className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><List className="size-4" /></button>
+                            <button type="button" className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><LayoutGrid className="size-4" /></button>
+                            <button type="button" className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><List className="size-4" /></button>
                         </div>
 
                         {/* Simulated Topology Graph */}
@@ -203,8 +204,8 @@ export default function SystemHealthDashboard() {
                                     </div>
                                     <p className="text-[10px] text-slate-400 mb-2">p99 latency exceeded 500ms threshold (current: 820ms)</p>
                                     <div className="hidden group-hover:flex gap-2">
-                                        <button className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-xs rounded text-slate-300">Investigate</button>
-                                        <button className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-xs rounded text-slate-300">Ack</button>
+                                        <Button variant="secondary" className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-xs rounded text-slate-300">Investigate</Button>
+                                        <Button variant="secondary" className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-xs rounded text-slate-300">Ack</Button>
                                     </div>
                                 </div>
 

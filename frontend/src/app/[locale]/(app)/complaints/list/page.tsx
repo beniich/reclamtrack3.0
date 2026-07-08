@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { SmartTicketVisionHeader } from '@/components/complaints/SmartTicketVision';
+import { Button } from '@/components/ui/button';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Meta { page: number; limit: number; total: number; totalPages: number; }
@@ -168,13 +169,13 @@ export default function ComplaintListPage() {
                 </div>
 
                 <div className="flex items-center gap-2 flex-wrap">
-                    <button
+                    <button type="button"
                         onClick={fetchData}
                         className="flex items-center gap-2 px-4 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-300 rounded-xl transition-all text-[10px] font-black uppercase tracking-widest"
                     >
                         <RefreshCw className="w-3.5 h-3.5" />
                     </button>
-                    <button
+                    <button type="button"
                         onClick={handleExport}
                         disabled={exporting}
                         className="flex items-center gap-2 bg-emerald-500 hover:brightness-110 disabled:opacity-60 text-white px-4 py-3 rounded-xl transition-all font-black text-[10px] uppercase tracking-widest shadow-lg shadow-emerald-500/20 active:scale-95"
@@ -198,7 +199,7 @@ export default function ComplaintListPage() {
             {/* ── Status Tabs ── */}
             <div className="flex items-center gap-2 flex-wrap">
                 {STATUSES.map((s) => (
-                    <button
+                    <button type="button"
                         key={s.value}
                         onClick={() => setStatusFilter(s.value)}
                         className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border
@@ -232,12 +233,12 @@ export default function ComplaintListPage() {
                             className="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/50 focus:bg-white/8 transition-all font-medium"
                         />
                         {search && (
-                            <button onClick={() => setSearch('')} title="Effacer la recherche" className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300">
+                            <button type="button" onClick={() => setSearch('')} title="Effacer la recherche" className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300">
                                 <X className="w-4 h-4" />
                             </button>
                         )}
                     </div>
-                    <button
+                    <button type="button"
                         onClick={() => setShowFilters(!showFilters)}
                         className={`flex items-center gap-2 px-4 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest border transition-all
                             ${showFilters || hasActiveFilters
@@ -250,7 +251,7 @@ export default function ComplaintListPage() {
                         {hasActiveFilters && <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full" />}
                     </button>
                     {hasActiveFilters && (
-                        <button onClick={clearFilters} className="text-[10px] font-black text-slate-500 hover:text-rose-400 uppercase tracking-widest transition-colors flex items-center gap-1">
+                        <button type="button" onClick={clearFilters} className="text-[10px] font-black text-slate-500 hover:text-rose-400 uppercase tracking-widest transition-colors flex items-center gap-1">
                             <X className="w-3 h-3" /> Effacer
                         </button>
                     )}
@@ -291,9 +292,7 @@ export default function ComplaintListPage() {
                         {hasActiveFilters ? 'Aucune réclamation ne correspond aux filtres appliqués.' : 'Le registre est vide.'}
                     </p>
                     {hasActiveFilters && (
-                        <button onClick={clearFilters} className="mt-6 text-cyan-400 text-xs font-black uppercase tracking-widest hover:underline">
-                            Effacer les filtres
-                        </button>
+                        <Button variant="ghost" className="mt-6 text-cyan-400 text-xs font-black uppercase tracking-widest hover:underline" onClick={clearFilters}>Effacer les filtres</Button>
                     )}
                 </div>
             ) : (
@@ -388,7 +387,7 @@ export default function ComplaintListPage() {
                             {((meta.page - 1) * meta.limit) + 1}–{Math.min(meta.page * meta.limit, meta.total)} sur {meta.total}
                         </span>
                         <div className="flex items-center gap-2">
-                            <button
+                            <button type="button"
                                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                                 disabled={meta.page <= 1}
                                 className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
@@ -402,7 +401,7 @@ export default function ComplaintListPage() {
                                         {idx > 0 && arr[idx - 1] !== p - 1 && (
                                             <span key={`gap-${p}`} className="text-slate-600 text-xs">…</span>
                                         )}
-                                        <button
+                                        <button type="button"
                                             key={p}
                                             onClick={() => setPage(p)}
                                             className={`w-8 h-8 rounded-lg text-xs font-black transition-all border
@@ -416,7 +415,7 @@ export default function ComplaintListPage() {
                                     </>
                                 ))
                             }
-                            <button
+                            <button type="button"
                                 onClick={() => setPage((p) => Math.min(meta.totalPages, p + 1))}
                                 disabled={meta.page >= meta.totalPages}
                                 className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all"

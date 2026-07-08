@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import * as XLSX from 'xlsx';
+import { Button } from '@/components/ui/button';
 
 // Types
 type ReportFormat = 'PDF' | 'EXCEL' | 'CSV';
@@ -178,7 +179,7 @@ export default function ReportsPage() {
                         <p className="text-slate-500 text-lg max-w-2xl">Real-time performance metrics and automated report generation.</p>
                     </div>
                     <div className="flex gap-3">
-                        <button className="flex items-center gap-2 rounded-lg h-11 px-6 bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
+                        <button type="button" className="flex items-center gap-2 rounded-lg h-11 px-6 bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
                             <span className="material-symbols-outlined text-[20px]">add</span>
                             New Report Job
                         </button>
@@ -241,7 +242,7 @@ export default function ReportsPage() {
                                         <label className="text-sm font-semibold text-slate-700 mb-2 block">Report Frequency</label>
                                         <div className="grid grid-cols-3 gap-2 bg-slate-100 p-1 rounded-lg">
                                             {(['MONTHLY', 'ANNUAL', 'CUSTOM'] as const).map(f => (
-                                                <button
+                                                <button type="button"
                                                     key={f}
                                                     onClick={() => setFrequency(f)}
                                                     className={cn(
@@ -259,22 +260,22 @@ export default function ReportsPage() {
                                     <div>
                                         <label className="text-sm font-semibold text-slate-700 mb-2 block">Export Format</label>
                                         <div className="flex gap-2">
-                                            <button onClick={() => setSelectedFormat('PDF')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'PDF' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
+                                            <button type="button" onClick={() => setSelectedFormat('PDF')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'PDF' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
                                                 <span className="material-symbols-outlined text-[24px]">picture_as_pdf</span>
                                                 <span className="text-[10px] font-black uppercase">PDF</span>
                                             </button>
-                                            <button onClick={() => setSelectedFormat('EXCEL')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'EXCEL' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
+                                            <button type="button" onClick={() => setSelectedFormat('EXCEL')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'EXCEL' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
                                                 <span className="material-symbols-outlined text-[24px]">table_view</span>
                                                 <span className="text-[10px] font-black uppercase">Excel</span>
                                             </button>
-                                            <button onClick={() => setSelectedFormat('CSV')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'CSV' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
+                                            <button type="button" onClick={() => setSelectedFormat('CSV')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'CSV' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
                                                 <span className="material-symbols-outlined text-[24px]">csv</span>
                                                 <span className="text-[10px] font-black uppercase">CSV</span>
                                             </button>
                                         </div>
                                     </div>
 
-                                    <button
+                                    <button type="button"
                                         onClick={handleGenerate}
                                         disabled={isGenerating}
                                         className="w-full mt-4 bg-primary text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transform active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-wait"

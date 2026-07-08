@@ -4,6 +4,7 @@ import { KPICard } from '@/components/shared/KPICard';
 import { StatusIndicator } from '@/components/shared/StatusIndicator';
 import { Shield, AlertTriangle, Activity, Database } from 'lucide-react';
 import { useThreatData } from '@/lib/hooks/useThreatData';
+import { Button } from '@/components/ui/button';
 
 export default function ThreatIntelPage() {
     const { metrics, events, loading } = useThreatData();
@@ -21,10 +22,8 @@ export default function ThreatIntelPage() {
                     </p>
                 </div>
                 <div className="flex gap-3">
-                    <button className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-sm font-semibold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                        Export Report
-                    </button>
-                    <button className="px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2">
+                    <Button variant="secondary" className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-sm font-semibold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Export Report</Button>
+                    <button type="button" className="px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2">
                         <Shield className="w-4 h-4" />
                         Deploy Countermeasures
                     </button>
@@ -115,8 +114,8 @@ export default function ThreatIntelPage() {
                                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-primary/20 size-64 rounded-full border-dashed animate-[spin_20s_linear_infinite]"></div>
                             </div>
                             <div className="absolute bottom-4 right-4 flex flex-col gap-2 z-20">
-                                <button className="size-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center hover:bg-slate-700 text-white">+</button>
-                                <button className="size-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center hover:bg-slate-700 text-white">-</button>
+                                <button type="button" className="size-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center hover:bg-slate-700 text-white">+</button>
+                                <Button variant="secondary" className="size-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center hover:bg-slate-700 text-white">-</Button>
                             </div>
                         </div>
                     </div>
@@ -128,7 +127,7 @@ export default function ThreatIntelPage() {
                                 <Activity className="w-5 h-5 text-primary" />
                                 Real-time Blocked Events
                             </h3>
-                            <button className="text-xs text-primary font-bold hover:underline">View All Logs</button>
+                            <Button variant="ghost" className="text-xs text-primary font-bold hover:underline">View All Logs</Button>
                         </div>
 
                         <div className="overflow-x-auto">
@@ -245,9 +244,7 @@ export default function ThreatIntelPage() {
                                 </div>
                             </div>
                         </div>
-                        <button className="w-full py-3 bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                            SCAN GLOBAL REPUTATION DATABASE
-                        </button>
+                        <Button variant="secondary" className="w-full py-3 bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">SCAN GLOBAL REPUTATION DATABASE</Button>
                     </div>
 
                     {/* Feed Health */}
@@ -284,16 +281,16 @@ export default function ThreatIntelPage() {
             <div className="dashboard-card p-4 flex flex-wrap gap-4 items-center justify-between">
                 <div className="flex items-center gap-4">
                     <div className="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-1">
-                        <button className="px-4 py-1.5 text-xs font-bold bg-primary text-white rounded-md shadow-sm">Real-time</button>
-                        <button className="px-4 py-1.5 text-xs font-bold text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">24h History</button>
-                        <button className="px-4 py-1.5 text-xs font-bold text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">7d Trend</button>
+                        <Button variant="primary" className="px-4 py-1.5 text-xs font-bold bg-primary text-white rounded-md shadow-sm">Real-time</Button>
+                        <Button variant="ghost" className="px-4 py-1.5 text-xs font-bold text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">24h History</Button>
+                        <Button variant="ghost" className="px-4 py-1.5 text-xs font-bold text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">7d Trend</Button>
                     </div>
                 </div>
                 <div className="flex gap-3">
-                    <button className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-white px-4 py-2 rounded-lg text-xs font-bold transition-all border border-slate-200 dark:border-slate-700">
+                    <button type="button" className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-white px-4 py-2 rounded-lg text-xs font-bold transition-all border border-slate-200 dark:border-slate-700">
                         <span>🔽</span> Export Report
                     </button>
-                    <button className="flex items-center gap-2 bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-lg shadow-primary/20">
+                    <button type="button" className="flex items-center gap-2 bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-lg shadow-primary/20">
                         <Shield className="w-4 h-4" /> Deploy Countermeasures
                     </button>
                 </div>

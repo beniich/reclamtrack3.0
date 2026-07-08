@@ -19,6 +19,7 @@ import {
     Terminal,
     Server
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function SqlInsightDashboard() {
     return (
@@ -34,17 +35,17 @@ export default function SqlInsightDashboard() {
                     <div>
                         <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Databases</h3>
                         <div className="space-y-1">
-                            <button className="w-full flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded-lg text-sm font-medium">
+                            <button type="button" className="w-full flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded-lg text-sm font-medium">
                                 <Server className="size-4" />
                                 <span>production-primary</span>
                                 <span className="ml-auto size-2 rounded-full bg-emerald-500"></span>
                             </button>
-                            <button className="w-full flex items-center gap-2 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
+                            <button type="button" className="w-full flex items-center gap-2 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
                                 <Server className="size-4" />
                                 <span>analytics-replica-01</span>
                                 <span className="ml-auto size-2 rounded-full bg-emerald-500"></span>
                             </button>
-                            <button className="w-full flex items-center gap-2 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
+                            <button type="button" className="w-full flex items-center gap-2 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
                                 <Server className="size-4" />
                                 <span>staging-db</span>
                                 <span className="ml-auto size-2 rounded-full bg-amber-500"></span>
@@ -55,15 +56,9 @@ export default function SqlInsightDashboard() {
                     <div>
                         <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Saved Queries</h3>
                         <div className="space-y-1">
-                            <button className="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">
-                                Monthly User Churn Analysis
-                            </button>
-                            <button className="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">
-                                High Latency API Logs
-                            </button>
-                            <button className="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">
-                                Order Processing Queue Depth
-                            </button>
+                            <Button variant="secondary" className="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">Monthly User Churn Analysis</Button>
+                            <Button variant="secondary" className="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">High Latency API Logs</Button>
+                            <Button variant="secondary" className="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">Order Processing Queue Depth</Button>
                         </div>
                     </div>
                 </div>
@@ -98,7 +93,7 @@ export default function SqlInsightDashboard() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <button className="flex items-center gap-2 px-3 py-1.5 bg-indigo-600 text-white text-sm font-bold rounded-lg shadow-sm hover:bg-indigo-700 transition-colors">
+                        <button type="button" className="flex items-center gap-2 px-3 py-1.5 bg-indigo-600 text-white text-sm font-bold rounded-lg shadow-sm hover:bg-indigo-700 transition-colors">
                             <Play className="size-4" /> Run Query
                         </button>
                     </div>
@@ -118,8 +113,8 @@ export default function SqlInsightDashboard() {
                                 Query on table <code className="font-mono bg-amber-100 dark:bg-amber-900/40 px-1 py-0.5 rounded">users</code> is performing a sequential scan. Adding an index on <code className="font-mono bg-amber-100 dark:bg-amber-900/40 px-1 py-0.5 rounded">email</code> could improve performance by 94%.
                             </p>
                             <div className="mt-3 flex gap-3">
-                                <button className="text-xs font-bold text-amber-800 dark:text-amber-400 hover:underline">View Query Details</button>
-                                <button className="text-xs font-bold text-amber-800 dark:text-amber-400 hover:underline">Generate Index Migration</button>
+                                <Button variant="ghost" className="text-xs font-bold text-amber-800 dark:text-amber-400 hover:underline">View Query Details</Button>
+                                <Button variant="ghost" className="text-xs font-bold text-amber-800 dark:text-amber-400 hover:underline">Generate Index Migration</Button>
                             </div>
                         </div>
                     </div>
@@ -132,8 +127,8 @@ export default function SqlInsightDashboard() {
                                 Slowest Queries (Last 1h)
                             </h3>
                             <div className="flex gap-2">
-                                <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-slate-400"><Filter className="size-4" /></button>
-                                <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-slate-400"><Download className="size-4" /></button>
+                                <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-slate-400"><Filter className="size-4" /></button>
+                                <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-slate-400"><Download className="size-4" /></button>
                             </div>
                         </div>
 
@@ -160,7 +155,7 @@ export default function SqlInsightDashboard() {
                                         <td className="px-6 py-4 font-mono font-bold text-amber-500">342ms</td>
                                         <td className="px-6 py-4 font-mono font-bold text-rose-500">1.2s</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button className="invisible group-hover:visible p-1 hover:text-indigo-600"><MoreHorizontal className="size-4" /></button>
+                                            <button type="button" className="invisible group-hover:visible p-1 hover:text-indigo-600"><MoreHorizontal className="size-4" /></button>
                                         </td>
                                     </tr>
                                     {/* Row 2 */}
@@ -174,7 +169,7 @@ export default function SqlInsightDashboard() {
                                         <td className="px-6 py-4 font-mono font-bold text-emerald-500">5ms</td>
                                         <td className="px-6 py-4 font-mono font-bold text-slate-500">12ms</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button className="invisible group-hover:visible p-1 hover:text-indigo-600"><MoreHorizontal className="size-4" /></button>
+                                            <button type="button" className="invisible group-hover:visible p-1 hover:text-indigo-600"><MoreHorizontal className="size-4" /></button>
                                         </td>
                                     </tr>
                                     {/* Row 3 */}
@@ -188,7 +183,7 @@ export default function SqlInsightDashboard() {
                                         <td className="px-6 py-4 font-mono font-bold text-amber-500">890ms</td>
                                         <td className="px-6 py-4 font-mono font-bold text-rose-500">2.4s</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button className="invisible group-hover:visible p-1 hover:text-indigo-600"><MoreHorizontal className="size-4" /></button>
+                                            <button type="button" className="invisible group-hover:visible p-1 hover:text-indigo-600"><MoreHorizontal className="size-4" /></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -201,8 +196,8 @@ export default function SqlInsightDashboard() {
                         <div className="px-4 py-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
                             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Ad-hoc Query</span>
                             <div className="flex gap-2">
-                                <button className="text-xs text-slate-500 hover:text-indigo-600 flex items-center gap-1"><Copy className="size-3" /> Copy</button>
-                                <button className="text-xs text-slate-500 hover:text-slate-700 flex items-center gap-1"><Terminal className="size-3" /> Explain</button>
+                                <button type="button" className="text-xs text-slate-500 hover:text-indigo-600 flex items-center gap-1"><Copy className="size-3" /> Copy</button>
+                                <button type="button" className="text-xs text-slate-500 hover:text-slate-700 flex items-center gap-1"><Terminal className="size-3" /> Explain</button>
                             </div>
                         </div>
                         <div className="flex-1 bg-[#1e1e1e] text-slate-300 font-mono text-sm p-4 outline-none">

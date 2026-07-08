@@ -12,6 +12,7 @@ import {
     Info,
     Wallet
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function CheckoutPage() {
     return (
@@ -39,11 +40,11 @@ export default function CheckoutPage() {
 
                             {/* Payment Selector Tabs */}
                             <div className="flex border-b border-slate-200 dark:border-slate-800 mb-6">
-                                <button className="flex items-center gap-2 px-6 py-3 border-b-2 border-primary text-primary font-semibold text-sm">
+                                <button type="button" className="flex items-center gap-2 px-6 py-3 border-b-2 border-primary text-primary font-semibold text-sm">
                                     <CreditCard className="w-4 h-4" />
                                     Credit / Debit Card
                                 </button>
-                                <button className="flex items-center gap-2 px-6 py-3 border-b-2 border-transparent text-slate-500 dark:text-slate-400 font-medium text-sm hover:text-slate-700 transition-colors">
+                                <button type="button" className="flex items-center gap-2 px-6 py-3 border-b-2 border-transparent text-slate-500 dark:text-slate-400 font-medium text-sm hover:text-slate-700 transition-colors">
                                     <Wallet className="w-4 h-4" />
                                     PayPal
                                 </button>
@@ -174,7 +175,7 @@ export default function CheckoutPage() {
                                 {/* Promo Code */}
                                 <div className="relative mb-6">
                                     <input className="w-full h-11 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent px-4 pr-16 focus:ring-1 focus:ring-primary focus:border-primary outline-none text-sm" placeholder="Promo Code" type="text" />
-                                    <button className="absolute right-2 top-1/2 -translate-y-1/2 text-primary font-bold text-xs uppercase hover:underline">Apply</button>
+                                    <Button variant="ghost" className="absolute right-2 top-1/2 -translate-y-1/2 text-primary font-bold text-xs uppercase hover:underline">Apply</Button>
                                 </div>
                                 {/* Primary CTA */}
                                 <Link

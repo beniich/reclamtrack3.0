@@ -106,8 +106,8 @@ export default function NetVizDashboard() {
                     </div>
                     <div className="h-6 w-px bg-slate-300 dark:bg-slate-700 mx-2"></div>
                     <div className="flex gap-2">
-                        <button className="px-3 py-1.5 rounded-md bg-primary/10 text-primary text-xs font-bold border border-primary/20 hover:bg-primary/20 transition-all">Live View</button>
-                        <button className="px-3 py-1.5 rounded-md text-slate-500 hover:text-slate-900 dark:hover:text-white text-xs font-bold transition-all">Historical</button>
+                        <button type="button" className="px-3 py-1.5 rounded-md bg-primary/10 text-primary text-xs font-bold border border-primary/20 hover:bg-primary/20 transition-all">Live View</button>
+                        <button type="button" className="px-3 py-1.5 rounded-md text-slate-500 hover:text-slate-900 dark:hover:text-white text-xs font-bold transition-all">Historical</button>
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -227,10 +227,10 @@ export default function NetVizDashboard() {
                     ))}
 
                     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-xl bg-white/90 dark:bg-background-dark/90 border border-primary/20 p-2 shadow-2xl backdrop-blur-md z-30">
-                        <button className="h-8 w-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><span className="material-symbols-outlined text-sm">add</span></button>
-                        <button className="h-8 w-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><span className="material-symbols-outlined text-sm">remove</span></button>
+                        <button type="button" className="h-8 w-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><span className="material-symbols-outlined text-sm">add</span></button>
+                        <button type="button" className="h-8 w-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><span className="material-symbols-outlined text-sm">remove</span></button>
                         <div className="w-px h-4 bg-slate-300 dark:bg-slate-600 mx-1"></div>
-                        <button className="h-8 w-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><span className="material-symbols-outlined text-sm">center_focus_strong</span></button>
+                        <button type="button" className="h-8 w-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><span className="material-symbols-outlined text-sm">center_focus_strong</span></button>
                     </div>
                     <div className="absolute bottom-6 right-6 flex flex-col gap-4 items-end z-30">
                         <div className="bg-white/90 dark:bg-background-dark/90 border border-primary/10 p-3 rounded-lg shadow-xl backdrop-blur-md">

@@ -25,6 +25,7 @@ import {
     XAxis,
     YAxis
 } from 'recharts';
+import { Button } from '@/components/ui/button';
 
 const RESOURCE_DATA = [
     { time: '12:00', cpu: 24, ram: 42, net: 18 },
@@ -68,7 +69,7 @@ export default function InfrastructureDashboard() {
                         { id: 'security', icon: ShieldCheck, label: 'Pare-feu' },
                         { id: 'billing', icon: CreditCard, label: 'Facturation' },
                     ].map((item) => (
-                        <button
+                        <button type="button"
                             key={item.id}
                             onClick={() => setActiveTab(item.id)}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
@@ -89,7 +90,7 @@ export default function InfrastructureDashboard() {
                     </div>
                     <div className="text-[10px] font-black uppercase tracking-widest text-white mb-2 italic">Global Network</div>
                     <p className="text-[9px] text-slate-400 font-light leading-relaxed mb-4">Votre infrastructure s'étend sur 4 régions souveraines.</p>
-                    <button className="w-full py-2 bg-blue-600/20 hover:bg-blue-600 text-white rounded-lg text-[9px] font-black uppercase tracking-widest transition-all">Voir Carte</button>
+                    <Button variant="primary" className="w-full py-2 bg-blue-600/20 hover:bg-blue-600 text-white rounded-lg text-[9px] font-black uppercase tracking-widest transition-all">Voir Carte</Button>
                 </div>
             </aside>
 
@@ -139,12 +140,8 @@ export default function InfrastructureDashboard() {
                             </p>
                         </div>
                         <div className="flex gap-4">
-                            <button className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all">
-                                Snapshot Global
-                            </button>
-                            <button className="px-8 py-4 bg-blue-600 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 hover:scale-105 transition-all">
-                                Déployer Instance
-                            </button>
+                            <Button variant="ghost" className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all">Snapshot Global</Button>
+                            <Button variant="primary" className="px-8 py-4 bg-blue-600 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 hover:scale-105 transition-all">Déployer Instance</Button>
                         </div>
                     </div>
 
@@ -189,8 +186,8 @@ export default function InfrastructureDashboard() {
                                 </div>
                             </div>
                             <div className="flex items-center gap-2 bg-white/5 p-2 rounded-xl">
-                                <button className="px-5 py-2 bg-blue-600 rounded-lg text-[9px] font-black uppercase tracking-widest text-white shadow-lg shadow-blue-500/10 transition-all">Temps Réel</button>
-                                <button className="px-5 py-2 hover:bg-white/5 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-500 transition-all">Historique</button>
+                                <Button variant="primary" className="px-5 py-2 bg-blue-600 rounded-lg text-[9px] font-black uppercase tracking-widest text-white shadow-lg shadow-blue-500/10 transition-all">Temps Réel</Button>
+                                <Button variant="ghost" className="px-5 py-2 hover:bg-white/5 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-500 transition-all">Historique</Button>
                             </div>
                         </div>
 
@@ -226,7 +223,7 @@ export default function InfrastructureDashboard() {
                     <div className="glass-card rounded-[3rem] p-10">
                         <div className="flex items-center justify-between mb-8">
                             <h3 className="text-xl font-black uppercase italic tracking-tighter">Status des Clusters</h3>
-                            <button className="text-[10px] font-black uppercase tracking-widest text-blue-500 hover:underline">Rafraîchir Noeuds</button>
+                            <Button variant="ghost" className="text-[10px] font-black uppercase tracking-widest text-blue-500 hover:underline">Rafraîchir Noeuds</Button>
                         </div>
                         <div className="overflow-x-auto">
                             <table className="w-full text-left">
@@ -271,7 +268,7 @@ export default function InfrastructureDashboard() {
                                             </td>
                                             <td className="py-8 text-[10px] font-black uppercase text-slate-500 italic">{node.uptime}</td>
                                             <td className="py-8 text-right">
-                                                <button className="p-3 hover:bg-white/5 rounded-xl transition-all">
+                                                <button type="button" className="p-3 hover:bg-white/5 rounded-xl transition-all">
                                                     <Settings className="w-4 h-4 text-slate-600 hover:text-white" />
                                                 </button>
                                             </td>
@@ -285,7 +282,7 @@ export default function InfrastructureDashboard() {
                                 <Lock className="w-5 h-5 text-blue-500" />
                                 <div className="text-[10px] font-black uppercase text-slate-400">Accès SSH via Quantum-Secure Tunnel actif sur tous les noeuds.</div>
                             </div>
-                            <button className="px-6 py-2 bg-blue-600 rounded-xl text-[9px] font-black uppercase tracking-widest">Gérer Clefs</button>
+                            <Button variant="primary" className="px-6 py-2 bg-blue-600 rounded-xl text-[9px] font-black uppercase tracking-widest">Gérer Clefs</Button>
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { useTranslations } from 'next-intl'
 import { complianceApi } from "@/lib/api"
 import { toast } from "sonner"
+import { Button } from '@/components/ui/button';
 
 interface ComplianceReport {
     timestamp: string;
@@ -94,7 +95,7 @@ export default function CompliancePage() {
                             <span className="size-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_5px_#10b981]"></span>
                             AUDIT ACTIVE
                         </div>
-                        <button 
+                        <button type="button" 
                             onClick={handleExport}
                             className="px-5 py-2.5 rounded-lg bg-[#310B5E] text-white border border-[#4F1A93] font-bold hover:bg-[#4F1A93] hover:shadow-[0_0_15px_rgba(79,26,147,0.5)] transition-all active:scale-95 text-sm flex items-center gap-2"
                         >
@@ -198,7 +199,7 @@ export default function CompliancePage() {
                                                     )}
                                                 </td>
                                                 <td className="px-6 py-4 text-right">
-                                                    <button className="text-[#FF6D00] hover:text-white hover:underline text-[11px] font-bold uppercase transition-colors">Audit Trail</button>
+                                                    <Button variant="ghost" className="text-[#FF6D00] hover:text-white hover:underline text-[11px] font-bold uppercase transition-colors">Audit Trail</Button>
                                                 </td>
                                             </tr>
                                         ))
@@ -236,7 +237,7 @@ export default function CompliancePage() {
                             </div>
                             
                             <div className="mt-4 pt-4 border-t border-[#4F1A93]/40 relative z-10">
-                                <button className="w-full py-2.5 bg-[#1A0536] border border-[#4F1A93]/50 hover:bg-[#310B5E] rounded-lg text-xs font-bold text-slate-300 transition-colors flex items-center justify-center gap-2">
+                                <button type="button" className="w-full py-2.5 bg-[#1A0536] border border-[#4F1A93]/50 hover:bg-[#310B5E] rounded-lg text-xs font-bold text-slate-300 transition-colors flex items-center justify-center gap-2">
                                     <span className="material-symbols-outlined text-sm">open_in_new</span>
                                     Open Full Audit Trail
                                 </button>

@@ -14,7 +14,7 @@ export default function BackupTimeline({ backups }: { backups: Backup[] }) {
         <div className="p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm transition-colors">
             <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Backup History</h3>
-                <button className="px-3 py-1 bg-primary/10 text-primary text-sm rounded hover:bg-primary/20 transition-colors">
+                <button type="button" className="px-3 py-1 bg-primary/10 text-primary text-sm rounded hover:bg-primary/20 transition-colors">
                     <span className="material-symbols-outlined text-sm align-middle mr-1">add</span> New Backup
                 </button>
             </div>

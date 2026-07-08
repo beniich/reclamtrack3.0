@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function UsersPage() {
     return (
@@ -47,11 +48,11 @@ export default function UsersPage() {
                             <p className="text-slate-500 dark:text-slate-400 text-base">Manage access levels and profiles for platform operators and field staff.</p>
                         </div>
                         <div className="flex gap-3">
-                            <button className="flex items-center gap-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-900 dark:text-white px-4 py-2 rounded-lg font-bold text-sm transition-all">
+                            <button type="button" className="flex items-center gap-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-900 dark:text-white px-4 py-2 rounded-lg font-bold text-sm transition-all">
                                 <span className="material-symbols-outlined text-lg">filter_list</span>
                                 Filter
                             </button>
-                            <button className="flex items-center gap-2 bg-primary hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20">
+                            <button type="button" className="flex items-center gap-2 bg-primary hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20">
                                 <span className="material-symbols-outlined text-lg">person_add</span>
                                 Add User
                             </button>
@@ -104,8 +105,8 @@ export default function UsersPage() {
                                         </td>
                                         <td className="px-6 py-5 text-sm text-slate-500">2 mins ago</td>
                                         <td className="px-6 py-5 text-right">
-                                            <button className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</button>
-                                            <button className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                            <Button variant="ghost" className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</Button>
+                                            <button type="button" className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
                                         </td>
                                     </tr>
                                     {/* Row 2 */}
@@ -130,8 +131,8 @@ export default function UsersPage() {
                                         </td>
                                         <td className="px-6 py-5 text-sm text-slate-500">1 hour ago</td>
                                         <td className="px-6 py-5 text-right">
-                                            <button className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</button>
-                                            <button className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                            <Button variant="ghost" className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</Button>
+                                            <button type="button" className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
                                         </td>
                                     </tr>
                                     {/* Row 3 */}
@@ -156,8 +157,8 @@ export default function UsersPage() {
                                         </td>
                                         <td className="px-6 py-5 text-sm text-slate-500">3 days ago</td>
                                         <td className="px-6 py-5 text-right">
-                                            <button className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</button>
-                                            <button className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                            <Button variant="ghost" className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</Button>
+                                            <button type="button" className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
                                         </td>
                                     </tr>
                                     {/* Row 4 */}
@@ -182,8 +183,8 @@ export default function UsersPage() {
                                         </td>
                                         <td className="px-6 py-5 text-sm text-slate-500">Just now</td>
                                         <td className="px-6 py-5 text-right">
-                                            <button className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</button>
-                                            <button className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                            <Button variant="ghost" className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</Button>
+                                            <button type="button" className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
                                         </td>
                                     </tr>
                                     {/* Row 5 */}
@@ -208,8 +209,8 @@ export default function UsersPage() {
                                         </td>
                                         <td className="px-6 py-5 text-sm text-slate-500">5 hours ago</td>
                                         <td className="px-6 py-5 text-right">
-                                            <button className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</button>
-                                            <button className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                            <Button variant="ghost" className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</Button>
+                                            <button type="button" className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -220,13 +221,13 @@ export default function UsersPage() {
                         <div className="px-6 py-4 flex items-center justify-between border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30">
                             <p className="text-sm text-slate-500">Showing <span className="font-bold text-slate-900 dark:text-white">1</span> to <span className="font-bold text-slate-900 dark:text-white">5</span> of <span className="font-bold text-slate-900 dark:text-white">42</span> staff members</p>
                             <div className="flex gap-1">
-                                <button className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-500">
+                                <button type="button" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-500">
                                     <span className="material-symbols-outlined">chevron_left</span>
                                 </button>
-                                <button className="px-3.5 py-1.5 rounded-lg bg-primary text-white font-bold text-sm">1</button>
-                                <button className="px-3.5 py-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm font-medium">2</button>
-                                <button className="px-3.5 py-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm font-medium">3</button>
-                                <button className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-500">
+                                <Button variant="primary" className="px-3.5 py-1.5 rounded-lg bg-primary text-white font-bold text-sm">1</Button>
+                                <Button variant="ghost" className="px-3.5 py-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm font-medium">2</Button>
+                                <Button variant="ghost" className="px-3.5 py-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm font-medium">3</Button>
+                                <button type="button" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-500">
                                     <span className="material-symbols-outlined">chevron_right</span>
                                 </button>
                             </div>

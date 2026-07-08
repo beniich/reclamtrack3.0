@@ -87,11 +87,11 @@ export default function AuditPage() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-           <Button variant="outline" size="sm" onClick={loadLogs}>
+           <Button type="button" variant="outline" size="sm" onClick={loadLogs}>
               <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
               Refresh
            </Button>
-           <Button size="sm">
+           <Button type="button" size="sm">
               <Download className="w-4 h-4 mr-2" />
               Export CSV
            </Button>

@@ -2,6 +2,7 @@
 import { cn } from '@/lib/utils';
 import { BarChart3, Calendar, MessageSquare, Phone, Users } from 'lucide-react';
 import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 const ComplaintManagementSystem = () => {
     const [activeTab, setActiveTab] = useState('dashboard');
@@ -154,7 +155,7 @@ const ComplaintManagementSystem = () => {
                     ].map(tab => {
                         const Icon = tab.icon;
                         return (
-                            <button
+                            <button type="button"
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={cn(

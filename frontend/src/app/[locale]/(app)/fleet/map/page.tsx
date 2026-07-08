@@ -3,6 +3,7 @@
 import { FleetRouteMap } from '@/components/maps/FleetRouteMap';
 import { Layers, RefreshCw, Truck } from 'lucide-react';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export default function FleetMapPage() {
   const [lastUpdate, setLastUpdate] = useState(new Date());
@@ -44,14 +45,14 @@ export default function FleetMapPage() {
             </span>
           </div>
 
-          <button
+          <button type="button"
             onClick={handleRefresh}
             className="p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm group"
           >
             <RefreshCw className="w-5 h-5 text-slate-600 dark:text-slate-400 group-active:rotate-180 transition-transform duration-500" />
           </button>
 
-          <button className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-95">
+          <button type="button" className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-95">
             <Layers className="w-4 h-4" />
             Vue Satellite
           </button>

@@ -64,14 +64,14 @@ export default function LogTable() {
                     Showing {logs.length} events (Page {pagination?.page || 1} of {pagination?.pages || 1})
                 </p>
                 <div className="flex gap-2">
-                    <button
+                    <button type="button"
                         onClick={() => setPage(p => Math.max(1, p - 1))}
                         disabled={page === 1}
                         className="px-4 py-2 text-xs font-bold text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50 shadow-sm"
                     >
                         Previous
                     </button>
-                    <button
+                    <button type="button"
                         onClick={() => setPage(p => (pagination && p < pagination.pages ? p + 1 : p))}
                         disabled={!pagination || page >= pagination.pages}
                         className="px-4 py-2 text-xs font-bold text-white bg-primary rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-primary/20 disabled:opacity-50 disabled:shadow-none"

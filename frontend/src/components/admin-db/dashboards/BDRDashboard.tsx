@@ -73,10 +73,10 @@ export default function BDRDashboard() {
                         <p className="text-slate-500 dark:text-slate-400 text-base max-w-xl">Configure S3 cloud targets, local snapshot retention, and automated recovery schedules with real-time RPO/RTO tracking.</p>
                     </div>
                     <div className="flex gap-3">
-                        <button className="flex items-center justify-center rounded-lg h-11 px-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm">
+                        <button type="button" className="flex items-center justify-center rounded-lg h-11 px-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm">
                             Export Config
                         </button>
-                        <button className="flex items-center justify-center rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                        <button type="button" className="flex items-center justify-center rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
                             Run Manual Backup Now
                         </button>
                     </div>
@@ -132,13 +132,13 @@ export default function BDRDashboard() {
                     <div className="xl:col-span-2 flex flex-col gap-6">
                         <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm">
                             <div className="flex border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
-                                <button className="flex-1 py-4 px-6 text-sm font-bold text-primary border-b-2 border-primary bg-primary/5">
+                                <button type="button" className="flex-1 py-4 px-6 text-sm font-bold text-primary border-b-2 border-primary bg-primary/5">
                                     S3 Cloud Storage
                                 </button>
-                                <button className="flex-1 py-4 px-6 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors border-b-2 border-transparent">
+                                <button type="button" className="flex-1 py-4 px-6 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors border-b-2 border-transparent">
                                     Local Snapshots
                                 </button>
-                                <button className="flex-1 py-4 px-6 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors border-b-2 border-transparent">
+                                <button type="button" className="flex-1 py-4 px-6 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors border-b-2 border-transparent">
                                     Retention Policies
                                 </button>
                             </div>
@@ -166,7 +166,7 @@ export default function BDRDashboard() {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4 pt-2">
-                                    <button className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-white rounded-lg text-sm font-medium transition-all">
+                                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-white rounded-lg text-sm font-medium transition-all">
                                         <span className="material-symbols-outlined text-sm">open_run</span>
                                         Test Connection
                                     </button>
@@ -186,10 +186,10 @@ export default function BDRDashboard() {
                             </h3>
                             <div className="space-y-6">
                                 <div className="flex flex-wrap gap-3">
-                                    <button className="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-primary text-sm font-medium transition-all">Every Hour</button>
-                                    <button className="px-4 py-2 rounded-full border border-primary bg-primary/10 text-primary text-sm font-bold transition-all">Every 6 Hours</button>
-                                    <button className="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-primary text-sm font-medium transition-all">Daily at Midnight</button>
-                                    <button className="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-primary text-sm font-medium transition-all">Custom Cron</button>
+                                    <button type="button" className="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-primary text-sm font-medium transition-all">Every Hour</button>
+                                    <button type="button" className="px-4 py-2 rounded-full border border-primary bg-primary/10 text-primary text-sm font-bold transition-all">Every 6 Hours</button>
+                                    <button type="button" className="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-primary text-sm font-medium transition-all">Daily at Midnight</button>
+                                    <button type="button" className="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-primary text-sm font-medium transition-all">Custom Cron</button>
                                 </div>
                                 <div className="bg-slate-50 dark:bg-background-dark/50 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
                                     <div className="flex items-center justify-between mb-4">
@@ -214,7 +214,7 @@ export default function BDRDashboard() {
                         <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl flex flex-col h-full shadow-sm">
                             <div className="p-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
                                 <h3 className="text-slate-900 dark:text-white text-lg font-bold">Recovery History</h3>
-                                <button className="text-primary text-xs font-bold hover:underline">View All</button>
+                                <button type="button" className="text-primary text-xs font-bold hover:underline">View All</button>
                             </div>
                             <div className="flex-1 overflow-y-auto max-h-[600px]">
                                 {backups.map((backup) => (
@@ -260,7 +260,7 @@ export default function BDRDashboard() {
                                 </div>
                             </div>
                             <div className="p-4 bg-slate-50 dark:bg-slate-800/80">
-                                <button className="w-full py-2 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-sm font-bold rounded hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
+                                <button type="button" className="w-full py-2 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-sm font-bold rounded hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
                                     Download System Audit Log
                                 </button>
                             </div>
@@ -280,8 +280,8 @@ export default function BDRDashboard() {
                         <p className="text-xs text-slate-500">Last settings update: Oct 24, 2023 11:15 AM</p>
                     </div>
                     <div className="flex gap-4">
-                        <button className="px-6 py-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-bold transition-all">Discard Changes</button>
-                        <button className="px-8 py-2.5 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:shadow-primary/30 transition-all">
+                        <button type="button" className="px-6 py-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-bold transition-all">Discard Changes</button>
+                        <button type="button" className="px-8 py-2.5 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:shadow-primary/30 transition-all">
                             Save Configuration
                         </button>
                     </div>

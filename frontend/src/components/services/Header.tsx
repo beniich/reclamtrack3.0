@@ -49,14 +49,14 @@ export function Header({ variant = 'default' }: HeaderProps) {
 
                 {/* Actions */}
                 <div className="flex items-center gap-4">
-                    <button className="relative p-2 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">
+                    <button type="button" className="relative p-2 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">
                         <Bell className="w-5 h-5" />
                         <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full" />
                     </button>
 
                     <div className="h-6 w-[1px] bg-slate-200 dark:bg-slate-700" />
 
-                    <button className="flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all hover:text-primary dark:hover:text-primary">
+                    <button type="button" className="flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all hover:text-primary dark:hover:text-primary">
                         <LogOut className="w-4 h-4" />
                         <span className="hidden sm:inline">Sign Out</span>
                     </button>

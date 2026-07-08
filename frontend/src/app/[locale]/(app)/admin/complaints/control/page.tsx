@@ -147,7 +147,7 @@ export default function ComplaintControlPage() {
 
                   <div className="flex items-center gap-3">
                     <RoleGuard minRole={Role.VALIDATOR}>
-                      <Button
+                      <Button type="button"
                         variant="danger"
                         onClick={() => handleRejectInit(complaint._id)}
                         className="bg-red-50 text-red-700 hover:bg-red-100 border-red-200 border"
@@ -157,7 +157,7 @@ export default function ComplaintControlPage() {
                       </Button>
                     </RoleGuard>
                     <RoleGuard minRole={Role.VALIDATOR}>
-                      <Button
+                      <Button type="button"
                         onClick={() => handleApprove(complaint._id)}
                         className="bg-green-600 hover:bg-green-700 text-white"
                       >
@@ -197,8 +197,8 @@ export default function ComplaintControlPage() {
           </div>
 
           <DialogFooter>
-            <Button variant="outline" onClick={() => setRejectingId(null)}>Cancel</Button>
-            <Button
+            <Button type="button" variant="outline" onClick={() => setRejectingId(null)}>Cancel</Button>
+            <Button type="button"
               variant="danger"
               onClick={handleRejectConfirm}
               disabled={!rejectionReason.trim()}

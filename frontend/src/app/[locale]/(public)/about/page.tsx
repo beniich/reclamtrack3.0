@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function AboutPage() {
     return (
@@ -44,12 +45,8 @@ export default function AboutPage() {
                             Building a world where transparency isn't a feature, it's the foundation. Experience the gold standard of tracking.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <button className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-lg shadow-2xl shadow-primary/30 hover:scale-105 transition-transform">
-                                Explore Our Journey
-                            </button>
-                            <button className="w-full sm:w-auto px-8 py-4 bg-slate-200 dark:bg-white/5 text-slate-900 dark:text-white font-bold rounded-lg border border-slate-300 dark:border-white/10 hover:bg-slate-300 dark:hover:bg-white/10 transition-all">
-                                View Success Stories
-                            </button>
+                            <Button variant="primary" className="w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-lg shadow-2xl shadow-primary/30 hover:scale-105 transition-transform">Explore Our Journey</Button>
+                            <Button variant="ghost" className="w-full sm:w-auto px-8 py-4 bg-slate-200 dark:bg-white/5 text-slate-900 dark:text-white font-bold rounded-lg border border-slate-300 dark:border-white/10 hover:bg-slate-300 dark:hover:bg-white/10 transition-all">View Success Stories</Button>
                         </div>
                     </div>
                 </section>

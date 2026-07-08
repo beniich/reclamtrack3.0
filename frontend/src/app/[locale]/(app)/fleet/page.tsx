@@ -5,6 +5,7 @@ import { useAuthStore } from '@/store/authStore';
 import { useOrgStore } from '@/store/orgStore';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 interface Vehicle {
     _id: string;
@@ -203,7 +204,7 @@ export default function FleetPage() {
                 </div>
                 <div className="flex items-center gap-4">
                     {/* Download CSV */}
-                    <button
+                    <button type="button"
                         onClick={handleDownloadCSV}
                         disabled={isDownloading}
                         className="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-[#242447] text-slate-700 dark:text-slate-200 rounded-lg text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors disabled:opacity-50"
@@ -214,7 +215,7 @@ export default function FleetPage() {
                         </span>
                         {isDownloading ? 'Exporting...' : 'Export CSV'}
                     </button>
-                    <button className="p-2 rounded-lg bg-slate-100 dark:bg-[#242447] text-slate-600 dark:text-white relative">
+                    <button type="button" className="p-2 rounded-lg bg-slate-100 dark:bg-[#242447] text-slate-600 dark:text-white relative">
                         <span className="material-symbols-outlined">notifications</span>
                         <span className="absolute top-1.5 right-1.5 h-2 w-2 bg-red-500 rounded-full border-2 border-white dark:border-[#242447]"></span>
                     </button>
@@ -269,7 +270,7 @@ export default function FleetPage() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex bg-slate-100 dark:bg-[#242447] p-1 rounded-lg w-fit">
                     {tabs.map(tab => (
-                        <button
+                        <button type="button"
                             key={tab.key}
                             onClick={() => setFilterTab(tab.key)}
                             className={`px-4 py-1.5 text-xs font-bold rounded-md transition-colors ${
@@ -391,7 +392,7 @@ export default function FleetPage() {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-right relative">
-                                            <button
+                                            <button type="button"
                                                 onClick={() => {
                                                     setOpenMenuId(isMenuOpen ? null : vehicle._id);
                                                     setStatusEditId(null);
@@ -407,7 +408,7 @@ export default function FleetPage() {
                                                         <div className="p-2">
                                                             <p className="text-[10px] font-bold text-slate-400 px-2 py-1 uppercase tracking-wider">Change Status</p>
                                                             {Object.entries(statusConfig).map(([key, val]) => (
-                                                                <button
+                                                                <button type="button"
                                                                     key={key}
                                                                     onClick={() => handleStatusChange(vehicle._id, key)}
                                                                     className="w-full text-left px-3 py-2 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg flex items-center gap-2 transition-colors"
@@ -420,7 +421,7 @@ export default function FleetPage() {
                                                                     {val.label}
                                                                 </button>
                                                             ))}
-                                                            <button
+                                                            <button type="button"
                                                                 onClick={() => setStatusEditId(null)}
                                                                 className="w-full text-left px-3 py-2 text-xs font-bold text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
                                                             >
@@ -432,7 +433,7 @@ export default function FleetPage() {
                                                             <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-700">
                                                                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{vehicle.plateNumber}</p>
                                                             </div>
-                                                            <button
+                                                            <button type="button"
                                                                 onClick={() => setStatusEditId(vehicle._id)}
                                                                 className="w-full text-left px-4 py-3 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-3 transition-colors"
                                                             >
@@ -455,7 +456,7 @@ export default function FleetPage() {
                                                                 <span className="material-symbols-outlined text-base text-amber-500">build</span>
                                                                 Schedule Maintenance
                                                             </Link>
-                                                            <button
+                                                            <button type="button"
                                                                 onClick={() => { handleDeleteVehicle(vehicle._id); setOpenMenuId(null); }}
                                                                 className="w-full text-left px-4 py-3 text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-3 border-t border-slate-100 dark:border-slate-700 transition-colors"
                                                             >
@@ -478,7 +479,7 @@ export default function FleetPage() {
                         Showing {vehicles.length} of {pagination.total} vehicles
                     </p>
                     <div className="flex gap-2">
-                        <button
+                        <button type="button"
                             onClick={() => fetchVehicles(pagination.page - 1)}
                             disabled={pagination.page <= 1 || isLoading}
                             className="px-3 py-1 rounded border border-slate-200 dark:border-slate-800 text-xs font-bold hover:bg-white dark:hover:bg-primary/20 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
@@ -488,7 +489,7 @@ export default function FleetPage() {
                         <span className="px-3 py-1 text-xs font-bold text-slate-500">
                             {pagination.page} / {pagination.pages}
                         </span>
-                        <button
+                        <button type="button"
                             onClick={() => fetchVehicles(pagination.page + 1)}
                             disabled={pagination.page >= pagination.pages || isLoading}
                             className="px-3 py-1 rounded bg-white dark:bg-primary border border-slate-200 dark:border-primary text-xs font-bold shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"

@@ -3,6 +3,7 @@
 // Components
 import Image from 'next/image';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function InfrastructureHeatmapPage() {
     return (
@@ -54,8 +55,8 @@ export default function InfrastructureHeatmapPage() {
                             <div className="space-y-2">
                                 <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Time Period</label>
                                 <div className="grid grid-cols-2 gap-2">
-                                    <button className="text-xs py-1.5 px-2 bg-primary text-white rounded font-bold shadow-md">24h</button>
-                                    <button className="text-xs py-1.5 px-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded font-medium hover:bg-slate-200 dark:hover:bg-slate-700">7 Days</button>
+                                    <Button variant="primary" className="text-xs py-1.5 px-2 bg-primary text-white rounded font-bold shadow-md">24h</Button>
+                                    <Button variant="secondary" className="text-xs py-1.5 px-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded font-medium hover:bg-slate-200 dark:hover:bg-slate-700">7 Days</Button>
                                 </div>
                             </div>
                             <div className="space-y-2 pt-4 border-t border-slate-200 dark:border-slate-800">

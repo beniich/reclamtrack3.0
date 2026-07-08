@@ -6,6 +6,7 @@ import {
     Package, Search, Filter, AlertTriangle, 
     TrendingDown, ArchiveRestore, Truck, FileText
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function MROInventoryPage() {
     // Mock data for Phase 4 MRO
@@ -37,10 +38,10 @@ export default function MROInventoryPage() {
                 </div>
 
                 <div className="flex gap-3">
-                    <button className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-blue-300 dark:hover:border-blue-500/50 flex items-center gap-2 transition-all shadow-sm">
+                    <button type="button" className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-blue-300 dark:hover:border-blue-500/50 flex items-center gap-2 transition-all shadow-sm">
                         <Truck className="w-4 h-4" /> Réapprovisionner
                     </button>
-                    <button className="h-[52px] bg-blue-600 dark:bg-blue-500 hover:brightness-110 text-white rounded-2xl px-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-blue-600/20 dark:shadow-blue-600/20 transition-all">
+                    <button type="button" className="h-[52px] bg-blue-600 dark:bg-blue-500 hover:brightness-110 text-white rounded-2xl px-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-blue-600/20 dark:shadow-blue-600/20 transition-all">
                         <Package className="w-4 h-4" /> Nouvel Article
                     </button>
                 </div>
@@ -88,7 +89,7 @@ export default function MROInventoryPage() {
                         className="w-full h-[52px] pl-12 pr-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[12px] font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                     />
                 </div>
-                <button className="h-[52px] px-6 flex items-center justify-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-[10px] font-black uppercase tracking-widest text-slate-700 dark:text-slate-300 gap-2">
+                <button type="button" className="h-[52px] px-6 flex items-center justify-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-[10px] font-black uppercase tracking-widest text-slate-700 dark:text-slate-300 gap-2">
                     <Filter className="w-4 h-4 text-slate-400" /> Filtrer
                 </button>
             </div>
@@ -139,7 +140,7 @@ export default function MROInventoryPage() {
                                         </td>
                                         <td className="px-6 py-5 text-right">
                                             <Link href={`/inventory/mro/${item.id}`}>
-                                                <button className="size-10 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-300 transition-colors shadow-sm">
+                                                <button type="button" className="size-10 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-300 transition-colors shadow-sm">
                                                     <FileText className="w-4 h-4" />
                                                 </button>
                                             </Link>

@@ -23,10 +23,10 @@ export default function TrendChart({ data = [] }: { data?: TrendData[] }) {
             <div className="flex justify-between items-center mb-6">
                 <h4 className="font-bold text-lg text-slate-900 dark:text-white">Satisfaction Trends</h4>
                 <div className="flex gap-2">
-                    <button className="px-3 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <button type="button" className="px-3 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
                         Weekly
                     </button>
-                    <button className="px-3 py-1 text-xs rounded-lg bg-primary text-white font-medium hover:bg-primary/90 transition-colors">
+                    <button type="button" className="px-3 py-1 text-xs rounded-lg bg-primary text-white font-medium hover:bg-primary/90 transition-colors">
                         Monthly
                     </button>
                 </div>

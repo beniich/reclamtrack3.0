@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 export default function MessagesPage() {
     return (
         <div className="font-display bg-background-light text-slate-900 h-[calc(100vh-64px)] overflow-hidden flex flex-col">
@@ -9,7 +10,7 @@ export default function MessagesPage() {
                     <div className="p-4 space-y-4">
                         <div className="flex items-center justify-between">
                             <h1 className="text-xl font-bold">Discussions</h1>
-                            <button className="flex items-center gap-1 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-colors">
+                            <button type="button" className="flex items-center gap-1 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-colors">
                                 <span className="material-symbols-outlined text-sm">edit_square</span>
                                 Nouveau
                             </button>
@@ -21,9 +22,9 @@ export default function MessagesPage() {
                         </div>
                         {/* Filters */}
                         <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
-                            <button className="px-3 py-1 bg-primary text-white rounded-full text-xs font-medium whitespace-nowrap">Tout</button>
-                            <button className="px-3 py-1 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium whitespace-nowrap">Urgent</button>
-                            <button className="px-3 py-1 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium whitespace-nowrap">Terrain</button>
+                            <Button variant="primary" className="px-3 py-1 bg-primary text-white rounded-full text-xs font-medium whitespace-nowrap">Tout</Button>
+                            <Button variant="ghost" className="px-3 py-1 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium whitespace-nowrap">Urgent</Button>
+                            <Button variant="ghost" className="px-3 py-1 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-medium whitespace-nowrap">Terrain</Button>
                         </div>
                     </div>
 
@@ -108,11 +109,11 @@ export default function MessagesPage() {
                     {/* Input Area */}
                     <div className="p-4 md:p-6 bg-white border-t border-slate-200">
                         <div className="flex items-end gap-3 bg-slate-50 border border-slate-200 rounded-xl p-2 focus-within:ring-2 focus-within:ring-primary/50 transition-all">
-                            <button className="p-2 text-slate-400 hover:text-primary rounded-lg transition-colors">
+                            <button type="button" className="p-2 text-slate-400 hover:text-primary rounded-lg transition-colors">
                                 <span className="material-symbols-outlined">add_circle</span>
                             </button>
                             <textarea className="flex-1 bg-transparent border-none focus:ring-0 text-sm py-2 px-1 resize-none min-h-[40px] max-h-[120px]" placeholder="Écrivez votre message..." rows={1}></textarea>
-                            <button className="h-10 w-10 flex items-center justify-center bg-primary text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-primary/20 transition-all active:scale-95">
+                            <button type="button" className="h-10 w-10 flex items-center justify-center bg-primary text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-primary/20 transition-all active:scale-95">
                                 <span className="material-symbols-outlined">send</span>
                             </button>
                         </div>

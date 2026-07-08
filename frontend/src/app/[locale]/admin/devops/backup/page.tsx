@@ -2,6 +2,7 @@
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { useState } from "react"
+import { Button } from '@/components/ui/button';
 
 export default function BackupHubPage() {
     const [backups] = useState([
@@ -58,12 +59,8 @@ export default function BackupHubPage() {
                             Recent Backups
                         </h3>
                         <div className="flex gap-2">
-                            <button className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">
-                                Day
-                            </button>
-                            <button className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-lg text-[10px] font-black uppercase tracking-widest text-primary">
-                                Week
-                            </button>
+                            <Button variant="ghost" className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">Day</Button>
+                            <Button variant="primary" className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-lg text-[10px] font-black uppercase tracking-widest text-primary">Week</Button>
                         </div>
                     </div>
 
@@ -94,7 +91,7 @@ export default function BackupHubPage() {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-right">
-                                            <button className="p-2 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary/10 rounded-lg text-primary">
+                                            <button type="button" className="p-2 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary/10 rounded-lg text-primary">
                                                 <span className="material-symbols-outlined text-sm">settings_backup_restore</span>
                                             </button>
                                         </td>
@@ -130,9 +127,7 @@ export default function BackupHubPage() {
                                 <span className="font-bold text-slate-500 uppercase">Potential Savings</span>
                                 <span className="text-emerald-500 font-black">$185 / mo</span>
                             </div>
-                            <button className="w-full py-2 bg-amber-500 text-white text-xs font-black uppercase tracking-widest rounded-lg shadow-lg shadow-amber-500/20 hover:brightness-110 active:scale-95 transition-all">
-                                Migrate to Glacier
-                            </button>
+                            <Button variant="ghost" className="w-full py-2 bg-amber-500 text-white text-xs font-black uppercase tracking-widest rounded-lg shadow-lg shadow-amber-500/20 hover:brightness-110 active:scale-95 transition-all">Migrate to Glacier</Button>
                         </div>
                     </div>
 

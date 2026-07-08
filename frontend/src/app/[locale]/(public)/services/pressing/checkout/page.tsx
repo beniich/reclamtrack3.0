@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 type Plan = 'starter' | 'pro' | 'enterprise';
 
@@ -135,7 +136,7 @@ export default function PressingCheckoutPage() {
                                 {/* Plan selection */}
                                 <div className="grid gap-4 mb-10">
                                     {(Object.keys(planDetails) as Plan[]).map(plan => (
-                                        <button
+                                        <button type="button"
                                             key={plan}
                                             onClick={() => setSelectedPlan(plan)}
                                             className={`flex items-center justify-between p-5 rounded-2xl border-2 text-left transition-all ${selectedPlan === plan ? 'border-primary bg-primary/5 dark:bg-primary/10' : 'border-slate-200 dark:border-slate-700 hover:border-primary/50'}`}
@@ -160,7 +161,7 @@ export default function PressingCheckoutPage() {
                                 <h3 className="text-lg font-black text-slate-900 dark:text-white mb-5">Options complémentaires</h3>
                                 <div className="grid md:grid-cols-2 gap-3 mb-8">
                                     {addons.map(addon => (
-                                        <button
+                                        <button type="button"
                                             key={addon.id}
                                             onClick={() => toggleAddon(addon.id)}
                                             className={`flex items-start gap-4 p-4 rounded-xl border-2 text-left transition-all ${selectedAddons.includes(addon.id) ? 'border-primary bg-primary/5 dark:bg-primary/10' : 'border-slate-200 dark:border-slate-700 hover:border-primary/50'}`}
@@ -177,7 +178,7 @@ export default function PressingCheckoutPage() {
                                     ))}
                                 </div>
 
-                                <button onClick={() => setStep(2)} className="w-full bg-primary text-white py-4 rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-xl shadow-primary/20">
+                                <button type="button" onClick={() => setStep(2)} className="w-full bg-primary text-white py-4 rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-xl shadow-primary/20">
                                     Continuer — Infos organisation →
                                 </button>
                             </div>

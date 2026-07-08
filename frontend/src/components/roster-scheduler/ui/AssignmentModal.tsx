@@ -60,7 +60,7 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
                             <p className="text-xs text-slate-500 mt-1">Configurez les détails de la tâche et le personnel assigné.</p>
                         </div>
                     </div>
-                    <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
+                    <button type="button" onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
                         <span className="material-symbols-outlined">close</span>
                     </button>
                 </div>
@@ -102,8 +102,8 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
                                     <div>
                                         <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1.5 ml-1">Niveau Priorité</label>
                                         <div className="flex gap-2">
-                                            <button className="flex-1 py-2 rounded-lg bg-red-900/20 border border-red-500/50 text-red-500 text-xs font-bold ring-2 ring-red-500/20">Urgent</button>
-                                            <button className="flex-1 py-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 text-xs font-bold hover:bg-slate-700 transition-colors">Standard</button>
+                                            <button type="button" className="flex-1 py-2 rounded-lg bg-red-900/20 border border-red-500/50 text-red-500 text-xs font-bold ring-2 ring-red-500/20">Urgent</button>
+                                            <button type="button" className="flex-1 py-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 text-xs font-bold hover:bg-slate-700 transition-colors">Standard</button>
                                         </div>
                                     </div>
                                 </div>
@@ -169,8 +169,8 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <button onClick={onClose} className="px-5 py-2 text-sm font-bold text-slate-400 hover:text-white transition-colors">Annuler</button>
-                        <button
+                        <button type="button" onClick={onClose} className="px-5 py-2 text-sm font-bold text-slate-400 hover:text-white transition-colors">Annuler</button>
+                        <button type="button"
                             onClick={handleConfirm}
                             className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg text-sm font-bold shadow-lg shadow-blue-500/20 flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={!selectedStaff}

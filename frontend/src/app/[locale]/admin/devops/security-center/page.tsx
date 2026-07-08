@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { useOrgStore } from "@/store/orgStore"
 import { format } from "date-fns"
 import { useEffect, useState } from "react"
+import { Button } from '@/components/ui/button';
 
 interface ComplianceData {
     complianceScore: number;
@@ -135,10 +136,8 @@ export default function SecurityPage() {
                     </div>
 
                     <div className="flex gap-4 relative z-10">
-                        <button className="px-8 py-4 bg-white dark:bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-2xl border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 transition-all">
-                            Review Policy
-                        </button>
-                        <button className={cn(
+                        <Button variant="ghost" className="px-8 py-4 bg-white dark:bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-2xl border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 transition-all">Review Policy</Button>
+                        <button type="button" className={cn(
                             "px-8 py-4 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-2xl hover:scale-105 transition-all",
                             activeThreats > 0 ? 'bg-rose-500' : 'bg-primary'
                         )}>
@@ -265,9 +264,7 @@ export default function SecurityPage() {
                                        </div>
                                    ))}
                                </div>
-                               <button className="w-full py-4 bg-white/10 hover:bg-white/20 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl border border-white/10 transition-all backdrop-blur-md">
-                                   Download Full Report
-                               </button>
+                               <Button variant="ghost" className="w-full py-4 bg-white/10 hover:bg-white/20 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl border border-white/10 transition-all backdrop-blur-md">Download Full Report</Button>
                            </div>
                         </div>
                     </div>

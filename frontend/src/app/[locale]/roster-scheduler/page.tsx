@@ -6,6 +6,7 @@ import { useRosterWasm, type Shift } from "@/hooks/useRosterWasm";
 import { useDbSocket } from '@/hooks/useDbSocket';
 import { Link } from '@/i18n/navigation';
 import { useEffect, useState } from "react";
+import { Button } from '@/components/ui/button';
 
 // Sample shift data for the POC demonstration
 const DEMO_SHIFTS: Shift[] = [
@@ -87,7 +88,7 @@ export default function RosterPage() {
                         <span className="text-xs font-semibold text-blue-500">Live Sync</span>
                         <span className="text-[10px] text-slate-500 uppercase">Last update: Now</span>
                     </div>
-                    <button className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2">
+                    <button type="button" className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2">
                         <span className="material-symbols-outlined text-sm">cloud_upload</span>
                         Publish Roster
                     </button>
@@ -109,16 +110,16 @@ export default function RosterPage() {
                     <div className="h-14 border-b border-slate-800 flex items-center justify-between px-6 shrink-0 bg-slate-900 z-20">
                         <div className="flex items-center gap-6">
                             <div className="flex items-center bg-slate-800 p-1 rounded-lg">
-                                <button className="px-4 py-1.5 text-xs font-semibold rounded-md bg-slate-700 shadow-sm text-blue-400">Day</button>
-                                <button className="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-slate-200 transition-colors">Week</button>
-                                <button className="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-slate-200 transition-colors">Month</button>
+                                <Button variant="ghost" className="px-4 py-1.5 text-xs font-semibold rounded-md bg-slate-700 shadow-sm text-blue-400">Day</Button>
+                                <Button variant="ghost" className="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-slate-200 transition-colors">Week</Button>
+                                <Button variant="ghost" className="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-slate-200 transition-colors">Month</Button>
                             </div>
                             <div className="flex items-center gap-2">
-                                <button className="p-1 hover:bg-slate-800 rounded-full transition-colors">
+                                <button type="button" className="p-1 hover:bg-slate-800 rounded-full transition-colors">
                                     <span className="material-symbols-outlined text-xl text-slate-500">chevron_left</span>
                                 </button>
                                 <span className="text-sm font-bold text-slate-200">Today</span>
-                                <button className="p-1 hover:bg-slate-800 rounded-full transition-colors">
+                                <button type="button" className="p-1 hover:bg-slate-800 rounded-full transition-colors">
                                     <span className="material-symbols-outlined text-xl text-slate-500">chevron_right</span>
                                 </button>
                             </div>
@@ -138,10 +139,10 @@ export default function RosterPage() {
                                 </div>
                             )}
                             <div className="h-8 w-px bg-slate-800 mx-1"></div>
-                            <button className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
+                            <button type="button" className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
                                 <span className="material-symbols-outlined text-xl">filter_list</span>
                             </button>
-                            <button className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
+                            <button type="button" className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
                                 <span className="material-symbols-outlined text-xl">settings</span>
                             </button>
                         </div>
@@ -192,7 +193,7 @@ export default function RosterPage() {
                             </div>
                         </div>
 
-                        <button
+                        <button type="button"
                             onClick={handleAutoResolve}
                             disabled={resolving}
                             className="block w-full text-center mt-2 py-2 text-[11px] font-bold text-blue-500 hover:bg-blue-500/10 rounded transition-colors uppercase tracking-wider border border-blue-500/30 disabled:opacity-50"

@@ -3,6 +3,7 @@
 import { Footer } from "@/components/devops-dashboards/layout/Footer"
 import { Header } from "@/components/devops-dashboards/layout/Header"
 import { useState } from 'react'
+import { Button } from '@/components/ui/button';
 
 export default function KubernetesPage() {
     const [activeTab, setActiveTab] = useState('main')
@@ -60,14 +61,14 @@ export default function KubernetesPage() {
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="flex bg-surface-dark border border-border-dark rounded-lg p-1 mr-2">
-                        <button
+                        <button type="button"
                             onClick={() => setActiveTab('main')}
                             className={`px-3 py-1 text-xs font-medium rounded ${activeTab === 'main' ? 'bg-border-dark text-white' : 'text-slate-500 hover:text-slate-300'
                                 }`}
                         >
                             Main Container
                         </button>
-                        <button
+                        <button type="button"
                             onClick={() => setActiveTab('proxy')}
                             className={`px-3 py-1 text-xs font-medium rounded ${activeTab === 'proxy' ? 'bg-border-dark text-white' : 'text-slate-500 hover:text-slate-300'
                                 }`}
@@ -75,11 +76,11 @@ export default function KubernetesPage() {
                             Istio Proxy
                         </button>
                     </div>
-                    <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border-dark bg-surface-dark hover:bg-border-dark transition-colors text-sm font-semibold">
+                    <button type="button" className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border-dark bg-surface-dark hover:bg-border-dark transition-colors text-sm font-semibold">
                         <span className="material-symbols-outlined text-sm">refresh</span>
                         Restart
                     </button>
-                    <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500/20 transition-colors text-sm font-semibold">
+                    <button type="button" className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500/20 transition-colors text-sm font-semibold">
                         <span className="material-symbols-outlined text-sm">delete</span>
                         Delete
                     </button>
@@ -178,7 +179,7 @@ export default function KubernetesPage() {
                                 <span className="material-symbols-outlined text-slate-400 text-sm">history</span>
                                 <h3 className="font-bold text-sm">Recent Events</h3>
                             </div>
-                            <button className="text-xs text-primary font-medium hover:underline">View All</button>
+                            <Button variant="ghost" className="text-xs text-primary font-medium hover:underline">View All</Button>
                         </div>
                         <div className="flex-1 overflow-y-auto terminal-scrollbar p-4 space-y-4">
                             <div className="flex gap-3">
@@ -233,20 +234,20 @@ export default function KubernetesPage() {
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
-                            <button
+                            <button type="button"
                                 className="p-1 hover:bg-white/10 rounded text-slate-400"
                                 title="Clear Terminal"
                             >
                                 <span className="material-symbols-outlined text-sm">backspace</span>
                             </button>
-                            <button
+                            <button type="button"
                                 className="p-1 hover:bg-white/10 rounded text-slate-400"
                                 title="Download Buffer"
                             >
                                 <span className="material-symbols-outlined text-sm">download</span>
                             </button>
                             <div className="h-4 w-[1px] bg-border-dark mx-1"></div>
-                            <button className="p-1 hover:bg-white/10 rounded text-slate-400">
+                            <button type="button" className="p-1 hover:bg-white/10 rounded text-slate-400">
                                 <span className="material-symbols-outlined text-sm">expand_content</span>
                             </button>
                         </div>

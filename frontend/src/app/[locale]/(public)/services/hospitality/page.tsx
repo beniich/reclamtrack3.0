@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
 
 export default function HospitalityLanding() {
     const t = useTranslations('Hospitality');
@@ -26,10 +27,10 @@ export default function HospitalityLanding() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 pt-4">
-                            <button className="w-full sm:w-auto bg-brand-orange text-white font-black px-10 py-5 rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-brand-orange/25 hover:bg-orange-600 transition-all orange-glow transform hover:scale-105">
+                            <button type="button" className="w-full sm:w-auto bg-brand-orange text-white font-black px-10 py-5 rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-brand-orange/25 hover:bg-orange-600 transition-all orange-glow transform hover:scale-105">
                                 {t('ctaStart')}
                             </button>
-                            <button className="w-full sm:w-auto glass-card px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-white/10 transition-all">
+                            <button type="button" className="w-full sm:w-auto glass-card px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-white/10 transition-all">
                                 <span className="material-symbols-outlined text-sm">hotel</span> {t('ctaDemo')}
                             </button>
                         </div>

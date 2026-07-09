@@ -130,11 +130,11 @@ export default function ITAssetsPage() {
 
   const getAssetIcon = (type: string) => {
     switch (type) {
-      case 'server': return <Server className="h-5 w-5 text-blue-600" />;
+      case 'server': return <Server className="h-5 w-5 text-primary" />;
       case 'laptop': return <Laptop className="h-5 w-5 text-green-600" />;
-      case 'desktop': return <Monitor className="h-5 w-5 text-indigo-600" />;
+      case 'desktop': return <Monitor className="h-5 w-5 text-primary" />;
       case 'network_device': return <Network className="h-5 w-5 text-purple-600" />;
-      case 'mobile': return <Smartphone className="h-5 w-5 text-orange-600" />;
+      case 'mobile': return <Smartphone className="h-5 w-5 text-primary" />;
       case 'printer': return <Printer className="h-5 w-5 text-gray-600" />;
       default: return <Server className="h-5 w-5 text-gray-400" />;
     }
@@ -222,7 +222,7 @@ export default function ITAssetsPage() {
             <CardHeader className="pb-3">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-slate-50 rounded-lg group-hover:bg-slate-100 transition-colors">
+                  <div className="p-2 bg-slate-50 rounded-lg group-hover:bg-primary/8 transition-colors">
                      {getAssetIcon(asset.type)}
                   </div>
                   <div>

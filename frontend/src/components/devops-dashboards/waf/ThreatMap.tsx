@@ -2,8 +2,8 @@ import React from 'react';
 import { Icon } from "@/components/devops-dashboards/ui/Icon";
 
 export const ThreatMap = () => (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden relative shadow-sm h-[400px]">
-        <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50 absolute top-0 w-full z-10">
+    <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden relative shadow-sm h-[400px]">
+        <div className="p-4 border-b border-slate-200 dark:border-border-dark flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50 absolute top-0 w-full z-10">
             <div className="flex items-center gap-2">
                 <Icon name="public" className="text-red-500" />
                 <h3 className="font-bold text-sm">Live Global Threat Visualization</h3>

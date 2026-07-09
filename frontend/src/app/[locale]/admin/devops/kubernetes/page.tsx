@@ -1,9 +1,11 @@
+import { toast } from 'sonner';
 'use client'
 
 import { Footer } from "@/components/devops-dashboards/layout/Footer"
 import { Header } from "@/components/devops-dashboards/layout/Header"
 import { useState } from 'react'
 import { Button } from '@/components/ui/button';
+import { RefreshCw, Trash, BarChart, History, CheckCircle, AlertTriangle, Download } from 'lucide-react';
 
 export default function KubernetesPage() {
     const [activeTab, setActiveTab] = useState('main')
@@ -76,12 +78,12 @@ export default function KubernetesPage() {
                             Istio Proxy
                         </button>
                     </div>
-                    <button type="button" className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border-dark bg-surface-dark hover:bg-border-dark transition-colors text-sm font-semibold">
-                        <span className="material-symbols-outlined text-sm">refresh</span>
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border-dark bg-surface-dark hover:bg-border-dark transition-colors text-sm font-semibold">
+                        <RefreshCw className="text-sm" />
                         Restart
                     </button>
-                    <button type="button" className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500/20 transition-colors text-sm font-semibold">
-                        <span className="material-symbols-outlined text-sm">delete</span>
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500/20 transition-colors text-sm font-semibold">
+                        <Trash className="text-sm" />
                         Delete
                     </button>
                 </div>
@@ -136,7 +138,7 @@ export default function KubernetesPage() {
                             <div className="bg-surface-dark rounded-xl border border-border-dark p-5 flex flex-col">
                                 <div className="flex items-center justify-between mb-4">
                                     <div className="flex items-center gap-2">
-                                        <span className="material-symbols-outlined text-primary">analytics</span>
+                                        <BarChart className="text-primary" />
                                         <h3 className="font-semibold text-sm">Memory Usage</h3>
                                     </div>
                                     <span className="text-xs text-slate-400">Limit: 4Gi</span>
@@ -176,7 +178,7 @@ export default function KubernetesPage() {
                     <div className="col-span-12 lg:col-span-4 bg-surface-dark rounded-xl border border-border-dark flex flex-col overflow-hidden">
                         <div className="px-4 py-3 border-b border-border-dark flex items-center justify-between bg-white/5">
                             <div className="flex items-center gap-2">
-                                <span className="material-symbols-outlined text-slate-400 text-sm">history</span>
+                                <History className="text-slate-400 text-sm" />
                                 <h3 className="font-bold text-sm">Recent Events</h3>
                             </div>
                             <Button variant="ghost" className="text-xs text-primary font-medium hover:underline">View All</Button>
@@ -184,7 +186,7 @@ export default function KubernetesPage() {
                         <div className="flex-1 overflow-y-auto terminal-scrollbar p-4 space-y-4">
                             <div className="flex gap-3">
                                 <div className="text-green-500 pt-1">
-                                    <span className="material-symbols-outlined text-lg">check_circle</span>
+                                    <CheckCircle className="text-lg" />
                                 </div>
                                 <div>
                                     <p className="text-xs font-bold text-white uppercase">Started</p>
@@ -194,7 +196,7 @@ export default function KubernetesPage() {
                             </div>
                             <div className="flex gap-3">
                                 <div className="text-green-500 pt-1">
-                                    <span className="material-symbols-outlined text-lg">check_circle</span>
+                                    <CheckCircle className="text-lg" />
                                 </div>
                                 <div>
                                     <p className="text-xs font-bold text-white uppercase">Pulled</p>
@@ -206,7 +208,7 @@ export default function KubernetesPage() {
                             </div>
                             <div className="flex gap-3">
                                 <div className="text-amber-500 pt-1">
-                                    <span className="material-symbols-outlined text-lg">warning</span>
+                                    <AlertTriangle className="text-lg" />
                                 </div>
                                 <div>
                                     <p className="text-xs font-bold text-white uppercase">BackOff</p>
@@ -234,20 +236,20 @@ export default function KubernetesPage() {
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
-                            <button type="button"
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')} 
                                 className="p-1 hover:bg-white/10 rounded text-slate-400"
                                 title="Clear Terminal"
                             >
                                 <span className="material-symbols-outlined text-sm">backspace</span>
                             </button>
-                            <button type="button"
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')} 
                                 className="p-1 hover:bg-white/10 rounded text-slate-400"
                                 title="Download Buffer"
                             >
-                                <span className="material-symbols-outlined text-sm">download</span>
+                                <Download className="text-sm" />
                             </button>
                             <div className="h-4 w-[1px] bg-border-dark mx-1"></div>
-                            <button type="button" className="p-1 hover:bg-white/10 rounded text-slate-400">
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 hover:bg-white/10 rounded text-slate-400">
                                 <span className="material-symbols-outlined text-sm">expand_content</span>
                             </button>
                         </div>
@@ -321,7 +323,7 @@ export default function KubernetesPage() {
             {/* Floating Tooltip for pod health */}
             <div className="fixed bottom-24 right-6 pointer-events-none">
                 <div className="bg-primary shadow-xl shadow-primary/20 rounded-full px-4 py-2 flex items-center gap-3 text-white pointer-events-auto">
-                    <span className="material-symbols-outlined animate-spin text-sm">sync</span>
+                    <RefreshCw className="animate-spin text-sm" />
                     <span className="text-xs font-bold tracking-tight">AUTO-FOLLOW LOGS ENABLED</span>
                 </div>
             </div>

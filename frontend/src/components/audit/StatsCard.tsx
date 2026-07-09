@@ -24,7 +24,7 @@ export default function StatsCard({ icon, title, value, change }: Props) {
     const colorClass = change ? getColorClass(change.color) : "primary";
 
     return (
-        <div className="flex flex-col gap-3 rounded-xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-sm transition-all hover:shadow-md">
+        <div className="flex flex-col gap-3 rounded-xl bg-white dark:bg-background p-6 border border-slate-200 dark:border-border-dark shadow-sm transition-all hover:shadow-md">
             <div className="flex items-center gap-3">
                 <div className="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-primary">
                     {icon}

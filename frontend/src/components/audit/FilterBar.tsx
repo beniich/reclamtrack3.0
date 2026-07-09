@@ -1,6 +1,7 @@
+import { Calendar, Filter } from 'lucide-react';
 export default function FilterBar() {
     return (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 mb-6 shadow-sm">
+        <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl p-4 mb-6 shadow-sm">
             <div className="flex flex-wrap gap-4 items-center">
                 <div className="flex-1 min-w-[280px]">
                     <div className="relative">
@@ -22,14 +23,14 @@ export default function FilterBar() {
                     </button>
                     <button type="button" className="flex items-center gap-2 rounded-lg bg-slate-100 dark:bg-slate-800 px-3 py-2 text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-primary">
                         Last 24 Hours
-                        <span className="material-symbols-outlined text-lg">calendar_month</span>
+                        <Calendar className="text-lg" />
                     </button>
                     <button type="button" className="flex items-center gap-2 rounded-lg bg-slate-100 dark:bg-slate-800 px-3 py-2 text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
                         Status: All
                         <span className="material-symbols-outlined text-lg">tune</span>
                     </button>
                     <button type="button" className="flex size-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-colors">
-                        <span className="material-symbols-outlined">filter_list</span>
+                        <Filter />
                     </button>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { MetricCard } from '@/components/ui/MetricCard'
 import { Role } from '@/lib/rbac/permissions'
+import { Plus, Lock } from 'lucide-react';
 
 export default function SecretsPage() {
     return (
@@ -22,7 +23,7 @@ export default function SecretsPage() {
                     </div>
                     <RoleGuard minRole={Role.ADMIN}>
                         <Button type="button" variant="primary">
-                            <span className="material-symbols-outlined">add</span>
+                            <Plus />
                             New Secret
                         </Button>
                     </RoleGuard>
@@ -37,7 +38,7 @@ export default function SecretsPage() {
                 <Card header={<h3 className="font-bold">Secure Vault</h3>}>
                     <div className="py-20 flex flex-col items-center justify-center text-center space-y-4">
                         <div className="w-20 h-20 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center">
-                            <span className="material-symbols-outlined text-4xl text-slate-400">lock</span>
+                            <Lock className="text-4xl text-slate-400" />
                         </div>
                         <div>
                             <h2 className="text-xl font-bold">Vault Locked</h2>

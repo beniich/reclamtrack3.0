@@ -26,9 +26,9 @@ export default function AdminDbPage() {
     const ActiveComponent = TABS.find(tab => tab.id === activeTabId)?.component || BDRDashboard;
 
     return (
-        <div className="flex flex-col h-screen bg-slate-50 dark:bg-slate-950 transition-colors overflow-hidden">
+        <div className="flex flex-col h-screen bg-slate-50 dark:bg-background transition-colors overflow-hidden">
             {/* Navigation Bar */}
-            <header className="h-16 flex items-center justify-between px-6 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-orange-500/10 z-50 shadow-sm flex-shrink-0">
+            <header className="h-16 flex items-center justify-between px-6 bg-white dark:bg-background border-b border-slate-200 dark:border-primary/10 z-50 shadow-sm flex-shrink-0">
                 <div className="flex items-center gap-4">
                     <h1 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">{t('title')}</h1>
                     <div className="h-6 w-px bg-slate-200 dark:bg-slate-700"></div>
@@ -38,7 +38,7 @@ export default function AdminDbPage() {
                                 key={tab.id}
                                 onClick={() => setActiveTabId(tab.id)}
                                 className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-[10px] uppercase font-black tracking-widest transition-all ${activeTabId === tab.id
-                                        ? 'bg-white dark:bg-slate-900 text-indigo-600 dark:text-orange-400 shadow-sm border border-slate-200 dark:border-orange-500/20'
+                                        ? 'bg-white dark:bg-background text-primary dark:text-orange-400 shadow-sm border border-slate-200 dark:border-primary/20'
                                         : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-700'
                                     }`}
                             >

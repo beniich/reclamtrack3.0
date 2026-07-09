@@ -30,7 +30,7 @@ export default function KPICard({
     }
 
     const iconColorClasses = {
-        primary: 'bg-blue-500/10 text-blue-500',
+        primary: 'bg-primary/10 text-primary',
         red: 'bg-red-500/10 text-red-500',
         green: 'bg-green-500/10 text-green-500',
         amber: 'bg-amber-500/10 text-amber-500',

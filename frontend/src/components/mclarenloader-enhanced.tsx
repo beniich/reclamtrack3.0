@@ -60,7 +60,7 @@ export function McLarenLoader() {
                 <div className="absolute -inset-4 bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 rounded-lg blur-lg opacity-30 animate-pulse" />
 
                 {/* Car Container */}
-                <div className="relative bg-white dark:bg-slate-900 rounded-lg p-8 shadow-2xl">
+                <div className="relative bg-white dark:bg-background rounded-lg p-8 shadow-2xl">
                     {/* McLaren Car SVG */}
                     <svg
                         viewBox="0 0 200 100"
@@ -142,9 +142,9 @@ export function McLarenLoader() {
                             Changement de vitesse en cours...
                         </p>
                         <div className="flex justify-center gap-1.5">
-                            <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
+                            <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
                             <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-                            <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
+                            <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
                         </div>
                     </div>
 

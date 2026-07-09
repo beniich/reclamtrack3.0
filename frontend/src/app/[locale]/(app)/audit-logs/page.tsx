@@ -6,6 +6,7 @@ import StatsCard from "@/components/audit/StatsCard";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { Suspense } from "react";
 import { Button } from '@/components/ui/button';
+import { RefreshCw, Download, List } from 'lucide-react';
 
 export default function AuditLogsPage() {
     return (
@@ -29,12 +30,12 @@ export default function AuditLogsPage() {
 
                 <div className="flex gap-3">
                     <button type="button" className="flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 px-6 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all shadow-xl shadow-cyan-500/5 group">
-                        <span className="material-symbols-outlined text-lg group-hover:rotate-180 transition-transform duration-500">sync</span>
+                        <RefreshCw className="text-lg group-hover:rotate-180 transition-transform duration-500" />
                         <span>Synchroniser</span>
                     </button>
 
                     <button type="button" className="flex items-center gap-3 rounded-2xl bg-brand-orange px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white shadow-xl shadow-orange-500/20 hover:brightness-110 transition-all active:scale-95">
-                        <span className="material-symbols-outlined text-lg">download</span>
+                        <Download className="text-lg" />
                         <span>Exporter les Archives</span>
                     </button>
                 </div>
@@ -42,7 +43,7 @@ export default function AuditLogsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                 <StatsCard
-                    icon={<span className="material-symbols-outlined">list_alt</span>}
+                    icon={<List />}
                     title="Total Logs Today"
                     value="1,284"
                     change={{ direction: "up", percent: 12, color: "emerald" }}
@@ -88,7 +89,7 @@ export default function AuditLogsPage() {
                                     boxShadow: i === 3 ? "0 0 20px rgba(255, 107, 0, 0.3)" : "none"
                                 }}
                             >
-                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-dark text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
                                     {Math.round(h * 100)}%
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl'
 import { complianceApi } from "@/lib/api"
 import { toast } from "sonner"
 import { Button } from '@/components/ui/button';
+import { Download, CheckCircle, Shield } from 'lucide-react';
 
 interface ComplianceReport {
     timestamp: string;
@@ -99,7 +100,7 @@ export default function CompliancePage() {
                             onClick={handleExport}
                             className="px-5 py-2.5 rounded-lg bg-[#310B5E] text-white border border-[#4F1A93] font-bold hover:bg-[#4F1A93] hover:shadow-[0_0_15px_rgba(79,26,147,0.5)] transition-all active:scale-95 text-sm flex items-center gap-2"
                         >
-                            <span className="material-symbols-outlined text-[18px]">download</span>
+                            <Download className="text-[18px]" />
                             Export Full Report
                         </button>
                     </div>
@@ -124,7 +125,7 @@ export default function CompliancePage() {
                                 <p className="text-xs font-bold text-slate-400 uppercase mb-2 tracking-wider">IAM Health</p>
                                 <div className="text-3xl font-black text-white">Protected</div>
                                 <p className="text-xs text-emerald-400 mt-2 font-medium flex items-center gap-1">
-                                    <span className="material-symbols-outlined text-[14px]">check_circle</span>
+                                    <CheckCircle className="text-[14px]" />
                                     MFA Enforced globally
                                 </p>
                             </div>
@@ -140,12 +141,12 @@ export default function CompliancePage() {
                                 <p className="text-xs font-bold text-slate-400 uppercase mb-2 tracking-wider">Security Events</p>
                                 <div className="text-3xl font-black text-white">0</div>
                                 <p className="text-xs text-emerald-400 mt-2 font-medium flex items-center gap-1">
-                                    <span className="material-symbols-outlined text-[14px]">shield</span>
+                                    <Shield className="text-[14px]" />
                                     No critical incidents open
                                 </p>
                             </div>
-                            <div className="size-10 rounded-lg flex items-center justify-center bg-blue-500/10 border border-blue-500/20">
-                                <span className="material-symbols-outlined text-blue-500">radar</span>
+                            <div className="size-10 rounded-lg flex items-center justify-center bg-primary/10 border border-primary/20">
+                                <span className="material-symbols-outlined text-primary">radar</span>
                             </div>
                         </div>
                     </div>
@@ -237,7 +238,7 @@ export default function CompliancePage() {
                             </div>
                             
                             <div className="mt-4 pt-4 border-t border-[#4F1A93]/40 relative z-10">
-                                <button type="button" className="w-full py-2.5 bg-[#1A0536] border border-[#4F1A93]/50 hover:bg-[#310B5E] rounded-lg text-xs font-bold text-slate-300 transition-colors flex items-center justify-center gap-2">
+                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full py-2.5 bg-[#1A0536] border border-[#4F1A93]/50 hover:bg-[#310B5E] rounded-lg text-xs font-bold text-slate-300 transition-colors flex items-center justify-center gap-2">
                                     <span className="material-symbols-outlined text-sm">open_in_new</span>
                                     Open Full Audit Trail
                                 </button>

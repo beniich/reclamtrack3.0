@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Search, Phone, ChevronRight, Download, Plus, MoreVertical, History, Timer, AlertTriangle } from 'lucide-react';
 
 // Types
 type SOPStatus = 'ACTIVE' | 'DRAFT' | 'REVIEW' | 'ARCHIVED';
@@ -101,7 +102,7 @@ export default function KnowledgeBasePage() {
         switch (priority) {
             case 'URGENT': return <div className="px-2 py-1 bg-red-100 dark:bg-red-500/20 text-red-600 dark:text-red-400 text-[10px] font-black uppercase rounded tracking-wider">Urgent Safety</div>;
             case 'HIGH': return <div className="px-2 py-1 bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 text-[10px] font-black uppercase rounded tracking-wider">High Priority</div>;
-            case 'MEDIUM': return <div className="px-2 py-1 bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase rounded tracking-wider">Maintenance</div>;
+            case 'MEDIUM': return <div className="px-2 py-1 bg-blue-100 dark:bg-primary/20 text-primary dark:text-blue-400 text-[10px] font-black uppercase rounded tracking-wider">Maintenance</div>;
             case 'LOW': return <div className="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-black uppercase rounded tracking-wider">Routine</div>;
         }
     };
@@ -109,7 +110,7 @@ export default function KnowledgeBasePage() {
     return (
         <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
             {/* Header */}
-            <header className="sticky top-0 z-50 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3">
+            <header className="sticky top-0 z-50 flex items-center justify-between border-b border-slate-200 dark:border-border-dark bg-white dark:bg-background px-6 py-3">
                 <div className="flex items-center gap-8">
                     <Link href="/dashboard" className="flex items-center gap-3">
                         <div className="p-2 bg-primary rounded-lg text-white">
@@ -126,7 +127,7 @@ export default function KnowledgeBasePage() {
                 </div>
                 <div className="flex items-center gap-4 flex-1 max-w-md mx-8">
                     <div className="relative w-full">
-                        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl" />
                         <input
                             className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400"
                             placeholder="Search procedures, codes, or keywords..."
@@ -146,7 +147,7 @@ export default function KnowledgeBasePage() {
 
             <div className="flex flex-1 overflow-hidden">
                 {/* Left Sidebar */}
-                <aside className="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hidden lg:flex flex-col p-4 shrink-0">
+                <aside className="w-64 border-r border-slate-200 dark:border-border-dark bg-white dark:bg-background hidden lg:flex flex-col p-4 shrink-0">
                     <div className="mb-6">
                         <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-4">Main Categories</p>
                         <div className="space-y-1">
@@ -156,7 +157,7 @@ export default function KnowledgeBasePage() {
                                     onClick={() => setSelectedCategory(category)}
                                     className={`flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${selectedCategory === category
                                             ? 'bg-primary/10 text-primary'
-                                            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'
+                                            : 'text-slate-600 dark:text-slate-400 hover:bg-primary/5 dark:hover:bg-violet-500/15'
                                         }`}
                                 >
                                     <span className="material-symbols-outlined text-lg">
@@ -171,11 +172,11 @@ export default function KnowledgeBasePage() {
                         </div>
                     </div>
 
-                    <div className="mt-auto p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div className="mt-auto p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-border-dark">
                         <p className="text-xs font-bold mb-2 text-slate-700 dark:text-slate-300">Need Live Support?</p>
                         <p className="text-[11px] text-slate-500 mb-3">Direct line to Central Dispatch for urgent clarifications.</p>
-                        <button type="button" className="w-full py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-slate-700 dark:text-slate-300">
-                            <span className="material-symbols-outlined text-sm">call</span>
+                        <button type="button" className="w-full py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold flex items-center justify-center gap-2 hover:bg-primary/5 dark:hover:bg-slate-700 transition-colors text-slate-700 dark:text-slate-300">
+                            <Phone className="text-sm" />
                             Call Supervisor
                         </button>
                     </div>
@@ -187,21 +188,21 @@ export default function KnowledgeBasePage() {
                     <div className="px-8 pt-6">
                         <nav className="flex items-center gap-2 text-xs text-slate-500 font-medium mb-4">
                             <Link href="/knowledge" className="hover:text-primary transition-colors">Knowledge Base</Link>
-                            <span className="material-symbols-outlined text-[10px]">chevron_right</span>
+                            <ChevronRight className="text-[10px]" />
                             <span className="text-slate-900 dark:text-slate-200">{selectedCategory}</span>
                         </nav>
-                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
+                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-border-dark pb-6">
                             <div>
                                 <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Standard Operating Procedures</h1>
                                 <p className="text-slate-500 mt-1 max-w-2xl font-medium">Technical guides and step-by-step intervention protocols for field operators and customer service desk.</p>
                             </div>
                             <div className="flex items-center gap-3">
-                                <button type="button" className="flex items-center gap-2 px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-lg text-sm font-bold bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors">
-                                    <span className="material-symbols-outlined text-lg">download</span>
+                                <button type="button" className="flex items-center gap-2 px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-lg text-sm font-bold bg-white dark:bg-background hover:bg-primary/5 dark:hover:bg-violet-500/15 text-slate-700 dark:text-slate-300 transition-colors">
+                                    <Download className="text-lg" />
                                     Export All
                                 </button>
                                 <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
-                                    <span className="material-symbols-outlined text-lg">add</span>
+                                    <Plus className="text-lg" />
                                     Create SOP
                                 </button>
                             </div>
@@ -218,23 +219,23 @@ export default function KnowledgeBasePage() {
                     {/* SOP Cards Grid */}
                     <div className="px-8 pb-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                         {filteredSOPs.map(sop => (
-                            <div key={sop.id} className={`group bg-white dark:bg-slate-900 border-2 border-transparent hover:border-primary/50 rounded-xl p-5 shadow-sm transition-all flex flex-col ${sop.status === 'DRAFT' ? 'opacity-80' : ''}`}>
+                            <div key={sop.id} className={`group bg-white dark:bg-background border-2 border-transparent hover:border-primary/50 rounded-xl p-5 shadow-sm transition-all flex flex-col ${sop.status === 'DRAFT' ? 'opacity-80' : ''}`}>
                                 <div className="flex justify-between items-start mb-4">
                                     {getPriorityBadge(sop.priority)}
-                                    <span className="text-slate-400 group-hover:text-primary cursor-pointer material-symbols-outlined">more_vert</span>
+                                    <MoreVertical className="text-slate-400 group-hover:text-primary cursor-pointer" />
                                 </div>
                                 <h3 className="text-lg font-bold leading-tight mb-2 group-hover:text-primary transition-colors text-slate-900 dark:text-white">{sop.title}</h3>
                                 <p className="text-sm text-slate-500 line-clamp-2 mb-6">{sop.description}</p>
                                 <div className="mt-auto space-y-4">
                                     <div className="flex items-center gap-4 text-xs font-medium text-slate-400">
-                                        <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">history</span> v{sop.version}</span>
+                                        <span className="flex items-center gap-1.5"><History className="text-sm" /> v{sop.version}</span>
                                         {sop.duration > 0 ? (
-                                            <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">timer</span> {sop.duration} mins</span>
+                                            <span className="flex items-center gap-1.5"><Timer className="text-sm" /> {sop.duration} mins</span>
                                         ) : (
                                             <span className="flex items-center gap-1.5 text-primary">Awaiting Review</span>
                                         )}
                                     </div>
-                                    <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
+                                    <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-border-dark">
                                         <div className="flex -space-x-2">
                                             {sop.reviewers.map((reviewer, i) => (
                                                 <div key={i} className="size-6 rounded-full bg-slate-200 border border-white dark:border-slate-900 overflow-hidden">
@@ -251,7 +252,7 @@ export default function KnowledgeBasePage() {
                         ))}
 
                         {/* Add New Card Placeholder */}
-                        <div className="border-2 border-dashed border-slate-300 dark:border-slate-800 hover:border-primary/50 hover:bg-primary/5 transition-all rounded-xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer h-full min-h-[250px]">
+                        <div className="border-2 border-dashed border-slate-300 dark:border-border-dark hover:border-primary/50 hover:bg-primary/5 transition-all rounded-xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer h-full min-h-[250px]">
                             <div className="size-12 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
                                 <span className="material-symbols-outlined text-2xl text-slate-500 group-hover:text-white">post_add</span>
                             </div>
@@ -262,7 +263,7 @@ export default function KnowledgeBasePage() {
                 </main>
 
                 {/* Right Sidebar (Contextual) */}
-                <aside className="w-80 border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hidden xl:flex flex-col shrink-0">
+                <aside className="w-80 border-l border-slate-200 dark:border-border-dark bg-white dark:bg-background hidden xl:flex flex-col shrink-0">
                     <div className="p-6">
                         <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6">Recently Viewed</h4>
                         <div className="space-y-6">
@@ -277,7 +278,7 @@ export default function KnowledgeBasePage() {
                             </div>
                             <div className="flex gap-4">
                                 <div className="size-10 shrink-0 bg-amber-100 dark:bg-amber-900/30 text-amber-600 rounded-lg flex items-center justify-center">
-                                    <span className="material-symbols-outlined">warning_amber</span>
+                                    <AlertTriangle />
                                 </div>
                                 <div>
                                     <p className="text-sm font-bold leading-tight text-slate-900 dark:text-white">Spill Response Kit Log</p>
@@ -286,7 +287,7 @@ export default function KnowledgeBasePage() {
                             </div>
                         </div>
                     </div>
-                    <div className="p-6 border-t border-slate-200 dark:border-slate-800">
+                    <div className="p-6 border-t border-slate-200 dark:border-border-dark">
                         <h4 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-4">Quick Stats</h4>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
@@ -299,7 +300,7 @@ export default function KnowledgeBasePage() {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-auto p-6 border-t border-slate-200 dark:border-slate-800">
+                    <div className="mt-auto p-6 border-t border-slate-200 dark:border-border-dark">
                         <div className="flex items-center justify-between mb-4">
                             <span className="text-xs font-bold text-slate-500">System Status</span>
                             <span className="flex items-center gap-1.5 text-[10px] font-black text-emerald-500 uppercase">

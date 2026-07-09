@@ -13,6 +13,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import * as XLSX from 'xlsx';
 import { Button } from '@/components/ui/button';
+import { BarChart, Plus, ThumbsUp, CheckCircle, Star, RefreshCw } from 'lucide-react';
 
 // Types
 type ReportFormat = 'PDF' | 'EXCEL' | 'CSV';
@@ -154,7 +155,7 @@ export default function ReportsPage() {
                 <div className="flex items-center gap-8">
                     <Link href="/dashboard" className="flex items-center gap-3">
                         <div className="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center">
-                            <span className="material-symbols-outlined text-xl">analytics</span>
+                            <BarChart className="text-xl" />
                         </div>
                         <h2 className="text-lg font-bold leading-tight tracking-tight">ReclamTrack Portal</h2>
                     </Link>
@@ -180,7 +181,7 @@ export default function ReportsPage() {
                     </div>
                     <div className="flex gap-3">
                         <button type="button" className="flex items-center gap-2 rounded-lg h-11 px-6 bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
-                            <span className="material-symbols-outlined text-[20px]">add</span>
+                            <Plus className="text-[20px]" />
                             New Report Job
                         </button>
                     </div>
@@ -192,8 +193,8 @@ export default function ReportsPage() {
                         {/* Real Analytics Stats */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
-                                <div className="size-14 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
-                                    <span className="material-symbols-outlined text-2xl">thumb_up</span>
+                                <div className="size-14 rounded-full bg-blue-100 text-primary flex items-center justify-center">
+                                    <ThumbsUp className="text-2xl" />
                                 </div>
                                 <div>
                                     <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Satisfaction Rate</p>
@@ -205,7 +206,7 @@ export default function ReportsPage() {
                             </div>
                             <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
                                 <div className="size-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
-                                    <span className="material-symbols-outlined text-2xl">check_circle</span>
+                                    <CheckCircle className="text-2xl" />
                                 </div>
                                 <div>
                                     <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Completion Rate</p>
@@ -217,7 +218,7 @@ export default function ReportsPage() {
                             </div>
                             <div className="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
                                 <div className="size-14 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center">
-                                    <span className="material-symbols-outlined text-2xl">star</span>
+                                    <Star className="text-2xl" />
                                 </div>
                                 <div>
                                     <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Avg Rating</p>
@@ -260,15 +261,15 @@ export default function ReportsPage() {
                                     <div>
                                         <label className="text-sm font-semibold text-slate-700 mb-2 block">Export Format</label>
                                         <div className="flex gap-2">
-                                            <button type="button" onClick={() => setSelectedFormat('PDF')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'PDF' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
+                                            <button type="button" onClick={() => setSelectedFormat('PDF')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'PDF' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-primary/30 text-slate-500')}>
                                                 <span className="material-symbols-outlined text-[24px]">picture_as_pdf</span>
                                                 <span className="text-[10px] font-black uppercase">PDF</span>
                                             </button>
-                                            <button type="button" onClick={() => setSelectedFormat('EXCEL')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'EXCEL' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
+                                            <button type="button" onClick={() => setSelectedFormat('EXCEL')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'EXCEL' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-primary/30 text-slate-500')}>
                                                 <span className="material-symbols-outlined text-[24px]">table_view</span>
                                                 <span className="text-[10px] font-black uppercase">Excel</span>
                                             </button>
-                                            <button type="button" onClick={() => setSelectedFormat('CSV')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'CSV' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-slate-200 text-slate-500')}>
+                                            <button type="button" onClick={() => setSelectedFormat('CSV')} className={cn("flex-1 flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all", selectedFormat === 'CSV' ? 'border-primary bg-primary/5 text-primary' : 'border-slate-100 hover:border-primary/30 text-slate-500')}>
                                                 <span className="material-symbols-outlined text-[24px]">csv</span>
                                                 <span className="text-[10px] font-black uppercase">CSV</span>
                                             </button>
@@ -280,7 +281,7 @@ export default function ReportsPage() {
                                         disabled={isGenerating}
                                         className="w-full mt-4 bg-primary text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transform active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-wait"
                                     >
-                                        {isGenerating ? <><span className="material-symbols-outlined animate-spin">refresh</span> Generating...</> : <><span className="material-symbols-outlined">autostop</span> Generate Report Now</>}
+                                        {isGenerating ? <><RefreshCw className="animate-spin" /> Generating...</> : <><span className="material-symbols-outlined">autostop</span> Generate Report Now</>}
                                     </button>
                                 </div>
                             </div>
@@ -295,7 +296,7 @@ export default function ReportsPage() {
                                                 <div className="flex justify-between items-start mb-2">
                                                     <div className="flex items-center gap-1 text-amber-500">
                                                         <span className="font-bold text-lg">{feedback.rating}</span>
-                                                        <span className="material-symbols-outlined text-sm">star</span>
+                                                        <Star className="text-sm" />
                                                     </div>
                                                     <span className="text-xs text-slate-400">{feedback.date}</span>
                                                 </div>
@@ -327,7 +328,7 @@ export default function ReportsPage() {
                                     </thead>
                                     <tbody className="divide-y divide-slate-100">
                                         {mockReports.map((report) => (
-                                            <tr key={report.id} className="hover:bg-slate-50/50 transition-colors">
+                                            <tr key={report.id} className="hover:bg-primary/5/50 transition-colors">
                                                 <td className="px-6 py-4 font-bold text-sm">{report.name}</td>
                                                 <td className="px-6 py-4 text-sm text-slate-600">{report.date}</td>
                                                 <td className="px-6 py-4 text-xs font-bold text-slate-500">{report.format}</td>

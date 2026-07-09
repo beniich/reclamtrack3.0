@@ -38,8 +38,8 @@ export default function WorkOrdersPage() {
     const getStatusColor = (status: string) => {
         switch(status) {
             case 'draft': return 'bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-500/20';
-            case 'planned': return 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20';
-            case 'assigned': return 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20';
+            case 'planned': return 'bg-primary/10 text-primary dark:text-blue-400 border-primary/20';
+            case 'assigned': return 'bg-primary/10 text-primary dark:text-indigo-400 border-primary/20';
             case 'in_progress': return 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
             case 'closed': return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
             case 'validated': return 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20';
@@ -50,7 +50,7 @@ export default function WorkOrdersPage() {
     const getTypeColor = (type: string) => {
         switch(type) {
             case 'corrective': return 'text-red-500 bg-red-500/10';
-            case 'preventive': return 'text-indigo-500 bg-indigo-500/10';
+            case 'preventive': return 'text-primary bg-primary/10';
             case 'improvement': return 'text-emerald-500 bg-emerald-500/10';
             case 'inspection': return 'text-purple-500 bg-purple-500/10';
             default: return '';
@@ -75,7 +75,7 @@ export default function WorkOrdersPage() {
     );
 
     return (
-        <div className="p-6 space-y-8 bg-slate-50 dark:bg-slate-950 min-h-[calc(100vh-6rem)] relative overflow-hidden font-display">
+        <div className="p-6 space-y-8 bg-slate-50 dark:bg-background min-h-[calc(100vh-6rem)] relative overflow-hidden font-display">
             {/* Ambient glow */}
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-500/5 dark:bg-red-500/10 blur-[120px] -z-10 pointer-events-none rounded-full"></div>
             
@@ -99,7 +99,7 @@ export default function WorkOrdersPage() {
                 </div>
 
                 <div className="flex gap-3">
-                    <Button variant="secondary" className="h-[52px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white rounded-2xl px-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-slate-50 transition-all">Historique</Button>
+                    <Button variant="secondary" className="h-[52px] bg-white dark:bg-background border border-slate-200 dark:border-border-dark text-slate-900 dark:text-white rounded-2xl px-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-primary/5 transition-all">Historique</Button>
                     <button type="button" className="h-[52px] bg-red-600 dark:bg-red-500 hover:brightness-110 text-white rounded-2xl px-8 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-2xl shadow-red-600/20 transition-all">
                         <Plus className="w-4 h-4" /> Créer OT Industrial
                     </button>
@@ -115,15 +115,15 @@ export default function WorkOrdersPage() {
                         placeholder="Rechercher par référence WO, titre..." 
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full h-[56px] pl-14 pr-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[12px] font-bold text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-all shadow-sm"
+                        className="w-full h-[56px] pl-14 pr-4 rounded-2xl bg-white dark:bg-background border border-slate-200 dark:border-border-dark text-[12px] font-bold text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20 transition-all shadow-sm"
                     />
                 </div>
                 <div className="flex gap-3">
                     <Select value={statusFilter} onValueChange={setStatusFilter}>
-                        <SelectTrigger className="w-[180px] h-[56px] bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-2xl text-[10px] font-black uppercase tracking-widest">
+                        <SelectTrigger className="w-[180px] h-[56px] bg-white dark:bg-background border-slate-200 dark:border-border-dark rounded-2xl text-[10px] font-black uppercase tracking-widest">
                             <SelectValue placeholder="Statut" />
                         </SelectTrigger>
-                        <SelectContent className="bg-white dark:bg-slate-900 border-slate-800">
+                        <SelectContent className="bg-white dark:bg-background border-border-dark">
                             <SelectItem value="all_status">Tous les Statuts</SelectItem>
                             <SelectItem value="draft">Brouillon</SelectItem>
                             <SelectItem value="planned">Planifié</SelectItem>
@@ -133,10 +133,10 @@ export default function WorkOrdersPage() {
                     </Select>
                     
                     <Select value={typeFilter} onValueChange={setTypeFilter}>
-                        <SelectTrigger className="w-[180px] h-[56px] bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-2xl text-[10px] font-black uppercase tracking-widest">
+                        <SelectTrigger className="w-[180px] h-[56px] bg-white dark:bg-background border-slate-200 dark:border-border-dark rounded-2xl text-[10px] font-black uppercase tracking-widest">
                             <SelectValue placeholder="Type OT" />
                         </SelectTrigger>
-                        <SelectContent className="bg-white dark:bg-slate-900 border-slate-800">
+                        <SelectContent className="bg-white dark:bg-background border-border-dark">
                             <SelectItem value="all_types">Tous Types</SelectItem>
                             <SelectItem value="corrective">Correctif</SelectItem>
                             <SelectItem value="preventive">Préventif</SelectItem>
@@ -144,7 +144,7 @@ export default function WorkOrdersPage() {
                         </SelectContent>
                     </Select>
                     
-                    <button type="button" className="w-[56px] h-[56px] flex items-center justify-center bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl hover:bg-slate-50 transition-colors shadow-sm">
+                    <button type="button" className="w-[56px] h-[56px] flex items-center justify-center bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-2xl hover:bg-primary/5 transition-colors shadow-sm">
                         <Filter className="w-4 h-4 text-slate-700 dark:text-slate-300" />
                     </button>
                 </div>
@@ -155,13 +155,13 @@ export default function WorkOrdersPage() {
                 {isLoading ? (
                     [1, 2, 3].map(i => <Skeleton key={i} height="100px" borderRadius="1.5rem" mb={4} />)
                 ) : error ? (
-                    <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-[2rem] border border-red-500/20">
+                    <div className="p-12 text-center bg-white dark:bg-background rounded-[2rem] border border-red-500/20">
                         <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
                         <h4 className="text-sm font-black uppercase text-slate-900 dark:text-white">Échec de synchronisation</h4>
                         <p className="text-xs text-slate-500 mt-2">Veuillez vérifier votre connexion au serveur GMAO.</p>
                     </div>
                 ) : filteredWorkOrders.length === 0 ? (
-                    <div className="p-20 text-center bg-white dark:bg-slate-900 rounded-[2.5rem] border-2 border-dashed border-slate-100 dark:border-slate-800">
+                    <div className="p-20 text-center bg-white dark:bg-background rounded-[2.5rem] border-2 border-dashed border-slate-100 dark:border-border-dark">
                         <div className="size-16 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center mx-auto mb-6">
                             <Wrench className="w-8 h-8 text-slate-300" />
                         </div>
@@ -171,7 +171,7 @@ export default function WorkOrdersPage() {
                 ) : (
                     filteredWorkOrders.map((wo: any, i: number) => (
                         <Link href={`/work-orders/${wo._id}`} key={wo._id}>
-                            <div className="bg-white dark:bg-slate-900 rounded-[1.5rem] border border-slate-200 dark:border-slate-800/80 p-5 hover:border-red-500/40 flex items-center gap-6 cursor-pointer shadow-sm group transition-all animate-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${i * 50}ms` }}>
+                            <div className="bg-white dark:bg-background rounded-[1.5rem] border border-slate-200 dark:border-border-dark/80 p-5 hover:border-red-500/40 flex items-center gap-6 cursor-pointer shadow-sm group transition-all animate-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${i * 50}ms` }}>
                                 
                                 <div className={`p-4 rounded-2xl ${getTypeColor(wo.type)} flex items-center justify-center border border-current opacity-70 group-hover:opacity-100 transition-opacity`}>
                                     <Wrench className="w-5 h-5" />
@@ -197,7 +197,7 @@ export default function WorkOrdersPage() {
                                         </h3>
                                         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-3">
                                             <span className="text-[10px] font-black text-slate-400 flex items-center gap-2 uppercase tracking-wider">
-                                                <Layout className="w-3.5 h-3.5 text-indigo-500" /> 
+                                                <Layout className="w-3.5 h-3.5 text-primary" /> 
                                                 Asset: <span className="text-slate-600 dark:text-slate-200">{wo.assetId?.name || 'N/A'}</span>
                                             </span>
                                             <span className="text-[10px] font-black text-slate-400 flex items-center gap-2 uppercase tracking-wider">

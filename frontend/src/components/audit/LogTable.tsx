@@ -11,7 +11,7 @@ export default function LogTable() {
 
     if (isLoading) {
         return (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-12 text-center shadow-sm">
+            <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl p-12 text-center shadow-sm">
                 <LoadingSpinner />
                 <p className="text-slate-500 italic mt-4">Synchronizing audit trails...</p>
             </div>
@@ -19,7 +19,7 @@ export default function LogTable() {
     }
 
     return (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+        <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                     <thead>
@@ -59,7 +59,7 @@ export default function LogTable() {
                 </table>
             </div>
 
-            <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between border-t border-slate-200 dark:border-slate-800">
+            <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between border-t border-slate-200 dark:border-border-dark">
                 <p className="text-xs text-slate-500 dark:text-slate-400 font-bold italic">
                     Showing {logs.length} events (Page {pagination?.page || 1} of {pagination?.pages || 1})
                 </p>
@@ -67,14 +67,14 @@ export default function LogTable() {
                     <button type="button"
                         onClick={() => setPage(p => Math.max(1, p - 1))}
                         disabled={page === 1}
-                        className="px-4 py-2 text-xs font-bold text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50 shadow-sm"
+                        className="px-4 py-2 text-xs font-bold text-slate-600 dark:text-slate-400 bg-white dark:bg-background border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors disabled:opacity-50 shadow-sm"
                     >
                         Previous
                     </button>
                     <button type="button"
                         onClick={() => setPage(p => (pagination && p < pagination.pages ? p + 1 : p))}
                         disabled={!pagination || page >= pagination.pages}
-                        className="px-4 py-2 text-xs font-bold text-white bg-primary rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-primary/20 disabled:opacity-50 disabled:shadow-none"
+                        className="px-4 py-2 text-xs font-bold text-white bg-primary rounded-lg hover:bg-primary-700 transition-colors shadow-lg shadow-primary/20 disabled:opacity-50 disabled:shadow-none"
                     >
                         Next Page
                     </button>

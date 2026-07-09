@@ -27,6 +27,7 @@ import {
     YAxis
 } from 'recharts';
 import { Button } from '@/components/ui/button';
+import { Download } from 'lucide-react';
 
 const PERFORMANCE_DATA = [
     { name: 'Sep', score: 72 },
@@ -49,7 +50,7 @@ export default function EducationDashboard() {
     const [activeTab, setActiveTab] = useState('dashboard');
 
     return (
-        <div className="flex min-h-screen bg-slate-950 text-slate-200 font-sans">
+        <div className="flex min-h-screen bg-background-dark text-slate-200 font-sans">
             {/* Sidebar */}
             <aside className="w-72 border-r border-white/5 bg-brand-midnight/50 backdrop-blur-xl flex flex-col p-6 space-y-8">
                 <div className="flex items-center gap-3 px-2">
@@ -133,7 +134,7 @@ export default function EducationDashboard() {
                         </div>
                         <div className="flex gap-4">
                             <button type="button" className="px-6 py-3 glass-card rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 hover:bg-white/5 transition-all">
-                                <span className="material-symbols-outlined text-sm">download</span> Rapport PDF
+                                <Download className="text-sm" /> Rapport PDF
                             </button>
                             <Button variant="ghost" className="px-6 py-3 bg-brand-orange rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-orange/20 hover:scale-105 transition-all outline-none">Nouvel Examen</Button>
                         </div>
@@ -250,8 +251,8 @@ export default function EducationDashboard() {
                                     {[
                                         { name: 'Sarah Benckley', grade: '2nde B', score: '17.4', risk: '2%', status: 'Progressif', color: 'text-green-500' },
                                         { name: 'Marc Dupont', grade: '1ère C', score: '08.2', risk: '64%', status: 'Critique', color: 'text-brand-orange' },
-                                        { name: 'Yassine Alami', grade: 'Termiale G', score: '12.5', risk: '15%', status: 'Stable', color: 'text-blue-500' },
-                                        { name: 'Emma Wilson', grade: '3ème A', score: '14.8', risk: '5%', status: 'Stable', color: 'text-blue-500' },
+                                        { name: 'Yassine Alami', grade: 'Termiale G', score: '12.5', risk: '15%', status: 'Stable', color: 'text-primary' },
+                                        { name: 'Emma Wilson', grade: '3ème A', score: '14.8', risk: '5%', status: 'Stable', color: 'text-primary' },
                                     ].map((student, i) => (
                                         <tr key={i} className="border-b border-white/[0.02] hover:bg-white/[0.01] transition-all">
                                             <td className="py-6">

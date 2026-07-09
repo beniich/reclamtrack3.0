@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { BarChart } from 'lucide-react';
 
 export default function AboutPage() {
     return (
@@ -80,7 +81,7 @@ export default function AboutPage() {
                                 <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-transparent rounded-xl blur-2xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
                                 <div className="relative bg-[#221610] rounded-xl overflow-hidden aspect-square flex items-center justify-center border border-white/5">
                                     <div className="flex flex-col items-center gap-4 text-primary opacity-20 group-hover:opacity-40 transition-opacity">
-                                        <span className="material-symbols-outlined text-[120px]">analytics</span>
+                                        <BarChart className="text-[120px]" />
                                         <p className="text-xl font-black uppercase tracking-widest">ReclamCore Engine</p>
                                     </div>
                                     {/* Simple Decorative UI */}
@@ -190,7 +191,7 @@ export default function AboutPage() {
                                 Join over 500+ enterprises leveraging ReclamTrack Pro for their claims management.
                             </p>
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                                <Link href="/login" className="bg-white text-primary px-10 py-4 rounded-lg font-black text-lg hover:bg-slate-50 transition-colors">
+                                <Link href="/login" className="bg-white text-primary px-10 py-4 rounded-lg font-black text-lg hover:bg-primary/5 transition-colors">
                                     Request Demo
                                 </Link>
                                 <Link href="/contact" className="bg-transparent text-white border-2 border-white/30 hover:border-white px-10 py-4 rounded-lg font-black text-lg transition-all">

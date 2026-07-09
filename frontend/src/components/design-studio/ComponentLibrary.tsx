@@ -47,7 +47,7 @@ export const ComponentLibrary: React.FC<ComponentLibraryProps> = ({ onSelect }) 
     ] as const;
 
     return (
-        <div className="w-80 h-full flex flex-col gap-4 bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-orange-500/10 p-6">
+        <div className="w-80 h-full flex flex-col gap-4 bg-white dark:bg-background border-r border-slate-200 dark:border-primary/10 p-6">
             <div className="space-y-1">
                 <h2 className="text-xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter">
                     Tech Library
@@ -65,12 +65,12 @@ export const ComponentLibrary: React.FC<ComponentLibraryProps> = ({ onSelect }) 
                     placeholder="Search components..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-900 border-none rounded-xl text-sm focus:ring-2 focus:ring-orange-500/50 transition-all"
+                    className="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-background border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/50 transition-all"
                 />
             </div>
 
             {/* Tabs */}
-            <div className="flex bg-slate-100 dark:bg-slate-900 p-1 rounded-[1.2rem] gap-1">
+            <div className="flex bg-slate-100 dark:bg-background p-1 rounded-[1.2rem] gap-1">
                 {tabs.map(tab => (
                     <button type="button"
                         key={tab.id}
@@ -78,8 +78,8 @@ export const ComponentLibrary: React.FC<ComponentLibraryProps> = ({ onSelect }) 
                         className={cn(
                             "flex-1 flex flex-col items-center justify-center py-3 rounded-2xl transition-all gap-1.5",
                             activeTab === tab.id 
-                                ? "bg-white dark:bg-slate-800 text-orange-500 shadow-sm"
-                                : "text-slate-500 hover:bg-white/50 dark:hover:bg-slate-800/50"
+                                ? "bg-white dark:bg-slate-800 text-primary shadow-sm"
+                                : "text-slate-500 hover:bg-white/50 dark:hover:bg-violet-500/10"
                         )}
                     >
                         <tab.icon size={18} />
@@ -94,10 +94,10 @@ export const ComponentLibrary: React.FC<ComponentLibraryProps> = ({ onSelect }) 
                     <button type="button"
                         key={comp.name}
                         onClick={() => onSelect(comp)}
-                        className="flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-slate-900 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 border border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-orange-500/50 rounded-2xl transition-all group"
+                        className="flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-background hover:bg-indigo-50 dark:hover:bg-indigo-900/20 border border-slate-200 dark:border-border-dark hover:border-indigo-400 dark:hover:border-primary/50 rounded-2xl transition-all group"
                     >
                         <div className="w-12 h-12 flex items-center justify-center mb-3">
-                            <svg viewBox="0 0 100 100" className="w-full h-full stroke-current text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-orange-400 fill-none stroke-[2]">
+                            <svg viewBox="0 0 100 100" className="w-full h-full stroke-current text-slate-400 group-hover:text-primary dark:group-hover:text-orange-400 fill-none stroke-[2]">
                                 <path d={comp.path} />
                             </svg>
                         </div>

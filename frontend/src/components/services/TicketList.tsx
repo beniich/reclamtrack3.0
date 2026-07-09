@@ -24,8 +24,8 @@ interface TicketListProps {
 }
 
 const STATUS_CONFIG = {
-    open: { color: 'bg-blue-500/10 text-blue-500', label: 'Open' },
-    'in-progress': { color: 'bg-blue-500/10 text-blue-500', label: 'In Progress' },
+    open: { color: 'bg-primary/10 text-primary', label: 'Open' },
+    'in-progress': { color: 'bg-primary/10 text-primary', label: 'In Progress' },
     waiting: { color: 'bg-yellow-500/10 text-yellow-600', label: 'Waiting Response' },
     resolved: { color: 'bg-emerald-500/10 text-emerald-500', label: 'Resolved' },
 };
@@ -35,15 +35,15 @@ export function TicketList({ tickets, onSelectTicket }: TicketListProps) {
 
     return (
         <div className={cn(
-            'bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800',
+            'bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark',
             'overflow-hidden'
         )}>
             <div className="overflow-x-auto">
                 <table className="w-full text-left">
                     <thead>
                         <tr className={cn(
-                            'bg-slate-50 dark:bg-slate-900/40',
-                            'border-b border-slate-200 dark:border-slate-800'
+                            'bg-slate-50 dark:bg-background/40',
+                            'border-b border-slate-200 dark:border-border-dark'
                         )}>
                             <th className="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">
                                 Ticket Details
@@ -74,7 +74,7 @@ export function TicketList({ tickets, onSelectTicket }: TicketListProps) {
                                     }}
                                     className={cn(
                                         'cursor-pointer transition-colors group',
-                                        'hover:bg-slate-50 dark:hover:bg-primary/5'
+                                        'hover:bg-primary/5 dark:hover:bg-primary/5'
                                     )}
                                 >
                                     <td className="px-6 py-5">

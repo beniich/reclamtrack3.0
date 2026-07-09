@@ -1,4 +1,5 @@
 import { LogEntry } from "@/lib/audit/types";
+import { MoreVertical } from 'lucide-react';
 
 type Props = {
     entry: LogEntry;
@@ -50,7 +51,7 @@ export default function LogRow({ entry }: Props) {
     };
 
     return (
-        <tr className={`hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group ${severityBorder}`}>
+        <tr className={`hover:bg-primary/5 dark:hover:bg-violet-500/8 transition-colors group ${severityBorder}`}>
             <td className="px-6 py-4">
                 <div className="flex items-center gap-3">
                     {entry.userId?.avatar ? (
@@ -95,8 +96,8 @@ export default function LogRow({ entry }: Props) {
             </td>
 
             <td className="px-6 py-4 text-right">
-                <button type="button" className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <span className="material-symbols-outlined">more_vert</span>
+                <button type="button" className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors rounded-lg hover:bg-primary/8 dark:hover:bg-violet-500/15">
+                    <MoreVertical />
                 </button>
             </td>
         </tr>

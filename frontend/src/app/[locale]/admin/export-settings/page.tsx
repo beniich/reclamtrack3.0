@@ -53,14 +53,14 @@ export default function ExportSettingsPage() {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center min-h-screen bg-slate-950">
-                <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+            <div className="flex items-center justify-center min-h-screen bg-background-dark">
+                <Loader2 className="w-8 h-8 text-primary animate-spin" />
             </div>
         )
     }
 
     return (
-        <div className="p-6 max-w-3xl mx-auto space-y-8 bg-slate-950 min-h-screen">
+        <div className="p-6 max-w-3xl mx-auto space-y-8 bg-background-dark min-h-screen">
             <div>
                 <h1 className="text-2xl font-black text-white uppercase tracking-tight">Paramètres d'Export</h1>
                 <p className="text-slate-500 text-sm mt-1">Choisissez où les fichiers Excel seront sauvegardés lors d'un export.</p>
@@ -72,16 +72,16 @@ export default function ExportSettingsPage() {
                     onClick={() => setSettings(s => ({ ...s, exportStorage: 'local' }))}
                     className={`relative p-6 rounded-2xl border-2 text-left transition-all flex flex-col gap-3 ${
                         settings.exportStorage === 'local'
-                            ? 'border-blue-500 bg-blue-500/10'
-                            : 'border-white/5 bg-slate-900 hover:border-white/10'
+                            ? 'border-primary bg-primary/10'
+                            : 'border-white/5 bg-surface-dark hover:border-white/10'
                     }`}
                 >
                     {settings.exportStorage === 'local' && (
-                        <CheckCircle className="absolute top-4 right-4 w-5 h-5 text-blue-500" />
+                        <CheckCircle className="absolute top-4 right-4 w-5 h-5 text-primary" />
                     )}
                     <div className="flex items-center gap-3">
-                        <div className="bg-blue-500/20 p-3 rounded-xl">
-                            <HardDrive className="w-6 h-6 text-blue-500" />
+                        <div className="bg-primary/20 p-3 rounded-xl">
+                            <HardDrive className="w-6 h-6 text-primary" />
                         </div>
                         <div>
                             <p className="font-black text-white">Serveur Local</p>
@@ -98,7 +98,7 @@ export default function ExportSettingsPage() {
                     className={`relative p-6 rounded-2xl border-2 text-left transition-all flex flex-col gap-3 ${
                         settings.exportStorage === 'google_drive'
                             ? 'border-green-500 bg-green-500/10'
-                            : 'border-white/5 bg-slate-900 hover:border-white/10'
+                            : 'border-white/5 bg-surface-dark hover:border-white/10'
                     }`}
                 >
                     {settings.exportStorage === 'google_drive' && (
@@ -121,7 +121,7 @@ export default function ExportSettingsPage() {
 
             {/* Google Drive Config (shown only when google_drive selected) */}
             {settings.exportStorage === 'google_drive' && (
-                <div className="bg-slate-900 border border-white/5 rounded-2xl p-6 space-y-4 animate-in fade-in duration-300">
+                <div className="bg-surface-dark border border-white/5 rounded-2xl p-6 space-y-4 animate-in fade-in duration-300">
                     <h2 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
                         <Cloud className="w-4 h-4 text-green-500" />
                         Configuration Google Drive
@@ -166,7 +166,7 @@ export default function ExportSettingsPage() {
                 <button type="button"
                     onClick={handleSave}
                     disabled={saving}
-                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-60 text-white px-8 py-3 rounded-xl font-black text-sm transition-all shadow-lg shadow-blue-900/30"
+                    className="flex items-center gap-2 bg-primary hover:bg-primary disabled:opacity-60 text-white px-8 py-3 rounded-xl font-black text-sm transition-all shadow-lg shadow-blue-900/30"
                 >
                     {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                     Sauvegarder les paramètres

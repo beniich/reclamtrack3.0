@@ -1,6 +1,7 @@
 import { Footer } from '../layout/Footer'
 import { Header } from '../layout/Header'
 import KPICard from './KPICard'
+import { RefreshCw, Settings } from 'lucide-react';
 
 interface DashboardTemplateProps {
     title: string
@@ -35,11 +36,11 @@ export default function DashboardTemplate({
                         <h1 className="text-2xl font-black tracking-tight">{title}</h1>
                     </div>
                     <div className="flex items-center gap-2">
-                        <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
-                            <span className="material-symbols-outlined">refresh</span>
+                        <button type="button" className="p-2 hover:bg-primary/8 dark:hover:bg-white/5 rounded-lg transition-colors">
+                            <RefreshCw />
                         </button>
-                        <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-colors">
-                            <span className="material-symbols-outlined">settings</span>
+                        <button type="button" className="p-2 hover:bg-primary/8 dark:hover:bg-white/5 rounded-lg transition-colors">
+                            <Settings />
                         </button>
                     </div>
                 </div>

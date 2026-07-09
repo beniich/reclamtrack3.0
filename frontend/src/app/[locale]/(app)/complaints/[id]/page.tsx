@@ -20,13 +20,13 @@ import { Button } from '@/components/ui/button';
 function TimelineIcon({ type }: { type: TimelineEvent['eventType'] }) {
     const map: Record<string, { icon: React.ReactNode; color: string }> = {
         created:          { icon: <CheckCircle2 className="w-4 h-4" />, color: 'bg-cyan-500 text-white' },
-        assigned:         { icon: <User className="w-4 h-4" />, color: 'bg-blue-500 text-white' },
+        assigned:         { icon: <User className="w-4 h-4" />, color: 'bg-primary text-white' },
         status_changed:   { icon: <Edit className="w-4 h-4" />, color: 'bg-amber-500 text-white' },
         commented:        { icon: <MessageSquare className="w-4 h-4" />, color: 'bg-slate-500 text-white' },
         resolved:         { icon: <ShieldCheck className="w-4 h-4" />, color: 'bg-emerald-500 text-white' },
         closed:           { icon: <Lock className="w-4 h-4" />, color: 'bg-slate-400 text-white' },
         rejected:         { icon: <XCircle className="w-4 h-4" />, color: 'bg-rose-500 text-white' },
-        priority_changed: { icon: <AlertTriangle className="w-4 h-4" />, color: 'bg-orange-500 text-white' },
+        priority_changed: { icon: <AlertTriangle className="w-4 h-4" />, color: 'bg-primary text-white' },
     };
     const { icon, color } = map[type] ?? map.commented;
     return <div className={`size-8 rounded-xl flex items-center justify-center shrink-0 ${color}`}>{icon}</div>;
@@ -225,7 +225,7 @@ export default function ComplaintDetailPage() {
                     </div>
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
-                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl font-bold text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl font-bold text-xs uppercase tracking-widest text-slate-600 dark:text-slate-300 hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-all">
                         <Printer className="w-4 h-4" /> Imprimer
                     </button>
                 </div>
@@ -237,7 +237,7 @@ export default function ComplaintDetailPage() {
                 <div className="lg:col-span-8 space-y-8">
 
                     {/* Timeline */}
-                    <section className="bg-white dark:bg-slate-900 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <section className="bg-white dark:bg-background rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-border-dark shadow-sm">
                         <div className="flex items-center justify-between mb-8">
                             <h3 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-3 uppercase tracking-tight">
                                 <span className="p-2 bg-primary/10 rounded-lg text-primary">
@@ -278,8 +278,8 @@ export default function ComplaintDetailPage() {
                     </section>
 
                     {/* Description */}
-                    <section className="bg-white dark:bg-slate-900 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
-                        <h3 className="text-lg font-black text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-4 mb-6 uppercase tracking-tight">
+                    <section className="bg-white dark:bg-background rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-border-dark shadow-sm">
+                        <h3 className="text-lg font-black text-slate-900 dark:text-white border-b border-slate-100 dark:border-border-dark pb-4 mb-6 uppercase tracking-tight">
                             Description
                         </h3>
                         <div className="text-slate-600 dark:text-slate-300 text-base leading-relaxed italic">
@@ -305,7 +305,7 @@ export default function ComplaintDetailPage() {
                                     {complaint.photos.map((photo, idx) => (
                                         <div
                                             key={idx}
-                                            className="group relative aspect-video rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 cursor-pointer"
+                                            className="group relative aspect-video rounded-xl overflow-hidden border border-slate-200 dark:border-border-dark cursor-pointer"
                                             onClick={() => setSelectedImage(photo)}
                                         >
                                             <img src={photo} alt={`Photo ${idx + 1}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -317,7 +317,7 @@ export default function ComplaintDetailPage() {
                     </section>
 
                     {/* Comments */}
-                    <section className="bg-white dark:bg-slate-900 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <section className="bg-white dark:bg-background rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-border-dark shadow-sm">
                         <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight mb-6">
                             Commentaires ({complaint.comments?.length ?? 0})
                         </h3>
@@ -339,14 +339,14 @@ export default function ComplaintDetailPage() {
                                 ))}
                             </div>
                         ) : (
-                            <div className="flex flex-col items-center py-8 mb-4 bg-slate-50 dark:bg-slate-800/20 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800">
+                            <div className="flex flex-col items-center py-8 mb-4 bg-slate-50 dark:bg-slate-800/20 rounded-2xl border border-dashed border-slate-200 dark:border-border-dark">
                                 <MessageSquare className="w-8 h-8 text-slate-300 dark:text-slate-700 mb-3" />
                                 <p className="text-sm text-slate-400 italic">Aucun commentaire pour l&apos;instant.</p>
                             </div>
                         )}
 
                         {/* New comment form */}
-                        <div className="border-t border-slate-100 dark:border-slate-800 pt-6 space-y-3">
+                        <div className="border-t border-slate-100 dark:border-border-dark pt-6 space-y-3">
                             <textarea
                                 value={commentText}
                                 onChange={(e) => setCommentText(e.target.value)}
@@ -376,8 +376,8 @@ export default function ComplaintDetailPage() {
                 <aside className="lg:col-span-4 space-y-6">
 
                     {/* Client Card */}
-                    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
-                        <div className="p-4 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <div className="bg-white dark:bg-background rounded-2xl border border-slate-200 dark:border-border-dark shadow-xl overflow-hidden">
+                        <div className="p-4 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-border-dark flex items-center justify-between">
                             <h4 className="font-extrabold text-[10px] uppercase tracking-[0.2em] text-slate-400">Signalement</h4>
                             <ShieldCheck className="w-4 h-4 text-emerald-500" />
                         </div>
@@ -394,7 +394,7 @@ export default function ComplaintDetailPage() {
                             <div className="w-full space-y-3">
                                 {!complaint.isAnonymous && complaint.phone && (
                                     <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
-                                        <Phone className="w-4 h-4 text-indigo-500 shrink-0" />
+                                        <Phone className="w-4 h-4 text-primary shrink-0" />
                                         <div>
                                             <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Téléphone</p>
                                             <p className="text-sm font-bold text-slate-700 dark:text-slate-300">{complaint.phone}</p>
@@ -411,7 +411,7 @@ export default function ComplaintDetailPage() {
 
                                 {/* Industrial Asset Section (GMAO Link) */}
                                 {complaint.assetId && (
-                                    <div className="mt-4 p-4 rounded-2xl bg-slate-900 border border-slate-800 shadow-inner relative overflow-hidden group">
+                                    <div className="mt-4 p-4 rounded-2xl bg-surface-dark border border-border-dark shadow-inner relative overflow-hidden group">
                                         <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
                                             <Wrench className="w-12 h-12 text-white" />
                                         </div>
@@ -450,11 +450,11 @@ export default function ComplaintDetailPage() {
                                     </div>
                                 )}
                                 {complaint.reporterLocation && (
-                                    <div className="flex items-center gap-3 p-3 rounded-xl bg-orange-50 dark:bg-orange-500/10 border border-orange-500/20">
-                                        <MapPin className="w-4 h-4 text-orange-500 shrink-0" />
+                                    <div className="flex items-center gap-3 p-3 rounded-xl bg-orange-50 dark:bg-primary/10 border border-primary/20">
+                                        <MapPin className="w-4 h-4 text-primary shrink-0" />
                                         <div>
                                             <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">GPS Réclamant</p>
-                                            <p className="text-[10px] font-mono font-bold text-orange-600 dark:text-orange-400">
+                                            <p className="text-[10px] font-mono font-bold text-primary dark:text-orange-400">
                                                 {complaint.reporterLocation.latitude.toFixed(5)}, {complaint.reporterLocation.longitude.toFixed(5)}
                                             </p>
                                         </div>
@@ -462,10 +462,10 @@ export default function ComplaintDetailPage() {
                                 )}
                                 {complaint.assignedTeamId && (
                                     <div className="flex items-center gap-3 p-3 rounded-xl bg-blue-50 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900">
-                                        <User className="w-4 h-4 text-blue-500 shrink-0" />
+                                        <User className="w-4 h-4 text-primary shrink-0" />
                                         <div>
                                             <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Équipe assignée</p>
-                                            <p className="text-sm font-bold text-blue-600 dark:text-blue-400">{complaint.assignedTeamId.name}</p>
+                                            <p className="text-sm font-bold text-primary dark:text-blue-400">{complaint.assignedTeamId.name}</p>
                                         </div>
                                     </div>
                                 )}
@@ -473,7 +473,7 @@ export default function ComplaintDetailPage() {
 
                             {/* Metadata Système */}
                             {complaint.reporterMetadata && (
-                                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-border-dark flex items-center justify-between">
                                     <div className="flex flex-col">
                                         <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">OS / Appareil</p>
                                         <p className="text-[10px] font-bold text-slate-500 truncate w-24">{complaint.reporterMetadata.os || 'Inconnu'}</p>
@@ -488,7 +488,7 @@ export default function ComplaintDetailPage() {
                     </div>
 
                     {/* Action Panel */}
-                    <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6 space-y-4 text-white overflow-hidden relative group">
+                    <div className="bg-surface-dark rounded-2xl border border-border-dark p-6 space-y-4 text-white overflow-hidden relative group">
                         <div className="absolute -right-10 -bottom-10 size-48 bg-primary/10 rounded-full blur-[80px] group-hover:scale-125 transition-transform duration-700" />
                         <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white/40 relative z-10">Actions</h3>
 
@@ -566,7 +566,7 @@ export default function ComplaintDetailPage() {
                                 <button type="button"
                                     onClick={handleConvertToWorkOrder}
                                     disabled={!!actionLoading}
-                                    className="col-span-2 mt-4 flex items-center justify-center gap-3 py-5 rounded-2xl bg-indigo-600 text-white hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/30 transition-all disabled:opacity-50 shadow-xl"
+                                    className="col-span-2 mt-4 flex items-center justify-center gap-3 py-5 rounded-2xl bg-primary text-white hover:bg-primary hover:shadow-lg hover:shadow-indigo-500/30 transition-all disabled:opacity-50 shadow-xl"
                                 >
                                     {actionLoading === 'convert' ? <Loader2 className="w-5 h-5 animate-spin" /> : <Wrench className="w-5 h-5" />}
                                     <div className="text-left">
@@ -583,7 +583,7 @@ export default function ComplaintDetailPage() {
             {/* ── Assign Modal ── */}
             {showAssignModal && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 duration-200">
+                    <div className="bg-white dark:bg-background rounded-2xl border border-slate-200 dark:border-border-dark p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95 duration-200">
                         <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight mb-6">Assigner la réclamation</h3>
                         <div className="space-y-4">
                             <div>
@@ -608,7 +608,7 @@ export default function ComplaintDetailPage() {
                             </div>
                         </div>
                         <div className="flex gap-3 mt-8">
-                            <Button variant="secondary" className="flex-1 py-3 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" onClick={() => setShowAssignModal(false)}>Annuler</Button>
+                            <Button variant="secondary" className="flex-1 py-3 rounded-xl border border-slate-200 dark:border-border-dark text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-all" onClick={() => setShowAssignModal(false)}>Annuler</Button>
                             <button type="button"
                                 onClick={handleAssign}
                                 disabled={actionLoading === 'assign'}

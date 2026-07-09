@@ -106,7 +106,7 @@ export default function ActiveDirectoryPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-blue-600" />
+              <Users className="h-5 w-5 text-primary" />
               User Users
             </CardTitle>
           </CardHeader>

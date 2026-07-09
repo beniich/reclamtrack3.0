@@ -29,7 +29,7 @@ export function StatsCard({
     style
 }: StatsCardProps) {
     const colorVariants = {
-        blue: 'bg-indigo-50 text-indigo-600 border-indigo-100 dark:bg-orange-500/10 dark:text-orange-400 dark:border-orange-500/20',
+        blue: 'bg-indigo-50 text-primary border-indigo-100 dark:bg-primary/10 dark:text-orange-400 dark:border-primary/20',
         green: 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20',
         amber: 'bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/20',
         red: 'bg-rose-50 text-rose-600 border-rose-100 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20',
@@ -39,7 +39,7 @@ export function StatsCard({
     return (
         <div
             className={cn(
-                "bg-white dark:bg-slate-900/50 dark:backdrop-blur-xl rounded-[2rem] p-6 border border-slate-200 dark:border-orange-500/10 shadow-sm transition-all duration-500 hover:shadow-xl hover:shadow-indigo-500/5 dark:hover:shadow-orange-500/10 hover:-translate-y-1 group",
+                "bg-white dark:bg-background/50 dark:backdrop-blur-xl rounded-[2rem] p-6 border border-slate-200 dark:border-primary/10 shadow-sm transition-all duration-500 hover:shadow-xl hover:shadow-indigo-500/5 dark:hover:shadow-orange-500/10 hover:-translate-y-1 group",
                 className
             )}
             style={style}

@@ -16,9 +16,9 @@ import { Button } from '@/components/ui/button';
 
 export default function WordexDashboard() {
   return (
-    <div className="min-h-screen bg-[#050505] text-indigo-100/70 p-6 md:p-10 font-sans selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-[#050505] text-indigo-100/70 p-6 md:p-10 font-sans selection:bg-primary/30">
       {/* Abstract Background Elements */}
-      <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-indigo-600/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-fuchsia-600/5 blur-[120px] rounded-full pointer-events-none" />
 
       {/* Header */}
@@ -40,7 +40,7 @@ export default function WordexDashboard() {
              </div>
              <input 
                type="text" 
-               className="bg-white/5 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm focus:border-indigo-500 outline-none w-64 transition-all" 
+               className="bg-white/5 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm focus:border-primary outline-none w-64 transition-all" 
                placeholder="Filtrer les tokens..."
              />
            </div>
@@ -56,7 +56,7 @@ export default function WordexDashboard() {
         {/* Analytics Main Card */}
         <div className="lg:col-span-8 flex flex-col gap-6">
           <div className="bg-white/[0.02] border border-white/10 p-8 rounded-3xl backdrop-blur-xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 blur-[80px] -mr-32 -mt-32 rounded-full" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] -mr-32 -mt-32 rounded-full" />
             
             <div className="relative z-10 flex justify-between items-start mb-8">
                <div>
@@ -72,7 +72,7 @@ export default function WordexDashboard() {
             {/* Mock Chart Area */}
             <div className="h-48 flex items-end gap-1 mb-8">
                {[40, 65, 52, 80, 70, 90, 85, 95, 100, 80, 90, 75, 60, 85, 95].map((h, i) => (
-                 <div key={i} className="flex-1 bg-white/5 group-hover:bg-indigo-500/10 transition-all rounded-t-sm relative">
+                 <div key={i} className="flex-1 bg-white/5 group-hover:bg-primary/10 transition-all rounded-t-sm relative">
                     <motion.div 
                       initial={{ height: 0 }}
                       animate={{ height: `${h}%` }}
@@ -106,7 +106,7 @@ export default function WordexDashboard() {
                <RocketLaunchIcon className="w-12 h-12 text-white/20 absolute -right-4 -bottom-4 rotate-12" />
                <h3 className="text-lg font-bold mb-2">Déployer Workflow</h3>
                <p className="text-xs text-white/70 leading-relaxed mb-6">Optimisez vos assets numériques avec notre pipeline de traitement GPU haute performance.</p>
-               <Button variant="ghost" className="bg-white text-indigo-600 px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl">Activer</Button>
+               <Button variant="ghost" className="bg-white text-primary px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl">Activer</Button>
              </div>
 
              <div className="bg-white/[0.02] border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
@@ -147,8 +147,8 @@ export default function WordexDashboard() {
               ].map((log, i) => (
                 <div key={i} className="flex gap-4 group">
                   <div className="pt-1.5 flex flex-col items-center">
-                    <div className="w-1 h-1 rounded-full bg-indigo-500/50" />
-                    <div className="w-px flex-grow bg-indigo-500/10 mt-2" />
+                    <div className="w-1 h-1 rounded-full bg-primary/50" />
+                    <div className="w-px flex-grow bg-primary/10 mt-2" />
                   </div>
                   <div className="pb-4">
                     <div className="flex items-center gap-2 mb-1">
@@ -163,7 +163,7 @@ export default function WordexDashboard() {
             
             <div className="mt-8 border-t border-white/10 pt-6">
                <div className="flex items-center gap-3 mb-4">
-                 <ShieldCheckIcon className="w-5 h-5 text-indigo-500" />
+                 <ShieldCheckIcon className="w-5 h-5 text-primary" />
                  <span className="text-xs font-bold text-white uppercase tracking-widest">Compliance_Verify</span>
                </div>
                <div className="grid grid-cols-2 gap-2">

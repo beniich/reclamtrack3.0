@@ -34,7 +34,7 @@ export default function RegisterPage() {
                 <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Créer un nouveau compte</p>
             </div>
 
-            <div className="w-full max-w-[440px] bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 dark:border-slate-800 p-8">
+            <div className="w-full max-w-[440px] bg-white dark:bg-background rounded-xl shadow-xl border border-slate-200 dark:border-border-dark p-8">
                 {success ? (
                     <div className="text-center space-y-6">
                         <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 text-green-600 rounded-full flex items-center justify-center mx-auto">
@@ -93,7 +93,7 @@ export default function RegisterPage() {
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-white"
                                     >
                                         {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                     </button>

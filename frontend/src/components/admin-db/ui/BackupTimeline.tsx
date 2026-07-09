@@ -1,4 +1,5 @@
 import React from "react";
+import { Plus } from 'lucide-react';
 
 interface Backup {
     id: string;
@@ -15,7 +16,7 @@ export default function BackupTimeline({ backups }: { backups: Backup[] }) {
             <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Backup History</h3>
                 <button type="button" className="px-3 py-1 bg-primary/10 text-primary text-sm rounded hover:bg-primary/20 transition-colors">
-                    <span className="material-symbols-outlined text-sm align-middle mr-1">add</span> New Backup
+                    <Plus className="text-sm align-middle mr-1" /> New Backup
                 </button>
             </div>
 
@@ -23,7 +24,7 @@ export default function BackupTimeline({ backups }: { backups: Backup[] }) {
                 {backups.map((b) => (
                     <li
                         key={b.id}
-                        className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-900/50 rounded border border-slate-100 dark:border-slate-700/50"
+                        className="flex items-center justify-between p-3 bg-slate-50 dark:bg-background/50 rounded border border-slate-100 dark:border-slate-700/50"
                     >
                         <div className="flex items-center gap-2">
                             {b.status === "success" ? (

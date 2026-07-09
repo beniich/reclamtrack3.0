@@ -20,7 +20,7 @@ export const Alert: React.FC<AlertProps> = ({
     const variants = {
         info: {
             container: 'bg-blue-50 border-blue-200 text-blue-900',
-            icon: <Info className="h-5 w-5 text-blue-600" />,
+            icon: <Info className="h-5 w-5 text-primary" />,
         },
         success: {
             container: 'bg-green-50 border-green-200 text-green-900',

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 export default function GDPRPage() {
     const complianceBadges = [
@@ -118,7 +119,7 @@ export default function GDPRPage() {
                                                     <h3 className="font-black text-slate-900 dark:text-white text-sm mb-1 uppercase tracking-tight">{r.title}</h3>
                                                     <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{r.desc}</p>
                                                     <Link href="/dashboard" className="text-[10px] font-bold text-primary mt-2 flex items-center gap-1 hover:gap-2 transition-all uppercase tracking-widest">
-                                                        Access Vault <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                                                        Access Vault <ArrowRight className="text-xs" />
                                                     </Link>
                                                 </div>
                                             </div>

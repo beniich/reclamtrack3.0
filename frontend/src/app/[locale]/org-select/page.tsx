@@ -148,7 +148,7 @@ export default function OrgSelectPage() {
                     >
                         <Dialog open={openDialog} onOpenChange={setOpenDialog}>
                             <DialogTrigger asChild>
-                                <Card className="border-2 border-dashed border-slate-300 hover:border-primary/50 hover:bg-slate-50/50 transition-all h-full flex flex-col justify-center items-center p-8 group cursor-pointer">
+                                <Card className="border-2 border-dashed border-slate-300 hover:border-primary/50 hover:bg-primary/5/50 transition-all h-full flex flex-col justify-center items-center p-8 group cursor-pointer">
                                     <div className="p-4 bg-slate-100 rounded-full group-hover:bg-primary/10 transition-colors mb-4 border border-slate-200 group-hover:border-primary/30">
                                         <Plus className="h-8 w-8 text-slate-400 group-hover:text-primary" />
                                     </div>

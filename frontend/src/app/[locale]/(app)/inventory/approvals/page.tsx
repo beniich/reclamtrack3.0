@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Search, Filter, Printer, Check, List, AlertTriangle, CheckCircle } from 'lucide-react';
 
 // Types
 interface RequestItem {
@@ -94,7 +95,7 @@ export default function WarehouseApprovalsPage() {
     return (
         <div className="flex flex-col h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
             {/* Top Navigation */}
-            <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-between px-6 shrink-0">
+            <header className="h-16 border-b border-slate-200 dark:border-border-dark bg-white dark:bg-background flex items-center justify-between px-6 shrink-0">
                 <div className="flex items-center gap-4">
                     <Link href="/dashboard" className="flex items-center gap-2">
                         <div className="bg-primary p-1.5 rounded-lg text-white">
@@ -105,7 +106,7 @@ export default function WarehouseApprovalsPage() {
                 </div>
                 <div className="flex items-center gap-6">
                     <div className="relative hidden md:block">
-                        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" />
                         <input
                             className="pl-10 pr-4 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent text-sm w-64"
                             placeholder="Search requests..."
@@ -122,14 +123,14 @@ export default function WarehouseApprovalsPage() {
 
             <div className="flex flex-1 overflow-hidden">
                 {/* Sidebar: Pending Requests List */}
-                <aside className="w-80 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col">
-                    <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <aside className="w-80 border-r border-slate-200 dark:border-border-dark bg-white dark:bg-background flex flex-col">
+                    <div className="p-4 border-b border-slate-100 dark:border-border-dark flex items-center justify-between">
                         <h2 className="font-semibold flex items-center gap-2 text-slate-900 dark:text-white">
                             Pending Requests
                             <span className="bg-primary/10 text-primary text-xs font-bold px-2 py-0.5 rounded-full">{requests.length}</span>
                         </h2>
                         <button type="button" className="text-slate-400 hover:text-slate-600">
-                            <span className="material-symbols-outlined text-sm">filter_list</span>
+                            <Filter className="text-sm" />
                         </button>
                     </div>
                     <div className="flex-1 overflow-y-auto">
@@ -140,7 +141,7 @@ export default function WarehouseApprovalsPage() {
                                     onClick={() => setSelectedRequestId(req.id)}
                                     className={`p-3 rounded-r-lg cursor-pointer border-l-4 transition-colors ${selectedRequestId === req.id
                                         ? 'bg-primary/5 border-primary'
-                                        : 'hover:bg-slate-50 dark:hover:bg-slate-800/50 border-transparent'
+                                        : 'hover:bg-primary/5 dark:hover:bg-violet-500/10 border-transparent'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start mb-1">
@@ -167,15 +168,15 @@ export default function WarehouseApprovalsPage() {
                     {selectedRequest ? (
                         <div className="max-w-5xl mx-auto space-y-6">
                             {/* Header & Status Tracker */}
-                            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+                            <div className="bg-white dark:bg-background rounded-xl p-6 shadow-sm border border-slate-200 dark:border-border-dark">
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                                     <div>
                                         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Request Detail: #{selectedRequest.id}</h2>
                                         <p className="text-slate-500 dark:text-slate-400">Requested by {selectedRequest.requester} • Created Oct 24, 2023</p>
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-400 transition-colors">
-                                            <span className="material-symbols-outlined">print</span>
+                                        <button type="button" className="p-2 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-full text-slate-400 transition-colors">
+                                            <Printer />
                                         </button>
                                     </div>
                                 </div>
@@ -187,22 +188,22 @@ export default function WarehouseApprovalsPage() {
                                         <div className="relative flex justify-between">
                                             <div className="flex flex-col items-center">
                                                 <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center z-10">
-                                                    <span className="material-symbols-outlined text-sm">check</span>
+                                                    <Check className="text-sm" />
                                                 </div>
                                                 <span className="mt-2 text-xs font-bold text-primary">Received</span>
                                             </div>
                                             <div className="flex flex-col items-center">
-                                                <div className="w-8 h-8 rounded-full bg-white dark:bg-slate-900 border-2 border-primary flex items-center justify-center z-10">
+                                                <div className="w-8 h-8 rounded-full bg-white dark:bg-background border-2 border-primary flex items-center justify-center z-10">
                                                     <span className="w-2.5 h-2.5 rounded-full bg-primary"></span>
                                                 </div>
                                                 <span className="mt-2 text-xs font-bold text-primary">Picking</span>
                                             </div>
                                             <div className="flex flex-col items-center">
-                                                <div className="w-8 h-8 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center z-10"></div>
+                                                <div className="w-8 h-8 rounded-full bg-white dark:bg-background border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center z-10"></div>
                                                 <span className="mt-2 text-xs font-medium text-slate-400">Ready</span>
                                             </div>
                                             <div className="flex flex-col items-center">
-                                                <div className="w-8 h-8 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center z-10"></div>
+                                                <div className="w-8 h-8 rounded-full bg-white dark:bg-background border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center z-10"></div>
                                                 <span className="mt-2 text-xs font-medium text-slate-400">Issued</span>
                                             </div>
                                         </div>
@@ -211,10 +212,10 @@ export default function WarehouseApprovalsPage() {
                             </div>
 
                             {/* Inventory Table */}
-                            <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
-                                <div className="p-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex justify-between items-center">
+                            <div className="bg-white dark:bg-background rounded-xl shadow-sm border border-slate-200 dark:border-border-dark overflow-hidden">
+                                <div className="p-4 border-b border-slate-100 dark:border-border-dark bg-slate-50/50 dark:bg-slate-800/30 flex justify-between items-center">
                                     <h3 className="font-bold flex items-center gap-2 text-slate-900 dark:text-white">
-                                        <span className="material-symbols-outlined text-slate-400">list_alt</span>
+                                        <List className="text-slate-400" />
                                         Requested Items & Stock Availability
                                     </h3>
                                     <span className="text-xs text-slate-500">{selectedRequest.items.length} Items Total</span>
@@ -222,7 +223,7 @@ export default function WarehouseApprovalsPage() {
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-left text-sm">
                                         <thead>
-                                            <tr className="text-slate-400 font-medium border-b border-slate-100 dark:border-slate-800">
+                                            <tr className="text-slate-400 font-medium border-b border-slate-100 dark:border-border-dark">
                                                 <th className="px-6 py-4">Item Name & SKU</th>
                                                 <th className="px-6 py-4">Current Stock</th>
                                                 <th className="px-6 py-4">Requested Qty</th>
@@ -234,7 +235,7 @@ export default function WarehouseApprovalsPage() {
                                             {selectedRequest.items.map(item => {
                                                 const isShortage = item.currentStock < item.requestedQty;
                                                 return (
-                                                    <tr key={item.id} className={`hover:bg-slate-50/50 dark:hover:bg-slate-800/20 ${isShortage ? 'bg-red-50/30 dark:bg-red-900/10' : ''}`}>
+                                                    <tr key={item.id} className={`hover:bg-primary/5/50 dark:hover:bg-violet-500/15/20 ${isShortage ? 'bg-red-50/30 dark:bg-red-900/10' : ''}`}>
                                                         <td className="px-6 py-4">
                                                             <p className="font-semibold text-slate-900 dark:text-white">{item.name}</p>
                                                             <p className="text-xs text-slate-400 uppercase tracking-tighter">SKU: {item.sku}</p>
@@ -258,12 +259,12 @@ export default function WarehouseApprovalsPage() {
                                                         <td className="px-6 py-4">
                                                             {isShortage ? (
                                                                 <span className="flex items-center gap-1 text-red-600 font-medium">
-                                                                    <span className="material-symbols-outlined text-lg">warning</span>
+                                                                    <AlertTriangle className="text-lg" />
                                                                     Insufficient
                                                                 </span>
                                                             ) : (
                                                                 <span className="flex items-center gap-1 text-green-600 font-medium">
-                                                                    <span className="material-symbols-outlined text-lg">check_circle</span>
+                                                                    <CheckCircle className="text-lg" />
                                                                     Available
                                                                 </span>
                                                             )}
@@ -277,7 +278,7 @@ export default function WarehouseApprovalsPage() {
                             </div>
 
                             {/* Footer Controls */}
-                            <div className="flex flex-col md:flex-row gap-4 items-start md:items-end justify-between bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm mb-6">
+                            <div className="flex flex-col md:flex-row gap-4 items-start md:items-end justify-between bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm mb-6">
                                 <div className="flex-1 w-full">
                                     <label className="block text-xs font-bold text-slate-400 uppercase mb-2">Approval Note / Reason for Modification</label>
                                     <textarea
@@ -289,8 +290,8 @@ export default function WarehouseApprovalsPage() {
                                     ></textarea>
                                 </div>
                                 <div className="flex items-center gap-3 w-full md:w-auto shrink-0">
-                                    <Button variant="secondary" className="flex-1 md:flex-none px-6 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300">Reject</Button>
-                                    <button type="button" onClick={handleApprove} className="flex-1 md:flex-none px-8 py-2.5 rounded-lg bg-primary text-white font-bold text-sm hover:bg-blue-700 shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2">
+                                    <Button variant="secondary" className="flex-1 md:flex-none px-6 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 font-bold text-sm hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors text-slate-700 dark:text-slate-300">Reject</Button>
+                                    <button type="button" onClick={handleApprove} className="flex-1 md:flex-none px-8 py-2.5 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary-700 shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2">
                                         <span className="material-symbols-outlined text-sm">task_alt</span>
                                         Approve Request
                                     </button>

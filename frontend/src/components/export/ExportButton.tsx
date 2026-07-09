@@ -84,7 +84,7 @@ export function ExportButton<T extends Record<string, any>>({
                     Excel (.xlsx)
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleExport('csv')}>
-                    <FileText className="w-4 h-4 mr-2 text-blue-600" />
+                    <FileText className="w-4 h-4 mr-2 text-primary" />
                     CSV
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleExport('pdf')}>

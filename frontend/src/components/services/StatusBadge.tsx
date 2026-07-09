@@ -20,7 +20,7 @@ const VARIANTS = {
     success: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
     warning: 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20',
     error: 'bg-red-500/10 text-red-500 border-red-500/20',
-    info: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
+    info: 'bg-primary/10 text-primary border-primary/20',
     primary: 'bg-primary/10 text-primary border-primary/20',
 };
 

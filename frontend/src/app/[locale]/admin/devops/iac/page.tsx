@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 'use client';
 
 import React from 'react';
@@ -21,18 +22,18 @@ import { Button } from '@/components/ui/button';
 
 export default function IacDiffDashboard() {
     return (
-        <div className="flex h-[calc(100vh-4rem)] bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-white">
+        <div className="flex h-[calc(100vh-4rem)] bg-slate-50 dark:bg-background font-sans text-slate-900 dark:text-white">
 
             {/* Sidebar: Deployment History */}
-            <aside className="w-80 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 flex flex-col">
-                <div className="p-4 border-b border-slate-200 dark:border-slate-800">
+            <aside className="w-80 border-r border-slate-200 dark:border-border-dark bg-white dark:bg-background flex flex-col">
+                <div className="p-4 border-b border-slate-200 dark:border-border-dark">
                     <h2 className="font-bold text-lg mb-1">Deployments</h2>
                     <p className="text-xs text-slate-500">Select a run to view diff</p>
                 </div>
 
                 <div className="flex-1 overflow-y-auto">
                     {/* Item 1 - Active */}
-                    <div className="p-4 border-b border-slate-100 dark:border-slate-800 bg-purple-50 dark:bg-purple-900/10 border-l-4 border-l-purple-600 cursor-pointer">
+                    <div className="p-4 border-b border-slate-100 dark:border-border-dark bg-purple-50 dark:bg-purple-900/10 border-l-4 border-l-purple-600 cursor-pointer">
                         <div className="flex justify-between items-start mb-2">
                             <span className="font-bold text-sm">#8821: Add Redis Cluster</span>
                             <span className="text-[10px] bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 px-1.5 py-0.5 rounded font-bold uppercase">Plan</span>
@@ -51,7 +52,7 @@ export default function IacDiffDashboard() {
                     </div>
 
                     {/* Item 2 */}
-                    <div className="p-4 border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors cursor-pointer border-l-4 border-l-transparent">
+                    <div className="p-4 border-b border-slate-100 dark:border-border-dark hover:bg-primary/5 dark:hover:bg-surface-dark transition-colors cursor-pointer border-l-4 border-l-transparent">
                         <div className="flex justify-between items-start mb-2">
                             <span className="font-bold text-sm">#8820: Scale Worker Nodes</span>
                             <span className="text-[10px] bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-500 px-1.5 py-0.5 rounded font-bold uppercase">Applied</span>
@@ -68,7 +69,7 @@ export default function IacDiffDashboard() {
                     </div>
 
                     {/* Item 3 */}
-                    <div className="p-4 border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors cursor-pointer border-l-4 border-l-transparent">
+                    <div className="p-4 border-b border-slate-100 dark:border-border-dark hover:bg-primary/5 dark:hover:bg-surface-dark transition-colors cursor-pointer border-l-4 border-l-transparent">
                         <div className="flex justify-between items-start mb-2">
                             <span className="font-bold text-sm">#8819: Network Policy Fix</span>
                             <span className="text-[10px] bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-500 px-1.5 py-0.5 rounded font-bold uppercase">Failed</span>
@@ -87,7 +88,7 @@ export default function IacDiffDashboard() {
             <main className="flex-1 flex flex-col min-w-0">
 
                 {/* Run Header */}
-                <header className="px-8 py-6 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 flex justify-between items-center">
+                <header className="px-8 py-6 border-b border-slate-200 dark:border-border-dark bg-white dark:bg-background flex justify-between items-center">
                     <div>
                         <div className="flex items-center gap-3 mb-2">
                             <h1 className="text-2xl font-black tracking-tight">Add Redis Cluster</h1>
@@ -102,7 +103,7 @@ export default function IacDiffDashboard() {
                     </div>
                     <div className="flex items-center gap-3">
                         <Button variant="secondary" className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-colors">Discard</Button>
-                        <button type="button" className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg shadow-lg shadow-purple-200 dark:shadow-none transition-all flex items-center gap-2">
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg shadow-lg shadow-purple-200 dark:shadow-none transition-all flex items-center gap-2">
                             <Play className="size-4 fill-current" />
                             Apply Changes
                         </button>
@@ -110,7 +111,7 @@ export default function IacDiffDashboard() {
                 </header>
 
                 {/* Diff Content */}
-                <div className="flex-1 overflow-y-auto p-8 space-y-6 bg-slate-50 dark:bg-slate-950">
+                <div className="flex-1 overflow-y-auto p-8 space-y-6 bg-slate-50 dark:bg-background">
 
                     <div className="flex items-center justify-between text-sm font-bold text-slate-500">
                         <span>Resources to change: 6</span>
@@ -122,8 +123,8 @@ export default function IacDiffDashboard() {
                     </div>
 
                     {/* Resource Diff Block: Add */}
-                    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm">
-                        <div className="px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3 cursor-pointer">
+                    <div className="rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-background overflow-hidden shadow-sm">
+                        <div className="px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-border-dark flex items-center gap-3 cursor-pointer">
                             <ChevronDown className="size-4 text-slate-400" />
                             <div className="size-8 rounded bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 flex items-center justify-center">
                                 <Database className="size-4" />
@@ -175,8 +176,8 @@ export default function IacDiffDashboard() {
                     </div>
 
                     {/* Resource Diff Block: Modify */}
-                    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm">
-                        <div className="px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3 cursor-pointer">
+                    <div className="rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-background overflow-hidden shadow-sm">
+                        <div className="px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-border-dark flex items-center gap-3 cursor-pointer">
                             <ChevronDown className="size-4 text-slate-400" />
                             <div className="size-8 rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 flex items-center justify-center">
                                 <Server className="size-4" />

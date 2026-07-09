@@ -160,7 +160,7 @@ const ComplaintManagementSystem = () => {
                                 onClick={() => setActiveTab(tab.id)}
                                 className={cn(
                                     "flex items-center space-x-2 px-4 py-2 border-b-2 transition-colors",
-                                    activeTab === tab.id ? "border-blue-600 text-blue-600" : "border-transparent text-gray-600 hover:text-gray-900"
+                                    activeTab === tab.id ? "border-primary text-primary" : "border-transparent text-gray-600 hover:text-gray-900"
                                 )}
                             >
                                 <Icon className="h-5 w-5" />
@@ -177,13 +177,13 @@ const ComplaintManagementSystem = () => {
             {activeTab === 'dashboard' && (
                 <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                        <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500">
+                        <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
                             <div className="flex items-center justify-between">
                                 <div>
                                     <p className="text-gray-500 text-sm">Total</p>
                                     <p className="text-3xl font-bold text-gray-900">{stats.total}</p>
                                 </div>
-                                <MessageSquare className="h-10 w-10 text-blue-500" />
+                                <MessageSquare className="h-10 w-10 text-primary" />
                             </div>
                         </div>
                         {/* ... other stats ... */}

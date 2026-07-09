@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { dbAdminApi } from "@/services/dbAdminService";
+import { Timer, TrendingDown, Activity, CheckCircle, Info } from 'lucide-react';
 
 interface Backup {
     id: string;
@@ -73,7 +74,7 @@ export default function BDRDashboard() {
                         <p className="text-slate-500 dark:text-slate-400 text-base max-w-xl">Configure S3 cloud targets, local snapshot retention, and automated recovery schedules with real-time RPO/RTO tracking.</p>
                     </div>
                     <div className="flex gap-3">
-                        <button type="button" className="flex items-center justify-center rounded-lg h-11 px-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm">
+                        <button type="button" className="flex items-center justify-center rounded-lg h-11 px-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm font-bold hover:bg-primary/5 dark:hover:bg-slate-700 transition-all shadow-sm">
                             Export Config
                         </button>
                         <button type="button" className="flex items-center justify-center rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
@@ -87,22 +88,22 @@ export default function BDRDashboard() {
                     <div className="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
                         <div className="flex justify-between items-start">
                             <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Current RPO</p>
-                            <span className="material-symbols-outlined text-primary text-lg">timer</span>
+                            <Timer className="text-primary text-lg" />
                         </div>
                         <p className="text-slate-900 dark:text-white text-3xl font-bold leading-tight">{metrics?.lastBackup.includes('min') ? '14 mins' : 'Unknown'}</p>
                         <div className="flex items-center gap-1.5 mt-1">
-                            <span className="material-symbols-outlined text-red-500 text-sm">trending_down</span>
+                            <TrendingDown className="text-red-500 text-sm" />
                             <p className="text-red-500 text-xs font-bold">-2% from target</p>
                         </div>
                     </div>
                     <div className="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
                         <div className="flex justify-between items-start">
                             <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Targeted RTO</p>
-                            <span className="material-symbols-outlined text-primary text-lg">speed</span>
+                            <Activity className="text-primary text-lg" />
                         </div>
                         <p className="text-slate-900 dark:text-white text-3xl font-bold leading-tight">2 hours</p>
                         <div className="flex items-center gap-1.5 mt-1">
-                            <span className="material-symbols-outlined text-green-500 text-sm">check_circle</span>
+                            <CheckCircle className="text-green-500 text-sm" />
                             <p className="text-green-500 text-xs font-bold">Within threshold</p>
                         </div>
                     </div>
@@ -197,7 +198,7 @@ export default function BDRDashboard() {
                                         <span className="text-xs text-primary font-mono">0 */6 * * *</span>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <span className="material-symbols-outlined text-slate-500">info</span>
+                                        <Info className="text-slate-500" />
                                         <p className="text-sm text-slate-600 dark:text-slate-300">The backup engine will trigger a snapshot and S3 upload <span className="text-slate-900 dark:text-white font-bold">every 6 hours</span>, 7 days a week.</p>
                                     </div>
                                 </div>
@@ -218,7 +219,7 @@ export default function BDRDashboard() {
                             </div>
                             <div className="flex-1 overflow-y-auto max-h-[600px]">
                                 {backups.map((backup) => (
-                                    <div key={backup.id} className="p-4 border-b border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                    <div key={backup.id} className="p-4 border-b border-slate-200 dark:border-slate-700 hover:bg-primary/5 dark:hover:bg-violet-500/10 transition-colors">
                                         <div className="flex justify-between items-start mb-2">
                                             <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${backup.status === 'success'
                                                     ? 'bg-green-500/10 text-green-500'
@@ -245,13 +246,13 @@ export default function BDRDashboard() {
                                 ))}
 
                                 {/* Static Drill Item (Mock) */}
-                                <div className="p-4 border-b border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <div className="p-4 border-b border-slate-200 dark:border-slate-700 hover:bg-primary/5 dark:hover:bg-violet-500/10 transition-colors">
                                     <div className="flex justify-between items-start mb-2">
                                         <span className="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">Manual</span>
                                         <span className="text-slate-500 text-[11px]">8h ago</span>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <span className="material-symbols-outlined text-slate-400">check_circle</span>
+                                        <CheckCircle className="text-slate-400" />
                                         <div>
                                             <p className="text-sm text-slate-900 dark:text-white font-medium">Drill: Restore Test</p>
                                             <p className="text-xs text-slate-500">Duration: 12m 45s | RTO: 2.1h</p>

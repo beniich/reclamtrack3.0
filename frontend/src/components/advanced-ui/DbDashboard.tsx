@@ -11,7 +11,7 @@ export default function DbDashboard() {
 
       <div className="bg-white rounded-lg shadow p-6 border border-slate-200">
         <h2 className="text-xl font-semibold mb-4 text-slate-700 flex items-center gap-2">
-          <svg className="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
           Unified Audit Logs
@@ -19,7 +19,7 @@ export default function DbDashboard() {
 
         {isLoading && (
           <div className="flex justify-center p-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
           </div>
         )}
         {isError && <p className="text-sm text-red-500 p-4 bg-red-50 rounded">Erreur lors de la récupération des logs.</p>}
@@ -42,7 +42,7 @@ export default function DbDashboard() {
                   </tr>
                 ) : (
                   logs.map((log: any) => (
-                    <tr key={log.id} className="bg-white hover:bg-slate-50 transition-colors">
+                    <tr key={log.id} className="bg-white hover:bg-primary/5 transition-colors">
                       <td className="px-6 py-4 select-none">{new Date(log.created_at).toLocaleString()}</td>
                       <td className="px-6 py-4 font-mono">
                         <span className={`px-2.5 py-1 rounded-md text-xs font-semibold

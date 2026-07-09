@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 export default function SystemInfoPage() {
     return (
         <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-3">
+            <header className="sticky top-0 z-50 bg-white dark:bg-background border-b border-slate-200 dark:border-border-dark px-6 py-3">
                 <div className="max-w-[1600px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-8">
                         <Link href="/dashboard" className="flex items-center gap-3">
@@ -28,7 +29,7 @@ export default function SystemInfoPage() {
             <main className="flex-1 max-w-[1600px] mx-auto w-full px-6 py-10">
                 {/* Hero Section */}
                 <section className="mb-16">
-                    <div className="flex flex-col md:flex-row items-center gap-10 bg-white dark:bg-slate-900 p-8 lg:p-12 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden relative">
+                    <div className="flex flex-col md:flex-row items-center gap-10 bg-white dark:bg-background p-8 lg:p-12 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm overflow-hidden relative">
                         <div className="flex-1 z-10">
                             <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase rounded-full mb-4">Operations Guide</span>
                             <h1 className="text-4xl lg:text-5xl font-black leading-tight tracking-[-0.033em] mb-4 text-slate-900 dark:text-white">
@@ -70,7 +71,7 @@ export default function SystemInfoPage() {
                             { step: '05', title: 'Finalize', icon: 'verified_user', desc: 'Resolution is verified, documented, and the ticket is closed.' }
                         ].map((item, index) => (
                             <div key={item.step} className="flex flex-col items-center text-center group z-10">
-                                <div className={`size-20 rounded-full bg-white dark:bg-slate-900 border-4 ${index === 0 ? 'border-primary text-primary' : 'border-slate-200 dark:border-slate-800 text-slate-400 group-hover:border-primary group-hover:text-primary'} flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-all duration-300`}>
+                                <div className={`size-20 rounded-full bg-white dark:bg-background border-4 ${index === 0 ? 'border-primary text-primary' : 'border-slate-200 dark:border-border-dark text-slate-400 group-hover:border-primary group-hover:text-primary'} flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-all duration-300`}>
                                     <span className="material-symbols-outlined text-3xl">{item.icon}</span>
                                 </div>
                                 <span className={`text-xs font-bold uppercase tracking-widest mb-1 ${index === 0 ? 'text-primary' : 'text-slate-400 group-hover:text-primary'}`}>Step {item.step}</span>
@@ -89,7 +90,7 @@ export default function SystemInfoPage() {
                             <p className="text-slate-500 dark:text-slate-400">Expertise sectors available for field assignment.</p>
                         </div>
                         <button type="button" className="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
-                            View All Departments <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                            View All Departments <ArrowRight className="text-[18px]" />
                         </button>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -99,7 +100,7 @@ export default function SystemInfoPage() {
                             { title: 'Carpentry', icon: 'carpenter', color: 'orange', desc: 'Public furniture restoration, structural repairs, and signage installation.' },
                             { title: 'Sanitation', icon: 'delete_sweep', color: 'green', desc: 'Waste collection schedules, public hygiene maintenance, and recycling programs.' }
                         ].map((team) => (
-                            <div key={team.title} className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
+                            <div key={team.title} className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
                                 <div className={`size-12 rounded-lg bg-${team.color}-100 dark:bg-${team.color}-900/20 text-${team.color}-600 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors`}>
                                     <span className="material-symbols-outlined">{team.icon}</span>
                                 </div>
@@ -126,7 +127,7 @@ export default function SystemInfoPage() {
                             <div className="text-xs font-bold uppercase tracking-widest text-white/70">Active Teams</div>
                         </div>
                     </div>
-                    <Button variant="ghost" className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-slate-100 transition-colors whitespace-nowrap shadow-lg">View Active Dashboard</Button>
+                    <Button variant="ghost" className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-primary/8 transition-colors whitespace-nowrap shadow-lg">View Active Dashboard</Button>
                 </section>
             </main>
         </div>

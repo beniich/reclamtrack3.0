@@ -2,17 +2,18 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Cloud, Search, Bell, TrendingUp, Mail } from 'lucide-react';
 
 export default function SystemInfoPage() {
     return (
         <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300">
             <div className="layout-container flex h-full grow flex-col">
                 {/* Top Navigation Bar */}
-                <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 md:px-20 lg:px-40 py-4 bg-white dark:bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+                <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-border-dark px-6 md:px-20 lg:px-40 py-4 bg-white dark:bg-background/50 backdrop-blur-md sticky top-0 z-50">
                     <div className="flex items-center gap-8">
                         <Link href="/" className="flex items-center gap-3 text-primary">
                             <div className="size-8 flex items-center justify-center rounded-lg bg-primary/10">
-                                <span className="material-symbols-outlined text-primary">cloud</span>
+                                <Cloud className="text-primary" />
                             </div>
                             <h2 className="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">CloudIndustrie</h2>
                         </Link>
@@ -26,13 +27,13 @@ export default function SystemInfoPage() {
                         <label className="hidden lg:flex flex-col min-w-40 h-10 max-w-64">
                             <div className="flex w-full flex-1 items-stretch rounded-xl h-full bg-slate-100 dark:bg-slate-800">
                                 <div className="text-slate-500 flex items-center justify-center pl-4">
-                                    <span className="material-symbols-outlined text-[20px]">search</span>
+                                    <Search className="text-[20px]" />
                                 </div>
                                 <input className="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 h-full placeholder:text-slate-500 text-sm pl-2" placeholder="Search system docs..." value="" />
                             </div>
                         </label>
                         <button type="button" className="flex size-10 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                            <span className="material-symbols-outlined text-[20px]">notifications</span>
+                            <Bell className="text-[20px]" />
                         </button>
                         <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-slate-200 dark:border-slate-700" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBu9xYS9IJJYPjFYsIYjZt8GZwMFYMGBoyR-A3EdQnMfgvKwKgHVhEZfGPwc9owpwvORhtOizux2VxzTBIOcx-B8krDUg4gcUmCEgeMQq2xQyfR9_8BXea1DaTsgwJaW6dSSLBxJVcE4dpi0NaGCxgt7qvIuSSPiqacLiJZOA-JhkueSjSiSDxmuR-6u8OILDmI4Mk0Y4VGiv2fHU5xqHQ0pzwmek_jCZ2UL1MPAadLcXCLdDdrpvdIisJeeiOxC5UGWcJahDzGfjCB")' }}></div>
                     </div>
@@ -42,7 +43,7 @@ export default function SystemInfoPage() {
                 <main className="flex flex-1 flex-col px-6 md:px-20 lg:px-40 py-10 max-w-[1440px] mx-auto w-full">
                     {/* Hero Section */}
                     <section className="mb-16">
-                        <div className="flex flex-col md:flex-row items-center gap-10 bg-white dark:bg-slate-900 p-8 lg:p-12 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden relative">
+                        <div className="flex flex-col md:flex-row items-center gap-10 bg-white dark:bg-background p-8 lg:p-12 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm overflow-hidden relative">
                             <div className="flex-1 z-10">
                                 <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase rounded-full mb-4">Operations Guide</span>
                                 <h1 className="text-slate-900 dark:text-white text-4xl lg:text-5xl font-black leading-tight tracking-[-0.033em] mb-4">
@@ -83,7 +84,7 @@ export default function SystemInfoPage() {
 
                             {/* Step 1 */}
                             <div className="flex flex-col items-center text-center group z-10">
-                                <div className="size-20 rounded-full bg-white dark:bg-slate-900 border-4 border-primary flex items-center justify-center text-primary shadow-lg mb-6 group-hover:scale-110 transition-transform">
+                                <div className="size-20 rounded-full bg-white dark:bg-background border-4 border-primary flex items-center justify-center text-primary shadow-lg mb-6 group-hover:scale-110 transition-transform">
                                     <span className="material-symbols-outlined text-3xl">hub</span>
                                 </div>
                                 <span className="text-xs font-bold text-primary uppercase tracking-widest mb-1">Étape 01</span>
@@ -93,7 +94,7 @@ export default function SystemInfoPage() {
 
                             {/* Step 2 */}
                             <div className="flex flex-col items-center text-center group z-10">
-                                <div className="size-20 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
+                                <div className="size-20 rounded-full bg-white dark:bg-background border-4 border-slate-200 dark:border-border-dark flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
                                     <span className="material-symbols-outlined text-3xl">psychology</span>
                                 </div>
                                 <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Étape 02</span>
@@ -103,7 +104,7 @@ export default function SystemInfoPage() {
 
                             {/* Step 3 */}
                             <div className="flex flex-col items-center text-center group z-10">
-                                <div className="size-20 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
+                                <div className="size-20 rounded-full bg-white dark:bg-background border-4 border-slate-200 dark:border-border-dark flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
                                     <span className="material-symbols-outlined text-3xl">rocket_launch</span>
                                 </div>
                                 <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Étape 03</span>
@@ -113,7 +114,7 @@ export default function SystemInfoPage() {
 
                             {/* Step 4 */}
                             <div className="flex flex-col items-center text-center group z-10">
-                                <div className="size-20 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
+                                <div className="size-20 rounded-full bg-white dark:bg-background border-4 border-slate-200 dark:border-border-dark flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
                                     <span className="material-symbols-outlined text-3xl">radar</span>
                                 </div>
                                 <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Étape 04</span>
@@ -123,8 +124,8 @@ export default function SystemInfoPage() {
 
                             {/* Step 5 */}
                             <div className="flex flex-col items-center text-center group z-10">
-                                <div className="size-20 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
-                                    <span className="material-symbols-outlined text-3xl">trending_up</span>
+                                <div className="size-20 rounded-full bg-white dark:bg-background border-4 border-slate-200 dark:border-border-dark flex items-center justify-center text-slate-400 group-hover:border-primary group-hover:text-primary shadow-sm mb-6 group-hover:scale-110 transition-all">
+                                    <TrendingUp className="text-3xl" />
                                 </div>
                                 <span className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest mb-1 group-hover:text-primary">Étape 05</span>
                                 <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Optimisation</h3>
@@ -143,15 +144,15 @@ export default function SystemInfoPage() {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {/* IA & Computing */}
-                            <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
-                                <div className="size-12 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
+                                <div className="size-12 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
                                     <span className="material-symbols-outlined">memory</span>
                                 </div>
                                 <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">IA & Computing</h3>
                                 <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Optimisation de clusters GPU NVIDIA A100 et déploiement de modèles LLM.</p>
                             </div>
                             {/* Cybersecurity */}
-                            <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
+                            <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
                                 <div className="size-12 rounded-lg bg-amber-50 dark:bg-amber-900/20 text-amber-600 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
                                     <span className="material-symbols-outlined">security</span>
                                 </div>
@@ -159,15 +160,15 @@ export default function SystemInfoPage() {
                                 <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Protection ESET Enterprise, isolation CloudLinux et audits de vulnérabilité.</p>
                             </div>
                             {/* Cloud Architecture */}
-                            <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
-                                <div className="size-12 rounded-lg bg-orange-50 dark:bg-orange-900/20 text-orange-600 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
+                                <div className="size-12 rounded-lg bg-orange-50 dark:bg-orange-900/20 text-primary flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
                                     <span className="material-symbols-outlined">cloud_sync</span>
                                 </div>
                                 <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2">Cloud Architecture</h3>
                                 <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Design de réseaux hybrides, CDN LiteSpeed et orchestration de conteneurs.</p>
                             </div>
                             {/* Managed Services */}
-                            <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
+                            <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark hover:border-primary/50 hover:shadow-lg transition-all cursor-default group">
                                 <div className="size-12 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-600 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
                                     <span className="material-symbols-outlined">support_agent</span>
                                 </div>
@@ -193,18 +194,18 @@ export default function SystemInfoPage() {
                                 <div className="text-xs font-bold uppercase tracking-widest text-white/70">Active Teams</div>
                             </div>
                         </div>
-                        <Link href="/dashboard" className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-slate-100 transition-colors whitespace-nowrap text-center">
+                        <Link href="/dashboard" className="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:bg-primary/8 transition-colors whitespace-nowrap text-center">
                             View Active Dashboard
                         </Link>
                     </section>
                 </main>
 
                 {/* Footer */}
-                <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 md:px-20 lg:px-40 py-12">
+                <footer className="border-t border-slate-200 dark:border-border-dark bg-white dark:bg-background px-6 md:px-20 lg:px-40 py-12">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                         <div className="col-span-1 md:col-span-2">
                             <div className="flex items-center gap-3 text-primary mb-6">
-                                <span className="material-symbols-outlined text-3xl">cloud</span>
+                                <Cloud className="text-3xl" />
                                 <h2 className="text-slate-900 dark:text-white text-xl font-bold tracking-tight">CloudIndustrie Portal</h2>
                             </div>
                             <p className="text-slate-500 dark:text-slate-400 max-w-sm mb-6">
@@ -215,7 +216,7 @@ export default function SystemInfoPage() {
                                     <span className="material-symbols-outlined text-[20px]">language</span>
                                 </a>
                                 <a className="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 hover:text-primary transition-colors" href="#">
-                                    <span className="material-symbols-outlined text-[20px]">mail</span>
+                                    <Mail className="text-[20px]" />
                                 </a>
                             </div>
                         </div>
@@ -238,7 +239,7 @@ export default function SystemInfoPage() {
                             </ul>
                         </div>
                     </div>
-                    <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div className="mt-12 pt-8 border-t border-slate-200 dark:border-border-dark flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-slate-400 text-xs">© {new Date().getFullYear()} Cloudindustrie Ltd. Toutes les données opérationnelles sont sécurisées.</p>
                         <div className="flex gap-6">
                             <Link className="text-slate-400 text-xs hover:text-primary transition-colors" href="#">Privacy Policy</Link>

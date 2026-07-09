@@ -76,7 +76,7 @@ export default function ArchitecturePage() {
                             <span className="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded border border-slate-700">Presentation Tier</span>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <Card className="p-5 hover:border-primary/50 transition-all cursor-pointer bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+                            <Card className="p-5 hover:border-primary/50 transition-all cursor-pointer bg-white dark:bg-background border-slate-200 dark:border-border-dark">
                                 <div className="flex items-start justify-between mb-3">
                                     <div className="p-2 bg-primary/10 rounded-lg text-primary">
                                         <Smartphone className="w-5 h-5" />
@@ -90,7 +90,7 @@ export default function ArchitecturePage() {
                                     <div className="h-1 flex-1 bg-primary/20 rounded-full"></div>
                                 </div>
                             </Card>
-                            <Card className="p-5 hover:border-primary/50 transition-all cursor-pointer bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+                            <Card className="p-5 hover:border-primary/50 transition-all cursor-pointer bg-white dark:bg-background border-slate-200 dark:border-border-dark">
                                 <div className="flex items-start justify-between mb-3">
                                     <div className="p-2 bg-primary/10 rounded-lg text-primary">
                                         <Engineering className="w-5 h-5" />
@@ -104,7 +104,7 @@ export default function ArchitecturePage() {
                                     <div className="h-1 flex-1 bg-primary/20 rounded-full"></div>
                                 </div>
                             </Card>
-                            <Card className="p-5 hover:border-primary/50 transition-all cursor-pointer bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+                            <Card className="p-5 hover:border-primary/50 transition-all cursor-pointer bg-white dark:bg-background border-slate-200 dark:border-border-dark">
                                 <div className="flex items-start justify-between mb-3">
                                     <div className="p-2 bg-primary/10 rounded-lg text-primary">
                                         <DesktopWindows className="w-5 h-5" />
@@ -132,7 +132,7 @@ export default function ArchitecturePage() {
                             <div className="bg-primary/5 border-2 border-dashed border-primary/30 rounded-2xl p-6 relative">
                                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest">Edge Security</div>
                                 <div className="flex flex-col md:flex-row items-center gap-6 justify-center">
-                                    <div className="flex-1 flex flex-col items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl w-full text-center">
+                                    <div className="flex-1 flex flex-col items-center bg-white dark:bg-background border border-slate-200 dark:border-border-dark p-4 rounded-xl w-full text-center">
                                         <Shield className="text-primary mb-2 w-6 h-6" />
                                         <h4 className="font-bold text-sm">WAF (Web App Firewall)</h4>
                                         <p className="text-[10px] text-slate-500">OWASP Top 10 Filter</p>
@@ -140,7 +140,7 @@ export default function ArchitecturePage() {
                                     <div className="size-12 bg-primary rounded-full flex items-center justify-center text-white shadow-xl shadow-primary/30">
                                         <Api className="w-6 h-6" />
                                     </div>
-                                    <div className="flex-1 flex flex-col items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl w-full text-center">
+                                    <div className="flex-1 flex flex-col items-center bg-white dark:bg-background border border-slate-200 dark:border-border-dark p-4 rounded-xl w-full text-center">
                                         <Speed className="text-primary mb-2 w-6 h-6" />
                                         <h4 className="font-bold text-sm">Rate Limiting</h4>
                                         <p className="text-[10px] text-slate-500">10k Req/min/IP</p>
@@ -162,7 +162,7 @@ export default function ArchitecturePage() {
                             <span className="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded border border-slate-700">Microservices Mesh</span>
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl shadow-sm text-center flex flex-col items-center hover:scale-[1.02] transition-transform cursor-pointer">
+                            <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark p-4 rounded-xl shadow-sm text-center flex flex-col items-center hover:scale-[1.02] transition-transform cursor-pointer">
                                 <div className="size-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center mb-3">
                                     <Assignment className="text-primary w-6 h-6" />
                                 </div>
@@ -172,7 +172,7 @@ export default function ArchitecturePage() {
                                 </div>
                                 <span className="text-[9px] text-slate-500 mt-2">v2.1.0 (Golang)</span>
                             </div>
-                            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl shadow-sm text-center flex flex-col items-center hover:scale-[1.02] transition-transform cursor-pointer">
+                            <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark p-4 rounded-xl shadow-sm text-center flex flex-col items-center hover:scale-[1.02] transition-transform cursor-pointer">
                                 <div className="size-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center mb-3 text-primary">
                                     <NotificationsActive className="w-6 h-6" />
                                 </div>
@@ -182,7 +182,7 @@ export default function ArchitecturePage() {
                                 </div>
                                 <span className="text-[9px] text-slate-500 mt-2">v1.4.2 (NodeJS)</span>
                             </div>
-                            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl shadow-sm text-center flex flex-col items-center hover:scale-[1.02] transition-transform cursor-pointer">
+                            <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark p-4 rounded-xl shadow-sm text-center flex flex-col items-center hover:scale-[1.02] transition-transform cursor-pointer">
                                 <div className="size-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center mb-3 text-primary">
                                     <Inventory2 className="w-6 h-6" />
                                 </div>
@@ -192,7 +192,7 @@ export default function ArchitecturePage() {
                                 </div>
                                 <span className="text-[9px] text-slate-500 mt-2">v2.0.1 (Spring)</span>
                             </div>
-                            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl shadow-sm text-center flex flex-col items-center hover:scale-[1.02] transition-transform cursor-pointer">
+                            <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark p-4 rounded-xl shadow-sm text-center flex flex-col items-center hover:scale-[1.02] transition-transform cursor-pointer">
                                 <div className="size-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center mb-3 text-primary">
                                     <CalendarMonth className="w-6 h-6" />
                                 </div>
@@ -202,7 +202,7 @@ export default function ArchitecturePage() {
                                 </div>
                                 <span className="text-[9px] text-slate-500 mt-2">v1.1.0 (Python)</span>
                             </div>
-                            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl shadow-sm text-center flex flex-col items-center hover:scale-[1.02] transition-transform cursor-pointer">
+                            <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark p-4 rounded-xl shadow-sm text-center flex flex-col items-center hover:scale-[1.02] transition-transform cursor-pointer">
                                 <div className="size-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center mb-3 text-primary">
                                     <Payments className="w-6 h-6" />
                                 </div>
@@ -223,9 +223,9 @@ export default function ArchitecturePage() {
                                     <Database className="w-4 h-4" /> 4. Persistence Layer
                                 </h3>
                             </div>
-                            <div className="bg-slate-900/50 dark:bg-slate-800/20 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="bg-surface-dark/50 dark:bg-slate-800/20 border border-slate-200 dark:border-border-dark p-6 rounded-2xl grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div className="flex flex-col items-center">
-                                    <div className="size-14 bg-blue-500/10 rounded-full flex items-center justify-center border border-blue-500/20 mb-3 text-blue-500">
+                                    <div className="size-14 bg-primary/10 rounded-full flex items-center justify-center border border-primary/20 mb-3 text-primary">
                                         <Database className="w-8 h-8" />
                                     </div>
                                     <h4 className="font-bold text-sm">PostgreSQL</h4>
@@ -239,7 +239,7 @@ export default function ArchitecturePage() {
                                     <p className="text-[10px] text-slate-500">In-Memory / Pub-Sub</p>
                                 </div>
                                 <div className="flex flex-col items-center">
-                                    <div className="size-14 bg-orange-500/10 rounded-full flex items-center justify-center border border-orange-500/20 mb-3 text-orange-500">
+                                    <div className="size-14 bg-primary/10 rounded-full flex items-center justify-center border border-primary/20 mb-3 text-primary">
                                         <Cloud className="w-8 h-8" />
                                     </div>
                                     <h4 className="font-bold text-sm">AWS S3</h4>
@@ -254,7 +254,7 @@ export default function ArchitecturePage() {
                                 </h3>
                             </div>
                             <div className="flex flex-col gap-3">
-                                <div className="flex items-center gap-4 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-colors cursor-pointer">
+                                <div className="flex items-center gap-4 bg-white dark:bg-background p-3 rounded-xl border border-slate-200 dark:border-border-dark hover:border-primary/50 transition-colors cursor-pointer">
                                     <div className="text-slate-400"><CreditCard className="w-5 h-5" /></div>
                                     <div className="flex-1">
                                         <h5 className="text-xs font-bold">Stripe Payment</h5>
@@ -262,7 +262,7 @@ export default function ArchitecturePage() {
                                     </div>
                                     <div className="size-2 bg-green-500 rounded-full" />
                                 </div>
-                                <div className="flex items-center gap-4 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-colors cursor-pointer">
+                                <div className="flex items-center gap-4 bg-white dark:bg-background p-3 rounded-xl border border-slate-200 dark:border-border-dark hover:border-primary/50 transition-colors cursor-pointer">
                                     <div className="text-slate-400"><Map className="w-5 h-5" /></div>
                                     <div className="flex-1">
                                         <h5 className="text-xs font-bold">Google Maps</h5>
@@ -270,7 +270,7 @@ export default function ArchitecturePage() {
                                     </div>
                                     <div className="size-2 bg-green-500 rounded-full" />
                                 </div>
-                                <div className="flex items-center gap-4 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-colors cursor-pointer">
+                                <div className="flex items-center gap-4 bg-white dark:bg-background p-3 rounded-xl border border-slate-200 dark:border-border-dark hover:border-primary/50 transition-colors cursor-pointer">
                                     <div className="text-slate-400"><Sms className="w-5 h-5" /></div>
                                     <div className="flex-1">
                                         <h5 className="text-xs font-bold">Twilio SMS</h5>
@@ -286,7 +286,7 @@ export default function ArchitecturePage() {
 
             {/* Side Legend & Legend (Overlay style) */}
             <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-40">
-                <Card className="p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur shadow-2xl border-primary/20 w-64">
+                <Card className="p-4 bg-white/80 dark:bg-background/80 backdrop-blur shadow-2xl border-primary/20 w-64">
                     <h4 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3 flex items-center gap-2">
                         <Monitoring className="w-4 h-4" /> Ops Console
                     </h4>

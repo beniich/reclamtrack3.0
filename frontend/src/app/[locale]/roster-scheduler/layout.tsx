@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 export default function RosterLayout({ children }: { children: ReactNode }) {
     return (
-        <div className="flex h-screen overflow-hidden bg-slate-950 text-slate-100 font-sans antialiased">
+        <div className="flex h-screen overflow-hidden bg-background-dark text-slate-100 font-sans antialiased">
             {/* On surcharge le layout global ici potentiellement, mais comme on est déja dans RootLayout,
                 on doit s'assurer que Sidebar globale ne gêne pas.
                 Si RosterFlow a son propre header/sidebar full screen, on peut avoir besoin

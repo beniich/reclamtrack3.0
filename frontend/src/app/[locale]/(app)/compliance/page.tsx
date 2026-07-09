@@ -99,14 +99,14 @@ export default function ComplianceCenterPage() {
                 <div className="flex flex-wrap gap-3">
                     <button type="button" 
                         onClick={runAuditMutation}
-                        className="h-12 px-6 bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3 shadow-xl shadow-blue-500/20"
+                        className="h-12 px-6 bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3 shadow-xl shadow-blue-500/20"
                     >
                         <ShieldCheck className="w-4 h-4" />
                         Run IA Audit
                     </button>
                     <button type="button" 
                         onClick={() => window.open(`${process.env.NEXT_PUBLIC_API_URL}/compliance/export/excel`, '_blank')}
-                        className="h-12 px-6 bg-slate-900 text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl border border-slate-800 flex items-center gap-3 hover:text-white transition-colors"
+                        className="h-12 px-6 bg-surface-dark text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl border border-border-dark flex items-center gap-3 hover:text-white transition-colors"
                     >
                         <Download className="w-4 h-4" />
                         Export Audit Dossier
@@ -118,7 +118,7 @@ export default function ComplianceCenterPage() {
             {reports && reports.length > 0 && (
                 <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
                     {reports.map((report: any) => (
-                        <div key={report.name} className="flex-shrink-0 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-6 py-4 rounded-2xl flex items-center gap-4 shadow-sm group hover:border-primary transition-all">
+                        <div key={report.name} className="flex-shrink-0 bg-white dark:bg-background border border-slate-200 dark:border-border-dark px-6 py-4 rounded-2xl flex items-center gap-4 shadow-sm group hover:border-primary transition-all">
                              <div className="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg group-hover:bg-primary/10 transition-colors">
                                  <FileText className="w-4 h-4 text-slate-400 group-hover:text-primary" />
                              </div>
@@ -126,7 +126,7 @@ export default function ComplianceCenterPage() {
                                  <div className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-tighter">{report.name}</div>
                                  <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Audit Archive — {report.date}</div>
                              </div>
-                             <button type="button" className="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg">
+                             <button type="button" className="p-2 hover:bg-primary/5 dark:hover:bg-violet-500/15 rounded-lg">
                                  <Download className="w-3 h-3 text-slate-400" />
                              </button>
                         </div>
@@ -146,11 +146,11 @@ export default function ComplianceCenterPage() {
             {/* Score & IAM Stats */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Overall Score */}
-                <div className="bg-slate-900 rounded-[32px] p-10 text-white relative overflow-hidden flex flex-col items-center justify-center min-h-[300px] border border-slate-800 shadow-2xl">
+                <div className="bg-surface-dark rounded-[32px] p-10 text-white relative overflow-hidden flex flex-col items-center justify-center min-h-[300px] border border-border-dark shadow-2xl">
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 to-transparent"></div>
                     
                     <div className="relative z-10 flex flex-col items-center text-center">
-                        <div className="size-40 rounded-full border-[10px] border-slate-800 flex items-center justify-center relative">
+                        <div className="size-40 rounded-full border-[10px] border-border-dark flex items-center justify-center relative">
                             <svg className="absolute inset-0 size-40 -rotate-90">
                                 <circle
                                     cx="80"
@@ -173,9 +173,9 @@ export default function ComplianceCenterPage() {
 
                 {/* IAM Stats */}
                 <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 p-8 shadow-lg">
+                    <div className="bg-white dark:bg-background rounded-[32px] border border-slate-200 dark:border-border-dark p-8 shadow-lg">
                         <div className="flex justify-between items-start mb-6">
-                            <div className="p-3 bg-blue-500/10 text-blue-600 rounded-2xl border border-blue-200">
+                            <div className="p-3 bg-primary/10 text-primary rounded-2xl border border-blue-200">
                                 <Lock className="w-6 h-6" />
                             </div>
                             <span className="text-[10px] font-black px-2 py-1 rounded-full bg-green-50 text-green-600">Active</span>
@@ -183,12 +183,12 @@ export default function ComplianceCenterPage() {
                         <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">MFA Adoption</h4>
                         <div className="text-3xl font-black text-slate-900 dark:text-white mb-4">{report?.details?.iam?.mfaAdoptionRate.toFixed(1)}%</div>
                         <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                            <div className="h-full bg-blue-500 rounded-full transition-all duration-1000" style={{ width: `${report?.details?.iam?.mfaAdoptionRate}%` }}></div>
+                            <div className="h-full bg-primary rounded-full transition-all duration-1000" style={{ width: `${report?.details?.iam?.mfaAdoptionRate}%` }}></div>
                         </div>
                         <p className="text-[10px] font-bold text-slate-400 mt-4 uppercase">SOC 2 requirement: 100% for admin access</p>
                     </div>
 
-                    <div className="bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 p-8 shadow-lg">
+                    <div className="bg-white dark:bg-background rounded-[32px] border border-slate-200 dark:border-border-dark p-8 shadow-lg">
                         <div className="flex justify-between items-start mb-6">
                             <div className="p-3 bg-purple-500/10 text-purple-600 rounded-2xl border border-purple-200">
                                 <UserCheck className="w-6 h-6" />
@@ -198,7 +198,7 @@ export default function ComplianceCenterPage() {
                         <div className="text-3xl font-black text-slate-900 dark:text-white mb-4">{report?.details?.iam?.stalePasswordsCount} Users</div>
                         <p className="text-[10px] font-bold text-slate-400 uppercase">Passwords older than 90 days requiring rotation.</p>
                         <div className="mt-6 flex gap-2">
-                             <Button variant="secondary" className="px-4 py-2 bg-slate-900 text-white text-[9px] font-black uppercase rounded-lg">Trigger Blast</Button>
+                             <Button variant="secondary" className="px-4 py-2 bg-surface-dark text-white text-[9px] font-black uppercase rounded-lg">Trigger Blast</Button>
                         </div>
                     </div>
                 </div>
@@ -207,12 +207,12 @@ export default function ComplianceCenterPage() {
             {/* Middle Section: Classification & Controls */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Data Classification */}
-                <div className="lg:col-span-1 bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 p-8 shadow-lg flex flex-col">
+                <div className="lg:col-span-1 bg-white dark:bg-background rounded-[32px] border border-slate-200 dark:border-border-dark p-8 shadow-lg flex flex-col">
                     <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
                         <Database className="w-4 h-4 text-primary" />
                         Pillar 5 — Data Labels
                     </h3>
-                    <div className="mt-auto space-y-3 pt-6 border-t border-slate-100 dark:border-slate-800">
+                    <div className="mt-auto space-y-3 pt-6 border-t border-slate-100 dark:border-border-dark">
                          {classificationData.map(item => (
                              <div key={item.name} className="flex justify-between items-center text-[10px] font-bold uppercase">
                                  <span className="text-slate-400">{item.name}</span>
@@ -223,11 +223,11 @@ export default function ComplianceCenterPage() {
                 </div>
 
                 {/* Compliance Controls Maturity */}
-                <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 p-8 shadow-lg">
+                <div className="lg:col-span-2 bg-white dark:bg-background rounded-[32px] border border-slate-200 dark:border-border-dark p-8 shadow-lg">
                     <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-8">Industrial Controls Maturity</h3>
                     <div className="space-y-4">
                         {report?.controls.map((control: any) => (
-                            <div key={control.id} className="p-5 rounded-2xl border border-slate-100 dark:border-slate-800 flex items-center justify-between group hover:border-primary/20 transition-all">
+                            <div key={control.id} className="p-5 rounded-2xl border border-slate-100 dark:border-border-dark flex items-center justify-between group hover:border-primary/20 transition-all">
                                 <div className="flex items-center gap-4">
                                     <div className={`p-2 rounded-lg ${control.status === 'PASS' ? 'bg-green-500/10 text-green-600' : 'bg-red-500/10 text-red-600'}`}>
                                         {control.status === 'PASS' ? <ShieldCheck className="w-5 h-5" /> : <ShieldAlert className="w-5 h-5" />}
@@ -258,7 +258,7 @@ export default function ComplianceCenterPage() {
             </div>
 
             {/* Active Sessions Management */}
-            <div className="bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 p-8 shadow-lg">
+            <div className="bg-white dark:bg-background rounded-[32px] border border-slate-200 dark:border-border-dark p-8 shadow-lg">
                 <div className="flex items-center justify-between mb-8">
                      <div>
                         <h3 className="text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2">
@@ -272,15 +272,15 @@ export default function ComplianceCenterPage() {
 
                 <div className="space-y-4">
                      {sessions?.map((session: any) => (
-                         <div key={session._id} className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 flex items-center justify-between group">
+                         <div key={session._id} className="p-5 rounded-2xl bg-slate-50 dark:bg-background border border-slate-100 dark:border-border-dark flex items-center justify-between group">
                              <div className="flex items-center gap-4">
-                                 <div className="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                                 <div className="p-3 bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark">
                                      <Globe className="w-5 h-5 text-slate-400" />
                                  </div>
                                  <div>
                                      <div className="flex items-center gap-2">
                                          <span className="font-bold text-slate-900 dark:text-white uppercase tracking-tighter text-sm">{session.createdFromIp || 'IP Inconnu'}</span>
-                                         {session.createdFromIp === '127.0.0.1' && <span className="text-[8px] font-black bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded-full uppercase">Current</span>}
+                                         {session.createdFromIp === '127.0.0.1' && <span className="text-[8px] font-black bg-blue-100 text-primary px-1.5 py-0.5 rounded-full uppercase">Current</span>}
                                      </div>
                                      <p className="text-[10px] text-slate-400 font-medium uppercase mt-1">Created: {new Date(session.createdAt).toLocaleString()}</p>
                                  </div>
@@ -311,11 +311,11 @@ export default function ComplianceCenterPage() {
                      )}
                 </div>
             </div>
-            <div className="bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 p-8 shadow-lg">
+            <div className="bg-white dark:bg-background rounded-[32px] border border-slate-200 dark:border-border-dark p-8 shadow-lg">
                 <div className="flex items-center justify-between mb-8">
                      <div>
                         <h3 className="text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2">
-                            <Activity className="w-4 h-4 text-orange-500" />
+                            <Activity className="w-4 h-4 text-primary" />
                             Phase 1 — Security Incidents
                         </h3>
                         <p className="text-[10px] font-bold text-slate-400 uppercase mt-1">Real-time anomaly detection logs</p>
@@ -326,7 +326,7 @@ export default function ComplianceCenterPage() {
                 <div className="space-y-4 overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="border-b border-slate-100 dark:border-slate-800">
+                            <tr className="border-b border-slate-100 dark:border-border-dark">
                                 <th className="pb-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Type / ID</th>
                                 <th className="pb-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Severity</th>
                                 <th className="pb-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Source / Impact</th>
@@ -337,7 +337,7 @@ export default function ComplianceCenterPage() {
                         </thead>
                         <tbody className="divide-y divide-slate-50 dark:divide-slate-800/50 text-[11px] font-bold">
                             {events?.map((event: any) => (
-                                <tr key={event._id} className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/20 transition-colors">
+                                <tr key={event._id} className="group hover:bg-primary/5/50 dark:hover:bg-violet-500/15/20 transition-colors">
                                     <td className="py-4">
                                         <div className="flex flex-col">
                                             <span className="uppercase text-slate-900 dark:text-white">{event.type.replace('_', ' ')}</span>

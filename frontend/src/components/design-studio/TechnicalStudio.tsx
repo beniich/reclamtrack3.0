@@ -102,18 +102,18 @@ export const TechnicalStudio: React.FC = () => {
                 <div className="absolute top-4 right-4 z-10 flex gap-2">
                     <button type="button"
                         onClick={() => setShowHistory(true)}
-                        className="flex items-center gap-2 bg-[#0f0125]/90 hover:bg-[#0f0125] border border-blue-500/30 text-white px-4 py-2 rounded-xl shadow-lg shadow-blue-500/10 backdrop-blur-md transition-all"
+                        className="flex items-center gap-2 bg-[#0f0125]/90 hover:bg-[#0f0125] border border-primary/30 text-white px-4 py-2 rounded-xl shadow-lg shadow-blue-500/10 backdrop-blur-md transition-all"
                     >
-                        <History size={16} className="text-blue-500" />
+                        <History size={16} className="text-primary" />
                         <span className="text-xs font-bold uppercase tracking-widest px-2 border-l border-white/10">Archives</span>
                     </button>
                     
                     <button type="button"
                         onClick={handleSave}
                         disabled={isLoading || !project}
-                        className="flex items-center gap-2 bg-[#0f0125]/90 hover:bg-[#0f0125] border border-orange-500/30 text-white px-4 py-2 rounded-xl shadow-lg shadow-orange-500/10 backdrop-blur-md transition-all disabled:opacity-50"
+                        className="flex items-center gap-2 bg-[#0f0125]/90 hover:bg-[#0f0125] border border-primary/30 text-white px-4 py-2 rounded-xl shadow-lg shadow-orange-500/10 backdrop-blur-md transition-all disabled:opacity-50"
                     >
-                        {isLoading ? <Loader2 size={16} className="animate-spin text-orange-500" /> : <Save size={16} className="text-orange-500" />}
+                        {isLoading ? <Loader2 size={16} className="animate-spin text-primary" /> : <Save size={16} className="text-primary" />}
                         <span className="text-xs font-bold uppercase tracking-widest px-2 border-l border-white/10">Sauvegarder</span>
                     </button>
                 </div>
@@ -124,7 +124,7 @@ export const TechnicalStudio: React.FC = () => {
                         <div className="w-80 bg-[#1A0536] border-l border-white/10 h-full flex flex-col animate-in slide-in-from-right duration-300">
                             <div className="p-6 border-b border-white/10 flex items-center justify-between bg-[#310B5E]/30">
                                 <div className="flex items-center gap-2">
-                                    <FolderOpen size={20} className="text-orange-500" />
+                                    <FolderOpen size={20} className="text-primary" />
                                     <h3 className="text-sm font-black text-white uppercase tracking-tighter">Schémas Archivés</h3>
                                 </div>
                                 <button type="button" onClick={() => setShowHistory(false)} className="text-slate-400 hover:text-white">
@@ -135,7 +135,7 @@ export const TechnicalStudio: React.FC = () => {
                             <div className="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
                                 {isLoading ? (
                                     <div className="flex flex-col items-center justify-center h-40 gap-3 opacity-30">
-                                        <Loader2 className="animate-spin text-orange-500" />
+                                        <Loader2 className="animate-spin text-primary" />
                                         <span className="text-[10px] uppercase font-bold tracking-widest text-white">Actualisation...</span>
                                     </div>
                                 ) : schemas.length === 0 ? (
@@ -147,9 +147,9 @@ export const TechnicalStudio: React.FC = () => {
                                         <button type="button"
                                             key={s._id}
                                             onClick={() => handleLoadSchema(s)}
-                                            className="w-full text-left p-4 bg-[#310B5E]/30 border border-white/5 hover:border-orange-500/40 rounded-2xl group transition-all"
+                                            className="w-full text-left p-4 bg-[#310B5E]/30 border border-white/5 hover:border-primary/40 rounded-2xl group transition-all"
                                         >
-                                            <div className="font-bold text-white text-sm mb-1 group-hover:text-orange-500 transition-colors">{s.name}</div>
+                                            <div className="font-bold text-white text-sm mb-1 group-hover:text-primary transition-colors">{s.name}</div>
                                             <div className="text-[10px] text-slate-500 font-mono">
                                                 {format(new Date(s.createdAt), 'dd MMM yyyy HH:mm')}
                                             </div>
@@ -161,7 +161,7 @@ export const TechnicalStudio: React.FC = () => {
                     </div>
                 )}
 
-                <div className="flex-1 min-h-0 bg-white dark:bg-slate-900 rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-orange-500/10 shadow-inner flex relative">
+                <div className="flex-1 min-h-0 bg-white dark:bg-background rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-primary/10 shadow-inner flex relative">
                     <TechnicalCanvas 
                         onReady={(p) => setProject(p)} 
                         onSelectItem={handleSelectItem}
@@ -169,9 +169,9 @@ export const TechnicalStudio: React.FC = () => {
 
                     {/* GMAO Digital Twin Sidebar */}
                     {selectedAsset && (
-                        <div className="absolute top-4 right-4 bottom-4 w-72 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-[2rem] shadow-2xl p-6 flex flex-col animate-in slide-in-from-right duration-300 z-20">
+                        <div className="absolute top-4 right-4 bottom-4 w-72 bg-white/95 dark:bg-background/95 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-[2rem] shadow-2xl p-6 flex flex-col animate-in slide-in-from-right duration-300 z-20">
                             <div className="flex items-start justify-between mb-6">
-                                <div className="p-3 bg-indigo-500/10 text-indigo-500 rounded-xl">
+                                <div className="p-3 bg-primary/10 text-primary rounded-xl">
                                     <Box size={24} />
                                 </div>
                                 <button type="button" onClick={() => setSelectedAsset(null)} className="text-slate-400">
@@ -182,7 +182,7 @@ export const TechnicalStudio: React.FC = () => {
                             <div className="mb-6">
                                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Identifiant Actif</p>
                                 <h4 className="text-lg font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-none">{selectedAsset.id}</h4>
-                                <p className="text-xs font-bold text-indigo-500 mt-1">{selectedAsset.name}</p>
+                                <p className="text-xs font-bold text-primary mt-1">{selectedAsset.name}</p>
                             </div>
 
                             <div className="space-y-4 flex-1">
@@ -213,11 +213,11 @@ export const TechnicalStudio: React.FC = () => {
 
                             <div className="space-y-2 pt-4">
                                 <Link href={`/assets/1`} className="block">
-                                    <button type="button" className="w-full py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2">
+                                    <button type="button" className="w-full py-3 bg-surface-dark dark:bg-white text-white dark:text-slate-900 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2">
                                         <Info size={14} /> Fiche Complète
                                     </button>
                                 </Link>
-                                <button type="button" className="w-full py-3 border border-indigo-500/30 text-indigo-500 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-indigo-500/10 transition-colors">
+                                <button type="button" className="w-full py-3 border border-primary/30 text-primary rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-primary/10 transition-colors">
                                     <Wrench size={14} /> Créer un Job (OT)
                                 </button>
                             </div>

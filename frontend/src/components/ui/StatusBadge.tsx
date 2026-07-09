@@ -62,12 +62,12 @@ const priorityConfig: Record<string, { label: string; color: string; icon: strin
     },
     medium: {
         label: 'Medium',
-        color: 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 border-blue-200 dark:border-blue-800',
+        color: 'bg-blue-50 text-primary dark:bg-blue-900/20 dark:text-blue-400 border-blue-200 dark:border-blue-800',
         icon: '→',
     },
     high: {
         label: 'High',
-        color: 'bg-orange-50 text-orange-600 dark:bg-orange-900/20 dark:text-orange-400 border-orange-200 dark:border-orange-800',
+        color: 'bg-orange-50 text-primary dark:bg-orange-900/20 dark:text-orange-400 border-orange-200 dark:border-orange-800',
         icon: '↑',
     },
     urgent: {

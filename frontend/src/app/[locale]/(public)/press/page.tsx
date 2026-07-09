@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Download, ArrowRight } from 'lucide-react';
 
 export default function PressPage() {
     const mentions = [
@@ -35,7 +36,7 @@ export default function PressPage() {
 
             <main className="flex-1 pt-20">
                 {/* Hero Section */}
-                <section className="relative py-24 lg:py-32 bg-slate-900 dark:bg-black overflow-hidden text-center">
+                <section className="relative py-24 lg:py-32 bg-surface-dark dark:bg-black overflow-hidden text-center">
                     <div className="absolute inset-0 z-0 opacity-40 bg-[radial-gradient(circle_at_50%_0%,#ec5b13_5%,transparent_60%)]"></div>
                     <div className="relative z-10 max-w-4xl mx-auto px-6">
                         <div className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-primary/20 text-primary text-[10px] font-black tracking-widest uppercase mb-8 border border-primary/30">
@@ -110,7 +111,7 @@ export default function PressPage() {
                                     </div>
                                     <p className="text-xs text-slate-500 dark:text-slate-400 mb-6 leading-relaxed font-light">{asset.desc}</p>
                                     <div className="flex items-center gap-2 text-primary text-[10px] font-black uppercase tracking-widest group-hover:translate-x-2 transition-transform">
-                                        Download <span className="material-symbols-outlined text-sm">download</span>
+                                        Download <Download className="text-sm" />
                                     </div>
                                 </div>
                             ))}
@@ -119,7 +120,7 @@ export default function PressPage() {
                 </section>
 
                 {/* Press Contact */}
-                <section className="py-24 bg-slate-900 dark:bg-black relative text-white">
+                <section className="py-24 bg-surface-dark dark:bg-black relative text-white">
                     <div className="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(circle_at_0%_100%,#ec5b13_0%,transparent_40%)]"></div>
                     <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
                         <h2 className="text-3xl font-black mb-4">Direct Communication</h2>
@@ -139,7 +140,7 @@ export default function PressPage() {
                         </div>
 
                         <Link href="/contact" className="inline-flex items-center gap-3 bg-white text-slate-900 px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-transform shadow-2xl">
-                            Mission Transmission Form <span className="material-symbols-outlined">arrow_forward</span>
+                            Mission Transmission Form <ArrowRight />
                         </Link>
                     </div>
                 </section>

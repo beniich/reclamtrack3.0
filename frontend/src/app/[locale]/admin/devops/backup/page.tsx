@@ -1,8 +1,10 @@
+import { toast } from 'sonner';
 "use client"
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { useState } from "react"
 import { Button } from '@/components/ui/button';
+import { History, TrendingDown } from 'lucide-react';
 
 export default function BackupHubPage() {
     const [backups] = useState([
@@ -55,7 +57,7 @@ export default function BackupHubPage() {
                 <div className="lg:col-span-2 space-y-6">
                     <div className="flex items-center justify-between">
                         <h3 className="text-xl font-bold flex items-center gap-2">
-                            <span className="material-symbols-outlined text-primary">history</span>
+                            <History className="text-primary" />
                             Recent Backups
                         </h3>
                         <div className="flex gap-2">
@@ -76,7 +78,7 @@ export default function BackupHubPage() {
                             </thead>
                             <tbody className="divide-y divide-slate-100 dark:divide-white/5">
                                 {backups.map((bk) => (
-                                    <tr key={bk.id} className="hover:bg-slate-50/50 dark:hover:bg-white/5 group transition-colors">
+                                    <tr key={bk.id} className="hover:bg-primary/5/50 dark:hover:bg-white/5 group transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="font-bold text-slate-900 dark:text-white">{bk.name}</div>
                                             <div className="text-[10px] text-slate-500 font-mono tracking-wider">{bk.id} • {bk.date}</div>
@@ -91,7 +93,7 @@ export default function BackupHubPage() {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" className="p-2 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary/10 rounded-lg text-primary">
+                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary/10 rounded-lg text-primary">
                                                 <span className="material-symbols-outlined text-sm">settings_backup_restore</span>
                                             </button>
                                         </td>
@@ -112,7 +114,7 @@ export default function BackupHubPage() {
                     <div className="dashboard-card p-6 border-amber-500/20 bg-gradient-to-br from-amber-500/5 via-transparent to-transparent">
                         <div className="flex items-center gap-3 mb-4">
                             <div className="size-10 rounded-xl bg-amber-500/10 flex items-center justify-center">
-                                <span className="material-symbols-outlined text-amber-500">trending_down</span>
+                                <TrendingDown className="text-amber-500" />
                             </div>
                             <div>
                                 <h4 className="font-bold text-sm">Tier Optimization</h4>
@@ -122,7 +124,7 @@ export default function BackupHubPage() {
                         <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                             Detected <span className="text-amber-500 font-bold">5.2 TB</span> of older logs in <span className="text-slate-900 dark:text-white font-bold">Hot Storage</span> that haven't been accessed in 30 days.
                         </p>
-                        <div className="mt-4 p-4 bg-white dark:bg-slate-900/50 rounded-xl border border-amber-500/10">
+                        <div className="mt-4 p-4 bg-white dark:bg-background/50 rounded-xl border border-amber-500/10">
                             <div className="flex justify-between items-center text-xs mb-2">
                                 <span className="font-bold text-slate-500 uppercase">Potential Savings</span>
                                 <span className="text-emerald-500 font-black">$185 / mo</span>

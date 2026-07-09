@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { MetricCard } from '@/components/ui/MetricCard'
 import { Role } from '@/lib/rbac/permissions'
+import { AlertTriangle } from 'lucide-react';
 
 export default function ChaosHubPage() {
     return (
@@ -22,7 +23,7 @@ export default function ChaosHubPage() {
                     </div>
                     <RoleGuard allowedRoles={[Role.OWNER, Role.ADMIN]}>
                         <Button type="button" variant="danger">
-                            <span className="material-symbols-outlined">warning</span>
+                            <AlertTriangle />
                             New Experiment
                         </Button>
                     </RoleGuard>

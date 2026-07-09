@@ -12,8 +12,8 @@ export function Header({ variant = 'default' }: HeaderProps) {
     return (
         <header className={cn(
             'sticky top-0 z-40 border-b',
-            'bg-white/50 dark:bg-slate-900/50 backdrop-blur-md', // Adjusted for compatibility
-            'border-slate-200 dark:border-slate-800'
+            'bg-white/50 dark:bg-background/50 backdrop-blur-md', // Adjusted for compatibility
+            'border-slate-200 dark:border-border-dark'
         )}>
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                 {/* Logo */}

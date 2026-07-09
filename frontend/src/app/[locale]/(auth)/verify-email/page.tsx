@@ -51,7 +51,7 @@ export default function VerifyEmailPage() {
                 <h1 className="text-2xl font-bold">Vérification Email</h1>
             </div>
 
-            <div className="w-full max-w-[440px] bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 dark:border-slate-800 p-8 text-center">
+            <div className="w-full max-w-[440px] bg-white dark:bg-background rounded-xl shadow-xl border border-slate-200 dark:border-border-dark p-8 text-center">
                 {status === 'loading' && (
                     <div className="space-y-6 py-4">
                         <div className="flex justify-center">

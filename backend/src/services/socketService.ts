@@ -384,9 +384,6 @@ class NotificationService {
     }
   }
 
-      logger.info(`📢 Urgent alert sent: ${message}`);
-    }
-  }
 
   /**
    * Notify about GMAO/Maintenance events

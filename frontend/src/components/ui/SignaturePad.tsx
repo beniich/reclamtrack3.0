@@ -100,7 +100,7 @@ export function SignaturePad({ onSave, onClear }: SignaturePadProps) {
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="border-2 border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-white">
+            <div className="border-2 border-slate-200 dark:border-border-dark rounded-xl overflow-hidden bg-white">
                 <canvas
                     ref={canvasRef}
                     className="w-full h-48 cursor-crosshair touch-none"

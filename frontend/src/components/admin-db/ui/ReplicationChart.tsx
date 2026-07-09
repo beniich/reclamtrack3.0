@@ -17,7 +17,7 @@ export default function ReplicationChart({ data = [] }: { data: ChartPoint[] }) 
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                     Replication Lag (ms) – 24 h
                 </h3>
-                <select className="bg-slate-100 dark:bg-slate-900 text-xs text-slate-700 dark:text-slate-300 rounded px-2 py-1 border border-slate-200 dark:border-slate-700 outline-none">
+                <select className="bg-slate-100 dark:bg-background text-xs text-slate-700 dark:text-slate-300 rounded px-2 py-1 border border-slate-200 dark:border-slate-700 outline-none">
                     <option>1h</option>
                     <option defaultValue="24h">24h</option>
                     <option>7d</option>

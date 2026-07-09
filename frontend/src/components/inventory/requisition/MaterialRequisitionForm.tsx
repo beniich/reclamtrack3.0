@@ -45,6 +45,7 @@ import {
     checkStockAvailability
 } from '@/lib/inventory/mockData';
 import {
+import { AlertTriangle } from 'lucide-react';
     formatCurrency,
     generateRequisitionId,
     getPriorityColor,
@@ -257,7 +258,7 @@ export const MaterialRequisitionForm: React.FC = () => {
                 )}
 
                 {/* Progress / Status Header */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 bg-slate-900 rounded-[2rem] text-white shadow-2xl relative overflow-hidden group">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 bg-surface-dark rounded-[2rem] text-white shadow-2xl relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full -mr-32 -mt-32 blur-3xl group-hover:bg-primary/20 transition-all duration-1000"></div>
                     <div className="relative z-10">
                         <div className="flex items-center gap-2 text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-1">
@@ -373,7 +374,7 @@ export const MaterialRequisitionForm: React.FC = () => {
                                 />
 
                                 {selectedComplaint && (
-                                    <div className="p-6 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 animate-in fade-in slide-in-from-top-2">
+                                    <div className="p-6 bg-slate-50 dark:bg-background rounded-2xl border border-slate-200 dark:border-border-dark animate-in fade-in slide-in-from-top-2">
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                                             <div>
                                                 <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Interface</p>
@@ -436,7 +437,7 @@ export const MaterialRequisitionForm: React.FC = () => {
                             </div>
 
                             {fields.length === 0 ? (
-                                <div className="text-center py-16 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-3xl bg-slate-50/50 dark:bg-slate-900/30">
+                                <div className="text-center py-16 border-2 border-dashed border-slate-200 dark:border-border-dark rounded-3xl bg-slate-50/50 dark:bg-background/30">
                                     <div className="size-16 bg-white dark:bg-slate-800 rounded-2xl shadow-xl flex items-center justify-center mx-auto mb-4 text-slate-300">
                                         <Package className="size-8" />
                                     </div>
@@ -456,7 +457,7 @@ export const MaterialRequisitionForm: React.FC = () => {
                                         return (
                                             <div
                                                 key={field.id}
-                                                className="p-6 border border-slate-200 dark:border-slate-800 rounded-3xl bg-white dark:bg-slate-900 group/item hover:border-primary/50 transition-all duration-300 relative overflow-hidden"
+                                                className="p-6 border border-slate-200 dark:border-border-dark rounded-3xl bg-white dark:bg-background group/item hover:border-primary/50 transition-all duration-300 relative overflow-hidden"
                                             >
                                                 <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 dark:bg-slate-800/50 rounded-bl-[4rem] -mr-6 -mt-6 group-hover/item:bg-primary/5 transition-colors"></div>
 
@@ -514,7 +515,7 @@ export const MaterialRequisitionForm: React.FC = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="mt-6 flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 relative z-10 group-hover/item:bg-primary/5 group-hover/item:border-primary/10 transition-all">
+                                                <div className="mt-6 flex items-center justify-between p-4 bg-slate-50 dark:bg-background rounded-2xl border border-slate-100 dark:border-border-dark relative z-10 group-hover/item:bg-primary/5 group-hover/item:border-primary/10 transition-all">
                                                     <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] italic">Sous-total article</span>
                                                     <span className="text-lg font-black italic text-slate-900 dark:text-white">
                                                         {formatCurrency(itemTotal)}
@@ -524,7 +525,7 @@ export const MaterialRequisitionForm: React.FC = () => {
                                         );
                                     })}
 
-                                    <div className="mt-10 p-8 bg-slate-900 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden group">
+                                    <div className="mt-10 p-8 bg-surface-dark rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden group">
                                         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full -mr-32 -mt-32 blur-3xl"></div>
                                         <div className="relative z-10 space-y-6">
                                             <div className="flex justify-between items-center text-xs">
@@ -554,7 +555,7 @@ export const MaterialRequisitionForm: React.FC = () => {
 
                     <div className="space-y-8">
                         {/* Summary / Action Card */}
-                        <div className="bg-slate-900 rounded-[3rem] p-8 text-white shadow-2xl relative overflow-hidden group">
+                        <div className="bg-surface-dark rounded-[3rem] p-8 text-white shadow-2xl relative overflow-hidden group">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000"></div>
                             <div className="relative z-10 space-y-8">
                                 <div>
@@ -652,7 +653,7 @@ export const MaterialRequisitionForm: React.FC = () => {
                                             <textarea
                                                 {...register('deliveryInstructions')}
                                                 rows={3}
-                                                className="w-full p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs font-bold italic text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                                                className="w-full p-4 rounded-2xl border border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background text-xs font-bold italic text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
                                                 placeholder="Ex: Accès restreint, badge requis..."
                                             />
                                         </div>
@@ -669,7 +670,7 @@ export const MaterialRequisitionForm: React.FC = () => {
                             <textarea
                                 {...register('notes')}
                                 rows={4}
-                                className="w-full p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs font-bold italic text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                                className="w-full p-4 rounded-2xl border border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background text-xs font-bold italic text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
                                 placeholder="Précisions utiles pour le traitement de votre demande..."
                             />
                         </Card>
@@ -678,7 +679,7 @@ export const MaterialRequisitionForm: React.FC = () => {
                             <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:scale-150 transition-all duration-700"></div>
                             <div className="relative z-10">
                                 <div className="flex items-center gap-2 text-amber-600 font-black text-[10px] uppercase tracking-widest italic mb-3">
-                                    <span className="material-symbols-outlined text-sm">warning</span>
+                                    <AlertTriangle className="text-sm" />
                                     Avis de Conformité
                                 </div>
                                 <p className="text-[11px] text-amber-700/70 font-bold leading-relaxed italic">

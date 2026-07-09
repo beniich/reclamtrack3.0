@@ -15,7 +15,7 @@ interface KPICardProps {
 
 export function KPICard({ title, value, change, trend, changeLabel, icon, loading, className, footer }: KPICardProps) {
     return (
-        <div className={cn("bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm", className)}>
+        <div className={cn("bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl p-6 shadow-sm", className)}>
             <div className="flex justify-between items-start mb-4">
                 <div>
                     <p className="text-sm font-medium text-slate-500 uppercase tracking-widest">{title}</p>
@@ -53,7 +53,7 @@ export function KPICard({ title, value, change, trend, changeLabel, icon, loadin
                     {changeLabel && <span className="text-xs text-slate-500">{changeLabel}</span>}
                 </div>
             )}
-            {footer && <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">{footer}</div>}
+            {footer && <div className="mt-4 pt-4 border-t border-slate-100 dark:border-border-dark">{footer}</div>}
         </div>
     )
 }

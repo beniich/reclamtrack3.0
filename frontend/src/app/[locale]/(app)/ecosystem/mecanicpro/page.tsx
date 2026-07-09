@@ -27,7 +27,7 @@ import { Button } from '@/components/ui/button';
 
 export default function MecanicProDashboard() {
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-slate-300 p-6 md:p-10 font-mono selection:bg-orange-500/30 overflow-hidden">
+    <div className="min-h-screen bg-[#0a0a0c] text-slate-300 p-6 md:p-10 font-mono selection:bg-primary/30 overflow-hidden">
       <JsonLd 
         data={{
           "@context": "https://schema.org",
@@ -46,13 +46,13 @@ export default function MecanicProDashboard() {
       <div className="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-20 blur-sm pointer-events-none" />
 
       {/* Header */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-8 border-l-4 border-orange-500 pl-6 py-2">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-8 border-l-4 border-primary pl-6 py-2">
         <div className="flex items-center gap-6">
-          <div className="w-16 h-16 bg-orange-600 text-black flex items-center justify-center rounded-sm shadow-2xl shadow-orange-900/20">
+          <div className="w-16 h-16 bg-primary text-black flex items-center justify-center rounded-sm shadow-2xl shadow-orange-900/20">
             <WrenchScrewdriverIcon className="w-10 h-10" />
           </div>
           <div>
-            <h1 className="text-3xl font-black tracking-tighter text-white uppercase italic">Mecanic<span className="text-orange-500">Pro</span></h1>
+            <h1 className="text-3xl font-black tracking-tighter text-white uppercase italic">Mecanic<span className="text-primary">Pro</span></h1>
             <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-slate-500">Workshop & Fleet Intelligence OS v3.8</p>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default function MecanicProDashboard() {
                 <span className="text-[10px] text-slate-500 uppercase">System Integrity</span>
                 <span className="text-xs font-bold text-emerald-500 font-mono">STABLE // 99.8%</span>
               </div>
-              <SignalIcon className="w-6 h-6 text-orange-500" />
+              <SignalIcon className="w-6 h-6 text-primary" />
            </div>
         </div>
       </div>
@@ -77,14 +77,14 @@ export default function MecanicProDashboard() {
                 { label: "Engine Uptime", val: "2,482h", trend: "Nominal", icon: CpuChipIcon },
                 { label: "Fleet Load", val: "78%", trend: "Optimal", icon: TruckIcon },
               ].map((stat, i) => (
-                <div key={i} className="bg-slate-900/40 border border-slate-800 p-6 relative group hover:border-orange-500/50 transition-colors">
+                <div key={i} className="bg-surface-dark/40 border border-border-dark p-6 relative group hover:border-primary/50 transition-colors">
                   <div className="absolute top-0 right-0 p-2 opacity-5">
                     <stat.icon className="w-12 h-12" />
                   </div>
                   <p className="text-[9px] uppercase tracking-widest text-slate-500 mb-2 font-black">{stat.label}</p>
                   <div className="flex justify-between items-end">
                     <h3 className="text-2xl font-black text-white font-mono tracking-tighter">{stat.val}</h3>
-                    <span className="text-[9px] text-orange-500 font-bold">{stat.trend}</span>
+                    <span className="text-[9px] text-primary font-bold">{stat.trend}</span>
                   </div>
                   <div className="w-full h-[2px] bg-slate-800 mt-4 overflow-hidden">
                     <motion.div 
@@ -92,18 +92,18 @@ export default function MecanicProDashboard() {
                       initial={{ left: '-100%' }}
                       animate={{ left: '100%' }}
                       transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                      className="h-full w-1/3 bg-orange-500 absolute" 
+                      className="h-full w-1/3 bg-primary absolute" 
                     />
                   </div>
                 </div>
               ))}
            </div>
 
-           <div className="bg-slate-900/20 border border-slate-800 p-8 relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-1 h-full bg-orange-600" />
+           <div className="bg-surface-dark/20 border border-border-dark p-8 relative overflow-hidden group">
+              <div className="absolute top-0 left-0 w-1 h-full bg-primary" />
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
-                  <CommandLineIcon className="w-4 h-4 text-orange-500" />
+                  <CommandLineIcon className="w-4 h-4 text-primary" />
                   Machine Learning Diagnostics
                 </h2>
                 <span className="text-[10px] text-slate-600 font-mono">REF: MEC-2024-X</span>
@@ -136,26 +136,26 @@ export default function MecanicProDashboard() {
 
         {/* System Terminal (Sidebar) */}
         <div className="lg:col-span-4 flex flex-col gap-6">
-           <div className="bg-black/40 border border-slate-800 p-8 flex flex-col h-full relative">
+           <div className="bg-black/40 border border-border-dark p-8 flex flex-col h-full relative">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <h3 className="text-xs font-black uppercase text-slate-500 tracking-widest">IO_LOGS_TERMINAL</h3>
               </div>
               
               <div className="space-y-4 font-mono text-[10px] mb-8 text-slate-500">
-                 <p className="border-l border-slate-800 pl-2"><span className="text-orange-900">14:02:44</span> {">"} INIT_SEQUENCE_SUCCESS</p>
-                 <p className="border-l border-slate-800 pl-2"><span className="text-orange-900">14:05:12</span> {">"} GATEWAY_PULL_TELEMETRY</p>
-                 <p className="border-l border-slate-800 pl-2 text-red-900"><span className="text-red-950">14:08:01</span> {">"} ERR_SENSOR_B4_TIMEOUT</p>
-                 <p className="border-l border-orange-900 pl-2 text-orange-500/80"><span className="text-orange-900">14:10:33</span> {">"} AI_ACTION: RETRY_CONN</p>
+                 <p className="border-l border-border-dark pl-2"><span className="text-orange-900">14:02:44</span> {">"} INIT_SEQUENCE_SUCCESS</p>
+                 <p className="border-l border-border-dark pl-2"><span className="text-orange-900">14:05:12</span> {">"} GATEWAY_PULL_TELEMETRY</p>
+                 <p className="border-l border-border-dark pl-2 text-red-900"><span className="text-red-950">14:08:01</span> {">"} ERR_SENSOR_B4_TIMEOUT</p>
+                 <p className="border-l border-orange-900 pl-2 text-primary/80"><span className="text-orange-900">14:10:33</span> {">"} AI_ACTION: RETRY_CONN</p>
               </div>
 
               <div className="mt-auto space-y-4">
-                 <Button variant="ghost" className="w-full py-4 bg-orange-600 text-black font-black uppercase text-xs tracking-[0.2em] shadow-2xl shadow-orange-900/20 hover:bg-orange-500 transition-colors">Emergency Reset</Button>
+                 <Button variant="ghost" className="w-full py-4 bg-primary text-black font-black uppercase text-xs tracking-[0.2em] shadow-2xl shadow-orange-900/20 hover:bg-primary transition-colors">Emergency Reset</Button>
                  <Button variant="ghost" className="w-full py-4 bg-transparent border border-white/10 text-white font-black uppercase text-xs tracking-[0.2em] hover:bg-white/5 transition-colors">Export Analysis</Button>
               </div>
            </div>
 
-           <div className="bg-slate-900/10 border border-slate-800 p-6 flex items-center justify-between group cursor-pointer hover:bg-slate-800/30 transition-all">
+           <div className="bg-surface-dark/10 border border-border-dark p-6 flex items-center justify-between group cursor-pointer hover:bg-violet-500/15/30 transition-all">
               <div className="flex items-center gap-3">
                 <ShieldCheckIcon className="w-5 h-5 text-emerald-500" />
                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Secured Node</span>

@@ -13,7 +13,7 @@ const services = [
 const statusConfig: Record<string, { label: string; color: string; dot: string }> = {
     operational: { label: 'Operational', color: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20', dot: 'bg-emerald-500 shadow-[0_0_10px_#10b981]' },
     degraded: { label: 'Degraded', color: 'text-amber-500 bg-amber-500/10 border-amber-500/20', dot: 'bg-amber-500 shadow-[0_0_10px_#f59e0b]' },
-    maintenance: { label: 'Maintenance', color: 'text-blue-500 bg-blue-500/10 border-blue-500/20', dot: 'bg-blue-500 shadow-[0_0_10px_#3b82f6]' },
+    maintenance: { label: 'Maintenance', color: 'text-primary bg-primary/10 border-primary/20', dot: 'bg-primary shadow-[0_0_10px_#3b82f6]' },
     outage: { label: 'Critical Outage', color: 'text-red-500 bg-red-500/10 border-red-500/20', dot: 'bg-red-500 shadow-[0_0_10px_#ef4444]' },
 };
 
@@ -49,7 +49,7 @@ export default function StatusPage() {
 
             <main className="flex-1 max-w-5xl mx-auto px-6 pt-32 pb-24 w-full">
                 {/* Status Hero Card */}
-                <section className="relative mb-16 rounded-[40px] overflow-hidden bg-slate-900 dark:bg-black p-12 text-center border border-white/10">
+                <section className="relative mb-16 rounded-[40px] overflow-hidden bg-surface-dark dark:bg-black p-12 text-center border border-white/10">
                     <div className="absolute inset-0 z-0 opacity-40 bg-[radial-gradient(circle_at_50%_0%,#ec5b13_0%,transparent_50%)]"></div>
                     <div className="relative z-10">
                         <div className="w-20 h-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-8">
@@ -152,7 +152,7 @@ export default function StatusPage() {
                                     <h4 className="text-lg font-black">{inc.title}</h4>
                                     <p className="text-sm font-light text-slate-500 dark:text-slate-400">Resolution Timeframe: {inc.duration}</p>
                                 </div>
-                                <div className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest border transition-all ${inc.status === 'Resolved' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white' : 'bg-blue-500/10 border-blue-500/20 text-blue-500 group-hover:bg-blue-500 group-hover:text-white'}`}>
+                                <div className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest border transition-all ${inc.status === 'Resolved' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white' : 'bg-primary/10 border-primary/20 text-primary group-hover:bg-primary group-hover:text-white'}`}>
                                     <span className="material-symbols-outlined text-sm">{inc.status === 'Resolved' ? 'done_all' : 'pending'}</span>
                                     {inc.status}
                                 </div>

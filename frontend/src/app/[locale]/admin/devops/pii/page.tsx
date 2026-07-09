@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 'use client';
 
 import React from 'react';
@@ -22,12 +23,12 @@ import { Button } from '@/components/ui/button';
 
 export default function PiiGovernanceDashboard() {
     return (
-        <div className="flex h-full min-h-screen flex-col bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100">
+        <div className="flex h-full min-h-screen flex-col bg-slate-50 dark:bg-background font-sans text-slate-900 dark:text-slate-100">
 
             {/* Header */}
-            <header className="px-6 py-4 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between sticky top-0 z-10">
+            <header className="px-6 py-4 bg-white dark:bg-background border-b border-slate-200 dark:border-border-dark flex items-center justify-between sticky top-0 z-10">
                 <div className="flex items-center gap-3">
-                    <div className="size-10 bg-indigo-600/10 text-indigo-600 rounded-xl flex items-center justify-center">
+                    <div className="size-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
                         <Fingerprint className="size-6" />
                     </div>
                     <div>
@@ -41,7 +42,7 @@ export default function PiiGovernanceDashboard() {
                         <AlertTriangle className="size-4" />
                         <span>3 Critical Risks Found</span>
                     </div>
-                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-lg transition-colors shadow-sm shadow-indigo-200 dark:shadow-none">
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-700 text-white text-sm font-bold rounded-lg transition-colors shadow-sm shadow-indigo-200 dark:shadow-none">
                         <RefreshCw className="size-4" /> Start Scan
                     </button>
                 </div>
@@ -51,7 +52,7 @@ export default function PiiGovernanceDashboard() {
 
                 {/* KPI Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+                    <div className="p-6 bg-white dark:bg-background rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-50 dark:bg-indigo-900/20 rounded-bl-full -mr-6 -mt-6 transition-transform group-hover:scale-110"></div>
                         <div className="relative z-10">
                             <p className="text-slate-500 text-sm font-medium mb-1">Total PII Fields Discovered</p>
@@ -64,7 +65,7 @@ export default function PiiGovernanceDashboard() {
                         </div>
                     </div>
 
-                    <div className="p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+                    <div className="p-6 bg-white dark:bg-background rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-24 h-24 bg-rose-50 dark:bg-rose-900/20 rounded-bl-full -mr-6 -mt-6 transition-transform group-hover:scale-110"></div>
                         <div className="relative z-10">
                             <p className="text-slate-500 text-sm font-medium mb-1">Unencrypted Exposure</p>
@@ -77,7 +78,7 @@ export default function PiiGovernanceDashboard() {
                         </div>
                     </div>
 
-                    <div className="p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+                    <div className="p-6 bg-white dark:bg-background rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-50 dark:bg-emerald-900/20 rounded-bl-full -mr-6 -mt-6 transition-transform group-hover:scale-110"></div>
                         <div className="relative z-10">
                             <p className="text-slate-500 text-sm font-medium mb-1">Compliance Score</p>
@@ -91,16 +92,16 @@ export default function PiiGovernanceDashboard() {
                 </div>
 
                 {/* Discovery Table */}
-                <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-                    <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="bg-white dark:bg-background rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm overflow-hidden">
+                    <div className="px-6 py-5 border-b border-slate-200 dark:border-border-dark flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <h3 className="font-bold text-lg">Sensitive Data Inventory</h3>
 
                         <div className="flex items-center gap-3 w-full sm:w-auto">
                             <div className="relative flex-1 sm:flex-initial">
                                 <Search className="absolute left-2.5 top-2.5 size-4 text-slate-400" />
-                                <input type="text" placeholder="Search tables or columns..." className="pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm w-full sm:w-64 focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-400" />
+                                <input type="text" placeholder="Search tables or columns..." className="pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm w-full sm:w-64 focus:ring-2 focus:ring-primary placeholder:text-slate-400" />
                             </div>
-                            <button type="button" className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-500">
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-primary/5 dark:hover:bg-violet-500/15 text-slate-500">
                                 <Filter className="size-4" />
                             </button>
                         </div>
@@ -121,10 +122,10 @@ export default function PiiGovernanceDashboard() {
                             <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
 
                                 {/* Row 1 */}
-                                <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
+                                <tr className="hover:bg-primary/5/50 dark:hover:bg-surface-dark/50 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="size-8 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center">
+                                            <div className="size-8 rounded bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center">
                                                 <Database className="size-4" />
                                             </div>
                                             <span className="font-bold text-slate-700 dark:text-slate-200">users_db</span>
@@ -144,15 +145,15 @@ export default function PiiGovernanceDashboard() {
                                     </td>
                                     <td className="px-6 py-4 text-slate-500">us-east-1</td>
                                     <td className="px-6 py-4 text-right">
-                                        <button type="button" className="text-slate-400 hover:text-indigo-600"><MoreVertical className="size-4" /></button>
+                                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-primary"><MoreVertical className="size-4" /></button>
                                     </td>
                                 </tr>
 
                                 {/* Row 2 */}
-                                <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
+                                <tr className="hover:bg-primary/5/50 dark:hover:bg-surface-dark/50 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="size-8 rounded bg-orange-100 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center">
+                                            <div className="size-8 rounded bg-orange-100 dark:bg-orange-900/30 text-primary flex items-center justify-center">
                                                 <FileText className="size-4" />
                                             </div>
                                             <span className="font-bold text-slate-700 dark:text-slate-200">app_logs_s3</span>
@@ -172,15 +173,15 @@ export default function PiiGovernanceDashboard() {
                                     </td>
                                     <td className="px-6 py-4 text-slate-500">global</td>
                                     <td className="px-6 py-4 text-right">
-                                        <button type="button" className="text-slate-400 hover:text-indigo-600"><MoreVertical className="size-4" /></button>
+                                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-primary"><MoreVertical className="size-4" /></button>
                                     </td>
                                 </tr>
 
                                 {/* Row 3 */}
-                                <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
+                                <tr className="hover:bg-primary/5/50 dark:hover:bg-surface-dark/50 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="size-8 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center">
+                                            <div className="size-8 rounded bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center">
                                                 <Database className="size-4" />
                                             </div>
                                             <span className="font-bold text-slate-700 dark:text-slate-200">payments_db</span>
@@ -200,7 +201,7 @@ export default function PiiGovernanceDashboard() {
                                     </td>
                                     <td className="px-6 py-4 text-slate-500">eu-central-1</td>
                                     <td className="px-6 py-4 text-right">
-                                        <button type="button" className="text-slate-400 hover:text-indigo-600"><MoreVertical className="size-4" /></button>
+                                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-primary"><MoreVertical className="size-4" /></button>
                                     </td>
                                 </tr>
 
@@ -208,8 +209,8 @@ export default function PiiGovernanceDashboard() {
                         </table>
                     </div>
 
-                    <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex justify-center">
-                        <Button variant="ghost" className="text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors">View All Discovered items</Button>
+                    <div className="px-6 py-4 border-t border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background/50 flex justify-center">
+                        <Button variant="ghost" className="text-sm font-bold text-slate-500 hover:text-primary transition-colors">View All Discovered items</Button>
                     </div>
                 </div>
 

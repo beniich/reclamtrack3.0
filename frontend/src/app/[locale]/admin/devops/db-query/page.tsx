@@ -2,6 +2,7 @@
 
 import DashboardTemplate from '@/components/devops-dashboards/shared/DashboardTemplate'
 import { Button } from '@/components/ui/button';
+import { AlertTriangle, List } from 'lucide-react';
 
 export default function DBQueryPerformance() {
   const kpis = [
@@ -61,7 +62,7 @@ export default function DBQueryPerformance() {
 
           <div className="bg-slate-50 dark:bg-surface-dark/50 p-4 rounded-xl border border-slate-100 dark:border-border-dark">
             <p className="text-xs font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-              <span className="material-symbols-outlined text-sm text-amber-500">warning</span>
+              <AlertTriangle className="text-sm text-amber-500" />
               System Alert
             </p>
             <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -130,7 +131,7 @@ export default function DBQueryPerformance() {
               <h2 className="text-lg font-bold dark:text-white">Identified Slow Queries</h2>
             </div>
             <div className="p-6 text-center text-slate-500 dark:text-slate-400">
-              <span className="material-symbols-outlined text-4xl mb-2">list_alt</span>
+              <List className="text-4xl mb-2" />
               <p>Detailed query analysis available in advanced view</p>
             </div>
           </section>

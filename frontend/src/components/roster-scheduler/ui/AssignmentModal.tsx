@@ -4,6 +4,7 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { staffApi } from '@/lib/api';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { X, Check, ArrowRight } from 'lucide-react';
 
 interface AssignmentModalProps {
     onClose: () => void;
@@ -47,13 +48,13 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
     };
 
     return (
-        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[100] flex items-center justify-center p-4">
-            <div className="bg-slate-900 w-full max-w-4xl max-h-[90vh] rounded-2xl border border-slate-700 shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200 font-display">
+        <div className="fixed inset-0 bg-background-dark/80 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+            <div className="bg-surface-dark w-full max-w-4xl max-h-[90vh] rounded-2xl border border-slate-700 shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200 font-display">
                 {/* Header */}
-                <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/50">
+                <div className="px-6 py-4 border-b border-border-dark flex items-center justify-between bg-surface-dark/50">
                     <div className="flex items-center gap-3">
-                        <div className="p-2 bg-blue-500/10 rounded-lg">
-                            <span className="material-symbols-outlined text-blue-500">assignment_add</span>
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                            <span className="material-symbols-outlined text-primary">assignment_add</span>
                         </div>
                         <div>
                             <h2 className="text-lg font-bold text-white leading-none">Assignation Avancée</h2>
@@ -61,7 +62,7 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
                         </div>
                     </div>
                     <button type="button" onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
-                        <span className="material-symbols-outlined">close</span>
+                        <X />
                     </button>
                 </div>
 
@@ -78,7 +79,7 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
                                         <div className="relative group">
                                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">construction</span>
                                             <input
-                                                className="w-full bg-slate-800 border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
+                                                className="w-full bg-slate-800 border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none"
                                                 type="text"
                                                 value={taskNature}
                                                 onChange={(e) => setTaskNature(e.target.value)}
@@ -89,7 +90,7 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
                                     <div>
                                         <label className="block text-[11px] font-bold text-slate-500 uppercase mb-1.5 ml-1">Durée Estimée</label>
                                         <select
-                                            className="w-full bg-slate-800 border-slate-700 rounded-lg px-3 py-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                                            className="w-full bg-slate-800 border-slate-700 rounded-lg px-3 py-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-primary focus:border-primary outline-none"
                                             value={duration}
                                             onChange={(e) => setDuration(e.target.value)}
                                         >
@@ -123,7 +124,7 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
                                         {staff.map((person) => (
                                             <div
                                                 key={person._id}
-                                                className={`p-3 bg-slate-800/50 border ${selectedStaff === person._id ? 'border-blue-500' : 'border-slate-700/50'} rounded-xl flex items-center justify-between group hover:border-slate-600 transition-all cursor-pointer`}
+                                                className={`p-3 bg-slate-800/50 border ${selectedStaff === person._id ? 'border-primary' : 'border-slate-700/50'} rounded-xl flex items-center justify-between group hover:border-slate-600 transition-all cursor-pointer`}
                                                 onClick={() => setSelectedStaff(person._id)}
                                             >
                                                 <div className="flex items-center gap-3">
@@ -138,8 +139,8 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
                                                         <p className="text-[10px] text-slate-500 uppercase tracking-wider">{person.role}</p>
                                                     </div>
                                                 </div>
-                                                <div className={`size-5 rounded-full border-2 flex items-center justify-center transition-all ${selectedStaff === person._id ? 'border-blue-500 bg-blue-500' : 'border-slate-600'}`}>
-                                                    {selectedStaff === person._id && <span className="material-symbols-outlined text-[12px] text-white">check</span>}
+                                                <div className={`size-5 rounded-full border-2 flex items-center justify-center transition-all ${selectedStaff === person._id ? 'border-primary bg-primary' : 'border-slate-600'}`}>
+                                                    {selectedStaff === person._id && <Check className="text-[12px] text-white" />}
                                                 </div>
                                             </div>
                                         ))}
@@ -152,7 +153,7 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
                         <div className="md:col-span-5 space-y-6">
                             <section>
                                 <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Équipement & Véhicule</h3>
-                                <div className="bg-slate-950/40 rounded-xl border border-slate-800 p-4 space-y-4">
+                                <div className="bg-background-dark/40 rounded-xl border border-border-dark p-4 space-y-4">
                                     <p className="text-xs text-slate-500 italic">Configuration des ressources matérielles prochainement disponible...</p>
                                 </div>
                             </section>
@@ -161,7 +162,7 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
                 </div>
 
                 {/* Footer */}
-                <div className="px-6 py-4 bg-slate-950/50 border-t border-slate-800 flex items-center justify-between">
+                <div className="px-6 py-4 bg-background-dark/50 border-t border-border-dark flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <span className="text-xs font-medium text-slate-400">
                             {selectedStaff ? '1 membre sélectionné' : 'Aucun membre sélectionné'}
@@ -172,11 +173,11 @@ export default function AssignmentModal({ onClose, onAssign }: AssignmentModalPr
                         <button type="button" onClick={onClose} className="px-5 py-2 text-sm font-bold text-slate-400 hover:text-white transition-colors">Annuler</button>
                         <button type="button"
                             onClick={handleConfirm}
-                            className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg text-sm font-bold shadow-lg shadow-blue-500/20 flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="bg-primary hover:bg-primary text-white px-6 py-2 rounded-lg text-sm font-bold shadow-lg shadow-blue-500/20 flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={!selectedStaff}
                         >
                             Confirmer Assignation
-                            <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                            <ArrowRight className="text-sm" />
                         </button>
                     </div>
                 </div>

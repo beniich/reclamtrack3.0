@@ -4,7 +4,7 @@ import { cn, isValidEmail, getInitials } from './utils';
 describe('Frontend utils', () => {
     describe('cn', () => {
         it('should merge tailwind classes correctly', () => {
-            expect(cn('text-red-500', 'bg-blue-500')).toBe('text-red-500 bg-blue-500');
+            expect(cn('text-red-500', 'bg-primary')).toBe('text-red-500 bg-primary');
             expect(cn('p-4', { 'm-2': true, 'm-4': false })).toBe('p-4 m-2');
         });
     });

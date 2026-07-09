@@ -1,8 +1,10 @@
+import { toast } from 'sonner';
 'use client'
 
 import DashboardTemplate from '@/components/devops-dashboards/shared/DashboardTemplate'
 import { Badge } from "@/components/ui/badge"
 import { Button } from '@/components/ui/button';
+import { Settings, AlertTriangle, ChevronRight } from 'lucide-react';
 
 export default function SSLManagerDashboard() {
   const kpis = [
@@ -91,7 +93,7 @@ export default function SSLManagerDashboard() {
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-white/5">
                 {/* Row 1 - Healthy */}
-                <tr className="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                <tr className="group hover:bg-primary/5 dark:hover:bg-white/5 transition-colors">
                   <td className="px-8 py-6">
                     <div className="flex items-center gap-4">
                       <div className="size-10 rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
@@ -127,8 +129,8 @@ export default function SSLManagerDashboard() {
                     </div>
                   </td>
                   <td className="px-8 py-6 text-right">
-                    <button type="button" className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
-                      <span className="material-symbols-outlined">settings</span>
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
+                      <Settings />
                     </button>
                   </td>
                 </tr>
@@ -138,7 +140,7 @@ export default function SSLManagerDashboard() {
                   <td className="px-8 py-6">
                     <div className="flex items-center gap-4">
                       <div className="size-10 rounded-xl bg-rose-500/10 flex items-center justify-center border border-rose-500/20">
-                        <span className="material-symbols-outlined text-rose-500 text-xl font-black">warning</span>
+                        <AlertTriangle className="text-rose-500 text-xl font-black" />
                       </div>
                       <div>
                         <p className="font-black text-md tracking-tight">legacy-portal.net</p>
@@ -211,8 +213,8 @@ export default function SSLManagerDashboard() {
                     </div>
                   </td>
                   <td className="px-8 py-6 text-right">
-                    <button type="button" className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
-                      <span className="material-symbols-outlined">settings</span>
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
+                      <Settings />
                     </button>
                   </td>
                 </tr>
@@ -270,18 +272,18 @@ export default function SSLManagerDashboard() {
                   { label: 'Compliance Report', icon: 'verified' },
                   { label: 'Bulk Import', icon: 'file_upload' }
                 ].map((action, idx) => (
-                  <button type="button" key={idx} className="w-full flex items-center justify-between p-4 bg-white dark:bg-white/5 rounded-2xl border border-primary/10 hover:border-primary/40 hover:scale-[1.02] active:scale-95 transition-all text-left shadow-sm">
+                  <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  key={idx} className="w-full flex items-center justify-between p-4 bg-white dark:bg-white/5 rounded-2xl border border-primary/10 hover:border-primary/40 hover:scale-[1.02] active:scale-95 transition-all text-left shadow-sm">
                     <div className="flex items-center gap-3">
                         <span className="material-symbols-outlined text-primary text-xl">{action.icon}</span>
                         <span className="text-[10px] font-black uppercase tracking-widest">{action.label}</span>
                     </div>
-                    <span className="material-symbols-outlined text-sm text-primary">chevron_right</span>
+                    <ChevronRight className="text-sm text-primary" />
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="dashboard-card p-6 bg-slate-900 border-white/5 text-white/40 font-mono text-[10px] leading-relaxed">
+            <div className="dashboard-card p-6 bg-surface-dark border-white/5 text-white/40 font-mono text-[10px] leading-relaxed">
                 <div className="flex items-center gap-2 mb-4 text-emerald-500">
                     <span className="size-2 rounded-full bg-emerald-500 animate-ping"></span>
                     <span className="font-bold uppercase tracking-widest">Watcher Log</span>

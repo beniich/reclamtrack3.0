@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 export default function CookiesPage() {
     const cookieCategories = [
@@ -126,10 +127,10 @@ export default function CookiesPage() {
                                 </p>
                                 <div className="flex flex-wrap gap-6">
                                     <Link href="/legal/privacy" className="flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all uppercase tracking-widest text-xs">
-                                        Privacy Framework <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                                        Privacy Framework <ArrowRight className="text-sm" />
                                     </Link>
                                     <Link href="/contact" className="flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all uppercase tracking-widest text-xs">
-                                        Protocol Support <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                                        Protocol Support <ArrowRight className="text-sm" />
                                     </Link>
                                 </div>
                             </div>

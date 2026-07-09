@@ -28,13 +28,13 @@ export default function GrafanaMonitoringPage() {
     }
 
     return (
-        <div className="flex flex-col h-screen bg-slate-50 dark:bg-slate-950">
+        <div className="flex flex-col h-screen bg-slate-50 dark:bg-background">
             {/* Header */}
-            <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 py-4">
+            <div className="bg-white dark:bg-background border-b border-slate-200 dark:border-border-dark px-8 py-4">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                        <div className="p-2 bg-orange-500/10 rounded-lg">
-                            <svg className="w-8 h-8 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                            <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                             </svg>
                         </div>
@@ -52,7 +52,7 @@ export default function GrafanaMonitoringPage() {
                             href={GRAFANA_URL}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors flex items-center gap-2"
+                            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary transition-colors flex items-center gap-2"
                         >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -65,10 +65,10 @@ export default function GrafanaMonitoringPage() {
 
             {/* Info Cards */}
             <div className="px-8 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                     <div className="flex items-center justify-between mb-4">
-                        <div className="p-3 bg-blue-500/10 rounded-lg">
-                            <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="p-3 bg-primary/10 rounded-lg">
+                            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                             </svg>
                         </div>
@@ -78,10 +78,10 @@ export default function GrafanaMonitoringPage() {
                     <p className="text-sm text-slate-500 dark:text-slate-400">Port: 9090</p>
                 </div>
 
-                <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                     <div className="flex items-center justify-between mb-4">
-                        <div className="p-3 bg-orange-500/10 rounded-lg">
-                            <svg className="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="p-3 bg-primary/10 rounded-lg">
+                            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                             </svg>
                         </div>
@@ -91,7 +91,7 @@ export default function GrafanaMonitoringPage() {
                     <p className="text-sm text-slate-500 dark:text-slate-400">Port: 3001</p>
                 </div>
 
-                <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                     <div className="flex items-center justify-between mb-4">
                         <div className="p-3 bg-purple-500/10 rounded-lg">
                             <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,7 +107,7 @@ export default function GrafanaMonitoringPage() {
 
             {/* Embedded Grafana */}
             <div className="flex-1 px-8 pb-8">
-                <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden h-full">
+                <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark shadow-lg overflow-hidden h-full">
                     <div className="bg-slate-100 dark:bg-slate-800 px-6 py-4 border-b border-slate-200 dark:border-slate-700">
                         <div className="flex items-center justify-between">
                             <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
@@ -130,7 +130,7 @@ export default function GrafanaMonitoringPage() {
             </div>
 
             {/* Quick Access Links */}
-            <div className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-8 py-4">
+            <div className="bg-white dark:bg-background border-t border-slate-200 dark:border-border-dark px-8 py-4">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
                         <span>Identifiants par défaut: admin / reclamtrack2024</span>
@@ -140,7 +140,7 @@ export default function GrafanaMonitoringPage() {
                             href={`${GRAFANA_URL}/datasources`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                            className="text-sm text-primary dark:text-blue-400 hover:underline"
                         >
                             Configurer les sources de données
                         </a>
@@ -148,7 +148,7 @@ export default function GrafanaMonitoringPage() {
                             href={`${GRAFANA_URL}/dashboards`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                            className="text-sm text-primary dark:text-blue-400 hover:underline"
                         >
                             Gérer les dashboards
                         </a>

@@ -106,7 +106,7 @@ export function CreateComplaintWizard() {
             />
 
             {/* Form Container */}
-            <div className="mt-8 bg-white dark:bg-slate-900 rounded-xl shadow-lg p-8 border border-slate-200 dark:border-slate-800">
+            <div className="mt-8 bg-white dark:bg-background rounded-xl shadow-lg p-8 border border-slate-200 dark:border-border-dark">
                 <form onSubmit={currentForm.handleSubmit(isLastStep ? handleFinalSubmit : goToNextStep)}>
                     {/* Étape 1: Informations */}
                     {currentStep === 1 && (
@@ -334,7 +334,7 @@ export function CreateComplaintWizard() {
                     )}
 
                     {/* Navigation Buttons */}
-                    <div className="mt-8 flex justify-between pt-6 border-t border-slate-200 dark:border-slate-800">
+                    <div className="mt-8 flex justify-between pt-6 border-t border-slate-200 dark:border-border-dark">
                         <Button
                             type="button"
                             variant="outline"

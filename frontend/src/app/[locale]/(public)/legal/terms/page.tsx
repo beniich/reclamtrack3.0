@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { List } from 'lucide-react';
 
 export default function TermsPage() {
     const sections = [
@@ -50,10 +51,10 @@ export default function TermsPage() {
                     <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-16">
                         {/* Interactive Sidebar */}
                         <aside className="lg:col-span-4 lg:sticky lg:top-32 h-fit space-y-8">
-                            <div className="bg-slate-900 text-white rounded-3xl p-8 relative overflow-hidden group">
+                            <div className="bg-surface-dark text-white rounded-3xl p-8 relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 <h2 className="text-lg font-black mb-4 flex items-center gap-2">
-                                    <span className="material-symbols-outlined text-primary">list_alt</span>
+                                    <List className="text-primary" />
                                     Protocol Map
                                 </h2>
                                 <nav className="space-y-1">

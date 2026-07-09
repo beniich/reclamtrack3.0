@@ -114,21 +114,21 @@ export default function DashboardPage() {
     ];
 
     return (
-        <div className="p-6 space-y-10 bg-slate-50 dark:bg-slate-950 min-h-screen font-display relative overflow-hidden">
+        <div className="p-6 space-y-10 bg-slate-50 dark:bg-background min-h-screen font-display relative overflow-hidden">
             {/* Industrial Grid Background */}
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
-            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-indigo-500/5 dark:bg-orange-500/10 blur-[150px] -z-10 rounded-full"></div>
+            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 dark:bg-primary/10 blur-[150px] -z-10 rounded-full"></div>
 
             {/* Header Section */}
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
                 <div>
                     <div className="flex items-center gap-4 mb-3">
-                        <div className="size-12 rounded-2xl bg-indigo-600 dark:bg-orange-500 flex items-center justify-center shadow-xl shadow-indigo-500/20">
+                        <div className="size-12 rounded-2xl bg-primary dark:bg-primary flex items-center justify-center shadow-xl shadow-indigo-500/20">
                             <Activity className="w-6 h-6 text-white animate-pulse" />
                         </div>
                         <div className="flex flex-col">
                             <h2 className="text-3xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter leading-none">
-                                RECLAMTRACK <span className="text-indigo-600 dark:text-orange-500 not-italic">COMMAND CENTER</span>
+                                RECLAMTRACK <span className="text-primary dark:text-primary not-italic">COMMAND CENTER</span>
                             </h2>
                             <div className="flex items-center gap-2 mt-2">
                                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-0.5">Industrial OS v3.0</span>
@@ -140,10 +140,10 @@ export default function DashboardPage() {
 
                 <div className="flex items-center gap-3">
                     <Select value={dateFilter} onValueChange={setDateFilter}>
-                        <SelectTrigger className="w-[200px] bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-2xl h-[56px] text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest shadow-sm">
+                        <SelectTrigger className="w-[200px] bg-white dark:bg-background border-slate-200 dark:border-border-dark rounded-2xl h-[56px] text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest shadow-sm">
                             <SelectValue placeholder="Période" />
                         </SelectTrigger>
-                        <SelectContent className="bg-white dark:bg-slate-900 border-slate-800">
+                        <SelectContent className="bg-white dark:bg-background border-border-dark">
                             <SelectItem value="today">Aujourd'hui</SelectItem>
                             <SelectItem value="7days">7 Derniers Jours</SelectItem>
                             <SelectItem value="30days">30 Derniers Jours</SelectItem>
@@ -151,9 +151,12 @@ export default function DashboardPage() {
                         </SelectContent>
                     </Select>
 
-                    <button type="button" className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl px-8 h-[56px] text-[10px] font-black uppercase tracking-widest flex items-center gap-3 shadow-2xl hover:brightness-110 transition-all active:scale-95">
+                    <Link
+                        href={`/reports?dateFilter=${dateFilter}`}
+                        className="bg-surface-dark dark:bg-white text-white dark:text-slate-900 rounded-2xl px-8 h-[56px] text-[10px] font-black uppercase tracking-widest flex items-center gap-3 shadow-2xl hover:brightness-110 transition-all active:scale-95"
+                    >
                         <FileText className="w-4 h-4" /> Générer Report
-                    </button>
+                    </Link>
                 </div>
             </div>
 
@@ -172,9 +175,9 @@ export default function DashboardPage() {
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 relative z-10">
                 {/* Recent Complaints Section */}
                 <div className="xl:col-span-2 space-y-6">
-                    <div className="flex items-center justify-between bg-white dark:bg-slate-900/50 p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800">
+                    <div className="flex items-center justify-between bg-white dark:bg-background/50 p-6 rounded-[2rem] border border-slate-200 dark:border-border-dark">
                         <div className="flex items-center gap-4">
-                            <div className="p-3 bg-indigo-50 dark:bg-orange-500/10 text-indigo-600 dark:text-orange-400 rounded-2xl">
+                            <div className="p-3 bg-indigo-50 dark:bg-primary/10 text-primary dark:text-orange-400 rounded-2xl">
                                 <TrendingUp className="w-6 h-6" />
                             </div>
                             <div>
@@ -182,7 +185,7 @@ export default function DashboardPage() {
                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Dernières interventions détectées</p>
                             </div>
                         </div>
-                        <Link href="/complaints" className="px-5 py-2.5 bg-slate-100 dark:bg-slate-800 text-[10px] font-black text-slate-600 dark:text-slate-300 uppercase tracking-widest rounded-xl hover:bg-indigo-600 hover:text-white transition-all">
+                        <Link href="/complaints" className="px-5 py-2.5 bg-slate-100 dark:bg-slate-800 text-[10px] font-black text-slate-600 dark:text-slate-300 uppercase tracking-widest rounded-xl hover:bg-primary hover:text-white transition-all">
                             Voir Tout
                         </Link>
                     </div>
@@ -195,7 +198,7 @@ export default function DashboardPage() {
                                 <ComplaintCard key={complaint._id} complaint={complaint} className="animate-in zoom-in-95 duration-500" />
                             ))
                         ) : (
-                            <div className="col-span-full py-20 bg-white dark:bg-slate-900/50 rounded-[2.5rem] border border-dashed border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center">
+                            <div className="col-span-full py-20 bg-white dark:bg-background/50 rounded-[2.5rem] border border-dashed border-slate-200 dark:border-border-dark flex flex-col items-center justify-center">
                                 <AlertCircle className="w-12 h-12 mb-4 text-slate-200" />
                                 <p className="text-sm font-black text-slate-400 uppercase italic">Aucune alerte active</p>
                             </div>
@@ -208,8 +211,8 @@ export default function DashboardPage() {
                 {/* Sidebar Stats & Activity */}
                 <aside className="space-y-8">
                     {/* Live Activity Feed */}
-                    <div className="bg-white dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-[2.5rem] overflow-hidden flex flex-col shadow-2xl">
-                        <div className="p-8 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <div className="bg-white dark:bg-background/80 backdrop-blur-xl border border-slate-200 dark:border-border-dark rounded-[2.5rem] overflow-hidden flex flex-col shadow-2xl">
+                        <div className="p-8 border-b border-slate-100 dark:border-border-dark flex items-center justify-between">
                             <div>
                                 <h3 className="font-black text-xl text-slate-900 dark:text-white uppercase italic tracking-tighter">Live Audit</h3>
                                 <div className="flex items-center gap-2 mt-2">
@@ -218,7 +221,7 @@ export default function DashboardPage() {
                                 </div>
                             </div>
                             <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700">
-                                <Shield className="w-5 h-5 text-indigo-500" />
+                                <Shield className="w-5 h-5 text-primary" />
                             </div>
                         </div>
                         <div className="flex-1 overflow-y-auto p-8 space-y-6 max-h-[500px]">
@@ -226,7 +229,7 @@ export default function DashboardPage() {
                                 Array(4).fill(0).map((_, i) => <Skeleton key={i} height="60px" borderRadius="1rem" />)
                             ) : activityLogs.map((log, i) => (
                                 <div key={i} className="flex gap-4 group cursor-pointer animate-in slide-in-from-right-4 duration-500" style={{ animationDelay: `${i * 100}ms` }}>
-                                    <div className="size-10 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-slate-100 dark:border-slate-700 group-hover:bg-indigo-600 transition-all">
+                                    <div className="size-10 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-slate-100 dark:border-slate-700 group-hover:bg-primary transition-all">
                                         <Activity className="w-4 h-4 text-slate-400 group-hover:text-white" />
                                     </div>
                                     <div className="flex-1 min-w-0">
@@ -242,7 +245,7 @@ export default function DashboardPage() {
                     </div>
 
                     {/* Sector Breakdown Card */}
-                    <div className="bg-indigo-600 dark:bg-indigo-950/40 p-10 rounded-[2.5rem] border border-indigo-400/20 shadow-2xl relative overflow-hidden group">
+                    <div className="bg-primary dark:bg-indigo-950/40 p-10 rounded-[2.5rem] border border-indigo-400/20 shadow-2xl relative overflow-hidden group">
                         <div className="absolute -right-10 -top-10 size-40 bg-white/5 rounded-full blur-3xl group-hover:bg-white/10 transition-colors"></div>
                         <div className="relative z-10">
                             <h3 className="font-black text-2xl text-white uppercase italic tracking-tighter mb-8">Secteurs <span className="text-indigo-200">Impactés</span></h3>

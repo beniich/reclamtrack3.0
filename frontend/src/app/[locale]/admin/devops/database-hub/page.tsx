@@ -1,8 +1,10 @@
+import { toast } from 'sonner';
 "use client"
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { Badge } from "@/components/ui/badge"
 import { Button } from '@/components/ui/button';
+import { ChevronRight } from 'lucide-react';
 
 export default function DatabasePage() {
     const kpis = [
@@ -103,7 +105,7 @@ export default function DatabasePage() {
                                             { name: "pg-prod-03", status: "WARNING", role: "Replica", lag: 450, color: "amber" },
                                             { name: "pg-prod-04", status: "CRITICAL", role: "Replica", lag: 5200, color: "rose" },
                                         ].map((node, _i) => (
-                                            <tr key={node.name} className="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                                            <tr key={node.name} className="group hover:bg-primary/5 dark:hover:bg-white/5 transition-colors">
                                                 <td className="px-8 py-6">
                                                     <div className="flex items-center gap-4">
                                                         <div className={`size-10 rounded-xl bg-${node.color}-500/10 flex items-center justify-center border border-${node.color}-500/20`}>
@@ -141,7 +143,7 @@ export default function DatabasePage() {
                         </div>
 
                         {/* Query Performance Visualizer Placeholder */}
-                        <div className="dashboard-card p-8 bg-slate-900 border-white/5 relative overflow-hidden group">
+                        <div className="dashboard-card p-8 bg-surface-dark border-white/5 relative overflow-hidden group">
                            <div className="absolute top-0 right-0 p-12 opacity-5 scale-150 pointer-events-none group-hover:rotate-12 transition-transform duration-1000">
                                <span className="material-symbols-outlined text-9xl text-white">insights</span>
                            </div>
@@ -189,19 +191,19 @@ export default function DatabasePage() {
                                     { name: "Backup Verification", icon: "verified" },
                                     { name: "User Access Audit", icon: "admin_panel_settings" }
                                 ].map((tool, i) => (
-                                    <button type="button" key={i} className="w-full flex items-center justify-between p-4 bg-slate-100 dark:bg-white/5 rounded-2xl border border-transparent hover:border-primary/30 hover:bg-white/10 transition-all text-left group">
+                                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  key={i} className="w-full flex items-center justify-between p-4 bg-slate-100 dark:bg-white/5 rounded-2xl border border-transparent hover:border-primary/30 hover:bg-white/10 transition-all text-left group">
                                         <div className="flex items-center gap-3">
                                             <span className="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">{tool.icon}</span>
                                             <span className="text-[10px] font-black uppercase tracking-widest">{tool.name}</span>
                                         </div>
-                                        <span className="material-symbols-outlined text-sm text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
+                                        <ChevronRight className="text-sm text-slate-300 group-hover:text-primary transition-colors" />
                                     </button>
                                 ))}
                             </div>
                         </div>
 
                         {/* Recent Alerts Feed */}
-                        <div className="dashboard-card p-6 bg-slate-950 border-white/5 font-mono text-[10px] leading-relaxed text-white/40 h-[240px] overflow-y-auto custom-scrollbar">
+                        <div className="dashboard-card p-6 bg-background-dark border-white/5 font-mono text-[10px] leading-relaxed text-white/40 h-[240px] overflow-y-auto custom-scrollbar">
                            <div className="flex items-center gap-2 mb-4 text-primary">
                                <span className="size-2 rounded-full bg-primary animate-pulse"></span>
                                <span className="font-bold uppercase tracking-widest">Log Stream</span>

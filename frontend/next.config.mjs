@@ -43,7 +43,7 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
 
-  transpilePackages: ['lucide-react', 'recharts'],
+  transpilePackages: ['lucide-react', 'recharts', '@chakra-ui/react', '@emotion/react', '@emotion/styled', '@zag-js/react'],
 
   eslint: {
     ignoreDuringBuilds: true,

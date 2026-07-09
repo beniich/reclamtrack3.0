@@ -129,7 +129,7 @@ export default function LeavePage() {
                         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                             {leaves.length > 0 ? (
                                 leaves.map((leave) => (
-                                    <tr key={leave._id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                                    <tr key={leave._id} className="hover:bg-primary/5/50 dark:hover:bg-violet-500/8 transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
                                                 <div className="size-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold text-primary">
@@ -147,7 +147,7 @@ export default function LeavePage() {
                                         <td className="px-6 py-4">
                                             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${
                                                 leave.type === 'Sick' ? 'bg-red-100 text-red-600 dark:bg-red-900/20' :
-                                                leave.type === 'Vacation' ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/20' :
+                                                leave.type === 'Vacation' ? 'bg-blue-100 text-primary dark:bg-blue-900/20' :
                                                 'bg-purple-100 text-purple-600 dark:bg-purple-900/20'
                                             }`}>
                                                 {leave.type}

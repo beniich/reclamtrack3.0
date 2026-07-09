@@ -292,7 +292,7 @@ export function getTailwindStatusColor(status: string): string {
         warning: 'text-amber-500 bg-amber-500/10 border-amber-500/20',
         critical: 'text-red-500 bg-red-500/10 border-red-500/20',
         offline: 'text-slate-500 bg-slate-500/10 border-slate-500/20',
-        degraded: 'text-orange-500 bg-orange-500/10 border-orange-500/20',
+        degraded: 'text-primary bg-primary/10 border-primary/20',
     }
     return statusMap[status.toLowerCase()] || statusMap.offline
 }
@@ -300,7 +300,7 @@ export function getTailwindStatusColor(status: string): string {
 export function getSeverityColor(severity: string): string {
     const severityMap: Record<string, string> = {
         critical: 'bg-red-500/10 text-red-500 border-red-500/20',
-        high: 'bg-orange-500/10 text-orange-500 border-orange-500/20',
+        high: 'bg-primary/10 text-primary border-primary/20',
         medium: 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20',
         low: 'bg-green-500/10 text-green-500 border-green-500/20',
     }

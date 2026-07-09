@@ -49,7 +49,7 @@ export const OrganizationSelector: React.FC = () => {
             <DropdownMenuTrigger asChild>
                 <Button type="button"
                     variant="ghost"
-                    className="flex items-center gap-2 px-2 hover:bg-slate-100 transition-colors"
+                    className="flex items-center gap-2 px-2 hover:bg-primary/8 transition-colors"
                 >
                     <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10 text-primary">
                         {activeOrganization?.logo ? (

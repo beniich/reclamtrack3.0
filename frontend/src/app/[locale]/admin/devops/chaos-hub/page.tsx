@@ -3,6 +3,7 @@
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { useState } from "react"
 import { Button } from '@/components/ui/button';
+import { AlertTriangle, History } from 'lucide-react';
 
 export default function ChaosHubPage() {
     const [experiments] = useState([
@@ -53,7 +54,7 @@ export default function ChaosHubPage() {
                 {/* Active Experiment Banner */}
                 <div className="bg-rose-500/10 border border-rose-500/20 rounded-2xl p-6 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                        <span className="material-symbols-outlined text-9xl text-rose-500">warning</span>
+                        <AlertTriangle className="text-9xl text-rose-500" />
                     </div>
                     <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                         <div className="flex items-center gap-4">
@@ -100,7 +101,7 @@ export default function ChaosHubPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="dashboard-card p-8 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 bg-slate-950/50">
+                        <div className="dashboard-card p-8 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 bg-background-dark/50">
                             {['SVC-A', 'SVC-B', 'KV-01', 'AUTH', 'DB-P', 'DB-S', 'API', 'WEB', 'EDGE', 'CDN', 'SQL', 'REDIS'].map((node, i) => (
                                 <div key={node} className={`aspect-square rounded-xl border flex flex-col items-center justify-center gap-1 transition-all hover:scale-110 cursor-help ${
                                     node === 'DB-P' ? 'bg-amber-500/10 border-amber-500/30 text-amber-500' :
@@ -125,7 +126,7 @@ export default function ChaosHubPage() {
                             <span className="material-symbols-outlined text-primary">terminal</span>
                             Infection Log
                         </h3>
-                        <div className="dashboard-card h-[320px] bg-slate-950 p-6 font-mono text-[10px] leading-relaxed text-slate-400 overflow-y-auto border-white/5 relative">
+                        <div className="dashboard-card h-[320px] bg-background-dark p-6 font-mono text-[10px] leading-relaxed text-slate-400 overflow-y-auto border-white/5 relative">
                             <div className="absolute top-2 right-4 flex gap-1">
                                 <div className="size-2 rounded-full bg-rose-500/50" />
                                 <div className="size-2 rounded-full bg-amber-500/50" />
@@ -148,7 +149,7 @@ export default function ChaosHubPage() {
                 {/* History */}
                 <div className="space-y-4">
                     <h3 className="text-lg font-black uppercase tracking-tight flex items-center gap-2">
-                        <span className="material-symbols-outlined text-primary">history</span>
+                        <History className="text-primary" />
                         Experiment History
                     </h3>
                     <div className="dashboard-card overflow-hidden">
@@ -164,7 +165,7 @@ export default function ChaosHubPage() {
                             </thead>
                             <tbody className="divide-y divide-slate-100 dark:divide-white/5">
                                 {experiments.map((exp) => (
-                                    <tr key={exp.id} className="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors">
+                                    <tr key={exp.id} className="hover:bg-primary/5/50 dark:hover:bg-white/5 transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="font-bold text-slate-900 dark:text-white uppercase tracking-tight">{exp.name}</div>
                                             <div className="text-[10px] text-slate-500 font-mono italic">{exp.type} • {exp.id}</div>

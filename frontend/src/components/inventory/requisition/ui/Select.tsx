@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/inventory/utils';
+import { ChevronDown } from 'lucide-react';
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
     label?: string;
@@ -28,10 +29,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
                     <select
                         ref={ref}
                         className={cn(
-                            'w-full h-12 rounded-2xl border border-slate-200 dark:border-slate-800',
-                            'bg-slate-50 dark:bg-slate-950 text-sm font-bold text-slate-900 dark:text-white appearance-none',
+                            'w-full h-12 rounded-2xl border border-slate-200 dark:border-border-dark',
+                            'bg-slate-50 dark:bg-background text-sm font-bold text-slate-900 dark:text-white appearance-none',
                             'focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
-                            'disabled:bg-slate-100 dark:disabled:bg-slate-900 disabled:cursor-not-allowed',
+                            'disabled:bg-slate-100 dark:disabled:bg-surface-dark disabled:cursor-not-allowed',
                             'transition-all duration-200 cursor-pointer pl-4 pr-10',
                             error && 'border-rose-500 focus:ring-rose-500/20 focus:border-rose-500',
                             icon && 'pl-11',
@@ -51,7 +52,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
                         ))}
                     </select>
                     <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
-                        <span className="material-symbols-outlined shrink-0 text-xl">expand_more</span>
+                        <ChevronDown className="shrink-0 text-xl" />
                     </div>
                 </div>
                 {error && (

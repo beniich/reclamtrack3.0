@@ -13,7 +13,7 @@ export default function SSHManagementPage() {
                     <h1 className="text-3xl font-bold tracking-tight text-slate-900">Gestion SSH</h1>
                     <p className="text-slate-500 mt-2">Gérez les paires de clés SSH et les accès serveurs sécurisés</p>
                 </div>
-                <button type="button" className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-xl hover:bg-slate-800 transition-colors">
+                <button type="button" className="flex items-center gap-2 bg-surface-dark text-white px-4 py-2 rounded-xl hover:bg-violet-500/15 transition-colors">
                     <Plus size={18} />
                     <span>Nouvelle Clé</span>
                 </button>
@@ -43,11 +43,11 @@ export default function SSHManagementPage() {
                 <Card className="border-l-4 border-l-orange-500">
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-slate-600">Clés Expirées</CardTitle>
-                        <Lock className="h-5 w-5 text-orange-500" />
+                        <Lock className="h-5 w-5 text-primary" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-3xl font-bold text-slate-900">2</div>
-                        <p className="text-xs text-orange-600 mt-1">Nécessite une rotation</p>
+                        <p className="text-xs text-primary mt-1">Nécessite une rotation</p>
                     </CardContent>
                 </Card>
             </div>

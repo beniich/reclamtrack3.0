@@ -31,7 +31,7 @@ export default function OrderSummaryPage() {
                                 <p className="text-slate-600 dark:text-slate-400 mt-2">Confirm your subscription details and apply any promotional codes.</p>
                             </div>
 
-                            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+                            <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark p-6 shadow-sm">
                                 <div className="flex items-start justify-between mb-4">
                                     <div className="flex items-center gap-4">
                                         <div className="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
@@ -44,7 +44,7 @@ export default function OrderSummaryPage() {
                                     </div>
                                     <Link className="text-primary text-sm font-semibold hover:underline" href="/en/pricing">Change Plan</Link>
                                 </div>
-                                <hr className="border-slate-100 dark:border-slate-800 my-4" />
+                                <hr className="border-slate-100 dark:border-border-dark my-4" />
                                 <ul className="space-y-3">
                                     <li className="flex items-center gap-3 text-slate-600 dark:text-slate-400 text-sm">
                                         <CheckCircle className="text-green-500 w-5 h-5" />
@@ -71,7 +71,7 @@ export default function OrderSummaryPage() {
                                     <span className="text-sm font-semibold text-slate-900 dark:text-white">Billed Monthly</span>
                                     <span className="text-xs text-slate-500 dark:text-slate-400">Next billing on March 12, 2026</span>
                                 </div>
-                                <button type="button" className="bg-white dark:bg-slate-700 px-4 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 text-xs font-bold text-slate-700 dark:text-white hover:bg-slate-50 transition-colors">
+                                <button type="button" className="bg-white dark:bg-slate-700 px-4 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600 text-xs font-bold text-slate-700 dark:text-white hover:bg-primary/5 transition-colors">
                                     Switch to Yearly (Save 20%)
                                 </button>
                             </div>
@@ -79,7 +79,7 @@ export default function OrderSummaryPage() {
 
                         {/* Right Column: Checkout Breakdown */}
                         <div className="w-full lg:w-[380px] flex flex-col gap-6">
-                            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 shadow-md">
+                            <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark p-8 shadow-md">
                                 <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6">Payment Summary</h3>
                                 <div className="space-y-4 mb-6">
                                     <div className="flex justify-between items-center">

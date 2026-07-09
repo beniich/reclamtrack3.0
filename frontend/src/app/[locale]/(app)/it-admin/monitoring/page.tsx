@@ -17,7 +17,7 @@ export default function MonitoringPage() {
                 <Card className="border-l-4 border-l-blue-500">
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-slate-600">Charge CPU Globale</CardTitle>
-                        <Cpu className="h-5 w-5 text-blue-500" />
+                        <Cpu className="h-5 w-5 text-primary" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-3xl font-bold text-slate-900">42%</div>

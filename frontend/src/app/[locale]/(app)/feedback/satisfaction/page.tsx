@@ -73,7 +73,7 @@ export default function SatisfactionDashboardPage() {
                     <div className="relative flex-1 md:flex-none">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 size-4" />
                         <input
-                            className="pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm w-full md:w-64 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                            className="pl-10 pr-4 py-2 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl text-sm w-full md:w-64 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                             placeholder="Rechercher un feedback..."
                             type="text"
                             value={search}
@@ -81,7 +81,7 @@ export default function SatisfactionDashboardPage() {
                         />
                     </div>
 
-                    <button type="button" className="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                    <button type="button" className="p-2 rounded-xl bg-white dark:bg-background border border-slate-200 dark:border-border-dark text-slate-600 dark:text-slate-400 hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors">
                         <Bell className="size-5" />
                     </button>
 

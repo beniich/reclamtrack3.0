@@ -3,6 +3,7 @@
 import { ReactNode } from 'react';
 import { AlertCircle, Info } from 'lucide-react';
 import { cn } from '@/lib/utils'; // Using main project utils
+import { toast } from 'sonner';
 
 interface ServiceCardProps {
     title: string;
@@ -44,7 +45,7 @@ export function ServiceCard({
 
     return (
         <div className={cn(
-            'bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800',
+            'bg-white dark:bg-background-dark border border-slate-200 dark:border-border-dark',
             'rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group'
         )}>
             <div className="p-6">
@@ -76,7 +77,14 @@ export function ServiceCard({
                                     {detail.value}
                                 </span>
                                 {detail.highlight && (
-                                    <button type="button" className="opacity-0 group-hover/line:opacity-100 transition-opacity text-slate-400 hover:text-primary p-1">
+                                    <button type="button" 
+                                        onClick={() => {
+                                            navigator.clipboard.writeText(detail.value);
+                                            toast.success('Copié dans le presse-papiers', { description: detail.value });
+                                        }}
+                                        className="opacity-0 group-hover/line:opacity-100 transition-opacity text-slate-400 hover:text-primary p-1"
+                                        title="Copier"
+                                    >
                                         📋
                                     </button>
                                 )}
@@ -88,14 +96,14 @@ export function ServiceCard({
 
             {/* Actions */}
             <div className={cn(
-                'bg-slate-50 dark:bg-slate-800/50 p-4 border-t border-slate-100 dark:border-slate-800',
+                'bg-slate-50 dark:bg-slate-800/50 p-4 border-t border-slate-100 dark:border-border-dark',
                 'flex gap-3'
             )}>
                 <button type="button"
                     onClick={onReportIssue}
                     className={cn(
                         'flex-1 bg-primary text-white py-2 px-4 rounded-lg font-semibold text-sm',
-                        'hover:bg-blue-700 transition-colors flex items-center justify-center gap-2'
+                        'hover:bg-primary-700 transition-colors flex items-center justify-center gap-2'
                     )}
                 >
                     <AlertCircle className="w-4 h-4" />
@@ -105,7 +113,7 @@ export function ServiceCard({
                     onClick={onInfo}
                     className={cn(
                         'bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600',
-                        'p-2 rounded-lg hover:bg-slate-50 transition-colors'
+                        'p-2 rounded-lg hover:bg-primary/5 transition-colors'
                     )}
                 >
                     <Info className="w-5 h-5 text-slate-500 dark:text-slate-300" />

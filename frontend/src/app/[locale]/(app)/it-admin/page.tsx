@@ -77,7 +77,7 @@ export default function ITAdminDashboard() {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-gray-600">Loading IT Dashboard...</p>
         </div>
       </div>
@@ -100,7 +100,7 @@ export default function ITAdminDashboard() {
         <Card className="bg-white shadow-sm hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600">Total Assets</CardTitle>
-            <Server className="h-5 w-5 text-blue-600" />
+            <Server className="h-5 w-5 text-primary" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold text-gray-900">{stats?.totalAssets || 0}</div>
@@ -135,7 +135,7 @@ export default function ITAdminDashboard() {
         <Card className="bg-white shadow-sm hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600">Open Tickets</CardTitle>
-            <Ticket className="h-5 w-5 text-orange-600" />
+            <Ticket className="h-5 w-5 text-primary" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold text-gray-900">{stats?.openTickets || 0}</div>
@@ -320,7 +320,7 @@ export default function ITAdminDashboard() {
                         alert.severity === 'critical'
                           ? 'bg-red-500'
                           : alert.severity === 'high'
-                          ? 'bg-orange-500'
+                          ? 'bg-primary'
                           : 'bg-yellow-500'
                       }`}
                     />
@@ -331,7 +331,7 @@ export default function ITAdminDashboard() {
                       </p>
                     </div>
                   </div>
-                  <Button variant="ghost" className="text-blue-600 hover:underline text-sm font-medium">View details</Button>
+                  <Button variant="ghost" className="text-primary hover:underline text-sm font-medium">View details</Button>
                 </div>
               ))}
             </div>

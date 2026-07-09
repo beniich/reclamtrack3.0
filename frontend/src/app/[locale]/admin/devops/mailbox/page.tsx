@@ -1,9 +1,11 @@
+import { toast } from 'sonner';
 'use client'
 
 import { RoleGuard } from '@/components/security/RoleGuard'
 import { Role } from '@/lib/rbac/permissions'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button';
+import { Mail, HelpCircle, Info, EyeOff, Link, History } from 'lucide-react';
 
 export default function MailboxPage() {
     const [syncAttachments, setSyncAttachments] = useState(true)
@@ -17,7 +19,7 @@ export default function MailboxPage() {
                 <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                            <span className="material-symbols-outlined text-white">mail</span>
+                            <Mail className="text-white" />
                         </div>
                         <div>
                             <h1 className="font-bold text-lg leading-tight">Mailbox Configuration</h1>
@@ -36,8 +38,8 @@ export default function MailboxPage() {
                                 Connection Active
                             </span>
                         </div>
-                        <button type="button" className="text-slate-400 hover:text-white transition-colors">
-                            <span className="material-symbols-outlined">help_outline</span>
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-white transition-colors">
+                            <HelpCircle />
                         </button>
                     </div>
                 </div>
@@ -57,7 +59,7 @@ export default function MailboxPage() {
 
                             <div className="grid grid-cols-2 gap-3">
                                 {['Gmail', 'Outlook', 'iCloud', 'Custom'].map((provider, idx) => (
-                                    <button type="button"
+                                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')} 
                                         key={provider}
                                         className={`flex flex-col items-center justify-center p-4 rounded-lg border transition-all ${idx === 1
                                                 ? 'border-primary bg-primary/5 dark:bg-primary/10'
@@ -102,7 +104,7 @@ export default function MailboxPage() {
 
                         <div className="bg-primary/5 border border-primary/10 rounded-xl p-6">
                             <div className="flex items-start gap-3">
-                                <span className="material-symbols-outlined text-primary">info</span>
+                                <Info className="text-primary" />
                                 <div>
                                     <h3 className="text-sm font-semibold mb-1">Security Recommendation</h3>
                                     <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -177,8 +179,8 @@ export default function MailboxPage() {
                                             className="w-full bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-primary/20 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                                             defaultValue="••••••••••••"
                                         />
-                                        <button type="button" className="absolute right-3 top-2.5 text-slate-400 hover:text-primary">
-                                            <span className="material-symbols-outlined text-xl">visibility_off</span>
+                                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="absolute right-3 top-2.5 text-slate-400 hover:text-primary">
+                                            <EyeOff className="text-xl" />
                                         </button>
                                     </div>
                                 </div>
@@ -226,7 +228,7 @@ export default function MailboxPage() {
                             {sameAsIncoming && (
                                 <div className="px-6 pb-6">
                                     <div className="flex items-center gap-3 p-4 bg-primary/5 border border-dashed border-primary/30 rounded-lg">
-                                        <span className="material-symbols-outlined text-primary">link</span>
+                                        <Link className="text-primary" />
                                         <p className="text-sm text-slate-400 italic">
                                             SMTP is currently linked to IMAP credentials. To use different credentials,
                                             uncheck &quot;Same as Incoming&quot; above.
@@ -239,7 +241,7 @@ export default function MailboxPage() {
                         {/* Action Bar */}
                         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200 dark:border-primary/10">
                             <div className="flex items-center gap-2">
-                                <span className="material-symbols-outlined text-green-500 text-sm">history</span>
+                                <History className="text-green-500 text-sm" />
                                 <span className="text-xs text-slate-500">
                                     Last successful connection: Today at 09:42 AM
                                 </span>

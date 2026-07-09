@@ -79,14 +79,14 @@ export default function DocticDashboard() {
                 { time: "11:15", patient: "Karim Tazi", type: "Téléconsultation", status: "En attente" },
                 { time: "14:00", patient: "Yassine Drissi", type: "Vaccination", status: "En attente" },
               ].map((rdv, i) => (
-                <div key={i} className={`flex items-center gap-4 p-4 rounded-xl border ${rdv.active ? 'border-emerald-500/50 bg-emerald-500/5' : 'border-white/5 bg-slate-900/50'}`}>
+                <div key={i} className={`flex items-center gap-4 p-4 rounded-xl border ${rdv.active ? 'border-emerald-500/50 bg-emerald-500/5' : 'border-white/5 bg-surface-dark/50'}`}>
                   <span className="text-sm font-mono text-slate-500 w-12">{rdv.time}</span>
                   <div className="flex-grow">
                     <p className="text-sm font-semibold text-white">{rdv.patient}</p>
                     <p className="text-xs text-slate-500">{rdv.type}</p>
                   </div>
                   <span className={`text-[10px] uppercase font-bold px-2 py-1 rounded-md ${
-                    rdv.status === 'En cours' ? 'bg-blue-500/20 text-blue-400' : 
+                    rdv.status === 'En cours' ? 'bg-primary/20 text-blue-400' : 
                     rdv.status === 'En attente' ? 'bg-slate-500/20 text-slate-400' : 'bg-emerald-500/20 text-emerald-400'
                   }`}>
                     {rdv.status}

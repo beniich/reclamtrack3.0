@@ -53,18 +53,18 @@ export default function DatabaseTopologyPage() {
                             title="Memory Usage"
                             value="124.5 GB"
                             icon="save"
-                            iconColor="text-orange-500"
+                            iconColor="text-primary"
                         />
                     </div>
 
                     {/* Main Content Area */}
-                    <div className="bg-white dark:bg-[#1a2233] rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                    <div className="bg-white dark:bg-[#1a2233] rounded-xl border border-slate-200 dark:border-border-dark p-6">
                         <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
                             <span className="material-symbols-outlined text-primary">account_tree</span>
                             Cluster Topology Visualization
                         </h3>
 
-                        <div className="h-96 flex items-center justify-center bg-slate-50 dark:bg-[#101622] rounded-lg border border-slate-200 dark:border-slate-800">
+                        <div className="h-96 flex items-center justify-center bg-slate-50 dark:bg-[#101622] rounded-lg border border-slate-200 dark:border-border-dark">
                             <div className="text-center">
                                 <span className="material-symbols-outlined text-6xl text-slate-300 mb-4 block">hub</span>
                                 <p className="text-slate-500 text-sm">
@@ -79,7 +79,7 @@ export default function DatabaseTopologyPage() {
 
                     {/* Status Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div className="bg-white dark:bg-[#1a2233] rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                        <div className="bg-white dark:bg-[#1a2233] rounded-xl border border-slate-200 dark:border-border-dark p-6">
                             <h3 className="text-lg font-bold mb-4 text-slate-900 dark:text-white">Node Status</h3>
                             <div className="space-y-3">
                                 <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-[#101622] rounded-lg">
@@ -106,7 +106,7 @@ export default function DatabaseTopologyPage() {
                             </div>
                         </div>
 
-                        <div className="bg-white dark:bg-[#1a2233] rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+                        <div className="bg-white dark:bg-[#1a2233] rounded-xl border border-slate-200 dark:border-border-dark p-6">
                             <h3 className="text-lg font-bold mb-4 text-slate-900 dark:text-white">Replication Metrics</h3>
                             <div className="space-y-4">
                                 <div>
@@ -133,7 +133,7 @@ export default function DatabaseTopologyPage() {
                                         <span className="font-bold text-slate-900 dark:text-white">1,842</span>
                                     </div>
                                     <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                                        <div className="h-full bg-blue-500 rounded-full" style={{ width: '42%' }}></div>
+                                        <div className="h-full bg-primary rounded-full" style={{ width: '42%' }}></div>
                                     </div>
                                 </div>
                             </div>

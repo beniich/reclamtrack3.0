@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 'use client';
 
 import React from 'react';
@@ -23,11 +24,11 @@ import { Button } from '@/components/ui/button';
 
 export default function SqlInsightDashboard() {
     return (
-        <div className="flex h-[calc(100vh-4rem)] bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 overflow-hidden">
+        <div className="flex h-[calc(100vh-4rem)] bg-slate-50 dark:bg-background font-sans text-slate-900 dark:text-slate-100 overflow-hidden">
             {/* Sidebar */}
-            <aside className="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 flex flex-col">
-                <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center gap-2">
-                    <Database className="text-indigo-600 size-6" />
+            <aside className="w-64 border-r border-slate-200 dark:border-border-dark bg-white dark:bg-background flex flex-col">
+                <div className="p-4 border-b border-slate-200 dark:border-border-dark flex items-center gap-2">
+                    <Database className="text-primary size-6" />
                     <h1 className="font-bold text-lg">Query Insight</h1>
                 </div>
 
@@ -35,17 +36,17 @@ export default function SqlInsightDashboard() {
                     <div>
                         <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Databases</h3>
                         <div className="space-y-1">
-                            <button type="button" className="w-full flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded-lg text-sm font-medium">
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-indigo-900/20 text-primary dark:text-indigo-400 rounded-lg text-sm font-medium">
                                 <Server className="size-4" />
                                 <span>production-primary</span>
                                 <span className="ml-auto size-2 rounded-full bg-emerald-500"></span>
                             </button>
-                            <button type="button" className="w-full flex items-center gap-2 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full flex items-center gap-2 px-3 py-2 hover:bg-primary/8 dark:hover:bg-surface-dark text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
                                 <Server className="size-4" />
                                 <span>analytics-replica-01</span>
                                 <span className="ml-auto size-2 rounded-full bg-emerald-500"></span>
                             </button>
-                            <button type="button" className="w-full flex items-center gap-2 px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full flex items-center gap-2 px-3 py-2 hover:bg-primary/8 dark:hover:bg-surface-dark text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
                                 <Server className="size-4" />
                                 <span>staging-db</span>
                                 <span className="ml-auto size-2 rounded-full bg-amber-500"></span>
@@ -56,14 +57,14 @@ export default function SqlInsightDashboard() {
                     <div>
                         <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Saved Queries</h3>
                         <div className="space-y-1">
-                            <Button variant="secondary" className="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">Monthly User Churn Analysis</Button>
-                            <Button variant="secondary" className="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">High Latency API Logs</Button>
-                            <Button variant="secondary" className="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">Order Processing Queue Depth</Button>
+                            <Button variant="secondary" className="w-full text-left px-3 py-2 hover:bg-primary/8 dark:hover:bg-surface-dark rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">Monthly User Churn Analysis</Button>
+                            <Button variant="secondary" className="w-full text-left px-3 py-2 hover:bg-primary/8 dark:hover:bg-surface-dark rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">High Latency API Logs</Button>
+                            <Button variant="secondary" className="w-full text-left px-3 py-2 hover:bg-primary/8 dark:hover:bg-surface-dark rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 truncate transition-colors">Order Processing Queue Depth</Button>
                         </div>
                     </div>
                 </div>
 
-                <div className="p-4 border-t border-slate-200 dark:border-slate-800">
+                <div className="p-4 border-t border-slate-200 dark:border-border-dark">
                     <div className="flex items-center justify-between text-xs text-slate-500">
                         <span>PostgreSQL 15.4</span>
                         <span className="flex items-center gap-1"><span className="size-2 rounded-full bg-emerald-500 animate-pulse"></span> Connected</span>
@@ -74,18 +75,18 @@ export default function SqlInsightDashboard() {
             {/* Main Content */}
             <main className="flex-1 flex flex-col min-w-0">
                 {/* Top Stats Bar */}
-                <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 flex items-center px-6 justify-between shrink-0">
+                <header className="h-16 border-b border-slate-200 dark:border-border-dark bg-white dark:bg-background flex items-center px-6 justify-between shrink-0">
                     <div className="flex items-center gap-6">
                         <div>
                             <p className="text-xs text-slate-500 uppercase font-bold">QPS</p>
                             <p className="text-lg font-bold font-mono">2,450</p>
                         </div>
-                        <div className="h-8 w-px bg-slate-200 dark:border-slate-800"></div>
+                        <div className="h-8 w-px bg-slate-200 dark:border-border-dark"></div>
                         <div>
                             <p className="text-xs text-slate-500 uppercase font-bold">Avg Latency</p>
                             <p className="text-lg font-bold font-mono text-emerald-600">4.2ms</p>
                         </div>
-                        <div className="h-8 w-px bg-slate-200 dark:border-slate-800"></div>
+                        <div className="h-8 w-px bg-slate-200 dark:border-border-dark"></div>
                         <div>
                             <p className="text-xs text-slate-500 uppercase font-bold">Active Conn</p>
                             <p className="text-lg font-bold font-mono">84/100</p>
@@ -93,7 +94,7 @@ export default function SqlInsightDashboard() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <button type="button" className="flex items-center gap-2 px-3 py-1.5 bg-indigo-600 text-white text-sm font-bold rounded-lg shadow-sm hover:bg-indigo-700 transition-colors">
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 bg-primary text-white text-sm font-bold rounded-lg shadow-sm hover:bg-primary-700 transition-colors">
                             <Play className="size-4" /> Run Query
                         </button>
                     </div>
@@ -120,21 +121,21 @@ export default function SqlInsightDashboard() {
                     </div>
 
                     {/* Slow Queries Table */}
-                    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 overflow-hidden shadow-sm">
-                        <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+                    <div className="rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-background overflow-hidden shadow-sm">
+                        <div className="px-6 py-4 border-b border-slate-200 dark:border-border-dark flex justify-between items-center">
                             <h3 className="font-bold text-base flex items-center gap-2">
                                 <Clock className="size-4 text-slate-400" />
                                 Slowest Queries (Last 1h)
                             </h3>
                             <div className="flex gap-2">
-                                <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-slate-400"><Filter className="size-4" /></button>
-                                <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-lg text-slate-400"><Download className="size-4" /></button>
+                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-surface-dark rounded-lg text-slate-400"><Filter className="size-4" /></button>
+                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-surface-dark rounded-lg text-slate-400"><Download className="size-4" /></button>
                             </div>
                         </div>
 
                         <div className="overflow-x-auto">
                             <table className="w-full text-left text-sm">
-                                <thead className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 text-slate-500">
+                                <thead className="bg-slate-50 dark:bg-background border-b border-slate-200 dark:border-border-dark text-slate-500">
                                     <tr>
                                         <th className="px-6 py-3 font-medium text-xs uppercase tracking-wider">Query Snippet</th>
                                         <th className="px-6 py-3 font-medium text-xs uppercase tracking-wider w-32">Calls/Min</th>
@@ -145,9 +146,9 @@ export default function SqlInsightDashboard() {
                                 </thead>
                                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                                     {/* Row 1 */}
-                                    <tr className="group hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
+                                    <tr className="group hover:bg-primary/5 dark:hover:bg-surface-dark/50 transition-colors">
                                         <td className="px-6 py-4">
-                                            <div className="font-mono text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800 truncate max-w-md">
+                                            <div className="font-mono text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-background p-2 rounded border border-slate-200 dark:border-border-dark truncate max-w-md">
                                                 SELECT * FROM orders WHERE status = 'PENDING' AND created_at &#60; NOW() - INTERVAL '1 day'
                                             </div>
                                         </td>
@@ -155,13 +156,13 @@ export default function SqlInsightDashboard() {
                                         <td className="px-6 py-4 font-mono font-bold text-amber-500">342ms</td>
                                         <td className="px-6 py-4 font-mono font-bold text-rose-500">1.2s</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" className="invisible group-hover:visible p-1 hover:text-indigo-600"><MoreHorizontal className="size-4" /></button>
+                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible p-1 hover:text-primary"><MoreHorizontal className="size-4" /></button>
                                         </td>
                                     </tr>
                                     {/* Row 2 */}
-                                    <tr className="group hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
+                                    <tr className="group hover:bg-primary/5 dark:hover:bg-surface-dark/50 transition-colors">
                                         <td className="px-6 py-4">
-                                            <div className="font-mono text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800 truncate max-w-md">
+                                            <div className="font-mono text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-background p-2 rounded border border-slate-200 dark:border-border-dark truncate max-w-md">
                                                 UPDATE user_sessions SET last_active = NOW() WHERE session_id = $1
                                             </div>
                                         </td>
@@ -169,13 +170,13 @@ export default function SqlInsightDashboard() {
                                         <td className="px-6 py-4 font-mono font-bold text-emerald-500">5ms</td>
                                         <td className="px-6 py-4 font-mono font-bold text-slate-500">12ms</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" className="invisible group-hover:visible p-1 hover:text-indigo-600"><MoreHorizontal className="size-4" /></button>
+                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible p-1 hover:text-primary"><MoreHorizontal className="size-4" /></button>
                                         </td>
                                     </tr>
                                     {/* Row 3 */}
-                                    <tr className="group hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
+                                    <tr className="group hover:bg-primary/5 dark:hover:bg-surface-dark/50 transition-colors">
                                         <td className="px-6 py-4">
-                                            <div className="font-mono text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800 truncate max-w-md">
+                                            <div className="font-mono text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-background p-2 rounded border border-slate-200 dark:border-border-dark truncate max-w-md">
                                                 SELECT count(*) FROM audit_logs WHERE user_id = $1 GROUP BY action_type
                                             </div>
                                         </td>
@@ -183,7 +184,7 @@ export default function SqlInsightDashboard() {
                                         <td className="px-6 py-4 font-mono font-bold text-amber-500">890ms</td>
                                         <td className="px-6 py-4 font-mono font-bold text-rose-500">2.4s</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" className="invisible group-hover:visible p-1 hover:text-indigo-600"><MoreHorizontal className="size-4" /></button>
+                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible p-1 hover:text-primary"><MoreHorizontal className="size-4" /></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -192,12 +193,12 @@ export default function SqlInsightDashboard() {
                     </div>
 
                     {/* Query Editor Placeholder */}
-                    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 overflow-hidden shadow-sm flex flex-col h-96">
-                        <div className="px-4 py-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <div className="rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-background overflow-hidden shadow-sm flex flex-col h-96">
+                        <div className="px-4 py-2 bg-slate-50 dark:bg-background border-b border-slate-200 dark:border-border-dark flex items-center justify-between">
                             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Ad-hoc Query</span>
                             <div className="flex gap-2">
-                                <button type="button" className="text-xs text-slate-500 hover:text-indigo-600 flex items-center gap-1"><Copy className="size-3" /> Copy</button>
-                                <button type="button" className="text-xs text-slate-500 hover:text-slate-700 flex items-center gap-1"><Terminal className="size-3" /> Explain</button>
+                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-xs text-slate-500 hover:text-primary flex items-center gap-1"><Copy className="size-3" /> Copy</button>
+                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-xs text-slate-500 hover:text-slate-700 flex items-center gap-1"><Terminal className="size-3" /> Explain</button>
                             </div>
                         </div>
                         <div className="flex-1 bg-[#1e1e1e] text-slate-300 font-mono text-sm p-4 outline-none">

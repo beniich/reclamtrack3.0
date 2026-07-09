@@ -25,7 +25,7 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
     const [searchQuery, setSearchQuery] = useState('');
 
     return (
-        <header className="h-20 border-b border-slate-200 dark:border-orange-500/10 bg-white/80 dark:bg-[#0f0125]/80 backdrop-blur-xl px-8 flex items-center justify-between sticky top-0 z-50">
+        <header className="h-20 border-b border-slate-200 dark:border-primary/10 bg-white/80 dark:bg-[#0f0125]/80 backdrop-blur-xl px-8 flex items-center justify-between sticky top-0 z-50">
             {/* Logo & Breadcrumbs */}
             <div className="flex items-center gap-10">
                 <Link href="/dashboard" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
@@ -39,7 +39,7 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                                 {i > 0 && <span className="text-slate-400 dark:text-slate-600">/</span>}
                                 <Link
                                     href={crumb.href}
-                                    className="text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors font-medium"
+                                    className="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-orange-400 transition-colors font-medium"
                                 >
                                     {crumb.label}
                                 </Link>
@@ -55,10 +55,10 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                     <div className="relative w-full group">
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500/20 to-purple-500/20 rounded-2xl blur opacity-0 group-focus-within:opacity-100 transition duration-500"></div>
                         <div className={cn(
-                            "relative flex items-center bg-slate-100/50 dark:bg-slate-800/50 border border-slate-200 dark:border-orange-500/20 rounded-2xl px-4 py-2.5 transition-all duration-300",
+                            "relative flex items-center bg-slate-100/50 dark:bg-slate-800/50 border border-slate-200 dark:border-primary/20 rounded-2xl px-4 py-2.5 transition-all duration-300",
                             "group-focus-within:bg-white dark:group-focus-within:bg-[#1a0b3a] group-focus-within:animate-electric-border"
                         )}>
-                            <Search className="text-slate-400 w-4 h-4 mr-3 group-focus-within:text-orange-500 transition-colors" />
+                            <Search className="text-slate-400 w-4 h-4 mr-3 group-focus-within:text-primary transition-colors" />
                             <input
                                 type="text"
                                 value={searchQuery}
@@ -69,7 +69,7 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                             {/* AI Agent Interaction Point */}
                             <div className="flex items-center pl-3 border-l border-slate-200 dark:border-slate-700 ml-2">
                                 <motion.div 
-                                    className="p-1.5 rounded-lg bg-orange-500/10 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 cursor-pointer"
+                                    className="p-1.5 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary dark:text-orange-400 cursor-pointer"
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
                                     onClick={toggleAISidekick}
@@ -84,16 +84,16 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
 
             {/* Actions & Premium Profile */}
             <div className="flex items-center gap-6">
-                <div className="flex items-center gap-2 pr-4 border-r border-slate-200 dark:border-slate-800">
+                <div className="flex items-center gap-2 pr-4 border-r border-slate-200 dark:border-border-dark">
                     <ThemeToggle />
                     
                     <Button variant="transparent" size="icon" className="rounded-xl relative group" aria-label="Notifications">
-                        <Bell className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-orange-500" />
-                        <span className="absolute top-3 right-3 w-2 h-2 bg-orange-500 rounded-full border-2 border-white dark:border-[#0f0125] group-hover:scale-110 transition-transform" />
+                        <Bell className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-primary" />
+                        <span className="absolute top-3 right-3 w-2 h-2 bg-primary rounded-full border-2 border-white dark:border-[#0f0125] group-hover:scale-110 transition-transform" />
                     </Button>
 
-                    <Link href="/settings" className="p-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all group">
-                        <Settings className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-orange-500" />
+                    <Link href="/settings" className="p-2.5 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-xl transition-all group">
+                        <Settings className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-primary" />
                     </Link>
                 </div>
 
@@ -105,7 +105,7 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                         </p>
                         <div className="flex items-center justify-end gap-1.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                            <p className="text-[10px] font-black text-orange-500/80 uppercase tracking-widest italic">
+                            <p className="text-[10px] font-black text-primary/80 uppercase tracking-widest italic">
                                 {user?.role || 'Super Admin'}
                             </p>
                         </div>
@@ -115,12 +115,12 @@ export function Header({ showSearch = true, breadcrumbs }: HeaderProps) {
                         className="relative p-0.5 rounded-full bg-gradient-to-tr from-orange-500 to-purple-600 shadow-lg"
                         whileHover={{ scale: 1.05 }}
                     >
-                        <div className="h-10 w-10 rounded-full bg-slate-900 border-2 border-white dark:border-[#0f0125] flex items-center justify-center overflow-hidden">
+                        <div className="h-10 w-10 rounded-full bg-surface-dark border-2 border-white dark:border-[#0f0125] flex items-center justify-center overflow-hidden">
                             {user?.avatar ? (
                                 <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
                             ) : (
-                                <div className="bg-orange-500/10 w-full h-full flex items-center justify-center">
-                                    <User className="w-5 h-5 text-orange-500" />
+                                <div className="bg-primary/10 w-full h-full flex items-center justify-center">
+                                    <User className="w-5 h-5 text-primary" />
                                 </div>
                             )}
                         </div>

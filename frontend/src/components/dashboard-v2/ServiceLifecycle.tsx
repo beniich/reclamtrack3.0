@@ -51,12 +51,12 @@ export function ServiceLifecycle() {
     return (
         <section className="relative overflow-hidden bg-white rounded-[2.5rem] border border-slate-200 p-12 shadow-sm">
             {/* Ambient background glow */}
-            <div className="absolute top-0 right-1/4 w-1/2 h-full bg-indigo-500/5 blur-[120px] -z-10 pointer-events-none"></div>
+            <div className="absolute top-0 right-1/4 w-1/2 h-full bg-primary/5 blur-[120px] -z-10 pointer-events-none"></div>
 
             <div className="max-w-6xl mx-auto space-y-16">
                 <div className="text-center space-y-4">
                     <h2 className="text-4xl font-black text-slate-900 transition-colors tracking-tighter uppercase italic">
-                        Cycle de Vie <span className="text-indigo-600">des Services</span>
+                        Cycle de Vie <span className="text-primary">des Services</span>
                     </h2>
                     <p className="max-w-2xl mx-auto text-slate-400 font-bold uppercase tracking-[0.2em] text-[11px]">
                         De l&apos;expression du besoin à l&apos;optimisation continue de vos performances opérationnelles.
@@ -83,8 +83,8 @@ export function ServiceLifecycle() {
                                     <step.icon className={cn(
                                         "w-8 h-8 transition-colors duration-500",
                                         "text-slate-400",
-                                        step.color === 'indigo' && "group-hover:text-indigo-600",
-                                        step.color === 'blue' && "group-hover:text-blue-600",
+                                        step.color === 'indigo' && "group-hover:text-primary",
+                                        step.color === 'blue' && "group-hover:text-primary",
                                         step.color === 'purple' && "group-hover:text-purple-600",
                                         step.color === 'cyan' && "group-hover:text-cyan-600",
                                         step.color === 'emerald' && "group-hover:text-emerald-600"
@@ -97,7 +97,7 @@ export function ServiceLifecycle() {
                                 {/* Step Labels */}
                                 <div className="space-y-3">
                                     <div>
-                                        <p className="text-[10px] font-black text-indigo-600 tracking-[0.2em] uppercase mb-1">{step.subtitle}</p>
+                                        <p className="text-[10px] font-black text-primary tracking-[0.2em] uppercase mb-1">{step.subtitle}</p>
                                         <h4 className="text-xl font-black text-slate-900 uppercase italic tracking-tight">{step.title}</h4>
                                     </div>
                                     <p className="text-[11px] text-slate-500 font-medium leading-relaxed max-w-[200px] mx-auto">

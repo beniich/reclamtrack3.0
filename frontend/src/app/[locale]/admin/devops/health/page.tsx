@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 'use client';
 
 import React from 'react';
@@ -25,10 +26,10 @@ import { Button } from '@/components/ui/button';
 
 export default function SystemHealthDashboard() {
     return (
-        <div className="flex h-full min-h-screen flex-col bg-slate-950 font-sans text-slate-100 selection:bg-cyan-500/30">
+        <div className="flex h-full min-h-screen flex-col bg-background-dark font-sans text-slate-100 selection:bg-cyan-500/30">
 
             {/* Header */}
-            <header className="px-6 py-4 bg-slate-900/50 border-b border-slate-800 flex items-center justify-between backdrop-blur-sm sticky top-0 z-20">
+            <header className="px-6 py-4 bg-surface-dark/50 border-b border-border-dark flex items-center justify-between backdrop-blur-sm sticky top-0 z-20">
                 <div className="flex items-center gap-3">
                     <div className="size-10 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.2)]">
                         <Activity className="size-6" />
@@ -43,7 +44,7 @@ export default function SystemHealthDashboard() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <div className="hidden md:flex items-center gap-4 text-xs font-mono text-slate-400 border-r border-slate-800 pr-4">
+                    <div className="hidden md:flex items-center gap-4 text-xs font-mono text-slate-400 border-r border-border-dark pr-4">
                         <div className="flex items-center gap-2">
                             <Clock className="size-3" />
                             <span>Uptime: 99.998%</span>
@@ -53,7 +54,7 @@ export default function SystemHealthDashboard() {
                             <span>Latency: 42ms</span>
                         </div>
                     </div>
-                    <button type="button" className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium rounded-lg transition-colors border border-slate-700">
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium rounded-lg transition-colors border border-slate-700">
                         <RefreshCcw className="size-4" /> <span className="hidden sm:inline">Refresh</span>
                     </button>
                 </div>
@@ -66,10 +67,10 @@ export default function SystemHealthDashboard() {
                 <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
 
                     {/* Topology Map (Center) */}
-                    <div className="lg:col-span-2 bg-slate-900/40 border border-slate-800 rounded-2xl p-6 relative min-h-[500px] flex items-center justify-center overflow-hidden group">
+                    <div className="lg:col-span-2 bg-surface-dark/40 border border-border-dark rounded-2xl p-6 relative min-h-[500px] flex items-center justify-center overflow-hidden group">
                         <div className="absolute top-4 left-4 z-20 flex gap-2">
-                            <button type="button" className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><LayoutGrid className="size-4" /></button>
-                            <button type="button" className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><List className="size-4" /></button>
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><LayoutGrid className="size-4" /></button>
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><List className="size-4" /></button>
                         </div>
 
                         {/* Simulated Topology Graph */}
@@ -168,7 +169,7 @@ export default function SystemHealthDashboard() {
                     {/* Metrics Sidebar */}
                     <div className="flex flex-col gap-6">
                         {/* Global Status Card */}
-                        <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm">
+                        <div className="bg-surface-dark/50 border border-border-dark rounded-2xl p-6 backdrop-blur-sm">
                             <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Global Health Score</h3>
                             <div className="flex items-end gap-2 mb-2">
                                 <span className="text-5xl font-black text-white">98</span>
@@ -190,7 +191,7 @@ export default function SystemHealthDashboard() {
                         </div>
 
                         {/* Active Incidents */}
-                        <div className="flex-1 bg-slate-900/50 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm overflow-hidden flex flex-col">
+                        <div className="flex-1 bg-surface-dark/50 border border-border-dark rounded-2xl p-6 backdrop-blur-sm overflow-hidden flex flex-col">
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider">Active Alerts</h3>
                                 <span className="bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/20">1 Active</span>

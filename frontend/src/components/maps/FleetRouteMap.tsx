@@ -124,7 +124,7 @@ export function FleetRouteMap() {
   if (!isLoaded || loading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+        <Loader2 className="w-8 h-8 text-primary animate-spin" />
       </div>
     );
   }
@@ -215,7 +215,7 @@ export function FleetRouteMap() {
               {selectedMarker.type === 'team' ? (
                 <>
                   <div className="flex items-center gap-2 mb-2">
-                    <Truck className="w-4 h-4 text-blue-500" />
+                    <Truck className="w-4 h-4 text-primary" />
                     <span className="font-bold">{selectedMarker.name}</span>
                   </div>
                   <div className="text-xs space-y-1">
@@ -241,20 +241,20 @@ export function FleetRouteMap() {
       </GoogleMap>
 
       {/* Legend Overlay */}
-      <div className="absolute bottom-6 right-6 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-800 z-10 w-64">
+      <div className="absolute bottom-6 right-6 bg-white dark:bg-background p-4 rounded-xl shadow-2xl border border-slate-200 dark:border-border-dark z-10 w-64">
         <h3 className="font-bold text-sm mb-3 uppercase tracking-wider text-slate-500">Flotte & Opérations</h3>
         <div className="space-y-3">
           <div className="flex items-center gap-3">
-            <div className="w-3 h-3 rounded-full bg-blue-500" />
+            <div className="w-3 h-3 rounded-full bg-primary" />
             <span className="text-xs font-medium">Équipe de maintenance</span>
           </div>
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 rounded-full bg-red-500 border-2 border-white shadow-sm" />
             <span className="text-xs font-medium">Intervention en cours</span>
           </div>
-          <div className="h-0.5 bg-blue-500/30 rounded-full w-full my-1" />
+          <div className="h-0.5 bg-primary/30 rounded-full w-full my-1" />
           <div className="flex items-center gap-3">
-            <div className="w-8 h-1 bg-blue-500 rounded-full" />
+            <div className="w-8 h-1 bg-primary rounded-full" />
             <span className="text-xs font-medium italic">Itinéraire optimisé</span>
           </div>
         </div>

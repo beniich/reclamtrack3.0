@@ -21,8 +21,8 @@ interface NotificationStore {
     addNotification: (n: Notification) => void;
     markAsRead: (id: string) => Promise<void>;
     markAllAsRead: () => Promise<void>;
-    clearAll: () => void;
-    removeNotification: (id: string) => void;
+    clearAll: () => Promise<void>;
+    removeNotification: (id: string) => Promise<void>;
 }
 
 export const useNotificationStore = create<NotificationStore>()(
@@ -91,17 +91,29 @@ export const useNotificationStore = create<NotificationStore>()(
                 }
             },
 
-            clearAll: () => set({ notifications: [], unreadCount: 0 }),
+            clearAll: async () => {
+                try {
+                    await notificationApi.deleteAll();
+                    set({ notifications: [], unreadCount: 0 });
+                } catch (error) {
+                    console.error('Failed to clear all notifications:', error);
+                }
+            },
 
-            removeNotification: (id) => {
-                const state = get();
-                const notification = state.notifications.find(n => n.id === id);
-                const wasUnread = notification && !notification.read;
+            removeNotification: async (id) => {
+                try {
+                    await notificationApi.delete(id);
+                    const state = get();
+                    const notification = state.notifications.find(n => n.id === id);
+                    const wasUnread = notification && !notification.read;
 
-                set((state) => ({
-                    notifications: state.notifications.filter(n => n.id !== id),
-                    unreadCount: wasUnread ? Math.max(0, state.unreadCount - 1) : state.unreadCount
-                }));
+                    set((state) => ({
+                        notifications: state.notifications.filter(n => n.id !== id),
+                        unreadCount: wasUnread ? Math.max(0, state.unreadCount - 1) : state.unreadCount
+                    }));
+                } catch (error) {
+                    console.error('Failed to remove notification:', error);
+                }
             },
         }),
         { name: 'notification-storage' }

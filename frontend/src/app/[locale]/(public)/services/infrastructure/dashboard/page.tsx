@@ -47,16 +47,16 @@ export default function InfrastructureDashboard() {
     const [activeTab, setActiveTab] = useState('nodes');
 
     return (
-        <div className="flex min-h-screen bg-[#020617] text-slate-200 font-sans selection:bg-blue-500/30">
+        <div className="flex min-h-screen bg-[#020617] text-slate-200 font-sans selection:bg-primary/30">
             {/* Sidebar */}
-            <aside className="w-72 border-r border-blue-500/10 bg-[#020617] flex flex-col p-6 space-y-8">
+            <aside className="w-72 border-r border-primary/10 bg-[#020617] flex flex-col p-6 space-y-8">
                 <div className="flex items-center gap-3 px-2">
-                    <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
                         <Terminal className="text-white w-6 h-6" />
                     </div>
                     <div>
                         <h1 className="font-display font-black text-xs uppercase tracking-widest text-white leading-none">Hébergement Pro</h1>
-                        <p className="text-[10px] text-blue-500 font-bold uppercase tracking-widest mt-1">Cloud Control</p>
+                        <p className="text-[10px] text-primary font-bold uppercase tracking-widest mt-1">Cloud Control</p>
                     </div>
                 </div>
 
@@ -74,8 +74,8 @@ export default function InfrastructureDashboard() {
                             onClick={() => setActiveTab(item.id)}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
                                 activeTab === item.id
-                                ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
-                                : 'text-slate-500 hover:text-blue-400 hover:bg-blue-500/5'
+                                ? 'bg-primary text-white shadow-lg shadow-blue-500/20'
+                                : 'text-slate-500 hover:text-blue-400 hover:bg-primary/5'
                             }`}
                         >
                             <item.icon className="w-4 h-4" />
@@ -84,13 +84,13 @@ export default function InfrastructureDashboard() {
                     ))}
                 </nav>
 
-                <div className="glass-card rounded-2xl p-5 border-blue-500/20 bg-blue-500/5 relative overflow-hidden group">
+                <div className="glass-card rounded-2xl p-5 border-primary/20 bg-primary/5 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 p-2 opacity-10 rotate-12 group-hover:rotate-0 transition-all">
                         <Globe className="w-12 h-12" />
                     </div>
                     <div className="text-[10px] font-black uppercase tracking-widest text-white mb-2 italic">Global Network</div>
                     <p className="text-[9px] text-slate-400 font-light leading-relaxed mb-4">Votre infrastructure s'étend sur 4 régions souveraines.</p>
-                    <Button variant="primary" className="w-full py-2 bg-blue-600/20 hover:bg-blue-600 text-white rounded-lg text-[9px] font-black uppercase tracking-widest transition-all">Voir Carte</Button>
+                    <Button variant="primary" className="w-full py-2 bg-primary/20 hover:bg-primary text-white rounded-lg text-[9px] font-black uppercase tracking-widest transition-all">Voir Carte</Button>
                 </div>
             </aside>
 
@@ -106,7 +106,7 @@ export default function InfrastructureDashboard() {
                     </div>
 
                     <div className="flex items-center gap-6">
-                        <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-xl border border-white/5 hover:border-blue-500/20 transition-all cursor-pointer">
+                        <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-xl border border-white/5 hover:border-primary/20 transition-all cursor-pointer">
                             <Search className="w-4 h-4 text-slate-600" />
                             <input
                                 type="text"
@@ -123,7 +123,7 @@ export default function InfrastructureDashboard() {
                                 <div className="text-[10px] font-black uppercase text-white">Cloud Master</div>
                                 <div className="text-[9px] text-slate-500 font-bold tracking-widest uppercase">Root Access</div>
                             </div>
-                            <div className="w-10 h-10 rounded-full bg-blue-600 p-0.5 flex items-center justify-center font-black">CM</div>
+                            <div className="w-10 h-10 rounded-full bg-primary p-0.5 flex items-center justify-center font-black">CM</div>
                         </div>
                     </div>
                 </header>
@@ -141,20 +141,20 @@ export default function InfrastructureDashboard() {
                         </div>
                         <div className="flex gap-4">
                             <Button variant="ghost" className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all">Snapshot Global</Button>
-                            <Button variant="primary" className="px-8 py-4 bg-blue-600 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 hover:scale-105 transition-all">Déployer Instance</Button>
+                            <Button variant="primary" className="px-8 py-4 bg-primary rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 hover:scale-105 transition-all">Déployer Instance</Button>
                         </div>
                     </div>
 
                     {/* Utilization Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
-                            { label: 'Utilisation CPU', val: '68%', icon: Cpu, trend: 'En hausse', color: 'text-blue-500' },
-                            { label: 'Utilisation RAM', val: '124 GB', icon: Activity, trend: 'Optimal', color: 'text-indigo-500' },
+                            { label: 'Utilisation CPU', val: '68%', icon: Cpu, trend: 'En hausse', color: 'text-primary' },
+                            { label: 'Utilisation RAM', val: '124 GB', icon: Activity, trend: 'Optimal', color: 'text-primary' },
                             { label: 'Bande Passante', val: '12.4 GB/s', icon: Network, trend: 'Capacité 80%', color: 'text-brand-orange' },
                         ].map((stat, i) => (
-                            <div key={i} className="glass-card rounded-[2.5rem] p-10 border border-white/5 hover:border-blue-500/20 transition-all group">
+                            <div key={i} className="glass-card rounded-[2.5rem] p-10 border border-white/5 hover:border-primary/20 transition-all group">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className={`w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center ${stat.color} group-hover:bg-blue-600 group-hover:text-white transition-all`}>
+                                    <div className={`w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center ${stat.color} group-hover:bg-primary group-hover:text-white transition-all`}>
                                         <stat.icon className="w-6 h-6" />
                                     </div>
                                     <div className="text-[9px] font-black uppercase tracking-[.2em] text-slate-500">{stat.trend}</div>
@@ -172,11 +172,11 @@ export default function InfrastructureDashboard() {
                                 <h3 className="text-2xl font-black uppercase italic tracking-tighter">Analyses de Charge (24h)</h3>
                                 <div className="flex gap-8">
                                     <div className="flex items-center gap-2">
-                                        <div className="w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
                                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">CPU Compute</span>
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <div className="w-3 h-3 rounded-full bg-indigo-500"></div>
+                                        <div className="w-3 h-3 rounded-full bg-primary"></div>
                                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Memory Ops</span>
                                     </div>
                                     <div className="flex items-center gap-2">
@@ -186,7 +186,7 @@ export default function InfrastructureDashboard() {
                                 </div>
                             </div>
                             <div className="flex items-center gap-2 bg-white/5 p-2 rounded-xl">
-                                <Button variant="primary" className="px-5 py-2 bg-blue-600 rounded-lg text-[9px] font-black uppercase tracking-widest text-white shadow-lg shadow-blue-500/10 transition-all">Temps Réel</Button>
+                                <Button variant="primary" className="px-5 py-2 bg-primary rounded-lg text-[9px] font-black uppercase tracking-widest text-white shadow-lg shadow-blue-500/10 transition-all">Temps Réel</Button>
                                 <Button variant="ghost" className="px-5 py-2 hover:bg-white/5 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-500 transition-all">Historique</Button>
                             </div>
                         </div>
@@ -223,7 +223,7 @@ export default function InfrastructureDashboard() {
                     <div className="glass-card rounded-[3rem] p-10">
                         <div className="flex items-center justify-between mb-8">
                             <h3 className="text-xl font-black uppercase italic tracking-tighter">Status des Clusters</h3>
-                            <Button variant="ghost" className="text-[10px] font-black uppercase tracking-widest text-blue-500 hover:underline">Rafraîchir Noeuds</Button>
+                            <Button variant="ghost" className="text-[10px] font-black uppercase tracking-widest text-primary hover:underline">Rafraîchir Noeuds</Button>
                         </div>
                         <div className="overflow-x-auto">
                             <table className="w-full text-left">
@@ -242,7 +242,7 @@ export default function InfrastructureDashboard() {
                                         <tr key={i} className="border-b border-white/[0.02] hover:bg-white/[0.01] transition-all">
                                             <td className="py-8">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
+                                                    <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
                                                     <span className="text-[10px] font-black uppercase text-white">{node.name}</span>
                                                 </div>
                                             </td>
@@ -261,7 +261,7 @@ export default function InfrastructureDashboard() {
                                             <td className="py-8">
                                                 <div className="flex items-center gap-3">
                                                     <div className="w-24 h-1.5 bg-white/5 rounded-full overflow-hidden">
-                                                        <div className="h-full bg-blue-500 transition-all duration-1000" style={{ width: `${node.load}%` }}></div>
+                                                        <div className="h-full bg-primary transition-all duration-1000" style={{ width: `${node.load}%` }}></div>
                                                     </div>
                                                     <span className="text-[9px] font-black uppercase">{node.load}%</span>
                                                 </div>
@@ -277,12 +277,12 @@ export default function InfrastructureDashboard() {
                                 </tbody>
                             </table>
                         </div>
-                        <div className="mt-10 p-6 bg-blue-600/5 border border-blue-600/10 rounded-[2rem] flex items-center justify-between">
+                        <div className="mt-10 p-6 bg-primary/5 border border-primary/10 rounded-[2rem] flex items-center justify-between">
                             <div className="flex items-center gap-4">
-                                <Lock className="w-5 h-5 text-blue-500" />
+                                <Lock className="w-5 h-5 text-primary" />
                                 <div className="text-[10px] font-black uppercase text-slate-400">Accès SSH via Quantum-Secure Tunnel actif sur tous les noeuds.</div>
                             </div>
-                            <Button variant="primary" className="px-6 py-2 bg-blue-600 rounded-xl text-[9px] font-black uppercase tracking-widest">Gérer Clefs</Button>
+                            <Button variant="primary" className="px-6 py-2 bg-primary rounded-xl text-[9px] font-black uppercase tracking-widest">Gérer Clefs</Button>
                         </div>
                     </div>
                 </div>

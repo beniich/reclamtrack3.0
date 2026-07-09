@@ -1,460 +1,186 @@
-﻿import { Router } from 'express';
-import { body, param } from 'express-validator';
+import { Router } from 'express';
+import { body, param, query } from 'express-validator';
 import { validator } from '../middleware/validator.js';
+import { authenticate as protect } from '../middleware/security.js';
+import { requireOrganization } from '../middleware/security.js';
+import InventoryItem from '../models/InventoryItem.js';
 import { Requisition, RequisitionStatus } from '../models/Requisition.js';
 import { eventBus } from '../services/eventBus.js';
-import { io } from '../services/socketService.js';
 
 const router = Router();
 
-// Données mockées pour les articles d'inventaire
-const inventoryItems = [
-  {
-    id: '1',
-    code: 'ELEC-001',
-    name: 'Câble Électrique 10mm',
-    category: 'Électricité',
-    unit: 'm',
-    currentStock: 150,
-    minStock: 50,
-    price: 25.5,
-  },
-  {
-    id: '2',
-    code: 'EAU-002',
-    name: 'Tuyau PVC 50mm',
-    category: 'Plomberie',
-    unit: 'm',
-    currentStock: 80,
-    minStock: 20,
-    price: 18.0,
-  },
-  {
-    id: '3',
-    code: 'ROAD-003',
-    name: 'Bitume à froid',
-    category: 'Voirie',
-    unit: 'kg',
-    currentStock: 500,
-    minStock: 100,
-    price: 12.75,
-  },
-  {
-    id: '4',
-    code: 'LIGHT-004',
-    name: 'Lampe LED 100W',
-    category: 'Éclairage',
-    unit: 'pcs',
-    currentStock: 30,
-    minStock: 10,
-    price: 45.0,
-  },
-  {
-    id: '5',
-    code: 'ELEC-005',
-    name: 'Disjoncteur 32A',
-    category: 'Électricité',
-    unit: 'pcs',
-    currentStock: 25,
-    minStock: 15,
-    price: 35.0,
-  },
-  {
-    id: '6',
-    code: 'EAU-006',
-    name: "Robinet d'arrêt",
-    category: 'Plomberie',
-    unit: 'pcs',
-    currentStock: 40,
-    minStock: 10,
-    price: 22.5,
-  },
-  {
-    id: '7',
-    code: 'ROAD-007',
-    name: 'Peinture routière blanche',
-    category: 'Voirie',
-    unit: 'L',
-    currentStock: 120,
-    minStock: 30,
-    price: 28.0,
-  },
-  {
-    id: '8',
-    code: 'LIGHT-008',
-    name: 'Ballast électronique',
-    category: 'Éclairage',
-    unit: 'pcs',
-    currentStock: 18,
-    minStock: 8,
-    price: 52.0,
-  },
-  {
-    id: '9',
-    code: 'TOOL-009',
-    name: 'Pelle',
-    category: 'Outillage',
-    unit: 'pcs',
-    currentStock: 12,
-    minStock: 5,
-    price: 65.0,
-  },
-  {
-    id: '10',
-    code: 'TOOL-010',
-    name: 'Pioche',
-    category: 'Outillage',
-    unit: 'pcs',
-    currentStock: 10,
-    minStock: 5,
-    price: 58.0,
-  },
-  {
-    id: '11',
-    code: 'EAU-011',
-    name: 'Colle PVC',
-    category: 'Plomberie',
-    unit: 'kg',
-    currentStock: 15,
-    minStock: 5,
-    price: 32.0,
-  },
-  {
-    id: '12',
-    code: 'SIGN-012',
-    name: 'Panneau Stop',
-    category: 'Signalisation',
-    unit: 'pcs',
-    currentStock: 8,
-    minStock: 3,
-    price: 125.0,
-  },
-];
+// Apply auth to all routes
+router.use(protect, requireOrganization);
 
-// GET /api/inventory/items/search - Rechercher des articles
-router.get('/items/search', async (req: any, res, next) => {
-  try {
-    const { q, category, lowStock } = req.query;
-
-    let results = [...inventoryItems];
-
-    // Filtrer par terme de recherche
-    if (q) {
-      const searchTerm = q.toString().toLowerCase();
-      results = results.filter(
-        (item) =>
-          item.name.toLowerCase().includes(searchTerm) ||
-          item.code.toLowerCase().includes(searchTerm) ||
-          item.category.toLowerCase().includes(searchTerm)
-      );
-    }
-
-    // Filtrer par catégorie
-    if (category) {
-      results = results.filter((item) => item.category === category);
-    }
-
-    // Filtrer par stock faible
-    if (lowStock === 'true') {
-      results = results.filter((item) => item.currentStock <= item.minStock);
-    }
-
-    res.json({
-      success: true,
-      data: results,
-      total: results.length,
-    });
-  } catch (err) {
-    next(err);
-  }
-});
-
-// GET /api/inventory/items - Liste tous les articles
+/**
+ * @route   GET /api/inventory/items
+ * @desc    Get all inventory items (optionally filtered by category/search/lowStock)
+ * @access  Private
+ */
 router.get('/items', async (req: any, res, next) => {
-  try {
-    res.json({
-      success: true,
-      data: inventoryItems,
-      total: inventoryItems.length,
-    });
-  } catch (err) {
-    next(err);
-  }
+    try {
+        const { q, category, lowStock } = req.query;
+
+        const filter: Record<string, any> = {};
+
+        if (q) {
+            filter.$or = [
+                { name: { $regex: q, $options: 'i' } },
+                { reference: { $regex: q, $options: 'i' } }
+            ];
+        }
+
+        if (category) {
+            filter.category = category;
+        }
+
+        if (lowStock === 'true') {
+            filter.$expr = { $lte: ['$currentStock', '$minStockAlert'] };
+        }
+
+        const items = await InventoryItem.find(filter).sort({ name: 1 });
+
+        res.json({
+            success: true,
+            data: items,
+            total: items.length
+        });
+    } catch (err) {
+        next(err);
+    }
 });
 
-// GET /api/inventory/items/:id - Détails d'un article
+/**
+ * @route   GET /api/inventory/items/search
+ * @desc    Search items (alias for /items with q)
+ * @access  Private
+ */
+router.get('/items/search', async (req: any, res, next) => {
+    try {
+        const { q, category, lowStock } = req.query;
+        const filter: Record<string, any> = {};
+
+        if (q) {
+            filter.$or = [
+                { name: { $regex: q, $options: 'i' } },
+                { reference: { $regex: q, $options: 'i' } },
+                { category: { $regex: q, $options: 'i' } }
+            ];
+        }
+
+        if (category) filter.category = category;
+        if (lowStock === 'true') filter.$expr = { $lte: ['$currentStock', '$minStockAlert'] };
+
+        const results = await InventoryItem.find(filter);
+        res.json({ success: true, data: results, total: results.length });
+    } catch (err) {
+        next(err);
+    }
+});
+
+/**
+ * @route   GET /api/inventory/items/:id
+ * @desc    Get single item
+ * @access  Private
+ */
 router.get('/items/:id', async (req: any, res, next) => {
-  try {
-    const item = inventoryItems.find((i) => i.id === req.params.id);
-
-    if (!item) {
-      return res.status(404).json({
-        success: false,
-        message: 'Article introuvable',
-      });
+    try {
+        const item = await InventoryItem.findById(req.params.id);
+        if (!item) return res.status(404).json({ success: false, message: 'Item not found' });
+        res.json({ success: true, data: item });
+    } catch (err) {
+        next(err);
     }
-
-    res.json({
-      success: true,
-      data: item,
-    });
-  } catch (err) {
-    next(err);
-  }
 });
 
-// GET /api/inventory/requisitions
+/**
+ * @route   POST /api/inventory/items
+ * @desc    Create new item
+ * @access  Private
+ */
+router.post('/items', [
+    body('name').notEmpty(),
+    body('reference').notEmpty(),
+    body('category').optional().isString(),
+    body('currentStock').optional().isNumeric(),
+    body('minStockAlert').optional().isNumeric(),
+], validator, async (req: any, res, next) => {
+    try {
+        const item = await InventoryItem.create(req.body);
+        res.status(201).json({ success: true, data: item });
+    } catch (err) {
+        next(err);
+    }
+});
+
+/**
+ * @route   PUT /api/inventory/items/:id
+ * @desc    Update item
+ * @access  Private
+ */
+router.put('/items/:id', async (req: any, res, next) => {
+    try {
+        const item = await InventoryItem.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!item) return res.status(404).json({ success: false, message: 'Item not found' });
+        res.json({ success: true, data: item });
+    } catch (err) {
+        next(err);
+    }
+});
+
+/**
+ * @route   DELETE /api/inventory/items/:id
+ * @desc    Delete item
+ * @access  Private
+ */
+router.delete('/items/:id', async (req: any, res, next) => {
+    try {
+        await InventoryItem.findByIdAndDelete(req.params.id);
+        res.json({ success: true, message: 'Item deleted' });
+    } catch (err) {
+        next(err);
+    }
+});
+
+// Requisitions routes
 router.get('/requisitions', async (req: any, res, next) => {
-  try {
-    const query: any = { organizationId: req.organizationId };
-
-    // Filter by user role ?
-    // If basic user, only see own requisitions
-    if (['technician', 'staff'].includes(req.user.role)) {
-      query.requesterId = req.user.id;
+    try {
+        const requisitions = await Requisition.find({ organizationId: req.organizationId })
+            .populate('requesterId', 'name email')
+            .populate('assignedTo', 'name email')
+            .sort({ createdAt: -1 });
+        res.json({ success: true, data: requisitions });
+    } catch (err) {
+        next(err);
     }
-
-    const requisitions = await Requisition.find(query)
-      .populate('requesterId', 'name email')
-      .populate('complaintId', 'number')
-      .sort({ createdAt: -1 });
-
-    res.json(requisitions);
-  } catch (err) {
-    next(err);
-  }
 });
 
-// POST /api/inventory/requisitions
-router.post(
-  '/requisitions',
-  [
-    body('items').isArray({ min: 1 }),
-    body('items.*.description').notEmpty(),
-    body('items.*.quantity').isInt({ min: 1 }),
-  ],
-  validator,
-  async (req: any, res, next) => {
+router.post('/requisitions', async (req: any, res, next) => {
     try {
-      const requisition = await Requisition.create({
-        ...req.body,
-        organizationId: req.organizationId,
-        requesterId: req.user.id,
-        status: RequisitionStatus.DRAFT,
-        history: [
-          {
-            status: RequisitionStatus.DRAFT,
-            action: 'created',
-            userId: req.user.id,
-            timestamp: new Date(),
-          },
-        ],
-      });
-
-      // Kafka Event
-      await eventBus.publish('inventory-events', 'REQUISITION_CREATED', {
-        requisitionId: (requisition as any)._id,
-        requesterId: req.user.id,
-        timestamp: new Date(),
-      });
-
-      res.status(201).json(requisition);
+        const reqData = {
+            ...req.body,
+            organizationId: req.organizationId,
+            requesterId: req.user.id,
+            status: RequisitionStatus.PENDING_APPROVAL
+        };
+        const requisition = await Requisition.create(reqData);
+        res.status(201).json({ success: true, data: requisition });
     } catch (err) {
-      next(err);
+        next(err);
     }
-  }
-);
-
-// PATCH /api/inventory/requisitions/:id/status
-router.patch(
-  '/requisitions/:id/status',
-  [
-    param('id').isMongoId(),
-    body('status').isIn(Object.values(RequisitionStatus)),
-    body('comment').optional().isString(),
-  ],
-  validator,
-  async (req: any, res, next) => {
-    try {
-      const { status, comment } = req.body;
-
-      const requisition = await Requisition.findOne({
-        _id: req.params.id,
-        organizationId: req.organizationId,
-      });
-      if (!requisition) return res.status(404).json({ message: 'Requisition not found' });
-
-      // Add simple logic check here (e.g. only warehouse_manager can approve)
-      // For now, allow loosely based on role presence, assuming frontend limits actions.
-
-      requisition.status = status;
-      requisition.history.push({
-        status,
-        action: 'status_change',
-        userId: req.user.id,
-        comment,
-        timestamp: new Date(),
-      });
-
-      await requisition.save();
-
-      if (io) {
-        io.emit('requisition-updated', requisition);
-      }
-
-      // Kafka Event
-      await eventBus.publish('inventory-events', 'REQUISITION_STATUS_UPDATED', {
-        requisitionId: requisition._id,
-        status: status,
-        updatedBy: req.user.id,
-        timestamp: new Date(),
-      });
-
-      res.json(requisition);
-    } catch (err) {
-      next(err);
-    }
-  }
-);
-
-// --- Aliases for Frontend Compatibility ---
-
-// POST /api/inventory/requests -> POST /api/inventory/requisitions
-router.post(
-  '/requests',
-  [
-    body('items').isArray({ min: 1 }),
-    body('items.*.description').notEmpty(),
-    body('items.*.quantity').isInt({ min: 1 }),
-  ],
-  validator,
-  async (req: any, res, next) => {
-    try {
-      const requisition = await Requisition.create({
-        ...req.body,
-        organizationId: req.organizationId,
-        requesterId: req.user.id,
-        status: RequisitionStatus.DRAFT,
-        history: [
-          {
-            status: RequisitionStatus.DRAFT,
-            action: 'created',
-            userId: req.user.id,
-            timestamp: new Date(),
-          },
-        ],
-      });
-
-      // Kafka Event
-      await eventBus.publish('inventory-events', 'REQUISITION_CREATED', {
-        requisitionId: (requisition as any)._id,
-        requesterId: req.user.id,
-        timestamp: new Date(),
-      });
-
-      res.status(201).json(requisition);
-    } catch (err) {
-      next(err);
-    }
-  }
-);
-
-// GET /api/inventory/requests -> GET /api/inventory/requisitions
-router.get('/requests', async (req: any, res, next) => {
-  try {
-    const query: any = { organizationId: req.organizationId };
-
-    // Filter by user role ?
-    // If basic user, only see own requisitions
-    if (['technician', 'staff'].includes(req.user.role)) {
-      query.requesterId = req.user.id;
-    }
-
-    const requisitions = await Requisition.find(query)
-      .populate('requesterId', 'name email')
-      .populate('complaintId', 'number')
-      .sort({ createdAt: -1 });
-
-    res.json(requisitions);
-  } catch (err) {
-    next(err);
-  }
 });
 
-// POST /api/inventory/requests/:id/approve
-router.post('/requests/:id/approve', async (req: any, res, next) => {
-  try {
-    const requisition = await Requisition.findOne({
-      _id: req.params.id,
-      organizationId: req.organizationId,
-    });
-    if (!requisition) return res.status(404).json({ message: 'Requisition not found' });
-
-    requisition.status = RequisitionStatus.APPROVED;
-    requisition.history.push({
-      status: RequisitionStatus.APPROVED,
-      action: 'status_change',
-      userId: req.user.id,
-      comment: 'Approved via API',
-      timestamp: new Date(),
-    });
-
-    await requisition.save();
-
-    if (io) {
-      io.emit('requisition-updated', requisition);
+router.put('/requisitions/:id/status', async (req: any, res, next) => {
+    try {
+        const reqItem = await Requisition.findOneAndUpdate(
+            { _id: req.params.id, organizationId: req.organizationId },
+            { status: req.body.status, updatedAt: new Date() },
+            { new: true }
+        );
+        res.json({ success: true, data: reqItem });
+    } catch (err) {
+        next(err);
     }
-
-    // Kafka Event
-    await eventBus.publish('inventory-events', 'REQUISITION_STATUS_UPDATED', {
-      requisitionId: requisition._id,
-      status: RequisitionStatus.APPROVED,
-      updatedBy: req.user.id,
-      timestamp: new Date(),
-    });
-
-    res.json(requisition);
-  } catch (err) {
-    next(err);
-  }
-});
-
-// POST /api/inventory/requests/:id/reject
-router.post('/requests/:id/reject', async (req: any, res, next) => {
-  try {
-    const requisition = await Requisition.findOne({
-      _id: req.params.id,
-      organizationId: req.organizationId,
-    });
-    if (!requisition) return res.status(404).json({ message: 'Requisition not found' });
-
-    requisition.status = RequisitionStatus.REJECTED;
-    requisition.history.push({
-      status: RequisitionStatus.REJECTED,
-      action: 'status_change',
-      userId: req.user.id,
-      comment: req.body.comment || 'Rejected via API',
-      timestamp: new Date(),
-    });
-
-    await requisition.save();
-
-    if (io) {
-      io.emit('requisition-updated', requisition);
-    }
-
-    // Kafka Event
-    await eventBus.publish('inventory-events', 'REQUISITION_STATUS_UPDATED', {
-      requisitionId: requisition._id,
-      status: RequisitionStatus.REJECTED,
-      updatedBy: req.user.id,
-      timestamp: new Date(),
-    });
-
-    res.json(requisition);
-  } catch (err) {
-    next(err);
-  }
 });
 
 export default router;

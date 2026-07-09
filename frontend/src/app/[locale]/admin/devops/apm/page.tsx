@@ -87,7 +87,7 @@ export default function APMDashboard() {
                                             { name: "notification-hub", latency: 12, success: 100, cpu: 5, mem: 120, color: "emerald" },
                                             { name: "search-engine", latency: 540, success: 94.20, cpu: 92, mem: 4200, color: "rose" },
                                         ].map((service, _i) => (
-                                            <tr key={service.name} className="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                                            <tr key={service.name} className="group hover:bg-primary/5 dark:hover:bg-white/5 transition-colors">
                                                 <td className="px-8 py-6">
                                                     <div className="flex items-center gap-4">
                                                         <div className={`size-10 rounded-xl bg-${service.color}-500/10 flex items-center justify-center border border-${service.color}-500/20`}>
@@ -124,7 +124,7 @@ export default function APMDashboard() {
                         </div>
 
                         {/* Recent Traces Visualizer Placeholder */}
-                        <div className="dashboard-card p-8 bg-slate-900 border-white/5 relative overflow-hidden group">
+                        <div className="dashboard-card p-8 bg-surface-dark border-white/5 relative overflow-hidden group">
                            <div className="absolute top-0 right-0 p-12 opacity-5 scale-150 pointer-events-none group-hover:rotate-12 transition-transform duration-1000">
                                <span className="material-symbols-outlined text-9xl text-white">timeline</span>
                            </div>
@@ -174,7 +174,7 @@ export default function APMDashboard() {
                         </div>
 
                         {/* RUM Insights */}
-                        <div className="dashboard-card p-8 bg-slate-950 border-white/5 relative overflow-hidden group">
+                        <div className="dashboard-card p-8 bg-background-dark border-white/5 relative overflow-hidden group">
                            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                            <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6 flex items-center gap-2">
                                <span className="material-symbols-outlined text-sm">open_in_new</span>

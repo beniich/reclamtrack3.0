@@ -1,7 +1,9 @@
+import { toast } from 'sonner';
 'use client'
 
 import DashboardTemplate from '@/components/devops-dashboards/shared/DashboardTemplate'
 import { Button } from '@/components/ui/button';
+import { Edit2, Trash } from 'lucide-react';
 
 
 export default function RateLimitingDashboard() {
@@ -69,7 +71,7 @@ export default function RateLimitingDashboard() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
-                <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+                <tr className="hover:bg-primary/5 dark:hover:bg-violet-500/10 transition-colors group">
                   <td className="px-6 py-4">
                     <div className="flex flex-col">
                       <span className="text-sm font-mono font-bold text-primary">/api/v2/auth/login</span>
@@ -77,7 +79,7 @@ export default function RateLimitingDashboard() {
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="px-2 py-1 rounded bg-blue-500/10 text-blue-500 text-[10px] font-bold">POST</span>
+                    <span className="px-2 py-1 rounded bg-primary/10 text-primary text-[10px] font-bold">POST</span>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
@@ -93,21 +95,21 @@ export default function RateLimitingDashboard() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button type="button" className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
-                        <span className="material-symbols-outlined text-lg">edit</span>
+                      <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
+                        <Edit2 className="text-lg" />
                       </button>
-                      <button type="button" className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
-                        <span className="material-symbols-outlined text-lg">delete</span>
+                      <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
+                        <Trash className="text-lg" />
                       </button>
                     </div>
                   </td>
                 </tr>
-                <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
-                  <td className="px-6 py-4 border-l-4 border-orange-500">
+                <tr className="hover:bg-primary/5 dark:hover:bg-violet-500/10 transition-colors group">
+                  <td className="px-6 py-4 border-l-4 border-primary">
                     <div className="flex flex-col">
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-mono font-bold text-primary">/api/v2/user/profile/*</span>
-                        <span className="material-symbols-outlined text-orange-500 text-sm">bolt</span>
+                        <span className="material-symbols-outlined text-primary text-sm">bolt</span>
                       </div>
                       <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase mt-1">Core API • Throttling Active</span>
                     </div>
@@ -129,11 +131,11 @@ export default function RateLimitingDashboard() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button type="button" className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
-                        <span className="material-symbols-outlined text-lg">edit</span>
+                      <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
+                        <Edit2 className="text-lg" />
                       </button>
-                      <button type="button" className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
-                        <span className="material-symbols-outlined text-lg">delete</span>
+                      <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
+                        <Trash className="text-lg" />
                       </button>
                     </div>
                   </td>
@@ -196,7 +198,7 @@ export default function RateLimitingDashboard() {
               <option>Last 7 Days</option>
               <option>Custom Window</option>
             </select>
-            <Button variant="secondary" className="bg-slate-900 dark:bg-white dark:text-slate-900 text-white px-4 py-2 rounded-lg text-xs font-bold hover:opacity-90 transition-all">Run Simulation</Button>
+            <Button variant="secondary" className="bg-surface-dark dark:bg-white dark:text-slate-900 text-white px-4 py-2 rounded-lg text-xs font-bold hover:opacity-90 transition-all">Run Simulation</Button>
           </div>
         </div>
 

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useDbSocket } from "@/hooks/useDbSocket";
+import { Search } from 'lucide-react';
 
 interface Log {
     timestamp: string;
@@ -40,7 +41,7 @@ export default function Terminal() {
     const colorClass = (type: string) => {
         switch (type) {
             case "INFO":
-                return "bg-blue-500/20 text-blue-400";
+                return "bg-primary/20 text-blue-400";
             case "WARN":
                 return "bg-amber-500/20 text-amber-400";
             case "ERROR":
@@ -71,10 +72,10 @@ export default function Terminal() {
                 </div>
             </div>
 
-            <div className="rounded-xl bg-black font-mono text-sm overflow-hidden border border-slate-800 shadow-2xl flex flex-col h-[460px]">
+            <div className="rounded-xl bg-black font-mono text-sm overflow-hidden border border-border-dark shadow-2xl flex flex-col h-[460px]">
                 {/* barre de recherche */}
-                <div className="bg-slate-900 border-b border-slate-800 p-2 flex items-center gap-3">
-                    <span className="material-symbols-outlined text-slate-600 text-sm">search</span>
+                <div className="bg-surface-dark border-b border-border-dark p-2 flex items-center gap-3">
+                    <Search className="text-slate-600 text-sm" />
                     <input
                         className="bg-transparent border-none focus:ring-0 text-xs text-slate-300 flex-1 placeholder:text-slate-600 outline-none"
                         placeholder="Recherche (ex : SELECT *, error, user_id=123)..."

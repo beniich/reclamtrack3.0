@@ -5,6 +5,7 @@ import { rosterApi, staffApi } from '@/lib/api';
 import { useOrgStore } from '@/store/orgStore';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Filter, CheckCircle, Users } from 'lucide-react';
 
 export default function RosterPage() {
     const [staff, setStaff] = useState<any[]>([]);
@@ -50,18 +51,18 @@ export default function RosterPage() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div className="flex items-center gap-3">
                     <div className="flex items-center bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-1 shadow-sm">
-                        <Button variant="ghost" className="material-symbols-outlined p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">chevron_left</Button>
+                        <Button variant="ghost" className="material-symbols-outlined p-1 hover:bg-primary/8 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">chevron_left</Button>
                         <div className="px-4 text-sm font-bold text-slate-700 dark:text-slate-200">Oct 23 - Oct 29, 2023</div>
-                        <Button variant="ghost" className="material-symbols-outlined p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">chevron_right</Button>
+                        <Button variant="ghost" className="material-symbols-outlined p-1 hover:bg-primary/8 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">chevron_right</Button>
                     </div>
-                    <Button variant="secondary" className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium shadow-sm hover:bg-slate-50">Today</Button>
+                    <Button variant="secondary" className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium shadow-sm hover:bg-primary/5">Today</Button>
                 </div>
                 <div className="flex items-center gap-3">
                     <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium shadow-sm">
-                        <span className="material-symbols-outlined text-lg">filter_list</span>
+                        <Filter className="text-lg" />
                         Filter
                     </button>
-                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-blue-700 transition-colors">
+                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-primary-700 transition-colors">
                         <span className="material-symbols-outlined text-lg">publish</span>
                         Publish Roster
                     </button>
@@ -69,7 +70,7 @@ export default function RosterPage() {
             </div>
 
             {/* Roster Table Container */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden mb-8">
+            <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl shadow-sm overflow-hidden mb-8">
                 <div className="overflow-x-auto">
                     <table className="w-full border-collapse">
                         <thead>
@@ -88,8 +89,8 @@ export default function RosterPage() {
                         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                             {staff.length > 0 ? (
                                 staff.map((member: any) => (
-                                    <tr key={member._id} className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
-                                        <td className="sticky left-0 z-10 bg-white dark:bg-slate-900 px-6 py-4 border-r border-slate-200 dark:border-slate-700">
+                                    <tr key={member._id} className="group hover:bg-primary/5/50 dark:hover:bg-violet-500/8">
+                                        <td className="sticky left-0 z-10 bg-white dark:bg-background px-6 py-4 border-r border-slate-200 dark:border-slate-700">
                                             <div className="flex items-center gap-3">
                                                 <div className="size-10 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold">
                                                     {member.name.split(' ').map((n: string) => n[0]).join('')}
@@ -109,11 +110,11 @@ export default function RosterPage() {
                                             const isOff = !dayShift || dayShift.toLowerCase() === 'off';
 
                                             return (
-                                                <td key={day} className="p-2 border-r border-slate-100 dark:border-slate-800">
+                                                <td key={day} className="p-2 border-r border-slate-100 dark:border-border-dark">
                                                     <div className={`
                                                         border rounded-lg p-2 text-center min-h-[40px] text-xs font-medium flex items-center justify-center
                                                         ${isOff
-                                                            ? 'bg-slate-50 dark:bg-slate-800/20 border-slate-100 dark:border-slate-800 text-slate-400'
+                                                            ? 'bg-slate-50 dark:bg-slate-800/20 border-slate-100 dark:border-border-dark text-slate-400'
                                                             : 'bg-blue-50 dark:bg-blue-900/20 border-blue-100 dark:border-blue-800 text-blue-700 dark:text-blue-300'
                                                         }
                                                     `}>
@@ -138,9 +139,9 @@ export default function RosterPage() {
 
             {/* Stats Footer */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                <div className="bg-white dark:bg-background p-5 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm flex items-center gap-4">
                     <div className="size-12 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 flex items-center justify-center">
-                        <span className="material-symbols-outlined text-3xl">check_circle</span>
+                        <CheckCircle className="text-3xl" />
                     </div>
                     <div>
                         <div className="text-2xl font-bold">{roster?.shifts?.length || 0}</div>
@@ -148,7 +149,7 @@ export default function RosterPage() {
                     </div>
                 </div>
 
-                <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                <div className="bg-white dark:bg-background p-5 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm flex items-center gap-4">
                     <div className="size-12 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-600 flex items-center justify-center">
                         <span className="material-symbols-outlined text-3xl">pending_actions</span>
                     </div>
@@ -158,9 +159,9 @@ export default function RosterPage() {
                     </div>
                 </div>
 
-                <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
-                    <div className="size-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center">
-                        <span className="material-symbols-outlined text-3xl">groups</span>
+                <div className="bg-white dark:bg-background p-5 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm flex items-center gap-4">
+                    <div className="size-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center">
+                        <Users className="text-3xl" />
                     </div>
                     <div>
                         <div className="text-2xl font-bold">{staff.length}</div>

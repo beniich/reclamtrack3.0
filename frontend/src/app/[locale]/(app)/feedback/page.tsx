@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { CheckCircle, FileText, UploadCloud } from 'lucide-react';
 
 export default function CitizenFeedbackPage() {
     // State
@@ -39,7 +40,7 @@ export default function CitizenFeedbackPage() {
             <div className="min-h-screen bg-brand-midnight font-display text-white flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-full h-full bg-cyan-500/5 blur-[120px] -z-10 pointer-events-none"></div>
                 <div className="w-24 h-24 bg-emerald-500/20 rounded-full flex items-center justify-center mb-6 animate-bounce border border-emerald-500/20">
-                    <span className="material-symbols-outlined text-6xl text-emerald-400">check_circle</span>
+                    <CheckCircle className="text-6xl text-emerald-400" />
                 </div>
                 <h1 className="text-3xl font-black tracking-tighter uppercase italic mb-4">Merci !</h1>
                 <p className="text-slate-500 uppercase tracking-widest text-[10px] font-black max-w-md mb-8">
@@ -80,7 +81,7 @@ export default function CitizenFeedbackPage() {
                 <div className="mb-10">
                     <h1 className="text-4xl font-black tracking-tighter mb-2 uppercase italic">Partagez votre avis</h1>
                     <div className="flex items-center gap-2 text-cyan-400">
-                        <span className="material-symbols-outlined text-lg">description</span>
+                        <FileText className="text-lg" />
                         <span className="text-[10px] font-black uppercase tracking-widest">Case ID: REC-001 — Infrastructure Repair</span>
                     </div>
                 </div>
@@ -119,7 +120,7 @@ export default function CitizenFeedbackPage() {
                         </div>
                     </section>
 
-                    <hr className="border-slate-100 dark:border-slate-800" />
+                    <hr className="border-slate-100 dark:border-border-dark" />
 
                     {/* 2. Checklist Criteria */}
                     <section>
@@ -128,7 +129,7 @@ export default function CitizenFeedbackPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <label className={cn(
                                 "flex items-center p-4 rounded-lg border cursor-pointer transition-colors group",
-                                criteria.punctuality ? "border-primary bg-primary/5" : "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                criteria.punctuality ? "border-primary bg-primary/5" : "border-slate-200 dark:border-border-dark hover:bg-primary/5 dark:hover:bg-violet-500/15"
                             )}>
                                 <input
                                     checked={criteria.punctuality}
@@ -140,7 +141,7 @@ export default function CitizenFeedbackPage() {
                             </label>
                             <label className={cn(
                                 "flex items-center p-4 rounded-lg border cursor-pointer transition-colors group",
-                                criteria.professionalism ? "border-primary bg-primary/5" : "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                criteria.professionalism ? "border-primary bg-primary/5" : "border-slate-200 dark:border-border-dark hover:bg-primary/5 dark:hover:bg-violet-500/15"
                             )}>
                                 <input
                                     checked={criteria.professionalism}
@@ -152,7 +153,7 @@ export default function CitizenFeedbackPage() {
                             </label>
                             <label className={cn(
                                 "flex items-center p-4 rounded-lg border cursor-pointer transition-colors group",
-                                criteria.quality ? "border-primary bg-primary/5" : "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                criteria.quality ? "border-primary bg-primary/5" : "border-slate-200 dark:border-border-dark hover:bg-primary/5 dark:hover:bg-violet-500/15"
                             )}>
                                 <input
                                     checked={criteria.quality}
@@ -164,7 +165,7 @@ export default function CitizenFeedbackPage() {
                             </label>
                             <label className={cn(
                                 "flex items-center p-4 rounded-lg border cursor-pointer transition-colors group",
-                                criteria.cleanup ? "border-primary bg-primary/5" : "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                criteria.cleanup ? "border-primary bg-primary/5" : "border-slate-200 dark:border-border-dark hover:bg-primary/5 dark:hover:bg-violet-500/15"
                             )}>
                                 <input
                                     checked={criteria.cleanup}
@@ -177,7 +178,7 @@ export default function CitizenFeedbackPage() {
                         </div>
                     </section>
 
-                    <hr className="border-slate-100 dark:border-slate-800" />
+                    <hr className="border-slate-100 dark:border-border-dark" />
 
                     {/* 3. Comments */}
                     <section>
@@ -196,11 +197,11 @@ export default function CitizenFeedbackPage() {
                         <h2 className="text-lg font-bold mb-4">Evidence & Documentation</h2>
                         <div className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-10 flex flex-col items-center justify-center bg-slate-50/50 dark:bg-slate-800/30 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer group">
                             <div className="size-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                <span className="material-symbols-outlined text-primary">cloud_upload</span>
+                                <UploadCloud className="text-primary" />
                             </div>
                             <p className="text-sm font-bold mb-1">Drag and Drop Photo of Completed Work</p>
                             <p className="text-xs text-slate-500">PNG, JPG or PDF up to 10MB</p>
-                            <Button variant="secondary" className="mt-4 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-semibold shadow-sm hover:shadow transition-all">Browse Files</Button>
+                            <Button variant="secondary" className="mt-4 px-4 py-2 bg-white dark:bg-background border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-semibold shadow-sm hover:shadow transition-all">Browse Files</Button>
                         </div>
                     </section>
 
@@ -226,7 +227,7 @@ export default function CitizenFeedbackPage() {
             </main>
 
             {/* Footer */}
-            <footer className="w-full py-8 text-center text-slate-400 text-xs border-t border-slate-200 dark:border-slate-800 mt-12 bg-white dark:bg-slate-900">
+            <footer className="w-full py-8 text-center text-slate-400 text-xs border-t border-slate-200 dark:border-border-dark mt-12 bg-white dark:bg-background">
                 <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center px-6 gap-4">
                     <p>© 2026 ReclamTrack. Official Municipal Service Portal.</p>
                     <div className="flex gap-6">

@@ -36,8 +36,8 @@ export const AICmdBar: React.FC<AICmdBarProps> = ({ onGenerate }) => {
     };
 
     return (
-        <div className="flex items-center gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-orange-500/10 p-4 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-orange-500/5">
-            <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-orange-500/10 text-orange-500 rounded-2xl">
+        <div className="flex items-center gap-4 bg-white dark:bg-background border border-slate-200 dark:border-primary/10 p-4 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-orange-500/5">
+            <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-primary/10 text-primary rounded-2xl">
                 <Sparkles size={20} className={cn(loading && "animate-pulse")} />
             </div>
 
@@ -62,7 +62,7 @@ export const AICmdBar: React.FC<AICmdBarProps> = ({ onGenerate }) => {
                     "w-12 h-12 flex items-center justify-center rounded-2xl transition-all",
                     loading || !prompt.trim()
                         ? "bg-slate-100 dark:bg-slate-800 text-slate-400"
-                        : "bg-slate-900 dark:bg-orange-500 text-white shadow-lg shadow-orange-500/20 hover:scale-105 active:scale-95"
+                        : "bg-surface-dark dark:bg-primary text-white shadow-lg shadow-orange-500/20 hover:scale-105 active:scale-95"
                 )}
             >
                 {loading ? <Loader2 size={20} className="animate-spin" /> : <Send size={20} />}

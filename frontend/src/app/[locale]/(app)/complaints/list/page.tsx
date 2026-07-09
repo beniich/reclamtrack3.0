@@ -328,7 +328,7 @@ export default function ComplaintListPage() {
                                                 </span>
                                                 <span className="text-[10px] text-slate-600 font-bold uppercase tracking-widest flex items-center gap-1">
                                                     {new Date(c.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
-                                                    {c.priority === 'urgent' && <Zap className="w-2.5 h-2.5 text-orange-500 animate-pulse" />}
+                                                    {c.priority === 'urgent' && <Zap className="w-2.5 h-2.5 text-primary animate-pulse" />}
                                                 </span>
                                             </div>
                                         </td>

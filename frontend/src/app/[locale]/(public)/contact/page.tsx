@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 export default function ContactPage() {
     const [sent, setSent] = useState(false);
@@ -34,7 +35,7 @@ export default function ContactPage() {
 
             <main className="flex-1 pt-20">
                 {/* Hero Section */}
-                <section className="relative py-24 bg-slate-900 dark:bg-black overflow-hidden">
+                <section className="relative py-24 bg-surface-dark dark:bg-black overflow-hidden">
                     <div className="absolute inset-0 z-0 opacity-40 bg-[radial-gradient(circle_at_100%_0%,#ec5b13_0%,transparent_50% preview)]"></div>
                     <div className="absolute inset-0 z-0 opacity-40 bg-[radial-gradient(circle_at_100%_0%,#ec5b13_0%,transparent_50%)]"></div>
                     <div className="relative z-10 max-w-4xl mx-auto px-6">
@@ -81,7 +82,7 @@ export default function ContactPage() {
                                     Already a Pro user? For mission-critical incidents, please use the encrypted chat within your mission dashboard for prioritized response times.
                                 </p>
                                 <Link href="/login" className="text-primary font-black text-xs uppercase tracking-[0.2em] hover:tracking-[0.3em] transition-all flex items-center gap-2">
-                                    Dashboard Access <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                                    Dashboard Access <ArrowRight className="text-sm" />
                                 </Link>
                             </div>
                         </div>

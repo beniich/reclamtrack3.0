@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { dbAdminApi } from "@/services/dbAdminService";
+import { RefreshCw, BarChart, Filter } from 'lucide-react';
 
 interface ActiveQuery {
     id: number;
@@ -143,13 +144,13 @@ export default function DBASentinelDashboard() {
                         <div className="space-y-2">
                             <h3 className="text-xs font-bold text-[#666] uppercase tracking-wider">Quick Actions</h3>
                             <button type="button" className="w-full text-left px-3 py-2 text-xs bg-[#222] hover:bg-[#333] border border-[#444] text-[#ccc] hover:text-white transition-colors rounded flex items-center gap-2">
-                                <span className="material-symbols-outlined text-sm">refresh</span> Re-balance Connections
+                                <RefreshCw className="text-sm" /> Re-balance Connections
                             </button>
                             <button type="button" className="w-full text-left px-3 py-2 text-xs bg-[#222] hover:bg-[#333] border border-[#444] text-[#ccc] hover:text-white transition-colors rounded flex items-center gap-2">
                                 <span className="material-symbols-outlined text-sm">stop_circle</span> Kill Idle Sessions
                             </button>
                             <button type="button" className="w-full text-left px-3 py-2 text-xs bg-[#222] hover:bg-[#333] border border-[#444] text-[#ccc] hover:text-white transition-colors rounded flex items-center gap-2">
-                                <span className="material-symbols-outlined text-sm">analytics</span> Analyze Vacuum Stats
+                                <BarChart className="text-sm" /> Analyze Vacuum Stats
                             </button>
                         </div>
                     </aside>
@@ -184,7 +185,7 @@ export default function DBASentinelDashboard() {
                                 <h3 className="text-xs font-bold text-[#ccc]">ACTIVE_SESSIONS</h3>
                                 <div className="flex gap-2">
                                     <input type="text" placeholder="Filter by user/db..." className="bg-[#0b0c10] border border-[#333] text-[#aaa] text-xs px-2 py-1 rounded w-48 outline-none focus:border-[#4ade80]" />
-                                    <button type="button" className="text-[#aaa] hover:text-white"><span className="material-symbols-outlined text-sm">filter_list</span></button>
+                                    <button type="button" className="text-[#aaa] hover:text-white"><Filter className="text-sm" /></button>
                                 </div>
                             </div>
                             <table className="w-full text-left text-xs">

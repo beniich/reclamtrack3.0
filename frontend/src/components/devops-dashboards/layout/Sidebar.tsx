@@ -26,7 +26,7 @@ export const Sidebar = ({ items }: { items: MenuItem[] }) => (
                     title={it.label}
                     className={`flex items-center gap-4 px-3 py-2.5 rounded-xl transition-all ${it.active
                             ? "bg-primary/10 text-primary font-bold shadow-sm"
-                            : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                            : "text-slate-600 dark:text-slate-400 hover:bg-primary/8 dark:hover:bg-violet-500/15"
                         }`}
                 >
                     <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
@@ -41,7 +41,7 @@ export const Sidebar = ({ items }: { items: MenuItem[] }) => (
 
         {/* Footer actions */}
         <div className="p-4 border-t border-slate-200 dark:border-border-dark space-y-4">
-            <button type="button" title="New Discovery Scan" className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-blue-600 text-white font-bold py-2.5 rounded-xl transition-all shadow-lg shadow-primary/20 overflow-hidden">
+            <button type="button" title="New Discovery Scan" className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary text-white font-bold py-2.5 rounded-xl transition-all shadow-lg shadow-primary/20 overflow-hidden">
                 <Icon name="potted_plant" className="text-lg flex-shrink-0" />
                 <span className="opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 whitespace-nowrap">Scan</span>
             </button>

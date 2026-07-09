@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import { Home } from 'lucide-react';
 
 export default function RBACPage() {
     return (
@@ -11,10 +12,10 @@ export default function RBACPage() {
                     </div>
                     <h2 className="text-lg font-bold text-white">Enterprise Access Control</h2>
                 </div>
-                <Link href="/admin/devops" className="p-2 text-slate-400 hover:text-white"><span className="material-symbols-outlined">home</span></Link>
+                <Link href="/admin/devops" className="p-2 text-slate-400 hover:text-white"><Home /></Link>
             </header>
             <div className="flex-1 flex overflow-hidden">
-                <aside className="w-64 border-r border-slate-800 bg-background-dark p-4 space-y-2">
+                <aside className="w-64 border-r border-border-dark bg-background-dark p-4 space-y-2">
                     <a className="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary">
                         <span className="material-symbols-outlined">admin_panel_settings</span>
                         <span className="text-sm font-medium">Roles & Permissions</span>
@@ -23,10 +24,10 @@ export default function RBACPage() {
                 <main className="flex-1 p-6 overflow-y-auto">
                     <h1 className="text-2xl font-bold mb-2 text-white">Granular RBAC Fine-tuning</h1>
                     <p className="text-slate-400 text-sm mb-6">Define specific module access levels</p>
-                    <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+                    <div className="bg-surface-dark/50 border border-border-dark rounded-xl p-6">
                         <table className="w-full">
                             <thead>
-                                <tr className="border-b border-slate-800">
+                                <tr className="border-b border-border-dark">
                                     <th className="text-left p-4 text-xs font-bold text-slate-400 uppercase">Module</th>
                                     <th className="text-center p-4 text-xs font-bold text-slate-400 uppercase">Create</th>
                                     <th className="text-center p-4 text-xs font-bold text-slate-400 uppercase">Read</th>
@@ -35,7 +36,7 @@ export default function RBACPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="border-b border-slate-800">
+                                <tr className="border-b border-border-dark">
                                     <td className="p-4"><div className="font-semibold text-white">User Management</div></td>
                                     <td className="p-4 text-center"><input type="checkbox" defaultChecked className="rounded" /></td>
                                     <td className="p-4 text-center"><input type="checkbox" defaultChecked className="rounded" /></td>

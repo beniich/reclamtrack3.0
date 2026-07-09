@@ -35,7 +35,7 @@ export function AnimatedLogo({ className = "", size = 40 }: AnimatedLogoProps) {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             {/* Top Node Glow - Industrial Orange */}
             <motion.div 
-               className="w-[20%] h-[15%] bg-orange-500/50 rounded-full blur-md"
+               className="w-[20%] h-[15%] bg-primary/50 rounded-full blur-md"
                animate={{ opacity: [0.3, 0.9, 0.3], scale: [1, 1.3, 1] }}
                transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
                style={{ position: 'absolute', top: '10%', left: '40%', mixBlendMode: 'screen' }}

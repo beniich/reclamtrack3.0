@@ -10,6 +10,7 @@ import { Router } from 'express';
 import { body } from 'express-validator';
 import { authenticate } from '../middleware/security.js';
 import { validator } from '../middleware/validator.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
 import AuditLog from '../models/AuditLog.js';
 import { User } from '../models/User.js';
 import {

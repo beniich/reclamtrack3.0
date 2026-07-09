@@ -1,4 +1,5 @@
 import React from 'react';
+import { Users } from 'lucide-react';
 
 // Types pour les props
 interface Personnel {
@@ -30,12 +31,12 @@ const pendingOrders: Order[] = [
 
 export default function SidebarLeft({ onOpenAssignment }: { onOpenAssignment: () => void }) {
     return (
-        <aside className="w-72 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0 h-full">
+        <aside className="w-72 bg-surface-dark border-r border-border-dark flex flex-col shrink-0 h-full">
             {/* Available Personnel */}
-            <div className="flex-1 flex flex-col min-h-0 border-b border-slate-800">
-                <div className="p-4 flex items-center justify-between bg-slate-900/50">
+            <div className="flex-1 flex flex-col min-h-0 border-b border-border-dark">
+                <div className="p-4 flex items-center justify-between bg-surface-dark/50">
                     <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                        <span className="material-symbols-outlined text-sm">people</span> Available Personnel
+                        <Users className="text-sm" /> Available Personnel
                     </h2>
                     <span className="bg-emerald-900/30 text-emerald-400 px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-500/20">
                         12 ONLINE
@@ -46,7 +47,7 @@ export default function SidebarLeft({ onOpenAssignment }: { onOpenAssignment: ()
                     {personnelList.map((person, idx) => (
                         <div
                             key={idx}
-                            className={`p-2 rounded-lg border border-slate-800 bg-slate-800/40 hover:border-blue-500/50 hover:bg-slate-800 cursor-grab active:cursor-grabbing transition-colors flex items-center gap-3 group ${person.status === 'break' ? 'opacity-60' : ''}`}
+                            className={`p-2 rounded-lg border border-border-dark bg-slate-800/40 hover:border-primary/50 hover:bg-violet-500/15 cursor-grab active:cursor-grabbing transition-colors flex items-center gap-3 group ${person.status === 'break' ? 'opacity-60' : ''}`}
                         >
                             <div className="relative">
                                 <img
@@ -66,12 +67,12 @@ export default function SidebarLeft({ onOpenAssignment }: { onOpenAssignment: ()
             </div>
 
             {/* Pending Orders */}
-            <div className="flex-1 flex flex-col min-h-0 bg-slate-950/20">
-                <div className="p-4 flex items-center justify-between bg-slate-900 border-b border-slate-800">
+            <div className="flex-1 flex flex-col min-h-0 bg-background-dark/20">
+                <div className="p-4 flex items-center justify-between bg-surface-dark border-b border-border-dark">
                     <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
                         <span className="material-symbols-outlined text-sm">assignment_late</span> Pending Orders
                     </h2>
-                    <span className="text-[10px] font-bold text-blue-500">05 NEW</span>
+                    <span className="text-[10px] font-bold text-primary">05 NEW</span>
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-3 space-y-3 scrollbar-thin scrollbar-thumb-slate-800">
@@ -79,7 +80,7 @@ export default function SidebarLeft({ onOpenAssignment }: { onOpenAssignment: ()
                         <div
                             key={order.id}
                             onClick={onOpenAssignment}
-                            className={`bg-slate-800 p-3 rounded-lg shadow-lg border-l-4 ${order.type === 'urgent' ? 'border-red-500' : 'border-blue-500'} cursor-pointer hover:bg-slate-700/80 transition-colors`}
+                            className={`bg-slate-800 p-3 rounded-lg shadow-lg border-l-4 ${order.type === 'urgent' ? 'border-red-500' : 'border-primary'} cursor-pointer hover:bg-slate-700/80 transition-colors`}
                         >
                             <div className="flex justify-between items-start mb-1">
                                 <span className="text-[10px] font-bold text-slate-500">{order.id}</span>

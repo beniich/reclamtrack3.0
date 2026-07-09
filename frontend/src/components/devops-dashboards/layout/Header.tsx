@@ -5,7 +5,7 @@ import { Icon } from "../ui/Icon";
 import { useState } from "react";
 
 export const Header = () => (
-    <header className="flex items-center justify-between px-6 py-3 border-b border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark sticky top-0 z-50">
+    <header className="flex items-center justify-between px-6 py-3 border-b border-slate-200 dark:border-border-dark bg-background-light dark:bg-background-dark sticky top-0 z-50">
         {/* Logo & title */}
         <div className="flex items-center gap-3">
             <div className="size-8 bg-primary rounded-lg flex items-center justify-center text-white">

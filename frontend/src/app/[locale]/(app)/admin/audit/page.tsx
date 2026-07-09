@@ -76,7 +76,7 @@ export default function AuditPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-background-dark">
-      <header className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-8 py-4 sticky top-0 z-50">
+      <header className="flex items-center justify-between border-b border-slate-200 dark:border-border-dark bg-white dark:bg-background px-8 py-4 sticky top-0 z-50">
         <div className="flex items-center gap-4">
           <div className="bg-primary p-2 rounded-xl text-white shadow-lg shadow-primary/20">
             <Shield className="w-6 h-6" />
@@ -105,7 +105,7 @@ export default function AuditPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-           <Card className="bg-white dark:bg-slate-900 border-0 shadow-xl shadow-slate-200/50 dark:shadow-none ring-1 ring-slate-200 dark:ring-slate-800">
+           <Card className="bg-white dark:bg-background border-0 shadow-xl shadow-slate-200/50 dark:shadow-none ring-1 ring-slate-200 dark:ring-slate-800">
              <CardContent className="pt-6">
                <div className="flex items-center justify-between">
                   <div>
@@ -116,7 +116,7 @@ export default function AuditPage() {
                </div>
              </CardContent>
            </Card>
-           <Card className="bg-white dark:bg-slate-900 border-0 shadow-xl shadow-slate-200/50 dark:shadow-none ring-1 ring-slate-200 dark:ring-slate-800 border-l-4 border-l-red-500">
+           <Card className="bg-white dark:bg-background border-0 shadow-xl shadow-slate-200/50 dark:shadow-none ring-1 ring-slate-200 dark:ring-slate-800 border-l-4 border-l-red-500">
              <CardContent className="pt-6">
                <div className="flex items-center justify-between">
                   <div>
@@ -127,7 +127,7 @@ export default function AuditPage() {
                </div>
              </CardContent>
            </Card>
-           <Card className="bg-white dark:bg-slate-900 border-0 shadow-xl shadow-slate-200/50 dark:shadow-none ring-1 ring-slate-200 dark:ring-slate-800 border-l-4 border-l-emerald-500">
+           <Card className="bg-white dark:bg-background border-0 shadow-xl shadow-slate-200/50 dark:shadow-none ring-1 ring-slate-200 dark:ring-slate-800 border-l-4 border-l-emerald-500">
              <CardContent className="pt-6">
                <div className="flex items-center justify-between">
                   <div>
@@ -140,18 +140,18 @@ export default function AuditPage() {
            </Card>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-wrap gap-4 items-center">
+        <div className="bg-white dark:bg-background rounded-2xl p-4 border border-slate-200 dark:border-border-dark shadow-sm flex flex-wrap gap-4 items-center">
             <div className="flex-1 min-w-[300px] relative">
                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                <Input
                 placeholder="Search logs by operator, action or data..."
-                className="pl-10 border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 font-medium"
+                className="pl-10 border-slate-100 dark:border-border-dark bg-slate-50 dark:bg-background font-medium"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
             <div className="flex gap-2">
-               <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-950 px-4 py-2 rounded-xl border border-slate-100 dark:border-slate-800">
+               <div className="flex items-center gap-2 bg-slate-50 dark:bg-background px-4 py-2 rounded-xl border border-slate-100 dark:border-border-dark">
                   <Filter className="w-4 h-4 text-slate-400" />
                   <select
                     className="bg-transparent border-none focus:ring-0 text-sm font-bold"
@@ -168,11 +168,11 @@ export default function AuditPage() {
             </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-2xl shadow-slate-200/50 dark:shadow-none">
+        <div className="bg-white dark:bg-background rounded-3xl border border-slate-200 dark:border-border-dark overflow-hidden shadow-2xl shadow-slate-200/50 dark:shadow-none">
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-slate-50 dark:bg-slate-950/50 border-b border-slate-100 dark:border-slate-800">
+                <tr className="bg-slate-50 dark:bg-background/50 border-b border-slate-100 dark:border-border-dark">
                   <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Operator</th>
                   <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Action</th>
                   <th className="px-6 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Resource</th>
@@ -186,7 +186,7 @@ export default function AuditPage() {
                     <td colSpan={5} className="px-6 py-20 text-center text-slate-400 font-bold italic animate-pulse">Syncing encrypted audit stream...</td>
                   </tr>
                 ) : filteredLogs.length > 0 ? filteredLogs.map((log) => (
-                  <tr key={log._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                  <tr key={log._id} className="hover:bg-primary/5 dark:hover:bg-violet-500/8 transition-colors">
                     <td className="px-6 py-4">
                        <div className="flex items-center gap-3">
                           <div className="bg-primary/10 p-2 rounded-lg text-primary">

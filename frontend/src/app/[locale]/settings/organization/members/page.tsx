@@ -178,7 +178,7 @@ export default function MembersPage() {
                 </RoleGuard>
             </div>
 
-            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark shadow-sm overflow-hidden">
                 <Table>
                     <TableHeader>
                         <TableRow>

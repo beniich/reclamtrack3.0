@@ -10,15 +10,15 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 export function Card({ children, className = '', header, footer, ...props }: CardProps) {
     const isOpinionated = header || footer;
     return (
-        <div className={`bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden ${className}`} {...props}>
+        <div className={`bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-sm overflow-hidden ${className}`} {...props}>
             {header && (
-                <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                <div className="px-6 py-4 border-b border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-slate-800/50">
                     {header}
                 </div>
             )}
             <div className={isOpinionated ? "p-6" : ""}>{children}</div>
             {footer && (
-                <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                <div className="px-6 py-4 border-t border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-slate-800/50">
                     {footer}
                 </div>
             )}
@@ -28,7 +28,7 @@ export function Card({ children, className = '', header, footer, ...props }: Car
 
 export function CardHeader({ className = '', children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className={`px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex flex-col space-y-1.5 ${className}`} {...props}>
+        <div className={`px-6 py-4 border-b border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-slate-800/50 flex flex-col space-y-1.5 ${className}`} {...props}>
             {children}
         </div>
     )
@@ -60,7 +60,7 @@ export function CardDescription({ className = '', children, ...props }: React.HT
 
 export function CardFooter({ className = '', children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className={`px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex items-center ${className}`} {...props}>
+        <div className={`px-6 py-4 border-t border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-slate-800/50 flex items-center ${className}`} {...props}>
             {children}
         </div>
     )

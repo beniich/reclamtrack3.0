@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Calendar, History } from 'lucide-react';
 
 export default function PrivacyPage() {
     const sections = [
@@ -84,11 +85,11 @@ To exercise sovereignty, contact: dpo@reclamtrack.pro`
                         <h1 className="text-4xl md:text-5xl font-black mb-4">Privacy Protocol</h1>
                         <div className="flex flex-wrap gap-6 text-sm font-bold text-slate-500">
                             <span className="flex items-center gap-2 italic">
-                                <span className="material-symbols-outlined text-sm text-primary">event</span>
+                                <Calendar className="text-sm text-primary" />
                                 Effective: Jan 01, 2026
                             </span>
                             <span className="flex items-center gap-2">
-                                <span className="material-symbols-outlined text-sm text-primary">history</span>
+                                <History className="text-sm text-primary" />
                                 Version 4.0 (Pro Upgrade)
                             </span>
                         </div>
@@ -131,7 +132,7 @@ To exercise sovereignty, contact: dpo@reclamtrack.pro`
                                 </div>
                             ))}
 
-                            <div className="mt-20 p-8 bg-slate-900 text-white rounded-3xl relative overflow-hidden">
+                            <div className="mt-20 p-8 bg-surface-dark text-white rounded-3xl relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl rounded-full"></div>
                                 <h3 className="text-xl font-black mb-4">Contact Protocol Officer</h3>
                                 <p className="text-slate-400 mb-6 font-light">Direct line for all data sovereignty inquiries:</p>

@@ -1,3 +1,4 @@
+import { TrendingDown } from 'lucide-react';
 'use client';
 
 export default function ResolutionEfficiency() {
@@ -18,7 +19,7 @@ export default function ResolutionEfficiency() {
                     </div>
 
                     <div className="size-12 rounded-full border-4 border-white/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <span className="material-symbols-outlined filled-icon">trending_down</span>
+                        <TrendingDown className="filled-icon" />
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Landmark, Lock, Check, Info } from 'lucide-react';
 
 type Plan = 'starter' | 'pro' | 'enterprise';
 
@@ -89,16 +90,16 @@ export default function PressingCheckoutPage() {
     return (
         <div className="min-h-screen bg-white dark:bg-[#0a0a0f] font-sans">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-white/90 dark:bg-[#0a0a0f]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+            <header className="sticky top-0 z-50 bg-white/90 dark:bg-[#0a0a0f]/90 backdrop-blur-md border-b border-slate-200 dark:border-border-dark">
                 <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
                     <Link href="/services/pressing" className="flex items-center gap-3">
                         <div className="flex items-center justify-center size-9 bg-primary rounded-lg text-white">
-                            <span className="material-symbols-outlined text-xl notranslate">account_balance</span>
+                            <Landmark className="text-xl notranslate" />
                         </div>
                         <span className="text-lg font-black text-slate-900 dark:text-white">Cloud <span className="text-primary">Industrie</span></span>
                     </Link>
                     <div className="flex items-center gap-2 text-xs text-slate-400">
-                        <span className="material-symbols-outlined text-emerald-500 text-sm notranslate">lock</span>
+                        <Lock className="text-emerald-500 text-sm notranslate" />
                         Paiement 100% sécurisé
                     </div>
                 </div>
@@ -116,7 +117,7 @@ export default function PressingCheckoutPage() {
                         <div key={s.num} className="flex items-center gap-2">
                             <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-black transition-all ${step === s.num ? 'bg-primary text-white shadow-lg shadow-primary/30' : step > s.num ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400' : 'bg-slate-100 dark:bg-slate-800 text-slate-400'}`}>
                                 {step > s.num
-                                    ? <span className="material-symbols-outlined text-sm notranslate">check</span>
+                                    ? <Check className="text-sm notranslate" />
                                     : <span>{s.num}</span>
                                 }
                                 <span className="hidden sm:inline">{s.label}</span>
@@ -167,7 +168,7 @@ export default function PressingCheckoutPage() {
                                             className={`flex items-start gap-4 p-4 rounded-xl border-2 text-left transition-all ${selectedAddons.includes(addon.id) ? 'border-primary bg-primary/5 dark:bg-primary/10' : 'border-slate-200 dark:border-slate-700 hover:border-primary/50'}`}
                                         >
                                             <div className={`size-5 mt-0.5 rounded border-2 flex items-center justify-center flex-shrink-0 ${selectedAddons.includes(addon.id) ? 'border-primary bg-primary' : 'border-slate-300 dark:border-slate-600'}`}>
-                                                {selectedAddons.includes(addon.id) && <span className="material-symbols-outlined text-white text-xs notranslate">check</span>}
+                                                {selectedAddons.includes(addon.id) && <Check className="text-white text-xs notranslate" />}
                                             </div>
                                             <div className="flex-1">
                                                 <p className="font-bold text-slate-900 dark:text-white text-sm">{addon.label}</p>
@@ -178,7 +179,7 @@ export default function PressingCheckoutPage() {
                                     ))}
                                 </div>
 
-                                <button type="button" onClick={() => setStep(2)} className="w-full bg-primary text-white py-4 rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-xl shadow-primary/20">
+                                <button type="button" onClick={() => setStep(2)} className="w-full bg-primary text-white py-4 rounded-2xl font-black text-lg hover:bg-primary-700 transition-all shadow-xl shadow-primary/20">
                                     Continuer — Infos organisation →
                                 </button>
                             </div>
@@ -254,10 +255,10 @@ export default function PressingCheckoutPage() {
                                     </div>
                                 </div>
                                 <div className="flex gap-3 mt-8">
-                                    <button type="button" onClick={() => setStep(1)} className="px-6 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                                    <button type="button" onClick={() => setStep(1)} className="px-6 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 font-bold text-slate-700 dark:text-slate-300 hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-all">
                                         ← Retour
                                     </button>
-                                    <button type="submit" className="flex-1 bg-primary text-white py-4 rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-xl shadow-primary/20">
+                                    <button type="submit" className="flex-1 bg-primary text-white py-4 rounded-2xl font-black text-lg hover:bg-primary-700 transition-all shadow-xl shadow-primary/20">
                                         Continuer — Paiement →
                                     </button>
                                 </div>
@@ -270,7 +271,7 @@ export default function PressingCheckoutPage() {
                                 <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-8">Informations de paiement</h2>
 
                                 <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-4 mb-8 flex items-start gap-3">
-                                    <span className="material-symbols-outlined text-amber-500 notranslate">info</span>
+                                    <Info className="text-amber-500 notranslate" />
                                     <p className="text-sm text-amber-800 dark:text-amber-400">
                                         <strong>Mode démonstration.</strong> Aucune vraie transaction ne sera effectuée. Utilisez un numéro factice pour tester.
                                     </p>
@@ -315,10 +316,10 @@ export default function PressingCheckoutPage() {
                                 </div>
 
                                 <div className="flex gap-3 mt-8">
-                                    <button type="button" onClick={() => setStep(2)} className="px-6 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                                    <button type="button" onClick={() => setStep(2)} className="px-6 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 font-bold text-slate-700 dark:text-slate-300 hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-all">
                                         ← Retour
                                     </button>
-                                    <button type="submit" disabled={processing} className="flex-1 bg-primary text-white py-4 rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-xl shadow-primary/20 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3">
+                                    <button type="submit" disabled={processing} className="flex-1 bg-primary text-white py-4 rounded-2xl font-black text-lg hover:bg-primary-700 transition-all shadow-xl shadow-primary/20 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3">
                                         {processing ? (
                                             <>
                                                 <svg className="animate-spin size-5" viewBox="0 0 24 24" fill="none">

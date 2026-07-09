@@ -12,7 +12,7 @@ export default function DevOpsPage() {
                     <h1 className="text-3xl font-bold tracking-tight text-slate-900">Outils DevOps & CI/CD</h1>
                     <p className="text-slate-500 mt-2">Gestion des déploiements continus et pipelines Vercel/GitHub</p>
                 </div>
-                <button type="button" className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-xl hover:bg-slate-800 transition-colors">
+                <button type="button" className="flex items-center gap-2 bg-surface-dark text-white px-4 py-2 rounded-xl hover:bg-violet-500/15 transition-colors">
                     <RefreshCw size={18} />
                     <span>Déclencher Build</span>
                 </button>
@@ -22,7 +22,7 @@ export default function DevOpsPage() {
                 <Card className="border-l-4 border-l-blue-500">
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-slate-600">Dernier Commit</CardTitle>
-                        <GitCommit className="h-5 w-5 text-blue-500" />
+                        <GitCommit className="h-5 w-5 text-primary" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold text-slate-900 font-mono truncate">feat: harmonization</div>

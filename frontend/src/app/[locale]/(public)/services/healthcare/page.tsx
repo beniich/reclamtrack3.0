@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { MoreHorizontal } from 'lucide-react';
 
 export default function HealthcareLanding() {
     const t = useTranslations('Healthcare');
@@ -27,7 +28,7 @@ export default function HealthcareLanding() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 pt-4">
-                            <Link href="/services/healthcare/dashboard" className="w-full sm:w-auto bg-brand-orange text-white font-black px-10 py-5 rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-brand-orange/25 hover:bg-orange-600 transition-all orange-glow transform hover:scale-105">
+                            <Link href="/services/healthcare/dashboard" className="w-full sm:w-auto bg-brand-orange text-white font-black px-10 py-5 rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-brand-orange/25 hover:bg-primary transition-all orange-glow transform hover:scale-105">
                                 {t('ctaStart')}
                             </Link>
                             <Link href="/services/healthcare/dashboard" className="w-full sm:w-auto glass-card px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-white/10 transition-all">
@@ -74,7 +75,7 @@ export default function HealthcareLanding() {
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between">
                                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 text-cyan-400">Alertes Temps Réel</span>
-                                        <span className="material-symbols-outlined text-xs text-slate-500">more_horiz</span>
+                                        <MoreHorizontal className="text-xs text-slate-500" />
                                     </div>
                                     <div className="bg-brand-orange/5 border-l-4 border-brand-orange p-4 rounded-xl flex items-center justify-between">
                                         <div className="flex items-center gap-3">

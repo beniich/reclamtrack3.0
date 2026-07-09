@@ -10,7 +10,7 @@ export function KPICard({
     iconColor = 'text-primary',
 }: KPICardProps) {
     return (
-        <div className="bg-white dark:bg-[#1a2233] rounded-xl border border-slate-200 dark:border-slate-800 p-6 hover:border-primary dark:hover:border-primary transition-all shadow-sm">
+        <div className="bg-white dark:bg-[#1a2233] rounded-xl border border-slate-200 dark:border-border-dark p-6 hover:border-primary dark:hover:border-primary transition-all shadow-sm">
             <div className="flex items-start justify-between mb-4">
                 <p className="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider">
                     {title}

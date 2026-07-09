@@ -41,13 +41,13 @@ export function Modal({
 
             {/* Modal */}
             <div className={cn(
-                'relative w-full mx-4 bg-white dark:bg-slate-900 rounded-xl', // Changed surface-dark to slate-900
-                'border border-slate-200 dark:border-slate-800 shadow-2xl',
+                'relative w-full mx-4 bg-white dark:bg-background rounded-xl', // Changed surface-dark to slate-900
+                'border border-slate-200 dark:border-border-dark shadow-2xl',
                 'transform transition-all',
                 SIZE_CONFIG[size]
             )}>
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-800">
+                <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-border-dark">
                     <div>
                         <h2 className="text-lg font-bold">{title}</h2>
                         {description && (
@@ -60,7 +60,7 @@ export function Modal({
                         <button type="button"
                             onClick={onClose}
                             className={cn(
-                                'p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg',
+                                'p-1 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-lg',
                                 'transition-colors text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
                             )}
                         >

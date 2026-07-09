@@ -97,12 +97,12 @@ export const MaterialSearch: React.FC<MaterialSearchProps> = ({
                     onKeyDown={handleKeyDown}
                     onFocus={() => results.length > 0 && setIsOpen(true)}
                     placeholder={placeholder}
-                    className="w-full h-12 pl-12 pr-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-sm font-bold text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                    className="w-full h-12 pl-12 pr-4 rounded-2xl border border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background text-sm font-bold text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
                 />
             </div>
 
             {isOpen && results.length > 0 && (
-                <div className="absolute z-50 w-full mt-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-2 max-h-96 overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="absolute z-50 w-full mt-3 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-2xl shadow-2xl p-2 max-h-96 overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200">
                     {results.map((material, index) => {
                         const stockStatus = getStockStatus(material);
                         const isSelected = index === selectedIndex;
@@ -112,7 +112,7 @@ export const MaterialSearch: React.FC<MaterialSearchProps> = ({
                                 key={material.id}
                                 onClick={() => handleSelect(material)}
                                 className={cn(
-                                    'w-full text-left px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors mb-1 last:mb-0',
+                                    'w-full text-left px-4 py-3 hover:bg-primary/5 dark:hover:bg-violet-500/15 rounded-xl transition-colors mb-1 last:mb-0',
                                     isSelected && 'bg-primary/5 ring-1 ring-primary/20'
                                 )}
                             >
@@ -148,7 +148,7 @@ export const MaterialSearch: React.FC<MaterialSearchProps> = ({
             )}
 
             {query.length >= 2 && results.length === 0 && (
-                <div className="absolute z-50 w-full mt-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-6 text-center animate-in fade-in slide-in-from-top-2">
+                <div className="absolute z-50 w-full mt-3 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-2xl shadow-2xl p-6 text-center animate-in fade-in slide-in-from-top-2">
                     <Package className="h-10 w-10 text-slate-200 mx-auto mb-3" />
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
                         Aucun matériau trouvé pour &quot;{query}&quot;

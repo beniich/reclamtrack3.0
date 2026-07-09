@@ -256,7 +256,7 @@ export const CallProvider = ({ children }: { children: React.ReactNode }) => {
 
                         {/* Local Video Picture-in-Picture */}
                         {localStream && (
-                            <div className="absolute bottom-3 right-3 w-28 aspect-video bg-slate-900 rounded-lg border border-white/10 shadow-lg overflow-hidden transition-transform group-hover:scale-105">
+                            <div className="absolute bottom-3 right-3 w-28 aspect-video bg-surface-dark rounded-lg border border-white/10 shadow-lg overflow-hidden transition-transform group-hover:scale-105">
                                 <video
                                     autoPlay
                                     playsInline
@@ -269,7 +269,7 @@ export const CallProvider = ({ children }: { children: React.ReactNode }) => {
                     </div>
 
                     {/* Controls */}
-                    <div className="p-4 flex justify-center gap-6 bg-slate-50 dark:bg-slate-900/95 backdrop-blur border-t border-slate-200 dark:border-slate-800">
+                    <div className="p-4 flex justify-center gap-6 bg-slate-50 dark:bg-background/95 backdrop-blur border-t border-slate-200 dark:border-border-dark">
                         {callState === 'incoming' ? (
                             <>
                                 <button type="button"

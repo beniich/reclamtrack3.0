@@ -1,17 +1,18 @@
 
 import { Button } from '@/components/ui/button';
+import { Landmark } from 'lucide-react';
 
 export default function GovernanceLanding() {
     return (
         <div className="min-h-screen bg-brand-midnight text-white flex flex-col items-center justify-center p-6 text-center">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-blue-500/5 blur-[120px] -z-10"></div>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-primary/5 blur-[120px] -z-10"></div>
             <div className="max-w-4xl space-y-12">
-                <div className="w-24 h-24 bg-blue-500/20 rounded-3xl flex items-center justify-center mx-auto text-blue-400 border border-blue-500/20 animate-bounce">
-                    <span className="material-symbols-outlined text-5xl">account_balance</span>
+                <div className="w-24 h-24 bg-primary/20 rounded-3xl flex items-center justify-center mx-auto text-blue-400 border border-primary/20 animate-bounce">
+                    <Landmark className="text-5xl" />
                 </div>
                 <h1 className="text-6xl md:text-8xl font-display font-black uppercase italic tracking-tighter">
                     Gouvernance <br />
-                    <span className="text-blue-500 not-italic">Numérique</span>
+                    <span className="text-primary not-italic">Numérique</span>
                 </h1>
                 <p className="text-xl text-slate-400 font-light leading-relaxed">
                     Nous transformons l'administration publique avec des solutions de transparence,

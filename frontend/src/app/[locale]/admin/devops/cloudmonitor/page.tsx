@@ -1,8 +1,10 @@
+import { toast } from 'sonner';
 "use client"
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { Badge } from "@/components/ui/badge"
 import { Button } from '@/components/ui/button';
+import { CheckCircle, AlertTriangle, TrendingDown, ArrowRight } from 'lucide-react';
 
 export default function CloudMonitorPage() {
     const kpis = [
@@ -47,7 +49,7 @@ export default function CloudMonitorPage() {
         >
             <div className="space-y-8 font-display">
                 {/* Infrastructure Globe Map Placeholder */}
-                <div className="dashboard-card p-12 bg-slate-950 border-white/5 relative overflow-hidden flex flex-col items-center justify-center min-h-[400px] group transition-all duration-700 hover:border-primary/40">
+                <div className="dashboard-card p-12 bg-background-dark border-white/5 relative overflow-hidden flex flex-col items-center justify-center min-h-[400px] group transition-all duration-700 hover:border-primary/40">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-50"></div>
 
                     {/* Pulsing Central Globe Icon */}
@@ -79,7 +81,7 @@ export default function CloudMonitorPage() {
                     {/* Floating Indicators */}
                     <div className="absolute bottom-8 left-8 p-4 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10">
                         <div className="flex items-center gap-3">
-                            <span className="material-symbols-outlined text-emerald-500">check_circle</span>
+                            <CheckCircle className="text-emerald-500" />
                             <div>
                                 <p className="text-[10px] font-black uppercase text-white">US-EAST-1</p>
                                 <p className="text-[8px] font-bold text-slate-500">12ms • Operational</p>
@@ -89,7 +91,7 @@ export default function CloudMonitorPage() {
 
                     <div className="absolute top-8 right-8 p-4 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10">
                         <div className="flex items-center gap-3">
-                            <span className="material-symbols-outlined text-amber-500">warning</span>
+                            <AlertTriangle className="text-amber-500" />
                             <div>
                                 <p className="text-[10px] font-black uppercase text-white">EU-WEST-3</p>
                                 <p className="text-[8px] font-bold text-slate-500">45ms • High Load</p>
@@ -130,7 +132,7 @@ export default function CloudMonitorPage() {
                                             { id: "az-db-01", provider: "Azure", type: "D4s v3", region: "west-us", health: 84, cost: 195 },
                                             { id: "i-9e8f7g6h", provider: "AWS", type: "c5.2xlarge", region: "ap-south-1", health: 100, cost: 450 },
                                         ].map((instance, _i) => (
-                                            <tr key={_i} className="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                                            <tr key={_i} className="group hover:bg-primary/5 dark:hover:bg-white/5 transition-colors">
                                                 <td className="px-8 py-6">
                                                     <div className="flex items-center gap-4">
                                                         <div className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center border border-slate-200 dark:border-white/10 group-hover:border-primary/50 transition-all">
@@ -181,7 +183,7 @@ export default function CloudMonitorPage() {
                             <div className="space-y-4">
                                 <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl">
                                     <div className="flex items-center gap-3 mb-2">
-                                        <span className="material-symbols-outlined text-emerald-500 text-sm">trending_down</span>
+                                        <TrendingDown className="text-emerald-500 text-sm" />
                                         <p className="text-[10px] font-black uppercase tracking-widest text-emerald-500">Savings Opportunity</p>
                                     </div>
                                     <p className="text-xs font-medium text-slate-400 px-1">Terminate 12 idle instances in <span className="text-white font-bold">us-east-1</span> to save <span className="text-emerald-500 font-black">$450/mo</span>.</p>
@@ -203,12 +205,12 @@ export default function CloudMonitorPage() {
                                     { name: "Budget Alerts", icon: "notifications_active" },
                                     { name: "Multi-Cloud IAM", icon: "account_tree" }
                                 ].map((tool, i) => (
-                                    <button type="button" key={i} className="w-full h-14 flex items-center justify-between px-6 bg-slate-100 dark:bg-white/5 rounded-2xl border border-transparent hover:border-primary/50 hover:bg-white/10 transition-all text-left group">
+                                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  key={i} className="w-full h-14 flex items-center justify-between px-6 bg-slate-100 dark:bg-white/5 rounded-2xl border border-transparent hover:border-primary/50 hover:bg-white/10 transition-all text-left group">
                                         <div className="flex items-center gap-3">
                                             <span className="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">{tool.icon}</span>
                                             <span className="text-[10px] font-black uppercase tracking-widest">{tool.name}</span>
                                         </div>
-                                        <span className="material-symbols-outlined text-sm text-slate-300 group-hover:translate-x-1 transition-all">arrow_forward</span>
+                                        <ArrowRight className="text-sm text-slate-300 group-hover:translate-x-1 transition-all" />
                                     </button>
                                 ))}
                             </div>

@@ -276,7 +276,7 @@ export function InterventionCalendar({
             )}
 
             {/* Calendar */}
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-800">
+            <div className="bg-white dark:bg-background rounded-xl p-4 border border-slate-200 dark:border-border-dark">
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                     initialView="timeGridWeek"
@@ -448,7 +448,7 @@ export function InterventionCalendar({
                                             title: comp ? `Intervention: ${comp.title}` : newIntervention.title
                                         });
                                     }}
-                                    className="w-full p-2 border border-slate-200 dark:border-slate-800 rounded-lg dark:bg-slate-900"
+                                    className="w-full p-2 border border-slate-200 dark:border-border-dark rounded-lg dark:bg-background"
                                 >
                                     <option value="">Associer une réclamation</option>
                                     {complaints.map(c => (
@@ -463,7 +463,7 @@ export function InterventionCalendar({
                                     type="text"
                                     value={newIntervention.title}
                                     onChange={e => setNewIntervention({ ...newIntervention, title: e.target.value })}
-                                    className="w-full p-2 border border-slate-200 dark:border-slate-800 rounded-lg dark:bg-slate-900"
+                                    className="w-full p-2 border border-slate-200 dark:border-border-dark rounded-lg dark:bg-background"
                                     placeholder="Ex: Réparation fuite d'eau"
                                 />
                             </div>
@@ -473,7 +473,7 @@ export function InterventionCalendar({
                                 <select
                                     value={newIntervention.teamId}
                                     onChange={e => setNewIntervention({ ...newIntervention, teamId: e.target.value })}
-                                    className="w-full p-2 border border-slate-200 dark:border-slate-800 rounded-lg dark:bg-slate-900"
+                                    className="w-full p-2 border border-slate-200 dark:border-border-dark rounded-lg dark:bg-background"
                                 >
                                     <option value="">Sélectionner une équipe</option>
                                     {teams.map(team => (
@@ -487,7 +487,7 @@ export function InterventionCalendar({
                                 <select
                                     value={newIntervention.priority}
                                     onChange={e => setNewIntervention({ ...newIntervention, priority: e.target.value as any })}
-                                    className="w-full p-2 border border-slate-200 dark:border-slate-800 rounded-lg dark:bg-slate-900"
+                                    className="w-full p-2 border border-slate-200 dark:border-border-dark rounded-lg dark:bg-background"
                                 >
                                     <option value="low">Faible</option>
                                     <option value="medium">Moyenne</option>
@@ -501,7 +501,7 @@ export function InterventionCalendar({
                                 <textarea
                                     value={newIntervention.description}
                                     onChange={e => setNewIntervention({ ...newIntervention, description: e.target.value })}
-                                    className="w-full p-2 border border-slate-200 dark:border-slate-800 rounded-lg dark:bg-slate-900 min-h-[80px]"
+                                    className="w-full p-2 border border-slate-200 dark:border-border-dark rounded-lg dark:bg-background min-h-[80px]"
                                 />
                             </div>
                         </div>

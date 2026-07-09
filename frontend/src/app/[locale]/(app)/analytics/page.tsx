@@ -89,11 +89,11 @@ export default function AnalyticsPage() {
                     </div>
 
                     <div className="flex flex-wrap gap-3">
-                        <div className="flex bg-white dark:bg-slate-900 p-1 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div className="flex bg-white dark:bg-background p-1 rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm">
                             <Button variant="primary" className="px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest bg-primary text-white shadow-lg shadow-primary/20">30 Jours</Button>
                             <Button variant="ghost" className="px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-slate-900 dark:hover:text-slate-300">90 Jours</Button>
                         </div>
-                        <button type="button" className="h-12 px-6 bg-slate-900 dark:bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3">
+                        <button type="button" className="h-12 px-6 bg-surface-dark dark:bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3">
                             <Download className="w-4 h-4" />
                             Export Data
                         </button>
@@ -140,7 +140,7 @@ export default function AnalyticsPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
                     {/* Trend Line Chart */}
-                    <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 p-8 shadow-xl shadow-slate-200/50 dark:shadow-none min-h-[450px] relative overflow-hidden group">
+                    <div className="lg:col-span-2 bg-white dark:bg-background rounded-[32px] border border-slate-200 dark:border-border-dark p-8 shadow-xl shadow-slate-200/50 dark:shadow-none min-h-[450px] relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-bl-[200px] -mr-32 -mt-32 transition-transform group-hover:scale-110 duration-700"></div>
 
                         <div className="flex items-center justify-between mb-10 relative z-10">
@@ -202,7 +202,7 @@ export default function AnalyticsPage() {
                     </div>
 
                     {/* Donut Chart Distribution */}
-                    <div className="bg-slate-900 rounded-[32px] border border-slate-800 p-8 shadow-xl text-white relative flex flex-col justify-between overflow-hidden">
+                    <div className="bg-surface-dark rounded-[32px] border border-border-dark p-8 shadow-xl text-white relative flex flex-col justify-between overflow-hidden">
                         <div className="absolute bottom-0 left-0 w-full h-1/2 bg-primary/10 blur-[80px]"></div>
 
                         <div className="relative z-10">
@@ -257,7 +257,7 @@ export default function AnalyticsPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-10">
 
                     {/* Status Breakdown */}
-                    <div className="bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 p-8 shadow-lg shadow-slate-200/50 dark:shadow-none">
+                    <div className="bg-white dark:bg-background rounded-[32px] border border-slate-200 dark:border-border-dark p-8 shadow-lg shadow-slate-200/50 dark:shadow-none">
                         <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-8">Status Pulse</h3>
                         <div className="space-y-6">
                             {Object.entries(stats?.byStatus || {}).map(([key, value]) => (
@@ -278,11 +278,11 @@ export default function AnalyticsPage() {
                     </div>
 
                     {/* Priority Mix */}
-                    <div className="bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 p-8 shadow-lg shadow-slate-200/50 dark:shadow-none">
+                    <div className="bg-white dark:bg-background rounded-[32px] border border-slate-200 dark:border-border-dark p-8 shadow-lg shadow-slate-200/50 dark:shadow-none">
                         <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-8">Matrice de Priorité</h3>
                         <div className="grid grid-cols-2 gap-4">
                             {stats?.byPriority?.map((p: PriorityItem) => (
-                                <div key={p._id} className="p-4 rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 group hover:border-primary/20 transition-all">
+                                <div key={p._id} className="p-4 rounded-2xl border border-slate-100 dark:border-border-dark bg-slate-50 dark:bg-background/50 group hover:border-primary/20 transition-all">
                                     <div className="flex items-center gap-2 mb-2">
                                         <div className="size-2 rounded-full" style={{ backgroundColor: PRIORITY_COLORS[p._id] || '#ccc' }}></div>
                                         <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">{p._id}</span>
@@ -351,14 +351,14 @@ interface StatCardProps {
 
 function StatCard({ title, value, trend, isUp, icon, color }: StatCardProps) {
     const colors = {
-        blue: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-200/50 dark:border-blue-900/50',
-        orange: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-200/50 dark:border-orange-900/50',
+        blue: 'bg-primary/10 text-primary dark:text-blue-400 border-blue-200/50 dark:border-blue-900/50',
+        orange: 'bg-primary/10 text-primary dark:text-orange-400 border-orange-200/50 dark:border-orange-900/50',
         emerald: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-200/50 dark:border-emerald-900/50',
         purple: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-200/50 dark:border-purple-900/50'
     };
 
     return (
-        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 shadow-lg shadow-slate-200/50 dark:shadow-none group hover:-translate-y-1 transition-all duration-300">
+        <div className="bg-white dark:bg-background rounded-3xl border border-slate-200 dark:border-border-dark p-6 shadow-lg shadow-slate-200/50 dark:shadow-none group hover:-translate-y-1 transition-all duration-300">
             <div className="flex justify-between items-start mb-6">
                 <div className={`p-3 rounded-2xl ${colors[color]} border transition-transform group-hover:scale-110`}>
                     {icon}

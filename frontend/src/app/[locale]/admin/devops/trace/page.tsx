@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 'use client';
 
 import { StatusIndicator } from '@/components/shared/StatusIndicator';
@@ -14,7 +15,7 @@ export default function APMTracesPage() {
                         <div className="flex items-center gap-3 mb-2">
                             <StatusIndicator status="healthy" label="Success" />
                             <h1 className="text-white text-2xl font-mono font-bold">tr-8821-x9</h1>
-                            <button type="button" className="text-slate-500 hover:text-slate-300">📋</button>
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-slate-500 hover:text-slate-300">📋</button>
                         </div>
                         <p className="text-slate-400 text-sm">
                             Request to <code className="text-primary bg-primary/10 px-1 rounded">/api/v1/orders/checkout</code> initiated by user-882
@@ -30,7 +31,7 @@ export default function APMTracesPage() {
                             <p className="text-white text-xl font-bold">12</p>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <button type="button" className="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg flex items-center gap-2">
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg flex items-center gap-2">
                                 <Share className="w-4 h-4" /> Export Trace
                             </button>
                         </div>
@@ -59,7 +60,7 @@ export default function APMTracesPage() {
                 {/* Spans List */}
                 <div className="flex flex-col">
                     {/* Gateway Span */}
-                    <div className="flex group cursor-pointer border-b border-slate-800/50 hover:bg-slate-800/30">
+                    <div className="flex group cursor-pointer border-b border-border-dark/50 hover:bg-violet-500/15/30">
                         <div className="w-[300px] px-4 py-3 border-r border-slate-700 flex items-center gap-2">
                             <span className="text-slate-600 text-sm">▼</span>
                             <div className="flex flex-col">
@@ -68,14 +69,14 @@ export default function APMTracesPage() {
                             </div>
                         </div>
                         <div className="flex-1 p-4 relative flex items-center">
-                            <div className="h-5 bg-indigo-500/30 border border-indigo-500/50 rounded-sm relative z-10 w-full flex items-center px-2">
+                            <div className="h-5 bg-primary/30 border border-primary/50 rounded-sm relative z-10 w-full flex items-center px-2">
                                 <span className="text-[9px] font-bold text-indigo-200">452ms</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Auth Service Span */}
-                    <div className="flex group cursor-pointer border-b border-slate-800/50 hover:bg-slate-800/30">
+                    <div className="flex group cursor-pointer border-b border-border-dark/50 hover:bg-violet-500/15/30">
                         <div className="w-[300px] px-4 py-3 border-r border-slate-700 flex items-center gap-2 pl-8">
                             <div className="flex flex-col">
                                 <span className="text-xs font-bold text-purple-400">Auth-Service</span>
@@ -90,7 +91,7 @@ export default function APMTracesPage() {
                     </div>
 
                     {/* Order Service Span - Critical Path */}
-                    <div className="flex group cursor-pointer border-b border-slate-800/50 bg-primary/5 hover:bg-primary/10">
+                    <div className="flex group cursor-pointer border-b border-border-dark/50 bg-primary/5 hover:bg-primary/10">
                         <div className="w-[300px] px-4 py-3 border-r border-slate-700 flex items-center gap-2 pl-8">
                             <div className="w-1.5 h-1.5 rounded-full bg-primary glow-primary mr-1"></div>
                             <div className="flex flex-col">
@@ -107,7 +108,7 @@ export default function APMTracesPage() {
                     </div>
 
                     {/* Database Span */}
-                    <div className="flex group cursor-pointer border-b border-slate-800/50 hover:bg-slate-800/30">
+                    <div className="flex group cursor-pointer border-b border-border-dark/50 hover:bg-violet-500/15/30">
                         <div className="w-[300px] px-4 py-3 border-r border-slate-700 flex items-center gap-2 pl-12">
                             <div className="flex flex-col">
                                 <span className="text-xs font-bold text-orange-400">Postgres-DB</span>
@@ -115,7 +116,7 @@ export default function APMTracesPage() {
                             </div>
                         </div>
                         <div className="flex-1 p-4 relative flex items-center">
-                            <div className="h-5 bg-orange-500/30 border border-orange-500/50 rounded-sm relative z-10 w-[18%] ml-[30%] flex items-center px-2">
+                            <div className="h-5 bg-primary/30 border border-primary/50 rounded-sm relative z-10 w-[18%] ml-[30%] flex items-center px-2">
                                 <span className="text-[9px] font-bold text-orange-200">80ms</span>
                             </div>
                         </div>
@@ -172,7 +173,7 @@ export default function APMTracesPage() {
             <div className="dashboard-card p-4 flex items-center justify-between text-[11px] text-slate-500">
                 <div className="flex items-center gap-4">
                     <span className="flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span> Gateway
+                        <span className="w-2 h-2 rounded-full bg-primary"></span> Gateway
                     </span>
                     <span className="flex items-center gap-1">
                         <span className="w-2 h-2 rounded-full bg-purple-500"></span> Auth
@@ -181,7 +182,7 @@ export default function APMTracesPage() {
                         <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Order
                     </span>
                     <span className="flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-orange-500"></span> Postgres
+                        <span className="w-2 h-2 rounded-full bg-primary"></span> Postgres
                     </span>
                 </div>
                 <span>v1.24.0-pro</span>

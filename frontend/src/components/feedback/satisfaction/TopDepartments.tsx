@@ -12,7 +12,7 @@ export default function TopDepartments({
         .slice(0, 4);
 
     return (
-        <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <section className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
             <h4 className="font-bold text-base mb-6 text-slate-900 dark:text-white">Department Rankings</h4>
             <div className="space-y-5">
                 {topThree.map((dept, i) => {

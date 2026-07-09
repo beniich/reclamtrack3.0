@@ -29,7 +29,7 @@ export default function WasmTestPage() {
 
   return (
     <div className="p-10 font-sans max-w-2xl mx-auto mt-10 shadow-lg rounded-lg border bg-white">
-      <h1 className="text-3xl font-bold mb-6 text-blue-600 border-b pb-2">
+      <h1 className="text-3xl font-bold mb-6 text-primary border-b pb-2">
         🚀 WebAssembly (Wasm) POC
       </h1>
 
@@ -54,7 +54,7 @@ export default function WasmTestPage() {
 
         <div className="bg-gray-50 p-4 rounded-md border">
           <h2 className="text-lg font-semibold mb-2">Logic Test: <code className="text-sm bg-gray-200 px-1 rounded">calculate_priority_wasm(100, 5)</code></h2>
-          <div className="text-2xl font-mono text-indigo-600">
+          <div className="text-2xl font-mono text-primary">
             {priorityResult !== null ? priorityResult : <span className="animate-pulse text-gray-400">Loading...</span>}
           </div>
         </div>

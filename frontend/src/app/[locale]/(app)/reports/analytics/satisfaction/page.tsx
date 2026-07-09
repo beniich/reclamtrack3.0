@@ -4,6 +4,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Download, Star, TrendingDown } from 'lucide-react';
 
 // Mock Data
 const mockReviews = [
@@ -43,7 +44,7 @@ export default function SatisfactionDashboard() {
     return (
         <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-3">
+            <header className="sticky top-0 z-50 bg-white dark:bg-background border-b border-slate-200 dark:border-border-dark px-6 py-3">
                 <div className="max-w-[1600px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-8">
                         <Link href="/dashboard" className="flex items-center gap-3">
@@ -60,7 +61,7 @@ export default function SatisfactionDashboard() {
                     </div>
                     <div className="flex items-center gap-4">
                         <button type="button" className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
-                            <span className="material-symbols-outlined text-sm">download</span> Export Reports
+                            <Download className="text-sm" /> Export Reports
                         </button>
                     </div>
                 </div>
@@ -81,7 +82,7 @@ export default function SatisfactionDashboard() {
 
                 {/* KPI Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <div className="flex justify-between items-start mb-4">
                             <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Average CSAT Score</p>
                             <span className="text-emerald-500 text-xs font-bold bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded-full">+3.2%</span>
@@ -91,11 +92,11 @@ export default function SatisfactionDashboard() {
                             <span className="text-slate-400 text-lg">/ 5.0</span>
                         </div>
                         <div className="mt-4 flex gap-1">
-                            {[1, 2, 3, 4].map(i => <span key={i} className="material-symbols-outlined text-amber-400 text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>)}
-                            <span className="material-symbols-outlined text-slate-200 dark:text-slate-700 text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                            {[1, 2, 3, 4].map(i => <Star className="text-amber-400 text-xl" />)}
+                            <Star className="text-slate-200 dark:text-slate-700 text-xl" />
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <div className="flex justify-between items-start mb-4">
                             <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Total Feedback Entries</p>
                             <span className="text-emerald-500 text-xs font-bold bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded-full">+12%</span>
@@ -103,7 +104,7 @@ export default function SatisfactionDashboard() {
                         <h3 className="text-4xl font-black text-slate-900 dark:text-white">1,240</h3>
                         <p className="text-xs text-slate-400 mt-2">from 842 unique citizens</p>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <div className="flex justify-between items-start mb-4">
                             <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Resolution Rate</p>
                             <span className="text-rose-500 text-xs font-bold bg-rose-50 dark:bg-rose-900/20 px-2 py-0.5 rounded-full">-0.5%</span>
@@ -119,7 +120,7 @@ export default function SatisfactionDashboard() {
                     {/* Main Data Column */}
                     <div className="lg:col-span-2 space-y-8">
                         {/* Chart Section */}
-                        <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <section className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                             <div className="flex justify-between items-center mb-6">
                                 <h4 className="font-bold text-lg text-slate-900 dark:text-white">Satisfaction Trends</h4>
                                 <div className="flex gap-2">
@@ -139,19 +140,19 @@ export default function SatisfactionDashboard() {
                                     <path d="M0,180 C50,160 100,190 150,140 C200,90 250,110 300,70 C350,30 400,60 450,50 C500,40 550,90 600,60 C650,30 700,50 800,20 L800,240 L0,240 Z" fill="url(#chartGradient)"></path>
                                     <path d="M0,180 C50,160 100,190 150,140 C200,90 250,110 300,70 C350,30 400,60 450,50 C500,40 550,90 600,60 C650,30 700,50 800,20" fill="none" stroke="#2424eb" strokeLinecap="round" strokeWidth="3"></path>
                                 </svg>
-                                <div className="absolute bottom-0 w-full flex justify-between text-[10px] text-slate-400 font-bold px-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                                <div className="absolute bottom-0 w-full flex justify-between text-[10px] text-slate-400 font-bold px-2 pt-2 border-t border-slate-100 dark:border-border-dark">
                                     <span>JAN</span><span>FEB</span><span>MAR</span><span>APR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AUG</span>
                                 </div>
                             </div>
                         </section>
 
                         {/* Recent Feedback */}
-                        <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <section className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                             <div className="flex justify-between items-center mb-6">
                                 <h4 className="font-bold text-lg text-slate-900 dark:text-white">Recent Citizen Feedback</h4>
                                 <div className="flex items-center gap-2">
                                     <span className="text-xs text-slate-500">Filter:</span>
-                                    <select className="text-xs border-slate-200 dark:border-slate-800 bg-transparent rounded-lg py-1 px-2 focus:ring-primary text-slate-600 dark:text-slate-300">
+                                    <select className="text-xs border-slate-200 dark:border-border-dark bg-transparent rounded-lg py-1 px-2 focus:ring-primary text-slate-600 dark:text-slate-300">
                                         <option>All Ratings</option>
                                         <option>Negative (1-2 Stars)</option>
                                         <option>Positive (4-5 Stars)</option>
@@ -160,7 +161,7 @@ export default function SatisfactionDashboard() {
                             </div>
                             <div className="space-y-6">
                                 {mockReviews.map(review => (
-                                    <div key={review.id} className="flex gap-4 p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all">
+                                    <div key={review.id} className="flex gap-4 p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-transparent hover:border-primary/30 dark:hover:border-primary/40 transition-all">
                                         <div className="size-10 rounded-full overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700 relative">
                                             <Image src={review.avatar} alt="Avatar" fill className="object-cover" />
                                         </div>
@@ -195,7 +196,7 @@ export default function SatisfactionDashboard() {
                     {/* Right Column / Sidebar Metrics */}
                     <div className="space-y-8">
                         {/* Top Performing */}
-                        <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <section className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                             <h4 className="font-bold text-base mb-4 text-slate-900 dark:text-white">Top Departments</h4>
                             <div className="space-y-4">
                                 <div className="space-y-2">
@@ -238,7 +239,7 @@ export default function SatisfactionDashboard() {
                         </section>
 
                         {/* Common Keywords */}
-                        <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <section className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                             <h4 className="font-bold text-base mb-4 text-slate-900 dark:text-white">Sentiment Keywords</h4>
                             <div className="flex flex-wrap gap-2">
                                 <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-xs font-bold">Safety (+14%)</span>
@@ -260,7 +261,7 @@ export default function SatisfactionDashboard() {
                                         <p className="text-[10px] uppercase font-bold text-white/60">Avg. Response Time</p>
                                     </div>
                                     <div className="size-12 rounded-full border-4 border-white/20 flex items-center justify-center">
-                                        <span className="material-symbols-outlined">trending_down</span>
+                                        <TrendingDown />
                                     </div>
                                 </div>
                             </div>

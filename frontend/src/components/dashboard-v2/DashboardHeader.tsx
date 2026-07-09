@@ -6,7 +6,7 @@ interface DashboardHeaderProps {
 
 export function DashboardHeader({ title, description, actions }: DashboardHeaderProps) {
     return (
-        <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0a0a0f] flex items-center justify-between px-8 z-10 sticky top-0">
+        <header className="h-16 border-b border-slate-200 dark:border-border-dark bg-white dark:bg-[#0a0a0f] flex items-center justify-between px-8 z-10 sticky top-0">
             <div>
                 <h1 className="text-lg font-semibold text-slate-900 dark:text-white">{title}</h1>
                 {description && (

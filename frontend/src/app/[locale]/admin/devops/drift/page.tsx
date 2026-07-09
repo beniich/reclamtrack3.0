@@ -2,6 +2,7 @@
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { Button } from '@/components/ui/button';
+import { AlertTriangle, BarChart, Plus } from 'lucide-react';
 
 export default function InfrastructureDriftPage() {
     const kpis = [
@@ -47,7 +48,7 @@ export default function InfrastructureDriftPage() {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 bg-rose-500/5 border border-rose-500/20 rounded-2xl">
                     <div className="flex items-start gap-4">
                         <div className="size-12 rounded-xl bg-rose-500/10 flex items-center justify-center shrink-0">
-                            <span className="material-symbols-outlined text-rose-500">warning</span>
+                            <AlertTriangle className="text-rose-500" />
                         </div>
                         <div>
                             <h2 className="text-lg font-bold">
@@ -74,7 +75,7 @@ export default function InfrastructureDriftPage() {
                             <span className="text-[10px] text-slate-400 font-mono">main.tf:142</span>
                         </div>
                         <div className="dashboard-card overflow-hidden border-emerald-500/20">
-                            <div className="bg-slate-900 p-6 font-mono text-sm leading-relaxed text-slate-300">
+                            <div className="bg-surface-dark p-6 font-mono text-sm leading-relaxed text-slate-300">
                                 <div className="text-slate-500">resource "aws_s3_bucket" "data_storage" &#123;</div>
                                 <div className="pl-4">bucket = "data-storage-prod-xyz"</div>
                                 <div className="pl-4">acl    = "private"</div>
@@ -100,7 +101,7 @@ export default function InfrastructureDriftPage() {
                             <span className="text-[10px] text-slate-400 font-mono">Cloud Console Edit</span>
                         </div>
                         <div className="dashboard-card overflow-hidden border-rose-500/20">
-                            <div className="bg-slate-900 p-6 font-mono text-sm leading-relaxed text-slate-300">
+                            <div className="bg-surface-dark p-6 font-mono text-sm leading-relaxed text-slate-300">
                                 <div className="text-slate-500">aws_s3_bucket.data_storage (ID: data-prod)</div>
                                 <div className="pl-4">bucket = "data-storage-prod-xyz"</div>
                                 <div className="pl-4">acl    = "private"</div>
@@ -122,7 +123,7 @@ export default function InfrastructureDriftPage() {
                 {/* Impact Analysis */}
                 <div className="dashboard-card p-8 bg-gradient-to-br from-slate-900 to-slate-950 border-white/5 overflow-hidden relative">
                     <div className="absolute top-0 right-0 p-8 opacity-5">
-                       <span className="material-symbols-outlined text-9xl">analytics</span>
+                       <BarChart className="text-9xl" />
                     </div>
                     <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
                         <div className="size-32 rounded-full border-4 border-rose-500/20 flex items-center justify-center p-4">
@@ -135,7 +136,7 @@ export default function InfrastructureDriftPage() {
                             <h3 className="text-xl font-bold uppercase tracking-tight">Drift Remediation Plan</h3>
                             <div className="space-y-2">
                                 <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
-                                    <span className="material-symbols-outlined text-emerald-500">add</span>
+                                    <Plus className="text-emerald-500" />
                                     <p className="text-xs">Add <span className="font-bold font-mono">tags.ManagedBy</span> (Expected "Terraform")</p>
                                 </div>
                                 <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/5">

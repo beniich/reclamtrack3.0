@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { Plus, Trash2, Save, Send, Search } from 'lucide-react';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { apiClient } from '@/lib/api';
 
 // Validation Schema
 const requisitionItemSchema = z.object({
@@ -130,54 +131,26 @@ export default function MaterialRequisitionPage() {
     // Sauvegarde brouillon
     const saveDraft = async (data: RequisitionFormData) => {
         try {
-            // const response = await fetch('/api/requisitions', {
-            //   method: 'POST',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify({ ...data, status: 'draft' }),
-            // });
-
-            // if (!response.ok) throw new Error('Erreur de sauvegarde');
-
-            // const result = await response.json();
-
-            // Mock API call
-            console.log('Saving draft:', data);
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            // const result = { id: 'REQ-' + Date.now() };
-
-            toast.success('Brouillon sauvegardé');
-            // router.push(`/inventory/requisition/${result.id}`);
-        } catch (error) {
+            const result = await apiClient.post('/requisitions', { ...data, status: 'draft' }) as any;
+            toast.success('Brouillon sauvegardé', { description: `Réf: ${result?.referenceNumber || result?.id || 'en attente'}` });
+            if (result?.id) router.push(`/inventory/requisition/${result.id}`);
+        } catch (error: any) {
             console.error(error);
-            toast.error('Erreur lors de la sauvegarde');
+            toast.error('Erreur lors de la sauvegarde', { description: error?.message });
         }
     };
 
     // Soumission finale
     const submitRequisition = async (data: RequisitionFormData) => {
         try {
-            // const response = await fetch('/api/requisitions', {
-            //   method: 'POST',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify({ ...data, status: 'pending' }),
-            // });
-
-            // if (!response.ok) throw new Error('Erreur de soumission');
-
-            // const result = await response.json();
-
-            // Mock API call
-            console.log('Submitting:', data);
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            const result = { id: 'REQ-' + Date.now(), referenceNumber: 'REQ-2025-001' };
-
+            const result = await apiClient.post('/requisitions', { ...data, status: 'pending' }) as any;
             toast.success('Réquisition soumise avec succès!', {
-                description: `Référence: ${result.referenceNumber}`,
+                description: `Référence: ${result?.referenceNumber || result?.id}`,
             });
-            router.push(`/inventory/requisition/${result.id}`);
-        } catch (error) {
+            router.push(`/inventory/requisition/${result?.id ?? ''}`);
+        } catch (error: any) {
             console.error(error);
-            toast.error('Erreur lors de la soumission');
+            toast.error('Erreur lors de la soumission', { description: error?.message });
         }
     };
 
@@ -196,7 +169,7 @@ export default function MaterialRequisitionPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Formulaire Principal */}
                 <div className="lg:col-span-2 space-y-6">
-                    <form className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 space-y-6">
+                    <form className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark p-6 space-y-6">
                         {/* Informations générales */}
                         <div>
                             <h3 className="text-lg font-semibold mb-4">Informations générales</h3>
@@ -362,7 +335,7 @@ export default function MaterialRequisitionPage() {
                                 type="button"
                                 onClick={handleSubmit(saveDraft)}
                                 disabled={isSubmitting}
-                                className="px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center gap-2"
+                                className="px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors flex items-center gap-2"
                             >
                                 <Save className="w-4 h-4" />
                                 Sauvegarder brouillon
@@ -383,7 +356,7 @@ export default function MaterialRequisitionPage() {
 
                 {/* Recherche d'articles */}
                 <div className="lg:col-span-1">
-                    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 sticky top-6">
+                    <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark p-6 sticky top-6">
                         <h3 className="text-lg font-semibold mb-4">Rechercher des articles</h3>
 
                         <div className="flex gap-2 mb-4">

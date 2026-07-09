@@ -24,15 +24,15 @@ export default function CommunicationPage() {
                 {/* Your Identity Card */}
                 <div className="p-6 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
                     <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                        <span className="w-2 h-2 bg-primary rounded-full"></span>
                         My Identity
                     </h2>
                     <div className="space-y-4">
-                        <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg">
+                        <div className="bg-slate-50 dark:bg-background p-4 rounded-lg">
                             <label className="text-xs text-slate-500 uppercase font-medium">My User ID</label>
                             <div className="font-mono text-sm mt-1 select-all break-all">{user?.id}</div>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg">
+                        <div className="bg-slate-50 dark:bg-background p-4 rounded-lg">
                             <label className="text-xs text-slate-500 uppercase font-medium">Name</label>
                             <div className="font-medium mt-1">{user?.name}</div>
                         </div>
@@ -80,7 +80,7 @@ export default function CommunicationPage() {
                 </div>
             </div>
 
-            <div className="mt-8 p-6 bg-slate-900 rounded-xl text-slate-300">
+            <div className="mt-8 p-6 bg-surface-dark rounded-xl text-slate-300">
                 <h3 className="text-white font-semibold mb-2">How SRTP is Integrated</h3>
                 <ul className="list-disc list-inside space-y-2 text-sm">
                     <li>This module uses <strong>WebRTC</strong> (Web Real-Time Communication).</li>

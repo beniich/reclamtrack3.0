@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Search, Calendar, Download, TrendingUp, TrendingDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Types
 interface CostEntry {
@@ -40,7 +41,7 @@ export default function CostTrackingPage() {
     return (
         <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-3">
+            <header className="sticky top-0 z-50 bg-white dark:bg-background border-b border-slate-200 dark:border-border-dark px-6 py-3">
                 <div className="max-w-[1440px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-8">
                         <Link href="/dashboard" className="flex items-center gap-3 text-primary">
@@ -55,7 +56,7 @@ export default function CostTrackingPage() {
                     </div>
                     <div className="flex flex-1 justify-end gap-4 items-center">
                         <div className="relative hidden sm:block w-full max-w-xs">
-                            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl" />
                             <input className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-white placeholder:text-slate-400" placeholder="Search tickets..." type="text" />
                         </div>
                         <button type="button" className="hidden lg:flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold transition-all shadow-sm">
@@ -77,12 +78,12 @@ export default function CostTrackingPage() {
                         <p className="text-slate-500 dark:text-slate-400 text-base">Detailed overview of material and labor expenses for all maintenance tickets.</p>
                     </div>
                     <div className="flex items-center gap-3">
-                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-                            <span className="material-symbols-outlined text-lg">calendar_month</span>
+                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary/5 dark:hover:bg-slate-700 transition-colors">
+                            <Calendar className="text-lg" />
                             <span>Last 30 Days</span>
                         </button>
-                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 transition-colors">
-                            <span className="material-symbols-outlined text-lg">download</span>
+                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary/5 transition-colors">
+                            <Download className="text-lg" />
                             <span>Export CSV</span>
                         </button>
                     </div>
@@ -90,41 +91,41 @@ export default function CostTrackingPage() {
 
                 {/* KPI Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <div className="flex items-center justify-between mb-2">
                             <p className="text-slate-500 dark:text-slate-400 text-sm font-semibold">TOTAL COST</p>
                             <span className="material-symbols-outlined text-primary">account_balance_wallet</span>
                         </div>
                         <p className="text-slate-900 dark:text-white text-2xl font-bold tracking-tight">${totalStats.total.toLocaleString()}.00</p>
                         <div className="mt-2 flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-sm font-bold">
-                            <span className="material-symbols-outlined text-sm">trending_up</span>
+                            <TrendingUp className="text-sm" />
                             <span>+12.5%</span>
                             <span className="text-slate-400 dark:text-slate-500 font-medium ml-1">vs last month</span>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <div className="flex items-center justify-between mb-2">
                             <p className="text-slate-500 dark:text-slate-400 text-sm font-semibold">MATERIALS</p>
                             <span className="material-symbols-outlined text-slate-400">inventory_2</span>
                         </div>
                         <p className="text-slate-900 dark:text-white text-2xl font-bold tracking-tight">${totalStats.materials.toLocaleString()}.00</p>
                         <div className="mt-2 flex items-center gap-1 text-rose-600 dark:text-rose-400 text-sm font-bold">
-                            <span className="material-symbols-outlined text-sm">trending_down</span>
+                            <TrendingDown className="text-sm" />
                             <span>-2.4%</span>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <div className="flex items-center justify-between mb-2">
                             <p className="text-slate-500 dark:text-slate-400 text-sm font-semibold">LABOR</p>
                             <span className="material-symbols-outlined text-slate-400">engineering</span>
                         </div>
                         <p className="text-slate-900 dark:text-white text-2xl font-bold tracking-tight">${totalStats.labor.toLocaleString()}.00</p>
                         <div className="mt-2 flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-sm font-bold">
-                            <span className="material-symbols-outlined text-sm">trending_up</span>
+                            <TrendingUp className="text-sm" />
                             <span>+18.1%</span>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm text-primary border-primary/20">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm text-primary border-primary/20">
                         <div className="flex items-center justify-between mb-2">
                             <p className="text-primary text-sm font-bold">PENDING INVOICE</p>
                             <span className="material-symbols-outlined text-primary">pending_actions</span>
@@ -138,7 +139,7 @@ export default function CostTrackingPage() {
 
                 {/* Charts Area (Simulated) */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-6">Operational Spending</h3>
                         <div className="grid grid-cols-6 items-end gap-3 h-48 px-2">
                             {[40, 65, 55, 85, 95, 70].map((h, i) => (
@@ -149,7 +150,7 @@ export default function CostTrackingPage() {
                             ))}
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <div className="flex items-center justify-between mb-6">
                             <h3 className="text-slate-900 dark:text-white font-bold text-lg">Material vs. Labor Efficiency</h3>
                             <div className="text-right">
@@ -164,8 +165,8 @@ export default function CostTrackingPage() {
                 </div>
 
                 {/* Table Section */}
-                <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-                    <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark shadow-sm overflow-hidden">
+                    <div className="p-6 border-b border-slate-200 dark:border-border-dark flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <h3 className="text-slate-900 dark:text-white font-black text-xl">Detailed Intervention Costs</h3>
                         <div className="flex items-center gap-2 w-full sm:w-auto">
                             <select
@@ -196,7 +197,7 @@ export default function CostTrackingPage() {
                             </thead>
                             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                                 {filteredCosts.map((item) => (
-                                    <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <tr key={item.id} className="hover:bg-primary/5 dark:hover:bg-violet-500/8 transition-colors group">
                                         <td className="px-6 py-4 text-sm font-bold text-primary">#{item.id}</td>
                                         <td className="px-6 py-4">
                                             <p className="text-sm font-bold text-slate-900 dark:text-white">{item.description}</p>
@@ -226,15 +227,15 @@ export default function CostTrackingPage() {
                         </table>
                     </div>
                     {/* Pagination */}
-                    <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/30 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/30 border-t border-slate-200 dark:border-border-dark flex items-center justify-between">
                         <p className="text-xs font-bold text-slate-500 uppercase">Showing {filteredCosts.length} entries</p>
                         <div className="flex items-center gap-1">
                             <button type="button" className="p-2 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors disabled:opacity-30" disabled>
-                                <span className="material-symbols-outlined text-sm">chevron_left</span>
+                                <ChevronLeft className="text-sm" />
                             </button>
                             <Button variant="primary" className="w-8 h-8 rounded bg-primary text-white text-[11px] font-black">1</Button>
                             <button type="button" className="p-2 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                                <span className="material-symbols-outlined text-sm">chevron_right</span>
+                                <ChevronRight className="text-sm" />
                             </button>
                         </div>
                     </div>

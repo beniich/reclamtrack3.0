@@ -68,7 +68,7 @@ export default function StaffPage() {
             </div>
 
             {/* Filters & Search */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm flex flex-col md:flex-row gap-4 items-center">
+            <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl p-4 shadow-sm flex flex-col md:flex-row gap-4 items-center">
                 <div className="relative flex-1 group w-full">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5 transition-colors group-focus-within:text-cyan-400" />
                     <input
@@ -80,11 +80,11 @@ export default function StaffPage() {
                     />
                 </div>
                 <div className="flex gap-2 w-full md:w-auto">
-                    <button type="button" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors text-slate-700 dark:text-slate-300">
+                    <button type="button" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium hover:bg-primary/5 transition-colors text-slate-700 dark:text-slate-300">
                         <Filter className="w-4 h-4" />
                         Filtrer
                     </button>
-                    <Button variant="secondary" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors text-slate-700 dark:text-slate-300">Exporter</Button>
+                    <Button variant="secondary" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium hover:bg-primary/5 transition-colors text-slate-700 dark:text-slate-300">Exporter</Button>
                 </div>
             </div>
 
@@ -95,7 +95,7 @@ export default function StaffPage() {
                         <div key={member._id} className="glass-card rounded-3xl p-6 relative group overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-right from-cyan-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button type="button" className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
+                                <button type="button" className="p-1.5 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-lg text-slate-400 transition-colors">
                                     <MoreVertical className="w-4 h-4" />
                                 </button>
                             </div>
@@ -126,7 +126,7 @@ export default function StaffPage() {
                                 </div>
                             </div>
 
-                            <div className="mt-6 space-y-3 pt-5 border-t border-slate-100 dark:border-slate-800">
+                            <div className="mt-6 space-y-3 pt-5 border-t border-slate-100 dark:border-border-dark">
                                 <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
                                     <Mail className="w-4 h-4 text-slate-400" />
                                     <span className="truncate">{member.email}</span>
@@ -142,7 +142,7 @@ export default function StaffPage() {
                             </div>
 
                             <div className="mt-6 flex gap-2">
-                                <button type="button" className="flex-1 py-2 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700 transition-all flex items-center justify-center gap-2">
+                                <button type="button" className="flex-1 py-2 bg-slate-50 dark:bg-slate-800/50 hover:bg-primary/8 dark:hover:bg-violet-500/15 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700 transition-all flex items-center justify-center gap-2">
                                     <Edit2 className="w-3 h-3" />
                                     Modifier
                                 </button>
@@ -154,7 +154,7 @@ export default function StaffPage() {
                         </div>
                     ))
                 ) : (
-                    <div className="col-span-full py-20 bg-white dark:bg-slate-900 border border-dash border-slate-200 dark:border-slate-800 rounded-xl flex flex-col items-center justify-center text-center">
+                    <div className="col-span-full py-20 bg-white dark:bg-background border border-dash border-slate-200 dark:border-border-dark rounded-xl flex flex-col items-center justify-center text-center">
                         <div className="size-20 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4">
                             <Search className="w-10 h-10 text-slate-300" />
                         </div>

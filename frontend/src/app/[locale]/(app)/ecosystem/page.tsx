@@ -47,7 +47,7 @@ export default function EcosystemDashboard() {
       status: "Protocol Active",
       description: "Infrastructure haute performance, gestion DevOps, Cloud et réseau (Nexus).",
       color: "from-slate-700 to-slate-900",
-      bgHover: "hover:bg-slate-100",
+      bgHover: "hover:bg-primary/8",
       link: "/ecosystem/nexus",
       repo: "herbute",
     },
@@ -126,7 +126,7 @@ export default function EcosystemDashboard() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-950 p-8 md:p-14 overflow-hidden relative">
       {/* Decorative Blur Overlays */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Header Section */}
@@ -136,7 +136,7 @@ export default function EcosystemDashboard() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="max-w-7xl mx-auto mb-16 relative z-10"
       >
-        <div className="inline-block px-4 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-sm md:text-base font-medium text-indigo-600 mb-4 backdrop-blur-md shadow-sm">
+        <div className="inline-block px-4 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-sm md:text-base font-medium text-primary mb-4 backdrop-blur-md shadow-sm">
           ✨ Écosystème Global
         </div>
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 text-slate-900">
@@ -173,7 +173,7 @@ export default function EcosystemDashboard() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
+                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
                 <p className="text-slate-500 text-sm leading-relaxed flex-grow">
@@ -186,7 +186,7 @@ export default function EcosystemDashboard() {
                     {project.repo}
                   </span>
                   
-                  <Link href={project.link} className="flex items-center gap-1 text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors">
+                  <Link href={project.link} className="flex items-center gap-1 text-sm font-bold text-primary hover:text-indigo-700 transition-colors">
                     Lancer <ChevronRightIcon className="w-4 h-4" />
                   </Link>
                 </div>
@@ -211,7 +211,7 @@ export default function EcosystemDashboard() {
             <p className="text-slate-500">Nos ingénieurs conçoivent votre écosystème personnalisé de A à Z. Contactez-nous pour intégrer un nouveau pipeline.</p>
           </div>
           
-          <button type="button" className="relative z-10 px-8 py-4 bg-indigo-600 text-white rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2 shadow-xl shadow-indigo-600/20">
+          <button type="button" className="relative z-10 px-8 py-4 bg-primary text-white rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2 shadow-xl shadow-indigo-600/20">
             Contactez le support
             <ChevronRightIcon className="w-5 h-5" />
           </button>

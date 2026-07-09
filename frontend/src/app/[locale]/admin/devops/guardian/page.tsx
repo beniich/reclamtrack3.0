@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 'use client';
 
 import { KPICard } from '@/components/shared/KPICard';
@@ -22,7 +23,7 @@ export default function PIIDiscoveryPage() {
                 </div>
                 <div className="flex gap-3">
                     <Button variant="secondary" className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-sm font-semibold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Export CSV</Button>
-                    <button type="button" className="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2">
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2">
                         <Database className="w-4 h-4" />
                         New Discovery Scan
                     </button>
@@ -197,10 +198,10 @@ export default function PIIDiscoveryPage() {
                         </span>
                     </div>
                     <div className="flex gap-2">
-                        <button type="button" className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200 dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800">
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200 dark:border-border-dark hover:bg-primary/5 dark:hover:bg-violet-500/15">
                             <span>🔽</span> Filter
                         </button>
-                        <button type="button" className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200 dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 text-primary">
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200 dark:border-border-dark hover:bg-primary/5 dark:hover:bg-violet-500/15 text-primary">
                             <span>📥</span> Export CSV
                         </button>
                     </div>
@@ -220,7 +221,7 @@ export default function PIIDiscoveryPage() {
                         </thead>
                         <tbody className="divide-y divide-slate-200 dark:divide-border-dark text-sm">
                             {assets?.map((asset) => (
-                                <tr key={asset.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <tr key={asset.id} className="hover:bg-primary/5 dark:hover:bg-violet-500/10 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="flex flex-col">
                                             <span className="font-semibold">{asset.name}</span>
@@ -272,8 +273,8 @@ export default function PIIDiscoveryPage() {
                     <p>Showing 1 to 3 of 892 assets</p>
                     <div className="flex gap-1">
                         <Button variant="primary" className="p-1.5 px-3 rounded-md bg-primary text-white">1</Button>
-                        <Button variant="secondary" className="p-1.5 px-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">2</Button>
-                        <Button variant="secondary" className="p-1.5 px-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">3</Button>
+                        <Button variant="secondary" className="p-1.5 px-3 rounded-md hover:bg-primary/8 dark:hover:bg-violet-500/15">2</Button>
+                        <Button variant="secondary" className="p-1.5 px-3 rounded-md hover:bg-primary/8 dark:hover:bg-violet-500/15">3</Button>
                     </div>
                 </div>
             </div>
@@ -291,7 +292,7 @@ export default function PIIDiscoveryPage() {
                     <h4 className="text-xs font-bold">Incremental Scan</h4>
                     <p className="text-[10px] text-slate-500">Checking S3 Bucket logs...</p>
                 </div>
-                <button type="button" className="text-slate-400 hover:text-slate-200">✕</button>
+                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-slate-200">✕</button>
             </div>
         </div>
     );

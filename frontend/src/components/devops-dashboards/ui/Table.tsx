@@ -20,7 +20,7 @@ export const Table = ({ columns, data, className = "" }: TableProps) => (
             </thead>
             <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-sm">
                 {data.map((row, i) => (
-                    <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-800/30">
+                    <tr key={i} className="hover:bg-primary/5 dark:hover:bg-violet-500/8">
                         {columns.map((col) => (
                             <td key={col.accessor} className="px-4 py-2">
                                 {row[col.accessor]}

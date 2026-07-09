@@ -6,14 +6,14 @@ export const Heatmap = () => {
         const value = Math.random();
         let color = "bg-green-500/20";
         if (value > 0.9) color = "bg-red-500";
-        else if (value > 0.7) color = "bg-orange-500";
+        else if (value > 0.7) color = "bg-primary";
         else if (value > 0.5) color = "bg-yellow-500";
 
         return <div key={i} className={`h-8 rounded ${color} hover:opacity-80 transition cursor-pointer`} title={`Risk Score: ${(value * 100).toFixed(0)}`} />;
     });
 
     return (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6">
+        <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl p-6">
             <h3 className="font-bold text-lg mb-4">Risk Heatmap</h3>
             <div className="grid grid-cols-8 gap-2">
                 {cells}

@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { ArrowLeft, Edit2, User } from 'lucide-react';
 
 export default function TeamCapacityPage() {
     const params = useParams();
@@ -58,12 +59,12 @@ export default function TeamCapacityPage() {
     };
 
     return (
-        <div className="bg-slate-950 font-sans text-slate-100 antialiased overflow-hidden h-screen flex flex-col">
+        <div className="bg-background-dark font-sans text-slate-100 antialiased overflow-hidden h-screen flex flex-col">
             {/* Header */}
-            <header className="bg-slate-900 border-b border-slate-800 h-16 flex items-center justify-between px-6 shrink-0 z-30">
+            <header className="bg-surface-dark border-b border-border-dark h-16 flex items-center justify-between px-6 shrink-0 z-30">
                 <div className="flex items-center gap-4">
-                    <Link href="/roster-scheduler" className="hover:bg-slate-800 p-2 rounded-lg transition-colors text-slate-400">
-                        <span className="material-symbols-outlined">arrow_back</span>
+                    <Link href="/roster-scheduler" className="hover:bg-violet-500/15 p-2 rounded-lg transition-colors text-slate-400">
+                        <ArrowLeft />
                     </Link>
                     <div className="h-8 w-px bg-slate-800 mx-1"></div>
                     <div>
@@ -81,8 +82,8 @@ export default function TeamCapacityPage() {
                             <span className="text-xs font-semibold">Active</span>
                         </div>
                     </div>
-                    <button type="button" className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
-                        <span className="material-symbols-outlined text-sm">edit</span>
+                    <button type="button" className="bg-primary hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
+                        <Edit2 className="text-sm" />
                         Modify Assignments
                     </button>
                     <img
@@ -98,7 +99,7 @@ export default function TeamCapacityPage() {
                 {/* Staff Timeline Section */}
                 <section className="flex-1 flex flex-col min-w-0">
                     {/* Time Header */}
-                    <div className="h-12 border-b border-slate-800 flex bg-slate-900 shrink-0 sticky top-0 z-40">
+                    <div className="h-12 border-b border-border-dark flex bg-surface-dark shrink-0 sticky top-0 z-40">
                         <div className="w-64 shrink-0 border-r border-slate-700 p-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">
                             Staff Member / Fatigue
                         </div>
@@ -106,7 +107,7 @@ export default function TeamCapacityPage() {
                             {['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'].map((time, idx) => (
                                 <div
                                     key={time}
-                                    className={`w-40 shrink-0 border-r border-slate-800 p-4 text-center text-[11px] font-bold ${time === '12:00' ? 'text-blue-500 bg-blue-500/5' : 'text-slate-500'}`}
+                                    className={`w-40 shrink-0 border-r border-border-dark p-4 text-center text-[11px] font-bold ${time === '12:00' ? 'text-primary bg-primary/5' : 'text-slate-500'}`}
                                 >
                                     {time}
                                 </div>
@@ -115,11 +116,11 @@ export default function TeamCapacityPage() {
                     </div>
 
                     {/* Staff Rows */}
-                    <div className="flex-1 overflow-auto scrollbar-thin scrollbar-thumb-slate-800 bg-slate-950/20">
+                    <div className="flex-1 overflow-auto scrollbar-thin scrollbar-thumb-slate-800 bg-background-dark/20">
                         {teamMembers.map((member, idx) => (
-                            <div key={idx} className="flex border-b border-slate-800/60 min-h-[120px] group hover:bg-slate-800/10 transition-colors">
+                            <div key={idx} className="flex border-b border-border-dark/60 min-h-[120px] group hover:bg-violet-500/15/10 transition-colors">
                                 {/* Staff Info */}
-                                <div className="w-64 shrink-0 border-r border-slate-700 p-4 bg-slate-900/80 sticky left-0 z-20 flex flex-col justify-between">
+                                <div className="w-64 shrink-0 border-r border-slate-700 p-4 bg-surface-dark/80 sticky left-0 z-20 flex flex-col justify-between">
                                     <div className="flex items-center gap-3">
                                         {member.img ? (
                                             <img
@@ -129,7 +130,7 @@ export default function TeamCapacityPage() {
                                             />
                                         ) : (
                                             <div className="h-10 w-10 rounded-full border-2 border-slate-700 bg-slate-800 flex items-center justify-center">
-                                                <span className="material-symbols-outlined text-slate-500">person</span>
+                                                <User className="text-slate-500" />
                                             </div>
                                         )}
                                         <div>
@@ -156,7 +157,7 @@ export default function TeamCapacityPage() {
                                 {/* Timeline with Shifts */}
                                 <div className="flex-1 relative min-w-[960px]">
                                     {member.shifts.map((shift, shiftIdx) => {
-                                        const bgClass = shift.color === 'blue' ? 'bg-blue-600' :
+                                        const bgClass = shift.color === 'blue' ? 'bg-primary' :
                                             shift.color === 'emerald' ? 'bg-emerald-600' :
                                                 shift.color === 'red' ? 'bg-red-600' : 'bg-slate-600';
                                         const borderClass = shift.color === 'blue' ? 'border-blue-400' :
@@ -184,9 +185,9 @@ export default function TeamCapacityPage() {
                 </section>
 
                 {/* Right Sidebar */}
-                <aside className="w-80 bg-slate-900 border-l border-slate-800 flex flex-col shrink-0">
+                <aside className="w-80 bg-surface-dark border-l border-border-dark flex flex-col shrink-0">
                     {/* Assigned Vehicle */}
-                    <div className="p-6 border-b border-slate-800 bg-slate-900/50">
+                    <div className="p-6 border-b border-border-dark bg-surface-dark/50">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4 flex items-center gap-2">
                             <span className="material-symbols-outlined text-sm">local_shipping</span> Assigned Vehicle
                         </h3>
@@ -199,11 +200,11 @@ export default function TeamCapacityPage() {
                                 <span className="bg-emerald-900/30 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded text-[10px] font-bold">READY</span>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="bg-slate-900/50 p-2 rounded-lg border border-slate-700/50">
+                                <div className="bg-surface-dark/50 p-2 rounded-lg border border-slate-700/50">
                                     <p className="text-[9px] text-slate-500 uppercase font-bold">Fuel Level</p>
                                     <p className="text-xs font-bold text-white">82%</p>
                                 </div>
-                                <div className="bg-slate-900/50 p-2 rounded-lg border border-slate-700/50">
+                                <div className="bg-surface-dark/50 p-2 rounded-lg border border-slate-700/50">
                                     <p className="text-[9px] text-slate-500 uppercase font-bold">Odometer</p>
                                     <p className="text-xs font-bold text-white">42,480 mi</p>
                                 </div>
@@ -212,12 +213,12 @@ export default function TeamCapacityPage() {
                     </div>
 
                     {/* Team Efficiency */}
-                    <div className="p-6 border-b border-slate-800">
+                    <div className="p-6 border-b border-border-dark">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Team Total Efficiency</h3>
                         <div className="relative flex items-center justify-center">
                             <svg className="w-32 h-32 transform -rotate-90">
                                 <circle className="text-slate-800" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" strokeWidth="8"></circle>
-                                <circle className="text-blue-600" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" strokeDasharray="364.4" strokeDashoffset="72" strokeWidth="8"></circle>
+                                <circle className="text-primary" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" strokeDasharray="364.4" strokeDashoffset="72" strokeWidth="8"></circle>
                             </svg>
                             <div className="absolute inset-0 flex flex-col items-center justify-center">
                                 <span className="text-2xl font-bold text-white">82%</span>
@@ -240,8 +241,8 @@ export default function TeamCapacityPage() {
                                 { name: 'Hydraulic Jack Kit', serial: 'HJ-5541', icon: 'build_circle', status: 'warning' },
                                 { name: 'Wrench Set (Std)', serial: 'WS-0120', icon: 'home_repair_service', status: 'ok' }
                             ].map((tool, idx) => (
-                                <div key={idx} className="flex items-center gap-3 p-2 bg-slate-800/40 border border-slate-800 rounded-lg">
-                                    <div className="w-10 h-10 bg-slate-900 rounded flex items-center justify-center">
+                                <div key={idx} className="flex items-center gap-3 p-2 bg-slate-800/40 border border-border-dark rounded-lg">
+                                    <div className="w-10 h-10 bg-surface-dark rounded flex items-center justify-center">
                                         <span className="material-symbols-outlined text-slate-400">{tool.icon}</span>
                                     </div>
                                     <div className="flex-1">
@@ -259,10 +260,10 @@ export default function TeamCapacityPage() {
             </main>
 
             {/* Footer */}
-            <footer className="h-10 border-t border-slate-800 bg-slate-900 flex items-center justify-between px-6 shrink-0 text-[10px] font-bold text-slate-500 tracking-wider">
+            <footer className="h-10 border-t border-border-dark bg-surface-dark flex items-center justify-between px-6 shrink-0 text-[10px] font-bold text-slate-500 tracking-wider">
                 <div className="flex items-center gap-6">
                     {[
-                        { color: 'bg-blue-600', label: 'MAINTENANCE' },
+                        { color: 'bg-primary', label: 'MAINTENANCE' },
                         { color: 'bg-emerald-600', label: 'ROUTINE' },
                         { color: 'bg-red-600', label: 'EMERGENCY' },
                         { color: 'bg-slate-600', label: 'ADMIN' }

@@ -27,10 +27,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     <input
                         ref={ref}
                         className={cn(
-                            'w-full h-12 px-4 rounded-2xl border border-slate-200 dark:border-slate-800',
-                            'bg-slate-50 dark:bg-slate-950 text-sm font-bold text-slate-900 dark:text-white placeholder:text-slate-400 placeholder:font-medium',
+                            'w-full h-12 px-4 rounded-2xl border border-slate-200 dark:border-border-dark',
+                            'bg-slate-50 dark:bg-background text-sm font-bold text-slate-900 dark:text-white placeholder:text-slate-400 placeholder:font-medium',
                             'focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
-                            'disabled:bg-slate-100 dark:disabled:bg-slate-900 disabled:cursor-not-allowed',
+                            'disabled:bg-slate-100 dark:disabled:bg-surface-dark disabled:cursor-not-allowed',
                             'transition-all duration-200',
                             error && 'border-rose-500 focus:ring-rose-500/20 focus:border-rose-500',
                             icon && 'pl-11',

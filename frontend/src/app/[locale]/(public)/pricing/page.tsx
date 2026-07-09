@@ -7,6 +7,7 @@ import { Link } from '@/i18n/navigation';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { ChevronDown, Share2 } from 'lucide-react';
 
 export default function PricingPage() {
     const [isYearly, setIsYearly] = useState(false);
@@ -229,7 +230,7 @@ export default function PricingPage() {
                                 <details key={i} className="group bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-6 cursor-pointer hover:border-primary/30 transition-all">
                                     <summary className="flex items-center justify-between font-bold text-slate-900 dark:text-white uppercase tracking-tight text-sm">
                                         <span>{item.q}</span>
-                                        <span className="material-symbols-outlined text-primary group-open:rotate-180 transition-transform">expand_more</span>
+                                        <ChevronDown className="text-primary group-open:rotate-180 transition-transform" />
                                     </summary>
                                     <div className="pt-4 text-sm text-slate-500 dark:text-slate-400 font-light leading-relaxed">
                                         {item.a}
@@ -262,7 +263,7 @@ export default function PricingPage() {
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">© {new Date().getFullYear()} ReclamTrack Pro Infrastructure</p>
                         <div className="flex gap-4">
                             <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary group hover:bg-primary hover:text-white transition-all cursor-pointer">
-                                <span className="material-symbols-outlined text-sm">share</span>
+                                <Share2 className="text-sm" />
                             </div>
                         </div>
                     </div>

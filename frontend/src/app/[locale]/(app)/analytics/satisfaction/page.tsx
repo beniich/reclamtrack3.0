@@ -171,7 +171,7 @@ export default function CitizenSatisfactionPage() {
                         <CardTitle className="text-sm font-medium text-slate-500">
                             Réponses
                         </CardTitle>
-                        <MessageSquare className="w-4 h-4 text-blue-500" />
+                        <MessageSquare className="w-4 h-4 text-primary" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-3xl font-bold">1,247</div>

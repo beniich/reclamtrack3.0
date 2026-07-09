@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { dbAdminApi } from "@/services/dbAdminService";
+import { Plus, AlertTriangle } from 'lucide-react';
 
 interface Node {
     id: string;
@@ -127,19 +128,19 @@ export default function NetVizDashboard() {
                     <div>
                         <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Layers</h3>
                         <div className="space-y-2">
-                            <label className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+                            <label className="flex items-center gap-3 p-2 rounded-lg hover:bg-primary/8 dark:hover:bg-violet-500/15 cursor-pointer transition-colors">
                                 <input type="checkbox" defaultChecked className="accent-primary h-4 w-4" />
                                 <span className="text-sm font-medium">Application Layer</span>
                             </label>
-                            <label className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+                            <label className="flex items-center gap-3 p-2 rounded-lg hover:bg-primary/8 dark:hover:bg-violet-500/15 cursor-pointer transition-colors">
                                 <input type="checkbox" defaultChecked className="accent-primary h-4 w-4" />
                                 <span className="text-sm font-medium">Database Cluster</span>
                             </label>
-                            <label className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+                            <label className="flex items-center gap-3 p-2 rounded-lg hover:bg-primary/8 dark:hover:bg-violet-500/15 cursor-pointer transition-colors">
                                 <input type="checkbox" defaultChecked className="accent-primary h-4 w-4" />
                                 <span className="text-sm font-medium">Cache / Redis</span>
                             </label>
-                            <label className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+                            <label className="flex items-center gap-3 p-2 rounded-lg hover:bg-primary/8 dark:hover:bg-violet-500/15 cursor-pointer transition-colors">
                                 <input type="checkbox" className="accent-primary h-4 w-4" />
                                 <span className="text-sm font-medium text-slate-400">External APIs</span>
                             </label>
@@ -183,7 +184,7 @@ export default function NetVizDashboard() {
                                         y={(source.y + target.y) / 2}
                                         fill="#94a3b8"
                                         fontSize="10"
-                                        className="font-mono bg-slate-900"
+                                        className="font-mono bg-surface-dark"
                                     >
                                         {conn.latency}ms
                                     </text>
@@ -216,7 +217,7 @@ export default function NetVizDashboard() {
                                     style={{ backgroundColor: getStatusColor(node.status) }}
                                 ></div>
                                 {/* Tooltip */}
-                                <div className="absolute -top-10 bg-slate-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
+                                <div className="absolute -top-10 bg-surface-dark text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
                                     {node.status.toUpperCase()} - {Math.floor(Math.random() * 80)}% Load
                                 </div>
                             </div>
@@ -227,17 +228,17 @@ export default function NetVizDashboard() {
                     ))}
 
                     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-xl bg-white/90 dark:bg-background-dark/90 border border-primary/20 p-2 shadow-2xl backdrop-blur-md z-30">
-                        <button type="button" className="h-8 w-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><span className="material-symbols-outlined text-sm">add</span></button>
-                        <button type="button" className="h-8 w-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><span className="material-symbols-outlined text-sm">remove</span></button>
+                        <button type="button" className="h-8 w-8 rounded-lg hover:bg-primary/8 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><Plus className="text-sm" /></button>
+                        <button type="button" className="h-8 w-8 rounded-lg hover:bg-primary/8 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><span className="material-symbols-outlined text-sm">remove</span></button>
                         <div className="w-px h-4 bg-slate-300 dark:bg-slate-600 mx-1"></div>
-                        <button type="button" className="h-8 w-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><span className="material-symbols-outlined text-sm">center_focus_strong</span></button>
+                        <button type="button" className="h-8 w-8 rounded-lg hover:bg-primary/8 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><span className="material-symbols-outlined text-sm">center_focus_strong</span></button>
                     </div>
                     <div className="absolute bottom-6 right-6 flex flex-col gap-4 items-end z-30">
                         <div className="bg-white/90 dark:bg-background-dark/90 border border-primary/10 p-3 rounded-lg shadow-xl backdrop-blur-md">
                             <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">Legend</h4>
                             <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                                 <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300"><span className="w-2 h-2 rounded-full bg-violet-500"></span> Load Balancer</div>
-                                <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300"><span className="w-2 h-2 rounded-full bg-blue-500"></span> App Server</div>
+                                <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300"><span className="w-2 h-2 rounded-full bg-primary"></span> App Server</div>
                                 <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300"><span className="w-2 h-2 rounded-full bg-cyan-500"></span> Database</div>
                                 <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300"><span className="w-2 h-2 rounded-full bg-pink-500"></span> Cache</div>
                             </div>
@@ -296,7 +297,7 @@ export default function NetVizDashboard() {
                         )}
 
                         <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 flex gap-3 items-start">
-                            <span className="material-symbols-outlined text-amber-500 text-lg mt-0.5">warning</span>
+                            <AlertTriangle className="text-amber-500 text-lg mt-0.5" />
                             <div>
                                 <h5 className="text-xs font-bold text-slate-900 dark:text-white">High Latency Detected</h5>
                                 <p className="text-[10px] text-slate-500 mt-1">Node <span className="font-mono bg-white dark:bg-slate-700 px-1 rounded">App Server 2</span> is responding slower than usual (45ms).</p>

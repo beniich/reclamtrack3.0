@@ -210,7 +210,7 @@ export default function TeamShiftSchedulerPage() {
                 <div className="flex items-center gap-3">
                     <button type="button"
                         onClick={duplicateWeek}
-                        className="px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center gap-2"
+                        className="px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors flex items-center gap-2"
                     >
                         <Copy className="w-4 h-4" />
                         Dupliquer semaine
@@ -245,10 +245,10 @@ export default function TeamShiftSchedulerPage() {
             )}
 
             {/* Week Navigation */}
-            <div className="flex items-center justify-between bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4">
+            <div className="flex items-center justify-between bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark p-4">
                 <button type="button"
                     onClick={() => setCurrentWeek(addDays(currentWeek, -7))}
-                    className="px-4 py-2 border rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800"
+                    className="px-4 py-2 border rounded-lg hover:bg-primary/5 dark:hover:bg-violet-500/15"
                 >
                     ← Semaine précédente
                 </button>
@@ -260,14 +260,14 @@ export default function TeamShiftSchedulerPage() {
 
                 <button type="button"
                     onClick={() => setCurrentWeek(addDays(currentWeek, 7))}
-                    className="px-4 py-2 border rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800"
+                    className="px-4 py-2 border rounded-lg hover:bg-primary/5 dark:hover:bg-violet-500/15"
                 >
                     Semaine suivante →
                 </button>
             </div>
 
             {/* Schedule Grid */}
-            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+            <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead>
@@ -315,7 +315,7 @@ export default function TeamShiftSchedulerPage() {
                                         return (
                                             <td
                                                 key={`${day.toISOString()}-${shift.id}`}
-                                                className={`p-2 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors ${cellAssignments.length < shift.requiredStaff
+                                                className={`p-2 cursor-pointer hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors ${cellAssignments.length < shift.requiredStaff
                                                         ? 'bg-red-50 dark:bg-red-900/10'
                                                         : ''
                                                     }`}
@@ -371,7 +371,7 @@ export default function TeamShiftSchedulerPage() {
                     onClick={() => setSelectedCell(null)}
                 >
                     <div
-                        className="bg-white dark:bg-slate-900 rounded-xl p-6 max-w-md w-full mx-4"
+                        className="bg-white dark:bg-background rounded-xl p-6 max-w-md w-full mx-4"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <h3 className="text-lg font-bold mb-4">Assigner un membre</h3>
@@ -405,7 +405,7 @@ export default function TeamShiftSchedulerPage() {
                                         disabled={alreadyAssigned}
                                         className={`w-full p-3 border rounded-lg text-left transition-colors ${alreadyAssigned
                                                 ? 'opacity-50 cursor-not-allowed bg-slate-100 dark:bg-slate-800'
-                                                : 'hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-primary'
+                                                : 'hover:bg-primary/5 dark:hover:bg-violet-500/15 hover:border-primary'
                                             }`}
                                     >
                                         <div className="font-semibold">{member.name}</div>
@@ -418,7 +418,7 @@ export default function TeamShiftSchedulerPage() {
                             })}
                         </div>
 
-                        <Button variant="secondary" className="mt-4 w-full px-4 py-2 border rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800" onClick={() => setSelectedCell(null)}>Annuler</Button>
+                        <Button variant="secondary" className="mt-4 w-full px-4 py-2 border rounded-lg hover:bg-primary/5 dark:hover:bg-violet-500/15" onClick={() => setSelectedCell(null)}>Annuler</Button>
                     </div>
                 </div>
             )}

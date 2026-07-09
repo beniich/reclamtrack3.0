@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { dbAdminApi } from "@/services/dbAdminService";
+import { LayoutDashboard, Plus, ArrowUp, Activity, AlertTriangle, Search, MoreHorizontal } from 'lucide-react';
 
 interface Queue {
     id: string;
@@ -62,8 +63,8 @@ export default function QManagerDashboard() {
 
             <div className="flex flex-1 overflow-hidden">
                 {/* Sidebar Navigation */}
-                <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col z-20 shadow-md">
-                    <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
+                <aside className="w-64 bg-white dark:bg-background border-r border-slate-200 dark:border-border-dark flex flex-col z-20 shadow-md">
+                    <div className="p-6 border-b border-slate-200 dark:border-border-dark flex items-center gap-3">
                         <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
                             <span className="material-symbols-outlined text-[20px]">layers</span>
                         </div>
@@ -73,19 +74,19 @@ export default function QManagerDashboard() {
                         <div className="px-4 mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider">Operational Views</div>
                         <ul className="space-y-1">
                             <li>
-                                <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors sidebar-item-active">
-                                    <span className="material-symbols-outlined text-primary text-[20px]">dashboard</span>
+                                <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors sidebar-item-active">
+                                    <LayoutDashboard className="text-primary text-[20px]" />
                                     Overview
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border-l-[3px] border-transparent">
+                                <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors border-l-[3px] border-transparent">
                                     <span className="material-symbols-outlined text-slate-400 text-[20px]">memory</span>
                                     Redis Clusters
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border-l-[3px] border-transparent">
+                                <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors border-l-[3px] border-transparent">
                                     <span className="material-symbols-outlined text-slate-400 text-[20px]">queue</span>
                                     Active Queues
                                     <span className="ml-auto bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">{queues.filter(q => q.active > 1000).length}</span>
@@ -106,7 +107,7 @@ export default function QManagerDashboard() {
                 {/* Main Content Area */}
                 <main className="flex-1 overflow-y-auto bg-slate-50/50 dark:bg-[#0b0c10]">
                     {/* Header Toolbar */}
-                    <header className="sticky top-0 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-8 py-4 flex justify-between items-center">
+                    <header className="sticky top-0 z-10 bg-white/80 dark:bg-background/80 backdrop-blur-md border-b border-slate-200 dark:border-border-dark px-8 py-4 flex justify-between items-center">
                         <div className="flex items-center gap-4">
                             <h2 className="text-xl font-bold text-slate-900 dark:text-white">Dashboard Overview</h2>
                             <div className="h-6 w-px bg-slate-200 dark:border-slate-700"></div>
@@ -122,7 +123,7 @@ export default function QManagerDashboard() {
                                 Purge All Caches
                             </button>
                             <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
-                                <span className="material-symbols-outlined text-[18px]">add</span>
+                                <Plus className="text-[18px]" />
                                 New Queue
                             </button>
                         </div>
@@ -139,7 +140,7 @@ export default function QManagerDashboard() {
                                 <h3 className="text-3xl font-black text-slate-900 dark:text-white">{cacheHitRate}%</h3>
                                 <div className="flex items-center gap-2 mt-2">
                                     <span className="text-xs font-bold text-green-500 flex items-center">
-                                        <span className="material-symbols-outlined text-[14px]">arrow_upward</span> 0.2%
+                                        <ArrowUp className="text-[14px]" /> 0.2%
                                     </span>
                                     <span className="text-xs text-slate-400">vs last hour</span>
                                 </div>
@@ -150,7 +151,7 @@ export default function QManagerDashboard() {
 
                             <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative overflow-hidden group">
                                 <div className="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                                    <span className="material-symbols-outlined text-[64px] text-purple-500">speed</span>
+                                    <Activity className="text-[64px] text-purple-500" />
                                 </div>
                                 <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Total Processing Rate</p>
                                 <h3 className="text-3xl font-black text-slate-900 dark:text-white">{totalThroughput}</h3>
@@ -169,13 +170,13 @@ export default function QManagerDashboard() {
 
                             <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative overflow-hidden group border-l-4 border-l-red-500">
                                 <div className="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                                    <span className="material-symbols-outlined text-[64px] text-red-500">warning</span>
+                                    <AlertTriangle className="text-[64px] text-red-500" />
                                 </div>
                                 <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Failed Jobs</p>
                                 <h3 className="text-3xl font-black text-slate-900 dark:text-white">{totalFailed}</h3>
                                 <div className="flex items-center gap-2 mt-2">
                                     <span className="text-xs font-bold text-red-500 flex items-center">
-                                        <span className="material-symbols-outlined text-[14px]">arrow_upward</span> {totalFailed > 0 ? '+1' : '0'}
+                                        <ArrowUp className="text-[14px]" /> {totalFailed > 0 ? '+1' : '0'}
                                     </span>
                                     <span className="text-xs text-slate-400">Needs attention</span>
                                 </div>
@@ -195,7 +196,7 @@ export default function QManagerDashboard() {
                                         Chart Visualization
                                     </div>
                                     <div className="flex-1 bg-primary/20 hover:bg-primary/40 transition-all rounded-t h-[40%] relative group z-10">
-                                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">2.4k req/s</div>
+                                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-dark text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">2.4k req/s</div>
                                     </div>
                                     <div className="flex-1 bg-primary/30 hover:bg-primary/50 transition-all rounded-t h-[55%] relative group z-10"></div>
                                     <div className="flex-1 bg-primary/60 hover:bg-primary/80 transition-all rounded-t h-[70%] relative group z-10"></div>
@@ -214,7 +215,7 @@ export default function QManagerDashboard() {
                                             <div className="flex justify-between text-sm">
                                                 <div className="flex items-center gap-1">
                                                     <span className="font-medium text-slate-600 dark:text-slate-300">{q.name}</span>
-                                                    {q.status === 'critical' && <span className="material-symbols-outlined text-[14px] text-red-500">warning</span>}
+                                                    {q.status === 'critical' && <AlertTriangle className="text-[14px] text-red-500" />}
                                                 </div>
                                                 <span className={`font-bold ${q.status === 'critical' ? 'text-red-500' : 'text-slate-900 dark:text-white'}`}>{q.active}</span>
                                             </div>
@@ -232,10 +233,10 @@ export default function QManagerDashboard() {
 
                         {/* Recent Job Activity Table (Remains Static Mock for now as generator doesn't provide job history list yet) */}
                         <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
-                            <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/50">
+                            <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50/50 dark:bg-background/50">
                                 <h3 className="font-bold text-lg text-slate-900 dark:text-white">Recent Job Activity</h3>
                                 <div className="relative">
-                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" />
                                     <input type="text" placeholder="Search Job ID..." className="pl-9 pr-4 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-primary/50 outline-none" />
                                 </div>
                             </div>
@@ -253,7 +254,7 @@ export default function QManagerDashboard() {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
-                                        <tr className="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                                        <tr className="hover:bg-primary/5 dark:hover:bg-slate-700/30 transition-colors">
                                             <td className="px-6 py-4">
                                                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-500/10 dark:text-green-400">
                                                     Completed
@@ -265,7 +266,7 @@ export default function QManagerDashboard() {
                                             <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">4s</td>
                                             <td className="px-6 py-4 text-sm text-slate-500">2m ago</td>
                                             <td className="px-6 py-4 text-right">
-                                                <button type="button" className="text-slate-400 hover:text-primary transition-colors"><span className="material-symbols-outlined">more_horiz</span></button>
+                                                <button type="button" className="text-slate-400 hover:text-primary transition-colors"><MoreHorizontal /></button>
                                             </td>
                                         </tr>
                                         {/* Reduced mock items for brevity */}

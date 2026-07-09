@@ -20,11 +20,11 @@ export default function MadrassaDashboard() {
       {/* Header */}
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
+          <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
             <AcademicCapIcon className="w-8 h-8 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Madrassa <span className="text-indigo-600">LMS</span></h1>
+            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Madrassa <span className="text-primary">LMS</span></h1>
             <p className="text-sm text-slate-400 font-medium">Portail Administratif • Campus de Casablanca</p>
           </div>
         </div>
@@ -41,7 +41,7 @@ export default function MadrassaDashboard() {
         {/* Left Stats Column */}
         <div className="space-y-6">
           {[
-            { label: "Élèves Inscrits", value: "1,240", icon: UserCircleIcon, color: "text-indigo-600", bg: "bg-indigo-50" },
+            { label: "Élèves Inscrits", value: "1,240", icon: UserCircleIcon, color: "text-primary", bg: "bg-indigo-50" },
             { label: "Cours Actifs", value: "48", icon: BookOpenIcon, color: "text-emerald-600", bg: "bg-emerald-50" },
             { label: "Note Moyenne", value: "16.5", icon: CheckBadgeIcon, color: "text-amber-600", bg: "bg-amber-50" },
           ].map((stat, i) => (
@@ -64,7 +64,7 @@ export default function MadrassaDashboard() {
             </div>
             <h4 className="text-sm font-bold mb-2">Mise à jour Système</h4>
             <p className="text-xs text-indigo-100 leading-relaxed mb-4">La nouvelle version du module d'examens est disponible. Essayez l'auto-correction par IA.</p>
-            <Button variant="ghost" className="text-xs bg-white text-indigo-600 px-4 py-2 rounded-xl font-bold hover:shadow-lg transition-all">En savoir plus</Button>
+            <Button variant="ghost" className="text-xs bg-white text-primary px-4 py-2 rounded-xl font-bold hover:shadow-lg transition-all">En savoir plus</Button>
           </div>
         </div>
 
@@ -91,7 +91,7 @@ export default function MadrassaDashboard() {
                      <p className="text-xs text-slate-500">{lesson.teacher} • {lesson.class}</p>
                    </div>
                    <span className={`text-[10px] px-2 py-1 rounded-full font-bold ${
-                     lesson.status === 'En cours' ? 'bg-indigo-600 text-white' : 'bg-slate-200 text-slate-500'
+                     lesson.status === 'En cours' ? 'bg-primary text-white' : 'bg-slate-200 text-slate-500'
                    }`}>{lesson.status}</span>
                 </div>
               ))}
@@ -100,7 +100,7 @@ export default function MadrassaDashboard() {
 
           <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
             <h2 className="text-lg font-bold text-slate-900 mb-6 font-mono">Classe Virtuelle (Madrassa Live)</h2>
-            <div className="aspect-video bg-slate-900 rounded-2xl relative overflow-hidden group">
+            <div className="aspect-video bg-surface-dark rounded-2xl relative overflow-hidden group">
                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
                  <div className="flex items-center gap-2 mb-2">
                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
@@ -122,7 +122,7 @@ export default function MadrassaDashboard() {
              <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Notifications</h2>
              <div className="space-y-6">
                {[
-                 { user: "Ahmed", action: "a rendu le devoir de Math", time: "5 min", color: "bg-blue-500" },
+                 { user: "Ahmed", action: "a rendu le devoir de Math", time: "5 min", color: "bg-primary" },
                  { user: "System", action: "Maintenance prévue à 20h", time: "1h", color: "bg-amber-500" },
                  { user: "Mme Drissi", action: "a partagé un nouveau support", time: "2h", color: "bg-emerald-500" },
                ].map((notif, i) => (
@@ -150,7 +150,7 @@ export default function MadrassaDashboard() {
                  </div>
                ))}
              </div>
-             <Button variant="primary" className="w-full mt-6 py-3 border border-indigo-100 text-indigo-600 font-bold rounded-2xl text-xs hover:bg-indigo-50 transition-all">Voir la messagerie</Button>
+             <Button variant="primary" className="w-full mt-6 py-3 border border-indigo-100 text-primary font-bold rounded-2xl text-xs hover:bg-indigo-50 transition-all">Voir la messagerie</Button>
           </div>
         </div>
       </div>

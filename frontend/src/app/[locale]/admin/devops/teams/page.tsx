@@ -1,13 +1,15 @@
+import { toast } from 'sonner';
 'use client'
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button';
+import { LayoutDashboard, Users, BarChart2, Settings, Bell, Home, Plus, Filter, ChevronDown, Calendar } from 'lucide-react';
 
 export default function TeamsPage() {
     return (
         <div className="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark">
             {/* Sidebar */}
-            <aside className="w-64 flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800">
+            <aside className="w-64 flex flex-col bg-white dark:bg-background border-r border-slate-200 dark:border-border-dark">
                 <div className="p-6 flex items-center gap-3">
                     <div className="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
                         <span className="material-symbols-outlined">engineering</span>
@@ -24,21 +26,21 @@ export default function TeamsPage() {
                 <nav className="flex-1 px-4 space-y-2 mt-4">
                     <Link
                         href="/admin/devops"
-                        className="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        className="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-lg transition-colors"
                     >
-                        <span className="material-symbols-outlined text-lg">dashboard</span>
+                        <LayoutDashboard className="text-lg" />
                         <span className="text-sm font-medium">Dashboard</span>
                     </Link>
                     <Link
                         href="#"
-                        className="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        className="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-lg transition-colors"
                     >
                         <span className="material-symbols-outlined text-lg">report_problem</span>
                         <span className="text-sm font-medium">Complaints</span>
                     </Link>
                     <Link
                         href="#"
-                        className="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        className="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-lg transition-colors"
                     >
                         <span className="material-symbols-outlined text-lg">construction</span>
                         <span className="text-sm font-medium">Interventions</span>
@@ -47,18 +49,18 @@ export default function TeamsPage() {
                         href="#"
                         className="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors"
                     >
-                        <span className="material-symbols-outlined text-lg">groups</span>
+                        <Users className="text-lg" />
                         <span className="text-sm font-medium">Technical Teams</span>
                     </Link>
                     <Link
                         href="#"
-                        className="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        className="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-lg transition-colors"
                     >
-                        <span className="material-symbols-outlined text-lg">bar_chart</span>
+                        <BarChart2 className="text-lg" />
                         <span className="text-sm font-medium">Reports</span>
                     </Link>
                 </nav>
-                <div className="p-4 border-t border-slate-200 dark:border-slate-800 space-y-4">
+                <div className="p-4 border-t border-slate-200 dark:border-border-dark space-y-4">
                     <div className="flex items-center gap-3 px-2">
                         <div className="size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
                             <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600"></div>
@@ -67,7 +69,7 @@ export default function TeamsPage() {
                             <p className="text-sm font-medium truncate">Marcus Chen</p>
                             <p className="text-xs text-slate-500 truncate">Senior Dispatcher</p>
                         </div>
-                        <span className="material-symbols-outlined text-slate-400 cursor-pointer">settings</span>
+                        <Settings className="text-slate-400 cursor-pointer" />
                     </div>
                 </div>
             </aside>
@@ -75,7 +77,7 @@ export default function TeamsPage() {
             {/* Main Content */}
             <main className="flex-1 flex flex-col overflow-hidden">
                 {/* Header */}
-                <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8">
+                <header className="h-16 bg-white dark:bg-background border-b border-slate-200 dark:border-border-dark flex items-center justify-between px-8">
                     <div className="flex items-center gap-6">
                         <h2 className="text-xl font-bold dark:text-white">Technical Teams Directory</h2>
                         <div className="relative w-72">
@@ -90,19 +92,19 @@ export default function TeamsPage() {
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button type="button" className="size-10 flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors relative">
-                            <span className="material-symbols-outlined">notifications</span>
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-10 flex items-center justify-center text-slate-500 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-full transition-colors relative">
+                            <Bell />
                             <span className="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
                         </button>
                         <div className="h-6 w-px bg-slate-200 dark:bg-slate-800"></div>
                         <Link
                             href="/admin/devops"
-                            className="size-10 flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+                            className="size-10 flex items-center justify-center text-slate-500 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-full transition-colors"
                         >
-                            <span className="material-symbols-outlined">home</span>
+                            <Home />
                         </Link>
-                        <button type="button" className="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
-                            <span className="material-symbols-outlined text-sm">add</span>
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
+                            <Plus className="text-sm" />
                             New Team
                         </button>
                     </div>
@@ -112,28 +114,28 @@ export default function TeamsPage() {
                 <div className="flex-1 overflow-y-auto p-8 space-y-8">
                     {/* Stats Row */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                             <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Total Teams</p>
                             <div className="mt-2 flex items-baseline gap-2">
                                 <span className="text-3xl font-bold dark:text-white">24</span>
                                 <span className="text-xs font-semibold text-emerald-500">+1 this month</span>
                             </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                             <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Available Now</p>
                             <div className="mt-2 flex items-baseline gap-2">
                                 <span className="text-3xl font-bold text-emerald-600">14</span>
                                 <span className="text-xs font-semibold text-slate-400">58% capacity</span>
                             </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                             <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Active Interventions</p>
                             <div className="mt-2 flex items-baseline gap-2">
                                 <span className="text-3xl font-bold text-primary">8</span>
                                 <span className="text-xs font-semibold text-amber-500">2 priority</span>
                             </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                             <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Average Response</p>
                             <div className="mt-2 flex items-baseline gap-2">
                                 <span className="text-3xl font-bold dark:text-white">42m</span>
@@ -145,15 +147,15 @@ export default function TeamsPage() {
                     {/* Filters Bar */}
                     <div className="flex items-center justify-between flex-wrap gap-4">
                         <div className="flex items-center gap-3">
-                            <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-white">
-                                <span className="material-symbols-outlined text-lg">filter_list</span>
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-lg text-sm font-medium hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors dark:text-white">
+                                <Filter className="text-lg" />
                                 All Specialties
-                                <span className="material-symbols-outlined text-lg">expand_more</span>
+                                <ChevronDown className="text-lg" />
                             </button>
-                            <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-white">
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-lg text-sm font-medium hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors dark:text-white">
                                 <span className="material-symbols-outlined text-lg">radio_button_checked</span>
                                 Status: Any
-                                <span className="material-symbols-outlined text-lg">expand_more</span>
+                                <ChevronDown className="text-lg" />
                             </button>
                         </div>
                         <p className="text-sm text-slate-500">Showing 24 technical teams</p>
@@ -220,7 +222,7 @@ export default function TeamsPage() {
 
                     {/* Pagination */}
                     <div className="flex justify-center py-6">
-                        <Button variant="secondary" className="px-6 py-2 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-white">Load More Teams</Button>
+                        <Button variant="secondary" className="px-6 py-2 border border-slate-200 dark:border-border-dark rounded-lg text-sm font-medium hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors dark:text-white">Load More Teams</Button>
                     </div>
                 </div>
             </main>
@@ -252,7 +254,7 @@ function TeamCard({
     vehicle: string
 }) {
     return (
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group flex flex-col">
+        <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark shadow-sm hover:shadow-md transition-shadow group flex flex-col">
             <div className="p-5 flex-1">
                 <div className="flex justify-between items-start mb-4">
                     <div className={`size-12 rounded-lg ${iconBg} ${iconColor} flex items-center justify-center`}>
@@ -270,7 +272,7 @@ function TeamCard({
                 <div className="space-y-3">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
-                            <span className="material-symbols-outlined text-sm">group</span>
+                            <Users className="text-sm" />
                             <span className="text-xs font-medium">{members} Members</span>
                         </div>
                     </div>
@@ -281,8 +283,8 @@ function TeamCard({
                 </div>
             </div>
             <div className="px-5 pb-5 mt-auto">
-                <button type="button" className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white transition-all rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
-                    <span className="material-symbols-outlined text-lg">calendar_month</span>
+                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white transition-all rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
+                    <Calendar className="text-lg" />
                     View Schedule
                 </button>
             </div>

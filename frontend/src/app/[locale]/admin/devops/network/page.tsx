@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import { Home } from 'lucide-react';
 
 export default function NetworkPage() {
     return (
@@ -11,7 +12,7 @@ export default function NetworkPage() {
                     </div>
                     <h2 className="text-lg font-bold text-white">NetViz <span className="text-primary">Pro</span></h2>
                 </div>
-                <Link href="/admin/devops" className="p-2 text-slate-400 hover:text-white"><span className="material-symbols-outlined">home</span></Link>
+                <Link href="/admin/devops" className="p-2 text-slate-400 hover:text-white"><Home /></Link>
             </header>
             <div className="flex-1 relative bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:32px_32px] p-12">
                 <div className="max-w-5xl mx-auto space-y-8">

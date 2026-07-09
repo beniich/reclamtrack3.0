@@ -74,7 +74,7 @@ export default function SettingsPage() {
 
                     {/* Action Footer */}
                     <div className="flex items-center justify-end gap-4 mt-12 pb-20">
-                        <Button variant="ghost" className="px-6 py-3 rounded-lg border border-slate-200 font-bold hover:bg-slate-50 transition-colors">Annuler</Button>
+                        <Button variant="ghost" className="px-6 py-3 rounded-lg border border-slate-200 font-bold hover:bg-primary/5 transition-colors">Annuler</Button>
                         <Button variant="primary" className="px-8 py-3 rounded-lg bg-primary text-white font-bold hover:shadow-lg hover:shadow-primary/30 transition-all">Enregistrer</Button>
                     </div>
                 </main>

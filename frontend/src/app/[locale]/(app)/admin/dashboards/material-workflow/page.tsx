@@ -4,6 +4,7 @@ import { DashboardHeader } from '@/components/dashboard-v2/DashboardHeader'
 import { Filter, Plus, Search } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button';
+import { ArrowRight, MapPin, CheckCircle } from 'lucide-react';
 
 export default function MaterialWorkflowPage() {
     const [searchQuery, setSearchQuery] = useState('')
@@ -26,7 +27,7 @@ export default function MaterialWorkflowPage() {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
                         </div>
-                        <button type="button" className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-[#1a2233] rounded-lg transition-all">
+                        <button type="button" className="p-2 text-slate-500 hover:bg-primary/8 dark:hover:bg-[#1a2233] rounded-lg transition-all">
                             <Filter className="h-5 w-5" />
                         </button>
                         <div className="h-8 w-[1px] bg-slate-200 dark:bg-slate-800"></div>
@@ -80,9 +81,9 @@ export default function MaterialWorkflowPage() {
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-between gap-2 mt-4">
-                                    <Button variant="secondary" className="flex-1 text-[11px] font-bold py-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Details</Button>
+                                    <Button variant="secondary" className="flex-1 text-[11px] font-bold py-2 rounded-lg border border-slate-200 dark:border-border-dark text-slate-700 dark:text-slate-300 hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-all">Details</Button>
                                     <button type="button" className="flex-1 text-[11px] font-bold py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-all flex items-center justify-center gap-1">
-                                        Approve <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                                        Approve <ArrowRight className="text-xs" />
                                     </button>
                                 </div>
                             </div>
@@ -93,7 +94,7 @@ export default function MaterialWorkflowPage() {
                                     <span className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">
                                         REQ-88430
                                     </span>
-                                    <span className="text-[10px] bg-blue-500/10 text-blue-500 px-2 py-0.5 rounded font-bold uppercase">
+                                    <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded font-bold uppercase">
                                         Standard
                                     </span>
                                 </div>
@@ -132,7 +133,7 @@ export default function MaterialWorkflowPage() {
                                         REQ-88395
                                     </span>
                                     <span className="flex items-center gap-1 text-[10px] text-primary font-bold">
-                                        <span className="material-symbols-outlined text-[12px]">location_on</span> Bin A-12, B-04
+                                        <MapPin className="text-[12px]" /> Bin A-12, B-04
                                     </span>
                                 </div>
                                 <h4 className="font-semibold text-sm mb-1 text-slate-900 dark:text-white">Electrical Component Batch</h4>
@@ -176,7 +177,7 @@ export default function MaterialWorkflowPage() {
                                 </div>
                                 <h4 className="font-semibold text-sm mb-1 text-slate-900 dark:text-white">HVAC Maintenance Spares</h4>
                                 <p className="text-xs text-slate-500 mb-4">Ready since 08:30 AM</p>
-                                <div className="flex items-center justify-center p-4 bg-slate-100 dark:bg-[#101622] rounded-lg mb-4 border border-dashed border-slate-300 dark:border-slate-800">
+                                <div className="flex items-center justify-center p-4 bg-slate-100 dark:bg-[#101622] rounded-lg mb-4 border border-dashed border-slate-300 dark:border-border-dark">
                                     <span className="material-symbols-outlined text-4xl text-slate-400">qr_code_2</span>
                                 </div>
                                 <button type="button" className="w-full text-[11px] font-bold py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-all flex items-center justify-center gap-1">
@@ -197,24 +198,24 @@ export default function MaterialWorkflowPage() {
                             </div>
                         </div>
                         <div className="space-y-4">
-                            <div className="bg-white/50 dark:bg-[#1a2233]/40 rounded-xl p-4 border border-slate-200 dark:border-slate-800 opacity-60">
+                            <div className="bg-white/50 dark:bg-[#1a2233]/40 rounded-xl p-4 border border-slate-200 dark:border-border-dark opacity-60">
                                 <div className="flex justify-between items-start mb-2">
                                     <span className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">
                                         REQ-88240
                                     </span>
-                                    <span className="material-symbols-outlined text-green-500 text-sm">check_circle</span>
+                                    <CheckCircle className="text-green-500 text-sm" />
                                 </div>
                                 <h4 className="font-semibold text-sm mb-1 line-through text-slate-400">
                                     Lighting Fixtures Lot
                                 </h4>
                                 <p className="text-[10px] text-slate-400">Delivered to Site B • 2h ago</p>
                             </div>
-                            <div className="bg-white/50 dark:bg-[#1a2233]/40 rounded-xl p-4 border border-slate-200 dark:border-slate-800 opacity-60">
+                            <div className="bg-white/50 dark:bg-[#1a2233]/40 rounded-xl p-4 border border-slate-200 dark:border-border-dark opacity-60">
                                 <div className="flex justify-between items-start mb-2">
                                     <span className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">
                                         REQ-88235
                                     </span>
-                                    <span className="material-symbols-outlined text-green-500 text-sm">check_circle</span>
+                                    <CheckCircle className="text-green-500 text-sm" />
                                 </div>
                                 <h4 className="font-semibold text-sm mb-1 line-through text-slate-400">PVC Piping Bundle</h4>
                                 <p className="text-[10px] text-slate-400">Delivered to Site A • 4h ago</p>

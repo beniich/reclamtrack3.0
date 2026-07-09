@@ -8,6 +8,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { Mail, Lock, LogIn } from 'lucide-react';
 
 export default function LoginPage() {
     const t = useTranslations('Auth');
@@ -84,22 +85,22 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-slate-50 dark:bg-background font-display selection:bg-indigo-500 selection:text-white transition-colors duration-300 relative overflow-hidden">
+        <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-slate-50 dark:bg-background font-display selection:bg-primary selection:text-white transition-colors duration-300 relative overflow-hidden">
             {/* Ambient glow */}
-            <div className="absolute top-0 right-0 w-full h-full bg-indigo-500/5 dark:bg-orange-500/5 blur-[120px] -z-10 pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-full h-full bg-primary/5 dark:bg-primary/5 blur-[120px] -z-10 pointer-events-none"></div>
 
             {/* Logo / Branding Header */}
             <div className="mb-8 flex flex-col items-center gap-6">
                 <Logo size={80} showText={true} className="flex-col !gap-6 scale-125" />
-                <p className="text-[10px] text-indigo-600 dark:text-orange-400 uppercase tracking-widest font-black mt-2">Industrial Intelligence Solutions</p>
+                <p className="text-[10px] text-primary dark:text-orange-400 uppercase tracking-widest font-black mt-2">Industrial Intelligence Solutions</p>
             </div>
 
             {/* Login Card */}
-            <div className="w-full max-w-[440px] bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-orange-500/10 shadow-2xl shadow-indigo-500/5 dark:shadow-orange-500/5 overflow-hidden transition-all duration-300">
+            <div className="w-full max-w-[440px] bg-white dark:bg-background rounded-[2rem] border border-slate-200 dark:border-primary/10 shadow-2xl shadow-indigo-500/5 dark:shadow-orange-500/5 overflow-hidden transition-all duration-300">
                 {/* Header badge */}
                 <div className="w-full px-8 pt-8 flex flex-col items-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-orange-500/10 border border-indigo-100 dark:border-orange-500/20 text-indigo-600 dark:text-orange-400 text-[10px] font-black uppercase tracking-widest mb-6">
-                        <span className="w-2 h-2 bg-indigo-600 dark:bg-orange-500 rounded-full animate-pulse"></span>
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-primary/10 border border-indigo-100 dark:border-primary/20 text-primary dark:text-orange-400 text-[10px] font-black uppercase tracking-widest mb-6">
+                        <span className="w-2 h-2 bg-primary dark:bg-primary rounded-full animate-pulse"></span>
                         {t('secureAuth')}
                     </div>
                     <h2 className="text-xl font-black uppercase tracking-tight text-slate-900 dark:text-white">{t('login')}</h2>
@@ -120,10 +121,10 @@ export default function LoginPage() {
 
                     <div className="relative mb-6">
                         <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-slate-100 dark:border-slate-800"></div>
+                            <div className="w-full border-t border-slate-100 dark:border-border-dark"></div>
                         </div>
                         <div className="relative flex justify-center text-[10px] font-black uppercase tracking-widest text-slate-400">
-                            <span className="px-4 bg-white dark:bg-slate-900">{t('continueWith')}</span>
+                            <span className="px-4 bg-white dark:bg-background">{t('continueWith')}</span>
                         </div>
                     </div>
 
@@ -132,9 +133,9 @@ export default function LoginPage() {
                         <div>
                             <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2" htmlFor="identifier">{t('identifierEmail')}</label>
                             <div className="relative">
-                                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xl notranslate" translate="no">mail</span>
+                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xl notranslate" />
                                 <input
-                                    className="w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-orange-500/20 focus:border-indigo-500 dark:focus:border-orange-500 transition-all text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 font-medium text-sm outline-none"
+                                    className="w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 dark:focus:ring-primary/20 focus:border-primary dark:focus:border-primary transition-all text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 font-medium text-sm outline-none"
                                     id="identifier"
                                     name="identifier"
                                     placeholder={t('emailPlaceholder')}
@@ -150,12 +151,12 @@ export default function LoginPage() {
                         <div>
                             <div className="flex justify-between items-center mb-2">
                                 <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400" htmlFor="password">{t('password')}</label>
-                                <Link className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-orange-400 hover:text-indigo-700 dark:hover:text-orange-300" href="/forgot-password">{t('forgotPassword')}</Link>
+                                <Link className="text-[10px] font-black uppercase tracking-widest text-primary dark:text-orange-400 hover:text-indigo-700 dark:hover:text-orange-300" href="/forgot-password">{t('forgotPassword')}</Link>
                             </div>
                             <div className="relative">
-                                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xl notranslate" translate="no">lock</span>
+                                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xl notranslate" />
                                 <input
-                                    className="w-full pl-11 pr-12 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-orange-500/20 focus:border-indigo-500 dark:focus:border-orange-500 transition-all text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 font-medium text-sm outline-none"
+                                    className="w-full pl-11 pr-12 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 dark:focus:ring-primary/20 focus:border-primary dark:focus:border-primary transition-all text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 font-medium text-sm outline-none"
                                     id="password"
                                     name="password"
                                     placeholder={t('passwordPlaceholder')}
@@ -176,7 +177,7 @@ export default function LoginPage() {
 
                         {/* Sign In Button */}
                         <button
-                            className="w-full bg-indigo-600 dark:bg-orange-500 hover:bg-indigo-700 dark:hover:brightness-110 text-white font-black py-4 rounded-xl shadow-xl shadow-indigo-600/20 dark:shadow-orange-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-widest text-xs"
+                            className="w-full bg-primary dark:bg-primary hover:bg-primary-700 dark:hover:brightness-110 text-white font-black py-4 rounded-xl shadow-xl shadow-indigo-600/20 dark:shadow-orange-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-widest text-xs"
                             type="submit"
                             disabled={loading}
                         >
@@ -188,7 +189,7 @@ export default function LoginPage() {
                             ) : (
                                 <>
                                     <span>{t('signIn')}</span>
-                                    <span className="material-symbols-outlined text-lg notranslate" translate="no">login</span>
+                                    <LogIn className="text-lg notranslate" />
                                 </>
                             )}
                         </button>
@@ -197,7 +198,7 @@ export default function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => handleQuickLogin('admin')}
-                                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest hover:bg-slate-100 dark:hover:bg-slate-700 transition-all"
+                                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest hover:bg-primary/8 dark:hover:bg-slate-700 transition-all"
                             >
                                 <span className="material-symbols-outlined text-sm">shield_person</span>
                                 {t('adminDemo')}
@@ -205,7 +206,7 @@ export default function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => handleQuickLogin('superadmin')}
-                                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-indigo-50 dark:bg-orange-500/10 border border-indigo-100 dark:border-orange-500/20 text-indigo-600 dark:text-orange-400 text-[10px] font-black uppercase tracking-widest hover:bg-indigo-100 dark:hover:bg-orange-500/20 transition-all"
+                                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-indigo-50 dark:bg-primary/10 border border-indigo-100 dark:border-primary/20 text-primary dark:text-orange-400 text-[10px] font-black uppercase tracking-widest hover:bg-indigo-100 dark:hover:bg-primary/20 transition-all"
                             >
                                 <span className="material-symbols-outlined text-sm">monitoring</span>
                                 {t('superAdmin')}
@@ -214,7 +215,7 @@ export default function LoginPage() {
                     </form>
 
                     {/* Security Footer inside card */}
-                    <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-center gap-2 text-slate-400 dark:text-slate-500">
+                    <div className="mt-8 pt-6 border-t border-slate-100 dark:border-border-dark flex items-center justify-center gap-2 text-slate-400 dark:text-slate-500">
                         <span className="material-symbols-outlined text-sm notranslate" translate="no">encrypted</span>
                         <span className="text-[10px] font-bold uppercase tracking-widest">{t('sslEncrypted')}</span>
                     </div>
@@ -223,14 +224,14 @@ export default function LoginPage() {
 
             {/* Footer Links */}
             <div className="mt-8 flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">
-                <a className="hover:text-indigo-600 dark:hover:text-orange-400 transition-colors" href="#">{t('securityPolicy')}</a>
-                <a className="hover:text-indigo-600 dark:hover:text-orange-400 transition-colors" href="#">{t('helpCenter')}</a>
-                <a className="hover:text-indigo-600 dark:hover:text-orange-400 transition-colors" href="#">{t('privacy')}</a>
+                <a className="hover:text-primary dark:hover:text-orange-400 transition-colors" href="#">{t('securityPolicy')}</a>
+                <a className="hover:text-primary dark:hover:text-orange-400 transition-colors" href="#">{t('helpCenter')}</a>
+                <a className="hover:text-primary dark:hover:text-orange-400 transition-colors" href="#">{t('privacy')}</a>
             </div>
 
             <div className="mt-8 text-center text-xs">
                 <span className="text-slate-500 dark:text-slate-400 font-medium">{t('newMember')} </span>
-                <Link href="/register" className="text-indigo-600 dark:text-orange-400 hover:text-indigo-700 dark:hover:text-orange-300 font-black uppercase tracking-widest ml-1">
+                <Link href="/register" className="text-primary dark:text-orange-400 hover:text-indigo-700 dark:hover:text-orange-300 font-black uppercase tracking-widest ml-1">
                     {t('requestAccess')}
                 </Link>
             </div>

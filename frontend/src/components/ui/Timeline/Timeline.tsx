@@ -33,7 +33,7 @@ export function Timeline({ events, className }: TimelineProps) {
             case 'created':
                 return 'bg-emerald-500/10 border-emerald-500/30'
             case 'assigned':
-                return 'bg-indigo-500/10 border-indigo-500/30'
+                return 'bg-primary/10 border-primary/30'
             case 'note':
                 return 'bg-amber-500/10 border-amber-500/30'
             default:
@@ -80,7 +80,7 @@ export function Timeline({ events, className }: TimelineProps) {
                                 <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">{event.description}</p>
 
                                 {index === events.length - 1 && event.actor && (
-                                    <div className="mt-4 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-700/50 relative overflow-hidden transition-all duration-500">
+                                    <div className="mt-4 p-4 bg-slate-50 dark:bg-background/50 rounded-xl border border-slate-200 dark:border-slate-700/50 relative overflow-hidden transition-all duration-500">
                                         <div className="absolute top-0 left-0 w-1 h-full bg-primary/80"></div>
                                         <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">
                                             Dernière Mise à Jour

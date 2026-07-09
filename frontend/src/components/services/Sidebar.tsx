@@ -29,7 +29,7 @@ export function Sidebar() {
         <>
             {/* Mobile Toggle */}
             <button type="button"
-                className="fixed top-4 left-4 z-50 md:hidden p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
+                className="fixed top-4 left-4 z-50 md:hidden p-2 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-lg"
                 onClick={() => setOpen(!open)}
             >
                 {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -46,7 +46,7 @@ export function Sidebar() {
             {/* Sidebar */}
             <aside className={cn(
                 'fixed left-0 top-0 h-screen w-64 md:w-20',
-                'bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800', // Adjusted theme colors
+                'bg-white dark:bg-background border-r border-slate-200 dark:border-border-dark', // Adjusted theme colors
                 'flex flex-col items-center md:items-start px-4 py-8 gap-8',
                 'transition-all duration-300 z-40',
                 'md:hover:w-64 md:group',

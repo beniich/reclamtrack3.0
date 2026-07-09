@@ -21,7 +21,7 @@ export function ComplaintCard({ complaint, className }: ComplaintCardProps) {
     return (
         <Link
             href={`/complaints/${complaint._id || (complaint as any).id}`}
-            className="group block bg-white dark:bg-slate-900/50 dark:backdrop-blur-xl rounded-[2rem] p-6 border border-slate-200 dark:border-orange-500/10 hover:border-indigo-300 dark:hover:border-orange-500/30 transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 dark:hover:shadow-orange-500/10 relative overflow-hidden"
+            className="group block bg-white dark:bg-background/50 dark:backdrop-blur-xl rounded-[2rem] p-6 border border-slate-200 dark:border-primary/10 hover:border-indigo-300 dark:hover:border-primary/30 transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 dark:hover:shadow-orange-500/10 relative overflow-hidden"
         >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-transparent dark:from-orange-500 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
@@ -35,7 +35,7 @@ export function ComplaintCard({ complaint, className }: ComplaintCardProps) {
                 <PriorityBadge priority={complaint.priority as any} />
             </div>
 
-            <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mb-3 group-hover:text-indigo-600 dark:group-hover:text-orange-400 transition-colors uppercase italic leading-tight">
+            <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mb-3 group-hover:text-primary dark:group-hover:text-orange-400 transition-colors uppercase italic leading-tight">
                 {complaint.title}
             </h3>
 
@@ -60,10 +60,10 @@ export function ComplaintCard({ complaint, className }: ComplaintCardProps) {
                 )}
             </div>
 
-            <div className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <div className="mt-6 pt-6 border-t border-slate-100 dark:border-border-dark flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-violet-500/10 border border-indigo-100 dark:border-violet-500/20 flex items-center justify-center shadow-sm dark:shadow-violet-500/10 transition-transform group-hover:scale-110">
-                        <span className="text-xs font-black text-indigo-600 dark:text-violet-400 uppercase">
+                        <span className="text-xs font-black text-primary dark:text-violet-400 uppercase">
                             {(complaint.technicianId as any)?.name?.charAt(0) || '?'}
                         </span>
                     </div>
@@ -74,7 +74,7 @@ export function ComplaintCard({ complaint, className }: ComplaintCardProps) {
                         </p>
                     </div>
                 </div>
-                <div className="flex items-center gap-2 text-indigo-600 dark:text-orange-400 font-black text-[10px] uppercase tracking-widest group-hover:gap-3 transition-all">
+                <div className="flex items-center gap-2 text-primary dark:text-orange-400 font-black text-[10px] uppercase tracking-widest group-hover:gap-3 transition-all">
                     {t('details')} <ChevronRight className="w-4 h-4" />
                 </div>
             </div>

@@ -60,8 +60,8 @@ function TabsTrigger({ value, className = '', children, ...props }: TabsTriggerP
       onClick={() => ctx.onValueChange(value)}
       className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
         isActive
-          ? 'bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 shadow-sm'
-          : 'hover:bg-white/50 dark:hover:bg-slate-800'
+          ? 'bg-white dark:bg-background text-slate-900 dark:text-slate-50 shadow-sm'
+          : 'hover:bg-white/50 dark:hover:bg-violet-500/15'
       } ${className}`}
       {...props}
     >

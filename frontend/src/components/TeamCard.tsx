@@ -32,7 +32,7 @@ export default function TeamCard({ team, onAssign }: Props) {
             {onAssign && (
                 <Button type="button"
                     onClick={() => onAssign(team._id)}
-                    className="bg-blue-600 hover:bg-blue-700"
+                    className="bg-primary hover:bg-primary-700"
                 >
                     Affecter
                 </Button>

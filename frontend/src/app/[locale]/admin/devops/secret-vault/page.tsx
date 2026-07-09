@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 "use client"
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
@@ -24,6 +25,7 @@ import {
 import { securityApi } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import { Search, Plus, Trash, Clock } from 'lucide-react';
 
 interface Secret {
   _id: string;
@@ -148,7 +150,7 @@ export default function SecretVaultPage() {
       <div className="space-y-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-4 bg-white dark:bg-white/5 px-6 py-3 rounded-2xl border border-slate-200 dark:border-white/5 flex-1 max-w-xl shadow-sm">
-                <span className="material-symbols-outlined text-slate-400">search</span>
+                <Search className="text-slate-400" />
                 <input
                     type="text"
                     placeholder="Search secrets by name or category..."
@@ -160,8 +162,8 @@ export default function SecretVaultPage() {
 
             <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
               <DialogTrigger asChild>
-                <button type="button" className="px-6 py-3 bg-primary text-white font-black rounded-xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-xs flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm">add</span>
+                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-6 py-3 bg-primary text-white font-black rounded-xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-xs flex items-center gap-2">
+                  <Plus className="text-sm" />
                   New Secret
                 </button>
               </DialogTrigger>
@@ -286,14 +288,14 @@ export default function SecretVaultPage() {
                             className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 transition-colors"
                             onClick={() => handleDelete(secret._id)}
                         >
-                          <span className="material-symbols-outlined text-xl">delete</span>
+                          <Trash className="text-xl" />
                         </button>
                       </div>
                     </div>
 
                     <div className="space-y-6">
                       {revealedSecret === secret._id ? (
-                        <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-primary/20 font-mono text-sm break-all flex justify-between items-center animate-in slide-in-from-top-2">
+                        <div className="bg-slate-50 dark:bg-background p-4 rounded-2xl border border-primary/20 font-mono text-sm break-all flex justify-between items-center animate-in slide-in-from-top-2">
                           <span className="text-primary font-bold overflow-hidden text-ellipsis mr-4">{revealedValue}</span>
                           <button type="button"
                             className="px-4 py-2 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-primary/20"
@@ -306,7 +308,7 @@ export default function SecretVaultPage() {
                           </button>
                         </div>
                       ) : (
-                        <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-100 dark:border-white/5 font-mono text-sm text-slate-300 dark:text-slate-700 select-none">
+                        <div className="bg-slate-50 dark:bg-background p-4 rounded-2xl border border-slate-100 dark:border-white/5 font-mono text-sm text-slate-300 dark:text-slate-700 select-none">
                           ••••••••••••••••••••••••••••••••
                         </div>
                       )}
@@ -317,7 +319,7 @@ export default function SecretVaultPage() {
                           Last: {secret.lastAccessed ? new Date(secret.lastAccessed).toLocaleTimeString() : 'Never'}
                         </div>
                         <div className="flex items-center gap-2">
-                           <span className="material-symbols-outlined text-sm">update</span>
+                           <Clock className="text-sm" />
                            Rotate: {new Date(secret.lastRotation).toLocaleDateString()}
                         </div>
                       </div>

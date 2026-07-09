@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { Search, PlusCircle } from 'lucide-react';
 export default function MessagesPage() {
     return (
         <div className="font-display bg-background-light text-slate-900 h-[calc(100vh-64px)] overflow-hidden flex flex-col">
@@ -10,14 +11,14 @@ export default function MessagesPage() {
                     <div className="p-4 space-y-4">
                         <div className="flex items-center justify-between">
                             <h1 className="text-xl font-bold">Discussions</h1>
-                            <button type="button" className="flex items-center gap-1 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-colors">
+                            <button type="button" className="flex items-center gap-1 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-primary-700 transition-colors">
                                 <span className="material-symbols-outlined text-sm">edit_square</span>
                                 Nouveau
                             </button>
                         </div>
                         {/* Search */}
                         <div className="relative">
-                            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl" />
                             <input className="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-primary text-sm" placeholder="Chef d'équipe ou ID Cas" type="text" />
                         </div>
                         {/* Filters */}
@@ -48,7 +49,7 @@ export default function MessagesPage() {
                             </div>
                         </div>
                         {/* Other Item */}
-                        <div className="flex items-center gap-4 px-4 py-4 hover:bg-slate-50 cursor-pointer border-l-4 border-transparent">
+                        <div className="flex items-center gap-4 px-4 py-4 hover:bg-primary/5 cursor-pointer border-l-4 border-transparent">
                             <div className="relative shrink-0">
                                 <span className="h-12 w-12 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">SM</span>
                             </div>
@@ -110,10 +111,10 @@ export default function MessagesPage() {
                     <div className="p-4 md:p-6 bg-white border-t border-slate-200">
                         <div className="flex items-end gap-3 bg-slate-50 border border-slate-200 rounded-xl p-2 focus-within:ring-2 focus-within:ring-primary/50 transition-all">
                             <button type="button" className="p-2 text-slate-400 hover:text-primary rounded-lg transition-colors">
-                                <span className="material-symbols-outlined">add_circle</span>
+                                <PlusCircle />
                             </button>
                             <textarea className="flex-1 bg-transparent border-none focus:ring-0 text-sm py-2 px-1 resize-none min-h-[40px] max-h-[120px]" placeholder="Écrivez votre message..." rows={1}></textarea>
-                            <button type="button" className="h-10 w-10 flex items-center justify-center bg-primary text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-primary/20 transition-all active:scale-95">
+                            <button type="button" className="h-10 w-10 flex items-center justify-center bg-primary text-white rounded-lg hover:bg-primary-700 shadow-lg shadow-primary/20 transition-all active:scale-95">
                                 <span className="material-symbols-outlined">send</span>
                             </button>
                         </div>

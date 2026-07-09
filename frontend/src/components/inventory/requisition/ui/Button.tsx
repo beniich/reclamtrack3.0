@@ -22,10 +22,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         const baseStyles = 'inline-flex items-center justify-center gap-2 font-bold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest text-[10px]';
 
         const variants = {
-            primary: 'bg-primary text-white hover:bg-blue-700 focus:ring-primary/50 shadow-lg shadow-primary/20',
-            secondary: 'bg-slate-800 text-white hover:bg-slate-900 focus:ring-slate-500 shadow-lg shadow-slate-900/20',
+            primary: 'bg-primary text-white hover:bg-primary-700 focus:ring-primary/50 shadow-lg shadow-primary/20',
+            secondary: 'bg-slate-800 text-white hover:bg-surface-dark focus:ring-slate-500 shadow-lg shadow-slate-900/20',
             outline: 'border-2 border-primary text-primary hover:bg-primary/5 focus:ring-primary/50',
-            ghost: 'text-slate-600 hover:bg-slate-100 focus:ring-slate-500',
+            ghost: 'text-slate-600 hover:bg-primary/8 focus:ring-slate-500',
             danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-lg shadow-red-600/20',
         };
 

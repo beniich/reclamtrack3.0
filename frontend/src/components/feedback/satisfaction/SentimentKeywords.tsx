@@ -8,7 +8,7 @@ export default function SentimentKeywords({
     keywords: Keyword[];
 }) {
     return (
-        <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <section className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
             <h4 className="font-bold text-base mb-4 text-slate-900 dark:text-white">Sentiment Keywords</h4>
             <div className="flex flex-wrap gap-2">
                 {keywords.map((kw, i) => {

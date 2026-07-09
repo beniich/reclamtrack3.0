@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { MapPin, ArrowRight, Code, Users } from 'lucide-react';
 
 const jobs = [
     { title: 'Senior Full-Stack Engineer', dept: 'Engineering', location: 'Remote / Global', type: 'Full-time', badge: '🔥 Hot' },
@@ -45,7 +46,7 @@ export default function CareersPage() {
 
             <main className="flex-1 pt-20">
                 {/* Hero Section */}
-                <section className="relative py-24 lg:py-32 overflow-hidden bg-slate-900 dark:bg-black">
+                <section className="relative py-24 lg:py-32 overflow-hidden bg-surface-dark dark:bg-black">
                     <div className="absolute inset-0 z-0 opacity-40 bg-[radial-gradient(circle_at_50%_0%,#ec5b13_0%,transparent_50%)]"></div>
                     <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
                         <div className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-[0.2em] uppercase mb-8 border border-primary/30">
@@ -117,12 +118,12 @@ export default function CareersPage() {
                                             </div>
                                             <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-wider">
                                                 <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">hub</span> {job.dept}</span>
-                                                <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">location_on</span> {job.location}</span>
+                                                <span className="flex items-center gap-1.5"><MapPin className="text-sm" /> {job.location}</span>
                                                 <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">schedule</span> {job.type}</span>
                                             </div>
                                         </div>
                                         <button type="button" className="bg-primary/5 group-hover:bg-primary text-primary group-hover:text-white h-12 w-12 md:h-14 md:w-14 rounded-xl flex items-center justify-center transition-all duration-300">
-                                            <span className="material-symbols-outlined">arrow_forward</span>
+                                            <ArrowRight />
                                         </button>
                                     </div>
                                 </div>
@@ -132,7 +133,7 @@ export default function CareersPage() {
                 </section>
 
                 {/* Spontaneous Applications */}
-                <section className="py-24 px-6 bg-slate-900 dark:bg-black relative overflow-hidden">
+                <section className="py-24 px-6 bg-surface-dark dark:bg-black relative overflow-hidden">
                     <div className="absolute inset-0 z-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1522071823991-b9671e3015b3?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center"></div>
                     <div className="relative z-10 max-w-4xl mx-auto text-center py-12">
                         <h2 className="text-3xl md:text-5xl font-black text-white mb-6">Didn't find your match?</h2>
@@ -151,8 +152,8 @@ export default function CareersPage() {
                     <p className="text-xs text-slate-500 font-bold uppercase tracking-widest mb-6">© {new Date().getFullYear()} ReclamTrack Pro. Join the Revolution.</p>
                     <div className="flex justify-center gap-8 mb-8">
                         <a className="size-10 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary/10 text-primary transition-colors cursor-pointer"><span className="material-symbols-outlined text-lg italic">public</span></a>
-                        <a className="size-10 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary/10 text-primary transition-colors cursor-pointer"><span className="material-symbols-outlined text-lg">code</span></a>
-                        <a className="size-10 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary/10 text-primary transition-colors cursor-pointer"><span className="material-symbols-outlined text-lg">group</span></a>
+                        <a className="size-10 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary/10 text-primary transition-colors cursor-pointer"><Code className="text-lg" /></a>
+                        <a className="size-10 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary/10 text-primary transition-colors cursor-pointer"><Users className="text-lg" /></a>
                     </div>
                     <div className="flex flex-wrap justify-center gap-8 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">
                         <Link href="/legal/privacy" className="hover:text-primary">Privacy Protocol</Link>

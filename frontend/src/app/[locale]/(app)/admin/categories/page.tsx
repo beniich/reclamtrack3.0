@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Search, Plus, Download, CheckCircle, Filter, Edit2, Trash } from 'lucide-react';
 
 // Types
 interface Category {
@@ -25,7 +26,7 @@ const mockCategories: Category[] = [
         priority: 'High',
         status: 'Active',
         icon: 'water_drop',
-        iconColor: 'text-blue-600',
+        iconColor: 'text-primary',
         bgColor: 'bg-blue-100 dark:bg-blue-900/30'
     },
     {
@@ -79,8 +80,8 @@ export default function ServiceCategoriesPage() {
     const getPriorityBadge = (priority: string) => {
         switch (priority) {
             case 'Urgent': return <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"><span className="size-1.5 rounded-full bg-red-500"></span>Urgent</span>;
-            case 'High': return <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400"><span className="size-1.5 rounded-full bg-orange-500"></span>High</span>;
-            case 'Medium': return <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400"><span className="size-1.5 rounded-full bg-blue-500"></span>Medium</span>;
+            case 'High': return <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400"><span className="size-1.5 rounded-full bg-primary"></span>High</span>;
+            case 'Medium': return <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400"><span className="size-1.5 rounded-full bg-primary"></span>Medium</span>;
             case 'Low': return <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-400"><span className="size-1.5 rounded-full bg-slate-500"></span>Low</span>;
         }
     };
@@ -88,7 +89,7 @@ export default function ServiceCategoriesPage() {
     return (
         <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-3">
+            <header className="sticky top-0 z-50 bg-white dark:bg-background border-b border-slate-200 dark:border-border-dark px-6 py-3">
                 <div className="max-w-[1600px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-8">
                         <Link href="/dashboard" className="flex items-center gap-3">
@@ -106,7 +107,7 @@ export default function ServiceCategoriesPage() {
                     </div>
                     <div className="flex items-center gap-4">
                         <div className="relative w-64">
-                            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" />
                             <input
                                 className="w-full pl-9 pr-4 py-1.5 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-primary"
                                 placeholder="Search categories..."
@@ -115,8 +116,8 @@ export default function ServiceCategoriesPage() {
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
                         </div>
-                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-blue-700 transition-colors">
-                            <span className="material-symbols-outlined text-sm">add</span>
+                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-primary-700 transition-colors">
+                            <Plus className="text-sm" />
                             Add Category
                         </button>
                     </div>
@@ -131,8 +132,8 @@ export default function ServiceCategoriesPage() {
                         <p className="text-slate-500 dark:text-slate-400 text-lg">Define how complaints are categorized, prioritized, and routed to technical teams.</p>
                     </div>
                     <div className="flex gap-3">
-                        <button type="button" className="flex items-center gap-2 px-4 h-10 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800">
-                            <span className="material-symbols-outlined text-lg">download</span>
+                        <button type="button" className="flex items-center gap-2 px-4 h-10 rounded-lg bg-white dark:bg-background border border-slate-200 dark:border-border-dark text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-primary/5 dark:hover:bg-violet-500/15">
+                            <Download className="text-lg" />
                             Export CSV
                         </button>
                     </div>
@@ -140,7 +141,7 @@ export default function ServiceCategoriesPage() {
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <div className="flex items-center justify-between mb-4">
                             <p className="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider">Total Categories</p>
                             <span className="material-symbols-outlined text-primary">category</span>
@@ -150,10 +151,10 @@ export default function ServiceCategoriesPage() {
                             <span className="text-green-600 text-xs font-bold bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded-full">+4 this month</span>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <div className="flex items-center justify-between mb-4">
                             <p className="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider">Active Status</p>
-                            <span className="material-symbols-outlined text-green-500">check_circle</span>
+                            <CheckCircle className="text-green-500" />
                         </div>
                         <div className="flex items-baseline gap-2">
                             <p className="text-3xl font-bold text-slate-900 dark:text-white">{categories.filter(c => c.status === 'Active').length}</p>
@@ -163,15 +164,15 @@ export default function ServiceCategoriesPage() {
                 </div>
 
                 {/* Table Container */}
-                <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark shadow-sm overflow-hidden">
                     {/* Table Controls */}
-                    <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
+                    <div className="px-6 py-4 border-b border-slate-200 dark:border-border-dark flex flex-wrap items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
                             <div className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400">
-                                <span className="material-symbols-outlined">filter_list</span>
+                                <Filter />
                                 Filter by:
                             </div>
-                            <select className="text-sm rounded-lg border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 focus:ring-primary p-2">
+                            <select className="text-sm rounded-lg border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-slate-800 focus:ring-primary p-2">
                                 <option>All Departments</option>
                                 <option>Facilities Management</option>
                                 <option>IT Support</option>
@@ -184,7 +185,7 @@ export default function ServiceCategoriesPage() {
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
                             <thead>
-                                <tr className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                                <tr className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-border-dark">
                                     <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Category Name</th>
                                     <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Department</th>
                                     <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Default Priority</th>
@@ -194,7 +195,7 @@ export default function ServiceCategoriesPage() {
                             </thead>
                             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                                 {categories.map((category) => (
-                                    <tr key={category.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                                    <tr key={category.id} className="hover:bg-primary/5 dark:hover:bg-violet-500/8 transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
                                                 <div className={`size-8 rounded ${category.bgColor} flex items-center justify-center ${category.iconColor}`}>
@@ -220,10 +221,10 @@ export default function ServiceCategoriesPage() {
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex justify-end gap-2">
                                                 <button type="button" className="p-2 text-slate-400 hover:text-primary rounded-lg transition-colors">
-                                                    <span className="material-symbols-outlined text-xl">edit</span>
+                                                    <Edit2 className="text-xl" />
                                                 </button>
                                                 <button type="button" onClick={() => deleteCategory(category.id)} className="p-2 text-slate-400 hover:text-red-500 rounded-lg transition-colors">
-                                                    <span className="material-symbols-outlined text-xl">delete</span>
+                                                    <Trash className="text-xl" />
                                                 </button>
                                             </div>
                                         </td>

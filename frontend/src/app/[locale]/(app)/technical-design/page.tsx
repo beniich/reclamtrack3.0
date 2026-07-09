@@ -22,13 +22,13 @@ export default async function TechnicalDesignPage() {
                         {ts('designStudio')}
                     </h1>
                     <p className="text-slate-500 dark:text-slate-400 text-sm font-bold uppercase tracking-widest flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+                        <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                         Professional Vector CAD Engine • AI Assisted
                     </p>
                 </div>
             </header>
 
-            <main className="flex-1 bg-white/40 dark:bg-slate-950/40 backdrop-blur-xl border border-slate-200 dark:border-orange-500/10 rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200/50 dark:shadow-orange-500/5">
+            <main className="flex-1 bg-white/40 dark:bg-background/40 backdrop-blur-xl border border-slate-200 dark:border-primary/10 rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200/50 dark:shadow-orange-500/5">
                 <TechnicalStudioWrapper />
             </main>
         </div>

@@ -1,7 +1,9 @@
+import { toast } from 'sonner';
 'use client'
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { Database, Share2, ChevronRight, AlertTriangle, BarChart, BarChart2, Code, MoreHorizontal } from 'lucide-react';
 
 export default function QueryVizPage() {
     const [, setSelectedNode] = useState('seq-scan')
@@ -9,11 +11,11 @@ export default function QueryVizPage() {
     return (
         <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col">
             {/* Top Navigation Bar */}
-            <header className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark px-6 py-3 sticky top-0 z-50">
+            <header className="flex items-center justify-between border-b border-slate-200 dark:border-border-dark bg-white dark:bg-background-dark px-6 py-3 sticky top-0 z-50">
                 <div className="flex items-center gap-6">
                     <div className="flex items-center gap-2">
                         <div className="p-1.5 bg-primary rounded-lg text-white">
-                            <span className="material-symbols-outlined text-2xl">database</span>
+                            <Database className="text-2xl" />
                         </div>
                         <h2 className="text-xl font-bold tracking-tight">
                             QueryViz <span className="text-primary">Pro</span>
@@ -46,8 +48,8 @@ export default function QueryVizPage() {
                             <span className="material-symbols-outlined text-sm">play_arrow</span>
                             Analyze Query
                         </Button>
-                        <button type="button" className="p-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
-                            <span className="material-symbols-outlined">share</span>
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
+                            <Share2 />
                         </button>
                     </div>
                 </div>
@@ -56,11 +58,11 @@ export default function QueryVizPage() {
             {/* Main Workspace */}
             <main className="flex flex-1 overflow-hidden">
                 {/* Left Sidebar: Explorer & Metrics */}
-                <aside className="w-80 border-r border-slate-200 dark:border-slate-800 flex flex-col bg-white dark:bg-background-dark/50">
-                    <div className="p-4 border-b border-slate-200 dark:border-slate-800">
+                <aside className="w-80 border-r border-slate-200 dark:border-border-dark flex flex-col bg-white dark:bg-background-dark/50">
+                    <div className="p-4 border-b border-slate-200 dark:border-border-dark">
                         <div className="flex items-center gap-2 text-xs text-slate-500 font-medium truncate">
                             <span>Alpha_Project</span>
-                            <span className="material-symbols-outlined text-[10px]">chevron_right</span>
+                            <ChevronRight className="text-[10px]" />
                             <span>Production_DB</span>
                         </div>
                         <h3 className="text-sm font-bold mt-1 truncate">Plan #1042: User_Stats_Rollup</h3>
@@ -73,18 +75,18 @@ export default function QueryVizPage() {
                                 Key Performance Indicators
                             </p>
 
-                            <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+                            <div className="p-4 rounded-xl border border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background/50">
                                 <div className="flex justify-between items-start">
                                     <span className="text-xs text-slate-500">Execution Time</span>
-                                    <span className="material-symbols-outlined text-orange-500 text-sm">warning</span>
+                                    <AlertTriangle className="text-primary text-sm" />
                                 </div>
                                 <p className="text-2xl font-bold mt-1">12.4ms</p>
-                                <p className="text-xs text-orange-500 mt-1 font-medium">
+                                <p className="text-xs text-primary mt-1 font-medium">
                                     -15% performance vs last run
                                 </p>
                             </div>
 
-                            <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+                            <div className="p-4 rounded-xl border border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background/50">
                                 <span className="text-xs text-slate-500">Total Cost Score</span>
                                 <p className="text-2xl font-bold mt-1">8,420</p>
                                 <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
@@ -92,7 +94,7 @@ export default function QueryVizPage() {
                                 </div>
                             </div>
 
-                            <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+                            <div className="p-4 rounded-xl border border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background/50">
                                 <span className="text-xs text-slate-500">Memory Usage</span>
                                 <p className="text-2xl font-bold mt-1">4.2MB</p>
                                 <p className="text-xs text-emerald-500 mt-1 font-medium">Within optimized bounds</p>
@@ -126,7 +128,7 @@ export default function QueryVizPage() {
                                     <Button variant="primary" className="w-full mt-2 py-1 text-[10px] font-bold border border-primary/30 rounded group-hover:bg-primary group-hover:text-white transition-all uppercase tracking-tighter">Copy SQL Fix</Button>
                                 </div>
 
-                                <div className="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+                                <div className="p-3 rounded-lg border border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background/50">
                                     <div className="flex gap-2">
                                         <span className="material-symbols-outlined text-emerald-500 text-lg">
                                             check_circle
@@ -146,21 +148,21 @@ export default function QueryVizPage() {
                 <section className="flex-1 relative canvas-grid flex flex-col bg-slate-50 dark:bg-[#0c1018]">
                     {/* Canvas Toolbar */}
                     <div className="absolute top-4 left-4 z-10 flex gap-2">
-                        <div className="flex items-center bg-white dark:bg-slate-900 p-1 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm">
-                            <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
+                        <div className="flex items-center bg-white dark:bg-background p-1 rounded-lg border border-slate-200 dark:border-border-dark shadow-sm">
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded transition-colors">
                                 <span className="material-symbols-outlined text-xl">zoom_in</span>
                             </button>
-                            <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded transition-colors">
                                 <span className="material-symbols-outlined text-xl">zoom_out</span>
                             </button>
                             <div className="w-px h-4 bg-slate-200 dark:bg-slate-800 mx-1"></div>
-                            <button type="button" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors">
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded transition-colors">
                                 <span className="material-symbols-outlined text-xl">center_focus_strong</span>
                             </button>
                         </div>
-                        <div className="flex items-center bg-white dark:bg-slate-900 p-1 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div className="flex items-center bg-white dark:bg-background p-1 rounded-lg border border-slate-200 dark:border-border-dark shadow-sm">
                             <Button variant="primary" className="px-3 py-1.5 text-xs font-bold bg-primary text-white rounded">Visual</Button>
-                            <Button variant="secondary" className="px-3 py-1.5 text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800 rounded">Raw JSON</Button>
+                            <Button variant="secondary" className="px-3 py-1.5 text-xs font-bold hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded">Raw JSON</Button>
                         </div>
                     </div>
 
@@ -169,7 +171,7 @@ export default function QueryVizPage() {
                         <div className="flex flex-col items-center gap-16 min-w-[1000px]">
                             {/* Root Node: Final Result */}
                             <div className="relative flex flex-col items-center">
-                                <div className="w-64 bg-white dark:bg-slate-900 rounded-xl border-2 border-primary shadow-xl p-4 relative z-10 cursor-pointer ring-4 ring-primary/10">
+                                <div className="w-64 bg-white dark:bg-background rounded-xl border-2 border-primary shadow-xl p-4 relative z-10 cursor-pointer ring-4 ring-primary/10">
                                     <div className="flex justify-between items-start mb-2">
                                         <span className="text-[10px] font-bold text-slate-400 uppercase">Limit</span>
                                         <span className="bg-primary/20 text-primary text-[10px] px-1.5 py-0.5 rounded font-bold">
@@ -194,7 +196,7 @@ export default function QueryVizPage() {
 
                             {/* Level 2: Sort */}
                             <div className="relative flex flex-col items-center">
-                                <div className="w-64 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-lg p-4 relative z-10 cursor-pointer hover:border-primary transition-all">
+                                <div className="w-64 bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark shadow-lg p-4 relative z-10 cursor-pointer hover:border-primary transition-all">
                                     <div className="flex justify-between items-start mb-2">
                                         <span className="text-[10px] font-bold text-slate-400 uppercase">Sort</span>
                                         <span className="bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] px-1.5 py-0.5 rounded font-bold">
@@ -214,7 +216,7 @@ export default function QueryVizPage() {
                             <div className="flex gap-40 relative">
                                 {/* Left Node: Join */}
                                 <div className="flex flex-col items-center">
-                                    <div className="w-64 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-lg p-4 relative z-10 cursor-pointer hover:border-primary transition-all">
+                                    <div className="w-64 bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark shadow-lg p-4 relative z-10 cursor-pointer hover:border-primary transition-all">
                                         <div className="flex justify-between items-start mb-2">
                                             <span className="text-[10px] font-bold text-slate-400 uppercase">
                                                 Hash Join
@@ -230,7 +232,7 @@ export default function QueryVizPage() {
                                     </div>
                                     <div className="h-16 w-1 bg-slate-300 dark:bg-slate-700"></div>
                                     {/* Leaf 1 */}
-                                    <div className="w-64 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-lg p-4 relative z-10 cursor-pointer hover:border-primary transition-all">
+                                    <div className="w-64 bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark shadow-lg p-4 relative z-10 cursor-pointer hover:border-primary transition-all">
                                         <div className="flex justify-between items-start mb-2">
                                             <span className="text-[10px] font-bold text-slate-400 uppercase">
                                                 Index Scan
@@ -248,18 +250,18 @@ export default function QueryVizPage() {
                                 <div className="flex flex-col items-center">
                                     <div
                                         onClick={() => setSelectedNode('seq-scan')}
-                                        className="w-64 bg-white dark:bg-slate-900 rounded-xl border-2 border-orange-500 shadow-lg shadow-orange-500/10 p-4 relative z-10 cursor-pointer hover:scale-105 transition-all"
+                                        className="w-64 bg-white dark:bg-background rounded-xl border-2 border-primary shadow-lg shadow-orange-500/10 p-4 relative z-10 cursor-pointer hover:scale-105 transition-all"
                                     >
                                         <div className="flex justify-between items-start mb-2">
                                             <div className="flex items-center gap-1">
-                                                <span className="text-[10px] font-bold text-orange-500 uppercase">
+                                                <span className="text-[10px] font-bold text-primary uppercase">
                                                     Seq Scan
                                                 </span>
-                                                <span className="material-symbols-outlined text-[14px] text-orange-500">
+                                                <span className="material-symbols-outlined text-[14px] text-primary">
                                                     error
                                                 </span>
                                             </div>
-                                            <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-500 text-[10px] px-1.5 py-0.5 rounded font-bold">
+                                            <span className="bg-orange-100 dark:bg-orange-900/30 text-primary text-[10px] px-1.5 py-0.5 rounded font-bold">
                                                 78% COST
                                             </span>
                                         </div>
@@ -276,7 +278,7 @@ export default function QueryVizPage() {
                     </div>
 
                     {/* Minimap */}
-                    <div className="absolute bottom-6 right-6 w-48 h-32 bg-white/80 dark:bg-slate-900/80 backdrop-blur border border-slate-200 dark:border-slate-800 rounded-lg shadow-xl overflow-hidden pointer-events-none">
+                    <div className="absolute bottom-6 right-6 w-48 h-32 bg-white/80 dark:bg-background/80 backdrop-blur border border-slate-200 dark:border-border-dark rounded-lg shadow-xl overflow-hidden pointer-events-none">
                         <div className="w-full h-full p-2 opacity-50 relative">
                             <div className="w-4 h-2 bg-primary mx-auto mb-2"></div>
                             <div className="w-12 h-0.5 bg-slate-400 mx-auto mb-2"></div>
@@ -291,11 +293,11 @@ export default function QueryVizPage() {
                 </section>
 
                 {/* Right Sidebar: Node Inspector */}
-                <aside className="w-96 border-l border-slate-200 dark:border-slate-800 flex flex-col bg-white dark:bg-background-dark">
-                    <div className="p-6 border-b border-slate-200 dark:border-slate-800">
+                <aside className="w-96 border-l border-slate-200 dark:border-border-dark flex flex-col bg-white dark:bg-background-dark">
+                    <div className="p-6 border-b border-slate-200 dark:border-border-dark">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="p-2 bg-orange-500/20 text-orange-500 rounded-lg">
-                                <span className="material-symbols-outlined">analytics</span>
+                            <div className="p-2 bg-primary/20 text-primary rounded-lg">
+                                <BarChart />
                             </div>
                             <div>
                                 <h3 className="text-lg font-bold">Node Inspector</h3>
@@ -303,13 +305,13 @@ export default function QueryVizPage() {
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg">
+                            <div className="p-3 bg-slate-50 dark:bg-background/50 rounded-lg">
                                 <span className="text-[10px] text-slate-500 block uppercase font-bold">
                                     Estimated Cost
                                 </span>
                                 <span className="text-sm font-mono font-bold">0.00 .. 842.12</span>
                             </div>
-                            <div className="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg">
+                            <div className="p-3 bg-slate-50 dark:bg-background/50 rounded-lg">
                                 <span className="text-[10px] text-slate-500 block uppercase font-bold">
                                     Actual Rows
                                 </span>
@@ -322,7 +324,7 @@ export default function QueryVizPage() {
                         {/* Metrics Section */}
                         <div>
                             <h5 className="text-sm font-bold mb-4 flex items-center gap-2">
-                                <span className="material-symbols-outlined text-sm">bar_chart</span>
+                                <BarChart2 className="text-sm" />
                                 Performance Breakdown
                             </h5>
                             <div className="space-y-4">
@@ -332,7 +334,7 @@ export default function QueryVizPage() {
                                         <span className="font-bold">4.2ms (34%)</span>
                                     </div>
                                     <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
-                                        <div className="bg-orange-500 h-full w-[34%]"></div>
+                                        <div className="bg-primary h-full w-[34%]"></div>
                                     </div>
                                 </div>
                                 <div className="space-y-1.5">
@@ -350,10 +352,10 @@ export default function QueryVizPage() {
                         {/* Source Code/JSON snippet */}
                         <div>
                             <h5 className="text-sm font-bold mb-4 flex items-center gap-2">
-                                <span className="material-symbols-outlined text-sm">code</span>
+                                <Code className="text-sm" />
                                 Raw Plan Fragment
                             </h5>
-                            <pre className="bg-slate-900 text-emerald-400 p-4 rounded-xl text-[10px] font-mono overflow-x-auto border border-slate-800">
+                            <pre className="bg-surface-dark text-emerald-400 p-4 rounded-xl text-[10px] font-mono overflow-x-auto border border-border-dark">
                                 {`{
   "Node Type": "Seq Scan",
   "Parallel Aware": true,
@@ -383,8 +385,8 @@ export default function QueryVizPage() {
                             </p>
                             <div className="mt-4 flex gap-2">
                                 <Button variant="primary" className="flex-1 py-2 bg-primary text-white text-[10px] font-bold rounded hover:bg-primary/90 transition-all uppercase">Apply Optimization</Button>
-                                <button type="button" className="px-3 py-2 border border-slate-200 dark:border-slate-800 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                                    <span className="material-symbols-outlined text-xs">more_horiz</span>
+                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-3 py-2 border border-slate-200 dark:border-border-dark rounded hover:bg-primary/8 dark:hover:bg-violet-500/15 transition-all">
+                                    <MoreHorizontal className="text-xs" />
                                 </button>
                             </div>
                         </div>
@@ -393,7 +395,7 @@ export default function QueryVizPage() {
             </main>
 
             {/* Footer: Query Editor Pull-up */}
-            <footer className="h-10 bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between text-[11px] font-medium text-slate-500">
+            <footer className="h-10 bg-white dark:bg-background-dark border-t border-slate-200 dark:border-border-dark px-6 flex items-center justify-between text-[11px] font-medium text-slate-500">
                 <div className="flex gap-4">
                     <span className="flex items-center gap-1.5">
                         <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Connected:
@@ -402,7 +404,7 @@ export default function QueryVizPage() {
                     <span>Database: analytics_warehouse</span>
                 </div>
                 <div className="flex gap-4 items-center">
-                    <button type="button" className="hover:text-primary transition-colors flex items-center gap-1">
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="hover:text-primary transition-colors flex items-center gap-1">
                         <span className="material-symbols-outlined text-sm">terminal</span> Console
                     </button>
                     <div className="w-px h-3 bg-slate-200 dark:bg-slate-800"></div>

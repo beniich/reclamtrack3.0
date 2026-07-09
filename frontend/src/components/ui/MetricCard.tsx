@@ -18,7 +18,7 @@ export function MetricCard({ title, value, icon, trend, subtitle, className = ''
     }
 
     return (
-        <div className={`bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-800 p-5 rounded-xl shadow-sm ${className}`}>
+        <div className={`bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-5 rounded-xl shadow-sm ${className}`}>
             <div className="flex justify-between items-start mb-2">
                 <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
                     {title}

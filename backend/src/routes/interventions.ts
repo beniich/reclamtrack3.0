@@ -1,62 +1,38 @@
-﻿import { Router } from 'express';
+import { Router } from 'express';
 import { body, param } from 'express-validator';
 import { validator } from '../middleware/validator.js';
 import { authenticate as protect } from '../middleware/security.js';
 import { requireOrganization } from '../middleware/security.js';
+import { Intervention } from '../models/Intervention.js';
 
 const router = Router();
 
-// Apply organization context to all intervention routes
+// Apply auth to all routes
 router.use(protect, requireOrganization);
-
-// Mock data for interventions (linked to complaints/assignments)
-// In a real implementation, this would be a Mongoose model
-const mockInterventions = [
-    {
-        id: '1',
-        complaintId: 'complaint_1',
-        teamId: 'team_1',
-        technicianId: 'tech_1',
-        status: 'scheduled',
-        scheduledDate: new Date('2026-02-17T10:00:00'),
-        completedDate: null,
-        notes: '',
-        duration: 120, // minutes
-        createdAt: new Date(),
-        updatedAt: new Date()
-    }
-];
 
 /**
  * @route   GET /api/interventions
- * @desc    Get all interventions (optionally filtered)
+ * @desc    Get all interventions
  * @access  Private
  */
 router.get('/', async (req: any, res, next) => {
     try {
-        const { complaintId, teamId, status } = req.query;
+        const { status, teamId, priority } = req.query;
 
-        let results = [...mockInterventions];
+        const filter: Record<string, any> = {};
+        if (status) filter.status = status;
+        if (teamId) filter.teamId = teamId;
+        if (priority) filter.priority = priority;
 
-        // Filter by complaint
-        if (complaintId) {
-            results = results.filter(i => i.complaintId === complaintId);
-        }
-
-        // Filter by team
-        if (teamId) {
-            results = results.filter(i => i.teamId === teamId);
-        }
-
-        // Filter by status
-        if (status) {
-            results = results.filter(i => i.status === status);
-        }
+        const interventions = await Intervention.find(filter)
+            .populate('teamId', 'name color')
+            .populate('assignedTechnicians', 'name email avatar')
+            .sort({ createdAt: -1 });
 
         res.json({
             success: true,
-            data: results,
-            total: results.length
+            data: interventions,
+            total: interventions.length
         });
     } catch (err) {
         next(err);
@@ -70,7 +46,9 @@ router.get('/', async (req: any, res, next) => {
  */
 router.get('/:id', async (req: any, res, next) => {
     try {
-        const intervention = mockInterventions.find(i => i.id === req.params.id);
+        const intervention = await Intervention.findById(req.params.id)
+            .populate('teamId', 'name color')
+            .populate('assignedTechnicians', 'name email avatar');
 
         if (!intervention) {
             return res.status(404).json({
@@ -79,10 +57,7 @@ router.get('/:id', async (req: any, res, next) => {
             });
         }
 
-        res.json({
-            success: true,
-            data: intervention
-        });
+        res.json({ success: true, data: intervention });
     } catch (err) {
         next(err);
     }
@@ -96,29 +71,34 @@ router.get('/:id', async (req: any, res, next) => {
 router.post(
     '/',
     [
-        body('complaintId').notEmpty().withMessage('Complaint ID is required'),
-        body('teamId').notEmpty().withMessage('Team ID is required'),
-        body('scheduledDate').isISO8601().toDate().withMessage('Valid scheduled date is required'),
-        body('duration').optional().isInt({ min: 1 }),
-        body('notes').optional().isString()
+        body('title').notEmpty().withMessage('Le titre est requis'),
+        body('start').optional().isISO8601().toDate(),
+        body('end').optional().isISO8601().toDate(),
+        body('priority').optional().isIn(['low', 'medium', 'high', 'urgent']),
+        body('status').optional().isIn(['scheduled', 'in-progress', 'completed', 'cancelled', 'SCHEDULED', 'IN_PROGRESS', 'COMPLETED', 'UNSCHEDULED']),
     ],
     validator,
     async (req: any, res, next) => {
         try {
-            const newIntervention = {
-                id: `intervention_${Date.now()}`,
+            const intervention = await Intervention.create({
                 ...req.body,
-                status: 'scheduled',
-                completedDate: null,
-                createdAt: new Date(),
-                updatedAt: new Date()
-            };
-
-            mockInterventions.push(newIntervention);
+                // Map frontend status format to model format
+                status: req.body.status === 'SCHEDULED' ? 'scheduled'
+                    : req.body.status === 'IN_PROGRESS' ? 'in-progress'
+                    : req.body.status === 'COMPLETED' ? 'completed'
+                    : req.body.status === 'UNSCHEDULED' ? 'scheduled'
+                    : req.body.status || 'scheduled',
+                priority: req.body.priority?.toLowerCase() || 'medium',
+                // Provide dummy values for required refs if not provided
+                complaintId: req.body.complaintId || new (await import('mongoose')).default.Types.ObjectId(),
+                teamId: req.body.teamId || new (await import('mongoose')).default.Types.ObjectId(),
+                start: req.body.start || req.body.date ? new Date(`${req.body.date}T${req.body.startTime || '08:00'}`) : new Date(),
+                end: req.body.end || req.body.date ? new Date(`${req.body.date}T${req.body.endTime || '10:00'}`) : new Date(),
+            });
 
             res.status(201).json({
                 success: true,
-                data: newIntervention,
+                data: intervention,
                 message: 'Intervention créée avec succès'
             });
         } catch (err) {
@@ -132,43 +112,34 @@ router.post(
  * @desc    Update intervention
  * @access  Private
  */
-router.put(
-    '/:id',
-    [
-        param('id').notEmpty(),
-        body('status').optional().isIn(['scheduled', 'in_progress', 'completed', 'cancelled']),
-        body('completedDate').optional().isISO8601().toDate(),
-        body('notes').optional().isString(),
-        body('duration').optional().isInt({ min: 1 })
-    ],
-    validator,
-    async (req: any, res, next) => {
-        try {
-            const index = mockInterventions.findIndex(i => i.id === req.params.id);
+router.put('/:id', async (req: any, res, next) => {
+    try {
+        const updateData = { ...req.body };
 
-            if (index === -1) {
-                return res.status(404).json({
-                    success: false,
-                    message: 'Intervention non trouvée'
-                });
-            }
-
-            mockInterventions[index] = {
-                ...mockInterventions[index],
-                ...req.body,
-                updatedAt: new Date()
-            };
-
-            res.json({
-                success: true,
-                data: mockInterventions[index],
-                message: 'Intervention mise à jour'
-            });
-        } catch (err) {
-            next(err);
+        // Normalize status
+        if (updateData.status) {
+            updateData.status = updateData.status === 'SCHEDULED' ? 'scheduled'
+                : updateData.status === 'IN_PROGRESS' ? 'in-progress'
+                : updateData.status === 'COMPLETED' ? 'completed'
+                : updateData.status === 'UNSCHEDULED' ? 'scheduled'
+                : updateData.status;
         }
+
+        const intervention = await Intervention.findByIdAndUpdate(
+            req.params.id,
+            { $set: updateData },
+            { new: true, runValidators: false }
+        );
+
+        if (!intervention) {
+            return res.status(404).json({ success: false, message: 'Intervention non trouvée' });
+        }
+
+        res.json({ success: true, data: intervention, message: 'Intervention mise à jour' });
+    } catch (err) {
+        next(err);
     }
-);
+});
 
 /**
  * @route   DELETE /api/interventions/:id
@@ -177,21 +148,13 @@ router.put(
  */
 router.delete('/:id', async (req: any, res, next) => {
     try {
-        const index = mockInterventions.findIndex(i => i.id === req.params.id);
+        const intervention = await Intervention.findByIdAndDelete(req.params.id);
 
-        if (index === -1) {
-            return res.status(404).json({
-                success: false,
-                message: 'Intervention non trouvée'
-            });
+        if (!intervention) {
+            return res.status(404).json({ success: false, message: 'Intervention non trouvée' });
         }
 
-        mockInterventions.splice(index, 1);
-
-        res.json({
-            success: true,
-            message: 'Intervention supprimée'
-        });
+        res.json({ success: true, message: 'Intervention supprimée' });
     } catch (err) {
         next(err);
     }

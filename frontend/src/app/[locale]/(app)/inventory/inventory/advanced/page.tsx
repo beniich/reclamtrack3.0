@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Search, Plus, AlertTriangle, Filter, Edit2, History } from 'lucide-react';
 
 // Types
 interface InventoryActivity {
@@ -38,7 +39,7 @@ export default function AdvancedInventoryPage() {
     return (
         <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-3">
+            <header className="sticky top-0 z-50 bg-white dark:bg-background border-b border-slate-200 dark:border-border-dark px-6 py-3">
                 <div className="max-w-[1600px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-8">
                         <Link href="/dashboard" className="flex items-center gap-3">
@@ -56,7 +57,7 @@ export default function AdvancedInventoryPage() {
                     </div>
                     <div className="flex items-center gap-4">
                         <div className="relative hidden md:block w-64">
-                            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" />
                             <input
                                 type="text"
                                 placeholder="Global inventory search..."
@@ -79,7 +80,7 @@ export default function AdvancedInventoryPage() {
                         </div>
                         <div className="flex gap-3">
                             <button type="button" className="flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-lg font-bold text-sm hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all">
-                                <span className="material-symbols-outlined text-lg">add</span>
+                                <Plus className="text-lg" />
                                 New Item
                             </button>
                         </div>
@@ -87,8 +88,8 @@ export default function AdvancedInventoryPage() {
 
                     {/* Quick Stats Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
-                            <div className="h-12 w-12 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+                        <div className="bg-white dark:bg-background p-5 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm flex items-center gap-4">
+                            <div className="h-12 w-12 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-primary">
                                 <span className="material-symbols-outlined text-2xl">category</span>
                             </div>
                             <div>
@@ -96,16 +97,16 @@ export default function AdvancedInventoryPage() {
                                 <p className="text-2xl font-bold text-slate-900 dark:text-white">1,248 <span className="text-xs font-normal text-slate-400 ml-1">SKUs</span></p>
                             </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                        <div className="bg-white dark:bg-background p-5 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm flex items-center gap-4">
                             <div className="h-12 w-12 rounded-lg bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center text-amber-600">
-                                <span className="material-symbols-outlined text-2xl">warning</span>
+                                <AlertTriangle className="text-2xl" />
                             </div>
                             <div>
                                 <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Low Stock Alerts</p>
                                 <p className="text-2xl font-bold text-slate-900 dark:text-white">14 <span className="text-xs font-normal text-rose-500 ml-1">3 Critical</span></p>
                             </div>
                         </div>
-                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                        <div className="bg-white dark:bg-background p-5 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm flex items-center gap-4">
                             <div className="h-12 w-12 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600">
                                 <span className="material-symbols-outlined text-2xl">pending_actions</span>
                             </div>
@@ -120,10 +121,10 @@ export default function AdvancedInventoryPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                     {/* Main Table Area */}
                     <div className="lg:col-span-3">
-                        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
-                            <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
+                        <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden shadow-sm">
+                            <div className="p-4 border-b border-slate-200 dark:border-border-dark flex flex-wrap items-center justify-between gap-4">
                                 <div className="relative w-full md:w-80">
-                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" />
                                     <input
                                         className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-primary/20"
                                         placeholder="Search by name or category..."
@@ -131,10 +132,10 @@ export default function AdvancedInventoryPage() {
                                     />
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <button type="button" className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">
-                                        <span className="material-symbols-outlined text-slate-500">filter_list</span>
+                                    <button type="button" className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-primary/5 dark:hover:bg-violet-500/15">
+                                        <Filter className="text-slate-500" />
                                     </button>
-                                    <button type="button" className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <button type="button" className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-primary/5 dark:hover:bg-violet-500/15">
                                         <span className="material-symbols-outlined text-slate-500">file_download</span>
                                     </button>
                                 </div>
@@ -153,10 +154,10 @@ export default function AdvancedInventoryPage() {
                                     </thead>
                                     <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                                         {/* Example Row 1 */}
-                                        <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                                        <tr className="hover:bg-primary/5 dark:hover:bg-violet-500/8 transition-colors">
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="h-10 w-10 flex-shrink-0 bg-blue-100 dark:bg-blue-900/20 text-blue-600 rounded flex items-center justify-center">
+                                                    <div className="h-10 w-10 flex-shrink-0 bg-blue-100 dark:bg-blue-900/20 text-primary rounded flex items-center justify-center">
                                                         <span className="material-symbols-outlined text-xl">vibration</span>
                                                     </div>
                                                     <div className="flex flex-col">
@@ -178,17 +179,17 @@ export default function AdvancedInventoryPage() {
                                             </td>
                                             <td className="px-6 py-4 text-right">
                                                 <div className="flex items-center justify-end gap-2">
-                                                    <button type="button" className="p-2 text-slate-400 hover:text-primary transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 rounded" title="Add/Subtract Stock">
+                                                    <button type="button" className="p-2 text-slate-400 hover:text-primary transition-colors hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded" title="Add/Subtract Stock">
                                                         <span className="material-symbols-outlined text-lg">exposure_plus_1</span>
                                                     </button>
-                                                    <button type="button" className="p-2 text-slate-400 hover:text-primary transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 rounded" title="Edit">
-                                                        <span className="material-symbols-outlined text-lg">edit</span>
+                                                    <button type="button" className="p-2 text-slate-400 hover:text-primary transition-colors hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded" title="Edit">
+                                                        <Edit2 className="text-lg" />
                                                     </button>
                                                 </div>
                                             </td>
                                         </tr>
                                         {/* Example Row 2 */}
-                                        <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                                        <tr className="hover:bg-primary/5 dark:hover:bg-violet-500/8 transition-colors">
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-3">
                                                     <div className="h-10 w-10 flex-shrink-0 bg-purple-100 dark:bg-purple-900/20 text-purple-600 rounded flex items-center justify-center">
@@ -213,11 +214,11 @@ export default function AdvancedInventoryPage() {
                                             </td>
                                             <td className="px-6 py-4 text-right">
                                                 <div className="flex items-center justify-end gap-2">
-                                                    <button type="button" className="p-2 text-slate-400 hover:text-primary transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 rounded" title="Add/Subtract Stock">
+                                                    <button type="button" className="p-2 text-slate-400 hover:text-primary transition-colors hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded" title="Add/Subtract Stock">
                                                         <span className="material-symbols-outlined text-lg">exposure_plus_1</span>
                                                     </button>
-                                                    <button type="button" className="p-2 text-slate-400 hover:text-primary transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 rounded" title="Edit">
-                                                        <span className="material-symbols-outlined text-lg">edit</span>
+                                                    <button type="button" className="p-2 text-slate-400 hover:text-primary transition-colors hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded" title="Edit">
+                                                        <Edit2 className="text-lg" />
                                                     </button>
                                                 </div>
                                             </td>
@@ -230,14 +231,14 @@ export default function AdvancedInventoryPage() {
 
                     {/* Activity Sidebar */}
                     <div className="lg:col-span-1">
-                        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col h-full max-h-[700px]">
-                            <div className="p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between">
+                        <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark shadow-sm overflow-hidden flex flex-col h-full max-h-[700px]">
+                            <div className="p-4 border-b border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between">
                                 <h3 className="text-xs font-black uppercase tracking-widest text-slate-500">Recent Activity</h3>
-                                <span className="material-symbols-outlined text-slate-400 text-lg">history</span>
+                                <History className="text-slate-400 text-lg" />
                             </div>
                             <div className="flex-1 overflow-y-auto p-4 space-y-6">
                                 {mockActivities.map(activity => (
-                                    <div key={activity.id} className="relative pl-6 border-l-2 border-slate-100 dark:border-slate-800">
+                                    <div key={activity.id} className="relative pl-6 border-l-2 border-slate-100 dark:border-border-dark">
                                         <div className={`absolute -left-[9px] top-0 h-4 w-4 rounded-full border-2 border-white dark:border-slate-900 shadow-sm ${getActivityColor(activity.type)}`}></div>
                                         <div className="flex flex-col gap-1">
                                             <p className="text-xs text-slate-400 font-medium uppercase tracking-tighter">{activity.timestamp}</p>
@@ -247,7 +248,7 @@ export default function AdvancedInventoryPage() {
                                     </div>
                                 ))}
                             </div>
-                            <div className="p-4 border-t border-slate-200 dark:border-slate-800">
+                            <div className="p-4 border-t border-slate-200 dark:border-border-dark">
                                 <Button variant="secondary" className="w-full py-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-black uppercase tracking-widest hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors rounded-lg">View Full History</Button>
                             </div>
                         </div>

@@ -59,15 +59,15 @@ export function DataTable<T extends { id: string | number }>({
     const totalPages = Math.ceil(data.length / pageSize);
 
     return (
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+        <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
-                    <thead className="bg-slate-50 dark:bg-slate-800/50 text-[10px] uppercase font-bold text-slate-500 tracking-wider border-b border-slate-100 dark:border-slate-800">
+                    <thead className="bg-slate-50 dark:bg-slate-800/50 text-[10px] uppercase font-bold text-slate-500 tracking-wider border-b border-slate-100 dark:border-border-dark">
                         <tr>
                             {columns.map((column) => (
                                 <th
                                     key={String(column.key)}
-                                    className={`px-6 py-4 ${column.sortable ? 'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors' : ''}`}
+                                    className={`px-6 py-4 ${column.sortable ? 'cursor-pointer hover:bg-primary/8 dark:hover:bg-violet-500/15 transition-colors' : ''}`}
                                     onClick={() => column.sortable && handleSort(column.key)}
                                 >
                                     <div className="flex items-center gap-2 group">
@@ -94,7 +94,7 @@ export function DataTable<T extends { id: string | number }>({
                             paginatedData.map((row) => (
                                 <tr
                                     key={row.id}
-                                    className={`hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors ${onRowClick ? 'cursor-pointer' : ''
+                                    className={`hover:bg-primary/5 dark:hover:bg-violet-500/10 transition-colors ${onRowClick ? 'cursor-pointer' : ''
                                         }`}
                                     onClick={() => onRowClick?.(row)}
                                 >
@@ -122,7 +122,7 @@ export function DataTable<T extends { id: string | number }>({
             </div>
 
             {pagination && totalPages > 1 && (
-                <div className="px-6 py-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/30">
+                <div className="px-6 py-4 border-t border-slate-100 dark:border-border-dark flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/30">
                     <p className="text-xs font-medium text-slate-500">
                         Showing <span className="font-bold text-slate-900 dark:text-white">{(currentPage - 1) * pageSize + 1}</span> to <span className="font-bold text-slate-900 dark:text-white">{Math.min(currentPage * pageSize, data.length)}</span> of{' '}
                         <span className="font-bold text-slate-900 dark:text-white">{data.length}</span> results

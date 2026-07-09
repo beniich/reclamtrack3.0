@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Search, ChevronDown } from 'lucide-react';
 
 const faqs = [
     {
@@ -57,7 +58,7 @@ export default function HelpPage() {
 
             <main className="flex-1 pt-20">
                 {/* Search Hero */}
-                <section className="relative py-24 lg:py-32 bg-slate-900 dark:bg-black overflow-hidden">
+                <section className="relative py-24 lg:py-32 bg-surface-dark dark:bg-black overflow-hidden">
                     <div className="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(circle_at_0%_100%,#ec5b13_0%,transparent_40%)]"></div>
                     <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
                         <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">How can we help?</h1>
@@ -66,7 +67,7 @@ export default function HelpPage() {
                         <div className="relative max-w-2xl mx-auto group">
                             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-orange-400 rounded-2xl blur opacity-20 group-focus-within:opacity-50 transition-opacity"></div>
                             <div className="relative flex items-center bg-white dark:bg-white/5 border border-white/10 rounded-2xl p-2 pl-6">
-                                <span className="material-symbols-outlined text-slate-400">search</span>
+                                <Search className="text-slate-400" />
                                 <input
                                     type="text"
                                     placeholder="Search for answers, guides, or API docs..."
@@ -125,7 +126,7 @@ export default function HelpPage() {
                                                 <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg group-open:text-primary transition-colors list-none">
                                                     {item.q}
                                                     <div className="w-8 h-8 rounded-full border border-primary/10 flex items-center justify-center group-open:rotate-180 transition-transform">
-                                                        <span className="material-symbols-outlined text-primary">expand_more</span>
+                                                        <ChevronDown className="text-primary" />
                                                     </div>
                                                 </summary>
                                                 <div className="px-6 pb-6 text-slate-500 dark:text-slate-400 leading-relaxed font-light">

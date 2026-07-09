@@ -32,14 +32,14 @@ export default function CheckoutPage() {
                     {/* Left Column: Payment & Billing */}
                     <div className="lg:col-span-2 space-y-8">
                         {/* Payment Information Section */}
-                        <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <section className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                             <div className="flex items-center gap-2 mb-6">
                                 <CreditCard className="text-primary w-5 h-5" />
                                 <h3 className="text-lg font-bold">Payment Information</h3>
                             </div>
 
                             {/* Payment Selector Tabs */}
-                            <div className="flex border-b border-slate-200 dark:border-slate-800 mb-6">
+                            <div className="flex border-b border-slate-200 dark:border-border-dark mb-6">
                                 <button type="button" className="flex items-center gap-2 px-6 py-3 border-b-2 border-primary text-primary font-semibold text-sm">
                                     <CreditCard className="w-4 h-4" />
                                     Credit / Debit Card
@@ -96,7 +96,7 @@ export default function CheckoutPage() {
                         </section>
 
                         {/* Billing Address Section */}
-                        <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <section className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                             <div className="flex items-center gap-2 mb-6">
                                 <MapPin className="text-primary w-5 h-5" />
                                 <h3 className="text-lg font-bold">Billing Address</h3>
@@ -133,7 +133,7 @@ export default function CheckoutPage() {
                                 <span className="text-xs font-bold uppercase tracking-wider">SSL Secured</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <ShieldCheck className="text-blue-600 w-5 h-5" />
+                                <ShieldCheck className="text-primary w-5 h-5" />
                                 <span className="text-xs font-bold uppercase tracking-wider">PCI Compliant</span>
                             </div>
                             <div className="flex items-center gap-2">
@@ -145,8 +145,8 @@ export default function CheckoutPage() {
 
                     {/* Right Column: Order Summary (Sticky) */}
                     <div className="lg:sticky lg:top-24">
-                        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
-                            <div className="p-6 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                        <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark shadow-xl overflow-hidden">
+                            <div className="p-6 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-border-dark">
                                 <h3 className="text-lg font-bold">Order Summary</h3>
                             </div>
                             <div className="p-6 space-y-4">
@@ -166,7 +166,7 @@ export default function CheckoutPage() {
                                     <span>Tax (8%)</span>
                                     <span>$96.00</span>
                                 </div>
-                                <hr className="border-slate-200 dark:border-slate-800 my-4" />
+                                <hr className="border-slate-200 dark:border-border-dark my-4" />
                                 {/* Total */}
                                 <div className="flex justify-between items-center mb-6">
                                     <span className="text-lg font-semibold">Total Amount</span>
@@ -210,7 +210,7 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Footer */}
-                <footer className="mt-20 pt-10 border-t border-slate-200 dark:border-slate-800 text-center text-slate-500 dark:text-slate-500 text-sm">
+                <footer className="mt-20 pt-10 border-t border-slate-200 dark:border-border-dark text-center text-slate-500 dark:text-slate-500 text-sm">
                     <p>© 2024 Complaint Management System Inc. All rights reserved.</p>
                     <div className="flex justify-center gap-4 mt-4">
                         <a className="hover:text-primary transition-colors" href="#">Security Overview</a>

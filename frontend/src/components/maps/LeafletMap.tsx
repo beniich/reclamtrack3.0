@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -56,6 +57,7 @@ function MapUpdater({ center }: { center: [number, number] }) {
 }
 
 export default function LeafletMap({ teams, complaints, center = [33.5731, -7.5898], zoom = 12 }: LeafletMapProps) {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -63,9 +65,9 @@ export default function LeafletMap({ teams, complaints, center = [33.5731, -7.58
   }, []);
 
   if (!mounted) return (
-    <div className="h-full w-full bg-slate-900 flex items-center justify-center">
+    <div className="h-full w-full bg-surface-dark flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-            <div className="size-12 border-4 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin"></div>
+            <div className="size-12 border-4 border-primary/20 border-t-indigo-500 rounded-full animate-spin"></div>
             <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">Initialisation Grid Map...</span>
         </div>
     </div>
@@ -128,16 +130,16 @@ export default function LeafletMap({ teams, complaints, center = [33.5731, -7.58
               <Popup className="custom-popup">
                 <div className="p-1 min-w-[160px]">
                   <div className="flex items-center justify-between gap-4 mb-2">
-                    <span className="text-[9px] font-black text-indigo-600 px-2 py-0.5 bg-indigo-50 rounded">#{complaint.number || complaint._id.slice(-6)}</span>
+                    <span className="text-[9px] font-black text-primary px-2 py-0.5 bg-indigo-50 rounded">#{complaint.number || complaint._id.slice(-6)}</span>
                     <span className={`px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-white ${
-                      complaint.priority === 'urgent' ? 'bg-red-500' : 'bg-orange-500'
+                      complaint.priority === 'urgent' ? 'bg-red-500' : 'bg-primary'
                     }`}>
                       {complaint.priority}
                     </span>
                   </div>
                   <h4 className="text-[11px] font-black text-slate-800 leading-tight mb-2 line-clamp-1 uppercase italic">{complaint.title}</h4>
                   <p className="text-[9px] text-slate-500 mb-3 line-clamp-2 leading-relaxed">{complaint.description}</p>
-                  <button type="button" className="w-full py-2 bg-slate-900 text-white text-[9px] font-black rounded-lg uppercase tracking-widest hover:bg-indigo-600 transition-colors">
+                  <button type="button" onClick={() => router.push(`/complaints/${complaint._id}`)} className="w-full py-2 bg-surface-dark text-white text-[9px] font-black rounded-lg uppercase tracking-widest hover:bg-primary transition-colors">
                     Ouvrir Détails
                   </button>
                 </div>
@@ -149,11 +151,11 @@ export default function LeafletMap({ teams, complaints, center = [33.5731, -7.58
 
       {/* Control Overlay Custom UI Overlay (Légende) */}
       <div className="absolute top-4 right-4 z-[500] pointer-events-none">
-        <div className="bg-slate-900/80 backdrop-blur-md p-4 rounded-[2rem] shadow-2xl border border-white/10 pointer-events-auto min-w-[140px]">
+        <div className="bg-surface-dark/80 backdrop-blur-md p-4 rounded-[2rem] shadow-2xl border border-white/10 pointer-events-auto min-w-[140px]">
           <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-indigo-400 mb-3 ml-1">Grid Alpha 7</h4>
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <div className="size-2.5 rounded-full bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
+              <div className="size-2.5 rounded-full bg-primary shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
               <span className="text-[9px] font-black text-white uppercase tracking-wider">Unité Mobile</span>
             </div>
             <div className="flex items-center gap-3">
@@ -161,7 +163,7 @@ export default function LeafletMap({ teams, complaints, center = [33.5731, -7.58
               <span className="text-[9px] font-black text-white uppercase tracking-wider">Urgence S1</span>
             </div>
             <div className="flex items-center gap-3">
-              <div className="size-2.5 rounded-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.5)]"></div>
+              <div className="size-2.5 rounded-full bg-primary shadow-[0_0_10px_rgba(249,115,22,0.5)]"></div>
               <span className="text-[9px] font-black text-white uppercase tracking-wider">Standard S2</span>
             </div>
           </div>

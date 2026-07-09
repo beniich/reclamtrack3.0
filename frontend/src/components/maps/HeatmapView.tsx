@@ -238,7 +238,7 @@ export function HeatmapView({
                         onClick={() => setMapMode('heatmap')}
                         className={`w-full px-3 py-2 rounded-md text-sm font-medium transition-colors ${mapMode === 'heatmap'
                                 ? 'bg-primary text-white'
-                                : 'text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700'
+                                : 'text-slate-600 hover:bg-primary/8 dark:hover:bg-slate-700'
                             }`}
                     >
                         <Thermometer className="w-4 h-4 inline mr-2" />
@@ -250,7 +250,7 @@ export function HeatmapView({
                             onClick={() => setMapMode('clusters')}
                             className={`w-full px-3 py-2 rounded-md text-sm font-medium transition-colors ${mapMode === 'clusters'
                                     ? 'bg-primary text-white'
-                                    : 'text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700'
+                                    : 'text-slate-600 hover:bg-primary/8 dark:hover:bg-slate-700'
                                 }`}
                         >
                             <Layers className="w-4 h-4 inline mr-2" />
@@ -263,7 +263,7 @@ export function HeatmapView({
                             onClick={() => setMapMode('both')}
                             className={`w-full px-3 py-2 rounded-md text-sm font-medium transition-colors ${mapMode === 'both'
                                     ? 'bg-primary text-white'
-                                    : 'text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700'
+                                    : 'text-slate-600 hover:bg-primary/8 dark:hover:bg-slate-700'
                                 }`}
                         >
                             Les deux
@@ -293,7 +293,7 @@ export function HeatmapView({
                 {/* Export Button */}
                 <button type="button"
                     onClick={exportHeatmapImage}
-                    className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                    className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-3 hover:bg-primary/5 dark:hover:bg-slate-700 transition-colors"
                     title="Exporter l'image"
                 >
                     <Download className="w-5 h-5 text-slate-600 dark:text-slate-400" />

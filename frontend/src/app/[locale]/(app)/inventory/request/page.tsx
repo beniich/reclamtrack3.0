@@ -2,12 +2,13 @@
 
 import { MaterialRequisitionForm } from '@/components/inventory/requisition/MaterialRequisitionForm';
 import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 
 export default function MaterialRequestPage() {
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-[#0a0a14] font-display pb-24 transition-colors">
             {/* Header / Nav */}
-            <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0a0a14]/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 py-3">
+            <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0a0a14]/80 backdrop-blur-md border-b border-slate-200 dark:border-border-dark px-6 py-3">
                 <div className="max-w-[1440px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-6">
                         <Link href="/dashboard" className="flex items-center gap-3 group">
@@ -38,7 +39,7 @@ export default function MaterialRequestPage() {
                 <div className="mb-12 text-center sm:text-left">
                     <div className="flex items-center justify-center sm:justify-start gap-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">
                         <span className="hover:text-primary transition-colors cursor-pointer">Gestion des Flux</span>
-                        <span className="material-symbols-outlined text-xs">chevron_right</span>
+                        <ChevronRight className="text-xs" />
                         <span className="text-primary italic">Réquisition Intelligente</span>
                     </div>
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">

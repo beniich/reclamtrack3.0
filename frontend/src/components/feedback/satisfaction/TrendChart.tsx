@@ -19,7 +19,7 @@ interface TrendData {
 
 export default function TrendChart({ data = [] }: { data?: TrendData[] }) {
     return (
-        <section className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <section className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
             <div className="flex justify-between items-center mb-6">
                 <h4 className="font-bold text-lg text-slate-900 dark:text-white">Satisfaction Trends</h4>
                 <div className="flex gap-2">

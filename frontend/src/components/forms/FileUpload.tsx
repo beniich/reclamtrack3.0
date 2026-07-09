@@ -183,7 +183,7 @@ export function FileUpload({
                     className={cn(
                         'border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all',
                         isDragActive && 'border-primary bg-primary/5 scale-105',
-                        !isDragActive && 'border-slate-300 dark:border-slate-600 hover:border-primary hover:bg-slate-50 dark:hover:bg-slate-800',
+                        !isDragActive && 'border-slate-300 dark:border-slate-600 hover:border-primary hover:bg-primary/5 dark:hover:bg-violet-500/15',
                         disabled && 'opacity-50 cursor-not-allowed'
                     )}
                 >

@@ -38,7 +38,7 @@ export default function MaintenancePlansPage() {
 
                 <div className="flex gap-3">
                     <Link href="/maintenance/calendar">
-                        <button type="button" className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-emerald-300 dark:hover:border-emerald-500/50 flex items-center gap-2 transition-all shadow-sm">
+                        <button type="button" className="h-[52px] px-6 rounded-2xl bg-white dark:bg-background border border-slate-200 dark:border-border-dark text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-emerald-300 dark:hover:border-emerald-500/50 flex items-center gap-2 transition-all shadow-sm">
                             <CalendarRange className="w-4 h-4" /> Vue Calendrier
                         </button>
                     </Link>
@@ -55,10 +55,10 @@ export default function MaintenancePlansPage() {
                     <input 
                         type="text" 
                         placeholder="Rechercher un plan de maintenance..." 
-                        className="w-full h-[52px] pl-12 pr-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[12px] font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 dark:focus:ring-emerald-500/20 transition-all"
+                        className="w-full h-[52px] pl-12 pr-4 rounded-2xl bg-white dark:bg-background border border-slate-200 dark:border-border-dark text-[12px] font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 dark:focus:ring-emerald-500/20 transition-all"
                     />
                 </div>
-                <button type="button" className="w-[52px] h-[52px] flex items-center justify-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                <button type="button" className="w-[52px] h-[52px] flex items-center justify-center bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-2xl hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors">
                     <Filter className="w-4 h-4 text-slate-700 dark:text-slate-300" />
                 </button>
             </div>
@@ -66,7 +66,7 @@ export default function MaintenancePlansPage() {
             {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 relative z-10">
                 {mockPlans.map((plan, i) => (
-                    <div key={plan.id} className={`bg-white dark:bg-slate-900 rounded-[2rem] border p-6 flex flex-col group cursor-pointer transition-all animate-in zoom-in-95 duration-500 shadow-sm hover:shadow-xl hover:-translate-y-1 ${plan.active ? 'border-slate-200 dark:border-slate-800 hover:border-emerald-500/30 dark:hover:border-emerald-500/30' : 'border-slate-200 dark:border-slate-800 opacity-60 bg-slate-50 dark:bg-slate-900/50'}`} style={{ animationDelay: `${i * 100}ms` }}>
+                    <div key={plan.id} className={`bg-white dark:bg-background rounded-[2rem] border p-6 flex flex-col group cursor-pointer transition-all animate-in zoom-in-95 duration-500 shadow-sm hover:shadow-xl hover:-translate-y-1 ${plan.active ? 'border-slate-200 dark:border-border-dark hover:border-emerald-500/30 dark:hover:border-emerald-500/30' : 'border-slate-200 dark:border-border-dark opacity-60 bg-slate-50 dark:bg-background/50'}`} style={{ animationDelay: `${i * 100}ms` }}>
                         
                         <div className="flex items-start justify-between mb-4">
                             <div className="flex items-center gap-2">
@@ -92,7 +92,7 @@ export default function MaintenancePlansPage() {
                             </span>
                         </div>
 
-                        <div className="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800/50 flex items-center justify-between">
+                        <div className="mt-auto pt-4 border-t border-slate-100 dark:border-border-dark/50 flex items-center justify-between">
                             <div>
                                 <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 block mb-1">Passage Précédent</span>
                                 <span className={`text-xs font-bold ${plan.active ? 'text-slate-700 dark:text-slate-300' : 'text-slate-400'}`}>{plan.lastRun}</span>

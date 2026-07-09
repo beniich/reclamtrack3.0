@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 "use client"
 
 import { Footer } from "@/components/devops-dashboards/layout/Footer"
@@ -5,6 +6,7 @@ import { Header } from "@/components/devops-dashboards/layout/Header"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { Button } from '@/components/ui/button';
+import { Database, RefreshCw, TrendingUp, ArrowRight } from 'lucide-react';
 
 interface Job {
     id: string
@@ -57,7 +59,7 @@ export default function QueuePage() {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                         <h1 className="text-3xl font-black text-slate-900 dark:text-white flex items-center gap-3">
-                            <span className="material-symbols-outlined text-primary text-4xl">database</span>
+                            <Database className="text-primary text-4xl" />
                             BullMQ & Redis Console
                         </h1>
                         <p className="text-slate-500 dark:text-slate-400 mt-1">
@@ -66,8 +68,8 @@ export default function QueuePage() {
                     </div>
                     <div className="flex items-center gap-3">
                         <Button variant="danger" className="px-4 py-2 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20 font-bold hover:bg-red-500/20 transition-all">Purge Failed Jobs</Button>
-                        <button type="button" className="px-4 py-2 rounded-lg bg-primary text-white font-bold hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2">
-                            <span className="material-symbols-outlined text-sm">refresh</span>
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-4 py-2 rounded-lg bg-primary text-white font-bold hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2">
+                            <RefreshCw className="text-sm" />
                             Force Refresh
                         </button>
                     </div>
@@ -91,7 +93,7 @@ export default function QueuePage() {
                                 </div>
                             </div>
                             <div className="mt-4 flex items-center gap-1 text-xs font-bold text-emerald-500">
-                                <span className="material-symbols-outlined text-sm">trending_up</span>
+                                <TrendingUp className="text-sm" />
                                 <span>+12% vs last hour</span>
                             </div>
                         </div>
@@ -123,7 +125,7 @@ export default function QueuePage() {
                                     </thead>
                                     <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-slate-300">
                                         {jobs.map((job) => (
-                                            <tr key={job.id} className="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors">
+                                            <tr key={job.id} className="hover:bg-primary/5/50 dark:hover:bg-white/5 transition-colors">
                                                 <td className="px-6 py-4">
                                                     <div className="font-bold text-slate-900 dark:text-white">{job.name}</div>
                                                     <div className="text-[10px] text-slate-500 font-mono tracking-tighter">{job.id}</div>
@@ -190,7 +192,7 @@ export default function QueuePage() {
                             </div>
                         </div>
 
-                        <div className="dashboard-card p-6 bg-slate-900 dark:bg-slate-950 border-none shadow-2xl overflow-hidden relative group">
+                        <div className="dashboard-card p-6 bg-surface-dark dark:bg-background border-none shadow-2xl overflow-hidden relative group">
                             <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-30 transition-opacity">
                                 <span className="material-symbols-outlined text-9xl text-primary">bolt</span>
                             </div>
@@ -200,8 +202,8 @@ export default function QueuePage() {
                                     Use <code className="text-primary font-mono bg-primary/10 px-1 rounded">queue.obliterate()</code> to completely
                                     reset a queue and its metadata during debugging.
                                 </p>
-                                <button type="button" className="text-xs font-bold text-primary flex items-center gap-1 hover:gap-2 transition-all">
-                                    Read docs <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-xs font-bold text-primary flex items-center gap-1 hover:gap-2 transition-all">
+                                    Read docs <ArrowRight className="text-xs" />
                                 </button>
                             </div>
                         </div>

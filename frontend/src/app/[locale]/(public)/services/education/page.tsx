@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { User, TrendingUp, BarChart, CheckCircle } from 'lucide-react';
 
 export default function EducationLanding() {
     const t = useTranslations('Education');
@@ -31,7 +32,7 @@ export default function EducationLanding() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 pt-4">
-                            <Link href="/services/education/dashboard" className="w-full sm:w-auto bg-brand-orange text-white font-black px-10 py-5 rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-brand-orange/25 hover:bg-orange-600 transition-all orange-glow transform hover:scale-105">
+                            <Link href="/services/education/dashboard" className="w-full sm:w-auto bg-brand-orange text-white font-black px-10 py-5 rounded-2xl text-xs uppercase tracking-widest shadow-xl shadow-brand-orange/25 hover:bg-primary transition-all orange-glow transform hover:scale-105">
                                 {t('ctaStart')}
                             </Link>
                             <Link href="/services/education/dashboard" className="w-full sm:w-auto glass-card px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-white/10 transition-all">
@@ -77,7 +78,7 @@ export default function EducationLanding() {
                                 <div className="space-y-3">
                                     <div className="flex items-center gap-4 bg-white/5 p-4 rounded-xl border border-white/5">
                                         <div className="w-10 h-10 rounded-full bg-brand-orange/20 flex items-center justify-center text-brand-orange">
-                                            <span className="material-symbols-outlined text-sm">person</span>
+                                            <User className="text-sm" />
                                         </div>
                                         <div className="flex-1">
                                             <div className="text-xs font-black uppercase">Léo Martinez</div>
@@ -101,7 +102,7 @@ export default function EducationLanding() {
                         <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-2">Élèves Actifs</p>
                         <div className="text-4xl font-black mb-3 italic">1.2M+</div>
                         <div className="flex items-center gap-2 text-green-500 text-[10px] font-black uppercase tracking-widest">
-                            <span className="material-symbols-outlined text-sm">trending_up</span> +12% ce trimestre
+                            <TrendingUp className="text-sm" /> +12% ce trimestre
                         </div>
                     </div>
                     <div className="glass-card rounded-3xl p-10 border-l-4 border-l-brand-orange">
@@ -133,14 +134,14 @@ export default function EducationLanding() {
                         {/* Feature 1 */}
                         <div className="group glass-card rounded-[3rem] p-12 hover:-translate-y-4 transition-all duration-700">
                             <div className="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center text-brand-orange mb-10 group-hover:scale-110 group-hover:rotate-12 transition-all">
-                                <span className="material-symbols-outlined text-3xl">analytics</span>
+                                <BarChart className="text-3xl" />
                             </div>
                             <h3 className="text-2xl font-black uppercase tracking-tight mb-6">{t('feature1Title')}</h3>
                             <p className="text-slate-400 font-light leading-relaxed mb-10">{t('feature1Desc')}</p>
                             <ul className="space-y-4">
                                 {['Présences Intelligentes', 'Cartes de chaleur comportementale', 'Dossiers de santé'].map((item, i) => (
                                     <li key={i} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                                        <span className="material-symbols-outlined text-brand-orange text-sm">check_circle</span> {item}
+                                        <CheckCircle className="text-brand-orange text-sm" /> {item}
                                     </li>
                                 ))}
                             </ul>
@@ -156,7 +157,7 @@ export default function EducationLanding() {
                             <ul className="space-y-4">
                                 {['Échelles de notation dynamiques', 'Exportation de rapports en masse', 'Calcul automatique du GPA'].map((item, i) => (
                                     <li key={i} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-slate-200">
-                                        <span className="material-symbols-outlined text-brand-orange text-sm">check_circle</span> {item}
+                                        <CheckCircle className="text-brand-orange text-sm" /> {item}
                                     </li>
                                 ))}
                             </ul>
@@ -172,7 +173,7 @@ export default function EducationLanding() {
                             <ul className="space-y-4">
                                 {['Accès application mobile', 'Portail de paiement des frais', 'Sync calendrier événements'].map((item, i) => (
                                     <li key={i} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                                        <span className="material-symbols-outlined text-brand-orange text-sm">check_circle</span> {item}
+                                        <CheckCircle className="text-brand-orange text-sm" /> {item}
                                     </li>
                                 ))}
                             </ul>

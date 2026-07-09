@@ -27,11 +27,11 @@ export default function FleetInterventionsPage() {
                 <div className="lg:col-span-2 space-y-4">
                     <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest pl-2">Active Interventions</h3>
                     {interventions.map((item) => (
-                        <div key={item.id} className="bg-white dark:bg-[#1c1c30] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between group hover:border-primary/50 transition-all cursor-pointer">
+                        <div key={item.id} className="bg-white dark:bg-[#1c1c30] p-5 rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm flex items-center justify-between group hover:border-primary/50 transition-all cursor-pointer">
                             <div className="flex items-center gap-5">
                                 <div className={`h-12 w-12 rounded-xl flex items-center justify-center ${
                                     item.status === 'Completed' ? 'bg-emerald-500/10 text-emerald-500' :
-                                    item.status === 'In Progress' ? 'bg-blue-500/10 text-blue-500' :
+                                    item.status === 'In Progress' ? 'bg-primary/10 text-primary' :
                                     'bg-amber-500/10 text-amber-500'
                                 }`}>
                                     <Wrench className="w-6 h-6" />
@@ -55,7 +55,7 @@ export default function FleetInterventionsPage() {
                                 </div>
                                 <div className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
                                     item.status === 'Completed' ? 'bg-emerald-500/10 text-emerald-500' :
-                                    item.status === 'In Progress' ? 'bg-blue-500/10 text-blue-500' :
+                                    item.status === 'In Progress' ? 'bg-primary/10 text-primary' :
                                     'bg-amber-500/10 text-amber-500'
                                 }`}>
                                     {item.status}
@@ -68,7 +68,7 @@ export default function FleetInterventionsPage() {
 
                 <div className="space-y-6">
                     <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest pl-2">Technician Availability</h3>
-                    <div className="bg-white dark:bg-[#1c1c30] p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                    <div className="bg-white dark:bg-[#1c1c30] p-6 rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm space-y-4">
                         {[
                             { name: 'Marc Stevens', role: 'Chief Mechanic', status: 'Available', color: 'emerald' },
                             { name: 'Sarah Connor', role: 'Electronics Spec.', status: 'On Site', color: 'blue' },

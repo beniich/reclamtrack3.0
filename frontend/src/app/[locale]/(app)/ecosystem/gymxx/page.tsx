@@ -49,7 +49,7 @@ export default function GymXXDashboard() {
            {[
              { label: "Membres Actifs", val: "842", trend: "+12", icon: UserGroupIcon, color: "text-cyan-400" },
              { label: "Check-ins Today", val: "156", trend: "High", icon: RocketIcon, color: "text-white" },
-             { label: "Retention Rate", val: "94.2%", trend: "+2.4%", icon: FireIcon, color: "text-orange-500" },
+             { label: "Retention Rate", val: "94.2%", trend: "+2.4%", icon: FireIcon, color: "text-primary" },
            ].map((stat, i) => (
              <div key={i} className="bg-white/[0.03] border border-white/5 p-8 rounded-[2rem] hover:border-cyan-500/30 transition-all group">
                 <div className="flex justify-between items-start mb-4">
@@ -79,7 +79,7 @@ export default function GymXXDashboard() {
                  {[
                    { time: "09:00", name: "Crossfit Advanced", trainer: "Coach Karim", load: 85, color: "bg-cyan-500" },
                    { time: "10:30", name: "Yoga Flow", trainer: "Sarah L.", load: 40, color: "bg-emerald-500" },
-                   { time: "11:45", name: "HIIT Session", trainer: "Marc V.", load: 95, color: "bg-orange-500" },
+                   { time: "11:45", name: "HIIT Session", trainer: "Marc V.", load: 95, color: "bg-primary" },
                  ].map((cls, i) => (
                    <div key={i} className="flex flex-col gap-2 p-6 rounded-3xl bg-white/[0.03] border border-white/[0.05] hover:bg-white/[0.05] transition-all cursor-pointer">
                       <div className="flex justify-between items-center">

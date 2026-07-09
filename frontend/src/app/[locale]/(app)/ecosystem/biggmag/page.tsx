@@ -29,7 +29,7 @@ export default function BiggMagDashboard() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <Button variant="danger" className="px-6 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-rose-500 transition-all shadow-lg">Nouveau Produit</Button>
+          <Button variant="danger" className="px-6 py-2.5 bg-surface-dark text-white rounded-xl text-sm font-bold hover:bg-rose-500 transition-all shadow-lg">Nouveau Produit</Button>
           <div className="w-10 h-10 rounded-full bg-slate-100 border border-slate-200" />
         </div>
       </div>
@@ -77,7 +77,7 @@ export default function BiggMagDashboard() {
                  { id: "#BM-426", user: "Sara H.", date: "2 hours ago", price: "240 MAD", status: "Livré" },
                  { id: "#BM-425", user: "Amine D.", date: "4 hours ago", price: "980 MAD", status: "Expédié" },
                ].map((order, i) => (
-                 <div key={i} className="flex items-center justify-between py-4 border-b border-slate-50 last:border-0 hover:bg-slate-50/50 px-4 rounded-xl transition-all">
+                 <div key={i} className="flex items-center justify-between py-4 border-b border-slate-50 last:border-0 hover:bg-primary/5/50 px-4 rounded-xl transition-all">
                    <div className="flex items-center gap-4">
                      <div className="w-8 h-8 rounded-lg bg-slate-100" />
                      <div>
@@ -88,7 +88,7 @@ export default function BiggMagDashboard() {
                    <div className="flex items-center gap-8">
                      <span className="font-bold text-slate-900">{order.price}</span>
                      <span className={`text-[10px] px-3 py-1 rounded-lg font-bold uppercase tracking-widest ${
-                       order.status === 'Expédié' ? 'bg-blue-50 text-blue-500' : 
+                       order.status === 'Expédié' ? 'bg-blue-50 text-primary' : 
                        order.status === 'Livré' ? 'bg-emerald-50 text-emerald-500' : 'bg-amber-50 text-amber-500'
                      }`}>{order.status}</span>
                    </div>
@@ -129,7 +129,7 @@ export default function BiggMagDashboard() {
              </div>
           </div>
 
-          <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex items-center justify-between group cursor-pointer hover:bg-slate-50 transition-all">
+          <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex items-center justify-between group cursor-pointer hover:bg-primary/5 transition-all">
              <div className="flex items-center gap-3">
                <ChatBubbleLeftIcon className="w-5 h-5 text-slate-400 group-hover:text-rose-500" />
                <span className="text-sm font-bold text-slate-900">Support Client</span>

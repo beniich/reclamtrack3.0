@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 import React from 'react';
 import { Card } from "@/components/devops-dashboards/ui/Card";
 import { Badge } from "@/components/devops-dashboards/ui/Badge";
@@ -86,8 +87,8 @@ export default function GslbPage() {
       </div>
 
       {/* -------------------- GLOBAL TRAFFIC MAP -------------------- */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden relative shadow-sm">
-        <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
+      <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden relative shadow-sm">
+        <div className="p-4 border-b border-slate-200 dark:border-border-dark flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
           <div className="flex items-center gap-2">
             <Icon name="public" className="text-primary" />
             <h3 className="font-bold text-sm">Global Traffic Distribution</h3>
@@ -140,22 +141,22 @@ export default function GslbPage() {
         </div>
         {/* Zoom controls */}
         <div className="absolute bottom-4 right-4 flex flex-col gap-1">
-          <button type="button" className="size-8 bg-slate-800 hover:bg-slate-700 rounded-t-lg flex items-center justify-center border border-slate-700 text-white">
+          <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-8 bg-slate-800 hover:bg-slate-700 rounded-t-lg flex items-center justify-center border border-slate-700 text-white">
             <Icon name="add" className="text-xs" />
           </button>
-          <button type="button" className="size-8 bg-slate-800 hover:bg-slate-700 rounded-b-lg flex items-center justify-center border border-slate-700 border-t-0 text-white">
+          <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-8 bg-slate-800 hover:bg-slate-700 rounded-b-lg flex items-center justify-center border border-slate-700 border-t-0 text-white">
             <Icon name="remove" className="text-xs" />
           </button>
         </div>
       </div>
 
       {/* -------------------- Routing Policies Table -------------------- */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden">
-        <div className="p-6 flex justify-between items-center border-b border-slate-200 dark:border-slate-800">
+      <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl shadow-sm overflow-hidden">
+        <div className="p-6 flex justify-between items-center border-b border-slate-200 dark:border-border-dark">
           <h3 className="font-bold text-lg">Routing Policies</h3>
           <div className="flex gap-2">
             <Button variant="secondary" className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition">Export Config</Button>
-            <button type="button" className="px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg flex items-center gap-2 hover:bg-primary/90 transition">
+            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg flex items-center gap-2 hover:bg-primary/90 transition">
               <Icon name="add" className="text-sm" /> Add New Rule
             </button>
           </div>
@@ -177,7 +178,7 @@ export default function GslbPage() {
               {policies.map((p, i) => (
                 <tr
                   key={i}
-                  className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors"
+                  className="hover:bg-primary/5 dark:hover:bg-violet-500/8 transition-colors"
                 >
                   <td className="px-6 py-4">
                     <div className="flex flex-col">
@@ -190,10 +191,10 @@ export default function GslbPage() {
                     <span
                       className={`inline-flex items-center gap-1.5 px-2 py-1 rounded ${
                         p.type === "GEOLOCATION"
-                          ? "bg-blue-100 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400"
+                          ? "bg-blue-100 text-primary dark:bg-primary/10 dark:text-blue-400"
                           : p.type === "FAILOVER"
                           ? "bg-purple-100 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400"
-                          : "bg-orange-100 text-orange-600 dark:bg-orange-500/10 dark:text-orange-400"
+                          : "bg-orange-100 text-primary dark:bg-primary/10 dark:text-orange-400"
                       } font-bold text-xs`}
                     >
                       <Icon name="location_on" className="text-xs" />
@@ -210,10 +211,10 @@ export default function GslbPage() {
                     </div>
                   </td>
                   <td className="px-6 py-4 text-right flex items-center justify-end gap-2">
-                    <button type="button" className="p-1 text-slate-400 hover:text-primary transition-colors">
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 text-slate-400 hover:text-primary transition-colors">
                       <Icon name="edit" />
                     </button>
-                    <button type="button" className="p-1 text-slate-400 hover:text-primary transition-colors">
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 text-slate-400 hover:text-primary transition-colors">
                       <Icon name="more_vert" />
                     </button>
                   </td>
@@ -223,8 +224,8 @@ export default function GslbPage() {
           </table>
         </div>
 
-        <div className="p-4 bg-slate-50 dark:bg-slate-800/20 border-t border-slate-200 dark:border-slate-800 flex justify-center">
-          <button type="button" className="text-xs font-bold text-primary flex items-center gap-2 hover:underline">
+        <div className="p-4 bg-slate-50 dark:bg-slate-800/20 border-t border-slate-200 dark:border-border-dark flex justify-center">
+          <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-xs font-bold text-primary flex items-center gap-2 hover:underline">
             View All Policies <Icon name="arrow_forward" className="text-xs" />
           </button>
         </div>

@@ -140,7 +140,7 @@ export default function TeamsPage() {
     return (
         <div className="flex flex-col h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display overflow-hidden">
             {/* Header */}
-            <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 shrink-0">
+            <header className="h-16 bg-white dark:bg-background border-b border-slate-200 dark:border-border-dark flex items-center justify-between px-8 shrink-0">
                 <div className="flex items-center gap-6">
                     <h2 className="text-xl font-bold">Technical Teams Directory</h2>
                     <div className="relative w-72 hidden md:block">
@@ -153,16 +153,16 @@ export default function TeamsPage() {
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
-                    <button type="button" className="size-10 flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors relative">
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-10 flex items-center justify-center text-slate-500 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-full transition-colors relative">
                         <NotificationsActive className="w-5 h-5" />
                         <span className="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
                     </button>
-                    <div className="h-6 w-px bg-slate-200 dark:border-slate-800"></div>
+                    <div className="h-6 w-px bg-slate-200 dark:border-border-dark"></div>
 
                     <RoleGuard minRole={Role.MODERATOR}>
                         <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
                             <DialogTrigger asChild>
-                                <button type="button" className="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
+                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
                                     <Add className="w-4 h-4" />
                                     New Team
                                 </button>
@@ -208,14 +208,14 @@ export default function TeamsPage() {
             <div className="flex-1 overflow-y-auto p-8 space-y-8">
                 {/* Stats Row */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <p className="text-sm text-slate-500 font-medium">Total Teams</p>
                         <div className="mt-2 flex items-baseline gap-2">
                             <span className="text-3xl font-bold">{teams.length}</span>
                             <span className="text-xs font-semibold text-emerald-500">+1 this month</span>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <p className="text-sm text-slate-500 font-medium">Available Now</p>
                         <div className="mt-2 flex items-baseline gap-2">
                             <span className="text-3xl font-bold text-emerald-600">
@@ -224,7 +224,7 @@ export default function TeamsPage() {
                             <span className="text-xs font-semibold text-slate-400">58% capacity</span>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <p className="text-sm text-slate-500 font-medium">Active Interventions</p>
                         <div className="mt-2 flex items-baseline gap-2">
                             <span className="text-3xl font-bold text-primary">
@@ -233,7 +233,7 @@ export default function TeamsPage() {
                             <span className="text-xs font-semibold text-amber-500">2 priority</span>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="bg-white dark:bg-background p-6 rounded-xl border border-slate-200 dark:border-border-dark shadow-sm">
                         <p className="text-sm text-slate-500 font-medium">Average Response</p>
                         <div className="mt-2 flex items-baseline gap-2">
                             <span className="text-3xl font-bold">42m</span>
@@ -245,12 +245,12 @@ export default function TeamsPage() {
                 {/* Filters Bar */}
                 <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-3">
-                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-lg text-sm font-medium hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors">
                             <FilterList className="w-5 h-5" />
                             All Specialties
                             <Search className="w-4 h-4 ml-2 opacity-50" />
                         </button>
-                        <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-lg text-sm font-medium hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors">
                             <RadioButtonChecked className="w-5 h-5" />
                             Status: Any
                             <Search className="w-4 h-4 ml-2 opacity-50" />
@@ -264,7 +264,7 @@ export default function TeamsPage() {
                     {teams.map((team) => {
                         const style = getStatusColor(team.status);
                         return (
-                            <div key={team._id} className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group flex flex-col">
+                            <div key={team._id} className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark shadow-sm hover:shadow-md transition-shadow group flex flex-col">
                                 <div className="p-5 flex-1">
                                     <div className="flex justify-between items-start mb-4">
                                         <div className={`size-12 rounded-lg ${getSpecialtyColor(team.specialization)} flex items-center justify-center`}>
@@ -306,7 +306,7 @@ export default function TeamsPage() {
                                     </div>
                                 </div>
                                 <div className="px-5 pb-5 mt-auto">
-                                    <button type="button" className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white transition-all rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
+                                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white transition-all rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
                                         <CalendarMonth className="w-4 h-4" />
                                         View Schedule
                                     </button>

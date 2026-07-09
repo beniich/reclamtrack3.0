@@ -35,12 +35,12 @@ export default function QRScanRedirectPage() {
     }, [params, router]);
 
     return (
-        <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-8 text-white">
+        <div className="min-h-screen bg-surface-dark flex flex-col items-center justify-center p-8 text-white">
             <div className="relative mb-12">
                 {status === 'analyzing' && (
-                    <div className="size-32 rounded-3xl border-2 border-indigo-500/30 flex items-center justify-center animate-pulse">
-                        <QrCode className="size-16 text-indigo-500" />
-                        <div className="absolute inset-0 border-t-2 border-indigo-500 animate-spin rounded-3xl"></div>
+                    <div className="size-32 rounded-3xl border-2 border-primary/30 flex items-center justify-center animate-pulse">
+                        <QrCode className="size-16 text-primary" />
+                        <div className="absolute inset-0 border-t-2 border-primary animate-spin rounded-3xl"></div>
                     </div>
                 )}
 
@@ -62,7 +62,7 @@ export default function QRScanRedirectPage() {
                     <>
                         <h2 className="text-2xl font-black uppercase italic tracking-tighter">Analyse du Code...</h2>
                         <p className="text-sm font-medium text-slate-400">Vérification de la base de données équipement pour <span className="text-indigo-400 font-mono">{assetCode}</span></p>
-                        <Loader2 className="size-6 text-indigo-500 animate-spin mx-auto mt-4" />
+                        <Loader2 className="size-6 text-primary animate-spin mx-auto mt-4" />
                     </>
                 )}
 

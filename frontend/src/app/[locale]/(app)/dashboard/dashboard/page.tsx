@@ -37,7 +37,7 @@ export default function OperationsDashboard() {
             {/* KPI Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 {/* Total Complaints */}
-                <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
+                <div className="bg-white dark:bg-background p-5 rounded-xl border border-slate-200 dark:border-border-dark">
                     <div className="flex items-center justify-between mb-3">
                         <BarChart className="text-slate-400 w-6 h-6" />
                         <span className="text-[10px] font-bold text-slate-400 uppercase">Total</span>
@@ -47,7 +47,7 @@ export default function OperationsDashboard() {
                 </div>
 
                 {/* New Complaints */}
-                <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border-l-4 border-l-primary border border-slate-200 dark:border-slate-800">
+                <div className="bg-white dark:bg-background p-5 rounded-xl border-l-4 border-l-primary border border-slate-200 dark:border-border-dark">
                     <div className="flex items-center justify-between mb-3">
                         <Activity className="text-primary w-6 h-6" />
                         <span className="text-[10px] font-bold text-slate-400 uppercase">New</span>
@@ -57,7 +57,7 @@ export default function OperationsDashboard() {
                 </div>
 
                 {/* In Progress */}
-                <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border-l-4 border-l-amber-500 border border-slate-200 dark:border-slate-800">
+                <div className="bg-white dark:bg-background p-5 rounded-xl border-l-4 border-l-amber-500 border border-slate-200 dark:border-border-dark">
                     <div className="flex items-center justify-between mb-3">
                         <Clock className="text-amber-500 w-6 h-6" />
                         <span className="text-[10px] font-bold text-slate-400 uppercase">In Progress</span>
@@ -67,7 +67,7 @@ export default function OperationsDashboard() {
                 </div>
 
                 {/* Resolved */}
-                <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border-l-4 border-l-emerald-500 border border-slate-200 dark:border-slate-800">
+                <div className="bg-white dark:bg-background p-5 rounded-xl border-l-4 border-l-emerald-500 border border-slate-200 dark:border-border-dark">
                     <div className="flex items-center justify-between mb-3">
                         <CheckCircle className="text-emerald-500 w-6 h-6" />
                         <span className="text-[10px] font-bold text-slate-400 uppercase">Resolved</span>
@@ -77,7 +77,7 @@ export default function OperationsDashboard() {
                 </div>
 
                 {/* Urgent */}
-                <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border-l-4 border-l-red-500 border border-slate-200 dark:border-slate-800 shadow-sm shadow-red-100">
+                <div className="bg-white dark:bg-background p-5 rounded-xl border-l-4 border-l-red-500 border border-slate-200 dark:border-border-dark shadow-sm shadow-red-100">
                     <div className="flex items-center justify-between mb-3">
                         <AlertTriangle className="text-red-500 animate-pulse w-6 h-6" />
                         <span className="text-[10px] font-bold text-slate-400 uppercase">Urgent</span>
@@ -90,8 +90,8 @@ export default function OperationsDashboard() {
             {/* Main Content Area */}
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 {/* Recent Complaints List (Placeholder) */}
-                <div className="xl:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col h-[500px]">
-                    <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/20">
+                <div className="xl:col-span-2 bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden flex flex-col h-[500px]">
+                    <div className="p-5 border-b border-slate-100 dark:border-border-dark flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/20">
                         <h3 className="font-bold text-lg">Recent Complaints</h3>
                         <Button type="button" variant="ghost" size="sm" className="text-primary font-bold hover:underline">View All List</Button>
                     </div>
@@ -101,8 +101,8 @@ export default function OperationsDashboard() {
                 </div>
 
                 {/* Live Feed (Placeholder) */}
-                <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col h-[500px]">
-                    <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2 bg-slate-50/50 dark:bg-slate-800/20">
+                <div className="bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark flex flex-col h-[500px]">
+                    <div className="p-5 border-b border-slate-100 dark:border-border-dark flex items-center gap-2 bg-slate-50/50 dark:bg-slate-800/20">
                         <span className="relative flex h-3 w-3">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
@@ -111,7 +111,7 @@ export default function OperationsDashboard() {
                     </div>
                     <div className="flex-1 overflow-y-auto p-4 space-y-4">
                         {/* Feed Item Mock */}
-                        <div className="flex gap-4 p-3 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer border-l-2 border-primary">
+                        <div className="flex gap-4 p-3 hover:bg-primary/5 dark:hover:bg-violet-500/15 rounded-lg transition-colors cursor-pointer border-l-2 border-primary">
                             <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary">
                                 <Activity className="w-5 h-5" />
                             </div>

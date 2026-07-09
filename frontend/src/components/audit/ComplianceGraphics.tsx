@@ -19,7 +19,7 @@ export const ComplianceGraphics: React.FC<ComplianceGraphicsProps> = ({ radarDat
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
             {/* Radar: ISO 27001 Maturity */}
-            <div className="bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 p-8 shadow-lg">
+            <div className="bg-white dark:bg-background rounded-[32px] border border-slate-200 dark:border-border-dark p-8 shadow-lg">
                 <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-6">Maturité ISO 27001</h3>
                 <div className="h-[300px] w-full">
                     <ResponsiveContainer width="100%" height="100%">
@@ -40,7 +40,7 @@ export const ComplianceGraphics: React.FC<ComplianceGraphicsProps> = ({ radarDat
             </div>
 
             {/* Area: Security Incidents Trend */}
-            <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-[32px] border border-slate-200 dark:border-slate-800 p-8 shadow-lg">
+            <div className="lg:col-span-2 bg-white dark:bg-background rounded-[32px] border border-slate-200 dark:border-border-dark p-8 shadow-lg">
                 <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-6">Tendances Incidents (30 jours)</h3>
                 <div className="h-[300px] w-full">
                     <ResponsiveContainer width="100%" height="100%">

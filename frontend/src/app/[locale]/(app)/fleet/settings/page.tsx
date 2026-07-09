@@ -13,7 +13,7 @@ export default function FleetSettingsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Maintenance Settings */}
-                <div className="bg-white dark:bg-[#1c1c30] p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+                <div className="bg-white dark:bg-[#1c1c30] p-6 rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm space-y-6">
                     <div className="flex items-center gap-3 mb-2">
                         <div className="p-2 bg-amber-500/10 rounded-lg">
                             <Gauge className="w-5 h-5 text-amber-500" />
@@ -24,20 +24,20 @@ export default function FleetSettingsPage() {
                     <div className="space-y-4">
                         <div>
                             <label htmlFor="mileage-alert" className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Mileage Alert (km)</label>
-                            <input id="mileage-alert" type="number" defaultValue="5000" aria-label="Mileage alert threshold in kilometers" className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
+                            <input id="mileage-alert" type="number" defaultValue="5000" aria-label="Mileage alert threshold in kilometers" className="w-full bg-slate-50 dark:bg-background border border-slate-200 dark:border-border-dark rounded-lg px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
                         </div>
                         <div>
                             <label htmlFor="service-interval" className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Service Interval (Days)</label>
-                            <input id="service-interval" type="number" defaultValue="180" aria-label="Service interval in days" className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
+                            <input id="service-interval" type="number" defaultValue="180" aria-label="Service interval in days" className="w-full bg-slate-50 dark:bg-background border border-slate-200 dark:border-border-dark rounded-lg px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
                         </div>
                     </div>
                 </div>
 
                 {/* Operational Settings */}
-                <div className="bg-white dark:bg-[#1c1c30] p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+                <div className="bg-white dark:bg-[#1c1c30] p-6 rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm space-y-6">
                     <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 bg-blue-500/10 rounded-lg">
-                            <Fuel className="w-5 h-5 text-blue-500" />
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                            <Fuel className="w-5 h-5 text-primary" />
                         </div>
                         <h3 className="text-lg font-bold">Fuel Management</h3>
                     </div>
@@ -45,9 +45,9 @@ export default function FleetSettingsPage() {
                     <div className="space-y-4">
                         <div>
                             <label htmlFor="low-fuel-alert" className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Low Fuel Alert (%)</label>
-                            <input id="low-fuel-alert" type="number" defaultValue="15" aria-label="Low fuel alert threshold percentage" className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
+                            <input id="low-fuel-alert" type="number" defaultValue="15" aria-label="Low fuel alert threshold percentage" className="w-full bg-slate-50 dark:bg-background border border-slate-200 dark:border-border-dark rounded-lg px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
                         </div>
-                        <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
+                        <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-background rounded-xl">
                             <div>
                                 <p className="text-sm font-bold">Track Fuel Usage</p>
                                 <p className="text-[10px] text-slate-500">Automatically calculate fuel consumption per trip</p>
@@ -60,7 +60,7 @@ export default function FleetSettingsPage() {
                 </div>
 
                 {/* Notifications */}
-                <div className="bg-white dark:bg-[#1c1c30] p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+                <div className="bg-white dark:bg-[#1c1c30] p-6 rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm space-y-6">
                     <div className="flex items-center gap-3 mb-2">
                         <div className="p-2 bg-purple-500/10 rounded-lg">
                             <Bell className="w-5 h-5 text-purple-500" />
@@ -79,7 +79,7 @@ export default function FleetSettingsPage() {
                 </div>
 
                 {/* Access Control */}
-                <div className="bg-white dark:bg-[#1c1c30] p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+                <div className="bg-white dark:bg-[#1c1c30] p-6 rounded-2xl border border-slate-200 dark:border-border-dark shadow-sm space-y-6">
                     <div className="flex items-center gap-3 mb-2">
                         <div className="p-2 bg-emerald-500/10 rounded-lg">
                             <Shield className="w-5 h-5 text-emerald-500" />
@@ -94,8 +94,8 @@ export default function FleetSettingsPage() {
                 </div>
             </div>
 
-            <div className="flex justify-end gap-4 border-t border-slate-200 dark:border-slate-800 pt-8">
-                <Button variant="outline" className="px-6 py-2 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-bold">Reset Defaults</Button>
+            <div className="flex justify-end gap-4 border-t border-slate-200 dark:border-border-dark pt-8">
+                <Button variant="outline" className="px-6 py-2 border border-slate-200 dark:border-border-dark rounded-lg text-sm font-bold">Reset Defaults</Button>
                 <Button variant="primary" className="px-8 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20">Save Changes</Button>
             </div>
         </div>

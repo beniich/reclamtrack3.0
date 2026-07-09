@@ -6,17 +6,8 @@
 
 @layer base {
   :root {
-    /* ===== Brand Colors (HSL format for Tailwind) ===== */
-    --color-primary-50: 214 100% 97%;
-    --color-primary-100: 214 95% 93%;
-    --color-primary-500: 217 91% 60%;
-    --color-primary-600: 221 83% 53%;
-    --color-primary-700: 224 76% 48%;
-
-    /* For direct use (hex) */
-    --color-primary: #2563eb;
-    --color-primary-light: #3b82f6;
-    --color-primary-dark: #1e40af;
+    /* ===== Brand Colors (Inherited from design-tokens.css) ===== */
+    /* Primary (Orange) and Secondary (Violet) are defined there. */
 
     /* ===== Semantic Colors ===== */
     --color-success: #10b981;
@@ -94,21 +85,13 @@
 
   .dark {
     /* ===== Dark Mode Overrides (Deep Violet & Electric Orange) ===== */
-    --background: 265 79% 21%; /* #310b5e - Deep Violet from image */
+    --background: 265 79% 21%; /* #310b5e - Deep Violet */
     --foreground: 210 40% 98%;
 
     --background-light: #3d0e75;
     --background-dark: #25084a;
 
-    --color-primary: #ff6d00; /* Electric Orange from image */
-    --color-primary-light: #ff8500;
-    --color-primary-dark: #e65c00;
-
-    --color-secondary: #9d4edd;
-    --color-secondary-light: #c77dff;
-    --color-secondary-dark: #5a189a;
-
-    --card: 265 70% 25%;
+    --card: 265 60% 18%; /* Dark mode cards should match the deep violet but slightly different */
     --card-foreground: 210 40% 98%;
 
     --popover: 260 60% 7%;
@@ -235,11 +218,11 @@
 
   /* ===== Utility Classes ===== */
   .glass-effect {
-    @apply bg-white/80 dark:bg-slate-900/80 backdrop-blur-md;
+    @apply bg-white/80 dark:bg-violet-950/80 backdrop-blur-md;
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-[#ff6d00]/20 dark:hover:border-[#ff6d00]/30;
   }
 
   /* DevOps Dashboard Utilities */
@@ -309,7 +292,7 @@
 
   /* Added for DevOps Dashboards from pppppp integration */
   .dashboard-card {
-    @apply bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm;
+    @apply bg-white dark:bg-[#1e0545]/60 border border-slate-200 dark:border-violet-800/30 rounded-xl shadow-sm;
   }
   .data-table {
     @apply w-full text-left text-sm;
@@ -332,14 +315,14 @@
 
   /* Glassmorphism & Effects from Mockup */
   .glass-nav {
-    @apply bg-white/70 backdrop-blur-md border-b border-indigo-500/10;
+    @apply bg-white/70 backdrop-blur-md border-b border-[#ff6d00]/10 dark:bg-violet-950/70 dark:border-[#ff6d00]/20;
   }
   .glass-card {
-    @apply bg-white/50 backdrop-blur-md border border-slate-200;
+    @apply bg-white/50 backdrop-blur-md border border-slate-200 dark:bg-violet-950/30 dark:border-violet-700/20;
     transition: all 0.3s ease;
   }
   .glass-card:hover {
-    @apply bg-white/80 border-indigo-500/30 shadow-xl shadow-indigo-500/5;
+    @apply bg-white/80 border-[#ff6d00]/30 shadow-xl shadow-[#ff6d00]/5 dark:bg-violet-950/50 dark:border-[#ff6d00]/40;
   }
   .gradient-bg {
     background: radial-gradient(circle at top right, var(--indigo-ink), var(--dark-amethyst) 60%);
@@ -402,8 +385,8 @@
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
   }
   .dark .dashboard-card:hover {
-    @apply border-violet-600/50;
-    box-shadow: 0 0 0 1px rgba(157, 78, 221, 0.4),
+    @apply border-[#ff6d00]/50;
+    box-shadow: 0 0 0 1px rgba(255, 109, 0, 0.35),
                 0 8px 32px -4px rgba(157, 78, 221, 0.45);
   }
 

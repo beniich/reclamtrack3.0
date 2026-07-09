@@ -2,13 +2,14 @@
 
 import { Feedback } from '@/lib/satisfaction-data';
 import { cn } from '@/lib/utils';
+import { User } from 'lucide-react';
 
 export default function FeedbackCard({ feedback }: { feedback: Feedback }) {
     return (
-        <div className="flex gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all group">
+        <div className="flex gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-transparent hover:border-primary/30 dark:hover:border-primary/40 transition-all group">
             {/* Avatar placeholder */}
             <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary/20 transition-colors">
-                <span className="material-symbols-outlined filled-icon">person</span>
+                <User className="filled-icon" />
             </div>
 
             <div className="flex-1">

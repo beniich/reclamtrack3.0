@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
+import api from '@/lib/api';
 import { Button } from '@/components/ui/button';
 
 // Types
@@ -97,10 +98,30 @@ export default function InventoryPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [selectedStatus, setSelectedStatus] = useState('All');
+    const [inventory, setInventory] = useState<InventoryItem[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchInventory = async () => {
+            try {
+                const response = await api.get('/inventory/items');
+                if (response && response.data) {
+                    setInventory(response.data);
+                }
+            } catch (error) {
+                console.error("Error fetching inventory:", error);
+                setInventory(mockInventory); // Fallback to mock on error
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchInventory();
+    }, []);
 
     // Derived State
     const filteredInventory = useMemo(() => {
-        return mockInventory.filter(item => {
+        const source = inventory.length > 0 ? inventory : mockInventory;
+        return source.filter(item => {
             const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 item.sku.toLowerCase().includes(searchQuery.toLowerCase());
             const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
@@ -113,12 +134,13 @@ export default function InventoryPage() {
         });
     }, [searchQuery, selectedCategory, selectedStatus]);
 
-    const categories = Array.from(new Set(mockInventory.map(item => item.category)));
+    const categories = Array.from(new Set((inventory.length > 0 ? inventory : mockInventory).map(item => item.category)));
 
     const stats = useMemo(() => {
-        const totalValue = mockInventory.reduce((acc, item) => acc + (item.currentStock * item.unitPrice), 0);
-        const lowStock = mockInventory.filter(i => i.status === 'LOW_STOCK').length;
-        const outOfStock = mockInventory.filter(i => i.status === 'OUT_OF_STOCK').length;
+        const source = inventory.length > 0 ? inventory : mockInventory;
+        const totalValue = source.reduce((acc, item) => acc + (item.currentStock * item.unitPrice), 0);
+        const lowStock = source.filter(i => i.status === 'LOW_STOCK').length;
+        const outOfStock = source.filter(i => i.status === 'OUT_OF_STOCK').length;
         return { totalValue, lowStock, outOfStock };
     }, []);
 
@@ -276,7 +298,7 @@ export default function InventoryPage() {
                             </select>
                         </div>
                         <div className="text-sm text-slate-500 dark:text-slate-400">
-                            Showing <strong>1 - {filteredInventory.length}</strong> of <strong>{mockInventory.length}</strong> items
+                            Showing <strong>1 - {filteredInventory.length}</strong> of <strong>{(inventory.length > 0 ? inventory : mockInventory).length}</strong> items
                         </div>
                     </div>
 

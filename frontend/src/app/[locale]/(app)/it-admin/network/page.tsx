@@ -116,7 +116,7 @@ export default function NetworkPage() {
 
   const getDeviceIcon = (type: string) => {
       switch(type) {
-          case 'router': return <Activity className="h-5 w-5 text-blue-600" />;
+          case 'router': return <Activity className="h-5 w-5 text-primary" />;
           case 'switch': return <Server className="h-5 w-5 text-green-600" />;
           case 'firewall': return <Shield className="h-5 w-5 text-red-600" />;
           case 'access_point': return <Wifi className="h-5 w-5 text-purple-600" />;
@@ -171,7 +171,7 @@ export default function NetworkPage() {
             <CardHeader className="pb-3">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                     <div className="p-2 bg-slate-50 rounded-lg group-hover:bg-slate-100 transition-colors">
+                     <div className="p-2 bg-slate-50 rounded-lg group-hover:bg-primary/8 transition-colors">
                         {getDeviceIcon(device.type)}
                      </div>
                     <div>

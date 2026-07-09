@@ -16,7 +16,7 @@ export default function MaintenanceCalendarPage() {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
                 <div className="flex items-center gap-3">
-                    <div className="p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-emerald-600 dark:text-emerald-500 rounded-2xl shadow-sm">
+                    <div className="p-3 bg-white dark:bg-background border border-slate-200 dark:border-border-dark text-emerald-600 dark:text-emerald-500 rounded-2xl shadow-sm">
                         <CalendarIcon className="w-6 h-6" />
                     </div>
                     <div>
@@ -30,21 +30,21 @@ export default function MaintenanceCalendarPage() {
                 </div>
 
                 <Link href="/maintenance">
-                    <button type="button" className="h-[52px] px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-emerald-300 dark:hover:border-emerald-500/50 flex items-center gap-2 transition-all shadow-sm">
+                    <button type="button" className="h-[52px] px-6 rounded-2xl bg-white dark:bg-background border border-slate-200 dark:border-border-dark text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest hover:border-emerald-300 dark:hover:border-emerald-500/50 flex items-center gap-2 transition-all shadow-sm">
                         <ArrowLeft className="w-4 h-4" /> Mode Liste
                     </button>
                 </Link>
             </div>
 
             {/* Calendar UI Mock */}
-            <div className="flex-1 bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm relative z-10 overflow-hidden flex flex-col">
+            <div className="flex-1 bg-white dark:bg-background rounded-[2.5rem] border border-slate-200 dark:border-border-dark shadow-sm relative z-10 overflow-hidden flex flex-col">
                 {/* Toolbar */}
-                <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/20">
+                <div className="p-6 border-b border-slate-100 dark:border-border-dark flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/20">
                     <div className="flex items-center gap-4">
-                        <div className="flex items-center bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
-                            <button type="button" className="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"><ChevronLeft className="w-4 h-4" /></button>
-                            <span className="px-4 text-[10px] font-black uppercase tracking-widest border-x border-slate-200 dark:border-slate-800 py-2 text-slate-900 dark:text-white">Avril 2026 (Sem 15)</span>
-                            <button type="button" className="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"><ChevronRight className="w-4 h-4" /></button>
+                        <div className="flex items-center bg-white dark:bg-background rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden shadow-sm">
+                            <button type="button" className="p-2 hover:bg-primary/5 dark:hover:bg-violet-500/15 text-slate-600 dark:text-slate-400 transition-colors"><ChevronLeft className="w-4 h-4" /></button>
+                            <span className="px-4 text-[10px] font-black uppercase tracking-widest border-x border-slate-200 dark:border-border-dark py-2 text-slate-900 dark:text-white">Avril 2026 (Sem 15)</span>
+                            <button type="button" className="p-2 hover:bg-primary/5 dark:hover:bg-violet-500/15 text-slate-600 dark:text-slate-400 transition-colors"><ChevronRight className="w-4 h-4" /></button>
                         </div>
                         <Button variant="secondary" className="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-[10px] font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">Aujourd'hui</Button>
                     </div>
@@ -54,9 +54,9 @@ export default function MaintenanceCalendarPage() {
                 <div className="flex-1 overflow-auto">
                     <div className="min-w-[800px] h-full flex flex-col">
                         {/* Headers */}
-                        <div className="grid grid-cols-7 border-b border-slate-100 dark:border-slate-800 text-center bg-slate-50 dark:bg-slate-900/50">
+                        <div className="grid grid-cols-7 border-b border-slate-100 dark:border-border-dark text-center bg-slate-50 dark:bg-background/50">
                             {days.map((day, idx) => (
-                                <div key={idx} className={`py-4 border-r border-slate-100 dark:border-slate-800 last:border-0 ${idx === 1 ? 'bg-emerald-50 dark:bg-emerald-500/10' : ''}`}>
+                                <div key={idx} className={`py-4 border-r border-slate-100 dark:border-border-dark last:border-0 ${idx === 1 ? 'bg-emerald-50 dark:bg-emerald-500/10' : ''}`}>
                                     <span className={`text-xs font-black uppercase tracking-widest ${idx === 1 ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`}>{day}</span>
                                 </div>
                             ))}
@@ -66,7 +66,7 @@ export default function MaintenanceCalendarPage() {
                         <div className="flex-1 grid grid-cols-7 grid-rows-6 relative">
                             {/* Grid lines */}
                             {Array.from({ length: 42 }).map((_, i) => (
-                                <div key={i} className="border-r border-b border-slate-100 dark:border-slate-800/50"></div>
+                                <div key={i} className="border-r border-b border-slate-100 dark:border-border-dark/50"></div>
                             ))}
 
                             {/* Task 1 */}

@@ -146,9 +146,9 @@ export default function ITTicketsPage() {
   const getPriorityBadge = (priority: string) => {
     const colors: Record<string, string> = {
       critical: 'bg-red-600 text-white border-red-700',
-      urgent: 'bg-orange-600 text-white border-orange-700',
+      urgent: 'bg-primary text-white border-orange-700',
       high: 'bg-yellow-600 text-white border-yellow-700',
-      medium: 'bg-blue-600 text-white border-blue-700',
+      medium: 'bg-primary text-white border-blue-700',
       low: 'bg-gray-600 text-white border-gray-700',
     };
 
@@ -192,7 +192,7 @@ export default function ITTicketsPage() {
             <Button type="button" variant="outline" onClick={() => loadTickets()}>
                 <span className="mr-2">↻</span> Refresh
             </Button>
-            <Button type="button" className="bg-orange-600 hover:bg-orange-700" onClick={handleCreate}>
+            <Button type="button" className="bg-primary hover:bg-primary-700" onClick={handleCreate}>
             <Plus className="mr-2 h-4 w-4" />
             Create Ticket
             </Button>
@@ -245,7 +245,7 @@ export default function ITTicketsPage() {
                     {getStatusBadge(ticket.status)}
                     <span className="text-xs text-gray-400">• {new Date(ticket.createdAt).toLocaleDateString()}</span>
                   </div>
-                  <CardTitle className="text-lg font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">
+                  <CardTitle className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors">
                     {ticket.title}
                   </CardTitle>
                 </div>
@@ -320,7 +320,7 @@ export default function ITTicketsPage() {
             <p className="text-gray-500 mb-6 max-w-sm mx-auto">
               {search ? 'No tickets match your search filters.' : 'There are no active IT support tickets at the moment.'}
             </p>
-            <Button type="button" onClick={handleCreate} className="bg-orange-600 hover:bg-orange-700">
+            <Button type="button" onClick={handleCreate} className="bg-primary hover:bg-primary-700">
                 <Plus className="mr-2 h-4 w-4" />
                 Create First Ticket
             </Button>
@@ -433,7 +433,7 @@ export default function ITTicketsPage() {
 
             <DialogFooter>
                 <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
-                <Button type="submit" className="bg-orange-600 hover:bg-orange-700">Save Ticket</Button>
+                <Button type="submit" className="bg-primary hover:bg-primary-700">Save Ticket</Button>
             </DialogFooter>
           </form>
         </DialogContent>

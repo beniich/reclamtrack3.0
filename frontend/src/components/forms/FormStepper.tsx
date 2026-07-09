@@ -53,7 +53,7 @@ export function FormStepper({
                                 onClick={() => handleStepClick(step.id)}
                                 className={cn(
                                     'flex items-start gap-4 p-4 rounded-lg transition-all',
-                                    isAccessible && 'cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800',
+                                    isAccessible && 'cursor-pointer hover:bg-primary/5 dark:hover:bg-violet-500/15',
                                     isCurrent && 'bg-primary/5 border-2 border-primary',
                                     !isCurrent && 'border border-slate-200 dark:border-slate-700'
                                 )}

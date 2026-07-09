@@ -22,10 +22,10 @@ export function Button({
 }: ButtonProps) {
   
   const variants = {
-    primary: 'bg-orange-600 dark:bg-orange-500 text-white shadow-lg shadow-orange-500/20 hover:brightness-110 active:scale-95 border-none',
-    secondary: 'bg-slate-900 dark:bg-slate-800 text-white border border-slate-700 hover:bg-slate-800 dark:hover:bg-slate-700 active:scale-95 shadow-lg',
-    outline: 'bg-transparent border-2 border-slate-200 dark:border-orange-500/20 text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-orange-500/10 active:scale-95',
-    ghost: 'bg-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800',
+    primary: 'bg-primary dark:bg-primary text-white shadow-lg shadow-orange-500/20 hover:brightness-110 active:scale-95 border-none',
+    secondary: 'bg-surface-dark dark:bg-slate-800 text-white border border-slate-700 hover:bg-violet-500/15 dark:hover:bg-slate-700 active:scale-95 shadow-lg',
+    outline: 'bg-transparent border-2 border-slate-200 dark:border-primary/20 text-slate-900 dark:text-white hover:bg-primary/5 dark:hover:bg-primary/10 active:scale-95',
+    ghost: 'bg-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-primary/8 dark:hover:bg-violet-500/15',
   };
 
   const sizes = {

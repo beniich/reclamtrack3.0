@@ -2,6 +2,7 @@
 
 import { Linkedin, Mail, MapPin, Twitter } from 'lucide-react';
 import Link from 'next/link';
+import { Landmark } from 'lucide-react';
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
@@ -47,8 +48,8 @@ export function Footer() {
                     {/* Brand Section */}
                     <div className="lg:col-span-2">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="bg-indigo-600 p-2 rounded-lg text-white">
-                                <span className="material-symbols-outlined text-2xl">account_balance</span>
+                            <div className="bg-primary p-2 rounded-lg text-white">
+                                <Landmark className="text-2xl" />
                             </div>
                             <div className="flex flex-col">
                                 <h2 className="text-xl font-bold leading-none text-slate-900">CloudIndustry</h2>
@@ -85,7 +86,7 @@ export function Footer() {
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className="text-sm text-slate-600 hover:text-indigo-600 transition-colors"
+                                        className="text-sm text-slate-600 hover:text-primary transition-colors"
                                     >
                                         {link.label}
                                     </Link>
@@ -142,7 +143,7 @@ export function Footer() {
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className="text-sm text-slate-600 hover:text-indigo-600 transition-colors"
+                                        className="text-sm text-slate-600 hover:text-primary transition-colors"
                                     >
                                         {link.label}
                                     </Link>
@@ -168,7 +169,7 @@ export function Footer() {
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="p-2 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-slate-100 transition-colors"
+                                    className="p-2 rounded-lg text-slate-500 hover:text-primary hover:bg-primary/8 transition-colors"
                                     aria-label={social.label}
                                 >
                                     {social.icon}
@@ -178,7 +179,7 @@ export function Footer() {
 
                         {/* Language & Theme Selector */}
                         <div className="flex items-center gap-2 text-sm">
-                            <select className="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <select className="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary">
                                 <option value="en">English</option>
                                 <option value="fr">Français</option>
                                 <option value="ar">العربية</option>

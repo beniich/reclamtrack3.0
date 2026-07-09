@@ -55,15 +55,9 @@ class ApiClient {
             },
             (error: AxiosError<ApiResponse>) => {
                 const config = error.config;
-                // === DEMO MODE BYPASS ===
-                // If it's a Network Error (backend offline/Vercel) OR explicitly set to true
-                if (!error.response || process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
-                    console.log(`[DEMO MODE] Intercepting failing request to ${config?.url}`);
-                    const mockData = getMockDataForRoute(config?.url || '', config?.method || 'get', config?.data);
-                    if (mockData !== undefined) {
-                        return Promise.resolve({ data: { success: true, data: mockData } });
-                    }
-                }
+                // === DEMO MODE BYPASS DISABLED ===
+                // We want to force the app to use the real backend.
+                // If it's a Network Error (backend offline), we want it to fail loudly.
 
                 if (error.response) {
                     const status = error.response.status;
@@ -317,6 +311,8 @@ export const notificationApi = {
     getAll: (params?: any) => apiClient.get('/notifications', params),
     markAsRead: (id: string) => apiClient.patch(`/notifications/${id}/read`),
     markAllRead: () => apiClient.post('/notifications/read-all'),
+    delete: (id: string) => apiClient.delete(`/notifications/${id}`),
+    deleteAll: () => apiClient.delete('/notifications'),
 };
 
 export const organizationsApi = {

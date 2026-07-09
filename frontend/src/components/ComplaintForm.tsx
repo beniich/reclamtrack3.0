@@ -135,7 +135,7 @@ export default function ComplaintForm() {
                     <button 
                         type="button"
                         onClick={captureLocation}
-                        className={`text-[10px] font-black uppercase px-3 py-2 rounded-lg border transition-all ${values.reporterLocation ? 'bg-emerald-50 text-emerald-600 border-emerald-200' : 'bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100'}`}
+                        className={`text-[10px] font-black uppercase px-3 py-2 rounded-lg border transition-all ${values.reporterLocation ? 'bg-emerald-50 text-emerald-600 border-emerald-200' : 'bg-slate-50 text-slate-500 border-slate-200 hover:bg-primary/8'}`}
                     >
                         {geoLoading ? 'Localisation...' : values.reporterLocation ? '✓ Position GPS Capturée' : '📍 Capturer ma position GPS'}
                     </button>

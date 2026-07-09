@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Landmark, CheckCircle, Star, Mail, Phone } from 'lucide-react';
 
 export default function PressingCheckoutSuccessPage() {
     const orderNumber = `PRE-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
@@ -12,11 +13,11 @@ export default function PressingCheckoutSuccessPage() {
 
     return (
         <div className="min-h-screen bg-white dark:bg-[#0a0a0f] font-sans">
-            <header className="border-b border-slate-100 dark:border-slate-800">
+            <header className="border-b border-slate-100 dark:border-border-dark">
                 <div className="max-w-5xl mx-auto px-6 h-16 flex items-center">
                     <Link href="/" className="flex items-center gap-3">
                         <div className="flex items-center justify-center size-9 bg-primary rounded-lg text-white">
-                            <span className="material-symbols-outlined text-xl notranslate">account_balance</span>
+                            <Landmark className="text-xl notranslate" />
                         </div>
                         <span className="text-lg font-black text-slate-900 dark:text-white">Cloud <span className="text-primary">Industrie</span></span>
                     </Link>
@@ -27,10 +28,10 @@ export default function PressingCheckoutSuccessPage() {
                 {/* Success animation */}
                 <div className="relative inline-flex mb-10">
                     <div className="size-28 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center">
-                        <span className="material-symbols-outlined text-emerald-500 text-6xl notranslate">check_circle</span>
+                        <CheckCircle className="text-emerald-500 text-6xl notranslate" />
                     </div>
                     <div className="absolute -top-2 -right-2 size-10 bg-primary rounded-full flex items-center justify-center animate-bounce">
-                        <span className="material-symbols-outlined text-white text-lg notranslate">star</span>
+                        <Star className="text-white text-lg notranslate" />
                     </div>
                 </div>
 
@@ -53,7 +54,7 @@ export default function PressingCheckoutSuccessPage() {
                     <h2 className="text-xl font-black text-slate-900 dark:text-white mb-8 text-center">Les prochaines étapes</h2>
                     <div className="space-y-4">
                         {nextSteps.map((s, i) => (
-                            <div key={i} className="flex gap-5 p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-primary/30 transition-all">
+                            <div key={i} className="flex gap-5 p-5 bg-white dark:bg-background rounded-2xl border border-slate-100 dark:border-border-dark shadow-sm hover:shadow-md hover:border-primary/30 transition-all">
                                 <div className="flex-shrink-0">
                                     <div className="size-12 bg-primary/10 rounded-2xl flex items-center justify-center backdrop-blur">
                                         <span className="material-symbols-outlined text-primary text-xl notranslate">{s.icon}</span>
@@ -76,12 +77,12 @@ export default function PressingCheckoutSuccessPage() {
                     <h3 className="font-black text-slate-900 dark:text-white mb-3">Une question ?</h3>
                     <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">Notre équipe support est disponible immédiatement pour vous accompagner.</p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                        <a href="mailto:support@cloudindustrie.fr" className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-3 rounded-xl font-bold text-sm hover:border-primary transition-all">
-                            <span className="material-symbols-outlined text-sm notranslate">mail</span>
+                        <a href="mailto:support@cloudindustrie.fr" className="flex items-center gap-2 bg-white dark:bg-background border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-3 rounded-xl font-bold text-sm hover:border-primary transition-all">
+                            <Mail className="text-sm notranslate" />
                             support@cloudindustrie.fr
                         </a>
-                        <a href="tel:+33123456789" className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-3 rounded-xl font-bold text-sm hover:border-primary transition-all">
-                            <span className="material-symbols-outlined text-sm notranslate">call</span>
+                        <a href="tel:+33123456789" className="flex items-center gap-2 bg-white dark:bg-background border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-5 py-3 rounded-xl font-bold text-sm hover:border-primary transition-all">
+                            <Phone className="text-sm notranslate" />
                             +33 1 23 45 67 89
                         </a>
                     </div>
@@ -89,16 +90,16 @@ export default function PressingCheckoutSuccessPage() {
 
                 {/* CTA buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link href="/login" className="bg-primary text-white px-10 py-4 rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-xl shadow-primary/30">
+                    <Link href="/login" className="bg-primary text-white px-10 py-4 rounded-2xl font-black text-lg hover:bg-primary-700 transition-all shadow-xl shadow-primary/30">
                         Accéder à mon tableau de bord →
                     </Link>
-                    <Link href="/" className="border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-10 py-4 rounded-2xl font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                    <Link href="/" className="border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 px-10 py-4 rounded-2xl font-bold hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-all">
                         Retour à l&apos;accueil
                     </Link>
                 </div>
             </main>
 
-            <footer className="border-t border-slate-100 dark:border-slate-800 py-8 text-center text-sm text-slate-400">
+            <footer className="border-t border-slate-100 dark:border-border-dark py-8 text-center text-sm text-slate-400">
                 <p>© {new Date().getFullYear()} Cloud Industrie — Merci de votre confiance ❤️</p>
             </footer>
         </div>

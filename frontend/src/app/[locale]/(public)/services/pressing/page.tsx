@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Landmark, CheckCircle, ArrowRight } from 'lucide-react';
 
 const plans = [
     {
@@ -35,7 +36,7 @@ const plans = [
             'Support prioritaire (4h)',
         ],
         cta: 'Choisir Pro',
-        ctaStyle: 'bg-primary text-white hover:bg-blue-700 shadow-xl shadow-primary/30',
+        ctaStyle: 'bg-primary text-white hover:bg-primary-700 shadow-xl shadow-primary/30',
     },
     {
         name: 'Enterprise',
@@ -71,11 +72,11 @@ export default function PressingPage() {
     return (
         <div className="flex flex-col min-h-screen bg-white dark:bg-[#0a0a0f] text-slate-900 dark:text-slate-100 font-sans">
             {/* Nav */}
-            <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-[#0a0a0f]/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+            <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-[#0a0a0f]/80 backdrop-blur-md border-b border-slate-200 dark:border-border-dark">
                 <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-3">
                         <div className="flex items-center justify-center size-9 bg-primary rounded-lg text-white">
-                            <span className="material-symbols-outlined text-xl notranslate">account_balance</span>
+                            <Landmark className="text-xl notranslate" />
                         </div>
                         <h2 className="text-xl font-bold text-slate-900 dark:text-white">Cloud <span className="text-primary">Industrie</span></h2>
                     </Link>
@@ -83,7 +84,7 @@ export default function PressingPage() {
                         <Link href="/login" className="text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">
                             Se connecter
                         </Link>
-                        <Link href="/services/pressing/checkout" className="bg-primary text-white text-sm font-black px-5 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-lg shadow-primary/30">
+                        <Link href="/services/pressing/checkout" className="bg-primary text-white text-sm font-black px-5 py-2 rounded-lg hover:bg-primary-700 transition-all shadow-lg shadow-primary/30">
                             Commander →
                         </Link>
                     </div>
@@ -103,7 +104,7 @@ export default function PressingPage() {
                             {/* Floating ticket cards - static positions (no inline styles) */}
                             <div className="absolute top-[5%] left-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
                                 <div className="size-8 bg-emerald-500 rounded-lg flex items-center justify-center">
-                                    <span className="material-symbols-outlined text-white text-sm notranslate">check_circle</span>
+                                    <CheckCircle className="text-white text-sm notranslate" />
                                 </div>
                                 <span className="text-white font-bold text-sm">Résolu</span>
                             </div>
@@ -114,7 +115,7 @@ export default function PressingPage() {
                                 <span className="text-white font-bold text-sm">En cours</span>
                             </div>
                             <div className="absolute top-[55%] left-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
-                                <div className="size-8 bg-blue-500 rounded-lg flex items-center justify-center">
+                                <div className="size-8 bg-primary rounded-lg flex items-center justify-center">
                                     <span className="material-symbols-outlined text-white text-sm notranslate">inbox</span>
                                 </div>
                                 <span className="text-white font-bold text-sm">Reçu</span>
@@ -141,9 +142,9 @@ export default function PressingPage() {
                                 Le service <strong className="text-white">Pressing</strong> est votre solution tout-en-un pour digitaliser et automatiser la gestion des réclamations citoyennes en 48h chrono.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <Link href="/services/pressing/checkout" className="bg-primary text-white h-14 px-10 rounded-2xl font-black text-lg shadow-2xl shadow-primary/40 hover:bg-blue-600 transition-all flex items-center justify-center gap-2 group">
+                                <Link href="/services/pressing/checkout" className="bg-primary text-white h-14 px-10 rounded-2xl font-black text-lg shadow-2xl shadow-primary/40 hover:bg-primary transition-all flex items-center justify-center gap-2 group">
                                     Démarrer maintenant
-                                    <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform notranslate">arrow_forward</span>
+                                    <ArrowRight className="group-hover:translate-x-1 transition-transform notranslate" />
                                 </Link>
                                 <a href="#plans" className="bg-white/10 border border-white/20 text-white h-14 px-10 rounded-2xl font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center">
                                     Voir les plans
@@ -161,7 +162,7 @@ export default function PressingPage() {
                 </section>
 
                 {/* Workflow steps */}
-                <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
+                <section className="py-20 bg-slate-50 dark:bg-background/50">
                     <div className="max-w-7xl mx-auto px-6">
                         <div className="text-center mb-16">
                             <h2 className="text-3xl font-black text-slate-900 dark:text-white">Comment ça marche ?</h2>
@@ -173,15 +174,15 @@ export default function PressingPage() {
 
                             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                                 {[
-                                    { step: '01', icon: 'inbox', title: 'Réception', desc: 'La réclamation arrive via web, mobile ou email et est enregistrée automatiquement.', color: 'bg-blue-500' },
-                                    { step: '02', icon: 'assignment_ind', title: 'Attribution', desc: 'Assignation automatique à l\'agent compétent selon les règles configurées.', color: 'bg-indigo-500' },
+                                    { step: '01', icon: 'inbox', title: 'Réception', desc: 'La réclamation arrive via web, mobile ou email et est enregistrée automatiquement.', color: 'bg-primary' },
+                                    { step: '02', icon: 'assignment_ind', title: 'Attribution', desc: 'Assignation automatique à l\'agent compétent selon les règles configurées.', color: 'bg-primary' },
                                     { step: '03', icon: 'engineering', title: 'Traitement', desc: 'L\'agent traite, met à jour le statut. Le citoyen reçoit des notifications en temps réel.', color: 'bg-violet-500' },
                                     { step: '04', icon: 'task_alt', title: 'Clôture', desc: 'Rapport de résolution envoyé, satisfaction mesurée, données archivées.', color: 'bg-emerald-500' },
                                 ].map((step, i) => (
                                     <div key={i} className="relative flex flex-col items-center text-center group">
                                         <div className={`relative size-20 ${step.color} rounded-2xl flex items-center justify-center mb-6 shadow-xl group-hover:scale-110 transition-transform duration-300`}>
                                             <span className="material-symbols-outlined text-white text-3xl notranslate">{step.icon}</span>
-                                            <span className="absolute -top-2 -right-2 size-6 bg-white dark:bg-slate-900 border-2 border-current rounded-full text-xs font-black flex items-center justify-center text-slate-700 dark:text-slate-300">{step.step}</span>
+                                            <span className="absolute -top-2 -right-2 size-6 bg-white dark:bg-background border-2 border-current rounded-full text-xs font-black flex items-center justify-center text-slate-700 dark:text-slate-300">{step.step}</span>
                                         </div>
                                         <h3 className="font-black text-slate-900 dark:text-white text-lg mb-2">{step.title}</h3>
                                         <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{step.desc}</p>
@@ -200,7 +201,7 @@ export default function PressingPage() {
                         </div>
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {features.map((f, i) => (
-                                <div key={i} className="group p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 hover:border-primary hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                                <div key={i} className="group p-8 bg-white dark:bg-background rounded-3xl border border-slate-100 dark:border-border-dark hover:border-primary hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                                     <div className="size-14 bg-primary/5 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                                         <span className="material-symbols-outlined text-2xl notranslate">{f.icon}</span>
                                     </div>
@@ -213,7 +214,7 @@ export default function PressingPage() {
                 </section>
 
                 {/* Social proof */}
-                <section className="py-16 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-100 dark:border-slate-800">
+                <section className="py-16 bg-slate-50 dark:bg-background/50 border-y border-slate-100 dark:border-border-dark">
                     <div className="max-w-7xl mx-auto px-6">
                         <div className="text-center mb-12">
                             <h2 className="text-xl font-black text-slate-900 dark:text-white">Ils ont adopté le service Pressing</h2>
@@ -224,7 +225,7 @@ export default function PressingPage() {
                                 { name: 'DSI Métropole', city: 'Bordeaux', quote: '« L\'intégration avec notre portail citoyen existant a été faite en une journée. »', rating: 5 },
                                 { name: 'Service Technique', city: 'Nantes', quote: '« Le tableau de bord cartographique a transformé notre façon de prioriser. »', rating: 5 },
                             ].map((t, i) => (
-                                <div key={i} className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
+                                <div key={i} className="bg-white dark:bg-background rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
                                     <div className="flex gap-1 mb-4">
                                         {Array.from({ length: t.rating }).map((_, j) => (
                                             <span key={j} className="text-amber-400">★</span>
@@ -250,7 +251,7 @@ export default function PressingPage() {
                         </div>
                         <div className="grid md:grid-cols-3 gap-6 items-start">
                             {plans.map((plan, i) => (
-                                <div key={i} className={`relative bg-white dark:bg-slate-900 rounded-3xl border-2 ${plan.color} p-8 transition-all hover:shadow-2xl hover:-translate-y-1 duration-300`}>
+                                <div key={i} className={`relative bg-white dark:bg-background rounded-3xl border-2 ${plan.color} p-8 transition-all hover:shadow-2xl hover:-translate-y-1 duration-300`}>
                                     {plan.badge && (
                                         <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                                             <span className="bg-primary text-white text-xs font-black px-4 py-1.5 rounded-full shadow-lg">{plan.badge}</span>
@@ -265,7 +266,7 @@ export default function PressingPage() {
                                     <ul className="space-y-3 mb-8">
                                         {plan.features.map((feat, j) => (
                                             <li key={j} className="flex items-start gap-3 text-sm">
-                                                <span className="material-symbols-outlined text-primary text-sm mt-0.5 notranslate">check_circle</span>
+                                                <CheckCircle className="text-primary text-sm mt-0.5 notranslate" />
                                                 <span className="text-slate-600 dark:text-slate-400">{feat}</span>
                                             </li>
                                         ))}
@@ -297,7 +298,7 @@ export default function PressingPage() {
                 </section>
             </main>
 
-            <footer className="bg-white dark:bg-[#0a0a0f] border-t border-slate-200 dark:border-slate-800 py-8 text-center text-sm text-slate-400">
+            <footer className="bg-white dark:bg-[#0a0a0f] border-t border-slate-200 dark:border-border-dark py-8 text-center text-sm text-slate-400">
                 <p>© {new Date().getFullYear()} Cloud Industrie — <Link href="/" className="hover:text-primary">Accueil</Link> · <Link href="/legal/privacy" className="hover:text-primary">Confidentialité</Link> · <Link href="/legal/terms" className="hover:text-primary">CGU</Link></p>
             </footer>
         </div>

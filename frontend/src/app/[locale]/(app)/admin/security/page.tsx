@@ -123,10 +123,10 @@ export default function SecurityCenterPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-500">Active RDP Sessions</p>
-                <p className="text-2xl font-bold text-blue-600">{rdpSessions.filter(s => s.status === 'active').length}</p>
+                <p className="text-2xl font-bold text-primary">{rdpSessions.filter(s => s.status === 'active').length}</p>
                 <p className="text-xs text-gray-400">monitored connections</p>
               </div>
-              <Terminal className="h-8 w-8 text-blue-500" />
+              <Terminal className="h-8 w-8 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -149,10 +149,10 @@ export default function SecurityCenterPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-500">Security Alerts</p>
-                <p className="text-2xl font-bold text-orange-600">0</p>
+                <p className="text-2xl font-bold text-primary">0</p>
                 <p className="text-xs text-gray-400">critical issues</p>
               </div>
-              <AlertTriangle className="h-8 w-8 text-orange-500" />
+              <AlertTriangle className="h-8 w-8 text-primary" />
             </div>
           </CardContent>
         </Card>
@@ -219,7 +219,7 @@ export default function SecurityCenterPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Terminal className="h-5 w-5 text-blue-600" />
+                <Terminal className="h-5 w-5 text-primary" />
                 RDP Access Monitoring
               </CardTitle>
               <CardDescription>Remote Desktop Protocol sessions and access logs</CardDescription>
@@ -401,7 +401,7 @@ export default function SecurityCenterPage() {
                     <p className="text-sm text-gray-500">Active States</p>
                     <p className="font-bold text-2xl">{firewallStatus?.states || '0 / 0'}</p>
                     <div className="w-full bg-gray-200 rounded-full h-1.5 mt-2">
-                      <div className="bg-blue-600 h-1.5 rounded-full" style={{ width: `${firewallStatus?.statesPercentage || 0}%` }}></div>
+                      <div className="bg-primary h-1.5 rounded-full" style={{ width: `${firewallStatus?.statesPercentage || 0}%` }}></div>
                     </div>
                   </CardContent>
                 </Card>
@@ -466,7 +466,7 @@ export default function SecurityCenterPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-blue-600" />
+                <Shield className="h-5 w-5 text-primary" />
                 Compliance & Governance
               </CardTitle>
               <CardDescription>Automated security compliance tracking and reporting</CardDescription>
@@ -522,7 +522,7 @@ export default function SecurityCenterPage() {
                                   </span>
                                 </td>
                                 <td className="px-4 py-3 text-right">
-                                  <Button type="button" variant="ghost" size="sm" className="text-blue-600 h-8">Remediate</Button>
+                                  <Button type="button" variant="ghost" size="sm" className="text-primary h-8">Remediate</Button>
                                 </td>
                               </tr>
                             ))}
@@ -548,7 +548,7 @@ export default function SecurityCenterPage() {
         </TabsContent>
 
         {/* Secret Vault Summary */}
-        <Card className="bg-slate-900 text-white rounded-3xl overflow-hidden border-0 shadow-2xl">
+        <Card className="bg-surface-dark text-white rounded-3xl overflow-hidden border-0 shadow-2xl">
           <CardContent className="p-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-6">
                <div className="bg-primary/20 p-4 rounded-2xl">

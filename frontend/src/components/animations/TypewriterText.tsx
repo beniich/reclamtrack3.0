@@ -86,7 +86,7 @@ export const TypewriterText: React.FC<TypewriterTextProps> = ({
                 </div>
             ))}
             {!isComplete && (
-                <span className="inline-block w-3 h-8 bg-orange-500 ml-1 animate-pulse align-middle" />
+                <span className="inline-block w-3 h-8 bg-primary ml-1 animate-pulse align-middle" />
             )}
         </h1>
     );

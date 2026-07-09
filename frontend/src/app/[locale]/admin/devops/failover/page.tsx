@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 'use client';
 
 import React from 'react';
@@ -21,7 +22,7 @@ import { Button } from '@/components/ui/button';
 
 export default function DrFailoverDashboard() {
     return (
-        <div className="flex h-full min-h-screen flex-col bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100">
+        <div className="flex h-full min-h-screen flex-col bg-slate-50 dark:bg-background font-sans text-slate-900 dark:text-slate-100">
 
             {/* Critical Header */}
             <header className="px-6 py-4 bg-rose-600 text-white flex items-center justify-between sticky top-0 z-50 shadow-lg shadow-rose-900/20">
@@ -60,7 +61,7 @@ export default function DrFailoverDashboard() {
                     <div className="absolute top-1/2 left-0 w-full h-1 bg-slate-200 dark:bg-slate-800 -z-10 transform -translate-y-1/2"></div>
 
                     {/* Primary Region */}
-                    <div className="flex-1 max-w-sm bg-white dark:bg-slate-900 rounded-2xl border-2 border-emerald-500 shadow-xl shadow-emerald-500/10 p-6 relative overflow-hidden">
+                    <div className="flex-1 max-w-sm bg-white dark:bg-background rounded-2xl border-2 border-emerald-500 shadow-xl shadow-emerald-500/10 p-6 relative overflow-hidden">
                         <div className="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">PRIMARY</div>
 
                         <div className="flex items-center gap-4 mb-6">
@@ -91,12 +92,12 @@ export default function DrFailoverDashboard() {
 
                     {/* Sync Status Badge (Center) */}
                     <div className="size-20 rounded-full bg-slate-100 dark:bg-slate-800 border-4 border-white dark:border-slate-950 flex flex-col items-center justify-center z-10 shadow-lg">
-                        <ArrowLeftRight className="size-6 text-blue-500" />
+                        <ArrowLeftRight className="size-6 text-primary" />
                         <span className="text-[10px] font-bold text-slate-500 mt-1">SYNC</span>
                     </div>
 
                     {/* Secondary Region */}
-                    <div className="flex-1 max-w-sm bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-800 p-6 relative opacity-80 hover:opacity-100 transition-opacity">
+                    <div className="flex-1 max-w-sm bg-white dark:bg-background rounded-2xl border-2 border-slate-200 dark:border-border-dark p-6 relative opacity-80 hover:opacity-100 transition-opacity">
                         <div className="absolute top-0 right-0 bg-slate-200 dark:bg-slate-800 text-slate-500 text-[10px] font-bold px-3 py-1 rounded-bl-xl">STANDBY</div>
 
                         <div className="flex items-center gap-4 mb-6">
@@ -112,7 +113,7 @@ export default function DrFailoverDashboard() {
                         <div className="space-y-3">
                             <div className="flex justify-between items-center text-sm">
                                 <span className="text-slate-500 flex items-center gap-2"><Server className="size-4" /> Compute</span>
-                                <span className="text-blue-500 font-bold flex items-center gap-1">Warm Standby</span>
+                                <span className="text-primary font-bold flex items-center gap-1">Warm Standby</span>
                             </div>
                             <div className="flex justify-between items-center text-sm">
                                 <span className="text-slate-500 flex items-center gap-2"><Database className="size-4" /> Replication</span>
@@ -131,8 +132,8 @@ export default function DrFailoverDashboard() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
                     {/* Failover Controls */}
-                    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
-                        <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex justify-between items-center">
+                    <div className="bg-white dark:bg-background rounded-2xl border border-slate-200 dark:border-border-dark overflow-hidden shadow-sm">
+                        <div className="px-6 py-4 border-b border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background/50 flex justify-between items-center">
                             <h3 className="font-bold text-lg flex items-center gap-2">
                                 <SwitchCamera className="size-5 text-slate-500" /> Failover Controls
                             </h3>
@@ -156,22 +157,22 @@ export default function DrFailoverDashboard() {
                                 </label>
                             </div>
 
-                            <button type="button" className="w-full max-w-sm py-3 bg-slate-200 dark:bg-slate-800 text-slate-400 font-bold rounded-lg cursor-not-allowed flex items-center justify-center gap-2" disabled>
+                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full max-w-sm py-3 bg-slate-200 dark:bg-slate-800 text-slate-400 font-bold rounded-lg cursor-not-allowed flex items-center justify-center gap-2" disabled>
                                 <SwitchCamera className="size-5" /> Initiate Regional Failover
                             </button>
                         </div>
                     </div>
 
                     {/* Drill History */}
-                    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
-                        <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex justify-between items-center">
+                    <div className="bg-white dark:bg-background rounded-2xl border border-slate-200 dark:border-border-dark overflow-hidden shadow-sm">
+                        <div className="px-6 py-4 border-b border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background/50 flex justify-between items-center">
                             <h3 className="font-bold text-lg flex items-center gap-2">
                                 <RefreshCcw className="size-5 text-slate-500" /> Recent Drills
                             </h3>
-                            <Button variant="ghost" className="text-xs text-blue-600 hover:underline">View Audit Logs</Button>
+                            <Button variant="ghost" className="text-xs text-primary hover:underline">View Audit Logs</Button>
                         </div>
                         <div className="divide-y divide-slate-100 dark:divide-slate-800">
-                            <div className="p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
+                            <div className="p-4 flex items-center gap-4 hover:bg-primary/5 dark:hover:bg-surface-dark/50 transition-colors">
                                 <div className="size-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 flex items-center justify-center">
                                     <Play className="size-5" />
                                 </div>
@@ -181,7 +182,7 @@ export default function DrFailoverDashboard() {
                                 </div>
                                 <span className="px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-500 text-xs font-bold rounded">Pass</span>
                             </div>
-                            <div className="p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
+                            <div className="p-4 flex items-center gap-4 hover:bg-primary/5 dark:hover:bg-surface-dark/50 transition-colors">
                                 <div className="size-10 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center">
                                     <Play className="size-5" />
                                 </div>
@@ -191,7 +192,7 @@ export default function DrFailoverDashboard() {
                                 </div>
                                 <span className="px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-500 text-xs font-bold rounded">Pass</span>
                             </div>
-                            <div className="p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors opacity-75">
+                            <div className="p-4 flex items-center gap-4 hover:bg-primary/5 dark:hover:bg-surface-dark/50 transition-colors opacity-75">
                                 <div className="size-10 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center">
                                     <Play className="size-5" />
                                 </div>

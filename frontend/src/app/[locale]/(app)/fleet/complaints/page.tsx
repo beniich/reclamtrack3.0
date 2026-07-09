@@ -3,6 +3,7 @@
 import { AlertCircle, CheckCircle2, Clock, Filter, Plus, Search } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { MoreVertical, Eye, CheckCircle, Trash } from 'lucide-react';
 
 interface Complaint {
     _id: string;
@@ -135,23 +136,23 @@ export default function FleetComplaintsPage() {
                     <p className="text-sm text-slate-500 font-medium">Manage and track vehicle-related issues reported by drivers.</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold shadow-sm hover:bg-primary/5 dark:hover:bg-slate-700 transition-colors">
                         <Filter className="w-4 h-4" />
                         Filters
                     </button>
-                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors">
+                    <button type="button" className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary-700 transition-colors">
                         <Plus className="w-4 h-4" />
                         New Complaint
                     </button>
                 </div>
             </header>
 
-            <div className="bg-white dark:bg-[#1c1c30] rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-                <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-[#242447]/20">
+            <div className="bg-white dark:bg-[#1c1c30] rounded-xl border border-slate-200 dark:border-border-dark shadow-sm overflow-hidden">
+                <div className="p-4 border-b border-slate-100 dark:border-border-dark flex items-center justify-between bg-slate-50/50 dark:bg-[#242447]/20">
                     <div className="relative w-72">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
                         <input
-                            className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary outline-none transition-all"
+                            className="w-full bg-white dark:bg-background border border-slate-200 dark:border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary outline-none transition-all"
                             placeholder="Search by ID, vehicle plate, or issue..."
                             type="text"
                             value={searchQuery}
@@ -164,13 +165,13 @@ export default function FleetComplaintsPage() {
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="bg-slate-50 dark:bg-[#242447]/50 text-slate-500 dark:text-[#9292c8] text-[11px] font-bold uppercase tracking-wider">
-                            <th className="px-6 py-4 border-b border-slate-100 dark:border-slate-800">Complaint ID</th>
-                            <th className="px-6 py-4 border-b border-slate-100 dark:border-slate-800">Vehicle</th>
-                            <th className="px-6 py-4 border-b border-slate-100 dark:border-slate-800">Issue Description</th>
-                            <th className="px-6 py-4 border-b border-slate-100 dark:border-slate-800">Priority</th>
-                            <th className="px-6 py-4 border-b border-slate-100 dark:border-slate-800">Status</th>
-                            <th className="px-6 py-4 border-b border-slate-100 dark:border-slate-800">Date</th>
-                            <th className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 text-right">Actions</th>
+                            <th className="px-6 py-4 border-b border-slate-100 dark:border-border-dark">Complaint ID</th>
+                            <th className="px-6 py-4 border-b border-slate-100 dark:border-border-dark">Vehicle</th>
+                            <th className="px-6 py-4 border-b border-slate-100 dark:border-border-dark">Issue Description</th>
+                            <th className="px-6 py-4 border-b border-slate-100 dark:border-border-dark">Priority</th>
+                            <th className="px-6 py-4 border-b border-slate-100 dark:border-border-dark">Status</th>
+                            <th className="px-6 py-4 border-b border-slate-100 dark:border-border-dark">Date</th>
+                            <th className="px-6 py-4 border-b border-slate-100 dark:border-border-dark text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody className="text-sm divide-y divide-slate-100 dark:divide-slate-800">
@@ -196,7 +197,7 @@ export default function FleetComplaintsPage() {
                                 </td>
                             </tr>
                         ) : filtered.map(item => (
-                            <tr key={item._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors relative">
+                            <tr key={item._id} className="hover:bg-primary/5 dark:hover:bg-violet-500/15/40 transition-colors relative">
                                 <td className="px-6 py-4 font-bold text-primary">{item.number || `#${item._id.slice(-6).toUpperCase()}`}</td>
                                 <td className="px-6 py-4">
                                     <span className="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded font-mono text-xs font-bold">
@@ -221,17 +222,17 @@ export default function FleetComplaintsPage() {
                                 <td className="px-6 py-4 text-right relative">
                                     <button type="button"
                                         onClick={() => setOpenMenuId(openMenuId === item._id ? null : item._id)}
-                                        className="p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors"
+                                        className="p-1 hover:bg-primary/8 dark:hover:bg-slate-700 rounded transition-colors"
                                     >
-                                        <span className="material-symbols-outlined text-slate-400 text-xl">more_vert</span>
+                                        <MoreVertical className="text-slate-400 text-xl" />
                                     </button>
                                     {openMenuId === item._id && (
                                         <div className="absolute right-6 top-12 z-50 bg-white dark:bg-[#1c1c30] border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl min-w-[160px] overflow-hidden">
                                             <button type="button"
                                                 onClick={() => setOpenMenuId(null)}
-                                                className="w-full text-left px-4 py-3 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-3 transition-colors"
+                                                className="w-full text-left px-4 py-3 text-sm font-medium hover:bg-primary/5 dark:hover:bg-violet-500/15 flex items-center gap-3 transition-colors"
                                             >
-                                                <span className="material-symbols-outlined text-base text-slate-500">visibility</span>
+                                                <Eye className="text-base text-slate-500" />
                                                 View Details
                                             </button>
                                             {item.status !== 'resolue' && item.status !== 'resolved' && (
@@ -239,7 +240,7 @@ export default function FleetComplaintsPage() {
                                                     onClick={() => handleResolve(item._id)}
                                                     className="w-full text-left px-4 py-3 text-sm font-medium text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 flex items-center gap-3 transition-colors"
                                                 >
-                                                    <span className="material-symbols-outlined text-base">check_circle</span>
+                                                    <CheckCircle className="text-base" />
                                                     Mark Resolved
                                                 </button>
                                             )}
@@ -247,7 +248,7 @@ export default function FleetComplaintsPage() {
                                                 onClick={() => handleDelete(item._id)}
                                                 className="w-full text-left px-4 py-3 text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-3 border-t border-slate-100 dark:border-slate-700 transition-colors"
                                             >
-                                                <span className="material-symbols-outlined text-base">delete</span>
+                                                <Trash className="text-base" />
                                                 Delete
                                             </button>
                                         </div>

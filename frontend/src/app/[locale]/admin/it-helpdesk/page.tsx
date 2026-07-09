@@ -1,9 +1,11 @@
+import { toast } from 'sonner';
 "use client"
 
 import { itTicketsApi } from "@/lib/api"
 import { format } from "date-fns"
 import { useEffect, useState } from "react"
 import { Button } from '@/components/ui/button';
+import { Filter, PlusCircle, Eye, CheckCircle } from 'lucide-react';
 
 export default function ITHelpdeskPage() {
     const [tickets, setTickets] = useState<any[]>([])
@@ -32,7 +34,7 @@ export default function ITHelpdeskPage() {
         switch (priority.toLowerCase()) {
             case 'high': return 'bg-red-500/10 text-red-500 border-red-500/20';
             case 'medium': return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-            case 'low': return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
+            case 'low': return 'bg-primary/10 text-primary border-primary/20';
             default: return 'bg-slate-500/10 text-slate-500 border-slate-500/20';
         }
     }
@@ -43,19 +45,19 @@ export default function ITHelpdeskPage() {
     }
 
     return (
-        <div className="p-6 space-y-6 bg-slate-950 min-h-screen">
+        <div className="p-6 space-y-6 bg-background-dark min-h-screen">
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-bold text-white uppercase tracking-tight">IT Support Helpdesk</h1>
                     <p className="text-slate-500 text-sm">Monitor and resolve IT infrastructure support requests.</p>
                 </div>
                 <div className="flex gap-3">
-                    <button type="button" className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2">
-                        <span className="material-symbols-outlined text-sm">filter_list</span>
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2">
+                        <Filter className="text-sm" />
                         Filters
                     </button>
-                    <button type="button" className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
-                        <span className="material-symbols-outlined text-sm">add_circle</span>
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="bg-primary hover:bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
+                        <PlusCircle className="text-sm" />
                         New Ticket
                     </button>
                 </div>
@@ -63,29 +65,29 @@ export default function ITHelpdeskPage() {
 
             {/* Stats Summary */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="bg-slate-900 border border-white/5 p-4 rounded-2xl relative overflow-hidden">
+                <div className="bg-surface-dark border border-white/5 p-4 rounded-2xl relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-2 opacity-5"><span className="material-symbols-outlined text-4xl">confirmation_number</span></div>
                     <p className="text-slate-500 text-[10px] font-bold uppercase mb-1">Open Tickets</p>
                     <p className="text-2xl font-black text-white">{isLoading ? '...' : stats?.byStatus?.find((s:any) => s._id === 'open')?.count || 0}</p>
                 </div>
-                <div className="bg-slate-900 border border-white/5 p-4 rounded-2xl">
+                <div className="bg-surface-dark border border-white/5 p-4 rounded-2xl">
                     <p className="text-slate-500 text-[10px] font-bold uppercase mb-1">In Progress</p>
-                    <p className="text-2xl font-black text-blue-500">{isLoading ? '...' : stats?.byStatus?.find((s:any) => s._id === 'in_progress')?.count || 0}</p>
+                    <p className="text-2xl font-black text-primary">{isLoading ? '...' : stats?.byStatus?.find((s:any) => s._id === 'in_progress')?.count || 0}</p>
                 </div>
-                <div className="bg-slate-900 border border-white/5 p-4 rounded-2xl">
+                <div className="bg-surface-dark border border-white/5 p-4 rounded-2xl">
                     <p className="text-slate-500 text-[10px] font-bold uppercase mb-1">Mean Resolution Time</p>
                     <p className="text-2xl font-black text-green-500">{isLoading ? '...' : `${stats?.avgResolutionTime || 0}h`}</p>
                 </div>
-                <div className="bg-slate-900 border border-white/5 p-4 rounded-2xl">
+                <div className="bg-surface-dark border border-white/5 p-4 rounded-2xl">
                     <p className="text-slate-500 text-[10px] font-bold uppercase mb-1">SLA Compliance</p>
                     <p className="text-2xl font-black text-purple-500">92.4%</p>
                 </div>
             </div>
 
-            <div className="bg-slate-900 border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
+            <div className="bg-surface-dark border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-sm">
-                        <thead className="bg-slate-950 text-slate-500 uppercase text-[11px] font-bold">
+                        <thead className="bg-background-dark text-slate-500 uppercase text-[11px] font-bold">
                             <tr>
                                 <th className="px-6 py-4">Ticket</th>
                                 <th className="px-6 py-4">Priority</th>
@@ -126,8 +128,8 @@ export default function ITHelpdeskPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button type="button" className="p-1.5 hover:bg-blue-500/20 text-blue-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">visibility</span></button>
-                                                <button type="button" className="p-1.5 hover:bg-green-500/20 text-green-400 rounded-lg transition-colors"><span className="material-symbols-outlined text-sm">check_circle</span></button>
+                                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-primary/20 text-blue-400 rounded-lg transition-colors"><Eye className="text-sm" /></button>
+                                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-green-500/20 text-green-400 rounded-lg transition-colors"><CheckCircle className="text-sm" /></button>
                                             </div>
                                         </td>
                                     </tr>

@@ -1,15 +1,17 @@
+import { toast } from 'sonner';
 'use client'
 
 import { RoleGuard } from '@/components/security/RoleGuard'
 import { MetricCard } from '@/components/ui/MetricCard'
 import { Button } from '@/components/ui/button'
 import { Role } from '@/lib/rbac/permissions'
+import { Search, Bell, Settings, Plus, AlertTriangle, MapPin, Edit2, MoreVertical, CheckCircle } from 'lucide-react';
 
 export default function EdgeRoutePage() {
     return (
         <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
             {/* Top Navigation */}
-            <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark px-6 py-3 sticky top-0 z-50">
+            <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-border-dark bg-background-light dark:bg-background-dark px-6 py-3 sticky top-0 z-50">
                 <div className="flex items-center gap-8">
                     <div className="flex items-center gap-3 text-primary">
                         <div className="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
@@ -56,7 +58,7 @@ export default function EdgeRoutePage() {
                     <label className="hidden md:flex flex-col min-w-40 max-w-64">
                         <div className="flex w-full items-stretch rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 h-9">
                             <div className="text-slate-400 flex items-center justify-center pl-3">
-                                <span className="material-symbols-outlined">search</span>
+                                <Search />
                             </div>
                             <input
                                 className="w-full bg-transparent border-none focus:ring-0 text-sm placeholder:text-slate-500 text-white px-3"
@@ -65,11 +67,11 @@ export default function EdgeRoutePage() {
                         </div>
                     </label>
                     <div className="flex gap-2">
-                        <button type="button" className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                            <span className="material-symbols-outlined">notifications</span>
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                            <Bell />
                         </button>
-                        <button type="button" className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                            <span className="material-symbols-outlined">settings</span>
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                            <Settings />
                         </button>
                     </div>
                 </div>
@@ -78,8 +80,8 @@ export default function EdgeRoutePage() {
             <main className="p-6 max-w-[1600px] mx-auto space-y-6">
                 {/* Interactive Traffic Map Section */}
                 <section className="grid grid-cols-1 xl:grid-cols-4 gap-6">
-                    <div className="xl:col-span-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden relative shadow-sm">
-                        <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
+                    <div className="xl:col-span-3 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden relative shadow-sm">
+                        <div className="p-4 border-b border-slate-200 dark:border-border-dark flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
                             <div className="flex items-center gap-2">
                                 <span className="material-symbols-outlined text-primary">public</span>
                                 <h3 className="font-bold text-sm text-slate-900 dark:text-white">Global Traffic Distribution</h3>
@@ -124,10 +126,10 @@ export default function EdgeRoutePage() {
                             </div>
                             {/* Zoom Controls */}
                             <div className="absolute bottom-4 right-4 flex flex-col gap-1">
-                                <button type="button" className="size-8 bg-slate-800 hover:bg-slate-700 rounded-t-lg flex items-center justify-center border border-slate-700 text-white">
-                                    <span className="material-symbols-outlined text-xs">add</span>
+                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-8 bg-slate-800 hover:bg-slate-700 rounded-t-lg flex items-center justify-center border border-slate-700 text-white">
+                                    <Plus className="text-xs" />
                                 </button>
-                                <button type="button" className="size-8 bg-slate-800 hover:bg-slate-700 rounded-b-lg flex items-center justify-center border border-slate-700 border-t-0 text-white">
+                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-8 bg-slate-800 hover:bg-slate-700 rounded-b-lg flex items-center justify-center border border-slate-700 border-t-0 text-white">
                                     <span className="material-symbols-outlined text-xs">remove</span>
                                 </button>
                             </div>
@@ -148,7 +150,7 @@ export default function EdgeRoutePage() {
                             subtitle="UPTIME"
                             trend={{ value: '-0.02%', direction: 'down' }}
                         />
-                        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+                        <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl p-5 shadow-sm">
                             <div className="flex justify-between items-start">
                                 <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
                                     Active Failovers
@@ -162,7 +164,7 @@ export default function EdgeRoutePage() {
                                 <span className="text-slate-500 text-xs font-medium">EVENTS</span>
                             </div>
                             <div className="mt-4 flex items-center gap-2 text-amber-500 text-xs font-medium">
-                                <span className="material-symbols-outlined text-sm">warning</span>
+                                <AlertTriangle className="text-sm" />
                                 <span>Region: ASIA-South (Retrying...)</span>
                             </div>
                         </div>
@@ -172,8 +174,8 @@ export default function EdgeRoutePage() {
                 {/* Main Content Area: Rules & Policy Table */}
                 <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* Policy Table (Left 2/3) */}
-                    <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden">
-                        <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="lg:col-span-2 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl shadow-sm overflow-hidden">
+                        <div className="p-6 border-b border-slate-200 dark:border-border-dark flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div>
                                 <h3 className="font-bold text-lg dark:text-white">Routing Policies</h3>
                                 <p className="text-sm text-slate-500 dark:text-slate-400">
@@ -188,7 +190,7 @@ export default function EdgeRoutePage() {
                                 </RoleGuard>
                                 <RoleGuard minRole={Role.ADMIN}>
                                     <Button type="button" variant="primary" size="sm">
-                                        <span className="material-symbols-outlined text-sm">add</span> Add New Rule
+                                        <Plus className="text-sm" /> Add New Rule
                                     </Button>
                                 </RoleGuard>
                             </div>
@@ -206,7 +208,7 @@ export default function EdgeRoutePage() {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
-                                    <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <tr className="hover:bg-primary/5 dark:hover:bg-violet-500/8 transition-colors group">
                                         <td className="px-6 py-4">
                                             <div className="flex flex-col">
                                                 <span className="font-semibold text-sm dark:text-white">EU Latency Optimizer</span>
@@ -214,8 +216,8 @@ export default function EdgeRoutePage() {
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[11px] font-bold">
-                                                <span className="material-symbols-outlined text-xs">location_on</span>{' '}
+                                            <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-blue-100 dark:bg-primary/10 text-primary dark:text-blue-400 text-[11px] font-bold">
+                                                <MapPin className="text-xs" />{' '}
                                                 GEOLOCATION
                                             </span>
                                         </td>
@@ -231,11 +233,11 @@ export default function EdgeRoutePage() {
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <RoleGuard minRole={Role.ADMIN}>
-                                                <button type="button" className="p-1 text-slate-400 hover:text-primary transition-colors">
-                                                    <span className="material-symbols-outlined">edit</span>
+                                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 text-slate-400 hover:text-primary transition-colors">
+                                                    <Edit2 />
                                                 </button>
-                                                <button type="button" className="p-1 text-slate-400 hover:text-primary transition-colors ml-2">
-                                                    <span className="material-symbols-outlined">more_vert</span>
+                                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 text-slate-400 hover:text-primary transition-colors ml-2">
+                                                    <MoreVertical />
                                                 </button>
                                             </RoleGuard>
                                         </td>
@@ -247,14 +249,14 @@ export default function EdgeRoutePage() {
 
                     {/* Health Checks & Quick Config (Right 1/3) */}
                     <div className="space-y-6">
-                        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden">
-                            <div className="p-5 border-b border-slate-200 dark:border-slate-800">
+                        <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl shadow-sm overflow-hidden">
+                            <div className="p-5 border-b border-slate-200 dark:border-border-dark">
                                 <h3 className="font-bold text-sm dark:text-white">Regional Health Status</h3>
                             </div>
                             <div className="p-5 space-y-4">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
-                                        <span className="material-symbols-outlined text-green-500">check_circle</span>
+                                        <CheckCircle className="text-green-500" />
                                         <div>
                                             <p className="text-xs font-bold dark:text-white">US-East (Virginia)</p>
                                             <p className="text-[10px] text-slate-500">HTTP/2 Status: 200 OK</p>
@@ -264,7 +266,7 @@ export default function EdgeRoutePage() {
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
-                                        <span className="material-symbols-outlined text-green-500">check_circle</span>
+                                        <CheckCircle className="text-green-500" />
                                         <div>
                                             <p className="text-xs font-bold dark:text-white">EU-Central (Frankfurt)</p>
                                             <p className="text-[10px] text-slate-500">HTTP/2 Status: 200 OK</p>
@@ -274,7 +276,7 @@ export default function EdgeRoutePage() {
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
-                                        <span className="material-symbols-outlined text-amber-500">warning</span>
+                                        <AlertTriangle className="text-amber-500" />
                                         <div>
                                             <p className="text-xs font-bold dark:text-white">ASIA-South (Mumbai)</p>
                                             <p className="text-[10px] text-slate-500">Timeout: 504 Gateway</p>

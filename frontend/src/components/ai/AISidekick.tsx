@@ -115,7 +115,7 @@ function processQuery(input: string, complaints: Complaint[], user: any): Messag
 const TicketCard = ({ ticket }: { ticket: Complaint }) => {
     const priorityColor = {
         urgent: 'border-red-500/50 bg-red-500/10 text-red-400',
-        high: 'border-orange-500/50 bg-orange-500/10 text-orange-400',
+        high: 'border-primary/50 bg-primary/10 text-orange-400',
         medium: 'border-yellow-500/50 bg-yellow-500/10 text-yellow-400',
         low: 'border-slate-500/50 bg-slate-500/10 text-slate-400',
     }[ticket.priority] || 'border-slate-500/50 bg-slate-500/10 text-slate-400';
@@ -212,7 +212,7 @@ export const AISidekick: React.FC = () => {
                 <div className={cn(
                     "px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-line",
                     isUser
-                        ? "bg-indigo-600 text-white rounded-tr-sm shadow-lg shadow-indigo-600/20"
+                        ? "bg-primary text-white rounded-tr-sm shadow-lg shadow-indigo-600/20"
                         : "bg-white/5 text-slate-200 border border-white/10 rounded-tl-sm"
                 )}>
                     {/* Render markdown-like bold */}
@@ -235,7 +235,7 @@ export const AISidekick: React.FC = () => {
                                 </div>
                             )}
                             {msg.data.active !== undefined && (
-                                <div className="bg-orange-500/10 rounded-xl p-2 text-center border border-orange-500/20">
+                                <div className="bg-primary/10 rounded-xl p-2 text-center border border-primary/20">
                                     <p className="text-xl font-black text-orange-400">{msg.data.active}</p>
                                     <p className="text-[9px] text-slate-500 uppercase tracking-widest">En cours</p>
                                 </div>
@@ -274,7 +274,7 @@ export const AISidekick: React.FC = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={closeAISidekick}
-                        className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[60]"
+                        className="fixed inset-0 bg-surface-dark/50 backdrop-blur-sm z-[60]"
                     />
 
                     {/* Panel */}
@@ -283,14 +283,14 @@ export const AISidekick: React.FC = () => {
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: '100%', opacity: 0 }}
                         transition={{ type: 'spring', damping: 28, stiffness: 220 }}
-                        className="fixed right-4 top-4 bottom-4 w-[22rem] bg-[#0f0125]/95 backdrop-blur-3xl border border-orange-500/20 rounded-[2.5rem] shadow-[0_0_80px_rgba(249,115,22,0.08)] z-[70] flex flex-col overflow-hidden"
+                        className="fixed right-4 top-4 bottom-4 w-[22rem] bg-[#0f0125]/95 backdrop-blur-3xl border border-primary/20 rounded-[2.5rem] shadow-[0_0_80px_rgba(249,115,22,0.08)] z-[70] flex flex-col overflow-hidden"
                     >
                         {/* Header */}
                         <div className="relative p-5 border-b border-white/10 flex items-center justify-between overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-transparent to-orange-500/10 pointer-events-none" />
                             <div className="relative flex items-center gap-3">
                                 <div className="relative w-10 h-10 flex items-center justify-center">
-                                    <div className="absolute inset-0 rounded-xl bg-orange-500/20 animate-pulse" />
+                                    <div className="absolute inset-0 rounded-xl bg-primary/20 animate-pulse" />
                                     <Bot size={20} className="relative text-orange-400" />
                                 </div>
                                 <div>
@@ -321,7 +321,7 @@ export const AISidekick: React.FC = () => {
                                     animate={{ opacity: 1 }}
                                     className="flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-2xl rounded-tl-sm w-fit border border-white/10"
                                 >
-                                    <Loader2 size={13} className="text-orange-500 animate-spin" />
+                                    <Loader2 size={13} className="text-primary animate-spin" />
                                     <span className="text-[11px] text-slate-400 font-medium">Traitement cognitif...</span>
                                 </motion.div>
                             )}
@@ -333,7 +333,7 @@ export const AISidekick: React.FC = () => {
                                 <button type="button"
                                     key={p}
                                     onClick={() => { setInput(p); }}
-                                    className="text-[10px] font-bold px-3 py-1.5 bg-white/5 hover:bg-orange-500/20 border border-white/10 hover:border-orange-500/40 rounded-full text-slate-400 hover:text-orange-400 transition-all uppercase tracking-wide"
+                                    className="text-[10px] font-bold px-3 py-1.5 bg-white/5 hover:bg-primary/20 border border-white/10 hover:border-primary/40 rounded-full text-slate-400 hover:text-orange-400 transition-all uppercase tracking-wide"
                                 >
                                     {p}
                                 </button>
@@ -343,14 +343,14 @@ export const AISidekick: React.FC = () => {
                         {/* Input */}
                         <div className="p-4 bg-white/5 border-t border-white/10">
                             <div className="relative flex items-center">
-                                <Sparkles size={15} className="absolute left-4 text-orange-500/60" />
+                                <Sparkles size={15} className="absolute left-4 text-primary/60" />
                                 <input
                                     type="text"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                                     placeholder="Requête opérationnelle..."
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-10 pr-14 text-sm text-white placeholder:text-slate-600 focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500/30 outline-none transition-all"
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-10 pr-14 text-sm text-white placeholder:text-slate-600 focus:ring-2 focus:ring-primary/40 focus:border-primary/30 outline-none transition-all"
                                 />
                                 <button type="button"
                                     onClick={handleSend}
@@ -359,7 +359,7 @@ export const AISidekick: React.FC = () => {
                                         "absolute right-2 w-9 h-9 flex items-center justify-center rounded-xl transition-all",
                                         !input.trim() || isTyping
                                             ? "text-slate-700"
-                                            : "bg-orange-500 text-white shadow-lg shadow-orange-500/30 hover:scale-105 active:scale-95"
+                                            : "bg-primary text-white shadow-lg shadow-orange-500/30 hover:scale-105 active:scale-95"
                                     )}
                                 >
                                     <Send size={15} />

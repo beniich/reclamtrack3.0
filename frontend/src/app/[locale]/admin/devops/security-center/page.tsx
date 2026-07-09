@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 "use client"
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
@@ -9,6 +10,7 @@ import { useOrgStore } from "@/store/orgStore"
 import { format } from "date-fns"
 import { useEffect, useState } from "react"
 import { Button } from '@/components/ui/button';
+import { UserCircle } from 'lucide-react';
 
 interface ComplianceData {
     complianceScore: number;
@@ -136,8 +138,8 @@ export default function SecurityPage() {
                     </div>
 
                     <div className="flex gap-4 relative z-10">
-                        <Button variant="ghost" className="px-8 py-4 bg-white dark:bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-2xl border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 transition-all">Review Policy</Button>
-                        <button type="button" className={cn(
+                        <Button variant="ghost" className="px-8 py-4 bg-white dark:bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-2xl border border-slate-200 dark:border-white/10 hover:bg-primary/5 dark:hover:bg-white/10 transition-all">Review Policy</Button>
+                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className={cn(
                             "px-8 py-4 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-2xl hover:scale-105 transition-all",
                             activeThreats > 0 ? 'bg-rose-500' : 'bg-primary'
                         )}>
@@ -167,7 +169,7 @@ export default function SecurityPage() {
                             </div>
                             <div className="overflow-x-auto h-[500px] custom-scrollbar">
                                 <table className="w-full text-left border-collapse font-mono">
-                                    <thead className="sticky top-0 bg-white dark:bg-slate-900 z-10">
+                                    <thead className="sticky top-0 bg-white dark:bg-background z-10">
                                         <tr className="border-b border-slate-200 dark:border-white/10">
                                             <th className="px-8 py-4 text-[9px] font-black uppercase tracking-widest text-slate-400">Timestamp</th>
                                             <th className="px-8 py-4 text-[9px] font-black uppercase tracking-widest text-slate-400">Action</th>
@@ -178,7 +180,7 @@ export default function SecurityPage() {
                                     </thead>
                                     <tbody className="divide-y divide-slate-100 dark:divide-white/5">
                                         {firewallLogs.length > 0 ? firewallLogs.map((log, _i) => (
-                                            <tr key={_i} className="group hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                                            <tr key={_i} className="group hover:bg-primary/5 dark:hover:bg-white/5 transition-colors">
                                                 <td className="px-8 py-4 text-[10px] text-slate-500">
                                                     {format(new Date(log.timestamp), 'HH:mm:ss.SSS')}
                                                 </td>
@@ -231,7 +233,7 @@ export default function SecurityPage() {
                                     <div key={_i} className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5 flex items-center justify-between group hover:border-primary/50 transition-all">
                                         <div className="flex items-center gap-4">
                                             <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                                                <span className="material-symbols-outlined text-primary text-xl">account_circle</span>
+                                                <UserCircle className="text-primary text-xl" />
                                             </div>
                                             <div>
                                                 <p className="text-[10px] font-black uppercase tracking-widest">{session.username}</p>
@@ -247,7 +249,7 @@ export default function SecurityPage() {
                         </div>
 
                         {/* Critical Compliance Audit */}
-                        <div className="dashboard-card p-8 bg-slate-900 border-white/5 relative overflow-hidden group">
+                        <div className="dashboard-card p-8 bg-surface-dark border-white/5 relative overflow-hidden group">
                            <div className="absolute -top-12 -left-12 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-700">
                                <span className="material-symbols-outlined text-[160px] text-white">fact_check</span>
                            </div>

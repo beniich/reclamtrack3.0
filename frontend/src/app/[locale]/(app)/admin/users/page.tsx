@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Landmark, Search, Filter, UserPlus, MoreVertical, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function UsersPage() {
     return (
@@ -12,11 +13,11 @@ export default function UsersPage() {
                 we might need to adjust layout later. For now, I follow the HTML structure. */}
 
             {/* Navigation Bar from HTML */}
-            <header className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 lg:px-10">
+            <header className="flex items-center justify-between border-b border-slate-200 dark:border-border-dark bg-white dark:bg-background px-6 py-3 lg:px-10">
                 <div className="flex items-center gap-8">
                     <div className="flex items-center gap-3">
                         <div className="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center">
-                            <span className="material-symbols-outlined text-xl">account_balance</span>
+                            <Landmark className="text-xl" />
                         </div>
                         <h2 className="text-lg font-bold leading-tight tracking-tight">Complaints System</h2>
                     </div>
@@ -29,7 +30,7 @@ export default function UsersPage() {
                 </div>
                 <div className="flex items-center gap-4">
                     <div className="hidden sm:flex bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 items-center gap-2">
-                        <span className="material-symbols-outlined text-slate-400 text-lg">search</span>
+                        <Search className="text-slate-400 text-lg" />
                         <input className="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder:text-slate-400" placeholder="Search system..." type="text" />
                     </div>
                     <div
@@ -49,18 +50,18 @@ export default function UsersPage() {
                         </div>
                         <div className="flex gap-3">
                             <button type="button" className="flex items-center gap-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-900 dark:text-white px-4 py-2 rounded-lg font-bold text-sm transition-all">
-                                <span className="material-symbols-outlined text-lg">filter_list</span>
+                                <Filter className="text-lg" />
                                 Filter
                             </button>
-                            <button type="button" className="flex items-center gap-2 bg-primary hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20">
-                                <span className="material-symbols-outlined text-lg">person_add</span>
+                            <button type="button" className="flex items-center gap-2 bg-primary hover:bg-primary-700 text-white px-5 py-2 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20">
+                                <UserPlus className="text-lg" />
                                 Add User
                             </button>
                         </div>
                     </div>
 
                     {/* Tabs */}
-                    <div className="mb-6 border-b border-slate-200 dark:border-slate-800">
+                    <div className="mb-6 border-b border-slate-200 dark:border-border-dark">
                         <div className="flex gap-8">
                             <a className="border-b-2 border-primary text-primary pb-3 font-bold text-sm" href="#">All Staff</a>
                             <a className="border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 font-medium text-sm hover:text-slate-700 transition-colors" href="#">Administrators</a>
@@ -70,11 +71,11 @@ export default function UsersPage() {
                     </div>
 
                     {/* Data Table */}
-                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+                    <div className="bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden shadow-sm">
                         <div className="overflow-x-auto">
                             <table className="w-full text-left">
                                 <thead>
-                                    <tr className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                                    <tr className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-border-dark">
                                         <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">User Details</th>
                                         <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Role</th>
                                         <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Status</th>
@@ -84,10 +85,10 @@ export default function UsersPage() {
                                 </thead>
                                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                                     {/* Row 1 */}
-                                    <tr className="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors">
+                                    <tr className="hover:bg-primary/5/80 dark:hover:bg-violet-500/8 transition-colors">
                                         <td className="px-6 py-5">
                                             <div className="flex items-center gap-3">
-                                                <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-xs">AR</div>
+                                                <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-primary dark:text-blue-400 font-bold text-xs">AR</div>
                                                 <div className="flex flex-col">
                                                     <span className="text-sm font-semibold">Alex Rivera</span>
                                                     <span className="text-xs text-slate-500">alex@system.com</span>
@@ -106,11 +107,11 @@ export default function UsersPage() {
                                         <td className="px-6 py-5 text-sm text-slate-500">2 mins ago</td>
                                         <td className="px-6 py-5 text-right">
                                             <Button variant="ghost" className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</Button>
-                                            <button type="button" className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                            <button type="button" className="text-slate-400 hover:text-slate-600"><MoreVertical className="text-lg" /></button>
                                         </td>
                                     </tr>
                                     {/* Row 2 */}
-                                    <tr className="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors">
+                                    <tr className="hover:bg-primary/5/80 dark:hover:bg-violet-500/8 transition-colors">
                                         <td className="px-6 py-5">
                                             <div className="flex items-center gap-3">
                                                 <div className="h-10 w-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 font-bold text-xs">JS</div>
@@ -132,14 +133,14 @@ export default function UsersPage() {
                                         <td className="px-6 py-5 text-sm text-slate-500">1 hour ago</td>
                                         <td className="px-6 py-5 text-right">
                                             <Button variant="ghost" className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</Button>
-                                            <button type="button" className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                            <button type="button" className="text-slate-400 hover:text-slate-600"><MoreVertical className="text-lg" /></button>
                                         </td>
                                     </tr>
                                     {/* Row 3 */}
-                                    <tr className="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors">
+                                    <tr className="hover:bg-primary/5/80 dark:hover:bg-violet-500/8 transition-colors">
                                         <td className="px-6 py-5">
                                             <div className="flex items-center gap-3">
-                                                <div className="h-10 w-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 font-bold text-xs">CC</div>
+                                                <div className="h-10 w-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-primary dark:text-orange-400 font-bold text-xs">CC</div>
                                                 <div className="flex flex-col">
                                                     <span className="text-sm font-semibold">Casey Chen</span>
                                                     <span className="text-xs text-slate-500">casey.c@system.com</span>
@@ -147,7 +148,7 @@ export default function UsersPage() {
                                             </div>
                                         </td>
                                         <td className="px-6 py-5">
-                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-orange-600">Technician</span>
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-primary">Technician</span>
                                         </td>
                                         <td className="px-6 py-5">
                                             <div className="flex items-center gap-2">
@@ -158,14 +159,14 @@ export default function UsersPage() {
                                         <td className="px-6 py-5 text-sm text-slate-500">3 days ago</td>
                                         <td className="px-6 py-5 text-right">
                                             <Button variant="ghost" className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</Button>
-                                            <button type="button" className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                            <button type="button" className="text-slate-400 hover:text-slate-600"><MoreVertical className="text-lg" /></button>
                                         </td>
                                     </tr>
                                     {/* Row 4 */}
-                                    <tr className="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors">
+                                    <tr className="hover:bg-primary/5/80 dark:hover:bg-violet-500/8 transition-colors">
                                         <td className="px-6 py-5">
                                             <div className="flex items-center gap-3">
-                                                <div className="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold text-xs">ML</div>
+                                                <div className="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-primary dark:text-indigo-400 font-bold text-xs">ML</div>
                                                 <div className="flex flex-col">
                                                     <span className="text-sm font-semibold">Morgan Lee</span>
                                                     <span className="text-xs text-slate-500">mlee@system.com</span>
@@ -184,11 +185,11 @@ export default function UsersPage() {
                                         <td className="px-6 py-5 text-sm text-slate-500">Just now</td>
                                         <td className="px-6 py-5 text-right">
                                             <Button variant="ghost" className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</Button>
-                                            <button type="button" className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                            <button type="button" className="text-slate-400 hover:text-slate-600"><MoreVertical className="text-lg" /></button>
                                         </td>
                                     </tr>
                                     {/* Row 5 */}
-                                    <tr className="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors">
+                                    <tr className="hover:bg-primary/5/80 dark:hover:bg-violet-500/8 transition-colors">
                                         <td className="px-6 py-5">
                                             <div className="flex items-center gap-3">
                                                 <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 font-bold text-xs">RT</div>
@@ -199,7 +200,7 @@ export default function UsersPage() {
                                             </div>
                                         </td>
                                         <td className="px-6 py-5">
-                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-orange-600">Technician</span>
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-primary">Technician</span>
                                         </td>
                                         <td className="px-6 py-5">
                                             <div className="flex items-center gap-2">
@@ -210,7 +211,7 @@ export default function UsersPage() {
                                         <td className="px-6 py-5 text-sm text-slate-500">5 hours ago</td>
                                         <td className="px-6 py-5 text-right">
                                             <Button variant="ghost" className="text-primary hover:text-blue-700 text-xs font-bold uppercase tracking-wide mr-4">Edit Permissions</Button>
-                                            <button type="button" className="text-slate-400 hover:text-slate-600"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+                                            <button type="button" className="text-slate-400 hover:text-slate-600"><MoreVertical className="text-lg" /></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -218,17 +219,17 @@ export default function UsersPage() {
                         </div>
 
                         {/* Pagination */}
-                        <div className="px-6 py-4 flex items-center justify-between border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30">
+                        <div className="px-6 py-4 flex items-center justify-between border-t border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-slate-800/30">
                             <p className="text-sm text-slate-500">Showing <span className="font-bold text-slate-900 dark:text-white">1</span> to <span className="font-bold text-slate-900 dark:text-white">5</span> of <span className="font-bold text-slate-900 dark:text-white">42</span> staff members</p>
                             <div className="flex gap-1">
                                 <button type="button" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-500">
-                                    <span className="material-symbols-outlined">chevron_left</span>
+                                    <ChevronLeft />
                                 </button>
                                 <Button variant="primary" className="px-3.5 py-1.5 rounded-lg bg-primary text-white font-bold text-sm">1</Button>
                                 <Button variant="ghost" className="px-3.5 py-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm font-medium">2</Button>
                                 <Button variant="ghost" className="px-3.5 py-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm font-medium">3</Button>
                                 <button type="button" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-slate-500">
-                                    <span className="material-symbols-outlined">chevron_right</span>
+                                    <ChevronRight />
                                 </button>
                             </div>
                         </div>
@@ -236,23 +237,23 @@ export default function UsersPage() {
 
                     {/* Role Info Cards */}
                     <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div className="bg-white dark:bg-background p-5 rounded-xl border border-slate-200 dark:border-border-dark">
                             <div className="flex items-center gap-3 mb-3">
                                 <span className="material-symbols-outlined text-primary">security</span>
                                 <h3 className="font-bold text-sm">Administrators</h3>
                             </div>
                             <p className="text-xs text-slate-500 leading-relaxed">Full system access including financial records, system configuration, and data exports.</p>
                         </div>
-                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div className="bg-white dark:bg-background p-5 rounded-xl border border-slate-200 dark:border-border-dark">
                             <div className="flex items-center gap-3 mb-3">
                                 <span className="material-symbols-outlined text-slate-700">support_agent</span>
                                 <h3 className="font-bold text-sm">Operators</h3>
                             </div>
                             <p className="text-xs text-slate-500 leading-relaxed">Can manage complaints, dispatch interventions, and communicate with customers.</p>
                         </div>
-                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div className="bg-white dark:bg-background p-5 rounded-xl border border-slate-200 dark:border-border-dark">
                             <div className="flex items-center gap-3 mb-3">
-                                <span className="material-symbols-outlined text-orange-500">engineering</span>
+                                <span className="material-symbols-outlined text-primary">engineering</span>
                                 <h3 className="font-bold text-sm">Technicians</h3>
                             </div>
                             <p className="text-xs text-slate-500 leading-relaxed">Restricted to mobile interface for resolving field interventions and reporting status.</p>
@@ -262,7 +263,7 @@ export default function UsersPage() {
             </main>
 
             {/* Footer */}
-            <footer className="mt-auto py-6 px-10 border-t border-slate-200 dark:border-slate-800 text-center text-slate-400 text-xs">
+            <footer className="mt-auto py-6 px-10 border-t border-slate-200 dark:border-border-dark text-center text-slate-400 text-xs">
                 © 2023 Complaints & Intervention System. Admin Terminal V 2.1.0
             </footer>
         </div>

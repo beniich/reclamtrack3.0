@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Landmark, LayoutDashboard, FileText } from 'lucide-react';
 
 const posts = [
     {
@@ -63,15 +64,15 @@ export default function BlogPage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-white dark:bg-[#0a0a0f] text-slate-900 dark:text-slate-100 font-sans">
-            <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-[#0a0a0f]/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+            <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-[#0a0a0f]/80 backdrop-blur-md border-b border-slate-200 dark:border-border-dark">
                 <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-3">
                         <div className="flex items-center justify-center size-9 bg-primary rounded-lg text-white">
-                            <span className="material-symbols-outlined text-xl notranslate">account_balance</span>
+                            <Landmark className="text-xl notranslate" />
                         </div>
                         <h2 className="text-xl font-bold text-slate-900 dark:text-white">Cloud <span className="text-primary">Industrie</span></h2>
                     </Link>
-                    <Link href="/login" className="bg-primary text-white text-sm font-bold px-5 py-2 rounded-lg hover:bg-blue-700 transition-all">
+                    <Link href="/login" className="bg-primary text-white text-sm font-bold px-5 py-2 rounded-lg hover:bg-primary-700 transition-all">
                         Se connecter
                     </Link>
                 </div>
@@ -111,7 +112,7 @@ export default function BlogPage() {
                                     </div>
                                 </div>
                                 <div className="w-full lg:w-64 h-48 bg-gradient-to-br from-primary to-blue-700 rounded-2xl flex items-center justify-center flex-shrink-0">
-                                    <span className="material-symbols-outlined text-white text-6xl notranslate">dashboard</span>
+                                    <LayoutDashboard className="text-white text-6xl notranslate" />
                                 </div>
                             </div>
                         </div>
@@ -121,9 +122,9 @@ export default function BlogPage() {
                     <h2 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Articles récents</h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {rest.map((post, i) => (
-                            <article key={i} className="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer">
+                            <article key={i} className="group bg-white dark:bg-background rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer">
                                 <div className="h-40 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center">
-                                    <span className="material-symbols-outlined text-slate-400 dark:text-slate-600 text-5xl notranslate">article</span>
+                                    <FileText className="text-slate-400 dark:text-slate-600 text-5xl notranslate" />
                                 </div>
                                 <div className="p-6">
                                     <span className={`inline-block text-xs font-black px-2.5 py-0.5 rounded-full mb-3 ${post.categoryColor}`}>{post.category}</span>
@@ -150,7 +151,7 @@ export default function BlogPage() {
                 </section>
             </main>
 
-            <footer className="border-t border-slate-100 dark:border-slate-800 py-8 text-center text-sm text-slate-400">
+            <footer className="border-t border-slate-100 dark:border-border-dark py-8 text-center text-sm text-slate-400">
                 <p>© {new Date().getFullYear()} Cloud Industrie — <Link href="/" className="hover:text-primary">Accueil</Link></p>
             </footer>
         </div>

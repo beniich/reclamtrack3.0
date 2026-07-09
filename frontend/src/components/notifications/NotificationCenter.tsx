@@ -5,6 +5,7 @@ import { useNotificationStore, Notification } from '@/hooks/useNotificationStore
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Bell, X } from 'lucide-react';
 
 export function NotificationCenter() {
     const [isOpen, setIsOpen] = useState(false);
@@ -45,10 +46,10 @@ export function NotificationCenter() {
             {/* Badge déclencheur */}
             <button type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="relative p-2 rounded-full hover:bg-primary/8 dark:hover:bg-violet-500/15 transition-colors"
                 aria-label="Notifications"
             >
-                <span className="material-symbols-outlined text-slate-600 dark:text-slate-300">notifications</span>
+                <Bell className="text-slate-600 dark:text-slate-300" />
                 {unreadCount > 0 && (
                     <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold min-w-[18px] h-[18px] flex items-center justify-center rounded-full border-2 border-white dark:border-slate-900">
                         {unreadCount > 9 ? '9+' : unreadCount}
@@ -64,9 +65,9 @@ export function NotificationCenter() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-slate-900 shadow-xl rounded-xl border border-slate-200 dark:border-slate-800 z-50 overflow-hidden"
+                        className="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-background shadow-xl rounded-xl border border-slate-200 dark:border-border-dark z-50 overflow-hidden"
                     >
-                        <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-sm">
+                        <div className="p-4 border-b border-slate-100 dark:border-border-dark flex justify-between items-center bg-slate-50/50 dark:bg-background/50 backdrop-blur-sm">
                             <h2 className="font-bold text-slate-900 dark:text-slate-100">Notifications</h2>
                             <div className="flex gap-2">
                                 {unreadCount > 0 && (
@@ -91,7 +92,7 @@ export function NotificationCenter() {
                                     {notifications.map((notification) => (
                                         <div
                                             key={notification.id}
-                                            className={`p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors relative group ${!notification.read ? 'bg-blue-50/30 dark:bg-blue-900/10' : ''}`}
+                                            className={`p-4 hover:bg-primary/5 dark:hover:bg-violet-500/10 transition-colors relative group ${!notification.read ? 'bg-blue-50/30 dark:bg-blue-900/10' : ''}`}
                                             onClick={() => markAsRead(notification.id)}
                                         >
                                             <div className="flex gap-3">
@@ -121,7 +122,7 @@ export function NotificationCenter() {
                                                 className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0"
                                                 title="Supprimer"
                                             >
-                                                <span className="material-symbols-outlined text-lg">close</span>
+                                                <X className="text-lg" />
                                             </button>
                                         </div>
                                     ))}
@@ -130,7 +131,7 @@ export function NotificationCenter() {
                         </div>
 
                         {notifications.length > 0 && (
-                            <div className="p-2 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900">
+                            <div className="p-2 border-t border-slate-100 dark:border-border-dark bg-slate-50 dark:bg-background">
                                 <button type="button"
                                     onClick={() => clearAll()}
                                     className="w-full py-2 text-xs text-slate-500 hover:text-red-600 font-medium transition-colors flex items-center justify-center gap-2"

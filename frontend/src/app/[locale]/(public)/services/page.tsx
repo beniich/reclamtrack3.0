@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { ArrowRight, Plus } from 'lucide-react';
 
 const VERTICALS = [
     { id: 'gov', color: 'blue', title: 'Gouvernance Digitale', desc: 'Solutions d\'e-gouvernance et transparence administrative.', symbol: 'account_balance', href: '/services/governance' },
@@ -58,7 +59,7 @@ export default function ServicesPage() {
 
                                     <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-brand-orange group-hover:gap-6 transition-all duration-500">
                                         Explorer la solution
-                                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                                        <ArrowRight className="text-sm" />
                                     </div>
                                 </div>
                             </Link>
@@ -67,7 +68,7 @@ export default function ServicesPage() {
                         {/* Custom Inquiry Card */}
                         <div className="glass-card p-12 rounded-[3.5rem] bg-brand-orange/10 border-brand-orange/20 h-full flex flex-col items-center justify-center text-center space-y-8 min-h-[450px]">
                             <div className="w-20 h-20 bg-brand-orange text-white rounded-3xl flex items-center justify-center shadow-2xl shadow-brand-orange/30">
-                                <span className="material-symbols-outlined text-4xl">add</span>
+                                <Plus className="text-4xl" />
                             </div>
                             <div className="space-y-4">
                                 <h3 className="text-2xl font-black uppercase italic tracking-tight">Besoin de plus ?</h3>

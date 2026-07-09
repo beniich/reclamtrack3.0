@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 'use client';
 
 import { StatusIndicator } from '@/components/shared/StatusIndicator';
@@ -18,7 +19,7 @@ export default function SecretsManagementPage() {
                     </p>
                 </div>
                 <div className="flex gap-3">
-                    <button type="button" className="px-5 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold flex items-center gap-2">
+                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-5 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold flex items-center gap-2">
                         <RotateCw className="w-4 h-4" /> Rotate Now
                     </button>
                     <Button variant="secondary" className="px-5 py-2.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-bold">Retrieve Secret</Button>
@@ -87,7 +88,7 @@ export default function SecretsManagementPage() {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-sm">
-                        <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/30">
+                        <tr className="hover:bg-primary/5 dark:hover:bg-violet-500/8">
                             <td className="px-6 py-4 font-medium text-slate-500">2023-10-19 14:22:05</td>
                             <td className="px-6 py-4">
                                 <div className="flex flex-col">

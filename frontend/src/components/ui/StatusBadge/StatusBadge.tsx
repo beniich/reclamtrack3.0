@@ -20,8 +20,8 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
     const t = useTranslations('Common')
     
     const variants = {
-        new: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-        in_progress: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
+        new: 'bg-primary/10 text-blue-400 border-primary/20',
+        in_progress: 'bg-primary/10 text-indigo-400 border-primary/20',
         resolved: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
         closed: 'bg-slate-500/10 text-slate-400 border-slate-500/20',
     }
@@ -52,7 +52,7 @@ export function PriorityBadge({ priority, className }: PriorityBadgeProps) {
     const variants = {
         low: 'bg-slate-500/10 text-slate-400 border-slate-500/20',
         medium: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-        high: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
+        high: 'bg-primary/10 text-orange-400 border-primary/20',
         critical: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
     }
 

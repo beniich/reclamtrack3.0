@@ -20,8 +20,8 @@ const colorConfig: Record<string, { bg: string; text: string; valueText: string 
         valueText: 'text-slate-900 dark:text-white'
     },
     'blue-500': {
-        bg: 'bg-blue-500/10',
-        text: 'text-blue-500',
+        bg: 'bg-primary/10',
+        text: 'text-primary',
         valueText: 'text-slate-900 dark:text-white'
     },
     'emerald-500': {
@@ -45,7 +45,7 @@ export function KPICard({ label, val, sub, icon, color, pulse = false }: KPICard
     const config = colorConfig[color] || colorConfig['slate'];
 
     return (
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden relative group">
+        <div className="bg-white dark:bg-background p-6 rounded-[2rem] border border-slate-200 dark:border-border-dark shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden relative group">
             <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:scale-125 transition-transform duration-500">
                 <span className="material-symbols-outlined text-6xl">{icon}</span>
             </div>

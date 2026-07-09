@@ -1,5 +1,7 @@
+'use client';
 
 'use client';
+
 
 import { RequisitionStatus } from '@/lib/workflows/requisition-workflow';
 import {

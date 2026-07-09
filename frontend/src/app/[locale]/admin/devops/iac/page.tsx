@@ -104,7 +104,7 @@ export default function IacDiffDashboard() {
                     </div>
                     <div className="flex items-center gap-3">
                         <Button variant="secondary" className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-colors">Discard</Button>
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg shadow-lg shadow-purple-200 dark:shadow-none transition-all flex items-center gap-2">
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg shadow-lg shadow-purple-200 dark:shadow-none transition-all flex items-center gap-2">
                             <Play className="size-4 fill-current" />
                             Apply Changes
                         </button>

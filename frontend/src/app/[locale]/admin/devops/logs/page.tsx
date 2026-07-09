@@ -1,5 +1,6 @@
-import { toast } from 'sonner';
 'use client';
+
+import { toast } from 'sonner';
 
 import React from 'react';
 import {
@@ -86,7 +87,7 @@ export default function LogSenseDashboard() {
                         <div className="space-y-1">
                             <div className="flex items-center justify-between px-2 py-1.5 rounded bg-primary/10 border border-primary/20 text-blue-400">
                                 <span>api-service</span>
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="hover:text-white"><Trash2 className="size-3" /></button>
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="hover:text-white"><Trash2 className="size-3" /></button>
                             </div>
                             <div className="flex items-center justify-between px-2 py-1 text-slate-500 hover:text-slate-300">
                                 <span>+ Add source filter</span>
@@ -97,7 +98,7 @@ export default function LogSenseDashboard() {
 
                 {/* Sidebar Footer */}
                 <div className="p-4 border-t border-border-dark">
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 text-slate-500 hover:text-slate-300 transition-colors w-full">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 text-slate-500 hover:text-slate-300 transition-colors w-full">
                         <Settings className="size-4" />
                         <span>Configuration</span>
                     </button>
@@ -124,7 +125,7 @@ export default function LogSenseDashboard() {
                             </div>
                         </div>
                         <Button variant="primary" className="px-4 py-2 bg-primary hover:bg-primary text-white font-bold rounded text-sm transition-colors">Run Query</Button>
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 text-slate-400 hover:text-white hover:bg-violet-500/15 rounded">
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 text-slate-400 hover:text-white hover:bg-violet-500/15 rounded">
                             <Download className="size-4" />
                         </button>
                     </div>
@@ -178,7 +179,7 @@ export default function LogSenseDashboard() {
                                     Failed to connect to database: Connection refused at tcp://db-primary:5432
                                 </td>
                                 <td className="px-2 py-1 text-right">
-                                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
+                                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
                                 </td>
                             </tr>
 
@@ -194,7 +195,7 @@ export default function LogSenseDashboard() {
                                     GET /v1/users/profile - 200 OK - 45ms
                                 </td>
                                 <td className="px-2 py-1 text-right">
-                                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
+                                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
                                 </td>
                             </tr>
                             {/* Additional Rows would go here */}
@@ -210,7 +211,7 @@ export default function LogSenseDashboard() {
                                         Processing job #{4920 + i} complete. Payload size: {120 + i * 10} bytes.
                                     </td>
                                     <td className="px-2 py-1 text-right">
-                                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
+                                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible text-slate-500 hover:text-slate-200"><MoreHorizontal className="size-3" /></button>
                                     </td>
                                 </tr>
                             ))}
@@ -225,9 +226,9 @@ export default function LogSenseDashboard() {
                         <span className="text-primary font-bold">0.045s query time</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 hover:bg-violet-500/15 rounded hover:text-slate-300 disabled:opacity-50"><ChevronLeft className="size-3" /></button>
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1 hover:bg-violet-500/15 rounded hover:text-slate-300 disabled:opacity-50"><ChevronLeft className="size-3" /></button>
                         <span className="text-slate-300">Page 1</span>
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 hover:bg-violet-500/15 rounded hover:text-slate-300"><ChevronRight className="size-3" /></button>
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1 hover:bg-violet-500/15 rounded hover:text-slate-300"><ChevronRight className="size-3" /></button>
                     </div>
                 </footer>
             </main>

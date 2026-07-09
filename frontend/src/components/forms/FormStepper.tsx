@@ -1,5 +1,7 @@
-// components/forms/FormStepper.tsx
 'use client';
+
+'use client';
+// components/forms/FormStepper.tsx
 
 import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';

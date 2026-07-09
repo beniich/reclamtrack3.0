@@ -1,5 +1,6 @@
-import { toast } from 'sonner';
 'use client';
+
+import { toast } from 'sonner';
 
 import React from 'react';
 import {
@@ -49,7 +50,7 @@ export default function KubernetesNodeDashboard() {
                             </div>
                         </label>
                         <div className="flex gap-2">
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 text-slate-500 dark:text-slate-400 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-lg">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 text-slate-500 dark:text-slate-400 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-lg">
                                 <Bell className="size-5" />
                             </button>
                             <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20 bg-slate-200">
@@ -83,10 +84,10 @@ export default function KubernetesNodeDashboard() {
                             </p>
                         </div>
                         <div className="flex gap-3">
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-white text-sm font-bold rounded-lg transition-colors border border-slate-200 dark:border-transparent">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-white text-sm font-bold rounded-lg transition-colors border border-slate-200 dark:border-transparent">
                                 <RefreshCcw className="size-4" /> Refresh
                             </button>
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg transition-colors">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg transition-colors">
                                 <Slash className="size-4" /> Drain Node
                             </button>
                         </div>
@@ -265,7 +266,7 @@ export default function KubernetesNodeDashboard() {
                                         <td className="px-6 py-4 text-xs font-bold text-slate-500">0</td>
                                         <td className="px-6 py-4 text-xs font-medium text-slate-500">4d 12h</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 hover:text-primary transition-colors">
+                                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1 hover:text-primary transition-colors">
                                                 <MoreVertical className="size-4" />
                                             </button>
                                         </td>
@@ -302,7 +303,7 @@ export default function KubernetesNodeDashboard() {
                                         <td className="px-6 py-4 text-xs font-bold text-slate-500">2</td>
                                         <td className="px-6 py-4 text-xs font-medium text-slate-500">12d 5h</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 hover:text-primary transition-colors">
+                                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1 hover:text-primary transition-colors">
                                                 <MoreVertical className="size-4" />
                                             </button>
                                         </td>
@@ -339,7 +340,7 @@ export default function KubernetesNodeDashboard() {
                                         <td className="px-6 py-4 text-xs font-bold text-red-500">14</td>
                                         <td className="px-6 py-4 text-xs font-medium text-slate-500">22m</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 hover:text-primary transition-colors">
+                                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1 hover:text-primary transition-colors">
                                                 <MoreVertical className="size-4" />
                                             </button>
                                         </td>
@@ -376,7 +377,7 @@ export default function KubernetesNodeDashboard() {
                                         <td className="px-6 py-4 text-xs font-bold text-slate-500">0</td>
                                         <td className="px-6 py-4 text-xs font-medium text-slate-500">1m</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 hover:text-primary transition-colors">
+                                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1 hover:text-primary transition-colors">
                                                 <MoreVertical className="size-4" />
                                             </button>
                                         </td>

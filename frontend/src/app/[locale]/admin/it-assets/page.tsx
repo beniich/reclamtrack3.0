@@ -1,5 +1,6 @@
+'use client';
+
 import { toast } from 'sonner';
-"use client"
 
 import { itAssetsApi } from "@/lib/api"
 import { useEffect, useState } from "react"
@@ -45,7 +46,7 @@ export default function ITAssetsPage() {
                     <h1 className="text-2xl font-bold text-white uppercase tracking-tight">IT Assets Inventory</h1>
                     <p className="text-slate-500 text-sm">Manage enterprise hardware and infrastructure assets.</p>
                 </div>
-                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="bg-primary hover:bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
+                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="bg-primary hover:bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
                     <Plus className="text-sm" />
                     Register New Asset
                 </button>
@@ -115,9 +116,9 @@ export default function ITAssetsPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-primary/20 text-blue-400 rounded-lg transition-colors"><Edit2 className="text-sm" /></button>
-                                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-yellow-500/20 text-yellow-400 rounded-lg transition-colors"><History className="text-sm" /></button>
-                                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-red-500/20 text-red-400 rounded-lg transition-colors"><Trash className="text-sm" /></button>
+                                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-primary/20 text-blue-400 rounded-lg transition-colors"><Edit2 className="text-sm" /></button>
+                                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-yellow-500/20 text-yellow-400 rounded-lg transition-colors"><History className="text-sm" /></button>
+                                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-red-500/20 text-red-400 rounded-lg transition-colors"><Trash className="text-sm" /></button>
                                             </div>
                                         </td>
                                     </tr>

@@ -1,5 +1,6 @@
-import { toast } from 'sonner';
 'use client';
+
+import { toast } from 'sonner';
 
 import { KPICard } from '@/components/shared/KPICard';
 import { StatusIndicator } from '@/components/shared/StatusIndicator';
@@ -24,7 +25,7 @@ export default function ThreatIntelPage() {
                 </div>
                 <div className="flex gap-3">
                     <Button variant="secondary" className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-sm font-semibold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Export Report</Button>
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2">
                         <Shield className="w-4 h-4" />
                         Deploy Countermeasures
                     </button>
@@ -115,7 +116,7 @@ export default function ThreatIntelPage() {
                                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-primary/20 size-64 rounded-full border-dashed animate-[spin_20s_linear_infinite]"></div>
                             </div>
                             <div className="absolute bottom-4 right-4 flex flex-col gap-2 z-20">
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center hover:bg-slate-700 text-white">+</button>
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="size-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center hover:bg-slate-700 text-white">+</button>
                                 <Button variant="secondary" className="size-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center hover:bg-slate-700 text-white">-</Button>
                             </div>
                         </div>
@@ -288,10 +289,10 @@ export default function ThreatIntelPage() {
                     </div>
                 </div>
                 <div className="flex gap-3">
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-white px-4 py-2 rounded-lg text-xs font-bold transition-all border border-slate-200 dark:border-slate-700">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-white px-4 py-2 rounded-lg text-xs font-bold transition-all border border-slate-200 dark:border-slate-700">
                         <span>🔽</span> Export Report
                     </button>
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-lg shadow-primary/20">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-lg shadow-primary/20">
                         <Shield className="w-4 h-4" /> Deploy Countermeasures
                     </button>
                 </div>

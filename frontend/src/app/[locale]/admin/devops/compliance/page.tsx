@@ -238,7 +238,7 @@ export default function CompliancePage() {
                             </div>
                             
                             <div className="mt-4 pt-4 border-t border-[#4F1A93]/40 relative z-10">
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full py-2.5 bg-[#1A0536] border border-[#4F1A93]/50 hover:bg-[#310B5E] rounded-lg text-xs font-bold text-slate-300 transition-colors flex items-center justify-center gap-2">
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="w-full py-2.5 bg-[#1A0536] border border-[#4F1A93]/50 hover:bg-[#310B5E] rounded-lg text-xs font-bold text-slate-300 transition-colors flex items-center justify-center gap-2">
                                     <span className="material-symbols-outlined text-sm">open_in_new</span>
                                     Open Full Audit Trail
                                 </button>

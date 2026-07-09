@@ -59,7 +59,7 @@ export default function PlanningPage() {
 
     const handleSubmitForm = (data: any) => {
         if (editingIntervention) {
-            updateIntervention(editingIntervention.id, data);
+            updateIntervention(editingIntervention.id!, data);
             if (selectedIntervention?.id === editingIntervention.id) {
                 setSelectedIntervention({ ...selectedIntervention, ...data });
             }
@@ -302,7 +302,7 @@ export default function PlanningPage() {
                             <Button onClick={() => handleOpenForm(selectedIntervention)} variant="primary" className="w-full py-2 bg-primary text-white text-xs font-bold rounded-lg">
                                 Modifier l'intervention
                             </Button>
-                            <Button onClick={() => handleDelete(selectedIntervention.id)} variant="outline" className="w-full py-2 border-red-200 text-red-500 hover:bg-red-50 hover:text-red-600 text-xs font-bold rounded-lg transition-colors">
+                            <Button onClick={() => handleDelete(selectedIntervention.id!)} variant="outline" className="w-full py-2 border-red-200 text-red-500 hover:bg-red-50 hover:text-red-600 text-xs font-bold rounded-lg transition-colors">
                                 Supprimer
                             </Button>
                         </div>

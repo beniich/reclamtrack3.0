@@ -1,5 +1,6 @@
+'use client';
+
 import { toast } from 'sonner';
-"use client"
 
 import { itTicketsApi } from "@/lib/api"
 import { format } from "date-fns"
@@ -52,11 +53,11 @@ export default function ITHelpdeskPage() {
                     <p className="text-slate-500 text-sm">Monitor and resolve IT infrastructure support requests.</p>
                 </div>
                 <div className="flex gap-3">
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2">
                         <Filter className="text-sm" />
                         Filters
                     </button>
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="bg-primary hover:bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="bg-primary hover:bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
                         <PlusCircle className="text-sm" />
                         New Ticket
                     </button>
@@ -128,8 +129,8 @@ export default function ITHelpdeskPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-primary/20 text-blue-400 rounded-lg transition-colors"><Eye className="text-sm" /></button>
-                                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-green-500/20 text-green-400 rounded-lg transition-colors"><CheckCircle className="text-sm" /></button>
+                                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-primary/20 text-blue-400 rounded-lg transition-colors"><Eye className="text-sm" /></button>
+                                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-green-500/20 text-green-400 rounded-lg transition-colors"><CheckCircle className="text-sm" /></button>
                                             </div>
                                         </td>
                                     </tr>

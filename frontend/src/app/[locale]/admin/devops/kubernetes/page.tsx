@@ -1,5 +1,6 @@
+'use client';
+
 import { toast } from 'sonner';
-'use client'
 
 import { Footer } from "@/components/devops-dashboards/layout/Footer"
 import { Header } from "@/components/devops-dashboards/layout/Header"
@@ -78,11 +79,11 @@ export default function KubernetesPage() {
                             Istio Proxy
                         </button>
                     </div>
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border-dark bg-surface-dark hover:bg-border-dark transition-colors text-sm font-semibold">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border-dark bg-surface-dark hover:bg-border-dark transition-colors text-sm font-semibold">
                         <RefreshCw className="text-sm" />
                         Restart
                     </button>
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500/20 transition-colors text-sm font-semibold">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500/20 transition-colors text-sm font-semibold">
                         <Trash className="text-sm" />
                         Delete
                     </button>
@@ -236,20 +237,20 @@ export default function KubernetesPage() {
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')} 
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')} 
                                 className="p-1 hover:bg-white/10 rounded text-slate-400"
                                 title="Clear Terminal"
                             >
                                 <span className="material-symbols-outlined text-sm">backspace</span>
                             </button>
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')} 
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')} 
                                 className="p-1 hover:bg-white/10 rounded text-slate-400"
                                 title="Download Buffer"
                             >
                                 <Download className="text-sm" />
                             </button>
                             <div className="h-4 w-[1px] bg-border-dark mx-1"></div>
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 hover:bg-white/10 rounded text-slate-400">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1 hover:bg-white/10 rounded text-slate-400">
                                 <span className="material-symbols-outlined text-sm">expand_content</span>
                             </button>
                         </div>

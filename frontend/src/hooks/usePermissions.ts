@@ -1,5 +1,7 @@
+'use client';
 
 'use client';
+
 
 import { Permission, ROLE_PERMISSIONS, Role, isRoleHigherOrEqual } from '@/lib/rbac/permissions';
 import { useAuthStore } from '@/store/authStore';

@@ -1,5 +1,6 @@
-import { toast } from 'sonner';
 'use client';
+
+import { toast } from 'sonner';
 
 import React from 'react';
 import {
@@ -42,7 +43,7 @@ export default function PiiGovernanceDashboard() {
                         <AlertTriangle className="size-4" />
                         <span>3 Critical Risks Found</span>
                     </div>
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-700 text-white text-sm font-bold rounded-lg transition-colors shadow-sm shadow-indigo-200 dark:shadow-none">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-700 text-white text-sm font-bold rounded-lg transition-colors shadow-sm shadow-indigo-200 dark:shadow-none">
                         <RefreshCw className="size-4" /> Start Scan
                     </button>
                 </div>
@@ -101,7 +102,7 @@ export default function PiiGovernanceDashboard() {
                                 <Search className="absolute left-2.5 top-2.5 size-4 text-slate-400" />
                                 <input type="text" placeholder="Search tables or columns..." className="pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm w-full sm:w-64 focus:ring-2 focus:ring-primary placeholder:text-slate-400" />
                             </div>
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-primary/5 dark:hover:bg-violet-500/15 text-slate-500">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-primary/5 dark:hover:bg-violet-500/15 text-slate-500">
                                 <Filter className="size-4" />
                             </button>
                         </div>
@@ -145,7 +146,7 @@ export default function PiiGovernanceDashboard() {
                                     </td>
                                     <td className="px-6 py-4 text-slate-500">us-east-1</td>
                                     <td className="px-6 py-4 text-right">
-                                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-primary"><MoreVertical className="size-4" /></button>
+                                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-primary"><MoreVertical className="size-4" /></button>
                                     </td>
                                 </tr>
 
@@ -173,7 +174,7 @@ export default function PiiGovernanceDashboard() {
                                     </td>
                                     <td className="px-6 py-4 text-slate-500">global</td>
                                     <td className="px-6 py-4 text-right">
-                                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-primary"><MoreVertical className="size-4" /></button>
+                                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-primary"><MoreVertical className="size-4" /></button>
                                     </td>
                                 </tr>
 
@@ -201,7 +202,7 @@ export default function PiiGovernanceDashboard() {
                                     </td>
                                     <td className="px-6 py-4 text-slate-500">eu-central-1</td>
                                     <td className="px-6 py-4 text-right">
-                                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-primary"><MoreVertical className="size-4" /></button>
+                                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-primary"><MoreVertical className="size-4" /></button>
                                     </td>
                                 </tr>
 

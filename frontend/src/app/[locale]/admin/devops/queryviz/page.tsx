@@ -1,5 +1,6 @@
+'use client';
+
 import { toast } from 'sonner';
-'use client'
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -48,7 +49,7 @@ export default function QueryVizPage() {
                             <span className="material-symbols-outlined text-sm">play_arrow</span>
                             Analyze Query
                         </Button>
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
                             <Share2 />
                         </button>
                     </div>
@@ -149,14 +150,14 @@ export default function QueryVizPage() {
                     {/* Canvas Toolbar */}
                     <div className="absolute top-4 left-4 z-10 flex gap-2">
                         <div className="flex items-center bg-white dark:bg-background p-1 rounded-lg border border-slate-200 dark:border-border-dark shadow-sm">
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded transition-colors">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded transition-colors">
                                 <span className="material-symbols-outlined text-xl">zoom_in</span>
                             </button>
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded transition-colors">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded transition-colors">
                                 <span className="material-symbols-outlined text-xl">zoom_out</span>
                             </button>
                             <div className="w-px h-4 bg-slate-200 dark:bg-slate-800 mx-1"></div>
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded transition-colors">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded transition-colors">
                                 <span className="material-symbols-outlined text-xl">center_focus_strong</span>
                             </button>
                         </div>
@@ -385,7 +386,7 @@ export default function QueryVizPage() {
                             </p>
                             <div className="mt-4 flex gap-2">
                                 <Button variant="primary" className="flex-1 py-2 bg-primary text-white text-[10px] font-bold rounded hover:bg-primary/90 transition-all uppercase">Apply Optimization</Button>
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-3 py-2 border border-slate-200 dark:border-border-dark rounded hover:bg-primary/8 dark:hover:bg-violet-500/15 transition-all">
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="px-3 py-2 border border-slate-200 dark:border-border-dark rounded hover:bg-primary/8 dark:hover:bg-violet-500/15 transition-all">
                                     <MoreHorizontal className="text-xs" />
                                 </button>
                             </div>
@@ -404,7 +405,7 @@ export default function QueryVizPage() {
                     <span>Database: analytics_warehouse</span>
                 </div>
                 <div className="flex gap-4 items-center">
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="hover:text-primary transition-colors flex items-center gap-1">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="hover:text-primary transition-colors flex items-center gap-1">
                         <span className="material-symbols-outlined text-sm">terminal</span> Console
                     </button>
                     <div className="w-px h-3 bg-slate-200 dark:bg-slate-800"></div>

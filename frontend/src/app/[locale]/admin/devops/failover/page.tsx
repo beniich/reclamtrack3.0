@@ -158,7 +158,7 @@ export default function DrFailoverDashboard() {
                                 </label>
                             </div>
 
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full max-w-sm py-3 bg-slate-200 dark:bg-slate-800 text-slate-400 font-bold rounded-lg cursor-not-allowed flex items-center justify-center gap-2" disabled>
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="w-full max-w-sm py-3 bg-slate-200 dark:bg-slate-800 text-slate-400 font-bold rounded-lg cursor-not-allowed flex items-center justify-center gap-2" disabled>
                                 <SwitchCamera className="size-5" /> Initiate Regional Failover
                             </button>
                         </div>

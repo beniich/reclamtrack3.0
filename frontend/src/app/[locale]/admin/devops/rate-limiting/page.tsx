@@ -1,5 +1,6 @@
+'use client';
+
 import { toast } from 'sonner';
-'use client'
 
 import DashboardTemplate from '@/components/devops-dashboards/shared/DashboardTemplate'
 import { Button } from '@/components/ui/button';
@@ -95,10 +96,10 @@ export default function RateLimitingDashboard() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
+                      <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
                         <Edit2 className="text-lg" />
                       </button>
-                      <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
+                      <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
                         <Trash className="text-lg" />
                       </button>
                     </div>
@@ -131,10 +132,10 @@ export default function RateLimitingDashboard() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
+                      <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
                         <Edit2 className="text-lg" />
                       </button>
-                      <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
+                      <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1.5 hover:bg-red-500/20 hover:text-red-500 rounded-lg transition-colors">
                         <Trash className="text-lg" />
                       </button>
                     </div>

@@ -1,5 +1,6 @@
+'use client';
+
 import { toast } from 'sonner';
-"use client"
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { Badge } from "@/components/ui/badge"
@@ -139,7 +140,7 @@ export default function SecurityPage() {
 
                     <div className="flex gap-4 relative z-10">
                         <Button variant="ghost" className="px-8 py-4 bg-white dark:bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-2xl border border-slate-200 dark:border-white/10 hover:bg-primary/5 dark:hover:bg-white/10 transition-all">Review Policy</Button>
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className={cn(
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className={cn(
                             "px-8 py-4 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-2xl hover:scale-105 transition-all",
                             activeThreats > 0 ? 'bg-rose-500' : 'bg-primary'
                         )}>

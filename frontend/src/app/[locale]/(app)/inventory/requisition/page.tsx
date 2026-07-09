@@ -1,5 +1,7 @@
+'use client';
 
 'use client';
+
 
 import { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';

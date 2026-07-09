@@ -68,10 +68,10 @@ export default function EdgeRoutePage() {
                         </div>
                     </label>
                     <div className="flex gap-2">
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
                             <Bell />
                         </button>
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex size-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
                             <Settings />
                         </button>
                     </div>
@@ -127,10 +127,10 @@ export default function EdgeRoutePage() {
                             </div>
                             {/* Zoom Controls */}
                             <div className="absolute bottom-4 right-4 flex flex-col gap-1">
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-8 bg-slate-800 hover:bg-slate-700 rounded-t-lg flex items-center justify-center border border-slate-700 text-white">
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="size-8 bg-slate-800 hover:bg-slate-700 rounded-t-lg flex items-center justify-center border border-slate-700 text-white">
                                     <Plus className="text-xs" />
                                 </button>
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-8 bg-slate-800 hover:bg-slate-700 rounded-b-lg flex items-center justify-center border border-slate-700 border-t-0 text-white">
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="size-8 bg-slate-800 hover:bg-slate-700 rounded-b-lg flex items-center justify-center border border-slate-700 border-t-0 text-white">
                                     <span className="material-symbols-outlined text-xs">remove</span>
                                 </button>
                             </div>
@@ -234,10 +234,10 @@ export default function EdgeRoutePage() {
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <RoleGuard minRole={Role.ADMIN}>
-                                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 text-slate-400 hover:text-primary transition-colors">
+                                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1 text-slate-400 hover:text-primary transition-colors">
                                                     <Edit2 />
                                                 </button>
-                                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-1 text-slate-400 hover:text-primary transition-colors ml-2">
+                                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-1 text-slate-400 hover:text-primary transition-colors ml-2">
                                                     <MoreVertical />
                                                 </button>
                                             </RoleGuard>

@@ -1,5 +1,6 @@
-import { toast } from 'sonner';
 'use client';
+
+import { toast } from 'sonner';
 
 import React from 'react';
 import {
@@ -36,17 +37,17 @@ export default function SqlInsightDashboard() {
                     <div>
                         <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Databases</h3>
                         <div className="space-y-1">
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-indigo-900/20 text-primary dark:text-indigo-400 rounded-lg text-sm font-medium">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="w-full flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-indigo-900/20 text-primary dark:text-indigo-400 rounded-lg text-sm font-medium">
                                 <Server className="size-4" />
                                 <span>production-primary</span>
                                 <span className="ml-auto size-2 rounded-full bg-emerald-500"></span>
                             </button>
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full flex items-center gap-2 px-3 py-2 hover:bg-primary/8 dark:hover:bg-surface-dark text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="w-full flex items-center gap-2 px-3 py-2 hover:bg-primary/8 dark:hover:bg-surface-dark text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
                                 <Server className="size-4" />
                                 <span>analytics-replica-01</span>
                                 <span className="ml-auto size-2 rounded-full bg-emerald-500"></span>
                             </button>
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full flex items-center gap-2 px-3 py-2 hover:bg-primary/8 dark:hover:bg-surface-dark text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="w-full flex items-center gap-2 px-3 py-2 hover:bg-primary/8 dark:hover:bg-surface-dark text-slate-600 dark:text-slate-400 rounded-lg text-sm font-medium transition-colors">
                                 <Server className="size-4" />
                                 <span>staging-db</span>
                                 <span className="ml-auto size-2 rounded-full bg-amber-500"></span>
@@ -94,7 +95,7 @@ export default function SqlInsightDashboard() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 bg-primary text-white text-sm font-bold rounded-lg shadow-sm hover:bg-primary-700 transition-colors">
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 bg-primary text-white text-sm font-bold rounded-lg shadow-sm hover:bg-primary-700 transition-colors">
                             <Play className="size-4" /> Run Query
                         </button>
                     </div>
@@ -128,8 +129,8 @@ export default function SqlInsightDashboard() {
                                 Slowest Queries (Last 1h)
                             </h3>
                             <div className="flex gap-2">
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-surface-dark rounded-lg text-slate-400"><Filter className="size-4" /></button>
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-surface-dark rounded-lg text-slate-400"><Download className="size-4" /></button>
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-surface-dark rounded-lg text-slate-400"><Filter className="size-4" /></button>
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 hover:bg-primary/8 dark:hover:bg-surface-dark rounded-lg text-slate-400"><Download className="size-4" /></button>
                             </div>
                         </div>
 
@@ -156,7 +157,7 @@ export default function SqlInsightDashboard() {
                                         <td className="px-6 py-4 font-mono font-bold text-amber-500">342ms</td>
                                         <td className="px-6 py-4 font-mono font-bold text-rose-500">1.2s</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible p-1 hover:text-primary"><MoreHorizontal className="size-4" /></button>
+                                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible p-1 hover:text-primary"><MoreHorizontal className="size-4" /></button>
                                         </td>
                                     </tr>
                                     {/* Row 2 */}
@@ -170,7 +171,7 @@ export default function SqlInsightDashboard() {
                                         <td className="px-6 py-4 font-mono font-bold text-emerald-500">5ms</td>
                                         <td className="px-6 py-4 font-mono font-bold text-slate-500">12ms</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible p-1 hover:text-primary"><MoreHorizontal className="size-4" /></button>
+                                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible p-1 hover:text-primary"><MoreHorizontal className="size-4" /></button>
                                         </td>
                                     </tr>
                                     {/* Row 3 */}
@@ -184,7 +185,7 @@ export default function SqlInsightDashboard() {
                                         <td className="px-6 py-4 font-mono font-bold text-amber-500">890ms</td>
                                         <td className="px-6 py-4 font-mono font-bold text-rose-500">2.4s</td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible p-1 hover:text-primary"><MoreHorizontal className="size-4" /></button>
+                                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="invisible group-hover:visible p-1 hover:text-primary"><MoreHorizontal className="size-4" /></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -197,8 +198,8 @@ export default function SqlInsightDashboard() {
                         <div className="px-4 py-2 bg-slate-50 dark:bg-background border-b border-slate-200 dark:border-border-dark flex items-center justify-between">
                             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Ad-hoc Query</span>
                             <div className="flex gap-2">
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-xs text-slate-500 hover:text-primary flex items-center gap-1"><Copy className="size-3" /> Copy</button>
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-xs text-slate-500 hover:text-slate-700 flex items-center gap-1"><Terminal className="size-3" /> Explain</button>
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="text-xs text-slate-500 hover:text-primary flex items-center gap-1"><Copy className="size-3" /> Copy</button>
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="text-xs text-slate-500 hover:text-slate-700 flex items-center gap-1"><Terminal className="size-3" /> Explain</button>
                             </div>
                         </div>
                         <div className="flex-1 bg-[#1e1e1e] text-slate-300 font-mono text-sm p-4 outline-none">

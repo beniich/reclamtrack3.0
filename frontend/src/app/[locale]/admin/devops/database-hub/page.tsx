@@ -192,7 +192,7 @@ export default function DatabasePage() {
                                     { name: "Backup Verification", icon: "verified" },
                                     { name: "User Access Audit", icon: "admin_panel_settings" }
                                 ].map((tool, i) => (
-                                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  key={i} className="w-full flex items-center justify-between p-4 bg-slate-100 dark:bg-white/5 rounded-2xl border border-transparent hover:border-primary/30 hover:bg-white/10 transition-all text-left group">
+                                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  key={i} className="w-full flex items-center justify-between p-4 bg-slate-100 dark:bg-white/5 rounded-2xl border border-transparent hover:border-primary/30 hover:bg-white/10 transition-all text-left group">
                                         <div className="flex items-center gap-3">
                                             <span className="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">{tool.icon}</span>
                                             <span className="text-[10px] font-black uppercase tracking-widest">{tool.name}</span>

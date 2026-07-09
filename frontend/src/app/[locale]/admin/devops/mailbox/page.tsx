@@ -1,5 +1,6 @@
+'use client';
+
 import { toast } from 'sonner';
-'use client'
 
 import { RoleGuard } from '@/components/security/RoleGuard'
 import { Role } from '@/lib/rbac/permissions'
@@ -38,7 +39,7 @@ export default function MailboxPage() {
                                 Connection Active
                             </span>
                         </div>
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-white transition-colors">
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="text-slate-400 hover:text-white transition-colors">
                             <HelpCircle />
                         </button>
                     </div>
@@ -59,7 +60,7 @@ export default function MailboxPage() {
 
                             <div className="grid grid-cols-2 gap-3">
                                 {['Gmail', 'Outlook', 'iCloud', 'Custom'].map((provider, idx) => (
-                                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')} 
+                                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')} 
                                         key={provider}
                                         className={`flex flex-col items-center justify-center p-4 rounded-lg border transition-all ${idx === 1
                                                 ? 'border-primary bg-primary/5 dark:bg-primary/10'
@@ -179,7 +180,7 @@ export default function MailboxPage() {
                                             className="w-full bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-primary/20 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                                             defaultValue="••••••••••••"
                                         />
-                                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="absolute right-3 top-2.5 text-slate-400 hover:text-primary">
+                                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="absolute right-3 top-2.5 text-slate-400 hover:text-primary">
                                             <EyeOff className="text-xl" />
                                         </button>
                                     </div>

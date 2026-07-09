@@ -55,7 +55,7 @@ export default function SystemHealthDashboard() {
                             <span>Latency: 42ms</span>
                         </div>
                     </div>
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium rounded-lg transition-colors border border-slate-700">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium rounded-lg transition-colors border border-slate-700">
                         <RefreshCcw className="size-4" /> <span className="hidden sm:inline">Refresh</span>
                     </button>
                 </div>
@@ -70,8 +70,8 @@ export default function SystemHealthDashboard() {
                     {/* Topology Map (Center) */}
                     <div className="lg:col-span-2 bg-surface-dark/40 border border-border-dark rounded-2xl p-6 relative min-h-[500px] flex items-center justify-center overflow-hidden group">
                         <div className="absolute top-4 left-4 z-20 flex gap-2">
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><LayoutGrid className="size-4" /></button>
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><List className="size-4" /></button>
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><LayoutGrid className="size-4" /></button>
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-lg backdrop-blur-sm border border-slate-700"><List className="size-4" /></button>
                         </div>
 
                         {/* Simulated Topology Graph */}

@@ -1,5 +1,7 @@
-// components/forms/FileUpload.tsx
 'use client';
+
+'use client';
+// components/forms/FileUpload.tsx
 
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';

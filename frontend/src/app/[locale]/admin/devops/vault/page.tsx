@@ -1,5 +1,6 @@
-import { toast } from 'sonner';
 'use client';
+
+import { toast } from 'sonner';
 
 import { StatusIndicator } from '@/components/shared/StatusIndicator';
 import { Lock, RotateCw, Shield, Clock } from 'lucide-react';
@@ -19,7 +20,7 @@ export default function SecretsManagementPage() {
                     </p>
                 </div>
                 <div className="flex gap-3">
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-5 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold flex items-center gap-2">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="px-5 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold flex items-center gap-2">
                         <RotateCw className="w-4 h-4" /> Rotate Now
                     </button>
                     <Button variant="secondary" className="px-5 py-2.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-bold">Retrieve Secret</Button>

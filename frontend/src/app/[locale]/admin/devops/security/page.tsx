@@ -1,5 +1,6 @@
-import { toast } from 'sonner';
 'use client';
+
+import { toast } from 'sonner';
 
 import React, { useState, useEffect } from 'react';
 import { useSecurityMetrics } from '@/hooks/useSecurityMetrics';
@@ -136,10 +137,10 @@ export default function SecurityDashboard() {
                         </div>
                         <div className="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-2"></div>
                         <div className="flex items-center gap-2">
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-border-dark text-slate-600 dark:text-slate-400 hover:bg-primary/5 dark:hover:bg-surface-dark">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="size-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-border-dark text-slate-600 dark:text-slate-400 hover:bg-primary/5 dark:hover:bg-surface-dark">
                                 <RefreshCcw className="size-4" />
                             </button>
-                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-9 flex items-center justify-center rounded-lg bg-primary text-white shadow-lg shadow-blue-600/20">
+                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="size-9 flex items-center justify-center rounded-lg bg-primary text-white shadow-lg shadow-blue-600/20">
                                 <Share2 className="size-4" />
                             </button>
                         </div>
@@ -393,7 +394,7 @@ export default function SecurityDashboard() {
                                     <Search className="absolute left-2 top-1.5 text-slate-400 text-sm size-4" />
                                     <input type="text" className="pl-8 py-1 rounded-md bg-white dark:bg-background border border-slate-200 dark:border-border-dark text-xs w-48 " placeholder="Filter logs..." />
                                 </div>
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-8 flex items-center justify-center rounded-md border border-slate-200 dark:border-border-dark text-slate-400 hover:text-rose-500">
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="size-8 flex items-center justify-center rounded-md border border-slate-200 dark:border-border-dark text-slate-400 hover:text-rose-500">
                                     <Slash className="size-4" />
                                 </button>
                             </div>

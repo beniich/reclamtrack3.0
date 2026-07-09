@@ -1,4 +1,3 @@
-import { toast } from 'sonner';
 "use client"
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
@@ -24,7 +23,7 @@ import {
 } from "@/components/ui/select"
 import { securityApi } from '@/lib/api'
 import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+import { toast } from 'sonner'
 import { Search, Plus, Trash, Clock } from 'lucide-react';
 
 interface Secret {
@@ -162,7 +161,7 @@ export default function SecretVaultPage() {
 
             <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
               <DialogTrigger asChild>
-                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="px-6 py-3 bg-primary text-white font-black rounded-xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-xs flex items-center gap-2">
+                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="px-6 py-3 bg-primary text-white font-black rounded-xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-xs flex items-center gap-2">
                   <Plus className="text-sm" />
                   New Secret
                 </button>

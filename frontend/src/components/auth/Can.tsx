@@ -1,5 +1,7 @@
+'use client';
 
 'use client';
+
 
 import { usePermissions } from '@/hooks/usePermissions';
 import { ReactNode } from 'react';

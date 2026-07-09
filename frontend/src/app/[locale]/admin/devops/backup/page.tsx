@@ -94,7 +94,7 @@ export default function BackupHubPage() {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-right">
-                                            <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="p-2 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary/10 rounded-lg text-primary">
+                                            <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="p-2 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary/10 rounded-lg text-primary">
                                                 <span className="material-symbols-outlined text-sm">settings_backup_restore</span>
                                             </button>
                                         </td>

@@ -1,5 +1,6 @@
+'use client';
+
 import { toast } from 'sonner';
-'use client'
 
 import DashboardTemplate from '@/components/devops-dashboards/shared/DashboardTemplate'
 import { Badge } from "@/components/ui/badge"
@@ -129,7 +130,7 @@ export default function SSLManagerDashboard() {
                     </div>
                   </td>
                   <td className="px-8 py-6 text-right">
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
                       <Settings />
                     </button>
                   </td>
@@ -213,7 +214,7 @@ export default function SSLManagerDashboard() {
                     </div>
                   </td>
                   <td className="px-8 py-6 text-right">
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100">
                       <Settings />
                     </button>
                   </td>
@@ -272,7 +273,7 @@ export default function SSLManagerDashboard() {
                   { label: 'Compliance Report', icon: 'verified' },
                   { label: 'Bulk Import', icon: 'file_upload' }
                 ].map((action, idx) => (
-                  <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  key={idx} className="w-full flex items-center justify-between p-4 bg-white dark:bg-white/5 rounded-2xl border border-primary/10 hover:border-primary/40 hover:scale-[1.02] active:scale-95 transition-all text-left shadow-sm">
+                  <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  key={idx} className="w-full flex items-center justify-between p-4 bg-white dark:bg-white/5 rounded-2xl border border-primary/10 hover:border-primary/40 hover:scale-[1.02] active:scale-95 transition-all text-left shadow-sm">
                     <div className="flex items-center gap-3">
                         <span className="material-symbols-outlined text-primary text-xl">{action.icon}</span>
                         <span className="text-[10px] font-black uppercase tracking-widest">{action.label}</span>

@@ -153,7 +153,7 @@ export default function TeamsPage() {
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
-                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="size-10 flex items-center justify-center text-slate-500 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-full transition-colors relative">
+                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="size-10 flex items-center justify-center text-slate-500 hover:bg-primary/8 dark:hover:bg-violet-500/15 rounded-full transition-colors relative">
                         <NotificationsActive className="w-5 h-5" />
                         <span className="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
                     </button>
@@ -162,7 +162,7 @@ export default function TeamsPage() {
                     <RoleGuard minRole={Role.MODERATOR}>
                         <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
                             <DialogTrigger asChild>
-                                <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
+                                <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
                                     <Add className="w-4 h-4" />
                                     New Team
                                 </button>
@@ -245,12 +245,12 @@ export default function TeamsPage() {
                 {/* Filters Bar */}
                 <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-3">
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-lg text-sm font-medium hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors">
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-lg text-sm font-medium hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors">
                             <FilterList className="w-5 h-5" />
                             All Specialties
                             <Search className="w-4 h-4 ml-2 opacity-50" />
                         </button>
-                        <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-lg text-sm font-medium hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors">
+                        <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background border border-slate-200 dark:border-border-dark rounded-lg text-sm font-medium hover:bg-primary/5 dark:hover:bg-violet-500/15 transition-colors">
                             <RadioButtonChecked className="w-5 h-5" />
                             Status: Any
                             <Search className="w-4 h-4 ml-2 opacity-50" />
@@ -306,7 +306,7 @@ export default function TeamsPage() {
                                     </div>
                                 </div>
                                 <div className="px-5 pb-5 mt-auto">
-                                    <button type="button" onClick={() => toast.info('Fonctionnalité en cours de déploiement')}  className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white transition-all rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
+                                    <button type="button" onClick={() => toast('Fonctionnalité en cours de déploiement')}  className="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white transition-all rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
                                         <CalendarMonth className="w-4 h-4" />
                                         View Schedule
                                     </button>

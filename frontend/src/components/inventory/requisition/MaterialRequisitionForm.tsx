@@ -44,8 +44,8 @@ import {
     getComplaintById,
     checkStockAvailability
 } from '@/lib/inventory/mockData';
-import {
 import { AlertTriangle } from 'lucide-react';
+import {
     formatCurrency,
     generateRequisitionId,
     getPriorityColor,

@@ -1,5 +1,6 @@
-import { toast } from 'sonner';
 "use client"
+
+import { toast } from 'sonner';
 
 import DashboardTemplate from "@/components/devops-dashboards/shared/DashboardTemplate"
 import { useState } from "react"

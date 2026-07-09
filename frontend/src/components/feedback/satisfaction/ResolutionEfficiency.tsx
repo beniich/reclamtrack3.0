@@ -1,5 +1,6 @@
-import { TrendingDown } from 'lucide-react';
 'use client';
+
+import { TrendingDown } from 'lucide-react';
 
 export default function ResolutionEfficiency() {
     return (

@@ -1,8 +1,5 @@
 'use client';
 
-'use client';
-
-
 import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -208,9 +205,9 @@ export function HeatmapView({
     const exportHeatmapImage = () => {
         if (!mapRef.current) return;
 
-        // @ts-ignore
+        // @ts-ignore leaflet-image typing issue
         import('leaflet-image').then((leafletImage) => {
-            // @ts-ignore
+            // @ts-ignore leaflet-image typing issue
             leafletImage.default(mapRef.current, (err: any, canvas: HTMLCanvasElement) => {
                 if (err) {
                     console.error('Export error:', err);
@@ -250,12 +247,10 @@ export function HeatmapView({
                     {showClusters && (
                         <button type="button"
                             onClick={() => setMapMode('clusters')}
-                            className={`w-full px-3 py-2 rounded-md text-sm font-medium transition-colors ${mapMode === 'clusters'
-                                    ? 'bg-primary text-white'
-                                    : 'text-slate-600 hover:bg-primary/8 dark:hover:bg-slate-700'
-                                }`}
+                            className={`w-full px-3 py-2 rounded-md text-sm font-medium transitions-all duration-200 ${
+                              mapMode === 'clusters' ? 'bg-primary text-white' : 'text-gray-900'
+                            }`}
                         >
-                            <Layers className="w-4 h-4 inline mr-2" />
                             Clusters
                         </button>
                     )}

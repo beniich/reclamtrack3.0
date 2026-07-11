@@ -6,7 +6,7 @@
  * @module backend/middleware
  */
 
-import { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { Error as MongooseError } from 'mongoose';
 import { AppError } from '../utils/AppError.js';

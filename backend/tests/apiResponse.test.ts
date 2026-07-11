@@ -2,7 +2,7 @@
  * Test for API Response Utilities
  */
 
-import { Response } from 'express';
+import type { Response } from 'express';
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 
 import {

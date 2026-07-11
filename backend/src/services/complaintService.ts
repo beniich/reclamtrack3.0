@@ -1,5 +1,6 @@
 import { Types } from 'mongoose';
-import { Complaint, IComplaint } from '../models/Complaint.js';
+import type { IComplaint } from '../models/Complaint.js';
+import { Complaint } from '../models/Complaint.js';
 import { Team } from '../models/Team.js';
 import { autoAssignComplaint } from './schedulingService.js';
 import notificationService from './socketService.js';

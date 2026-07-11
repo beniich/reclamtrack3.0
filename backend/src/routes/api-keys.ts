@@ -5,7 +5,8 @@
  * @module backend/routes
  */
 
-import { Request, Response, Router } from 'express';
+import type { Request, Response} from 'express';
+import { Router } from 'express';
 import { body } from 'express-validator';
 import {
   authenticate,

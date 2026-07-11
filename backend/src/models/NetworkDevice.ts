@@ -1,4 +1,5 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import type { Document} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 export interface INetworkDevice extends Document {
   organizationId: mongoose.Types.ObjectId;

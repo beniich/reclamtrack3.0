@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import WorkOrder from '../models/WorkOrder.js';
 import Asset from '../models/Asset.js';
 import mongoose from 'mongoose';
@@ -8,7 +8,7 @@ export const getMaintenanceKPIs = async (req: Request, res: Response) => {
         const { assetId, period = '30d' } = req.query;
 
         // Base filter
-        let filter: any = { status: 'closed' };
+        const filter: any = { status: 'closed' };
         if (assetId) filter.assetId = new mongoose.Types.ObjectId(assetId as string);
 
         // Fetch closed work orders to calculate MTTR and MTBF

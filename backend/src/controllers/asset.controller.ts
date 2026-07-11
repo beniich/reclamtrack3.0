@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import Asset from '../models/Asset.js';
 
 export const createAsset = async (req: Request, res: Response) => {

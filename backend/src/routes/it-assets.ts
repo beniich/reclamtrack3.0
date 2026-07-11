@@ -1,8 +1,9 @@
-import express, { Response } from 'express';
+import type { Response } from 'express';
+import express from 'express';
 import { authenticate as auth } from '../middleware/security.js';
 import { requireOrganization } from '../middleware/organization';
 import ITAsset from '../models/ITAsset';
-import { AuthenticatedRequest } from '../types/request.js';
+import type { AuthenticatedRequest } from '../types/request.js';
 
 const router = express.Router();
 

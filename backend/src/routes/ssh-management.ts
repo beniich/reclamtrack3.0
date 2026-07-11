@@ -6,7 +6,8 @@
  * @module backend/routes
  */
 
-import { Request, Response, Router } from 'express';
+import type { Request, Response} from 'express';
+import { Router } from 'express';
 import { body, param } from 'express-validator';
 import { authenticate, requireAdmin, requireOrganization } from '../middleware/security.js';
 import { validator } from '../middleware/validator.js';

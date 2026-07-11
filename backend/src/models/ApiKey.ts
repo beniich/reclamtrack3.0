@@ -4,7 +4,8 @@
  * @module backend/models
  */
 
-import mongoose, { Document, Schema } from 'mongoose';
+import type { Document} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 export interface IApiKey extends Document {
   orgId: mongoose.Types.ObjectId;

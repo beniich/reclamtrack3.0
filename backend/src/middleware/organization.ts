@@ -1,4 +1,4 @@
-import { NextFunction, Response } from 'express';
+import type { NextFunction, Response } from 'express';
 import { Membership } from '../models/Membership.js';
 
 /**

@@ -6,9 +6,10 @@
  * @module backend/middleware
  */
 
-import { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { IMembership, Membership } from '../models/Membership.js';
+import type { IMembership} from '../models/Membership.js';
+import { Membership } from '../models/Membership.js';
 import {
   AppError,
   ForbiddenAppError,

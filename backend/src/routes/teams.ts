@@ -40,7 +40,7 @@ router.post(
         try {
             const team = await Team.create({
                 ...req.body,
-                organizationId: (req as any).organizationId
+                organizationId: (req).organizationId
             });
 
             // Kafka Event

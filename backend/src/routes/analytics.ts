@@ -1,5 +1,6 @@
 import ExcelJS from 'exceljs';
-import { Request, Response, Router } from 'express';
+import type { Request, Response} from 'express';
+import { Router } from 'express';
 import fs from 'fs';
 import mongoose from 'mongoose';
 import path from 'path';
@@ -8,7 +9,7 @@ import { Complaint } from '../models/Complaint.js';
 import { Feedback } from '../models/Feedback.js';
 import { Organization } from '../models/Organization.js';
 import { saveExport } from '../services/storageService.js';
-import { AuthenticatedRequest } from '../types/request.js';
+import type { AuthenticatedRequest } from '../types/request.js';
 import { logger } from '../utils/logger.js';
 import { getMaintenanceKPIs, getOEEAnalytics } from '../controllers/analytics.controller.js';
 

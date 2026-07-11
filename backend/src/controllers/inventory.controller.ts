@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import InventoryItem from '../models/InventoryItem.js';
 
 export const createInventoryItem = async (req: Request, res: Response) => {

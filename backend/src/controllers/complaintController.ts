@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import AuditLog from '../models/AuditLog.js';
 import { complaintService } from '../services/complaintService.js';
 import { eventBus } from '../services/eventBus.js';

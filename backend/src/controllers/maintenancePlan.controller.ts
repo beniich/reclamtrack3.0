@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import MaintenancePlan from '../models/MaintenancePlan.js';
 
 export const createMaintenancePlan = async (req: Request, res: Response) => {

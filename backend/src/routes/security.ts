@@ -1,8 +1,9 @@
-import express, { Response } from 'express';
+import type { Response } from 'express';
+import express from 'express';
 import rateLimit from 'express-rate-limit';
 import { authenticate, requireOrganization, requireRole } from '../middleware/security.js';
 import { securityService } from '../services/securityService.js';
-import { AuthenticatedRequest } from '../types/request.js';
+import type { AuthenticatedRequest } from '../types/request.js';
 import {
   createdResponse,
   ErrorCodes,
@@ -239,7 +240,7 @@ router.get('/secrets', async (req: AuthenticatedRequest, res: Response) => {
     }
 
     const { secretService } = await import('../services/secretService.js');
-    const secrets = await secretService.getSecrets(organizationId!);
+    const secrets = await secretService.getSecrets(organizationId);
     return successResponse(res, secrets);
   } catch (error: any) {
     console.error('[Security Routes] Error in get secrets:', error);
@@ -265,7 +266,7 @@ router.post('/secrets', async (req: AuthenticatedRequest, res: Response) => {
     }
 
     const { secretService } = await import('../services/secretService.js');
-    const secret = await secretService.createSecret(req.body, userId, organizationId!);
+    const secret = await secretService.createSecret(req.body, userId, organizationId);
     return createdResponse(res, secret);
   } catch (error: any) {
     console.error('[Security Routes] Error in create secret:', error);
@@ -287,7 +288,7 @@ router.get('/secrets/:id/reveal', async (req: AuthenticatedRequest, res: Respons
     }
 
     const { secretService } = await import('../services/secretService.js');
-    const secret = await secretService.revealSecret(id as string, organizationId as string);
+    const secret = await secretService.revealSecret(id as string, organizationId);
     return successResponse(res, secret);
   } catch (error: any) {
     console.error('[Security Routes] Error in reveal secret:', error);
@@ -309,7 +310,7 @@ router.delete('/secrets/:id', async (req: AuthenticatedRequest, res: Response) =
     }
 
     const { secretService } = await import('../services/secretService.js');
-    await secretService.deleteSecret(id as string, organizationId as string);
+    await secretService.deleteSecret(id as string, organizationId);
     return successResponse(res, { message: 'Secret deleted' });
   } catch (error: any) {
     console.error('[Security Routes] Error in delete secret:', error);
@@ -330,7 +331,7 @@ router.get('/secrets/stats', async (req: AuthenticatedRequest, res: Response) =>
     }
 
     const { secretService } = await import('../services/secretService.js');
-    const stats = await secretService.getSecretStats(organizationId!);
+    const stats = await secretService.getSecretStats(organizationId);
     return successResponse(res, stats);
   } catch (error: any) {
     console.error('[Security Routes] Error in secret stats:', error);

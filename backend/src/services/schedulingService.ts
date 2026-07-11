@@ -1,5 +1,6 @@
-import { Types } from 'mongoose';
-import { Team, ITeam } from '../models/Team.js';
+import type { Types } from 'mongoose';
+import type { ITeam } from '../models/Team.js';
+import { Team } from '../models/Team.js';
 import { Complaint, IComplaint } from '../models/Complaint.js';
 
 interface TeamScore {
@@ -202,7 +203,7 @@ export const autoAssignComplaint = async (complaintId: string): Promise<Types.Ob
             }
 
             teamScores.push({
-                teamId: team._id as Types.ObjectId,
+                teamId: team._id,
                 team: team,
                 score,
                 reasons

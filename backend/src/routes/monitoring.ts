@@ -1,9 +1,10 @@
-import express, { Response } from 'express';
+import type { Response } from 'express';
+import express from 'express';
 import { authenticate as auth } from '../middleware/security.js';
 import { requireAdmin, requireOrganization } from '../middleware/security.js';
 import NetworkDevice from '../models/NetworkDevice.js';
 import defaultNetworkService, { NetworkService } from '../services/networkService.js';
-import { AuthenticatedRequest } from '../types/request.js';
+import type { AuthenticatedRequest } from '../types/request.js';
 
 const router = express.Router();
 
@@ -62,7 +63,7 @@ router.get('/device/:id/check', async (req: AuthenticatedRequest, res: Response)
       const service = new NetworkService(
         (device as any).snmpCommunity || process.env.SNMP_COMMUNITY || 'public'
       );
-      snmpData = await (service as any).getSnmpSystemInfo(device.ipAddress);
+      snmpData = await (service).getSnmpSystemInfo(device.ipAddress);
     }
 
 
@@ -107,7 +108,7 @@ router.post(
       );
 
       // Full SNMP Walk (simulated via getSnmpSystemInfo for now)
-      const snmpData = await (service as any).getSnmpSystemInfo(device.ipAddress);
+      const snmpData = await (service).getSnmpSystemInfo(device.ipAddress);
 
 
 
@@ -126,8 +127,8 @@ router.post(
               lastChecked: new Date(),
               uptime: snmpData.sysUpTime ? Math.floor(snmpData.sysUpTime / 100) : 0,
             };
-          device.currentMetrics!.isOnline = true;
-          device.currentMetrics!.lastChecked = new Date();
+          device.currentMetrics.isOnline = true;
+          device.currentMetrics.lastChecked = new Date();
           // CPU/Memory would require specific MIB OIDs per vendor
         }
         await device.save();

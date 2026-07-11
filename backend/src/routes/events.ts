@@ -4,7 +4,8 @@
  * @module backend/routes
  */
 
-import { Request, Response, Router } from 'express';
+import type { Request, Response} from 'express';
+import { Router } from 'express';
 import { Complaint } from '../models/Complaint.js';
 import { logger } from '../utils/logger.js';
 

@@ -6,7 +6,8 @@
  * @module backend/routes
  */
 
-import express, { Request, Response, Router } from 'express';
+import type { Request, Response} from 'express';
+import express, { Router } from 'express';
 import Stripe from 'stripe';
 import { authenticate } from '../middleware/security.js';
 import { PLAN_FEATURES, PLAN_MAX_USERS } from '../models/Subscription.js';
@@ -115,7 +116,7 @@ router.post(
 
       let event: any;
       try {
-        event = (stripe as any).webhooks.constructEvent(req.body, sig, endpointSecret);
+        event = (stripe).webhooks.constructEvent(req.body, sig, endpointSecret);
       } catch (err: any) {
         logger.error(`[Billing] Webhook signature verification failed: ${err.message}`);
         throw new AppError('Signature Webhook invalide', 400, 'STRIPE_SIGNATURE_INVALID');
@@ -126,7 +127,7 @@ router.post(
         event.type === 'customer.subscription.created' ||
         event.type === 'customer.subscription.updated'
       ) {
-        const subscription = event.data.object as any;
+        const subscription = event.data.object;
         const stripeCustomerId = subscription.customer as string;
         const priceId = subscription.items.data[0].price.id;
 
@@ -140,7 +141,7 @@ router.post(
 
         logger.info(`[Billing] Validated mapping for subscription: ${subscription.id}`);
       } else if (event.type === 'customer.subscription.deleted') {
-        const subscription = event.data.object as any;
+        const subscription = event.data.object;
         const stripeCustomerId = subscription.customer as string;
 
         await updateFromStripe(stripeCustomerId, subscription.id, '', 'canceled', new Date());

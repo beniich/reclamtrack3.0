@@ -2,7 +2,7 @@
  * Test for Security Middleware
  */
 
-import { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 
 import jwt from 'jsonwebtoken';

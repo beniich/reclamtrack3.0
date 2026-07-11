@@ -1,4 +1,4 @@
-import { Server } from 'http';
+import type { Server } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 import { Notification } from '../models/Notification.js';
 import { logger } from '../utils/logger.js';

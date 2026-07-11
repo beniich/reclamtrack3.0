@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import WorkOrder from '../models/WorkOrder.js';
 import { Complaint } from '../models/Complaint.js';
 

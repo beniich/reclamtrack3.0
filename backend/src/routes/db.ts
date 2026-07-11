@@ -1,5 +1,6 @@
 // routes/db.ts – Routes pour l'administration de base de données (Enterprise DB Management)
-import express, { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+import express from 'express';
 import { generateMetrics, generateNetVizMetrics, generateQueueMetrics, generateDBAMetrics } from '../data/db-generator.js';
 import { clusters, backups, networkNodes, networkConnections, cloudCosts } from '../data/db-fixtures.js';
 import { authenticate, requireAdmin } from '../middleware/security.js';

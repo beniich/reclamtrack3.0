@@ -6,7 +6,8 @@
  */
 
 import crypto from 'crypto';
-import { ApiKey, IApiKey } from '../models/ApiKey.js';
+import type { IApiKey } from '../models/ApiKey.js';
+import { ApiKey } from '../models/ApiKey.js';
 import { NotFoundAppError } from '../utils/AppError.js';
 import { logger } from '../utils/logger.js';
 

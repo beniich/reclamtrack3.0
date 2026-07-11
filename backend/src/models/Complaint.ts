@@ -1,4 +1,5 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import type { Document} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 export type ComplaintStatus = 'nouvelle' | 'en cours' | 'en attente' | 'planifié' | 'résolue' | 'fermée' | 'rejetée';
 export type Priority = 'low' | 'medium' | 'high' | 'urgent';

@@ -1,4 +1,5 @@
-﻿import { Response, Router } from 'express';
+﻿import type { Response} from 'express';
+import { Router } from 'express';
 import { body } from 'express-validator';
 import { authenticate, requireAdmin, requireOrganization } from '../middleware/security.js';
 import { validator } from '../middleware/validator.js';

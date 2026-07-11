@@ -1,9 +1,11 @@
-import express, { Response } from 'express';
+import type { Response } from 'express';
+import express from 'express';
 import { requireOrganization } from '../middleware/organization';
 import { authenticate as auth } from '../middleware/security.js';
 import ITTicket from '../models/ITTicket';
-import { AuthenticatedRequest } from '../types/request.js';
-import { calculatePriority, ImpactLevel, UrgencyLevel } from '../services/priorityMatrixService';
+import type { AuthenticatedRequest } from '../types/request.js';
+import type { ImpactLevel, UrgencyLevel } from '../services/priorityMatrixService';
+import { calculatePriority } from '../services/priorityMatrixService';
 
 const router = express.Router();
 

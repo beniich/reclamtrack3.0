@@ -1,9 +1,10 @@
-﻿import express, { Response } from 'express';
+﻿import type { Response } from 'express';
+import express from 'express';
 import { authenticate as auth } from '../middleware/security.js';
 import { requireAdmin, requireOrganization } from '../middleware/security.js';
 import ADSyncLog from '../models/ADSyncLog.js';
 import { ActiveDirectoryService } from '../services/adService.js';
-import { AuthenticatedRequest } from '../types/request.js';
+import type { AuthenticatedRequest } from '../types/request.js';
 
 const router = express.Router();
 

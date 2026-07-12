@@ -60,7 +60,7 @@ export function InterventionTimer({
             toast.success('Intervention terminée');
             onStatusChange?.('completed', seconds);
         } catch (error) {
-            toast.error('Erreur lors de la fin d\\'intervention');
+            toast.error("Erreur lors de la fin d'intervention");
         }
     };
 

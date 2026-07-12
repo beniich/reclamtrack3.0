@@ -57,7 +57,7 @@ export default function PlanningCalendar() {
 
     const events = slots.map(slot => ({
         id: slot._id,
-        title: `${slot.teamName} ${slot.complaintNumber ? \`(#\${slot.complaintNumber})\` : ''}`,
+        title: slot.teamName + (slot.complaintNumber ? ' (#' + slot.complaintNumber + ')' : ''),
         start: slot.start,
         end: slot.end,
         backgroundColor: '#6366f1',
@@ -99,39 +99,14 @@ export default function PlanningCalendar() {
                 </div>
             </div>
             
-            <style dangerouslySetInnerHTML={{__html: \`
-                .calendar-container .fc-theme-standard td, .calendar-container .fc-theme-standard th {
-                    border-color: #e2e8f0;
-                }
-                .calendar-container .fc-button-primary {
-                    background-color: #f8fafc;
-                    border-color: #e2e8f0;
-                    color: #475569;
-                    text-transform: capitalize;
-                    font-weight: 600;
-                    font-size: 0.875rem;
-                }
-                .calendar-container .fc-button-primary:hover {
-                    background-color: #f1f5f9;
-                    border-color: #cbd5e1;
-                    color: #1e293b;
-                }
-                .calendar-container .fc-button-active {
-                    background-color: #6366f1 !important;
-                    border-color: #6366f1 !important;
-                    color: #ffffff !important;
-                }
-                .calendar-container .fc-col-header-cell-cushion {
-                    color: #475569;
-                    text-decoration: none;
-                    font-weight: 700;
-                    padding: 8px 4px;
-                }
-                .calendar-container .fc-timegrid-slot-label-cushion {
-                    color: #64748b;
-                    font-size: 0.75rem;
-                }
-            \`}} />
+            <style dangerouslySetInnerHTML={{__html: [
+                '.calendar-container .fc-theme-standard td, .calendar-container .fc-theme-standard th { border-color: #e2e8f0; }',
+                '.calendar-container .fc-button-primary { background-color: #f8fafc; border-color: #e2e8f0; color: #475569; text-transform: capitalize; font-weight: 600; font-size: 0.875rem; }',
+                '.calendar-container .fc-button-primary:hover { background-color: #f1f5f9; border-color: #cbd5e1; color: #1e293b; }',
+                '.calendar-container .fc-button-active { background-color: #6366f1 !important; border-color: #6366f1 !important; color: #ffffff !important; }',
+                '.calendar-container .fc-col-header-cell-cushion { color: #475569; text-decoration: none; font-weight: 700; padding: 8px 4px; }',
+                '.calendar-container .fc-timegrid-slot-label-cushion { color: #64748b; font-size: 0.75rem; }'
+            ].join(' ')}} />
         </section>
     );
 }
